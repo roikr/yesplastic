@@ -22,6 +22,8 @@
 		E40D7EBA112323B700484710 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7EB4112323B700484710 /* ofxXmlSettings.cpp */; };
 		E41C700A115632FE00AAFDB8 /* FramesDrivenPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41C7006115632FE00AAFDB8 /* FramesDrivenPlayer.cpp */; };
 		E41C700B115632FE00AAFDB8 /* SimplePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41C7008115632FE00AAFDB8 /* SimplePlayer.cpp */; };
+		E41D3FB811F2FE4F00980BF9 /* ofxFramesDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41D2DF811F2FE4A00980BF9 /* ofxFramesDriver.cpp */; };
+		E41D3FB911F2FE4F00980BF9 /* ofxRKUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41D2DFC11F2FE4A00980BF9 /* ofxRKUtilities.cpp */; };
 		E41D879F11D3373D00FE8D41 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E41D879D11D3373D00FE8D41 /* Default.png */; };
 		E41D87A011D3373D00FE8D41 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E41D879E11D3373D00FE8D41 /* Icon.png */; };
 		E41D87AA11D337A100FE8D41 /* YesPlastic-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E41D87A911D337A100FE8D41 /* YesPlastic-Info.plist */; };
@@ -40,9 +42,6 @@
 		E41F965F114592900080F634 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F9498114517200080F634 /* XMLParser.m */; };
 		E4506B8C112BF15700612687 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4506B8B112BF15700612687 /* MainViewController.mm */; };
 		E4506B9D112BF2AD00612687 /* PlayerViewContorller.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4506B9C112BF2AD00612687 /* PlayerViewContorller.mm */; };
-		E45964C0117C9135004CE881 /* ofxOnePointTracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E45964B9117C9135004CE881 /* ofxOnePointTracks.cpp */; };
-		E45964C1117C9135004CE881 /* ofxRKUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E45964BD117C9135004CE881 /* ofxRKUtilities.cpp */; };
-		E45964CA117C91B0004CE881 /* ofxFramesDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E45964C8117C91B0004CE881 /* ofxFramesDriver.cpp */; };
 		E46670911147D4D900EB6D0A /* MenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E466708F1147D4D900EB6D0A /* MenuViewController.mm */; };
 		E46C7EBE11104CC10083BEAF /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E46C7EBC11104CC10083BEAF /* CAHostTimeBase.cpp */; };
 		E4944A62114D28B8002DAC54 /* ZoozzResourcesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4944A61114D28B8002DAC54 /* ZoozzResourcesLoader.m */; };
@@ -50,6 +49,7 @@
 		E4A10C7B114685100099172F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A10C7A114685100099172F /* SystemConfiguration.framework */; };
 		E4A10D0211468E480099172F /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A10D0111468E480099172F /* Utilities.m */; };
 		E4A1BE511107210400FBE0A8 /* YesPlasticAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A1BE501107210400FBE0A8 /* YesPlasticAppDelegate.mm */; };
+		E4A4FE5211F2FEC3000BE0A2 /* ofxOnePointTracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE5011F2FEC3000BE0A2 /* ofxOnePointTracks.cpp */; };
 		E4CDF986113F153A0085D61B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF97C113F153A0085D61B /* ioapi.c */; };
 		E4CDF987113F153A0085D61B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF97E113F153A0085D61B /* mztools.c */; };
 		E4CDF988113F153A0085D61B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF980113F153A0085D61B /* unzip.c */; };
@@ -106,6 +106,10 @@
 		E41C7007115632FE00AAFDB8 /* FramesDrivenPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesDrivenPlayer.h; sourceTree = "<group>"; };
 		E41C7008115632FE00AAFDB8 /* SimplePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimplePlayer.cpp; sourceTree = "<group>"; };
 		E41C7009115632FE00AAFDB8 /* SimplePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlayer.h; sourceTree = "<group>"; };
+		E41D2DF811F2FE4A00980BF9 /* ofxFramesDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFramesDriver.cpp; sourceTree = "<group>"; };
+		E41D2DF911F2FE4A00980BF9 /* ofxFramesDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFramesDriver.h; sourceTree = "<group>"; };
+		E41D2DFC11F2FE4A00980BF9 /* ofxRKUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKUtilities.cpp; sourceTree = "<group>"; };
+		E41D2DFD11F2FE4A00980BF9 /* ofxRKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKUtilities.h; sourceTree = "<group>"; };
 		E41D879D11D3373D00FE8D41 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		E41D879E11D3373D00FE8D41 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
 		E41D87A911D337A100FE8D41 /* YesPlastic-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "YesPlastic-Info.plist"; sourceTree = "<group>"; };
@@ -135,12 +139,6 @@
 		E4506B8B112BF15700612687 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4506B9B112BF2AD00612687 /* PlayerViewContorller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewContorller.h; sourceTree = "<group>"; };
 		E4506B9C112BF2AD00612687 /* PlayerViewContorller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerViewContorller.mm; sourceTree = "<group>"; };
-		E45964B9117C9135004CE881 /* ofxOnePointTracks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOnePointTracks.cpp; sourceTree = "<group>"; };
-		E45964BA117C9135004CE881 /* ofxOnePointTracks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOnePointTracks.h; sourceTree = "<group>"; };
-		E45964BD117C9135004CE881 /* ofxRKUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKUtilities.cpp; sourceTree = "<group>"; };
-		E45964BE117C9135004CE881 /* ofxRKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKUtilities.h; sourceTree = "<group>"; };
-		E45964C8117C91B0004CE881 /* ofxFramesDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFramesDriver.cpp; sourceTree = "<group>"; };
-		E45964C9117C91B0004CE881 /* ofxFramesDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFramesDriver.h; sourceTree = "<group>"; };
 		E466708E1147D4D900EB6D0A /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		E466708F1147D4D900EB6D0A /* MenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MenuViewController.mm; sourceTree = "<group>"; };
 		E46C7EBC11104CC10083BEAF /* CAHostTimeBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAHostTimeBase.cpp; sourceTree = "<group>"; };
@@ -154,6 +152,8 @@
 		E4A10D0111468E480099172F /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		E4A1BE4F1107210400FBE0A8 /* YesPlasticAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesPlasticAppDelegate.h; sourceTree = "<group>"; };
 		E4A1BE501107210400FBE0A8 /* YesPlasticAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YesPlasticAppDelegate.mm; sourceTree = "<group>"; };
+		E4A4FE5011F2FEC3000BE0A2 /* ofxOnePointTracks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOnePointTracks.cpp; sourceTree = "<group>"; };
+		E4A4FE5111F2FEC3000BE0A2 /* ofxOnePointTracks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOnePointTracks.h; sourceTree = "<group>"; };
 		E4CDF97B113F153A0085D61B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		E4CDF97C113F153A0085D61B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		E4CDF97D113F153A0085D61B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
@@ -352,6 +352,42 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		E41D2DF611F2FE4A00980BF9 /* ofxFramesDriver */ = {
+			isa = PBXGroup;
+			children = (
+				E41D2DF711F2FE4A00980BF9 /* src */,
+			);
+			name = ofxFramesDriver;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxFramesDriver";
+			sourceTree = SOURCE_ROOT;
+		};
+		E41D2DF711F2FE4A00980BF9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E41D2DF811F2FE4A00980BF9 /* ofxFramesDriver.cpp */,
+				E41D2DF911F2FE4A00980BF9 /* ofxFramesDriver.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E41D2DFA11F2FE4A00980BF9 /* ofxRKUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				E41D2DFB11F2FE4A00980BF9 /* src */,
+			);
+			name = ofxRKUtilities;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxRKUtilities";
+			sourceTree = SOURCE_ROOT;
+		};
+		E41D2DFB11F2FE4A00980BF9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E41D2DFC11F2FE4A00980BF9 /* ofxRKUtilities.cpp */,
+				E41D2DFD11F2FE4A00980BF9 /* ofxRKUtilities.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		E41F9490114517200080F634 /* PublicMediaShareClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,65 +427,11 @@
 		E4280BA91172449500F458BB /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				E45964C6117C91B0004CE881 /* ofxFramesDriver */,
-				E45964B7117C9135004CE881 /* ofxOnePointTracks */,
-				E45964BB117C9135004CE881 /* ofxRKUtilities */,
+				E4A4FE4E11F2FEC3000BE0A2 /* ofxOnePointTracks */,
+				E41D2DF611F2FE4A00980BF9 /* ofxFramesDriver */,
+				E41D2DFA11F2FE4A00980BF9 /* ofxRKUtilities */,
 			);
 			name = addons;
-			sourceTree = "<group>";
-		};
-		E45964B7117C9135004CE881 /* ofxOnePointTracks */ = {
-			isa = PBXGroup;
-			children = (
-				E45964B8117C9135004CE881 /* src */,
-			);
-			name = ofxOnePointTracks;
-			path = "../openFrameworks/My Addons/ofxOnePointTracks";
-			sourceTree = SOURCE_ROOT;
-		};
-		E45964B8117C9135004CE881 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				E45964B9117C9135004CE881 /* ofxOnePointTracks.cpp */,
-				E45964BA117C9135004CE881 /* ofxOnePointTracks.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		E45964BB117C9135004CE881 /* ofxRKUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				E45964BC117C9135004CE881 /* src */,
-			);
-			name = ofxRKUtilities;
-			path = "../openFrameworks/My Addons/ofxRKUtilities";
-			sourceTree = SOURCE_ROOT;
-		};
-		E45964BC117C9135004CE881 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				E45964BD117C9135004CE881 /* ofxRKUtilities.cpp */,
-				E45964BE117C9135004CE881 /* ofxRKUtilities.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		E45964C6117C91B0004CE881 /* ofxFramesDriver */ = {
-			isa = PBXGroup;
-			children = (
-				E45964C7117C91B0004CE881 /* src */,
-			);
-			name = ofxFramesDriver;
-			path = "../openFrameworks/My Addons/ofxFramesDriver";
-			sourceTree = SOURCE_ROOT;
-		};
-		E45964C7117C91B0004CE881 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				E45964C8117C91B0004CE881 /* ofxFramesDriver.cpp */,
-				E45964C9117C91B0004CE881 /* ofxFramesDriver.h */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		E4A1BE891107320F00FBE0A8 /* video */ = {
@@ -487,6 +469,24 @@
 				E4E6565F1105DC6D00754590 /* ofxRKThread.mm */,
 			);
 			name = utils;
+			sourceTree = "<group>";
+		};
+		E4A4FE4E11F2FEC3000BE0A2 /* ofxOnePointTracks */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE4F11F2FEC3000BE0A2 /* src */,
+			);
+			name = ofxOnePointTracks;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxOnePointTracks";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4A4FE4F11F2FEC3000BE0A2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE5011F2FEC3000BE0A2 /* ofxOnePointTracks.cpp */,
+				E4A4FE5111F2FEC3000BE0A2 /* ofxOnePointTracks.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		E4CDF979113F153A0085D61B /* ZipArchive */ = {
@@ -682,10 +682,10 @@
 				E4944A62114D28B8002DAC54 /* ZoozzResourcesLoader.m in Sources */,
 				E41C700A115632FE00AAFDB8 /* FramesDrivenPlayer.cpp in Sources */,
 				E41C700B115632FE00AAFDB8 /* SimplePlayer.cpp in Sources */,
-				E45964C0117C9135004CE881 /* ofxOnePointTracks.cpp in Sources */,
-				E45964C1117C9135004CE881 /* ofxRKUtilities.cpp in Sources */,
-				E45964CA117C91B0004CE881 /* ofxFramesDriver.cpp in Sources */,
 				E41D87AE11D337E600FE8D41 /* main.m in Sources */,
+				E41D3FB811F2FE4F00980BF9 /* ofxFramesDriver.cpp in Sources */,
+				E41D3FB911F2FE4F00980BF9 /* ofxRKUtilities.cpp in Sources */,
+				E4A4FE5211F2FEC3000BE0A2 /* ofxOnePointTracks.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +698,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (G22F3GL4MN)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/glut/lib/osx\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -707,7 +711,26 @@
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "YesPlastic-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/$(SDKROOT)/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(HOME)/$(SDKROOT)/lib",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/addons/ofxOpenCv/libs/opencv/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/addons/ofxOsc/libs/oscpack/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/fmodex/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/FreeImage/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/FreeImage/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/freetype/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/freetype/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/glee/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/glu/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/openFrameworksCompiled/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/openFrameworksCompiled/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/poco/lib/armv6\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/poco/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/rtAudio/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/SndObj/lib\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/ZenGarden/lib\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/moreAddons/ofxSndObj/libs\"",
+				);
 				OTHER_LDFLAGS = "-lGLU";
 				PRODUCT_NAME = YesPlastic;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "26312609-D4DC-4334-B323-DE45B09A7C83";
@@ -722,13 +745,36 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (S8LHA25A98)";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/glut/lib/osx\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = YesPlastic_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "YesPlastic-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/$(SDKROOT)/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(HOME)/$(SDKROOT)/lib",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/addons/ofxOpenCv/libs/opencv/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/addons/ofxOsc/libs/oscpack/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/fmodex/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/FreeImage/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/FreeImage/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/freetype/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/freetype/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/glee/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/glu/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/openFrameworksCompiled/lib/iphone\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/openFrameworksCompiled/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/poco/lib/armv6\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/poco/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/rtAudio/lib/osx\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/SndObj/lib\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/ZenGarden/lib\"",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/moreAddons/ofxSndObj/libs\"",
+				);
 				OTHER_LDFLAGS = "-lGLU";
 				PRODUCT_NAME = YesPlastic;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07F4CA32-20A3-4E40-B940-5A25CE38E57F";
