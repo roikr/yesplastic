@@ -18,9 +18,27 @@
 #include <dirent.h> 
 #include <sys/stat.h> 
 
+static bool enableDataPath = true; 
+
 //--------------------------------------------------
+
+void ofEnableDataPath(){
+	enableDataPath = true;
+}
+
+//--------------------------------------------------
+void ofDisableDataPath(){
+	enableDataPath = false;
+}
+
 string ofToDataPath(string path, bool makeAbsolute){	
-	return ofToDocumentsPath("data/"+path);
+	if (enableDataPath) {
+		return ofToDocumentsPath("data/"+path);
+	} else {
+		return path;
+	}
+
+	
 }
 
 

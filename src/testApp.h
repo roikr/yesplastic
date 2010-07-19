@@ -6,7 +6,7 @@
 //#include "ofxAccelerometer.h"
 #include "PlayerController.h"
 
-#include "MidiTrack.h"
+
 #include "ofxXmlSettings.h"
 //#include "ofxOsc.h"
 #include "ofxRKThread.h"
@@ -27,6 +27,8 @@ public:
 	void draw();
 	void exit();
 	
+	void audioRequested( float * output, int bufferSize, int nChannels );
+	
 	void setMode(int player,int mode);
 	void setState(int state);
 		
@@ -37,8 +39,6 @@ public:
 	void moveBack();
 		
 	void threadedFunction();
-	
-	void updateAudio();
 	
 	float getVolume();
 	void setVolume(float vol);
@@ -59,6 +59,10 @@ public:
 	bool isInTransition();
 	bool isSoundSetAvailiable(string soundSet);
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
+	
+	
+	void didBecomeAcive();
+	void willResignActive();
 	
 	int lastFrame;
 	
@@ -101,6 +105,13 @@ public:
 	
 	bool bMenu;
 	
+	float *lBlock;
+	float *rBlock;
+	
+	int sampleRate;
+	int blockLength;
+	
+	float bpm;
 	
 	
 };

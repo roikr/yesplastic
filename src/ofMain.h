@@ -78,6 +78,10 @@ public:
 
 typedef ofBaseApp ofSimpleApp;
 
+
+
+void	ofEnableDataPath();
+void	ofDisableDataPath();
 string 	ofToDataPath(string path, bool absolute=false);
 string ofToDocumentsPath(string path);
 string ofToResourcesPath(string path);

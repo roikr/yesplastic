@@ -4,11 +4,15 @@
 
 class ofxXmlSettings;
 class TexturesPlayerBase;
+class ofxMidiInstrument;
 
 
-#include "MidiTrack.h"
+
 #include "ofxRKTexture.h"
 #include "TexturesPlayer.h"
+#include "ofxMidiLooper.h"
+#include <map>
+#include <set>
 
 
 class PlayerController  {
@@ -22,18 +26,12 @@ public:
 	
 	void exit();
 	
-	void touchDown(float x, float y);
-	void keyPressed(int key);
+	//void touchDown(float x, float y);
+	//void keyPressed(int key);
 	void play(int num);
 		
-	MidiTrack *getMidiTrack();
-
-	
-	
 	void changeSet(string soundSet);
 	string getCurrentSoundSet();
-	
-	
 	
 	void threadedFunction();
 	
@@ -45,22 +43,67 @@ public:
 	bool enable;
 	int transitionState;
 	
+	void sync();
+	void setMode(int mode);
+	int getMode();
+	
+	int getCurrentLoop();
+	void changeLoop(int loopNum);
+	
+	void setSongMode(int songMode);
+	int getSongMode();
+	
+	void processWithBlocks(float *left,float *right);
+	
+	void setVolume(float volume); //  0.0 to 1.0
+	float getVolume();
+	
+	void setBPM(int bpmVal);
+	
 private:
+	
+	void loadSoundSet(string soundSet);
 	
 	TexturesPlayer *getTexturesPlayer();
 		
 	TexturesPlayer *previousPlayer;
 	TexturesPlayer *currentPlayer;
 	TexturesPlayer *nextPlayer;
-	MidiTrack midiTrack;
 	
+	ofxMidiInstrument *midiInstrument;
+		
 	string soundSet;
 	string subSoundSet;
 	int playerNum;
 	
 	string videoSet;
+	string nextVideoSet;
 	string soundSetPath;
 	bool bFramesDriverPlayer;
+	
+	
+	// came from MidiTrack
+	
+	
+	
+	ofxMidiLooper midiTrack;
+
+	string prefix;
+	
+	bool multi;
+	
+	map<int,int> keyToMidi;
+	map<int,int> midiToSample;
+	
+	void loadLoop(string filename);
+	
+	float volume;
+	
+	int mode;
+	
+	int currentLoop;
+	
+	int songMode;
 
 };
 

@@ -22,7 +22,7 @@ extern "C"
 #import "SoundSet.h"
 #import "MenuViewController.h"
 
-
+#include "testApp.h"
 
 @interface YesPlasticAppDelegate (PrivateMethods)
 - (void)parseLibrary;
@@ -61,6 +61,7 @@ extern "C"
 	//[viewController setupMenus]; // temporal
 		
 }
+
 
 
 -(void) parseLibrary {
@@ -242,15 +243,20 @@ extern "C"
 }
 
 
+
+
 - (void) applicationWillResignActive:(UIApplication *)application
 {
 	//[viewController.glView stopAnimation];
+	viewController.OFSAptr->willResignActive();
 }
 
 - (void) applicationDidBecomeActive:(UIApplication *)application
 {
+	viewController.OFSAptr->didBecomeAcive();
 	//[viewController.glView startAnimation];
 }
+ 
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

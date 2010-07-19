@@ -8,6 +8,7 @@
 #include <math.h>
 
 #include "ofxRKUtilities.h"
+#include "ofSoundStream.h"
 
 // listen on port 12345
 #define PORT 12345
@@ -103,7 +104,7 @@ void testApp::setup(){
 	*/
 	
 	
-	MidiTrack::Init();
+	//MidiTrack::Init();
 	
 	lastFrame = 0;
 	bChangeSet = false; 
@@ -117,9 +118,9 @@ void testApp::setup(){
 		//player[i].setFont(&verdana);
 		//player[i].loadSet();
 		//player[i].getTexturesPlayer()->setState(state);
-		player[i].changeSet("BOY");
+		player[i].changeSet("PACIFIST");
 	}
-	MidiTrack::SetSongMode(SONG_IDLE);
+	//MidiTrack::SetSongMode(SONG_IDLE);
 	
 	controller = 1;
 	setState(SOLO_STATE);
@@ -127,6 +128,17 @@ void testApp::setup(){
 	bTrans = false;
 	bMove = false;
 	bMenu = false;
+	
+	
+	sampleRate 			= 44100;
+	blockLength = 256;
+	
+
+	lBlock = new float[blockLength];
+	rBlock = new float[blockLength];
+
+	bpm = 120; // TODO: send bpm to players
+	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
 	
 }
 
@@ -143,13 +155,33 @@ bool testApp::isSoundSetAvailiable(string soundSet) {
 
 
 //--------------------------------------------------------------
-
-void testApp::updateAudio() {
-	MidiTrack::UpdateTicks();
-	 
-	for (int i=0;i<3;i++)
-		player[i].getMidiTrack()->update();
+void testApp::audioRequested(float * output, int bufferSize, int nChannels){
+	
+	
+	memset(lBlock, 0, bufferSize*sizeof(float));
+	memset(rBlock, 0, bufferSize*sizeof(float));
+	
+	for (int i=0;i<3;i++) {
+		player[i].processWithBlocks(lBlock, rBlock);
+	}
+	
+//	float TWO_PI = 6.28;
+//	
+//	while (phase > TWO_PI){
+//		phase -= TWO_PI;
+//	}
+//	
+//	sin(phase+=TWO_PI/bufferSize;
+		
+	for (int i = 0; i < bufferSize; i++){
+		output[i*nChannels] = lBlock[i];
+		output[i*nChannels + 1] = rBlock[i];
+	}
+	
+	
+	
 }
+
 
 void testApp::threadedFunction() {
 	int i=0;
@@ -160,20 +192,25 @@ void testApp::threadedFunction() {
 
 void testApp::setMode(int player,int mode) {
 	bool looping = false;
-	for (int i=0;i<3;i++)
-		looping = looping || (this->player[i].getMidiTrack()->getMode() == LOOP_MODE);
+	
+	int i;
+	for ( i=0;i<3;i++)
+		looping = looping || (this->player[i].getMode() == LOOP_MODE);
 	
 	bool reset = !looping && mode==LOOP_MODE;
+	
 	if (reset) {
-		ofLog(OF_LOG_VERBOSE,"start sequencer");
-		MidiTrack::loopTick = MidiTrack::currentTick;
+		ofLog(OF_LOG_VERBOSE,"reset loopers");
+		for (i=0;i<3;i++) {
+			this->player[i].sync();
+		}
 	}
 	
 	//if (mode == MANUAL_MODE || player != 0 || this->player[0].getMidiTrack()->getCurrentSet()==0)
 	//if (mode == LOOP_MODE && player == 1) // && this->player[1].getMidiTrack()->getCurrentSoundSet()!="CHECKIT")
 	//	return;
 	
-	this->player[player].getMidiTrack()->setMode(mode,reset);
+	this->player[player].setMode(mode);
 	
 }
 
@@ -237,11 +274,11 @@ void testApp::update(){
 		bChangeSet = false;
 		if (bChangeAll) {
 			for (int i=0; i<3; i++) {
-				player[i].getMidiTrack()->setMode(MANUAL_MODE, false);
+				player[i].setMode(MANUAL_MODE);
 				player[i].changeSet(nextSoundSet);
 			}
 		} else {
-			player[controller].getMidiTrack()->setMode(MANUAL_MODE, false);
+			player[controller].setMode(MANUAL_MODE);
 			player[controller].changeSet(nextSoundSet);
 		}
 	}
@@ -413,10 +450,10 @@ void testApp::draw(){
 						
 						y = 360+(i/4) * 60;
 						x = 10+(i%4)*80;
-						if (player[controller].getMidiTrack()->getMode() == MANUAL_MODE)
+						if (player[controller].getMode() == MANUAL_MODE)
 							buttons.draw(x,y,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
 						else
-							buttons.draw(x,y,i*60,(controller*2+1)*60,60,60,i==player[controller].getMidiTrack()->getCurrentLoop() ?  1.0f : 0.4f );
+							buttons.draw(x,y,i*60,(controller*2+1)*60,60,60,i==player[controller].getCurrentLoop() ?  1.0f : 0.4f );
 					}
 				
 			} break;
@@ -529,7 +566,7 @@ void testApp::touchDown(float x, float y, int touchId) {
 	
 	if (state==BAND_STATE) {
 		controller = (int)x/160;
-		nextLoop = player[controller].getMidiTrack()->getCurrentLoop();
+		nextLoop = player[controller].getCurrentLoop();
 	}
 	
 	
@@ -538,12 +575,12 @@ void testApp::touchDown(float x, float y, int touchId) {
 		button = 4*(((int)y-360)/60)+(int)x/80;
 		
 		if (player[controller].isEnabled() && !player[controller].isInTransition()) {					
-			if ( player[controller].getMidiTrack()->getMode() == MANUAL_MODE ) {
-				player[controller].getMidiTrack()->play(button);	
+			if ( player[controller].getMode() == MANUAL_MODE ) {
+				player[controller].play(button);	
 			}
 			
-			if ( player[controller].getMidiTrack()->getMode() == LOOP_MODE ) {
-				player[controller].getMidiTrack()->changeLoop(button);		
+			if ( player[controller].getMode() == LOOP_MODE ) {
+				player[controller].changeLoop(button);		
 			}			
 		}
 		bButtonDown = true; // for view 
@@ -585,7 +622,7 @@ void testApp::touchMoved(float x, float y, int touchId) {
 			break;
 		case BAND_STATE:
 			
-			nextLoop = (player[controller].getMidiTrack()->getCurrentLoop() + (measures.back().y-measures.front().y) / 40 + 8) % 8;
+			nextLoop = (player[controller].getCurrentLoop() + (measures.back().y-measures.front().y) / 40 + 8) % 8;
 			
 			break;
 	}
@@ -655,14 +692,14 @@ void testApp::touchUp(float x, float y, int touchId) {
 			
 		case BAND_STATE: 
 			
-			if (player[controller].getMidiTrack()->getCurrentLoop() != nextLoop ) 
-				player[controller].getMidiTrack()->changeLoop(nextLoop);
+			if (player[controller].getCurrentLoop() != nextLoop ) 
+				player[controller].changeLoop(nextLoop);
 			
 			break;
 	}
 	
 	if (measures.size()<=1 && !bButtonDown) {
-		setMode(controller,player[controller].getMidiTrack()->getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
+		setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
 	}
 	
 	measures.clear();
@@ -674,52 +711,60 @@ void testApp::touchUp(float x, float y, int touchId) {
 	
 
 float testApp::getVolume() {
-	return player[controller].getMidiTrack()->getVolume();
+	return player[controller].getVolume();
 }
 	
 void testApp::setVolume(float vol) {
-	player[controller].getMidiTrack()->setVolume(vol);
+	player[controller].setVolume(vol);
 }
 
+
+
 float testApp::getBPM() {
-	return (MidiTrack::GetBPM() - 50.0)/150.0;
+	return (bpm - 50.0)/150.00;
 }
 
 void testApp::setBPM(float bpm) {
-	MidiTrack::SetBPM(ofClamp(bpm*150.0+50.0,50,200));
-}
-
-void testApp::play() {
-	MidiTrack::SetSongMode(SONG_PLAY);
-	for (int i=0;i<3;i++)
-		player[i].getMidiTrack()->setupSong();
-}
-
-void testApp::stop() {
-	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
-	MidiTrack::SetSongMode(SONG_IDLE);
-	for (int i=0;i<3;i++)
-		this->player[i].getMidiTrack()->setMode(MANUAL_MODE,false);
+	this->bpm = ofClamp(bpm*150.0+50.0,50,200);
 	
-	if (bRecord) {
-		saveMidi();
+	for (int i=0;i<3;i++) {
+		player[i].setBPM(this->bpm);
 	}
 }
 
+//TODO: implement these
+void testApp::play() {
+//	MidiTrack::SetSongMode(SONG_PLAY);
+//	for (int i=0;i<3;i++)
+//		player[i].getMidiTrack()->setupSong();
+}
+
+void testApp::stop() {
+//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
+//	MidiTrack::SetSongMode(SONG_IDLE);
+//	for (int i=0;i<3;i++)
+//		this->player[i].getMidiTrack()->setMode(MANUAL_MODE,false);
+//	
+//	if (bRecord) {
+//		saveMidi();
+//	}
+}
+
 void testApp::record() {
-	MidiTrack::SetSongMode(SONG_RECORD);
-	for (int i=0;i<3;i++)
-		player[i].getMidiTrack()->setupSong();
+//	MidiTrack::SetSongMode(SONG_RECORD);
+//	for (int i=0;i<3;i++)
+//		player[i].getMidiTrack()->setupSong();
 }
 
 bool testApp::getIsPlaying() {
-	return MidiTrack::GetSongMode()==SONG_PLAY;
+	return false;
+	//return MidiTrack::GetSongMode()==SONG_PLAY;
 }
 
 bool testApp::getIsSongDone() {
 	bool res = true;
-	for (int i=0;i<3;i++)
-		res = res && player[i].getMidiTrack()->isSongDone();
+	//for (int i=0;i<3;i++)
+//		res = res && player[i].getMidiTrack()->isSongDone();
 	return res;
 }
 	
@@ -737,7 +782,7 @@ void testApp::saveMidi() {
 		midiXml.addTag("Track");
 		midiXml.addAttribute("Track", "Number", i, i);
 		midiXml.pushTag("Track", i);
-		player[i].getMidiTrack()->addMidiToXML(&midiXml);
+		//player[i].getMidiTrack()->addMidiToXML(&midiXml); // TODO: save song
 		midiXml.popTag();
 	} 
 	midiXml.popTag();
@@ -749,4 +794,15 @@ void testApp::saveMidi() {
 	midiXml.copyXmlToString(str);
 	cout << str;
 	 */
+}
+
+void testApp::didBecomeAcive() {
+	cout << "testApp::didBecomeAcive" << endl;
+	ofSoundStreamStart();
+}
+
+void testApp::willResignActive() {
+	cout << "testApp::willResignActive" << endl;
+	ofSoundStreamStop();
+
 }

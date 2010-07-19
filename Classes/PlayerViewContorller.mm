@@ -17,9 +17,10 @@
 @implementation PlayerViewContorller
 
 @synthesize mainController;
-@synthesize timer;
+//@synthesize timer;
 @synthesize volumeSlider;
 @synthesize bpmSlider;
+@synthesize doneButton;
 
 
 
@@ -197,27 +198,37 @@
 	
 }
 
-- (void)touchDown:(id)sender {
-	[timer invalidate];
-	self.timer = nil;
-}
+//- (void)touchDown:(id)sender {
+//	[timer invalidate];
+//	self.timer = nil;
+//}
 
 - (void)volumeChanged:(id)sender {
 	mainController.OFSAptr->setVolume(volumeSlider.value);
 
 }
 
-- (void)touchUp:(id)sender {
-	if (timer) {
-		[timer invalidate];
-		self.timer = nil;
-	}
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(1.0) target:mainController selector:@selector(dismissPlayerMenu:) userInfo:nil repeats:NO];
-	
-	if (sender == bpmSlider) {
-		mainController.OFSAptr->setBPM(bpmSlider.value);
-	}
+- (void) bpmChanged:(id)sender {
+	mainController.OFSAptr->setBPM(bpmSlider.value);
 }
+	
+- (void)done:(id)sender {
+	[mainController dismissPlayerMenu:nil];
+	
+}
+
+//- (void)touchUp:(id)sender {
+//	
+//	if (timer) {
+//		[timer invalidate];
+//		self.timer = nil;
+//	}
+//	self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(1.0) target:mainController selector:@selector(dismissPlayerMenu:) userInfo:nil repeats:NO];
+//	
+//	if (sender == bpmSlider) {
+//		mainController.OFSAptr->setBPM(bpmSlider.value);
+//	}
+//}
 
 
 

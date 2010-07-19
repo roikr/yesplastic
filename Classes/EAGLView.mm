@@ -25,7 +25,7 @@
 @synthesize label;
 @synthesize interfaceOrientation;
 @synthesize controller;
-@synthesize timer;
+//@synthesize timer;
 
 
 @dynamic animationFrameInterval;
@@ -68,7 +68,7 @@
 		
 		animationFrameInterval = 1;
 		displayLink = nil;
-		audioTimer = nil;
+		//audioTimer = nil;
 		
 		// A system version of 3.1 or greater is required to use CADisplayLink. The NSTimer
 		// class is used as fallback when it isn't available.
@@ -90,7 +90,10 @@
     
 	//label.text = [NSString stringWithFormat:@"%f",[displayLink timestamp]-startTime];
 	//label.text = [NSString stringWithFormat:@"%f",OFSAptr->vx];
-	[controller updateAudio:nil];
+	
+	
+	
+	[controller checkSong:nil];
 	[renderer setupView];
 	
 	if (!sender) {
@@ -170,8 +173,8 @@
 		[displayLink invalidate];
 		displayLink = nil;
 		
-		[audioTimer invalidate];
-		audioTimer = nil;
+		//[audioTimer invalidate];
+		//audioTimer = nil;
 		
 		
 		animating = FALSE;
@@ -195,7 +198,7 @@
 		//	NSLog(@"touchesBegan: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
 	
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5) target:controller selector:@selector(bringPlayerMenu:) userInfo:nil repeats:NO];
+	//self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5) target:controller selector:@selector(bringPlayerMenu:) userInfo:nil repeats:NO];
 	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;
@@ -225,8 +228,8 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	
 	//	NSLog(@"touchesMoved: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
-	[timer invalidate];
-	self.timer = nil;
+	//[timer invalidate];
+	//self.timer = nil;
 	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;
@@ -246,8 +249,8 @@
 //------------------------------------------------------
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
-	[timer invalidate];
-	self.timer = nil;
+	//[timer invalidate];
+	//self.timer = nil;
 	
 	//	NSLog(@"touchesEnded: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
@@ -271,8 +274,8 @@
 
 //------------------------------------------------------
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	[timer invalidate];
-	self.timer = nil;
+	//[timer invalidate];
+	//self.timer = nil;
 	
 	for(int i=0; i<OF_MAX_TOUCHES; i++){
 		if(activeTouches[i]){

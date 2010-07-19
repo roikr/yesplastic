@@ -1,10 +1,11 @@
 #include "ofMain.h"
 #include "SimplePlayer.h"
 #include "FramesDrivenPlayer.h"
-#include "MidiTrack.h"
+
 #include "PlayerController.h"
 #include "ofxXmlSettings.h"
 #include "Constants.h"
+#include "ofxMidiInstrument.h"
 
 
 PlayerController::PlayerController() {
@@ -16,60 +17,143 @@ PlayerController::PlayerController() {
 void PlayerController::setup(int playerNum) {
 	enable = true;	
 	this->playerNum = playerNum;
-	//enable = xml->getValue("enable", "true",0) == "true";
 	
 	
 	
-	/*
-	for (int i=0;i<xml->getNumTags("video_set");i++) { //
-		videosMap[xml->getValue("video_set:id","",i)]=i;
-		TexturesPlayer* texturePlayer  = new TexturesPlayer;
-		texturePlayer->setup(xml,i);
-		videos.push_back(texturePlayer);
-	}
-	 */
-	/*
-	for (int i=0;i<xml->getNumTags("sound_set");i++) {
-		string video = xml->getValue("sound_set:video","",i);
+	mode = MANUAL_MODE;	
+	
+	
 		
-		videosMap[video]=i;
-		TexturesPlayer* texturePlayer  = new TexturesPlayer;
-		texturePlayer->setup(video);
-		videos.push_back(texturePlayer);
-		
-		int videoSet =videosMap[video];
-		ofLog(OF_LOG_VERBOSE,"sound set %s using video set %s(%i)",xml->getValue("sound_set:id","",i).c_str(),video.c_str(),videoSet);
-		videoSets.push_back(videoSet);
-	}
-	 */
-	
-	
-	
-	if (!enable)
-		return;
-
-	//id = xml->getValue("id","");
-	//touchArea = xml->getValue("player_num",0);
-	
-	midiTrack.setup(playerNum);
-	
-	
-	//bChangeVideoSet = false;
-	//startThread(true, false);
-	
-	
-	//string filename = xml->getValue("mask:filename","");
-//	mask.setup(ofToDataPath(filename));
-//	mask.init();
-//	mask.load();
-//	mask_x = xml->getValue("mask:x",0);
-//	mask_width = xml->getValue("mask:width",0);
-//	bFade = false;
-	
 	currentPlayer = 0;
+	midiInstrument = 0;
+	midiTrack.setup();
+	//midiTrack = 0;
 	
 }
 
+
+void  PlayerController::loadSoundSet(string soundSet) {
+	
+	//enable =  xml.getValue("enable", "true",0) == "true";
+	
+	this->soundSet = soundSet;
+	ofxXmlSettings xml;
+	string xmlpath = "SOUNDS/"+soundSet+"/"+soundSet+".xml";
+	bool loaded = xml.loadFile(xmlpath);
+	ofLog(OF_LOG_VERBOSE,"loading of %s %s",xmlpath.c_str(),loaded ? "succeeded" : "failed");
+	enable = true;
+	if (!loaded) {
+		enable = false;
+		return;
+	}
+	
+	xml.pushTag("sound_set");
+	xml.pushTag("player", playerNum);
+	videoSet=	xml.getValue("video","");
+	
+	
+	xml.pushTag("sound");
+	
+	multi = xml.tagExists("multi");
+	prefix = xml.getValue("id","");
+	volume = xml.getValue("volume", 1.0f);
+	
+	ofLog(OF_LOG_VERBOSE,"loading set %s (%s)",soundSet.c_str(),prefix.c_str());
+	
+	vector<int> midiNotes;
+	
+	if (xml.tagExists("notes")) {
+		xml.pushTag("notes");
+		for (int i=0; i<xml.getNumTags("note");i++) {
+			int midi = (xml.getAttribute("note", "midi", 0, i) -12) % 24 ;// ("note", 0, i)-36) % 24;
+			
+			int sample = xml.getAttribute("note", "sample", 0, i)-1;
+			midiToSample[midi] = sample;
+			
+			int key = xml.getAttribute("note", "key", 0, i);
+			if (key)
+				keyToMidi[key-1] = midi;
+			
+			midiNotes.push_back(midi);
+			
+			//ofLog(OF_LOG_VERBOSE,"parsing note %d: midi=%d, video=%d, key=%d",i,midi,video,key);
+			
+		}
+		xml.popTag();
+	}
+	
+	// ticks trick
+	/*
+	 if (multi && xml.tagExists("priorities")) {
+	 xml.pushTag("priorities");
+	 for (int i=0;i<xml.getNumTags("priority");i++)
+	 priorities.push_back(xml.getValue("priority",0,i)); 
+	 xml.popTag();
+	 }
+	 */
+	
+	set<int> chokeGroup;
+	if (multi && xml.tagExists("choke_group")) {
+		xml.pushTag("choke_group");
+		for (int i=0;i<xml.getNumTags("note");i++) 
+			chokeGroup.insert(xml.getValue("note", 0, i)-1); // -1 because in the xml we start from 1
+		xml.popTag();
+	}
+	
+	
+	xml.popTag();
+	xml.popTag();
+	xml.popTag();
+	
+	
+	if (midiInstrument) {
+		midiInstrument->exit();
+		delete midiInstrument;
+	}
+	midiInstrument = new ofxMidiInstrument;
+	
+	
+	int i;
+	//loops.clear();
+	
+	string path = "SOUNDS/"+soundSet+"/"+prefix +"/"+prefix + "_";
+	
+	for (i=0; i<midiNotes.size();i++) {
+		string soundname = path+ofToString(i+1) + ".aif";
+		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
+		
+		midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i]); // TODO: add choke mechanics
+		
+		
+		/*
+		 if (multi)
+		 midiInstrument->loadSound(soundname, midiNotes[i],127,chokeGroup.find(i)!=chokeGroup.end());
+		 else
+		 midiInstrument->loadSound(soundname, midiNotes[i],127);
+		 */
+		
+	}
+	
+	midiInstrument->setup(256, 44100); // TODO: move these out
+	
+	midiTrack.clear();
+	
+	
+	string pathPrefix = ofToDataPath(path);
+	ofDisableDataPath(); // ofxXmlSettings uses ofToDataPath();
+	for (i=0;i<8;i++) {
+		midiTrack.loadLoop(pathPrefix+ofToString(i+1)+".xml");
+	}
+	ofEnableDataPath();
+	
+	midiTrack.play();
+	
+	currentLoop = 0;
+	
+	
+	//midiTrack->playLoop(currentLoop);
+	
+}
 
 
 
@@ -87,26 +171,26 @@ void PlayerController::changeSet(string soundSet) {
 	string xmlpath = "SOUNDS/"+soundSet+"/"+soundSet+".xml";
 	bool loaded = xml.loadFile(xmlpath);
 	
-	
-	if (loaded) {
+	if (loaded) { // TODO: if not ?
 		xml.pushTag("sound_set");
 		xml.pushTag("player", playerNum);
 		bFramesDriverPlayer = xml.getAttribute("video", "lips", 0, 0);
 		subSoundSet = xml.getValue("sound:id", "", 0);
-		videoSet =	xml.getValue("video","");
+		nextVideoSet =	xml.getValue("video","");
 		xml.popTag();
 		xml.popTag();
 	}
 	
 	ofLog(OF_LOG_VERBOSE,"loading of %s %s - using video: %s",xmlpath.c_str(),loaded ? "succeeded" : "failed",videoSet.c_str());
 	
-	if (getMidiTrack()->getCurrentVideoSet()!=videoSet) {
+	if (nextVideoSet!=videoSet) {
 		if (playerNum == 1) //  && videoSet == "VOC_CORE"
 			nextPlayer = new FramesDrivenPlayer("SOUNDS/"+soundSet,subSoundSet);
 		else
 			nextPlayer = new SimplePlayer;
 		
-		nextPlayer->setup(videoSet);
+		nextPlayer->setup(nextVideoSet);
+		
 	}
 	
 	
@@ -122,13 +206,15 @@ void PlayerController::changeSet(string soundSet) {
 		currentPlayer->prepareIn();
 		currentPlayer->prepareSet();
 		
-		midiTrack.setupSoundSet();
+		//midiTrack.setupSoundSet();
 		
-		midiTrack.setTexturesPlayer(currentPlayer);
+		
+		//midiTrack.setTexturesPlayer(currentPlayer);
 		
 	} else if (/*getMidiTrack()->getCurrentSet()!=setNum &&*/ !isInTransition()) {
-						
-		if (getMidiTrack()->getCurrentVideoSet()!=videoSet) {
+		midiTrack.pause();
+		
+		if (nextVideoSet!=videoSet) {
 			
 			currentPlayer->prepareOut();
 			transitionState = TRANSITION_INIT_IN;
@@ -160,7 +246,7 @@ void PlayerController::threadedFunction() {
 		case TRANSITION_SETUP:
 			currentPlayer->initIn();
 			currentPlayer->initSet();
-			midiTrack.loadSoundSet(soundSet);
+			loadSoundSet(soundSet);
 			transitionState = TRANSITION_IDLE;
 			break;
 		case TRANSITION_INIT_IN:
@@ -176,7 +262,7 @@ void PlayerController::threadedFunction() {
 			transitionState = TRANSITION_INIT_SET_FINISHED;
 			break;
 		case TRANSITION_CHANGE_SOUND_SET:
-			midiTrack.loadSoundSet(soundSet);
+			loadSoundSet(soundSet);
 			transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED;
 			break;
 	}
@@ -200,7 +286,7 @@ void PlayerController::update() {
 				if (currentPlayer->didTransitionEnd()) {
 					previousPlayer = currentPlayer;
 					currentPlayer = nextPlayer;
-					midiTrack.setTexturesPlayer(currentPlayer);
+					//midiTrack.setTexturesPlayer(currentPlayer);
 					currentPlayer->startTransition(true);
 					currentPlayer->update();
 					nextPlayer = 0;
@@ -220,11 +306,14 @@ void PlayerController::update() {
 				currentPlayer->prepareSet();
 				delete previousPlayer;
 				previousPlayer = 0;
-				midiTrack.releaseSoundSet();
+				videoSet = nextVideoSet;
+				//midiTrack->exit(); // done in loadSoundSet
+				//midiTrack.releaseSoundSet();
 				transitionState = TRANSITION_CHANGE_SOUND_SET;
 				break;
 			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
-				midiTrack.setupSoundSet();
+				midiTrack.play();
+				//midiTrack.setupSoundSet(); // done in loadSoundSet
 				transitionState = TRANSITION_IDLE;
 				break;
 			default:
@@ -266,18 +355,43 @@ float PlayerController::getScale(){
 
 
 
-void PlayerController::touchDown(float x, float y) {
+
+
+
+void PlayerController::play(int num) {
 	if (!enable) 
 		return;
 	
-	int key = y/60;
-	if (midiTrack.getMode() == MANUAL_MODE) 
-		midiTrack.play(key);
-	else if (midiTrack.getMode() == LOOP_MODE)
-		midiTrack.changeLoop(key);
+	if (mode == MANUAL_MODE) {
+		if (playerNum != 2) {
+			midiInstrument->noteOffAll();
+		}
+		int midi = keyToMidi[num];
+		cout << "num: " << num << ", midi: " << midi <<endl;
+		currentPlayer->play(midiToSample[midi]);
+		
+		
+		/* TODO: song record
+		 if (songMode==SONG_RECORD) {
+		 event e;
+		 e.time = time;
+		 e.note = midi;
+		 e.velocity = 127;
+		 song.push_back(e);
+		 //cout << "record note: " << e.note << ", tick: " << e.time << "\n"; 
+		 }
+		 */
+		
+		midiInstrument->noteOn(midi, 127*volume);
+		
+		
+	}
+	else if (mode == LOOP_MODE)
+		midiTrack.playLoop(num);
 	
 }
 
+/*
 void PlayerController::keyPressed(int key) {
 	if (!enable) 
 		return;
@@ -291,6 +405,7 @@ void PlayerController::keyPressed(int key) {
 		midiTrack.changeLoop(key);
 	
 }
+ */
 
 
 void PlayerController::exit() {
@@ -301,7 +416,7 @@ void PlayerController::exit() {
 	//	(*iter)->exit();
 	currentPlayer->exit();
 	
-	midiTrack.exit();
+	midiTrack.clear();
 }
 
 
@@ -309,9 +424,6 @@ TexturesPlayer *PlayerController::getTexturesPlayer() {
 	return currentPlayer;
 }
 
-MidiTrack * PlayerController::getMidiTrack() {
-	return &midiTrack;
-}
 
 bool PlayerController::isEnabled() {
 	return enable;
@@ -332,6 +444,95 @@ string PlayerController::getCurrentSet() {
 }
  */
 
+int PlayerController::getSongMode() {
+	return songMode;
+}
+
+
+void PlayerController::setSongMode(int songMode) {
+	this->songMode = songMode;
+	//startTick = 0;
+	//startTime = ofGetElapsedTimeMillis();
+	//ofxRKAQSoundPlayer::Start();
+	cout << "SetSongMode: " << songMode << "\n"; 
+}
 	
+void PlayerController::sync() {
+	if (!enable)
+		return;
+	midiTrack.sync();
+}
+
+void  PlayerController::setMode(int mode) { // 
+	if (!enable)
+		return;
+	
+	this->mode =  mode; 
+	
+	switch (mode) {
+		case LOOP_MODE:
+			midiTrack.playLoop(currentLoop);
+			break;
+		case MANUAL_MODE:
+			midiTrack.stopLoop();
+			break;
+		default:
+			break;
+	}
+	
+	printf("change mode:  %i\n", mode);
+}
+
+
+int  PlayerController::getMode() { 
+	return mode;
+}
+
+void PlayerController::changeLoop(int loopNum) {
+	currentLoop = loopNum;
+	midiTrack.playLoop(currentLoop);
+}
+
+int PlayerController::getCurrentLoop() {
+	return currentLoop;
+}
+
+void PlayerController::processWithBlocks(float *left,float *right) {
+	vector<event> events;
+	midiTrack.process(events);
+	for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
+		int note = (iter->note - 12) % 24;
+		//printf("loop note:  %i\n", note);
+		if (iter->bNoteOn) {
+			midiInstrument->noteOn(note, iter->velocity*volume);
+			currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
+		}
+						 
+		else {
+			if (playerNum!=2) {
+				midiInstrument->noteOff(note);
+			}
+		}
+			
+	}
+	midiInstrument->preProcess();
+	midiInstrument->mixWithBlocks(left,right);
+	midiInstrument->postProcess();
+	
+}
+
+
+void PlayerController::setVolume(float volume) {
+	this->volume = volume;
+}
+
+float PlayerController::getVolume() {
+	return volume;
+}
+
+void PlayerController::setBPM(int bpmVal) {
+	midiTrack.setBPM(bpmVal);
+}
+
 
 

@@ -32,9 +32,8 @@ class testApp;
 	// The NSTimer class is used only as fallback when running on a pre 3.1 device where CADisplayLink
 	// isn't available.
 	id displayLink;
-    NSTimer *audioTimer;
-	NSTimer * timer;
-		
+    //NSTimer *audioTimer;
+	//NSTimer * timer; // used for double click 		
 	UILabel *label;
 	CFTimeInterval startTime;
 	
@@ -49,7 +48,7 @@ class testApp;
 @property (nonatomic) NSInteger animationFrameInterval;
 @property (nonatomic,retain) IBOutlet UILabel *label;
 @property UIInterfaceOrientation interfaceOrientation;
-@property (nonatomic,retain) NSTimer *timer;
+//@property (nonatomic,retain) NSTimer *timer;
 @property (nonatomic,retain) MainViewController *controller;
 
 

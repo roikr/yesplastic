@@ -7,8 +7,6 @@
 //
 
 #import "ofxRKThread.h"
-#import "MidiTrack.h"
-
 
 @interface RKThread : NSObject {
 	

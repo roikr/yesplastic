@@ -16,10 +16,6 @@
 		E40C4EBD114507C500D267BB /* precache in Resources */ = {isa = PBXBuildFile; fileRef = E40C4EBA114507C500D267BB /* precache */; };
 		E40D7E82112322E800484710 /* ofxRKActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7E7E112322E800484710 /* ofxRKActor.cpp */; };
 		E40D7E83112322E800484710 /* ofxRKSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7E80112322E800484710 /* ofxRKSequence.cpp */; };
-		E40D7EB7112323B700484710 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7EAF112323B700484710 /* tinyxml.cpp */; };
-		E40D7EB8112323B700484710 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7EB1112323B700484710 /* tinyxmlerror.cpp */; };
-		E40D7EB9112323B700484710 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7EB2112323B700484710 /* tinyxmlparser.cpp */; };
-		E40D7EBA112323B700484710 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40D7EB4112323B700484710 /* ofxXmlSettings.cpp */; };
 		E41C700A115632FE00AAFDB8 /* FramesDrivenPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41C7006115632FE00AAFDB8 /* FramesDrivenPlayer.cpp */; };
 		E41C700B115632FE00AAFDB8 /* SimplePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41C7008115632FE00AAFDB8 /* SimplePlayer.cpp */; };
 		E41D3FB811F2FE4F00980BF9 /* ofxFramesDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E41D2DF811F2FE4A00980BF9 /* ofxFramesDriver.cpp */; };
@@ -39,7 +35,7 @@
 		E41F94A6114545050080F634 /* AuthenticateConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F94A4114545050080F634 /* AuthenticateConnection.m */; };
 		E41F95DC114570D70080F634 /* ZoozzConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F95DB114570D70080F634 /* ZoozzConstants.m */; };
 		E41F964311458D620080F634 /* Asset.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F964211458D620080F634 /* Asset.m */; };
-		E41F965F114592900080F634 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F9498114517200080F634 /* XMLParser.m */; };
+		E42E107611F3568400B8B103 /* ofxiPhoneSoundStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = E42E107511F3568400B8B103 /* ofxiPhoneSoundStream.mm */; };
 		E4506B8C112BF15700612687 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4506B8B112BF15700612687 /* MainViewController.mm */; };
 		E4506B9D112BF2AD00612687 /* PlayerViewContorller.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4506B9C112BF2AD00612687 /* PlayerViewContorller.mm */; };
 		E46670911147D4D900EB6D0A /* MenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E466708F1147D4D900EB6D0A /* MenuViewController.mm */; };
@@ -50,6 +46,17 @@
 		E4A10D0211468E480099172F /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A10D0111468E480099172F /* Utilities.m */; };
 		E4A1BE511107210400FBE0A8 /* YesPlasticAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A1BE501107210400FBE0A8 /* YesPlasticAppDelegate.mm */; };
 		E4A4FE5211F2FEC3000BE0A2 /* ofxOnePointTracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE5011F2FEC3000BE0A2 /* ofxOnePointTracks.cpp */; };
+		E4A4FE7D11F2FF90000BE0A2 /* ofxMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE7111F2FF90000BE0A2 /* ofxMidi.cpp */; };
+		E4A4FE7E11F2FF90000BE0A2 /* ofxMidiInstrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE7311F2FF90000BE0A2 /* ofxMidiInstrument.cpp */; };
+		E4A4FE7F11F2FF90000BE0A2 /* ofxMidiLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE7511F2FF90000BE0A2 /* ofxMidiLooper.cpp */; };
+		E4A4FE8011F2FF90000BE0A2 /* ofxMidiPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE7711F2FF90000BE0A2 /* ofxMidiPlayer.cpp */; };
+		E4A4FE8111F2FF90000BE0A2 /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE7B11F2FF90000BE0A2 /* ofxSndFile.cpp */; };
+		E4A4FE8C11F2FFA4000BE0A2 /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = E4A4FE8311F2FFA4000BE0A2 /* install.xml */; };
+		E4A4FE8D11F2FFA4000BE0A2 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE8511F2FFA4000BE0A2 /* tinyxml.cpp */; };
+		E4A4FE8E11F2FFA4000BE0A2 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE8711F2FFA4000BE0A2 /* tinyxmlerror.cpp */; };
+		E4A4FE8F11F2FFA4000BE0A2 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE8811F2FFA4000BE0A2 /* tinyxmlparser.cpp */; };
+		E4A4FE9011F2FFA4000BE0A2 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE8A11F2FFA4000BE0A2 /* ofxXmlSettings.cpp */; };
+		E4A4FF8B11F31AEF000BE0A2 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F9498114517200080F634 /* XMLParser.m */; };
 		E4CDF986113F153A0085D61B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF97C113F153A0085D61B /* ioapi.c */; };
 		E4CDF987113F153A0085D61B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF97E113F153A0085D61B /* mztools.c */; };
 		E4CDF988113F153A0085D61B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF980113F153A0085D61B /* unzip.c */; };
@@ -66,17 +73,14 @@
 		E4E6577A1105F47400754590 /* ofxRKPVRTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E6565B1105DC6D00754590 /* ofxRKPVRTexture.mm */; };
 		E4E6577B1105F47400754590 /* ofxRKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E6565D1105DC6D00754590 /* ofxRKTexture.mm */; };
 		E4E6577C1105F47400754590 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4E656601105DC6D00754590 /* PlayerController.cpp */; };
-		E4E6577D1105F47400754590 /* RKMusicXMLParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E656631105DC6D00754590 /* RKMusicXMLParser.mm */; };
 		E4E6577E1105F47400754590 /* RKPVRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E656651105DC6D00754590 /* RKPVRTexture.m */; };
 		E4E6577F1105F47400754590 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4E656661105DC6D00754590 /* testApp.cpp */; };
 		E4E6583C1106155000754590 /* ofxRKThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E6565F1105DC6D00754590 /* ofxRKThread.mm */; };
 		E4E65847110615F400754590 /* ofMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E65846110615F400754590 /* ofMain.mm */; };
-		E4ED8C3011076745002F9604 /* MidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C2F11076745002F9604 /* MidiTrack.cpp */; };
 		E4ED8C8411076A7B002F9604 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C7D11076A7B002F9604 /* CADebugMacros.cpp */; };
 		E4ED8C8511076A7B002F9604 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C8011076A7B002F9604 /* CAStreamBasicDescription.cpp */; };
 		E4ED8C8611076A7B002F9604 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C8211076A7B002F9604 /* CAXException.cpp */; };
 		E4ED8C8C11076AD5002F9604 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4ED8C8B11076AD5002F9604 /* AudioToolbox.framework */; };
-		E4ED8C9B11076C1C002F9604 /* ofxRKAQSoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C9911076C1C002F9604 /* ofxRKAQSoundPlayer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,19 +93,12 @@
 		28FD14FD0DC6FC130079059D /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* YesPlastic_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesPlastic_Prefix.pch; sourceTree = "<group>"; };
 		E40C4EBA114507C500D267BB /* precache */ = {isa = PBXFileReference; lastKnownFileType = folder; path = precache; sourceTree = "<group>"; };
 		E40D7E7E112322E800484710 /* ofxRKActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKActor.cpp; sourceTree = "<group>"; };
 		E40D7E7F112322E800484710 /* ofxRKActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKActor.h; sourceTree = "<group>"; };
 		E40D7E80112322E800484710 /* ofxRKSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKSequence.cpp; sourceTree = "<group>"; };
 		E40D7E81112322E800484710 /* ofxRKSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKSequence.h; sourceTree = "<group>"; };
-		E40D7EAF112323B700484710 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
-		E40D7EB0112323B700484710 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
-		E40D7EB1112323B700484710 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
-		E40D7EB2112323B700484710 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
-		E40D7EB4112323B700484710 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
-		E40D7EB5112323B700484710 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		E41C7006115632FE00AAFDB8 /* FramesDrivenPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FramesDrivenPlayer.cpp; sourceTree = "<group>"; };
 		E41C7007115632FE00AAFDB8 /* FramesDrivenPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesDrivenPlayer.h; sourceTree = "<group>"; };
 		E41C7008115632FE00AAFDB8 /* SimplePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimplePlayer.cpp; sourceTree = "<group>"; };
@@ -135,6 +132,8 @@
 		E41F964111458D620080F634 /* Asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asset.h; path = MediaShareClasses/Asset.h; sourceTree = "<group>"; };
 		E41F964211458D620080F634 /* Asset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Asset.m; path = MediaShareClasses/Asset.m; sourceTree = "<group>"; };
 		E424CDA611AC927900E431D7 /* YesPlastic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YesPlastic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E42E107411F3568400B8B103 /* ofSoundStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofSoundStream.h; path = src/ofSoundStream.h; sourceTree = "<group>"; };
+		E42E107511F3568400B8B103 /* ofxiPhoneSoundStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ofxiPhoneSoundStream.mm; path = src/ofxiPhoneSoundStream.mm; sourceTree = "<group>"; };
 		E4506B8A112BF15700612687 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4506B8B112BF15700612687 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4506B9B112BF2AD00612687 /* PlayerViewContorller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewContorller.h; sourceTree = "<group>"; };
@@ -154,6 +153,23 @@
 		E4A1BE501107210400FBE0A8 /* YesPlasticAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YesPlasticAppDelegate.mm; sourceTree = "<group>"; };
 		E4A4FE5011F2FEC3000BE0A2 /* ofxOnePointTracks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOnePointTracks.cpp; sourceTree = "<group>"; };
 		E4A4FE5111F2FEC3000BE0A2 /* ofxOnePointTracks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOnePointTracks.h; sourceTree = "<group>"; };
+		E4A4FE7111F2FF90000BE0A2 /* ofxMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidi.cpp; sourceTree = "<group>"; };
+		E4A4FE7211F2FF90000BE0A2 /* ofxMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidi.h; sourceTree = "<group>"; };
+		E4A4FE7311F2FF90000BE0A2 /* ofxMidiInstrument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiInstrument.cpp; sourceTree = "<group>"; };
+		E4A4FE7411F2FF90000BE0A2 /* ofxMidiInstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiInstrument.h; sourceTree = "<group>"; };
+		E4A4FE7511F2FF90000BE0A2 /* ofxMidiLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiLooper.cpp; sourceTree = "<group>"; };
+		E4A4FE7611F2FF90000BE0A2 /* ofxMidiLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiLooper.h; sourceTree = "<group>"; };
+		E4A4FE7711F2FF90000BE0A2 /* ofxMidiPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiPlayer.cpp; sourceTree = "<group>"; };
+		E4A4FE7811F2FF90000BE0A2 /* ofxMidiPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiPlayer.h; sourceTree = "<group>"; };
+		E4A4FE7B11F2FF90000BE0A2 /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
+		E4A4FE7C11F2FF90000BE0A2 /* ofxSndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSndFile.h; sourceTree = "<group>"; };
+		E4A4FE8311F2FFA4000BE0A2 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		E4A4FE8511F2FFA4000BE0A2 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		E4A4FE8611F2FFA4000BE0A2 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		E4A4FE8711F2FFA4000BE0A2 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		E4A4FE8811F2FFA4000BE0A2 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		E4A4FE8A11F2FFA4000BE0A2 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		E4A4FE8B11F2FFA4000BE0A2 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		E4CDF97B113F153A0085D61B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		E4CDF97C113F153A0085D61B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		E4CDF97D113F153A0085D61B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
@@ -186,8 +202,6 @@
 		E4E6565F1105DC6D00754590 /* ofxRKThread.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxRKThread.mm; sourceTree = "<group>"; };
 		E4E656601105DC6D00754590 /* PlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerController.cpp; sourceTree = "<group>"; };
 		E4E656611105DC6D00754590 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
-		E4E656621105DC6D00754590 /* RKMusicXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKMusicXMLParser.h; sourceTree = "<group>"; };
-		E4E656631105DC6D00754590 /* RKMusicXMLParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RKMusicXMLParser.mm; sourceTree = "<group>"; };
 		E4E656641105DC6D00754590 /* RKPVRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKPVRTexture.h; sourceTree = "<group>"; };
 		E4E656651105DC6D00754590 /* RKPVRTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKPVRTexture.m; sourceTree = "<group>"; };
 		E4E656661105DC6D00754590 /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
@@ -204,8 +218,6 @@
 		E4ED8C8211076A7B002F9604 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
 		E4ED8C8311076A7B002F9604 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
 		E4ED8C8B11076AD5002F9604 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		E4ED8C9911076C1C002F9604 /* ofxRKAQSoundPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKAQSoundPlayer.cpp; sourceTree = "<group>"; };
-		E4ED8C9A11076C1C002F9604 /* ofxRKAQSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKAQSoundPlayer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +282,6 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				E4E656501105DC6D00754590 /* src */,
 				E4E658141106058200754590 /* myOF */,
-				E40D7EAC112323B700484710 /* ofxXmlSettings */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -283,7 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* YesPlastic_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -321,35 +331,6 @@
 				E4E4F7CC11496C2400E607C1 /* StoreKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E40D7EAC112323B700484710 /* ofxXmlSettings */ = {
-			isa = PBXGroup;
-			children = (
-				E40D7EAE112323B700484710 /* libs */,
-				E40D7EB3112323B700484710 /* src */,
-			);
-			path = ofxXmlSettings;
-			sourceTree = "<group>";
-		};
-		E40D7EAE112323B700484710 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				E40D7EAF112323B700484710 /* tinyxml.cpp */,
-				E40D7EB0112323B700484710 /* tinyxml.h */,
-				E40D7EB1112323B700484710 /* tinyxmlerror.cpp */,
-				E40D7EB2112323B700484710 /* tinyxmlparser.cpp */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		E40D7EB3112323B700484710 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				E40D7EB4112323B700484710 /* ofxXmlSettings.cpp */,
-				E40D7EB5112323B700484710 /* ofxXmlSettings.h */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		E41D2DF611F2FE4A00980BF9 /* ofxFramesDriver */ = {
@@ -427,6 +408,9 @@
 		E4280BA91172449500F458BB /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E4A4FE8211F2FFA4000BE0A2 /* ofxXmlSettings */,
+				E4A4FE6F11F2FF90000BE0A2 /* ofxMidi */,
+				E4A4FE7911F2FF90000BE0A2 /* ofxSndFile */,
 				E4A4FE4E11F2FEC3000BE0A2 /* ofxOnePointTracks */,
 				E41D2DF611F2FE4A00980BF9 /* ofxFramesDriver */,
 				E41D2DFA11F2FE4A00980BF9 /* ofxRKUtilities */,
@@ -449,17 +433,6 @@
 				E4E656651105DC6D00754590 /* RKPVRTexture.m */,
 			);
 			name = video;
-			sourceTree = "<group>";
-		};
-		E4A1BE8A1107323000FBE0A8 /* audio */ = {
-			isa = PBXGroup;
-			children = (
-				E4ED8C9911076C1C002F9604 /* ofxRKAQSoundPlayer.cpp */,
-				E4ED8C9A11076C1C002F9604 /* ofxRKAQSoundPlayer.h */,
-				E4E656621105DC6D00754590 /* RKMusicXMLParser.h */,
-				E4E656631105DC6D00754590 /* RKMusicXMLParser.mm */,
-			);
-			name = audio;
 			sourceTree = "<group>";
 		};
 		E4A1BE8B1107325100FBE0A8 /* utils */ = {
@@ -485,6 +458,79 @@
 			children = (
 				E4A4FE5011F2FEC3000BE0A2 /* ofxOnePointTracks.cpp */,
 				E4A4FE5111F2FEC3000BE0A2 /* ofxOnePointTracks.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E4A4FE6F11F2FF90000BE0A2 /* ofxMidi */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE7011F2FF90000BE0A2 /* src */,
+			);
+			name = ofxMidi;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxMidi";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4A4FE7011F2FF90000BE0A2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE7111F2FF90000BE0A2 /* ofxMidi.cpp */,
+				E4A4FE7211F2FF90000BE0A2 /* ofxMidi.h */,
+				E4A4FE7311F2FF90000BE0A2 /* ofxMidiInstrument.cpp */,
+				E4A4FE7411F2FF90000BE0A2 /* ofxMidiInstrument.h */,
+				E4A4FE7511F2FF90000BE0A2 /* ofxMidiLooper.cpp */,
+				E4A4FE7611F2FF90000BE0A2 /* ofxMidiLooper.h */,
+				E4A4FE7711F2FF90000BE0A2 /* ofxMidiPlayer.cpp */,
+				E4A4FE7811F2FF90000BE0A2 /* ofxMidiPlayer.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E4A4FE7911F2FF90000BE0A2 /* ofxSndFile */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE7A11F2FF90000BE0A2 /* src */,
+			);
+			name = ofxSndFile;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4A4FE7A11F2FF90000BE0A2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE7B11F2FF90000BE0A2 /* ofxSndFile.cpp */,
+				E4A4FE7C11F2FF90000BE0A2 /* ofxSndFile.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E4A4FE8211F2FFA4000BE0A2 /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE8311F2FFA4000BE0A2 /* install.xml */,
+				E4A4FE8411F2FFA4000BE0A2 /* libs */,
+				E4A4FE8911F2FFA4000BE0A2 /* src */,
+			);
+			name = ofxXmlSettings;
+			path = ../of_preRelease_v0061_osxSL_FAT/addons/ofxXmlSettings;
+			sourceTree = SOURCE_ROOT;
+		};
+		E4A4FE8411F2FFA4000BE0A2 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE8511F2FFA4000BE0A2 /* tinyxml.cpp */,
+				E4A4FE8611F2FFA4000BE0A2 /* tinyxml.h */,
+				E4A4FE8711F2FFA4000BE0A2 /* tinyxmlerror.cpp */,
+				E4A4FE8811F2FFA4000BE0A2 /* tinyxmlparser.cpp */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		E4A4FE8911F2FFA4000BE0A2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4FE8A11F2FFA4000BE0A2 /* ofxXmlSettings.cpp */,
+				E4A4FE8B11F2FFA4000BE0A2 /* ofxXmlSettings.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -540,7 +586,6 @@
 				E4ED8C2F11076745002F9604 /* MidiTrack.cpp */,
 				E4E656541105DC6D00754590 /* Constants.h */,
 				E4A1BE8B1107325100FBE0A8 /* utils */,
-				E4A1BE8A1107323000FBE0A8 /* audio */,
 				E4A1BE891107320F00FBE0A8 /* video */,
 				E4E656551105DC6D00754590 /* main.cpp */,
 			);
@@ -550,6 +595,8 @@
 		E4E658141106058200754590 /* myOF */ = {
 			isa = PBXGroup;
 			children = (
+				E42E107411F3568400B8B103 /* ofSoundStream.h */,
+				E42E107511F3568400B8B103 /* ofxiPhoneSoundStream.mm */,
 				E4E657471105F03B00754590 /* ofMain.h */,
 				E4E65846110615F400754590 /* ofMain.mm */,
 			);
@@ -627,6 +674,7 @@
 				E41D883E11D33A9100FE8D41 /* PlayerViewController.xib in Resources */,
 				E41D883F11D33A9100FE8D41 /* SoundSetView.xib in Resources */,
 				E41D884F11D33B5C00FE8D41 /* MenuViewController.xib in Resources */,
+				E4A4FE8C11F2FFA4000BE0A2 /* install.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,30 +685,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E41F965F114592900080F634 /* XMLParser.m in Sources */,
+				E4A4FF8B11F31AEF000BE0A2 /* XMLParser.m in Sources */,
 				E4E6583C1106155000754590 /* ofxRKThread.mm in Sources */,
 				E4E6577A1105F47400754590 /* ofxRKPVRTexture.mm in Sources */,
 				E4E6577B1105F47400754590 /* ofxRKTexture.mm in Sources */,
 				E4E6577C1105F47400754590 /* PlayerController.cpp in Sources */,
-				E4E6577D1105F47400754590 /* RKMusicXMLParser.mm in Sources */,
 				E4E6577E1105F47400754590 /* RKPVRTexture.m in Sources */,
 				E4E6577F1105F47400754590 /* testApp.cpp in Sources */,
 				28FD14FE0DC6FC130079059D /* EAGLView.mm in Sources */,
 				2514C27210084DB100A42282 /* ES1Renderer.m in Sources */,
 				E4E65847110615F400754590 /* ofMain.mm in Sources */,
 				E4A1BE511107210400FBE0A8 /* YesPlasticAppDelegate.mm in Sources */,
-				E4ED8C3011076745002F9604 /* MidiTrack.cpp in Sources */,
 				E4ED8C8411076A7B002F9604 /* CADebugMacros.cpp in Sources */,
 				E4ED8C8511076A7B002F9604 /* CAStreamBasicDescription.cpp in Sources */,
 				E4ED8C8611076A7B002F9604 /* CAXException.cpp in Sources */,
-				E4ED8C9B11076C1C002F9604 /* ofxRKAQSoundPlayer.cpp in Sources */,
 				E46C7EBE11104CC10083BEAF /* CAHostTimeBase.cpp in Sources */,
 				E40D7E82112322E800484710 /* ofxRKActor.cpp in Sources */,
 				E40D7E83112322E800484710 /* ofxRKSequence.cpp in Sources */,
-				E40D7EB7112323B700484710 /* tinyxml.cpp in Sources */,
-				E40D7EB8112323B700484710 /* tinyxmlerror.cpp in Sources */,
-				E40D7EB9112323B700484710 /* tinyxmlparser.cpp in Sources */,
-				E40D7EBA112323B700484710 /* ofxXmlSettings.cpp in Sources */,
 				E4506B8C112BF15700612687 /* MainViewController.mm in Sources */,
 				E4506B9D112BF2AD00612687 /* PlayerViewContorller.mm in Sources */,
 				E4CDF986113F153A0085D61B /* ioapi.c in Sources */,
@@ -686,6 +727,16 @@
 				E41D3FB811F2FE4F00980BF9 /* ofxFramesDriver.cpp in Sources */,
 				E41D3FB911F2FE4F00980BF9 /* ofxRKUtilities.cpp in Sources */,
 				E4A4FE5211F2FEC3000BE0A2 /* ofxOnePointTracks.cpp in Sources */,
+				E4A4FE7D11F2FF90000BE0A2 /* ofxMidi.cpp in Sources */,
+				E4A4FE7E11F2FF90000BE0A2 /* ofxMidiInstrument.cpp in Sources */,
+				E4A4FE7F11F2FF90000BE0A2 /* ofxMidiLooper.cpp in Sources */,
+				E4A4FE8011F2FF90000BE0A2 /* ofxMidiPlayer.cpp in Sources */,
+				E4A4FE8111F2FF90000BE0A2 /* ofxSndFile.cpp in Sources */,
+				E4A4FE8D11F2FFA4000BE0A2 /* tinyxml.cpp in Sources */,
+				E4A4FE8E11F2FFA4000BE0A2 /* tinyxmlerror.cpp in Sources */,
+				E4A4FE8F11F2FFA4000BE0A2 /* tinyxmlparser.cpp in Sources */,
+				E4A4FE9011F2FFA4000BE0A2 /* ofxXmlSettings.cpp in Sources */,
+				E42E107611F3568400B8B103 /* ofxiPhoneSoundStream.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +761,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = "/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/src";
 				INFOPLIST_FILE = "YesPlastic-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(HOME)/$(SDKROOT)/lib",
@@ -730,8 +782,12 @@
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/SndObj/lib\"",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/ZenGarden/lib\"",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/moreAddons/ofxSndObj/libs\"",
+					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/Xcode/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-lGLU";
+				OTHER_LDFLAGS = (
+					"-lsndfile",
+					"-lGLU",
+				);
 				PRODUCT_NAME = YesPlastic;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "26312609-D4DC-4334-B323-DE45B09A7C83";
 				SDKROOT = iphoneos4.0;
@@ -754,6 +810,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = "/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/src";
 				INFOPLIST_FILE = "YesPlastic-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(HOME)/$(SDKROOT)/lib",
@@ -774,8 +831,12 @@
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/SndObj/lib\"",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/libs/ZenGarden/lib\"",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/moreAddons/ofxSndObj/libs\"",
+					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/Xcode/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-lGLU";
+				OTHER_LDFLAGS = (
+					"-lsndfile",
+					"-lGLU",
+				);
 				PRODUCT_NAME = YesPlastic;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07F4CA32-20A3-4E40-B940-5A25CE38E57F";
 				USER_HEADER_SEARCH_PATHS = "$(HOME)/$(SDKROOT)/include";

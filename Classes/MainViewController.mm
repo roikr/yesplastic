@@ -22,6 +22,7 @@
 @synthesize playButton;
 @synthesize recordButton;
 @synthesize menuButton;
+@synthesize playerMenuButton;
 @synthesize topMenu;
 @synthesize actionToolBar;
 @synthesize menuController;
@@ -116,9 +117,8 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (void) updateAudio:(id)sender {
-	OFSAptr->updateAudio();
-	
+- (void) checkSong:(id)sender {
+		
 	if (OFSAptr->getIsPlaying()) {
 		if (OFSAptr->getIsSongDone()) {
 			OFSAptr->stop();
