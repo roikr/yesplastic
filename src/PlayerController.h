@@ -31,7 +31,7 @@ public:
 	//void keyPressed(int key);
 	void play(int num);
 		
-	void changeSet(string soundSet);
+	void changeSet(string soundSet,bool bLoadDemo = false);
 	string getCurrentSoundSet();
 	
 	void threadedFunction();
@@ -62,15 +62,18 @@ public:
 	void setBPM(int bpmVal);
 	
 	void loadSong(string filename);
-	void loadDemo();
-	void playSong();
+		void playSong();
 	void recordSong();
 	void stopSong();
 	bool getIsPlaying();
+	void saveSong(string filename);
 	
 	
 	
 private:
+	
+	void loadDemo(); // parallel to change set so I have to provide the set name
+
 	
 	bool getIsRecording(); // TODO: do I really need it ?
 	
@@ -118,6 +121,8 @@ private:
 	int songMode;
 	ofxMidiTrack song;
 	vector<event> recordEvents;
+	
+	bool bLoadDemo;
 
 };
 

@@ -152,18 +152,25 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	
 	currentLoop = 0;
 	
-	loadDemo();
+	if (bLoadDemo) {
+		bLoadDemo = false;
+		loadDemo();
+	}
 	//midiTrack->playLoop(currentLoop);
 	
 }
 
 
 
-void PlayerController::changeSet(string soundSet) {
+void PlayerController::changeSet(string soundSet,bool bLoadDemo) {
+	
+	
 	
 	if (isInTransition()) {
 		return;
 	}
+	
+	this->bLoadDemo = bLoadDemo;
 	
 	bool bFirstTime = !currentPlayer;
 	
@@ -207,6 +214,8 @@ void PlayerController::changeSet(string soundSet) {
 		
 		currentPlayer->prepareIn();
 		currentPlayer->prepareSet();
+		
+		
 		
 		//midiTrack.setupSoundSet();
 		
@@ -607,6 +616,10 @@ bool PlayerController::getIsPlaying() {
 
 bool PlayerController::getIsRecording() {
 	return song.getIsRecording();
+}
+
+void PlayerController::saveSong(string filename) {
+	song.saveTrack(filename);
 }
 
 

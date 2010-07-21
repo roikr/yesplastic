@@ -185,11 +185,11 @@
 	
 		
 	if (playButton.selected) {
-		OFSAptr->stop();
+		OFSAptr->stopSong();
 		recordButton.enabled = YES;
 	}
 	else {
-		OFSAptr->play();
+		OFSAptr->playSong();
 		recordButton.enabled = NO;
 	}
 	
@@ -204,11 +204,12 @@
 	
 	
 	if (recordButton.selected) {
-		OFSAptr->stop();
+		OFSAptr->stopSong();
 		playButton.enabled = YES;
+		saveButton.enabled = YES;
 	}
 	else {
-		OFSAptr->record();
+		OFSAptr->recordSong();
 		playButton.enabled = NO;
 	}
 	
@@ -216,6 +217,7 @@
 }
 
 - (void) save:(id)sender {
+	OFSAptr->saveSong("hello");
 }
 
 
@@ -230,6 +232,9 @@
 		
 		if (menuButton.enabled) 
 			menuButton.enabled = NO;
+		
+		if (saveButton.enabled) 
+			saveButton.enabled = NO;
 			
 			
 	} else {
@@ -240,10 +245,10 @@
 		if (!menuButton.enabled) 
 			menuButton.enabled = YES;
 		
-		if (playButton.selected != OFSAptr->getIsPlaying()) 
-			playButton.selected = OFSAptr->getIsPlaying();
+		if (playButton.selected != OFSAptr->getIsSongPlaying()) 
+			playButton.selected = OFSAptr->getIsSongPlaying();
 		
-		if (!OFSAptr->getIsPlaying() && !recordButton.enabled ) {
+		if (!OFSAptr->getIsSongPlaying() && !recordButton.enabled ) {
 			recordButton.enabled = YES;
 		}
 	}

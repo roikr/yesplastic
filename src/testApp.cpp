@@ -118,7 +118,7 @@ void testApp::setup(){
 		//player[i].setFont(&verdana);
 		//player[i].loadSet();
 		//player[i].getTexturesPlayer()->setState(state);
-		player[i].changeSet("PACIFIST");
+		player[i].changeSet("PACIFIST",true);
 		
 		
 	}
@@ -281,7 +281,7 @@ void testApp::update(){
 		if (bChangeAll) {
 			for (int i=0; i<3; i++) {
 				player[i].setMode(MANUAL_MODE);
-				player[i].changeSet(nextSoundSet);
+				player[i].changeSet(nextSoundSet,true);
 			}
 		} else {
 			player[controller].setMode(MANUAL_MODE);
@@ -739,14 +739,14 @@ void testApp::setBPM(float bpm) {
 }
 
 //TODO: implement these
-void testApp::play() {
+void testApp::playSong() {
 	
 	for (int i=0;i<3;i++) {
 		player[i].playSong();
 	}
 }
 
-void testApp::stop() {
+void testApp::stopSong() {
 	for (int i=0;i<3;i++) {
 		player[i].stopSong();
 	}
@@ -760,50 +760,68 @@ void testApp::stop() {
 //	}
 }
 
-void testApp::record() {
+void testApp::recordSong() {
 	for (int i=0;i<3;i++) {
 		player[i].recordSong();
 	}
 	
 }
 
-bool testApp::getIsPlaying() {
+bool testApp::getIsSongPlaying() {
 	bool res = false;
 	for (int i=0;i<3;i++)
 		res = res || player[i].getIsPlaying();
 	return res;
 }
 
+bool testApp::loadSong(string songName) {
+	ofxXmlSettings songXml;
+	printf("testApp::loadSong: %s\n",songName.c_str());
+	ofDisableDataPath();
+	
+	
+	
+	if (!songXml.loadFile(ofToDocumentsPath(songName+".xml"))) 
+		return false;
+	
+	songXml.pushTag("song");
+		for (int i=0; i<3; i++) {
+			player[i].setMode(MANUAL_MODE);
+			string sound_set = songXml.getAttribute("player", "sound_set", "", i);
+			player[i].changeSet(sound_set);
+			player[i].loadSong(ofToDocumentsPath(songName+"_"+ofToString(i)+".xml"));
+		}
+	songXml.popTag();
 
-
-	
-
-void testApp::saveMidi() {
-	ofxXmlSettings midiXml;
-	midiXml.addTag("MIDIFile");
-	midiXml.pushTag("MIDIFile");
-	midiXml.addValue("Format", 0);
-	midiXml.addValue("TrackCount", 3);
-	midiXml.addValue("TicksPerBeat", 96);
-	midiXml.addValue("TimestampType", "Absolute");
-	
-	for (int i=0; i<3; i++) {
-		midiXml.addTag("Track");
-		midiXml.addAttribute("Track", "Number", i, i);
-		midiXml.pushTag("Track", i);
-		//player[i].getMidiTrack()->addMidiToXML(&midiXml); // TODO: save song
-		midiXml.popTag();
-	} 
-	midiXml.popTag();
-	
-	midiXml.saveFile(ofToDocumentsPath("ohYeahPlastic.xml"));
-	
-	/*
-	string str;
-	midiXml.copyXmlToString(str);
-	cout << str;
-	 */
+	ofEnableDataPath();	
+	return true;
 }
+
+
+
+void testApp::saveSong(string songName) {
+	
+	printf("testApp::saveSong: %s\n",songName.c_str());
+
+	
+	ofxXmlSettings songXml;
+	ofDisableDataPath();
+	
+	songXml.addTag("song");
+	songXml.pushTag("song");
+	for (int i=0; i<3; i++) {
+		songXml.addTag("player");
+		songXml.addAttribute("player", "sound_set", player[i].getCurrentSoundSet(), i);
+		player[i].saveSong(ofToDocumentsPath(songName+"_"+ofToString(i)+".xml"));
+	}
+	songXml.popTag();
+	
+	songXml.saveFile(ofToDocumentsPath(songName+".xml"));
+	ofEnableDataPath();	
+	
+}
+	
+
 
 void testApp::didBecomeAcive() {
 	cout << "testApp::didBecomeAcive" << endl;

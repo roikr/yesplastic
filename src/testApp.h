@@ -50,12 +50,12 @@ public:
 	
 	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
 	
-	void play();
-	bool getIsPlaying();
-	void stop();
-	void record();
-	
-	void saveMidi();
+	bool loadSong(string songName);
+	void playSong();
+	bool getIsSongPlaying();
+	void stopSong();
+	void recordSong();
+	void saveSong(string songName);
 	
 	bool isInTransition();
 	bool isSoundSetAvailiable(string soundSet);
