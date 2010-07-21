@@ -64,11 +64,15 @@ public:
 	void loadSong(string filename);
 	void loadDemo();
 	void playSong();
+	void recordSong();
 	void stopSong();
 	bool getIsPlaying();
 	
 	
+	
 private:
+	
+	bool getIsRecording(); // TODO: do I really need it ?
 	
 	void loadSoundSet(string soundSet);
 	
@@ -113,6 +117,7 @@ private:
 	
 	int songMode;
 	ofxMidiTrack song;
+	vector<event> recordEvents;
 
 };
 

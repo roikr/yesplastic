@@ -761,9 +761,10 @@ void testApp::stop() {
 }
 
 void testApp::record() {
-//	MidiTrack::SetSongMode(SONG_RECORD);
-//	for (int i=0;i<3;i++)
-//		player[i].getMidiTrack()->setupSong();
+	for (int i=0;i<3;i++) {
+		player[i].recordSong();
+	}
+	
 }
 
 bool testApp::getIsPlaying() {
@@ -772,6 +773,7 @@ bool testApp::getIsPlaying() {
 		res = res || player[i].getIsPlaying();
 	return res;
 }
+
 
 
 	

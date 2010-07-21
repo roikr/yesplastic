@@ -197,7 +197,88 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>E4DD67D211F79DD7001D3286</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>ofxXmlSettings.h</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>E4DD67D311F79DD7001D3286</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>ofxXmlSettings.h</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>E4DD67D411F79DD7001D3286</string>
+						<key>history</key>
+						<array>
+							<string>E4DD67B911F797CD001D3286</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1139, 677}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>38 284 1139 718 0 0 1680 1028 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>E4DD678F11F78C4D001D3286</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>ofxMidi.h</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>E4DD679011F78C4D001D3286</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>ofxMidi.h</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>E4DD67D511F79DD7001D3286</string>
+						<key>history</key>
+						<array>
+							<string>E4DD677D11F78A66001D3286</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1139, 677}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>1698 322 1139 718 1680 250 1280 800 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -265,6 +346,8 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>E4280BA91172449500F458BB</string>
+								<string>E4A4FE8211F2FFA4000BE0A2</string>
+								<string>E4A4FE8911F2FFA4000BE0A2</string>
 								<string>E4A4FE6F11F2FF90000BE0A2</string>
 								<string>E4A4FE7011F2FF90000BE0A2</string>
 								<string>080E96DDFE201D6D7F000001</string>
@@ -278,15 +361,15 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>10</integer>
+									<integer>9</integer>
 									<integer>8</integer>
-									<integer>4</integer>
-									<integer>3</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2}, {277, 660}}</string>
+							<string>{{0, 0}, {277, 660}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -305,7 +388,7 @@
 							<real>277</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>80 266 1496 719 0 0 1680 1028 </string>
+						<string>182 254 1496 719 0 0 1680 1028 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -323,7 +406,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ofxMidi.cpp</string>
+								<string>ofxMidiTrack.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,11 +414,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ofxMidi.cpp</string>
+										<string>ofxMidiTrack.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E4DD677011F7869D001D3286</string>
+										<string>E4DD67D111F79DD7001D3286</string>
 										<key>history</key>
 										<array>
 											<string>E4A1BEB71107436A00FBE0A8</string>
@@ -408,29 +491,29 @@
 											<string>E48B16ED11F6F8D600DB635B</string>
 											<string>E48B16EE11F6F8D600DB635B</string>
 											<string>E48B16EF11F6F8D600DB635B</string>
-											<string>E48B16F011F6F8D600DB635B</string>
 											<string>E48B16F111F6F8D600DB635B</string>
 											<string>E48B16F211F6F8D600DB635B</string>
-											<string>E48B16F311F6F8D600DB635B</string>
 											<string>E48B16F411F6F8D600DB635B</string>
 											<string>E48B16F611F6F8D600DB635B</string>
-											<string>E4DD66D011F77142001D3286</string>
-											<string>E4DD672F11F77B17001D3286</string>
 											<string>E4DD673011F77B17001D3286</string>
 											<string>E4DD673111F77B17001D3286</string>
 											<string>E4DD673211F77B17001D3286</string>
 											<string>E4DD673311F77B17001D3286</string>
 											<string>E4DD673411F77B17001D3286</string>
 											<string>E4DD673511F77B17001D3286</string>
-											<string>E4DD673611F77B17001D3286</string>
 											<string>E4DD676811F7869D001D3286</string>
-											<string>E4DD676911F7869D001D3286</string>
-											<string>E4DD676A11F7869D001D3286</string>
-											<string>E4DD676B11F7869D001D3286</string>
-											<string>E4DD676C11F7869D001D3286</string>
-											<string>E4DD676D11F7869D001D3286</string>
-											<string>E4DD676E11F7869D001D3286</string>
-											<string>E4DD676F11F7869D001D3286</string>
+											<string>E4DD67AB11F7978B001D3286</string>
+											<string>E4DD67AC11F7978B001D3286</string>
+											<string>E4DD67AF11F7978B001D3286</string>
+											<string>E4DD67B011F7978B001D3286</string>
+											<string>E4DD67B111F7978B001D3286</string>
+											<string>E4DD67B211F7978B001D3286</string>
+											<string>E4DD67B311F7978B001D3286</string>
+											<string>E4DD67B511F7978B001D3286</string>
+											<string>E4DD67CE11F79DD7001D3286</string>
+											<string>E4DD67CF11F79DD7001D3286</string>
+											<string>E4DD67D011F79DD7001D3286</string>
+											<string>E4DD67AD11F7978B001D3286</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -444,7 +527,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1197, 673}}</string>
 								<key>RubberWindowFrame</key>
-								<string>80 266 1496 719 0 0 1680 1028 </string>
+								<string>182 254 1496 719 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -464,7 +547,7 @@
 								<key>Frame</key>
 								<string>{{0, 678}, {1197, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>80 266 1496 719 0 0 1680 1028 </string>
+								<string>182 254 1496 719 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -632,12 +715,14 @@
 		<string>E4DD66E011F77142001D3286</string>
 		<string>E4DD66E111F77142001D3286</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
+		<string>E4DD678F11F78C4D001D3286</string>
 		<string>E4E6564A1105D9E900754590</string>
+		<string>E4DD67D211F79DD7001D3286</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/roikr/Developer/YesPlastic/YesPlastic.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>80 266 1496 719 0 0 1680 1028 </string>
+	<string>182 254 1496 719 0 0 1680 1028 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -660,7 +745,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ofxMidi.cpp</string>
+								<string>ofxMidiTrack.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

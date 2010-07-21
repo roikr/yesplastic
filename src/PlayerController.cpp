@@ -373,18 +373,19 @@ void PlayerController::play(int num) {
 		currentPlayer->play(midiToSample[midi]);
 		
 		
-		/* TODO: song record
-		 if (songMode==SONG_RECORD) {
-		 event e;
-		 e.time = time;
-		 e.note = midi;
-		 e.velocity = 127;
-		 song.push_back(e);
-		 //cout << "record note: " << e.note << ", tick: " << e.time << "\n"; 
-		 }
-		 */
+		
 		
 		midiInstrument->noteOn(midi, 127*volume);
+		
+		if (songMode==SONG_RECORD) { //TODO: get current playing note from midi instrument...
+			event e;
+			e.channel = 1;
+			e.note = midi+12; // when playing we substract 12
+			e.velocity = 127;
+			e.bNoteOn = true;
+			recordEvents.push_back(e);
+			//cout << "record note: " << e.note << ", tick: " << e.time << "\n"; 
+		}
 		
 		
 	}
@@ -517,10 +518,11 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 		}
 	}
 	
-	events.clear();
+	
 	
 	switch (songMode) {
 		case SONG_PLAY: {
+			events.clear();
 			song.process(events);
 			for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
 				int note = (iter->note - 12) % 24;
@@ -537,12 +539,23 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 				}
 			}
 		} break;
+		case SONG_RECORD: {
+			for (vector<event>::iterator iter=recordEvents.begin(); iter!=recordEvents.end(); iter++) {
+				cout << "record note: " << iter->note << endl; 
+				events.push_back(*iter);
+			}
+			
+			song.process(events); // add events from loops :-)
+		} break;
 		default:
 			break;
 	}
 	midiInstrument->preProcess();
 	midiInstrument->mixWithBlocks(left,right);
 	midiInstrument->postProcess();
+	
+	
+	recordEvents.clear(); // TODO: is it safe ?
 	
 }
 
@@ -577,6 +590,12 @@ void PlayerController::playSong() {
 	song.play();
 }
 
+void PlayerController::recordSong() {
+	setMode(MANUAL_MODE);
+	songMode = SONG_RECORD;
+	song.record();
+}
+
 void PlayerController::stopSong() {
 	songMode = SONG_IDLE;
 	song.stop();
@@ -584,6 +603,10 @@ void PlayerController::stopSong() {
 
 bool PlayerController::getIsPlaying() {
 	return song.getIsPlaying();
+}
+
+bool PlayerController::getIsRecording() {
+	return song.getIsRecording();
 }
 
 

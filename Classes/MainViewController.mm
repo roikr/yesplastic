@@ -57,7 +57,7 @@
 	 */
 	
 	saveButton.enabled = NO;
-	recordButton.enabled = NO;
+	//recordButton.enabled = NO;
 	topMenu.hidden = YES;
 	
 	
@@ -182,12 +182,15 @@
 	if (recordButton.selected) 
 		return;
 	
+	
 		
 	if (playButton.selected) {
 		OFSAptr->stop();
+		recordButton.enabled = YES;
 	}
 	else {
 		OFSAptr->play();
+		recordButton.enabled = NO;
 	}
 	
 	playButton.selected = !playButton.selected;
@@ -198,15 +201,18 @@
 	if (playButton.selected) 
 		return;
 	
-	recordButton.selected = !recordButton.selected;
+	
 	
 	if (recordButton.selected) {
-		OFSAptr->record();
+		OFSAptr->stop();
+		playButton.enabled = YES;
 	}
 	else {
-		OFSAptr->stop();
+		OFSAptr->record();
+		playButton.enabled = NO;
 	}
 	
+	recordButton.selected = !recordButton.selected;
 }
 
 - (void) save:(id)sender {
@@ -218,6 +224,9 @@
 	if (OFSAptr->isInTransition()) {
 		if (playButton.enabled)
 			playButton.enabled = NO;
+		
+		if (recordButton.enabled)
+			recordButton.enabled = NO;
 		
 		if (menuButton.enabled) 
 			menuButton.enabled = NO;
@@ -233,6 +242,10 @@
 		
 		if (playButton.selected != OFSAptr->getIsPlaying()) 
 			playButton.selected = OFSAptr->getIsPlaying();
+		
+		if (!OFSAptr->getIsPlaying() && !recordButton.enabled ) {
+			recordButton.enabled = YES;
+		}
 	}
 }	
 		
