@@ -40,6 +40,7 @@
 		E4506B9D112BF2AD00612687 /* PlayerViewContorller.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4506B9C112BF2AD00612687 /* PlayerViewContorller.mm */; };
 		E46670911147D4D900EB6D0A /* MenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E466708F1147D4D900EB6D0A /* MenuViewController.mm */; };
 		E46C7EBE11104CC10083BEAF /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E46C7EBC11104CC10083BEAF /* CAHostTimeBase.cpp */; };
+		E48B16C311F6F1FB00DB635B /* ofxMidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48B16C111F6F1FB00DB635B /* ofxMidiTrack.cpp */; };
 		E4944A62114D28B8002DAC54 /* ZoozzResourcesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4944A61114D28B8002DAC54 /* ZoozzResourcesLoader.m */; };
 		E4A10AF91146567B0099172F /* SoundSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A10AF81146567B0099172F /* SoundSet.m */; };
 		E4A10C7B114685100099172F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A10C7A114685100099172F /* SystemConfiguration.framework */; };
@@ -142,6 +143,8 @@
 		E466708F1147D4D900EB6D0A /* MenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MenuViewController.mm; sourceTree = "<group>"; };
 		E46C7EBC11104CC10083BEAF /* CAHostTimeBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAHostTimeBase.cpp; sourceTree = "<group>"; };
 		E46C7EBD11104CC10083BEAF /* CAHostTimeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAHostTimeBase.h; sourceTree = "<group>"; };
+		E48B16C111F6F1FB00DB635B /* ofxMidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiTrack.cpp; sourceTree = "<group>"; };
+		E48B16C211F6F1FB00DB635B /* ofxMidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiTrack.h; sourceTree = "<group>"; };
 		E4944A60114D28B8002DAC54 /* ZoozzResourcesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZoozzResourcesLoader.h; path = MediaShareClasses/ZoozzResourcesLoader.h; sourceTree = "<group>"; };
 		E4944A61114D28B8002DAC54 /* ZoozzResourcesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZoozzResourcesLoader.m; path = MediaShareClasses/ZoozzResourcesLoader.m; sourceTree = "<group>"; };
 		E4A10AF71146567B0099172F /* SoundSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundSet.h; path = MediaShareClasses/SoundSet.h; sourceTree = "<group>"; };
@@ -474,6 +477,8 @@
 		E4A4FE7011F2FF90000BE0A2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E48B16C111F6F1FB00DB635B /* ofxMidiTrack.cpp */,
+				E48B16C211F6F1FB00DB635B /* ofxMidiTrack.h */,
 				E4A4FE7111F2FF90000BE0A2 /* ofxMidi.cpp */,
 				E4A4FE7211F2FF90000BE0A2 /* ofxMidi.h */,
 				E4A4FE7311F2FF90000BE0A2 /* ofxMidiInstrument.cpp */,
@@ -737,6 +742,7 @@
 				E4A4FE8F11F2FFA4000BE0A2 /* tinyxmlparser.cpp in Sources */,
 				E4A4FE9011F2FFA4000BE0A2 /* ofxXmlSettings.cpp in Sources */,
 				E42E107611F3568400B8B103 /* ofxiPhoneSoundStream.mm in Sources */,
+				E48B16C311F6F1FB00DB635B /* ofxMidiTrack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

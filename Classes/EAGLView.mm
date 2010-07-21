@@ -93,7 +93,7 @@
 	
 	
 	
-	[controller checkSong:nil];
+	[controller checkState:nil];
 	[renderer setupView];
 	
 	if (!sender) {

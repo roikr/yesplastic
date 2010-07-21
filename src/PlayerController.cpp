@@ -27,6 +27,8 @@ void PlayerController::setup(int playerNum) {
 	currentPlayer = 0;
 	midiInstrument = 0;
 	midiTrack.setup();
+	songMode = SONG_IDLE;
+	song.setup();
 	//midiTrack = 0;
 	
 }
@@ -150,7 +152,7 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	
 	currentLoop = 0;
 	
-	
+	loadDemo();
 	//midiTrack->playLoop(currentLoop);
 	
 }
@@ -513,7 +515,30 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 				midiInstrument->noteOff(note);
 			}
 		}
-			
+	}
+	
+	events.clear();
+	
+	switch (songMode) {
+		case SONG_PLAY: {
+			song.process(events);
+			for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
+				int note = (iter->note - 12) % 24;
+				//printf("loop note:  %i\n", note);
+				if (iter->bNoteOn) {
+					midiInstrument->noteOn(note, iter->velocity*volume);
+					currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
+				}
+				
+				else {
+					if (playerNum!=2) {
+						midiInstrument->noteOff(note);
+					}
+				}
+			}
+		} break;
+		default:
+			break;
 	}
 	midiInstrument->preProcess();
 	midiInstrument->mixWithBlocks(left,right);
@@ -532,7 +557,33 @@ float PlayerController::getVolume() {
 
 void PlayerController::setBPM(int bpmVal) {
 	midiTrack.setBPM(bpmVal);
+	song.setBPM(bpmVal);
 }
 
+
+void PlayerController::loadSong(string filename) {
+	ofDisableDataPath();
+	song.loadTrack(filename);
+	ofEnableDataPath();
+}
+
+void PlayerController::loadDemo() {
+	loadSong(ofToDataPath("SOUNDS/"+soundSet+"/"+prefix +"/"+prefix + "_SONG.xml"));
+}
+
+void PlayerController::playSong() {
+	setMode(MANUAL_MODE);
+	songMode = SONG_PLAY;
+	song.play();
+}
+
+void PlayerController::stopSong() {
+	songMode = SONG_IDLE;
+	song.stop();
+}
+
+bool PlayerController::getIsPlaying() {
+	return song.getIsPlaying();
+}
 
 

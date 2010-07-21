@@ -119,6 +119,8 @@ void testApp::setup(){
 		//player[i].loadSet();
 		//player[i].getTexturesPlayer()->setState(state);
 		player[i].changeSet("PACIFIST");
+		
+		
 	}
 	//MidiTrack::SetSongMode(SONG_IDLE);
 	
@@ -239,6 +241,10 @@ void testApp::setState(int state) {
 		menu.setPlayer(player+controller, state);
 	}
 	 */
+}
+
+int	testApp::getState() {
+	return state;
 }
 
 bool testApp::isInTransition() {
@@ -734,12 +740,16 @@ void testApp::setBPM(float bpm) {
 
 //TODO: implement these
 void testApp::play() {
-//	MidiTrack::SetSongMode(SONG_PLAY);
-//	for (int i=0;i<3;i++)
-//		player[i].getMidiTrack()->setupSong();
+	
+	for (int i=0;i<3;i++) {
+		player[i].playSong();
+	}
 }
 
 void testApp::stop() {
+	for (int i=0;i<3;i++) {
+		player[i].stopSong();
+	}
 //	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
 //	MidiTrack::SetSongMode(SONG_IDLE);
 //	for (int i=0;i<3;i++)
@@ -757,16 +767,13 @@ void testApp::record() {
 }
 
 bool testApp::getIsPlaying() {
-	return false;
-	//return MidiTrack::GetSongMode()==SONG_PLAY;
-}
-
-bool testApp::getIsSongDone() {
-	bool res = true;
-	//for (int i=0;i<3;i++)
-//		res = res && player[i].getMidiTrack()->isSongDone();
+	bool res = false;
+	for (int i=0;i<3;i++)
+		res = res || player[i].getIsPlaying();
 	return res;
 }
+
+
 	
 
 void testApp::saveMidi() {

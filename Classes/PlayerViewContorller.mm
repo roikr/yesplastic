@@ -135,7 +135,7 @@
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
-	[mainController dismissPlayerMenu:nil];
+	[mainController dismissMenu:nil];
 	
 	PlayerController *player = mainController.OFSAptr->player+mainController.OFSAptr->controller;
 	SoundSet *soundSet = [[LocalStorage localStorage].soundSets objectAtIndex:indexPath.row];
@@ -213,7 +213,7 @@
 }
 	
 - (void)done:(id)sender {
-	[mainController dismissPlayerMenu:nil];
+	[mainController dismissMenu:nil];
 	
 }
 

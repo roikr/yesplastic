@@ -22,7 +22,7 @@
 @synthesize playButton;
 @synthesize recordButton;
 @synthesize menuButton;
-@synthesize playerMenuButton;
+@synthesize saveButton;
 @synthesize topMenu;
 @synthesize actionToolBar;
 @synthesize menuController;
@@ -56,6 +56,8 @@
 	[self.view addSubview:[menuController view]];
 	 */
 	
+	saveButton.enabled = NO;
+	recordButton.enabled = NO;
 	topMenu.hidden = YES;
 	
 	
@@ -102,6 +104,8 @@
 		default:
 			break;
 	}
+	
+	[self dismissMenu:nil];
 }
 
 
@@ -117,19 +121,7 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (void) checkSong:(id)sender {
-		
-	if (OFSAptr->getIsPlaying()) {
-		if (OFSAptr->getIsSongDone()) {
-			OFSAptr->stop();
-		}
-	} else {
-		if (playButton.selected) {
-			playButton.selected = NO;
-		}
-	}
-	
-}
+
 
 - (void) setupMenus {
 	
@@ -146,44 +138,59 @@
 }
 
 - (void) bringMenu:(id)sender {
-	menuController.view.hidden = NO;
 	topMenu.hidden = YES;
+	switch (OFSAptr->getState()) {
+		case SOLO_STATE: {
+			PlayerViewContorller *controller = [playerControllers objectAtIndex:OFSAptr->controller];
+			[controller show];
+			OFSAptr->bMenu=true;
+		} break;
+			
+		case BAND_STATE: {
+			menuController.view.hidden = NO;
+		} break;
+
+		default:
+			break;
+	}
+	
 }
 
 - (void) dismissMenu:(id)sender {
-	menuController.view.hidden = YES;
 	topMenu.hidden = NO;
-}
-
-- (void) bringPlayerMenu:(id)sender {
+	switch (OFSAptr->getState()) {
+		case SOLO_STATE: {
+			PlayerViewContorller *controller = [playerControllers objectAtIndex:OFSAptr->controller];
+			controller.view.hidden = YES;
+			OFSAptr->bMenu = false;
+			
+		} break;
+			
+		case BAND_STATE: {
+			menuController.view.hidden = YES;
+			
+		} break;
+			
+		default:
+			break;
+	}
 	
-	PlayerViewContorller *controller = [playerControllers objectAtIndex:OFSAptr->controller];
-	[controller show];
-	OFSAptr->bMenu=true;
-	topMenu.hidden = true;
-}
-
-- (void) dismissPlayerMenu:(id)sender {
 	
-	PlayerViewContorller *controller = [playerControllers objectAtIndex:OFSAptr->controller];
-	controller.view.hidden = true;
-	OFSAptr->bMenu = false;
-	topMenu.hidden = false;
 }
-
 
 - (void) play:(id)sender {
 	if (recordButton.selected) 
 		return;
 	
-	playButton.selected = !playButton.selected;
-	
+		
 	if (playButton.selected) {
-		OFSAptr->play();
-	}
-	else {
 		OFSAptr->stop();
 	}
+	else {
+		OFSAptr->play();
+	}
+	
+	playButton.selected = !playButton.selected;
 	
 }
 
@@ -201,6 +208,34 @@
 	}
 	
 }
+
+- (void) save:(id)sender {
+}
+
+
+- (void) checkState:(id)sender {
+	
+	if (OFSAptr->isInTransition()) {
+		if (playButton.enabled)
+			playButton.enabled = NO;
+		
+		if (menuButton.enabled) 
+			menuButton.enabled = NO;
+			
+			
+	} else {
+		
+		if (!playButton.enabled)
+			playButton.enabled = YES;
+		
+		if (!menuButton.enabled) 
+			menuButton.enabled = YES;
+		
+		if (playButton.selected != OFSAptr->getIsPlaying()) 
+			playButton.selected = OFSAptr->getIsPlaying();
+	}
+}	
+		
 
 - (void) updateTables {
 	[menuController.tableView reloadData];

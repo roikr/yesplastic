@@ -11,6 +11,7 @@ class ofxMidiInstrument;
 #include "ofxRKTexture.h"
 #include "TexturesPlayer.h"
 #include "ofxMidiLooper.h"
+#include "ofxMidiTrack.h"
 #include <map>
 #include <set>
 
@@ -60,6 +61,13 @@ public:
 	
 	void setBPM(int bpmVal);
 	
+	void loadSong(string filename);
+	void loadDemo();
+	void playSong();
+	void stopSong();
+	bool getIsPlaying();
+	
+	
 private:
 	
 	void loadSoundSet(string soundSet);
@@ -104,6 +112,7 @@ private:
 	int currentLoop;
 	
 	int songMode;
+	ofxMidiTrack song;
 
 };
 

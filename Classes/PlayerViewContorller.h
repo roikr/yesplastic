@@ -19,7 +19,7 @@
 }
 
 @property (nonatomic,retain) MainViewController *mainController;
-@property (nonatomic,retain ) NSTimer *timer;
+//@property (nonatomic,retain ) NSTimer *timer;
 @property (nonatomic,retain ) IBOutlet UISlider *volumeSlider;
 @property (nonatomic,retain) IBOutlet UISlider *bpmSlider;
 @property (nonatomic,retain) IBOutlet UIButton *doneButton;

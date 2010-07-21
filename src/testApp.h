@@ -30,7 +30,9 @@ public:
 	void audioRequested( float * output, int bufferSize, int nChannels );
 	
 	void setMode(int player,int mode);
+	
 	void setState(int state);
+	int	getState();
 		
 	void touchDown(float x, float y, int touchId);
 	void touchMoved(float x, float y, int touchId);
@@ -50,7 +52,6 @@ public:
 	
 	void play();
 	bool getIsPlaying();
-	bool getIsSongDone();
 	void stop();
 	void record();
 	
@@ -68,6 +69,11 @@ public:
 	
 	int controller;
 	PlayerController player[3];
+	bool bMenu;
+	
+private:
+	
+		
 	
 	float scale;
 	
@@ -103,7 +109,7 @@ public:
 	int nextLoop;
 	float vx;
 	
-	bool bMenu;
+	
 	
 	float *lBlock;
 	float *rBlock;
