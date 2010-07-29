@@ -30,6 +30,9 @@
 
 @synthesize playerControllers;
 
+@synthesize triggerButton;
+@synthesize loopButton;
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -95,6 +98,34 @@
 	 
 	
 	bMenuMode = NO;
+	for (int i=0; i<8; i++) {
+		[[NSBundle mainBundle] loadNibNamed:@"LoopButton" owner:self options:nil];
+		UIButton *button = loopButton;
+		self.loopButton = nil;
+		[loopsView addSubview:button];
+		
+		CGRect frame = button.frame;
+		frame.origin.x = (i % 4)*80+5;
+		frame.origin.y = (int)(i/4) * 60;
+		button.frame = frame;
+		button.tag = i;
+	}
+	
+	for (int i=0; i<8; i++) {
+		[[NSBundle mainBundle] loadNibNamed:@"TriggerButton" owner:self options:nil];
+		UIButton *button = triggerButton;
+		self.triggerButton = nil;
+		[triggersView addSubview:button];
+		
+		CGRect frame = button.frame;
+		frame.origin.x = (i % 4)*80+5;
+		frame.origin.y = (int)(i/4) * 60;
+		button.frame = frame;
+		button.tag = i;
+	}
+	
+	
+	
 }
 
 
@@ -156,7 +187,7 @@
 		case UIInterfaceOrientationLandscapeLeft:
 			bandLoopsView.hidden = NO;
 			menuButton.hidden = NO;
-						break;
+			break;
 		default:
 			break;
 	}
@@ -296,6 +327,24 @@
 	
 }
 */
+
+- (void) trigger:(id)sender {
+	UIButton *button = (UIButton*)sender;
+	if (button.tag == 7) {
+		triggersView.hidden = YES;
+		loopsView.hidden = NO;
+	}
+		
+}
+
+- (void) loop:(id)sender {
+	UIButton *button = (UIButton*)sender;
+	if (button.tag == 7) {
+		triggersView.hidden = NO;
+		loopsView.hidden = YES;
+	}
+	
+}
 
 
 - (void)dealloc {

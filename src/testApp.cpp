@@ -118,7 +118,7 @@ void testApp::setup(){
 		//player[i].setFont(&verdana);
 		//player[i].loadSet();
 		//player[i].getTexturesPlayer()->setState(state);
-		player[i].changeSet("SALAD",true);
+		player[i].changeSet("HEAT",true);
 		
 		
 	}

@@ -43,13 +43,14 @@
 	}	
 }
 
+
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
-	
-	CGRect oldFrame = self.label.frame;
-	oldFrame.origin.x = (highlighted && !self.selected ) ? 45 : 40;
-	oldFrame.origin.y = (highlighted && !self.selected) ? 5 : 0;
-	self.label.frame = oldFrame;
+	//
+//	CGRect oldFrame = self.label.frame;
+//	oldFrame.origin.x = (highlighted && !self.selected ) ? 45 : 40;
+//	oldFrame.origin.y = (highlighted && !self.selected) ? 5 : 0;
+//	self.label.frame = oldFrame;
 	
 	
 //	
@@ -63,17 +64,18 @@
 	 //self.label.frame.origin.x= highlighted ? 5 : 0;
 	 //self.label.frame.origin.y= highlighted ? 5 : 0;
 }
+ 
 
 - (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel {
 	NSArray * cells = [NSArray arrayWithObjects:@"CELL1.png",@"CELL2.png",@"CELL3.png",@"CELL4.png",@"CELL5.png",nil];
-	NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",@"CELL5_PRESS.png",nil];
+	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",@"CELL5_PRESS.png",nil];
 	NSArray * cells_selected = [NSArray arrayWithObjects:@"CELL1_SELECT.png",@"CELL2_SELECT.png",@"CELL3_SELECT.png",@"CELL4_SELECT.png",@"CELL5_SELECT.png",nil];
 	
 	
 	//[cell.bkg setImage:[UIImage imageNamed:[cellsBkgs objectAtIndex:[indexPath row]%[cellsBkgs count]]]];
 	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
 
-	[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_pressed objectAtIndex:num%[cells_pressed count]]]];
+	[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
 
 	[(UIImageView*)self.selectedBackgroundView setImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
 	//[(UIImageView*)self.selectedBackgroundView setHighlightedImage:[UIImage imageNamed:[cells_pressed objectAtIndex:num%[cells_pressed count]]]];

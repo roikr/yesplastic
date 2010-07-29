@@ -105,9 +105,10 @@
 	
 	if (self.help == nil) {
 		self.help = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+		help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	}
 	
-	help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	
 	[self presentModalViewController:self.help animated:YES];
 }
 

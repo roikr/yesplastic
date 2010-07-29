@@ -26,7 +26,7 @@ void testApp::setMode(int player,int mode) {
 }
 
 int testApp::getMode(int player) {
-	return LOOP_MODE;
+	return MANUAL_MODE;
 }
 
 void testApp::setState(int state) {

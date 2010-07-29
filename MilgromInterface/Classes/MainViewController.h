@@ -31,6 +31,9 @@ class testApp;
 	NSArray *playerControllers;
 	BOOL bMenuMode;
 	
+	UIButton *triggerButton;
+	UIButton *loopButton;
+	
 }
 
 @property (nonatomic, retain) IBOutlet EAGLView *glView;
@@ -43,6 +46,9 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 
+@property (nonatomic,assign) IBOutlet UIButton *triggerButton;
+@property (nonatomic,assign )IBOutlet UIButton *loopButton;
+
 @property (nonatomic, retain) NSArray *playerControllers;
 
 @property testApp *OFSAptr;
@@ -52,6 +58,8 @@ class testApp;
 - (void) play:(id)sender;
 - (void) record:(id)sender;
 - (void) save:(id)sender;
+- (void) trigger:(id)sender;
+- (void) loop:(id)sender;
 
 //- (void) updateTables;
 
