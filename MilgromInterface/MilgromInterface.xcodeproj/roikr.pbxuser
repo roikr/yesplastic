@@ -24,7 +24,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = E4B3D14511F81F6B00B57223 /* MilgromInterface */;
-		activeSDKPreference = iphoneos4.0;
+		activeSDKPreference = iphoneos4.1;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* MilgromInterface */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* MilgromInterface */,
@@ -80,8 +80,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 302119871;
-			PBXWorkspaceStateSaveDate = 302119871;
+			PBXPerProjectTemplateStateSaveDate = 302367713;
+			PBXWorkspaceStateSaveDate = 302367713;
 		};
 		perUserProjectItems = {
 			E4B6B64211FE36A000AA9FA8 /* PBXTextBookmark */ = E4B6B64211FE36A000AA9FA8 /* PBXTextBookmark */;
@@ -100,7 +100,6 @@
 			E4C91CF41201FB7E00279928 /* PBXTextBookmark */ = E4C91CF41201FB7E00279928 /* PBXTextBookmark */;
 			E4D400031201FDA600F8B7B2 /* PBXTextBookmark */ = E4D400031201FDA600F8B7B2 /* PBXTextBookmark */;
 			E4D400041201FDA600F8B7B2 /* PBXTextBookmark */ = E4D400041201FDA600F8B7B2 /* PBXTextBookmark */;
-			E4D400051201FDA600F8B7B2 /* PBXTextBookmark */ = E4D400051201FDA600F8B7B2 /* PBXTextBookmark */;
 			E4D400061201FDA600F8B7B2 /* PBXTextBookmark */ = E4D400061201FDA600F8B7B2 /* PBXTextBookmark */;
 			E4D4A26711FD9CEC00C92628 /* PlistBookmark */ = E4D4A26711FD9CEC00C92628 /* PlistBookmark */;
 			E4D4A29111FDB25F00C92628 /* PBXTextBookmark */ = E4D4A29111FDB25F00C92628 /* PBXTextBookmark */;
@@ -110,7 +109,7 @@
 			E4D4A2CE11FDB46100C92628 /* PBXTextBookmark */ = E4D4A2CE11FDB46100C92628 /* PBXTextBookmark */;
 			E4D4A2CF11FDB46100C92628 /* PBXTextBookmark */ = E4D4A2CF11FDB46100C92628 /* PBXTextBookmark */;
 			E4D4A3A411FDBF1100C92628 /* PBXTextBookmark */ = E4D4A3A411FDBF1100C92628 /* PBXTextBookmark */;
-			E4DE50291200139F00BF31AF /* PBXTextBookmark */ = E4DE50291200139F00BF31AF /* PBXTextBookmark */;
+			E4D5F3001205CD0C0035DA90 /* PBXTextBookmark */ = E4D5F3001205CD0C0035DA90 /* PBXTextBookmark */;
 			E4DE509B1200255400BF31AF /* PBXTextBookmark */ = E4DE509B1200255400BF31AF /* PBXTextBookmark */;
 			E4DE509C1200255400BF31AF /* PBXTextBookmark */ = E4DE509C1200255400BF31AF /* PBXTextBookmark */;
 			E4DE509D1200255400BF31AF /* PBXTextBookmark */ = E4DE509D1200255400BF31AF /* PBXTextBookmark */;
@@ -180,9 +179,9 @@
 	};
 	E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1146, 4342}}";
-			sepNavSelRange = "{2632, 0}";
-			sepNavVisRange = "{4192, 947}";
+			sepNavIntBoundsRect = "{{0, 0}, {1146, 4381}}";
+			sepNavSelRange = "{4832, 0}";
+			sepNavVisRange = "{4080, 1023}";
 			sepNavWindowFrame = "{{84, 186}, {1139, 774}}";
 		};
 	};
@@ -468,16 +467,6 @@
 		vrLen = 1300;
 		vrLoc = 279;
 	};
-	E4D400051201FDA600F8B7B2 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */;
-		name = "MainViewController.mm: 327";
-		rLen = 0;
-		rLoc = 7703;
-		rType = 0;
-		vrLen = 833;
-		vrLoc = 6632;
-	};
 	E4D400061201FDA600F8B7B2 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */;
@@ -631,22 +620,15 @@
 		vrLen = 655;
 		vrLoc = 0;
 	};
-	E4DE50111200102E00BF31AF /* UIButton.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = UIButton.h;
-		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIButton.h;
-		sourceTree = "<absolute>";
-	};
-	E4DE50291200139F00BF31AF /* PBXTextBookmark */ = {
+	E4D5F3001205CD0C0035DA90 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = E4DE50111200102E00BF31AF /* UIButton.h */;
-		name = "UIButton.h: 1";
+		fRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */;
+		name = "MainViewController.mm: 195";
 		rLen = 0;
-		rLoc = 0;
+		rLoc = 4832;
 		rType = 0;
-		vrLen = 1483;
-		vrLoc = 0;
+		vrLen = 1023;
+		vrLoc = 4080;
 	};
 	E4DE508B1200237B00BF31AF /* HelpViewController.h */ = {
 		uiCtxt = {
