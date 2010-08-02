@@ -7,13 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @class SongCell;
+@class SoundSet;
 @interface SongsTable : UITableViewController {
 	SongCell *tmpCell;
+	
+	NSMutableArray *songsArray;
+	NSManagedObjectContext *managedObjectContext;
 }
 
 
 @property (nonatomic,assign) IBOutlet SongCell *tmpCell;
 
+@property (nonatomic,retain) NSMutableArray *songsArray;
+@property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;
+
+-(void)addSong;
+- (void)deleteSong:(SongCell*)songCell;
 @end

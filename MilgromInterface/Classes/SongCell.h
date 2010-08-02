@@ -9,19 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @class CustomFontLabel;
+@class SongsTable;
 
 @interface SongCell : UITableViewCell {
 	CustomFontLabel *label;
 	UIImageView *lock;
 	UIButton *deleteButton;
-	
+	SongsTable *songsTable;
 }
 
 @property (nonatomic,retain) IBOutlet CustomFontLabel *label;
 @property (nonatomic,retain) IBOutlet UIImageView *lock;
 @property (nonatomic,retain) IBOutlet UIButton *deleteButton;
+@property (nonatomic,retain ) SongsTable *songsTable;
 
 
-- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel; 
-
+- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel withSongsTable:(SongsTable*)theTable; 
+- (void) delete:(id)sender;
 @end

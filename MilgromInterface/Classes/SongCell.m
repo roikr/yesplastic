@@ -8,6 +8,7 @@
 
 #import "SongCell.h"
 #import "CustomFontLabel.h"
+#import "SongsTable.h"
 
 
 @implementation SongCell
@@ -15,6 +16,7 @@
 @synthesize label;
 @synthesize lock;
 @synthesize deleteButton;
+@synthesize songsTable;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -66,7 +68,7 @@
 }
  
 
-- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel {
+- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel withSongsTable:(SongsTable*)theTable{
 	NSArray * cells = [NSArray arrayWithObjects:@"CELL1.png",@"CELL2.png",@"CELL3.png",@"CELL4.png",@"CELL5.png",nil];
 	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",@"CELL5_PRESS.png",nil];
 	NSArray * cells_selected = [NSArray arrayWithObjects:@"CELL1_SELECT.png",@"CELL2_SELECT.png",@"CELL3_SELECT.png",@"CELL4_SELECT.png",@"CELL5_SELECT.png",nil];
@@ -81,11 +83,18 @@
 	//[(UIImageView*)self.selectedBackgroundView setHighlightedImage:[UIImage imageNamed:[cells_pressed objectAtIndex:num%[cells_pressed count]]]];
 
 	self.lock.hidden = num != 2;
+	self.label.text = theLabel;
+	self.songsTable = theTable;
 	
 }
 
+- (void) delete:(id)sender {
+	[songsTable deleteSong:self];
+	
+}
 
 - (void)dealloc {
+	[songsTable release];
     [super dealloc];
 }
 

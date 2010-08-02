@@ -10,24 +10,78 @@
 #import "SongCell.h"
 #import "ZoozzMacros.h"
 #import "MilgromInterfaceAppDelegate.h"
-#import "MainViewController.h"
+#import "VideoSet.h"
+#import "SoundSet.h"
 
 
 @implementation SongsTable
 
 @synthesize tmpCell;
+@synthesize songsArray;
+@synthesize managedObjectContext;
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	self.managedObjectContext = appDelegate.managedObjectContext;
+	
+	//songsArray = [[NSMutableArray alloc] init]; // TODO: temporal
+	
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
+	[request setEntity:entity];
+	
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"soundSetName" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor,nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
+	[sortDescriptor release];
+	
+	NSError *error;
+	
+	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+	
+	if (mutableFetchResults == nil) {
+	}
+	
+	[self setSongsArray:mutableFetchResults];
+	[mutableFetchResults release];
+	[request release];
+	
+	
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
+
+-(void)addSong {
+	SoundSet *soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
+	[soundSet setSoundSetName:@"New Song"];
+	
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+	}
+	
+	[songsArray addObject:soundSet];
+	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
+	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	 [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (void)deleteSong:(SongCell*)songCell {
+	
+	NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)songCell];
+	
+	[self.tableView.dataSource tableView:self.tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+	
+}
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,7 +123,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [songsArray count];
 }
 
 
@@ -88,7 +142,8 @@
     }
 	
 	 // Configure the cell...
-	[cell configureCell:[indexPath row] withLabel:@"Hello Dolly"];
+	SoundSet *soundSet = (SoundSet *)[songsArray objectAtIndex:indexPath.row];
+	[cell configureCell:[indexPath row] withLabel:[soundSet soundSetName] withSongsTable:self];
 	    
     
     return (UITableViewCell*) cell;
@@ -110,19 +165,31 @@
 
 
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+		
+		NSManagedObject *songToDelete = [songsArray objectAtIndex:indexPath.row];
+		[managedObjectContext deleteObject:songToDelete];
+		
+		[songsArray removeObjectAtIndex:indexPath.row];
+		
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		
+		NSError *error;
+		
+		if (![managedObjectContext save:&error]) {
+			
+		}
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 
 /*
@@ -173,10 +240,14 @@
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
+	self.songsArray = nil;
+	
 }
 
 
 - (void)dealloc {
+	[managedObjectContext release];
+	[songsArray release];
     [super dealloc];
 }
 
