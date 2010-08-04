@@ -15,7 +15,6 @@
 		E490A1451206AB58008512EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E490A1441206AB58008512EA /* CoreData.framework */; };
 		E490A1A71206C55F008512EA /* VideoSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E490A1A41206C55F008512EA /* VideoSet.m */; };
 		E490A1A81206C55F008512EA /* SoundSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E490A1A61206C55F008512EA /* SoundSet.m */; };
-		E490A20C1206D05F008512EA /* Milgrom.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D18711F823E000B57223 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D18211F823E000B57223 /* testApp.cpp */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
@@ -125,6 +124,7 @@
 		E4DF714911FEB55A00EBD904 /* SetsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DF714711FEB55A00EBD904 /* SetsTable.m */; };
 		E4DF714D11FEB58400EBD904 /* PlayerMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */; };
 		E4DF714E11FEB58400EBD904 /* SetsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714C11FEB58400EBD904 /* SetsTable.xib */; };
+		E4F0DB27120861BE00D28745 /* Milgrom.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -371,7 +371,7 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */,
+				E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */,
 				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
 				E4C91C8B1201DC9700279928 /* LoopButton.xib */,
 				E4C91C8D1201DCEF00279928 /* TriggerButton.xib */,
@@ -675,6 +675,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F0DB27120861BE00D28745 /* Milgrom.xcdatamodeld in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MilgromInterfaceAppDelegate.mm in Sources */,
 				E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */,
@@ -690,7 +691,6 @@
 				E4C91CA01201E79400279928 /* CustomSlider.m in Sources */,
 				E490A1A71206C55F008512EA /* VideoSet.m in Sources */,
 				E490A1A81206C55F008512EA /* SoundSet.m in Sources */,
-				E490A20C1206D05F008512EA /* Milgrom.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +781,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */,
+			);
+			currentVersion = E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */;
+			path = Milgrom.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }
