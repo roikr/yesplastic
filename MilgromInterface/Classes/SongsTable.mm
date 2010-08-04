@@ -10,8 +10,7 @@
 #import "SongCell.h"
 #import "ZoozzMacros.h"
 #import "MilgromInterfaceAppDelegate.h"
-#import "VideoSet.h"
-#import "SoundSet.h"
+#import "Song.h"
 
 
 @implementation SongsTable
@@ -34,14 +33,17 @@
 	//songsArray = [[NSMutableArray alloc] init]; // TODO: temporal
 	
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:managedObjectContext];
 	[request setEntity:entity];
 	
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"soundSetName" ascending:NO];
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor,nil];
+	
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
+								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:YES],
+								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO]
+								,nil];
 	[request setSortDescriptors:sortDescriptors];
 	[sortDescriptors release];
-	[sortDescriptor release];
+	
 	
 	NSError *error;
 	
@@ -54,21 +56,41 @@
 	[mutableFetchResults release];
 	[request release];
 	
+		
+	
 	
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)addSong {
-	SoundSet *soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSoundSetName:@"New Song"];
+-(void)addDemo {
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
+	[song setSongName:@"Song"];
 	
 	NSError *error;
 	if (![managedObjectContext save:&error]) {
 	}
 	
-	[songsArray addObject:soundSet];
+	[songsArray addObject:song];
+	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+
+-(void)addSong {
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
+	[song setSongName:@"My Song"];
+	
+	
+	
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+	}
+	
+	[songsArray addObject:song];
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -142,8 +164,8 @@
     }
 	
 	 // Configure the cell...
-	SoundSet *soundSet = (SoundSet *)[songsArray objectAtIndex:indexPath.row];
-	[cell configureCell:[indexPath row] withLabel:[soundSet soundSetName] withSongsTable:self];
+	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+	[cell configureCell:[indexPath row] withLabel:[song songName] withSongsTable:self];
 	    
     
     return (UITableViewCell*) cell;

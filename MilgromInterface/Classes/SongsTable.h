@@ -25,5 +25,6 @@
 @property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;
 
 -(void)addSong;
+-(void)addDemo;
 - (void)deleteSong:(SongCell*)songCell;
 @end
