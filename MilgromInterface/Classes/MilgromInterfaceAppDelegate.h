@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class MainViewController;
+@class MilgromViewController;
 
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
@@ -18,10 +19,13 @@
 	NSManagedObjectContext *managedObjectContext_;
 	NSManagedObjectModel *managedObjectModel_;
 	NSPersistentStoreCoordinator *persistentStoreCoordinator_;
+	
+	MilgromViewController *milgromViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *viewController;
+@property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,retain,readonly) NSManagedObjectModel *managedObjectModel;
