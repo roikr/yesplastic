@@ -2,24 +2,32 @@
 //  Song.h
 //  MilgromInterface
 //
-//  Created by Roee Kremer on 8/10/10.
+//  Created by Roee Kremer on 8/11/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
+@class SoundSet;
 
 @interface Song :  NSManagedObject  
 {
 }
 
-@property (nonatomic, retain) NSNumber * bLoaded;
 @property (nonatomic, retain) NSNumber * bLocked;
-@property (nonatomic, retain) NSString * filename;
 @property (nonatomic, retain) NSString * songName;
+@property (nonatomic, retain) NSNumber * bReady;
 @property (nonatomic, retain) NSNumber * bDemo;
+@property (nonatomic, retain) NSSet* soundSets;
 
 @end
 
 
+@interface Song (CoreDataGeneratedAccessors)
+- (void)addSoundSetsObject:(SoundSet *)value;
+- (void)removeSoundSetsObject:(SoundSet *)value;
+- (void)addSoundSets:(NSSet *)value;
+- (void)removeSoundSets:(NSSet *)value;
+
+@end
 

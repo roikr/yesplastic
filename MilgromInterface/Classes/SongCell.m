@@ -12,6 +12,14 @@
 #import "Song.h"
 #import "MilgromMacros.h"
 #import "MilgromInterfaceAppDelegate.h"
+#import "SoundSet.h"
+#import "VideoSet.h"
+
+@interface NSObject (PrivateMethods)
+
+- (void)update;
+@end
+
 
 @implementation SongCell
 
@@ -91,13 +99,24 @@
 	self.song = theSong;
 	self.label.text = theSong.songName;
 	self.songsTable = theTable;
+	[self update];
 	
-	if (![song.bLoaded boolValue]) { 
+}
+
+- (void)update {
+	if (![song.bReady boolValue]) { 
 		self.userInteractionEnabled = NO;
 		CGRect frame = self.frame;
 		frame.size.width = 0;
 		self.frame = frame;
-		[[AssetLoader alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,song.filename]] delegate:self];
+		//[[AssetLoader alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,song.filename]] delegate:self];
+		MilgromLog(@"Song: %@",[song songName]);
+		NSArray *soundSets = [song.soundSets allObjects];
+		for (int i=0; i < [soundSets count]; i++) {
+			SoundSet *soundSet = [soundSets objectAtIndex:i];
+			VideoSet *videoSet = [soundSet videoSet];
+			MilgromLog(@"%i: SoundSet: %@, VideoSet: %@",i,[soundSet setName],[videoSet setName]);
+		}
 		
 	}
 }
@@ -120,8 +139,8 @@
 }
 
 - (void) loaderDidFinish:(AssetLoader *)theLoader {
-	[song setBLoaded:[NSNumber numberWithBool:YES]];
-	[songsTable updateSong:self];
+	[song setBReady:[NSNumber numberWithBool:YES]];
+	[songsTable updateContext];
 	self.userInteractionEnabled = YES;
 }
 

@@ -27,5 +27,5 @@
 -(void)addSong;
 -(void)addDemo;
 - (void)deleteSong:(SongCell*)songCell;
-- (void)updateSong:(SongCell*)songCell;
+- (void)updateContext;
 @end

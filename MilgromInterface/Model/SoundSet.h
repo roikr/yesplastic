@@ -2,19 +2,20 @@
 //  SoundSet.h
 //  MilgromInterface
 //
-//  Created by Roee Kremer on 8/2/10.
+//  Created by Roee Kremer on 8/11/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
+#import "Set.h"
 
+@class VideoSet;
 
-@interface SoundSet :  NSManagedObject  
+@interface SoundSet :  Set  
 {
 }
 
-@property (nonatomic, retain) NSNumber * testValue;
-@property (nonatomic, retain) NSString * soundSetName;
+@property (nonatomic, retain) VideoSet * videoSet;
 
 @end
 

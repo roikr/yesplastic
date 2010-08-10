@@ -1,17 +1,18 @@
 // 
-//  SoundSet.m
+//  Set.m
 //  MilgromInterface
 //
 //  Created by Roee Kremer on 8/11/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "SoundSet.h"
+#import "Set.h"
 
-#import "VideoSet.h"
 
-@implementation SoundSet 
+@implementation Set 
 
-@dynamic videoSet;
+@dynamic setName;
+@dynamic filename;
+@dynamic bReady;
 
 @end
