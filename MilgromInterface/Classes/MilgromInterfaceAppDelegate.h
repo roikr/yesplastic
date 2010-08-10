@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+
+extern NSString * const kCacheFolder;
+extern NSString * const kMilgromURL;
+
 @class MainViewController;
 @class MilgromViewController;
 
@@ -21,6 +25,7 @@
 	NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	
 	MilgromViewController *milgromViewController;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -28,7 +33,7 @@
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic,retain,readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain,readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSString *)applicationDocumentsDirectory;

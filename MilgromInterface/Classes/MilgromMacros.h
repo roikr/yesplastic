@@ -1,8 +1,8 @@
 //
-//  ZoozzMacros.h
-//  IMBooster
+//  MilgromMacros.h
+//  
 //
-//  Created by Roee Kremer on 1/6/10.
+//  Created by Roee Kremer on 8/101/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,13 +15,13 @@
 #endif
 
 #ifdef _Debug
-#define ZoozzLog( s, ... ) \
+#define MilgromLog( s, ... ) \
 do { \
 NSLog( @"<%@:(%d)> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] ); \
 } \
 while (0)
 #else
-#define ZoozzLog( s, ... ) do {} while (0)
+#define MilgromLog( s, ... ) do {} while (0)
 #endif
 
 //NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] ); \

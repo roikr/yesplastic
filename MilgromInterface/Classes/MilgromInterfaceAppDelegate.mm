@@ -9,12 +9,36 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "MainViewController.h"
 #import "MilgromViewController.h"
+#import "URLCacheAlert.h"
+#import "MilgromMacros.h"
+
+
+NSString * const kMilgromURL=@"roikr.com";
+NSString * const kCacheFolder=@"URLCache";
+
+@interface NSObject (PrivateMethods)
+
+/*
+ - (void) initUI;
+ - (void) startAnimation;
+ - (void) stopAnimation;
+ - (void) buttonsEnabled:(BOOL)flag;
+ - (void) getFileModificationDate;
+ - (void) displayImageWithURL:(NSURL *)theURL;
+ - (void) displayCachedImage;
+*/
+ - (void) initCache;
+ - (void) clearCache;
+ 
+@end
 
 @implementation MilgromInterfaceAppDelegate
 
 @synthesize window;
 @synthesize viewController;
 @synthesize milgromViewController;
+
+
 
 
 #pragma mark -
@@ -31,6 +55,18 @@
     [window makeKeyAndVisible];
 	
 	[window bringSubviewToFront:viewController.view];
+	
+	/* turn off the NSURLCache shared cache */
+	
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0
+                                                            diskCapacity:0
+                                                                diskPath:nil];
+    [NSURLCache setSharedURLCache:sharedCache];
+    [sharedCache release];
+	
+    /* prepare to use our own on-disk cache */
+	[self initCache];
+	
     return YES;
 }
 
@@ -93,6 +129,61 @@
         } 
     }
 }    
+
+
+#pragma mark -
+#pragma mark URLCache 
+- (void) initCache
+{
+	/* create path to cache directory inside the application's Documents directory */
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *dataPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:kCacheFolder];
+	
+	/* check for existence of cache directory */
+	if ([[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
+		return;
+	}
+	
+	 NSError *error = nil;
+	
+	/* create a new cache directory */
+	if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath
+								   withIntermediateDirectories:NO
+													attributes:nil
+														 error:&error]) {
+		URLCacheAlertWithError(error);
+		return;
+	}
+}
+
+
+/* removes every file in the cache directory */
+
+- (void) clearCache
+{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *dataPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:kCacheFolder];
+	
+	
+	NSError *error = nil;	
+	/* remove the cache directory and its contents */
+	if (![[NSFileManager defaultManager] removeItemAtPath:dataPath error:&error]) {
+		URLCacheAlertWithError(error);
+		return;
+	}
+	
+	/* create a new cache directory */
+	if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath
+								   withIntermediateDirectories:NO
+													attributes:nil
+														 error:&error]) {
+		URLCacheAlertWithError(error);
+		return;
+	}
+	
+	//[self initUI];
+}
+
 
 
 #pragma mark -

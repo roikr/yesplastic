@@ -9,7 +9,9 @@
 #import "SongCell.h"
 #import "CustomFontLabel.h"
 #import "SongsTable.h"
-
+#import "Song.h"
+#import "MilgromMacros.h"
+#import "MilgromInterfaceAppDelegate.h"
 
 @implementation SongCell
 
@@ -17,6 +19,7 @@
 @synthesize lock;
 @synthesize deleteButton;
 @synthesize songsTable;
+@synthesize song;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -67,8 +70,7 @@
 	 //self.label.frame.origin.y= highlighted ? 5 : 0;
 }
  
-
-- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel withSongsTable:(SongsTable*)theTable{
+- (void) updateBackgroundWithNumber:(NSInteger)num {
 	NSArray * cells = [NSArray arrayWithObjects:@"CELL1.png",@"CELL2.png",@"CELL3.png",@"CELL4.png",@"CELL5.png",nil];
 	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",@"CELL5_PRESS.png",nil];
 	NSArray * cells_selected = [NSArray arrayWithObjects:@"CELL1_SELECT.png",@"CELL2_SELECT.png",@"CELL3_SELECT.png",@"CELL4_SELECT.png",@"CELL5_SELECT.png",nil];
@@ -76,16 +78,28 @@
 	
 	//[cell.bkg setImage:[UIImage imageNamed:[cellsBkgs objectAtIndex:[indexPath row]%[cellsBkgs count]]]];
 	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
-
+	
 	[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
-
+	
 	[(UIImageView*)self.selectedBackgroundView setImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
 	//[(UIImageView*)self.selectedBackgroundView setHighlightedImage:[UIImage imageNamed:[cells_pressed objectAtIndex:num%[cells_pressed count]]]];
+	
+}
 
-	self.lock.hidden = num != 2;
-	self.label.text = theLabel;
+- (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable {
+	
+	self.song = theSong;
+	self.label.text = theSong.songName;
 	self.songsTable = theTable;
 	
+	if (![song.bLoaded boolValue]) { 
+		self.userInteractionEnabled = NO;
+		CGRect frame = self.frame;
+		frame.size.width = 0;
+		self.frame = frame;
+		[[AssetLoader alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,song.filename]] delegate:self];
+		
+	}
 }
 
 - (void) delete:(id)sender {
@@ -95,7 +109,27 @@
 
 - (void)dealloc {
 	[songsTable release];
+	[song release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark AssetLoader methods
+
+- (void) loaderDidFail:(AssetLoader *)theLoader {
+}
+
+- (void) loaderDidFinish:(AssetLoader *)theLoader {
+	[song setBLoaded:[NSNumber numberWithBool:YES]];
+	[songsTable updateSong:self];
+	self.userInteractionEnabled = YES;
+}
+
+- (void) loaderProgress:(NSNumber *)theProgress {
+	CGRect frame = self.frame;
+	frame.size.width = [theProgress floatValue] * 270;
+	self.frame = frame;
+	MilgromLog(@"loaderProgress: %3.2f, width: %3.0f/%3.0f",[theProgress floatValue] *100,self.frame.size.width,270);
 }
 
 

@@ -118,10 +118,10 @@
 	switch (button.tag) {
 		case 0:
 			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
-			[songsTable addSong];
+			[songsTable addDemo];
 			break;
 		case 1:
-			[songsTable addDemo];
+			[songsTable addSong];
 			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
 			break;
 		case 2:

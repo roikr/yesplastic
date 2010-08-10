@@ -7,23 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AssetLoader.h"
 
 @class CustomFontLabel;
 @class SongsTable;
-
-@interface SongCell : UITableViewCell {
+@class Song;
+@interface SongCell : UITableViewCell<AssetLoaderDelegate> {
 	CustomFontLabel *label;
 	UIImageView *lock;
 	UIButton *deleteButton;
 	SongsTable *songsTable;
+	Song *song;
 }
 
 @property (nonatomic,retain) IBOutlet CustomFontLabel *label;
 @property (nonatomic,retain) IBOutlet UIImageView *lock;
 @property (nonatomic,retain) IBOutlet UIButton *deleteButton;
-@property (nonatomic,retain ) SongsTable *songsTable;
+@property (nonatomic,retain) SongsTable *songsTable;
+@property (nonatomic,retain) Song *song;
 
-
-- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel withSongsTable:(SongsTable*)theTable; 
+- (void) updateBackgroundWithNumber:(NSInteger)num;
+- (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable; 
 - (void) delete:(id)sender;
 @end

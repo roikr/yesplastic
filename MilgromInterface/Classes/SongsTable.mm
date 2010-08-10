@@ -8,9 +8,10 @@
 
 #import "SongsTable.h"
 #import "SongCell.h"
-#import "ZoozzMacros.h"
+
 #import "MilgromInterfaceAppDelegate.h"
 #import "Song.h"
+
 
 
 @implementation SongsTable
@@ -66,7 +67,9 @@
 
 -(void)addDemo {
 	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
-	[song setSongName:@"Song"];
+	[song setSongName:@"Heat"];
+	[song setFilename:@"HEAT.zip"];
+	[song setBLoaded:[NSNumber numberWithBool:NO]];
 	
 	NSError *error;
 	if (![managedObjectContext save:&error]) {
@@ -84,6 +87,7 @@
 	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
 	[song setSongName:@"My Song"];
 	
+	[song setBLoaded:[NSNumber numberWithBool:YES]];
 	
 	
 	NSError *error;
@@ -103,6 +107,13 @@
 	
 	[self.tableView.dataSource tableView:self.tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
 	
+}
+
+- (void)updateSong:(SongCell*)songCell {
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+		
+	}
 }
 
 /*
@@ -165,8 +176,9 @@
 	
 	 // Configure the cell...
 	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
-	[cell configureCell:[indexPath row] withLabel:[song songName] withSongsTable:self];
-	    
+	[cell updateBackgroundWithNumber:[indexPath row]];
+	[cell configureWithSong:song withSongsTable:self];
+		    
     
     return (UITableViewCell*) cell;
 }
@@ -182,7 +194,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     // Return NO if you do not want the specified item to be editable.
-    return [indexPath row]>2;
+    return YES;//[indexPath row]>2;
 }
 
 
