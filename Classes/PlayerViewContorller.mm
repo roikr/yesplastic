@@ -117,7 +117,7 @@
 	SoundSet *soundSet = [[LocalStorage localStorage].soundSets objectAtIndex:indexPath.row];
 	cell.textLabel.text = soundSet.originalID;
 	
-	if (!mainController.OFSAptr->isSoundSetAvailiable([soundSet.originalID UTF8String])) {
+	if (!mainController.OFSAptr->isSongAvailiable([soundSet.originalID UTF8String],mainController.OFSAptr->controller)) {
 		cell.textLabel.textColor=[UIColor grayColor];
 		cell.userInteractionEnabled = NO;
 	} else {
@@ -141,7 +141,8 @@
 	SoundSet *soundSet = [[LocalStorage localStorage].soundSets objectAtIndex:indexPath.row];
 
 	string nextSoundSet = [soundSet.originalID UTF8String];
-	if ( player->getCurrentSoundSet() != nextSoundSet && !player->isInTransition() && mainController.OFSAptr->isSoundSetAvailiable(nextSoundSet)) {
+	if ( player->getCurrentSoundSet() != nextSoundSet && !player->isInTransition() && 
+			mainController.OFSAptr->isSongAvailiable(nextSoundSet,mainController.OFSAptr->controller)) {
 		mainController.OFSAptr->changeSoundSet(nextSoundSet, false);
 	}
 	

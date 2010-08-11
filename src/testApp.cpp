@@ -118,7 +118,7 @@ void testApp::setup(){
 		//player[i].setFont(&verdana);
 		//player[i].loadSet();
 		//player[i].getTexturesPlayer()->setState(state);
-		player[i].changeSet("HEAT",true);
+		player[i].changeSet(getPlayerName(i)+"_"+"HEAT",true);
 		
 		
 	}
@@ -144,15 +144,17 @@ void testApp::setup(){
 	
 }
 
-bool testApp::isSoundSetAvailiable(string soundSet) {
+
+bool testApp::isSongAvailiable(string song,int playerNum) {
 	vector<string> soundSets = ofListFolders(ofToDataPath("SOUNDS"));
 	for (vector<string>::iterator iter = soundSets.begin(); iter!=soundSets.end(); iter++) {
-		if (*iter == soundSet) {
+		if (*iter == getPlayerName(playerNum)+"_"+song) {
 			return true;
 		}
 	}
 	return false;
 }
+
 
 
 
@@ -263,6 +265,23 @@ void testApp::changeSoundSet(string nextSoundSet, bool bChangeAll) {
 	
 }
 
+string testApp::getPlayerName(int playerNum)  {
+	switch (playerNum) {
+		case 0:
+			return "GTR";
+			break;
+		case 1:
+			return "VOC";
+			break;
+		case 2:
+			return "DRM";
+			break;
+		default:
+			return "";
+			break;
+	}
+}
+
 
 void testApp::update(){
 	//	printf("update()\n");
@@ -281,11 +300,11 @@ void testApp::update(){
 		if (bChangeAll) {
 			for (int i=0; i<3; i++) {
 				player[i].setMode(MANUAL_MODE);
-				player[i].changeSet(nextSoundSet,true);
+				player[i].changeSet(getPlayerName(i)+"_"+nextSoundSet,true);
 			}
 		} else {
 			player[controller].setMode(MANUAL_MODE);
-			player[controller].changeSet(nextSoundSet);
+			player[controller].changeSet(getPlayerName(controller)+"_"+nextSoundSet);
 		}
 	}
 	 
@@ -788,8 +807,8 @@ bool testApp::loadSong(string songName) {
 		for (int i=0; i<3; i++) {
 			player[i].setMode(MANUAL_MODE);
 			string sound_set = songXml.getAttribute("player", "sound_set", "", i);
-			player[i].changeSet(sound_set);
-			player[i].loadSong(ofToDocumentsPath(songName+"_"+ofToString(i)+".xml"));
+			player[i].changeSet(getPlayerName(i)+"_"+sound_set);
+			player[i].loadSong(ofToDocumentsPath(getPlayerName(i)+"_"+songName+".xml"));
 		}
 	songXml.popTag();
 
@@ -812,7 +831,7 @@ void testApp::saveSong(string songName) {
 	for (int i=0; i<3; i++) {
 		songXml.addTag("player");
 		songXml.addAttribute("player", "sound_set", player[i].getCurrentSoundSet(), i);
-		player[i].saveSong(ofToDocumentsPath(songName+"_"+ofToString(i)+".xml"));
+		player[i].saveSong(ofToDocumentsPath(getPlayerName(i)+"_"+songName+".xml"));
 	}
 	songXml.popTag();
 	

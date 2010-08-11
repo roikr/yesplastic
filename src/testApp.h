@@ -58,7 +58,8 @@ public:
 	void saveSong(string songName);
 	
 	bool isInTransition();
-	bool isSoundSetAvailiable(string soundSet);
+	
+	bool isSongAvailiable(string song,int playerNum=0);
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
 	
 	
@@ -73,7 +74,7 @@ public:
 	
 private:
 	
-		
+	string getPlayerName(int playerNum); // using to build SoundSet name from Song name
 	
 	float scale;
 	

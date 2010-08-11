@@ -88,12 +88,11 @@ private:
 	ofxMidiInstrument *midiInstrument;
 		
 	string soundSet;
-	string subSoundSet;
 	int playerNum;
 	
 	string videoSet;
 	string nextVideoSet;
-	string soundSetPath;
+	//string soundSetPath;
 	bool bFramesDriverPlayer;
 	
 	
@@ -103,7 +102,7 @@ private:
 	
 	ofxMidiLooper midiTrack;
 
-	string prefix;
+	//string prefix;
 	
 	bool multi;
 	

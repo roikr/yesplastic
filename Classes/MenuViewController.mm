@@ -124,7 +124,7 @@
 
 	// Display dark and light background in alternate rows -- see tableView:willDisplayCell:forRowAtIndexPath:.
 	cell.useDarkBackground = (indexPath.row % 2 == 0);
-	cell.loading = !mainController.OFSAptr->isSoundSetAvailiable([soundSet.originalID UTF8String]);
+	cell.loading = !mainController.OFSAptr->isSongAvailiable([soundSet.originalID UTF8String]);
 	cell.name = soundSet.originalID;
 	cell.locked = soundSet.bLocked;
 	cell.price = [self priceOfProduct:soundSet.productIdentifier];	
@@ -162,7 +162,7 @@
 	SoundSet *soundSet = [[LocalStorage localStorage].soundSets objectAtIndex:indexPath.row];
 	
 	string nextSoundSet = [soundSet.originalID UTF8String];
-	if (  !mainController.OFSAptr->isInTransition() && mainController.OFSAptr->isSoundSetAvailiable(nextSoundSet)) {
+	if (  !mainController.OFSAptr->isInTransition() && mainController.OFSAptr->isSongAvailiable(nextSoundSet)) {
 		
 		mainController.OFSAptr->changeSoundSet(nextSoundSet, true);
 	}

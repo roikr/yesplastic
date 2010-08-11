@@ -16,7 +16,7 @@
 class FramesDrivenPlayer : public TexturesPlayer{
 
 public:
-	FramesDrivenPlayer(string soundSetPath,string subSoundSet);
+	FramesDrivenPlayer(string soundSet);
 	void setup(string setName);
 	
 	void update();
@@ -55,7 +55,7 @@ private:
 
 	
 	string setName;
-	string soundSetPath;
+	string soundSet;
 	
 	int x;
 	int y;
@@ -85,7 +85,7 @@ private:
 	
 	int currentFrame;
 	
-	string subSoundSet;
+	//string subSoundSet;
 	vector<int>sequences; // for samples
 	vector<int>specSeqs;
 	

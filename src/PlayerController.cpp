@@ -39,8 +39,10 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	//enable =  xml.getValue("enable", "true",0) == "true";
 	
 	this->soundSet = soundSet;
+	string path = "SOUNDS/"+soundSet+"/"+soundSet;
+	
 	ofxXmlSettings xml;
-	string xmlpath = "SOUNDS/"+soundSet+"/"+soundSet+".xml";
+	string xmlpath = path+".xml";
 	bool loaded = xml.loadFile(xmlpath);
 	ofLog(OF_LOG_VERBOSE,"loading of %s %s",xmlpath.c_str(),loaded ? "succeeded" : "failed");
 	enable = true;
@@ -50,17 +52,17 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	}
 	
 	xml.pushTag("sound_set");
-	xml.pushTag("player", playerNum);
+	xml.pushTag("player"); // , playerNum
 	videoSet=	xml.getValue("video","");
 	
 	
 	xml.pushTag("sound");
 	
 	multi = xml.tagExists("multi");
-	prefix = xml.getValue("id","");
+	//prefix = xml.getValue("id","");
 	volume = xml.getValue("volume", 1.0f);
 	
-	ofLog(OF_LOG_VERBOSE,"loading set %s (%s)",soundSet.c_str(),prefix.c_str());
+	ofLog(OF_LOG_VERBOSE,"loading set %s",soundSet.c_str()); //,prefix.c_str());
 	
 	vector<int> midiNotes;
 	
@@ -118,10 +120,10 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	int i;
 	//loops.clear();
 	
-	string path = "SOUNDS/"+soundSet+"/"+prefix +"/"+prefix + "_";
+	//string path = "SOUNDS/"+soundSet+"/"+soundSet; //prefix +"/"+prefix + "_";
 	
 	for (i=0; i<midiNotes.size();i++) {
-		string soundname = path+ofToString(i+1) + ".aif";
+		string soundname = path+"_"+ofToString(i+1) + ".aif";
 		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
 		
 		midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i]); // TODO: add choke mechanics
@@ -144,7 +146,7 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	string pathPrefix = ofToDataPath(path);
 	ofDisableDataPath(); // ofxXmlSettings uses ofToDataPath();
 	for (i=0;i<8;i++) {
-		midiTrack.loadLoop(pathPrefix+ofToString(i+1)+".xml");
+		midiTrack.loadLoop(pathPrefix+"_"+ofToString(i+1)+".xml");
 	}
 	ofEnableDataPath();
 	
@@ -182,9 +184,9 @@ void PlayerController::changeSet(string soundSet,bool bLoadDemo) {
 	
 	if (loaded) { // TODO: if not ?
 		xml.pushTag("sound_set");
-		xml.pushTag("player", playerNum);
+		xml.pushTag("player"); // no need for playerNum because it is seperate file
 		bFramesDriverPlayer = xml.getAttribute("video", "lips", 0, 0);
-		subSoundSet = xml.getValue("sound:id", "", 0);
+		//subSoundSet = xml.getValue("sound:id", "", 0);
 		nextVideoSet =	xml.getValue("video","");
 		xml.popTag();
 		xml.popTag();
@@ -194,7 +196,7 @@ void PlayerController::changeSet(string soundSet,bool bLoadDemo) {
 	
 	if (nextVideoSet!=videoSet) {
 		if (playerNum == 1) //  && videoSet == "VOC_CORE"
-			nextPlayer = new FramesDrivenPlayer("SOUNDS/"+soundSet,subSoundSet);
+			nextPlayer = new FramesDrivenPlayer(soundSet);
 		else
 			nextPlayer = new SimplePlayer;
 		
@@ -590,7 +592,7 @@ void PlayerController::loadSong(string filename) {
 }
 
 void PlayerController::loadDemo() {
-	loadSong(ofToDataPath("SOUNDS/"+soundSet+"/"+prefix +"/"+prefix + "_SONG.xml"));
+	loadSong(ofToDataPath("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml"));
 }
 
 void PlayerController::playSong() {

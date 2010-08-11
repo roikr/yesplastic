@@ -11,9 +11,10 @@ enum  {
 	
 };
 
-FramesDrivenPlayer::FramesDrivenPlayer(string soundSetPath,string subSoundSet) {
-	driver.loadVectors(soundSetPath+"/"+subSoundSet+"/"+subSoundSet+".xml");
-	this->subSoundSet = subSoundSet;
+FramesDrivenPlayer::FramesDrivenPlayer(string soundSet) {
+	driver.loadVectors("SOUNDS/"+soundSet+"/"+soundSet+"_VIDEO.xml");
+	this->soundSet = soundSet;
+	//this->subSoundSet = subSoundSet;
 	
 }
 												
@@ -264,7 +265,7 @@ void FramesDrivenPlayer::setDrivenSample(string sampleName) {
 void FramesDrivenPlayer::play(int num) {
 	//setDrivenSample(num+1); // play get 0 for sample 1
 	//setDrivenSample(num); // now the first sample is 0
-	setDrivenSample(subSoundSet+"_"+ofToString(num+1)); // get 0 for first sound which name is VOC_BLABLA_1
+	setDrivenSample(soundSet+"_"+ofToString(num+1)); // get 0 for first sound which name is VOC_BLABLA_1
 }
 
 
@@ -316,7 +317,7 @@ void FramesDrivenPlayer::update() {
 				actor.play();
 				break;
 			case SEQUENCE_IDLE:
-				setDrivenSample(subSoundSet+"_IDLE");
+				setDrivenSample(soundSet+"_IDLE");
 				break;
 			default:
 				break;
