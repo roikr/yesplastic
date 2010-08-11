@@ -36,79 +36,8 @@ void PlayerController::setup(int playerNum) {
 
 void  PlayerController::loadSoundSet(string soundSet) {
 	
-	//enable =  xml.getValue("enable", "true",0) == "true";
-	
-	this->soundSet = soundSet;
-	string path = "SOUNDS/"+soundSet+"/"+soundSet;
-	
-	ofxXmlSettings xml;
-	string xmlpath = path+".xml";
-	bool loaded = xml.loadFile(xmlpath);
-	ofLog(OF_LOG_VERBOSE,"loading of %s %s",xmlpath.c_str(),loaded ? "succeeded" : "failed");
-	enable = true;
-	if (!loaded) {
-		enable = false;
-		return;
-	}
-	
-	xml.pushTag("sound_set");
-	xml.pushTag("player"); // , playerNum
-	videoSet=	xml.getValue("video","");
-	
-	
-	xml.pushTag("sound");
-	
-	multi = xml.tagExists("multi");
-	//prefix = xml.getValue("id","");
-	volume = xml.getValue("volume", 1.0f);
-	
-	ofLog(OF_LOG_VERBOSE,"loading set %s",soundSet.c_str()); //,prefix.c_str());
-	
-	vector<int> midiNotes;
-	
-	if (xml.tagExists("notes")) {
-		xml.pushTag("notes");
-		for (int i=0; i<xml.getNumTags("note");i++) {
-			int midi = (xml.getAttribute("note", "midi", 0, i) -12) % 24 ;// ("note", 0, i)-36) % 24;
-			
-			int sample = xml.getAttribute("note", "sample", 0, i)-1;
-			midiToSample[midi] = sample;
-			
-			int key = xml.getAttribute("note", "key", 0, i);
-			if (key)
-				keyToMidi[key-1] = midi;
-			
-			midiNotes.push_back(midi);
-			
-			//ofLog(OF_LOG_VERBOSE,"parsing note %d: midi=%d, video=%d, key=%d",i,midi,video,key);
-			
-		}
-		xml.popTag();
-	}
-	
-	// ticks trick
-	/*
-	 if (multi && xml.tagExists("priorities")) {
-	 xml.pushTag("priorities");
-	 for (int i=0;i<xml.getNumTags("priority");i++)
-	 priorities.push_back(xml.getValue("priority",0,i)); 
-	 xml.popTag();
-	 }
-	 */
-	
-	set<int> chokeGroup;
-	if (multi && xml.tagExists("choke_group")) {
-		xml.pushTag("choke_group");
-		for (int i=0;i<xml.getNumTags("note");i++) 
-			chokeGroup.insert(xml.getValue("note", 0, i)-1); // -1 because in the xml we start from 1
-		xml.popTag();
-	}
-	
-	
-	xml.popTag();
-	xml.popTag();
-	xml.popTag();
-	
+	ofLog(OF_LOG_VERBOSE,"loadSoundSet: %s",soundSet.c_str());
+
 	
 	if (midiInstrument) {
 		midiInstrument->exit();
@@ -120,7 +49,7 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	int i;
 	//loops.clear();
 	
-	//string path = "SOUNDS/"+soundSet+"/"+soundSet; //prefix +"/"+prefix + "_";
+	string path = "SOUNDS/"+soundSet+"/"+soundSet; 
 	
 	for (i=0; i<midiNotes.size();i++) {
 		string soundname = path+"_"+ofToString(i+1) + ".aif";
@@ -178,21 +107,80 @@ void PlayerController::changeSet(string soundSet,bool bLoadDemo) {
 	
 	this->soundSet = soundSet;
 	
+	ofLog(OF_LOG_VERBOSE,"change set to %s",soundSet.c_str()); //,prefix.c_str());
+	
+	string path = "SOUNDS/"+soundSet+"/"+soundSet;
+	
 	ofxXmlSettings xml;
-	string xmlpath = "SOUNDS/"+soundSet+"/"+soundSet+".xml";
+	string xmlpath = path+".xml";
 	bool loaded = xml.loadFile(xmlpath);
 	
 	if (loaded) { // TODO: if not ?
+		enable = true;
 		xml.pushTag("sound_set");
-		xml.pushTag("player"); // no need for playerNum because it is seperate file
+		
 		bFramesDriverPlayer = xml.getAttribute("video", "lips", 0, 0);
-		//subSoundSet = xml.getValue("sound:id", "", 0);
+		
 		nextVideoSet =	xml.getValue("video","");
-		xml.popTag();
-		xml.popTag();
+		
+		ofLog(OF_LOG_VERBOSE,"using video: %s",nextVideoSet.c_str());
+		
+		
+		multi = xml.tagExists("multi");
+		volume = xml.getValue("volume", 1.0f);
+		
+		
+		
+		
+		
+		if (xml.tagExists("notes")) {
+			xml.pushTag("notes");
+			for (int i=0; i<xml.getNumTags("note");i++) {
+				int midi = (xml.getAttribute("note", "midi", 0, i) -12) % 24 ;// ("note", 0, i)-36) % 24;
+				
+				int sample = xml.getAttribute("note", "sample", 0, i)-1;
+				midiToSample[midi] = sample;
+				
+				int key = xml.getAttribute("note", "key", 0, i);
+				if (key)
+					keyToMidi[key-1] = midi;
+				
+				midiNotes.push_back(midi);
+				
+				//ofLog(OF_LOG_VERBOSE,"parsing note %d: midi=%d, video=%d, key=%d",i,midi,video,key);
+				
+			}
+			xml.popTag();
+		}
+		
+		// ticks trick
+		/*
+		 if (multi && xml.tagExists("priorities")) {
+		 xml.pushTag("priorities");
+		 for (int i=0;i<xml.getNumTags("priority");i++)
+		 priorities.push_back(xml.getValue("priority",0,i)); 
+		 xml.popTag();
+		 }
+		 */
+		
+		set<int> chokeGroup;
+		if (multi && xml.tagExists("choke_group")) {
+			xml.pushTag("choke_group");
+			for (int i=0;i<xml.getNumTags("note");i++) 
+				chokeGroup.insert(xml.getValue("note", 0, i)-1); // -1 because in the xml we start from 1
+			xml.popTag();
+		}
+		
+		
+		
+		xml.popTag(); // sound_set
+		
+		
+	} else {
+		enable = false;
 	}
 	
-	ofLog(OF_LOG_VERBOSE,"loading of %s %s - using video: %s",xmlpath.c_str(),loaded ? "succeeded" : "failed",videoSet.c_str());
+	ofLog(OF_LOG_VERBOSE,"xml loading %s",loaded ? "succeeded" : "failed");
 	
 	if (nextVideoSet!=videoSet) {
 		if (playerNum == 1) //  && videoSet == "VOC_CORE"
@@ -255,6 +243,19 @@ bool PlayerController::isInTransition() {
 void PlayerController::threadedFunction() {
 	if (!enable) 
 		return;
+	
+	
+//	switch (transitionState) {
+//		case TRANSITION_SETUP:
+//		case TRANSITION_INIT_IN:
+//		case TRANSITION_RELEASE_SET: 
+//		case TRANSITION_INIT_SET:
+//		case TRANSITION_CHANGE_SOUND_SET:
+//			ofLog(OF_LOG_VERBOSE,"threadedFunction: %i",transitionState);
+//			break;
+//	}
+	
+	
 	switch (transitionState) {
 		case TRANSITION_SETUP:
 			currentPlayer->initIn();
@@ -287,52 +288,65 @@ void PlayerController::update() {
 	if (!enable) 
 		return;
 	
-		switch (transitionState) {
-			case TRANSITION_IDLE:
-				break;
-			case TRANSITION_INIT_IN_FINISHED:
-				nextPlayer->prepareIn();
-				currentPlayer->startTransition(false);
-				transitionState = TRANSITION_PLAYING_IN;
-				break;
-			case TRANSITION_PLAYING_IN:
-				if (currentPlayer->didTransitionEnd()) {
-					previousPlayer = currentPlayer;
-					currentPlayer = nextPlayer;
-					//midiTrack.setTexturesPlayer(currentPlayer);
-					currentPlayer->startTransition(true);
-					currentPlayer->update();
-					nextPlayer = 0;
-					transitionState = TRANSITION_PLAYING_OUT;
-				}
-				break;
-			case TRANSITION_PLAYING_OUT:
-				if (currentPlayer->didTransitionEnd()) {
-					previousPlayer->finishOut();
-					transitionState = TRANSITION_RELEASE_SET;
-				}
-				break;
-			case TRANSITION_RELEASE_SET_FINISHED:
-				transitionState = TRANSITION_INIT_SET;
-				break;
-			case TRANSITION_INIT_SET_FINISHED:
-				currentPlayer->prepareSet();
-				delete previousPlayer;
-				previousPlayer = 0;
-				videoSet = nextVideoSet;
-				//midiTrack->exit(); // done in loadSoundSet
-				//midiTrack.releaseSoundSet();
-				transitionState = TRANSITION_CHANGE_SOUND_SET;
-				break;
-			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
-				midiTrack.play();
-				//midiTrack.setupSoundSet(); // done in loadSoundSet
-				transitionState = TRANSITION_IDLE;
-				break;
-			default:
-				break;
-		
-		}
+//	switch (transitionState) {
+//		
+//		case TRANSITION_INIT_IN_FINISHED:
+//		case TRANSITION_PLAYING_IN:
+//		case TRANSITION_PLAYING_OUT:
+//		case TRANSITION_RELEASE_SET_FINISHED:
+//		case TRANSITION_INIT_SET_FINISHED:
+//		case TRANSITION_CHANGE_SOUND_SET_FINISHED:
+//			ofLog(OF_LOG_VERBOSE,"update: %i",transitionState);
+//			break;
+//			
+//	}
+	
+	switch (transitionState) {
+		case TRANSITION_IDLE:
+			break;
+		case TRANSITION_INIT_IN_FINISHED:
+			nextPlayer->prepareIn();
+			currentPlayer->startTransition(false);
+			transitionState = TRANSITION_PLAYING_IN;
+			break;
+		case TRANSITION_PLAYING_IN:
+			if (currentPlayer->didTransitionEnd()) {
+				previousPlayer = currentPlayer;
+				currentPlayer = nextPlayer;
+				//midiTrack.setTexturesPlayer(currentPlayer);
+				currentPlayer->startTransition(true);
+				currentPlayer->update();
+				nextPlayer = 0;
+				transitionState = TRANSITION_PLAYING_OUT;
+			}
+			break;
+		case TRANSITION_PLAYING_OUT:
+			if (currentPlayer->didTransitionEnd()) {
+				previousPlayer->finishOut();
+				transitionState = TRANSITION_RELEASE_SET;
+			}
+			break;
+		case TRANSITION_RELEASE_SET_FINISHED:
+			transitionState = TRANSITION_INIT_SET;
+			break;
+		case TRANSITION_INIT_SET_FINISHED:
+			currentPlayer->prepareSet();
+			delete previousPlayer;
+			previousPlayer = 0;
+			videoSet = nextVideoSet;
+			//midiTrack->exit(); // done in loadSoundSet
+			//midiTrack.releaseSoundSet();
+			transitionState = TRANSITION_CHANGE_SOUND_SET;
+			break;
+		case TRANSITION_CHANGE_SOUND_SET_FINISHED:
+			midiTrack.play();
+			//midiTrack.setupSoundSet(); // done in loadSoundSet
+			transitionState = TRANSITION_IDLE;
+			break;
+		default:
+			break;
+	
+	}
 	
 	currentPlayer->update();
 				

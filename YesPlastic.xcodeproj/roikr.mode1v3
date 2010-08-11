@@ -264,9 +264,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
-								<string>E41F964411458D800080F634</string>
-								<string>E41F9490114517200080F634</string>
-								<string>E4CDF979113F153A0085D61B</string>
+								<string>E4280BA91172449500F458BB</string>
+								<string>E41D2DFA11F2FE4A00980BF9</string>
+								<string>E41D2DFB11F2FE4A00980BF9</string>
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>E4E656501105DC6D00754590</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
@@ -276,13 +276,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>50</integer>
-									<integer>48</integer>
+									<integer>37</integer>
+									<integer>33</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 483}, {277, 702}}</string>
+							<string>{{0, 0}, {277, 702}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -301,7 +301,7 @@
 							<real>277</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>179 241 1070 761 0 0 1680 1028 </string>
+						<string>9 231 1070 761 0 0 1680 1028 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -319,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.cpp</string>
+								<string>PlayerController.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.cpp</string>
+										<string>PlayerController.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E4A7543E1212A74600482840</string>
+										<string>E4A754791212C0CD00482840</string>
 										<key>history</key>
 										<array>
 											<string>E4A1BEB71107436A00FBE0A8</string>
@@ -369,7 +369,6 @@
 											<string>E4DD7FBC11E32BF500C8F418</string>
 											<string>E4A4FEF611F307BE000BE0A2</string>
 											<string>E4A4FEF811F307BE000BE0A2</string>
-											<string>E4A4FEFA11F307BE000BE0A2</string>
 											<string>E4A4FF9011F329A3000BE0A2</string>
 											<string>E4A4FFA011F329A3000BE0A2</string>
 											<string>E42E10DD11F35EE000B8B103</string>
@@ -418,14 +417,17 @@
 											<string>E4A753C31212960C00482840</string>
 											<string>E4A753C41212960C00482840</string>
 											<string>E4A753C51212960C00482840</string>
-											<string>E4A753DD12129FE700482840</string>
 											<string>E4A753DF12129FE700482840</string>
 											<string>E4A754331212A73B00482840</string>
 											<string>E4A754351212A73B00482840</string>
-											<string>E4A754361212A73B00482840</string>
 											<string>E4A754371212A73B00482840</string>
-											<string>E4A754381212A73B00482840</string>
-											<string>E4A753DC12129FE700482840</string>
+											<string>E4A7545B1212B5BF00482840</string>
+											<string>E4A7546A1212BD5B00482840</string>
+											<string>E4A7546B1212BD5B00482840</string>
+											<string>E4A7546C1212BD5B00482840</string>
+											<string>E4A7546E1212BD5B00482840</string>
+											<string>E4A754771212C0CD00482840</string>
+											<string>E4A754781212C0CD00482840</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -439,7 +441,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {771, 715}}</string>
 								<key>RubberWindowFrame</key>
-								<string>179 241 1070 761 0 0 1680 1028 </string>
+								<string>9 231 1070 761 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -459,7 +461,7 @@
 								<key>Frame</key>
 								<string>{{0, 720}, {771, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>179 241 1070 761 0 0 1680 1028 </string>
+								<string>9 231 1070 761 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -632,7 +634,7 @@
 		<string>/Users/roikr/Developer/YesPlastic/YesPlastic.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>179 241 1070 761 0 0 1680 1028 </string>
+	<string>9 231 1070 761 0 0 1680 1028 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -648,14 +650,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MenuViewController.mm</string>
+								<string>PlayerController.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -672,6 +672,8 @@
 							<string>517pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -866,14 +868,12 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.cpp</string>
+										<string>PlayerController.cpp</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -894,6 +894,8 @@
 							<string>536pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

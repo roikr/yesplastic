@@ -106,6 +106,7 @@ private:
 	
 	bool multi;
 	
+	vector<int> midiNotes;
 	map<int,int> keyToMidi;
 	map<int,int> midiToSample;
 	
