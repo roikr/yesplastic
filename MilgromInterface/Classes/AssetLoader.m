@@ -10,6 +10,9 @@
 #import "ZipArchive.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromMacros.h"
+#import "Set.h"
+#import "SoundSet.h"
+#import "VideoSet.h"
 
 @interface NSObject (PrivateMethods)
 
@@ -31,23 +34,25 @@
 
 @synthesize delegate;
 @synthesize filePath;
+@synthesize set;
 
-- (id) initWithURL:(NSURL *)theURL delegate:(id<AssetLoaderDelegate>)theDelegate
+- (id) initWithSet:(Set *)theSet delegate:(id<AssetLoaderDelegate>)theDelegate
 {
 	if (self = [super init]) {
 		
 		
 		
 		self.delegate = theDelegate;
+		self.set = theSet;
 		
 		/* create path to cache directory inside the application's Documents directory */
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *dataPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:kCacheFolder];
 		
+		//[[AssetLoader alloc] initWithURL:] delegate:self];
 		
 		[filePath release]; /* release previous instance */
-		NSString *fileName = [[theURL path] lastPathComponent];
-		self.filePath = [[dataPath stringByAppendingPathComponent:fileName] retain];
+		self.filePath = [[dataPath stringByAppendingPathComponent:set.filename] retain];
 		
 		/* apply daily time interval policy */
 		
@@ -58,7 +63,7 @@
 		//[self initUI];
 		//[self buttonsEnabled:NO];
 		//[self startAnimation];
-		
+		NSURL *theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,set.filename]];
 		MilgromLog(@"AssetLoader::initWithURL:%@, dataPath:%@",[theURL absoluteString],dataPath);
 		[[URLCacheConnection alloc] initWithURL:theURL delegate:self];
 		
@@ -109,7 +114,13 @@
 	ZipArchive *zip = [[ZipArchive alloc] init];
 	[zip UnzipOpenFile:filePath];
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	[zip UnzipFileTo:[paths objectAtIndex:0] overWrite:YES];
+	
+	
+	static NSString *SoundSetPath = @"data/SOUND";
+	static NSString *VideoSetPath = @"data/VIDEO";
+	
+		
+	[zip UnzipFileTo:[[paths objectAtIndex:0] stringByAppendingPathComponent:[set isKindOfClass:[SoundSet self]] ? SoundSetPath : VideoSetPath] overWrite:YES];
 	[zip UnzipCloseFile];
 	//[unzippedAssets addObject:asset.identifier];
 	//[self archive];

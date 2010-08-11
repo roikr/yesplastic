@@ -18,6 +18,9 @@
 	UIButton *deleteButton;
 	SongsTable *songsTable;
 	Song *song;
+	
+	int currentSet;
+	
 }
 
 @property (nonatomic,retain) IBOutlet CustomFontLabel *label;

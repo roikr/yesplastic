@@ -14,6 +14,7 @@
 #import "SoundSet.h"
 #import "VideoSet.h"
 #import "MilgromMacros.h"
+#import "BandMenu.h"
 
 
 
@@ -292,6 +293,8 @@
 	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	//[appDelegate.viewController dismissMenu:self];
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[appDelegate loadSong:nil];
 }
 
 

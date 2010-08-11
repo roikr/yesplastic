@@ -15,6 +15,7 @@ extern NSString * const kMilgromURL;
 
 @class MainViewController;
 @class MilgromViewController;
+@class Song;
 
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
@@ -38,6 +39,7 @@ extern NSString * const kMilgromURL;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
+- (void)loadSong:(Song*)song;
 
 
 

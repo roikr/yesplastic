@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "URLCacheConnection.h"
 
+@class Set;
 @protocol AssetLoaderDelegate;
 
 
@@ -16,13 +17,15 @@
 	id <AssetLoaderDelegate> delegate;
 	
 	NSString *filePath;
+	Set *set;
 
 }
 
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, copy) NSString *filePath;
+@property (nonatomic, retain) Set *set;
 
-- (id) initWithURL:(NSURL *)theURL delegate:(id<AssetLoaderDelegate>)theDelegate;
+- (id) initWithSet:(Set *)theSet delegate:(id<AssetLoaderDelegate>)theDelegate;
 @end
 
 @protocol AssetLoaderDelegate<NSObject>

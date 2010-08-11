@@ -7,7 +7,7 @@
 //
 
 #import "MilgromInterfaceAppDelegate.h"
-#import "MainViewController.h"
+#import "BandMenu.h"
 #import "MilgromViewController.h"
 #import "URLCacheAlert.h"
 #import "MilgromMacros.h"
@@ -68,6 +68,10 @@ NSString * const kCacheFolder=@"URLCache";
 	[self initCache];
 	
     return YES;
+}
+
+- (void)loadSong:(Song*)song {
+	[(BandMenu *)[self.viewController.viewControllers objectAtIndex:0] exit:nil];
 }
 
 

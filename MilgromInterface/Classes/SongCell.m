@@ -99,26 +99,50 @@
 	self.song = theSong;
 	self.label.text = theSong.songName;
 	self.songsTable = theTable;
+	currentSet = 0;
 	[self update];
 	
 }
 
 - (void)update {
+	self.userInteractionEnabled = YES;
+	
 	if (![song.bReady boolValue]) { 
 		self.userInteractionEnabled = NO;
 		CGRect frame = self.frame;
 		frame.size.width = 0;
 		self.frame = frame;
-		//[[AssetLoader alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,song.filename]] delegate:self];
 		MilgromLog(@"Song: %@",[song songName]);
 		NSArray *soundSets = [song.soundSets allObjects];
-		for (int i=0; i < [soundSets count]; i++) {
-			SoundSet *soundSet = [soundSets objectAtIndex:i];
-			VideoSet *videoSet = [soundSet videoSet];
-			MilgromLog(@"%i: SoundSet: %@, VideoSet: %@",i,[soundSet setName],[videoSet setName]);
-		}
+		while (currentSet/2 < [soundSets count] )  {
 		
-	}
+			SoundSet *soundSet = [soundSets objectAtIndex:currentSet/2];
+			if (![soundSet.bReady boolValue]) {
+				MilgromLog(@"%i: SoundSet: %@ is not ready",currentSet/2,[soundSet setName]);
+				[[AssetLoader alloc] initWithSet:soundSet delegate:self];
+				return; 
+			} else {
+				currentSet++;
+				VideoSet *videoSet = [soundSet videoSet];
+				if (![videoSet.bReady boolValue]) {
+					MilgromLog(@"%i: VideoSet: %@ is not ready",currentSet/2,[videoSet setName]);
+					[[AssetLoader alloc] initWithSet:videoSet delegate:self];
+					return;
+				} else {
+					currentSet++;
+				}
+
+
+			}
+			
+		}
+		frame.size.width = 270;
+		self.frame = frame;
+		self.userInteractionEnabled = YES;
+		[song setBReady:[NSNumber numberWithBool:YES]];
+		[songsTable updateContext];
+		
+	} 
 }
 
 - (void) delete:(id)sender {
@@ -136,19 +160,24 @@
 #pragma mark AssetLoader methods
 
 - (void) loaderDidFail:(AssetLoader *)theLoader {
+	[self update];
 }
 
 - (void) loaderDidFinish:(AssetLoader *)theLoader {
-	[song setBReady:[NSNumber numberWithBool:YES]];
+	
+	Set *set = theLoader.set;
+	MilgromLog(@"Set: %@ is ready",[set setName]);
+	[set setBReady:[NSNumber numberWithBool:YES]];
 	[songsTable updateContext];
-	self.userInteractionEnabled = YES;
+	[self update];
+	
 }
 
 - (void) loaderProgress:(NSNumber *)theProgress {
 	CGRect frame = self.frame;
-	frame.size.width = [theProgress floatValue] * 270;
+	frame.size.width = (float)currentSet * 270/6 + [theProgress floatValue] * 270/6;
 	self.frame = frame;
-	MilgromLog(@"loaderProgress: %3.2f, width: %3.0f/%3.0f",[theProgress floatValue] *100,self.frame.size.width,270);
+	//MilgromLog(@"loaderProgress: %3.2f, width: %3.0f/%3.0f",[theProgress floatValue] *100,self.frame.size.width,270);
 }
 
 
