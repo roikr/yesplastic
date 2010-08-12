@@ -8,10 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* MilgromInterfaceAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */; };
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		E44471CF121438540058D07B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = E44471C5121438540058D07B /* ioapi.c */; };
+		E44471D0121438540058D07B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = E44471C7121438540058D07B /* mztools.c */; };
+		E44471D1121438540058D07B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E44471C9121438540058D07B /* unzip.c */; };
+		E44471D2121438540058D07B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = E44471CB121438540058D07B /* zip.c */; };
+		E44471D3121438540058D07B /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = E44471CE121438540058D07B /* ZipArchive.mm */; };
+		E44471DB121438CD0058D07B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E44471DA121438CD0058D07B /* main.m */; };
 		E480B6CC1212152400096300 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C51212152400096300 /* Song.m */; };
 		E480B6CD1212152400096300 /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C71212152400096300 /* Set.m */; };
 		E480B6CE1212152400096300 /* VideoSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C91212152400096300 /* VideoSet.m */; };
@@ -36,11 +41,6 @@
 		E4D1EB3F121133F3004D4E25 /* URLCacheAlert.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */; };
 		E4D1EB40121133F3004D4E25 /* URLCacheConnection.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB3D121133F3004D4E25 /* URLCacheConnection.mm */; };
 		E4D1EB4F12113431004D4E25 /* AssetLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB4E12113431004D4E25 /* AssetLoader.m */; };
-		E4D1EB71121138BA004D4E25 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB67121138BA004D4E25 /* ioapi.c */; };
-		E4D1EB72121138BA004D4E25 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB69121138BA004D4E25 /* mztools.c */; };
-		E4D1EB73121138BA004D4E25 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB6B121138BA004D4E25 /* unzip.c */; };
-		E4D1EB74121138BA004D4E25 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB6D121138BA004D4E25 /* zip.c */; };
-		E4D1EB75121138BA004D4E25 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D1EB70121138BA004D4E25 /* ZipArchive.mm */; };
 		E4D1EB99121141C7004D4E25 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E4D1EB98121141C7004D4E25 /* libz.dylib */; };
 		E4D4A1CA11FD71D500C92628 /* CustomFontLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D4A1C911FD71D500C92628 /* CustomFontLabel.m */; };
 		E4D4A1D011FD725000C92628 /* Wonderlism.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */; };
@@ -150,8 +150,19 @@
 		1D6058910D05DD3D006BFB54 /* MilgromInterface.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilgromInterface.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MilgromInterface_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilgromInterface_Prefix.pch; sourceTree = "<group>"; };
+		E44471C4121438540058D07B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		E44471C5121438540058D07B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		E44471C6121438540058D07B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		E44471C7121438540058D07B /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		E44471C8121438540058D07B /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		E44471C9121438540058D07B /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		E44471CA121438540058D07B /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		E44471CB121438540058D07B /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		E44471CC121438540058D07B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		E44471CD121438540058D07B /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		E44471CE121438540058D07B /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		E44471DA121438CD0058D07B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Classes/main.m; sourceTree = "<group>"; };
 		E480B6C41212152400096300 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
 		E480B6C51212152400096300 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E480B6C61212152400096300 /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Set.h; path = Model/Set.h; sourceTree = "<group>"; };
@@ -191,17 +202,6 @@
 		E4D1EB4D12113431004D4E25 /* AssetLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetLoader.h; path = Classes/AssetLoader.h; sourceTree = "<group>"; };
 		E4D1EB4E12113431004D4E25 /* AssetLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetLoader.m; path = Classes/AssetLoader.m; sourceTree = "<group>"; };
 		E4D1EB50121134E1004D4E25 /* URLCacheConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URLCacheConnection.h; path = Classes/URLCacheConnection.h; sourceTree = "<group>"; };
-		E4D1EB66121138BA004D4E25 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		E4D1EB67121138BA004D4E25 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		E4D1EB68121138BA004D4E25 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		E4D1EB69121138BA004D4E25 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		E4D1EB6A121138BA004D4E25 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		E4D1EB6B121138BA004D4E25 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		E4D1EB6C121138BA004D4E25 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		E4D1EB6D121138BA004D4E25 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		E4D1EB6E121138BA004D4E25 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		E4D1EB6F121138BA004D4E25 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
-		E4D1EB70121138BA004D4E25 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		E4D1EB98121141C7004D4E25 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E4D1EBE712114631004D4E25 /* MilgromMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MilgromMacros.h; path = Classes/MilgromMacros.h; sourceTree = "<group>"; };
 		E4D4A1C811FD71D500C92628 /* CustomFontLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontLabel.h; sourceTree = "<group>"; };
@@ -388,8 +388,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E44471DA121438CD0058D07B /* main.m */,
 				32CA4F630368D1EE00C91783 /* MilgromInterface_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -406,6 +406,32 @@
 				E490A1441206AB58008512EA /* CoreData.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E44471C2121438540058D07B /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				E44471C3121438540058D07B /* minizip */,
+				E44471CD121438540058D07B /* ZipArchive.h */,
+				E44471CE121438540058D07B /* ZipArchive.mm */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		E44471C3121438540058D07B /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				E44471C4121438540058D07B /* crypt.h */,
+				E44471C5121438540058D07B /* ioapi.c */,
+				E44471C6121438540058D07B /* ioapi.h */,
+				E44471C7121438540058D07B /* mztools.c */,
+				E44471C8121438540058D07B /* mztools.h */,
+				E44471C9121438540058D07B /* unzip.c */,
+				E44471CA121438540058D07B /* unzip.h */,
+				E44471CB121438540058D07B /* zip.c */,
+				E44471CC121438540058D07B /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		E490A1A21206C536008512EA /* Model */ = {
@@ -448,8 +474,8 @@
 		E4D1EB3712113350004D4E25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E44471C2121438540058D07B /* ZipArchive */,
 				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
-				E4D1EB64121138BA004D4E25 /* ZipArchive */,
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
 				E4D1EB4D12113431004D4E25 /* AssetLoader.h */,
@@ -463,33 +489,6 @@
 				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		E4D1EB64121138BA004D4E25 /* ZipArchive */ = {
-			isa = PBXGroup;
-			children = (
-				E4D1EB65121138BA004D4E25 /* minizip */,
-				E4D1EB6F121138BA004D4E25 /* ZipArchive.h */,
-				E4D1EB70121138BA004D4E25 /* ZipArchive.mm */,
-			);
-			name = ZipArchive;
-			path = ../ZipArchive;
-			sourceTree = SOURCE_ROOT;
-		};
-		E4D1EB65121138BA004D4E25 /* minizip */ = {
-			isa = PBXGroup;
-			children = (
-				E4D1EB66121138BA004D4E25 /* crypt.h */,
-				E4D1EB67121138BA004D4E25 /* ioapi.c */,
-				E4D1EB68121138BA004D4E25 /* ioapi.h */,
-				E4D1EB69121138BA004D4E25 /* mztools.c */,
-				E4D1EB6A121138BA004D4E25 /* mztools.h */,
-				E4D1EB6B121138BA004D4E25 /* unzip.c */,
-				E4D1EB6C121138BA004D4E25 /* unzip.h */,
-				E4D1EB6D121138BA004D4E25 /* zip.c */,
-				E4D1EB6E121138BA004D4E25 /* zip.h */,
-			);
-			path = minizip;
 			sourceTree = "<group>";
 		};
 		E4DE4F5F11FFFC9A00BF31AF /* png */ = {
@@ -780,7 +779,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F0DB27120861BE00D28745 /* Milgrom.xcdatamodeld in Sources */,
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MilgromInterfaceAppDelegate.mm in Sources */,
 				E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */,
 				E4B3D18711F823E000B57223 /* testApp.cpp in Sources */,
@@ -798,15 +796,16 @@
 				E4D1EB3F121133F3004D4E25 /* URLCacheAlert.mm in Sources */,
 				E4D1EB40121133F3004D4E25 /* URLCacheConnection.mm in Sources */,
 				E4D1EB4F12113431004D4E25 /* AssetLoader.m in Sources */,
-				E4D1EB71121138BA004D4E25 /* ioapi.c in Sources */,
-				E4D1EB72121138BA004D4E25 /* mztools.c in Sources */,
-				E4D1EB73121138BA004D4E25 /* unzip.c in Sources */,
-				E4D1EB74121138BA004D4E25 /* zip.c in Sources */,
-				E4D1EB75121138BA004D4E25 /* ZipArchive.mm in Sources */,
 				E480B6CC1212152400096300 /* Song.m in Sources */,
 				E480B6CD1212152400096300 /* Set.m in Sources */,
 				E480B6CE1212152400096300 /* VideoSet.m in Sources */,
 				E480B6CF1212152400096300 /* SoundSet.m in Sources */,
+				E44471CF121438540058D07B /* ioapi.c in Sources */,
+				E44471D0121438540058D07B /* mztools.c in Sources */,
+				E44471D1121438540058D07B /* unzip.c in Sources */,
+				E44471D2121438540058D07B /* zip.c in Sources */,
+				E44471D3121438540058D07B /* ZipArchive.mm in Sources */,
+				E44471DB121438CD0058D07B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
