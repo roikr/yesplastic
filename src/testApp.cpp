@@ -194,6 +194,10 @@ void testApp::threadedFunction() {
 }
 
 
+int testApp::getMode(int player) {
+	return this->player[controller].getMode();
+}
+
 void testApp::setMode(int player,int mode) {
 	bool looping = false;
 	

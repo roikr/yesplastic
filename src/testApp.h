@@ -29,6 +29,7 @@ public:
 	
 	void audioRequested( float * output, int bufferSize, int nChannels );
 	
+	int getMode(int player);
 	void setMode(int player,int mode);
 	
 	void setState(int state);
