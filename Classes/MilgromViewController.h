@@ -15,9 +15,14 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+@class EAGLView;
+
 @interface MilgromViewController : UIViewController
 {
-    EAGLContext *context;
+    UINavigationController *viewController;
+	EAGLView *eAGLView;
+	EAGLContext *context;
+	
    
     
     BOOL animating;
@@ -30,7 +35,11 @@
 	 */
     id displayLink;
     NSTimer *animationTimer;
+	CFTimeInterval startTime;
 }
+
+@property (nonatomic, retain) IBOutlet UINavigationController *viewController;
+@property (nonatomic,retain) IBOutlet EAGLView *eAGLView;
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;

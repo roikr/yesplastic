@@ -11,6 +11,9 @@
 #import "MilgromViewController.h"
 #import "URLCacheAlert.h"
 #import "MilgromMacros.h"
+#import "ZipArchive.h"
+#include "testApp.h"
+#include "Constants.h"
 
 
 NSString * const kMilgromURL=@"roikr.com";
@@ -29,15 +32,15 @@ NSString * const kCacheFolder=@"URLCache";
 */
  - (void) initCache;
  - (void) clearCache;
++ (void)unzipPrecache;
  
 @end
 
 @implementation MilgromInterfaceAppDelegate
 
 @synthesize window;
-@synthesize viewController;
 @synthesize milgromViewController;
-
+@synthesize OFSAptr;
 
 
 
@@ -46,15 +49,26 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    // Override point for customization after application launch.
+    
+	// Override point for customization after application launch.
 	
+	[MilgromInterfaceAppDelegate unzipPrecache];
 	
     // Add the view controller's view to the window and display.
-   
-	[window addSubview:viewController.view]; // need to add before making visible to allow rotation
+	//[window addSubview:viewController.view]; // need to add before making visible to allow rotation
+	//[window addSubview:milgromViewController.view];
+	
     [window makeKeyAndVisible];
 	
-	[window bringSubviewToFront:viewController.view];
+	//[window bringSubviewToFront:viewController.view];
+	
+	
+	//glView.controller = self;
+	self.OFSAptr = new testApp;
+	OFSAptr->setup();
+	OFSAptr->setState(BAND_STATE);
+	OFSAptr->lastFrame = 0;
+	
 	
 	/* turn off the NSURLCache shared cache */
 	
@@ -71,7 +85,7 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)loadSong:(Song*)song {
-	[(BandMenu *)[self.viewController.viewControllers objectAtIndex:0] exit:nil];
+	//[(BandMenu *)[self.viewController.viewControllers objectAtIndex:0] exit:nil];
 }
 
 
@@ -336,10 +350,52 @@ NSString * const kCacheFolder=@"URLCache";
 	[managedObjectContext_ release];
 	[managedObjectModel_ release];
 	[persistentStoreCoordinator_ release];
-    [viewController release];
+   
 	[milgromViewController release];
     [window release];
     [super dealloc];
+}
+
+
++ (void)unzipPrecache {
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	if (!documentsDirectory) {
+		MilgromLog(@"Documents directory not found!");
+		return ;
+	}
+	
+	
+	
+	if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
+		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache"];
+		
+		if (precache) {
+			MilgromLog(@"unzipping precache");
+			
+			ZipArchive *zip = [[ZipArchive alloc] init];
+			[zip UnzipOpenFile:precache];
+			[zip UnzipFileTo:[paths objectAtIndex:0] overWrite:YES];
+			[zip UnzipCloseFile];
+		} 
+		/*
+		 else {
+		 NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"data"];
+		 NSError * error = nil;
+		 if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
+		 URLCacheAlertWithError(error);
+		 return;
+		 }
+		 
+		 
+		 }
+		 */
+		
+		
+	}
 }
 
 

@@ -29,6 +29,12 @@ public:
 	
 	void audioRequested( float * output, int bufferSize, int nChannels );
 	
+	void buttonPressed(int button);
+	void nextLoop(int player);
+	void prevLoop(int player);
+	
+	
+	
 	int getMode(int player);
 	void setMode(int player,int mode);
 	
@@ -108,7 +114,7 @@ private:
 	float sx;
 	
 	vector<measure> measures;
-	int nextLoop;
+	int nextLoopNum;
 	float vx;
 	
 	

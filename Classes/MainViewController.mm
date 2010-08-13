@@ -7,18 +7,17 @@
 //
 
 #import "MainViewController.h"
-//#import "EAGLView.h"
 
 
 #include "Constants.h"
 #include "testApp.h"
 #include "PlayerMenu.h"
 
+#import "MilgromInterfaceAppDelegate.h"
+#import "TouchView.h"
+
 @implementation MainViewController
 
-
-@synthesize glView;
-@synthesize OFSAptr;
 @synthesize playButton;
 @synthesize recordButton;
 @synthesize menuButton;
@@ -32,6 +31,8 @@
 
 @synthesize triggerButton;
 @synthesize loopButton;
+
+
 
 
 /*
@@ -48,11 +49,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	//glView.controller = self;
-	OFSAptr = new testApp;
-	OFSAptr->setup();
-	OFSAptr->setState(BAND_STATE);
-	
+		
 	/*
 	self.actionToolBar.hidden = true;
 	
@@ -66,8 +63,10 @@
 	//recordButton.enabled = NO;
 	//topMenu.hidden = YES;
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	OFSAptr = appDelegate.OFSAptr;
 	
-	
+	[(TouchView*)self.view  setViewController:self];
 	 
 	//TODO: replace with NULL as done in the page controll example
 	
@@ -139,52 +138,36 @@
 }
 
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	switch (toInterfaceOrientation) {
-		case UIInterfaceOrientationPortrait:
-		case UIInterfaceOrientationPortraitUpsideDown:
-			
-			OFSAptr->setState(SOLO_STATE);
-			break;
-		case UIInterfaceOrientationLandscapeRight:
-		case UIInterfaceOrientationLandscapeLeft:
-			OFSAptr->setState(BAND_STATE);
-			break;
-		default:
-			break;
-	}
-	
+
+
+- (void)hide {
 	triggersView.hidden = YES;
 	loopsView.hidden = YES;
 	bandLoopsView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
-	
-	//[self dismissMenu:nil]; // TODO: uncomment this
-	
 }
 
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	switch (self.interfaceOrientation) {
-		case UIInterfaceOrientationPortrait:
-		case UIInterfaceOrientationPortraitUpsideDown:
+
+- (void)show {
+	switch (OFSAptr->getState()) {
+		case SOLO_STATE:
 			setMenuButton.hidden = NO;
 			switch (OFSAptr->getMode(0)) {
 				case LOOP_MODE:
 					loopsView.hidden = NO;
+					triggersView.hidden = YES;
 					break;
 				case MANUAL_MODE:
+					loopsView.hidden = YES;
 					triggersView.hidden = NO;
 					break;
 				default:
 					break;
 			}
-			
-			
 			break;
-		case UIInterfaceOrientationLandscapeRight:
-		case UIInterfaceOrientationLandscapeLeft:
+		case BAND_STATE:
 			bandLoopsView.hidden = NO;
 			menuButton.hidden = NO;
 			break;
@@ -192,7 +175,6 @@
 			break;
 	}
 }
-
 
 
 
@@ -330,26 +312,44 @@
 
 - (void) trigger:(id)sender {
 	UIButton *button = (UIButton*)sender;
-	if (button.tag == 7) {
-		triggersView.hidden = YES;
-		loopsView.hidden = NO;
-	}
+	OFSAptr->buttonPressed(button.tag);
+	
+	
+	
+//	if (button.tag == 7) {
+//		triggersView.hidden = YES;
+//		loopsView.hidden = NO;
+//	}
 		
 }
 
 - (void) loop:(id)sender {
 	UIButton *button = (UIButton*)sender;
-	if (button.tag == 7) {
-		triggersView.hidden = NO;
-		loopsView.hidden = YES;
-	}
+	OFSAptr->buttonPressed(button.tag);
+	
+//	if (button.tag == 7) {
+//		triggersView.hidden = NO;
+//		loopsView.hidden = YES;
+//	}
 	
 }
+
+- (void) nextLoop:(id)sender {
+	UIButton *button = (UIButton*)sender;
+	OFSAptr->nextLoop(button.tag);
+	
+}
+
+- (void) prevLoop:(id)sender {
+	UIButton *button = (UIButton*)sender;
+	OFSAptr->prevLoop(button.tag);
+}
+
 
 
 - (void)dealloc {
 	//TODO: release player controllers
-	[glView release];
+	
     [super dealloc];
 }
 

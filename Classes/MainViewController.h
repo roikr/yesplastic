@@ -10,12 +10,12 @@
 
 class testApp;
 @class EAGLView;
-
+@class TouchView;
 
 
 @interface MainViewController : UIViewController {
 
-	EAGLView *glView;
+	
 	
 	UIButton *playButton;
 	UIButton *recordButton;
@@ -34,9 +34,10 @@ class testApp;
 	UIButton *triggerButton;
 	UIButton *loopButton;
 	
+	
+	
 }
 
-@property (nonatomic, retain) IBOutlet EAGLView *glView;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
 @property (nonatomic, retain) IBOutlet UIButton *menuButton;
@@ -49,9 +50,9 @@ class testApp;
 @property (nonatomic,assign) IBOutlet UIButton *triggerButton;
 @property (nonatomic,assign )IBOutlet UIButton *loopButton;
 
-@property (nonatomic, retain) NSArray *playerControllers;
 
-@property testApp *OFSAptr;
+
+@property (nonatomic, retain) NSArray *playerControllers;
 
 - (void) bringMenu:(id)sender;
 - (void) checkState:(id)sender;
@@ -60,6 +61,10 @@ class testApp;
 - (void) save:(id)sender;
 - (void) trigger:(id)sender;
 - (void) loop:(id)sender;
+- (void) nextLoop:(id)sender;
+- (void) prevLoop:(id)sender;
+- (void) show;
+- (void) hide;
 
 //- (void) updateTables;
 

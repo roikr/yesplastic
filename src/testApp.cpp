@@ -39,7 +39,7 @@ enum {
 void testApp::setup(){	
 	
 	
-	
+	/*
 	verdana.loadFont(ofToDataPath("verdana.ttf"),16);
 	verdana.setLineHeight(20.0f);
 	
@@ -59,7 +59,7 @@ void testApp::setup(){
 	oscMap["/drm_key"]=drm_key;	
 	oscMap["/record"]=song_record;
 	oscMap["/play"]=song_play;	
-
+	 */
 	
 	
 	cout << "listening for osc messages on port " << PORT << "\n";
@@ -87,24 +87,15 @@ void testApp::setup(){
 	background.setup(ofToDataPath(filename));
 	background.init();
 	background.load();
+	
+	
 
 	filename = "images/buttons.pvr";
 	buttons.setup(ofToDataPath(filename));
 	buttons.init();
 	buttons.load();
 	
-	//for (int i=0;i<3;i++) {}
 	
-	
-	
-	/*
-	for (int i=0; i<xml.getNumTags("sound_set"); i++) {
-		soundSets.push_back(xml.getValue("sound_set", "", i));
-	}
-	*/
-	
-	
-	//MidiTrack::Init();
 	
 	lastFrame = 0;
 	bChangeSet = false; 
@@ -112,6 +103,7 @@ void testApp::setup(){
 	bButtonDown = false;
 	
 	startThread();
+	
 	
 	for(int i=0;i<3;i++) {
 		player[i].setup(i);
@@ -122,7 +114,8 @@ void testApp::setup(){
 		
 		
 	}
-	//MidiTrack::SetSongMode(SONG_IDLE);
+	 
+	 
 	
 	controller = 1;
 	setState(SOLO_STATE);
@@ -141,6 +134,7 @@ void testApp::setup(){
 
 	bpm = 120; // TODO: send bpm to players
 	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
+	 
 	
 }
 
@@ -502,7 +496,7 @@ void testApp::draw(){
 					
 				
 				if (!measures.empty() ) 
-					buttons.draw(50+controller*160,260,nextLoop*60,(controller*2+1)*60,60,60,  1.0f );
+					buttons.draw(50+controller*160,260,nextLoopNum*60,(controller*2+1)*60,60,60,  1.0f );
 				
 			} 
 			 
@@ -586,6 +580,23 @@ void testApp::exit() {
  
   */
 
+void testApp::buttonPressed(int button) {
+	
+	if (player[controller].isEnabled() && !player[controller].isInTransition()) {					
+		if ( player[controller].getMode() == MANUAL_MODE ) {
+			player[controller].play(button);	
+		}
+		
+		if ( player[controller].getMode() == LOOP_MODE ) {
+			player[controller].changeLoop(button);		
+		}			
+	}
+		
+}
+
+
+
+
 //--------------------------------------------------------------
 void testApp::touchDown(float x, float y, int touchId) {
 	
@@ -595,7 +606,7 @@ void testApp::touchDown(float x, float y, int touchId) {
 	
 	if (state==BAND_STATE) {
 		controller = (int)x/160;
-		nextLoop = player[controller].getCurrentLoop();
+		nextLoopNum = player[controller].getCurrentLoop();
 	}
 	
 	
@@ -603,15 +614,7 @@ void testApp::touchDown(float x, float y, int touchId) {
 	if (state==SOLO_STATE && y>=360) {
 		button = 4*(((int)y-360)/60)+(int)x/80;
 		
-		if (player[controller].isEnabled() && !player[controller].isInTransition()) {					
-			if ( player[controller].getMode() == MANUAL_MODE ) {
-				player[controller].play(button);	
-			}
-			
-			if ( player[controller].getMode() == LOOP_MODE ) {
-				player[controller].changeLoop(button);		
-			}			
-		}
+		buttonPressed(button);
 		bButtonDown = true; // for view 
 	} else {
 		
@@ -651,7 +654,7 @@ void testApp::touchMoved(float x, float y, int touchId) {
 			break;
 		case BAND_STATE:
 			
-			nextLoop = (player[controller].getCurrentLoop() + (measures.back().y-measures.front().y) / 40 + 8) % 8;
+			nextLoopNum = (player[controller].getCurrentLoop() + (measures.back().y-measures.front().y) / 40 + 8) % 8;
 			
 			break;
 	}
@@ -721,8 +724,8 @@ void testApp::touchUp(float x, float y, int touchId) {
 			
 		case BAND_STATE: 
 			
-			if (player[controller].getCurrentLoop() != nextLoop ) 
-				player[controller].changeLoop(nextLoop);
+			if (player[controller].getCurrentLoop() != nextLoopNum ) 
+				player[controller].changeLoop(nextLoopNum);
 			
 			break;
 	}
@@ -735,6 +738,14 @@ void testApp::touchUp(float x, float y, int touchId) {
 	bButtonDown = false;
 	
 	
+}
+
+void testApp::nextLoop(int player) {
+	this->player[player].changeLoop((this->player[player].getCurrentLoop()+1)%8);
+}
+
+void testApp::prevLoop(int player) {
+	this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
 }
 
 	

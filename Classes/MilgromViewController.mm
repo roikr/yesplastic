@@ -10,6 +10,13 @@
 
 #import "MilgromViewController.h"
 #import "EAGLView.h"
+#import "MilgromInterfaceAppDelegate.h"
+#include "testApp.h"
+#import "BandMenu.h"
+#import "PlayerMenu.h"
+#import "MainViewController.h"
+#import "HelpViewController.h"
+#import "Constants.h"
 
 // Uniform index.
 enum {
@@ -31,10 +38,13 @@ enum {
 
 @implementation MilgromViewController
 
+@synthesize viewController;
+@synthesize eAGLView;
 @synthesize animating, context;
 
-- (void)awakeFromNib
-{
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
     EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     
    
@@ -46,8 +56,8 @@ enum {
 	self.context = aContext;
 	[aContext release];
 	
-    [(EAGLView *)self.view setContext:context];
-    [(EAGLView *)self.view setFramebuffer];
+    [self.eAGLView setContext:context];
+    [self.eAGLView setFramebuffer];
     
        
     animating = FALSE;
@@ -62,13 +72,55 @@ enum {
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
         displayLinkSupported = TRUE;
+	
+	[self.view addSubview:viewController.view];
 }
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return YES ;
+	if ([self.viewController.visibleViewController isKindOfClass:[BandMenu self]]) {
+		return interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
+	} else if ([self.viewController.visibleViewController isKindOfClass:[PlayerMenu self]]) {
+		return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
+	} else if ([self.viewController.visibleViewController isKindOfClass:[HelpViewController self]]) {
+		return NO;
+	}
+   
+	return YES;
 }
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	//[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	if ([self.viewController.visibleViewController isKindOfClass:[MainViewController self]]) {
+		
+		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+		
+		
+		switch (toInterfaceOrientation) {
+			case UIInterfaceOrientationPortrait:
+			case UIInterfaceOrientationPortraitUpsideDown:
+				
+				appDelegate.OFSAptr->setState(SOLO_STATE);
+				break;
+			case UIInterfaceOrientationLandscapeRight:
+			case UIInterfaceOrientationLandscapeLeft:
+				appDelegate.OFSAptr->setState(BAND_STATE);
+				break;
+			default:
+				break;
+		}
+		[(MainViewController*)self.viewController.visibleViewController hide];
+	}
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	if ([self.viewController.visibleViewController isKindOfClass:[MainViewController self]]) {
+		[(MainViewController*)self.viewController.visibleViewController show];
+	}
+}
+
 
 - (void)dealloc
 {
@@ -78,7 +130,8 @@ enum {
         [EAGLContext setCurrentContext:nil];
     
     [context release];
-    
+	[viewController release];
+    [eAGLView release];
     [super dealloc];
 }
 
@@ -148,6 +201,7 @@ enum {
         else
             animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) target:self selector:@selector(drawFrame) userInfo:nil repeats:TRUE];
         
+		startTime = CACurrentMediaTime();
         animating = TRUE;
     }
 }
@@ -173,8 +227,8 @@ enum {
 
 - (void)drawFrame
 {
-    [(EAGLView *)self.view setFramebuffer];
-    
+    [self.eAGLView setFramebuffer];
+    /*
     // Replace the implementation of this method to do your own custom drawing.
     static const GLfloat squareVertices[] = {
         -0.5f, -0.33f,
@@ -209,8 +263,26 @@ enum {
     
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	 
+	 */
+	
+	//[controller checkState:nil];
+	//[renderer setupView];
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
+	if (frame>appDelegate.OFSAptr->lastFrame) {
+		appDelegate.OFSAptr->lastFrame = frame;
+		appDelegate.OFSAptr->update();
+	}
+	
+	
+	
+	
+	appDelegate.OFSAptr->draw();
     
-    [(EAGLView *)self.view presentFramebuffer];
+    [self.eAGLView presentFramebuffer];
 }
 
 - (void)didReceiveMemoryWarning

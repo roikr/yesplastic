@@ -13,13 +13,13 @@
 extern NSString * const kCacheFolder;
 extern NSString * const kMilgromURL;
 
-@class MainViewController;
 @class MilgromViewController;
 @class Song;
+class testApp;
 
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    UINavigationController *viewController;
+    
 	
 	NSManagedObjectContext *managedObjectContext_;
 	NSManagedObjectModel *managedObjectModel_;
@@ -27,15 +27,18 @@ extern NSString * const kMilgromURL;
 	
 	MilgromViewController *milgromViewController;
 	
+	testApp *OFSAptr;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *viewController;
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain,readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@property testApp *OFSAptr;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
