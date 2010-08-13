@@ -67,7 +67,7 @@ void  PlayerController::loadSoundSet(string soundSet) {
 		
 	}
 	
-	midiInstrument->setup(256, 44100); // TODO: move these out
+	midiInstrument->setup(256, multi,44100); // TODO: move these out
 	
 	midiTrack.clear();
 	

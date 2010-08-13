@@ -27,7 +27,7 @@
 @synthesize lock;
 @synthesize deleteButton;
 @synthesize songsTable;
-@synthesize song;
+@synthesize song; 
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

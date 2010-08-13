@@ -10,6 +10,7 @@
 #import "SongsTable.h"
 #import "MainViewController.h"
 #import "HelpViewController.h"
+#import "MilgromInterfaceAppDelegate.h"
 
 
 @implementation BandMenu
@@ -17,7 +18,6 @@
 @synthesize songsTable;
 @synthesize songsView;
 @synthesize mainViewController;
-@synthesize help;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -102,14 +102,8 @@
 }
 
 - (void)help:(id)sender {
-	
-	if (self.help == nil) {
-		self.help = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
-		help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	}
-	
-	
-	[self presentModalViewController:self.help animated:YES];
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[appDelegate bringHelp];
 }
 
 - (void)link:(id)sender {
@@ -117,9 +111,8 @@
 	
 	switch (button.tag) {
 		case 0:
-			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
-			[songsTable addDemo];
-			break;
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
+						break;
 		case 1:
 			[self exit:nil];
 			//[songsTable addSong];

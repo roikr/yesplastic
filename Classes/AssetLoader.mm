@@ -116,8 +116,8 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	
 	
-	static NSString *SoundSetPath = @"data/SOUND";
-	static NSString *VideoSetPath = @"data/VIDEO";
+	static NSString *SoundSetPath = @"data/SOUNDS";
+	static NSString *VideoSetPath = @"data/VIDEOS";
 	
 		
 	[zip UnzipFileTo:[[paths objectAtIndex:0] stringByAppendingPathComponent:[set isKindOfClass:[SoundSet self]] ? SoundSetPath : VideoSetPath] overWrite:YES];

@@ -17,6 +17,8 @@ extern NSString * const kMilgromURL;
 @class Song;
 class testApp;
 
+@class HelpViewController;
+
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     
@@ -26,13 +28,15 @@ class testApp;
 	NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	
 	MilgromViewController *milgromViewController;
-	
+	HelpViewController *help;
 	testApp *OFSAptr;
+	
 	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
+@property (nonatomic,retain) HelpViewController *help;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain,readonly) NSManagedObjectModel *managedObjectModel;
@@ -40,10 +44,11 @@ class testApp;
 
 @property testApp *OFSAptr;
 
+
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
 - (void)loadSong:(Song*)song;
-
+- (void)bringHelp;
 
 
 @end

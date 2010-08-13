@@ -14,6 +14,10 @@
 #import "ZipArchive.h"
 #include "testApp.h"
 #include "Constants.h"
+#include "Song.h"
+#include "VideoSet.h"
+#include "SoundSet.h"
+#include "HelpViewController.h"
 
 
 NSString * const kMilgromURL=@"roikr.com";
@@ -32,7 +36,9 @@ NSString * const kCacheFolder=@"URLCache";
 */
  - (void) initCache;
  - (void) clearCache;
-+ (void)unzipPrecache;
++ (BOOL)unzipPrecache;
+- (void)addDemos;
+- (void)addDemo:(NSArray *)theArray download:(BOOL)bDownload;
  
 @end
 
@@ -41,6 +47,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize window;
 @synthesize milgromViewController;
 @synthesize OFSAptr;
+@synthesize help;
 
 
 
@@ -52,7 +59,8 @@ NSString * const kCacheFolder=@"URLCache";
     
 	// Override point for customization after application launch.
 	
-	[MilgromInterfaceAppDelegate unzipPrecache];
+	if ([MilgromInterfaceAppDelegate unzipPrecache])
+		[self addDemos];
 	
     // Add the view controller's view to the window and display.
 	//[window addSubview:viewController.view]; // need to add before making visible to allow rotation
@@ -85,7 +93,15 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)loadSong:(Song*)song {
-	//[(BandMenu *)[self.viewController.viewControllers objectAtIndex:0] exit:nil];
+	//
+	
+	string nextSong = [song.songName UTF8String];
+	if (  !OFSAptr->isInTransition() && OFSAptr->isSongAvailiable(nextSong)) {
+		
+		OFSAptr->changeSoundSet(nextSong, true);
+	}
+	
+	[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] exit:nil];
 }
 
 
@@ -357,7 +373,7 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
-+ (void)unzipPrecache {
++ (BOOL)unzipPrecache {
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	
@@ -365,7 +381,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (!documentsDirectory) {
 		MilgromLog(@"Documents directory not found!");
-		return ;
+		return YES;
 	}
 	
 	
@@ -393,9 +409,88 @@ NSString * const kCacheFolder=@"URLCache";
 		 
 		 }
 		 */
-		
+		return YES;
 		
 	}
+	return NO;
+}
+
+- (void)addDemos {
+	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] download:YES];
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] download:NO];
+}
+
+-(void)addDemo:(NSArray *)theArray download:(BOOL)bDownload {
+	NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+	
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
+	[song setSongName:[theArray objectAtIndex:0]];
+	[song setBLocked:[NSNumber numberWithBool:NO]];
+	if (!bDownload) {
+		[song setBReady:[NSNumber numberWithBool:YES]];
+	}
+	
+	SoundSet *soundSet;
+	VideoSet *videoSet;
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
+	[soundSet setSetName:[theArray objectAtIndex:1]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:2]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
+	[soundSet setVideoSet:videoSet];
+	[song addSoundSetsObject:soundSet];
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
+	[soundSet setSetName:[theArray objectAtIndex:3]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:4]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
+	[soundSet setVideoSet:videoSet];
+	[song addSoundSetsObject:soundSet];
+	
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
+	[soundSet setSetName:[theArray objectAtIndex:5]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:6]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
+	[soundSet setVideoSet:videoSet];
+	[song addSoundSetsObject:soundSet];
+	
+	
+	
+	
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+		MilgromLog(@"%@",[error description]);
+	}
+	
+	//[songsArray addObject:song];
+	
+	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	
+	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
+	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+
+- (void)bringHelp {
+	
+	if (self.help == nil) {
+		self.help = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+		help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	}
+	
+	
+	[self.milgromViewController presentModalViewController:self.help animated:YES];
 }
 
 

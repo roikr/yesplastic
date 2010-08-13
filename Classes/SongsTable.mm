@@ -35,6 +35,8 @@
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	self.managedObjectContext = appDelegate.managedObjectContext;
 	
+	
+	
 	//songsArray = [[NSMutableArray alloc] init]; // TODO: temporal
 	
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -62,60 +64,10 @@
 	[request release];
 	
 		
-	
-	
-
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
--(void)addDemo {
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
-	[song setSongName:@"Heat"];
-	[song setBLocked:[NSNumber numberWithBool:NO]];
-	
-	SoundSet *soundSet;
-	VideoSet *videoSet;
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSetName:@"GTR_HEAT"];
-	[soundSet setFilename:@"GTR_HEAT.zip"];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
-	[videoSet setSetName:@"GTR_ELECTRO"];
-	[videoSet setFilename:@"GTR_ELECTRO.zip"];
-	[soundSet setVideoSet:videoSet];
-	[song addSoundSetsObject:soundSet];
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSetName:@"VOC_HEAT"];
-	[soundSet setFilename:@"VOC_HEAT.zip"];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
-	[videoSet setSetName:@"VOC_BB"];
-	[videoSet setFilename:@"VOC_BB.zip"];
-	[soundSet setVideoSet:videoSet];
-	[song addSoundSetsObject:soundSet];
-	
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSetName:@"DRM_HEAT"];
-	[soundSet setFilename:@"DRM_HEAT.zip"];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
-	[videoSet setSetName:@"DRM_ELECTRO"];
-	[videoSet setFilename:@"DRM_ELECTRO.zip"];
-	[soundSet setVideoSet:videoSet];
-	[song addSoundSetsObject:soundSet];
-	
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-		MilgromLog(@"%@",[error description]);
-	}
-	
-	[songsArray addObject:song];
-	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
 
 
 -(void)addSong {
@@ -293,8 +245,10 @@
 	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	//[appDelegate.viewController dismissMenu:self];
 	
+	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[appDelegate loadSong:nil];
+	
+	[appDelegate loadSong:song];
 }
 
 
