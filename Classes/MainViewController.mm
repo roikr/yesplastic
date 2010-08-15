@@ -15,6 +15,8 @@
 
 #import "MilgromInterfaceAppDelegate.h"
 #import "TouchView.h"
+#import "MilgromMacros.h"
+
 
 @implementation MainViewController
 
@@ -201,7 +203,7 @@
 		case SOLO_STATE: {
 			//topMenu.hidden = YES;
 			PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
-			[controller updateView];
+			
 			//[controller show];
 			[self.navigationController pushViewController:controller animated:YES];
 			//[self presentModalViewController:controller animated:YES];
@@ -363,6 +365,32 @@
 	//TODO: release player controllers
 	
     [super dealloc];
+}
+
+
+
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	MilgromLog(@"MainViewController::viewDidAppear");
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"MainViewController::viewWillAppear");
+}
+
+
+
+- (BOOL)canBecomeFirstResponder {
+	return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+	MilgromLog(@"shake ended");
+	OFSAptr->playRandomLoop();
 }
 
 

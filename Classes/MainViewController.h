@@ -13,7 +13,7 @@ class testApp;
 @class TouchView;
 
 
-@interface MainViewController : UIViewController {
+@interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
 	
 	

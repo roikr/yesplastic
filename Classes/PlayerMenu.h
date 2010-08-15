@@ -27,5 +27,4 @@
 - (void)exit:(id)sender;
 - (void)volumeChanged:(id)sender ;
 - (void)bpmChanged:(id)sender;
-- (void)updateView;
 @end

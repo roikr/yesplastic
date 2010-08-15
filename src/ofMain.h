@@ -107,3 +107,11 @@ float 		ofGetFrameRate();
 void 		ofSetFrameRate(int targetRate);
 
 vector<string>	ofSplitString(const string & text, const string & delimiter);
+
+void 		ofSeedRandom();
+void 		ofSeedRandom(int val);
+float 		ofRandom(float val0, float val1);		// random (x - y)
+float 		ofRandomf();							// random (-1 - 1)
+float 		ofRandomuf();							// random (0 - 1) 
+
+

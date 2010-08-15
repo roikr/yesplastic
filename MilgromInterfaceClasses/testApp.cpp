@@ -191,3 +191,6 @@ void testApp::willResignActive() {
 	;
 
 }
+
+void testApp::playRandomLoop() {
+}

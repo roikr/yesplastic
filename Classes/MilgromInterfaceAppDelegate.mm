@@ -67,7 +67,7 @@ NSString * const kCacheFolder=@"URLCache";
 	//[window addSubview:milgromViewController.view];
 	
     [window makeKeyAndVisible];
-	
+		
 	//[window bringSubviewToFront:viewController.view];
 	
 	
@@ -418,8 +418,8 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)addDemos {
 	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] download:YES];
-	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] download:YES];
+	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] download:YES];
 	
 	NSError *error;
 	if (![managedObjectContext_ save:&error]) {
@@ -494,6 +494,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self.milgromViewController presentModalViewController:self.help animated:YES];
 }
+
 
 
 @end

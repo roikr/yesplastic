@@ -235,6 +235,55 @@ vector<string> ofSplitString(const string& str, const string& delimiter = " "){
 
 
 
+//--------------------------------------------------
+void ofSeedRandom() {
+	
+	// good info here:
+	// http://stackoverflow.com/questions/322938/recommended-way-to-initialize-srand
+	
+#ifdef TARGET_WIN32
+	srand(GetTickCount());
+#else
+	// use XOR'd second, microsecond precision AND pid as seed
+	struct timeval tv;
+	gettimeofday(&tv, 0);
+	long int n = (tv.tv_sec ^ tv.tv_usec) ^ getpid();
+	srand(n);
+#endif
+}
+
+//--------------------------------------------------
+void ofSeedRandom(int val) {
+	srand((long) val);
+}
+
+//--------------------------------------------------
+float ofRandom(float x, float y) {
+	
+	float high = 0;
+	float low = 0;
+	float randNum = 0;
+	// if there is no range, return the value
+	if (x == y) return x; 			// float == ?, wise? epsilon?
+	high = MAX(x,y);
+	low = MIN(x,y);
+	randNum = low + ((high-low) * rand()/(RAND_MAX + 1.0));
+	return randNum;
+}
+
+//--------------------------------------------------
+float ofRandomf() {
+	float randNum = 0;
+	randNum = (rand()/(RAND_MAX + 1.0)) * 2.0 - 1.0;
+	return randNum;
+}
+
+//--------------------------------------------------
+float ofRandomuf() {
+	float randNum = 0;
+	randNum = rand()/(RAND_MAX + 1.0);
+	return randNum;
+}
 
 
 

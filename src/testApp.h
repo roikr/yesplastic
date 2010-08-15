@@ -79,6 +79,8 @@ public:
 	PlayerController player[3];
 	bool bMenu;
 	
+	void playRandomLoop();
+	
 private:
 	
 	string getPlayerName(int playerNum); // using to build SoundSet name from Song name

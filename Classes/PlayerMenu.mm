@@ -11,6 +11,7 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "testApp.h"
 #import "CustomSlider.h"
+#import "MilgromMacros.h"
 
 
 @implementation PlayerMenu
@@ -63,16 +64,20 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-}
-
-- (void)updateView {
-	
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	MilgromLog(@"PlayerMenu::viewDidAppear");
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
 	bpmSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM();
+
+   
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"PlayerMenu::viewWillAppear");
+}
+
 
 
 - (void)volumeChanged:(id)sender {

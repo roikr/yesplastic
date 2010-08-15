@@ -134,7 +134,7 @@ void testApp::setup(){
 
 	bpm = 120; // TODO: send bpm to players
 	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
-	 
+	ofSeedRandom();
 	
 }
 
@@ -213,6 +213,42 @@ void testApp::setMode(int player,int mode) {
 	//	return;
 	
 	this->player[player].setMode(mode);
+	
+}
+
+int getRandomLoop() {
+	return ofRandomuf() * 8;
+}
+
+void testApp::playRandomLoop() {
+	float x = ofRandomuf();
+	
+	if (x<0.5) {
+		setMode(0, LOOP_MODE);
+		setMode(1, LOOP_MODE);
+		setMode(2, LOOP_MODE);
+		player[0].play(getRandomLoop());
+		player[1].play(getRandomLoop());
+		player[2].play(getRandomLoop());
+	} else if (x<0.70) {
+		setMode(0, LOOP_MODE);
+		setMode(1, MANUAL_MODE);
+		setMode(2, LOOP_MODE);
+		player[0].play(getRandomLoop());
+		player[2].play(getRandomLoop());
+	} else if (x<0.85) {
+		setMode(0, LOOP_MODE);
+		setMode(1, LOOP_MODE);
+		setMode(2, MANUAL_MODE);
+		player[0].play(getRandomLoop());
+		player[1].play(getRandomLoop());
+	} else  {
+		setMode(0, MANUAL_MODE);
+		setMode(1, LOOP_MODE);
+		setMode(2, LOOP_MODE);
+		player[1].play(getRandomLoop());
+		player[2].play(getRandomLoop());
+	}
 	
 }
 

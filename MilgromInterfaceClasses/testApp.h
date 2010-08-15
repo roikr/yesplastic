@@ -52,7 +52,7 @@ public:
 	void didBecomeAcive();
 	void willResignActive();
 	
-	
+	void playRandomLoop();
 	
 	int lastFrame;
 	

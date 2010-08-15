@@ -17,20 +17,9 @@
 #import "MainViewController.h"
 #import "HelpViewController.h"
 #import "Constants.h"
+#import "MilgromMacros.h"
 
-// Uniform index.
-enum {
-    UNIFORM_TRANSLATE,
-    NUM_UNIFORMS
-};
-GLint uniforms[NUM_UNIFORMS];
 
-// Attribute index.
-enum {
-    ATTRIB_VERTEX,
-    ATTRIB_COLOR,
-    NUM_ATTRIBUTES
-};
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
@@ -140,6 +129,9 @@ enum {
     [self startAnimation];
     
     [super viewWillAppear:animated];
+	
+	MilgromLog(@"MilgromViewController::viewWillAppear");
+	[viewController viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -292,6 +284,13 @@ enum {
     
     // Release any cached data, images, etc. that aren't in use.
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	MilgromLog(@"MilgromViewController::viewDidAppear");
+	[viewController viewDidAppear:animated];
+}
+
 
 
 

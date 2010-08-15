@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "HelpViewController.h"
 #import "MilgromInterfaceAppDelegate.h"
+#import "MilgromMacros.h"
 
 
 @implementation BandMenu
@@ -126,5 +127,17 @@
 	}
 	
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	MilgromLog(@"BandView::viewDidAppear");
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"BandView::viewWillAppear");
+}
+
+
 
 @end
