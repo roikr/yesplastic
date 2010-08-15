@@ -58,6 +58,7 @@
 		E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0A12106B0D001CB593 /* QuartzCore.framework */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
+		E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4C8B40A1217E7E500C34620 /* SetsTable.mm */; };
 		E4C91C881201D8FC00279928 /* TRIGGER_B_PRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E4C91C871201D8FC00279928 /* TRIGGER_B_PRESS.png */; };
 		E4C91C8C1201DC9700279928 /* LoopButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C91C8B1201DC9700279928 /* LoopButton.xib */; };
 		E4C91C8E1201DCEF00279928 /* TriggerButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C91C8D1201DCEF00279928 /* TriggerButton.xib */; };
@@ -165,7 +166,6 @@
 		E4DF707F11FEA10C00EBD904 /* SetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DF707E11FEA10C00EBD904 /* SetCell.m */; };
 		E4DF708311FEA13300EBD904 /* PlayerMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4DF708111FEA13300EBD904 /* PlayerMenu.mm */; };
 		E4DF708611FEA1CF00EBD904 /* SetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF708511FEA1CF00EBD904 /* SetCell.xib */; };
-		E4DF714911FEB55A00EBD904 /* SetsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DF714711FEB55A00EBD904 /* SetsTable.m */; };
 		E4DF714D11FEB58400EBD904 /* PlayerMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */; };
 		E4DF714E11FEB58400EBD904 /* SetsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714C11FEB58400EBD904 /* SetsTable.xib */; };
 		E4F0DB27120861BE00D28745 /* Milgrom.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */; };
@@ -268,6 +268,7 @@
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D1AC11F82BFA00B57223 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
+		E4C8B40A1217E7E500C34620 /* SetsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetsTable.mm; sourceTree = "<group>"; };
 		E4C91C871201D8FC00279928 /* TRIGGER_B_PRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TRIGGER_B_PRESS.png; sourceTree = "<group>"; };
 		E4C91C8B1201DC9700279928 /* LoopButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoopButton.xib; path = Resource/LoopButton.xib; sourceTree = "<group>"; };
 		E4C91C8D1201DCEF00279928 /* TriggerButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TriggerButton.xib; path = Resource/TriggerButton.xib; sourceTree = "<group>"; };
@@ -388,7 +389,6 @@
 		E4DF708111FEA13300EBD904 /* PlayerMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMenu.mm; sourceTree = "<group>"; };
 		E4DF708511FEA1CF00EBD904 /* SetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetCell.xib; path = Resource/SetCell.xib; sourceTree = "<group>"; };
 		E4DF714611FEB55A00EBD904 /* SetsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetsTable.h; sourceTree = "<group>"; };
-		E4DF714711FEB55A00EBD904 /* SetsTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetsTable.m; sourceTree = "<group>"; };
 		E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlayerMenu.xib; path = Resource/PlayerMenu.xib; sourceTree = "<group>"; };
 		E4DF714C11FEB58400EBD904 /* SetsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetsTable.xib; path = Resource/SetsTable.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -432,7 +432,7 @@
 				E4DF708011FEA13300EBD904 /* PlayerMenu.h */,
 				E4DF708111FEA13300EBD904 /* PlayerMenu.mm */,
 				E4DF714611FEB55A00EBD904 /* SetsTable.h */,
-				E4DF714711FEB55A00EBD904 /* SetsTable.m */,
+				E4C8B40A1217E7E500C34620 /* SetsTable.mm */,
 				E4DF707D11FEA10C00EBD904 /* SetCell.h */,
 				E4DF707E11FEA10C00EBD904 /* SetCell.m */,
 				E4D4A1C811FD71D500C92628 /* CustomFontLabel.h */,
@@ -1066,7 +1066,6 @@
 				E4D4A27611FDA23700C92628 /* SongCell.mm in Sources */,
 				E4DF707F11FEA10C00EBD904 /* SetCell.m in Sources */,
 				E4DF708311FEA13300EBD904 /* PlayerMenu.mm in Sources */,
-				E4DF714911FEB55A00EBD904 /* SetsTable.m in Sources */,
 				E4DE508E1200237B00BF31AF /* HelpViewController.m in Sources */,
 				E4C91CA01201E79400279928 /* CustomSlider.m in Sources */,
 				E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */,
@@ -1110,6 +1109,7 @@
 				E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */,
 				E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */,
 				E48503FC1214BB3600D2271F /* TouchView.mm in Sources */,
+				E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

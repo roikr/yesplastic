@@ -29,7 +29,7 @@ class testApp;
 	testApp *OFSAptr;
 	
 	NSArray *playerControllers;
-	BOOL bMenuMode;
+	
 	
 	UIButton *triggerButton;
 	UIButton *loopButton;

@@ -420,53 +420,9 @@ NSString * const kCacheFolder=@"URLCache";
 	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] download:YES];
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] download:NO];
-}
-
--(void)addDemo:(NSArray *)theArray download:(BOOL)bDownload {
-	NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-	
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
-	[song setSongName:[theArray objectAtIndex:0]];
-	[song setBLocked:[NSNumber numberWithBool:NO]];
-	if (!bDownload) {
-		[song setBReady:[NSNumber numberWithBool:YES]];
-	}
-	
-	SoundSet *soundSet;
-	VideoSet *videoSet;
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSetName:[theArray objectAtIndex:1]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:2]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
-	[soundSet setVideoSet:videoSet];
-	[song addSoundSetsObject:soundSet];
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSetName:[theArray objectAtIndex:3]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:4]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
-	[soundSet setVideoSet:videoSet];
-	[song addSoundSetsObject:soundSet];
-	
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext];
-	[soundSet setSetName:[theArray objectAtIndex:5]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:6]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
-	[soundSet setVideoSet:videoSet];
-	[song addSoundSetsObject:soundSet];
-	
-	
-	
 	
 	NSError *error;
-	if (![managedObjectContext save:&error]) {
+	if (![managedObjectContext_ save:&error]) {
 		MilgromLog(@"%@",[error description]);
 	}
 	
@@ -479,6 +435,52 @@ NSString * const kCacheFolder=@"URLCache";
 	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
 	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+-(void)addDemo:(NSArray *)theArray download:(BOOL)bDownload {
+	
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext_];
+	[song setSongName:[theArray objectAtIndex:0]];
+	[song setBLocked:[NSNumber numberWithBool:NO]];
+	[song setBDemo:[NSNumber numberWithBool:YES]];
+	if (!bDownload) {
+		[song setBReady:[NSNumber numberWithBool:YES]];
+	}
+	
+	SoundSet *soundSet;
+	VideoSet *videoSet;
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext_];
+	[soundSet setSetName:[theArray objectAtIndex:1]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext_];
+	[videoSet setSetName:[theArray objectAtIndex:2]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
+	[soundSet setVideoSet:videoSet];
+	[song addSoundSetsObject:soundSet];
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext_];
+	[soundSet setSetName:[theArray objectAtIndex:3]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext_];
+	[videoSet setSetName:[theArray objectAtIndex:4]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
+	[soundSet setVideoSet:videoSet];
+	[song addSoundSetsObject:soundSet];
+	
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext_];
+	[soundSet setSetName:[theArray objectAtIndex:5]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext_];
+	[videoSet setSetName:[theArray objectAtIndex:6]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
+	[soundSet setVideoSet:videoSet];
+	[song addSoundSetsObject:soundSet];
+	
+	
+	
+	
+	
 }
 
 

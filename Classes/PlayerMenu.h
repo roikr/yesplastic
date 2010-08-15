@@ -9,14 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @class SetsTable;
+@class CustomSlider;
 
 @interface PlayerMenu : UIViewController {
 	SetsTable *setsTable;
 	UIView *setsView;
+	
+	CustomSlider *volumeSlider;
+	CustomSlider *bpmSlider;
 }
 
 @property (nonatomic,retain) SetsTable *setsTable;
 @property (nonatomic,retain) IBOutlet UIView *setsView;
+@property (nonatomic,retain ) IBOutlet CustomSlider *volumeSlider;
+@property (nonatomic,retain) IBOutlet CustomSlider *bpmSlider;
 
 - (void)exit:(id)sender;
+- (void)volumeChanged:(id)sender ;
+- (void)bpmChanged:(id)sender;
+- (void)updateView;
 @end

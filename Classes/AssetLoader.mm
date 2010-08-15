@@ -28,6 +28,7 @@
 - (void) clearCache;
 */
 - (void)unzipAsset;
+- (void) unzipAssetDidFinish;
 @end
 
 @implementation AssetLoader
@@ -63,9 +64,20 @@
 		//[self initUI];
 		//[self buttonsEnabled:NO];
 		//[self startAnimation];
-		NSURL *theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,set.filename]];
-		MilgromLog(@"AssetLoader::initWithURL:%@, dataPath:%@",[theURL absoluteString],dataPath);
-		[[URLCacheConnection alloc] initWithURL:theURL delegate:self];
+		
+		MilgromLog(@"AssetLoader::initWithURL, dataPath:%@",dataPath);
+		
+		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+			
+			NSURL *theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,set.filename]];
+			MilgromLog(@"Downloading Asset from: %@",[theURL absoluteString]);
+			[[URLCacheConnection alloc] initWithURL:theURL delegate:self];
+		} else {
+			MilgromLog(@"Asset allready Downloaded");
+			[self performSelectorInBackground:@selector(unzipAsset) withObject:nil];
+			
+		}
+
 		
 		
 		
@@ -93,7 +105,8 @@
 	MilgromLog(@"AssetLoader::connectionDidFinish");
 	[[NSFileManager defaultManager] createFileAtPath:filePath contents:theConnection.receivedData  attributes:nil];
 	MilgromLog(@"zip file written");
-	[self unzipAsset];
+	[self performSelectorInBackground:@selector(unzipAsset) withObject:nil];
+	
 	
 	
 }
@@ -110,6 +123,9 @@
 }
 
 - (void)unzipAsset {
+	
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	
 	MilgromLog(@"unzipping started");
 	ZipArchive *zip = [[ZipArchive alloc] init];
 	[zip UnzipOpenFile:filePath];
@@ -125,9 +141,13 @@
 	//[unzippedAssets addObject:asset.identifier];
 	//[self archive];
 	MilgromLog(@"unzipping finished");
-	[self.delegate loaderDidFinish:self];
-
+	[self performSelectorOnMainThread:@selector(unzipAssetDidFinish) withObject:nil waitUntilDone:NO];
+	[pool release];
 	
+}
+
+- (void)unzipAssetDidFinish {
+	[self.delegate loaderDidFinish:self];
 }
 
 

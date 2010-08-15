@@ -11,8 +11,10 @@
 @class SetCell;
 @interface SetsTable : UITableViewController {
 	SetCell *tmpCell;
+	
+	NSArray *songsArray;
 }
 
 @property (nonatomic,assign) IBOutlet SetCell *tmpCell;
-
+@property (nonatomic,retain) NSArray *songsArray;
 @end

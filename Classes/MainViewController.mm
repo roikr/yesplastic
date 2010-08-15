@@ -96,7 +96,7 @@
 	 */
 	 
 	
-	bMenuMode = NO;
+	
 	for (int i=0; i<8; i++) {
 		[[NSBundle mainBundle] loadNibNamed:@"LoopButton" owner:self options:nil];
 		UIButton *button = loopButton;
@@ -195,12 +195,13 @@
 
 
 - (void) bringMenu:(id)sender {
+	 
 	
-	bMenuMode = YES;
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE: {
 			//topMenu.hidden = YES;
 			PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
+			[controller updateView];
 			//[controller show];
 			[self.navigationController pushViewController:controller animated:YES];
 			//[self presentModalViewController:controller animated:YES];

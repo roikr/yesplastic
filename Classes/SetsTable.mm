@@ -8,25 +8,64 @@
 
 #import "SetsTable.h"
 #import "SetCell.h"
-
+#import "MilgromInterfaceAppDelegate.h"
+#import "MilgromViewController.h"
+#import "PlayerMenu.h"
+#import "Song.h"
+#import "testApp.h"
 
 
 @implementation SetsTable
 
 @synthesize tmpCell;
+@synthesize songsArray;
 
 
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.managedObjectContext;
+	
+	
+	
+	//songsArray = [[NSMutableArray alloc] init]; // TODO: temporal
+	
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:appDelegate.managedObjectContext];
+	[request setEntity:entity];
+	
+	
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
+								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:YES],
+								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO]
+								,nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bDemo == YES"]; //  AND bReady == YES AND bLocked == NO
+    [request setPredicate:predicate];
+	
+	
+	
+	NSError *error;
+	
+	NSArray *fetchResults = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
+	
+	if (fetchResults == nil) {
+	}
+	
+	[self setSongsArray:fetchResults];
+	[request release];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
+
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,7 +107,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 4;
+    return [songsArray count];
 }
 
 
@@ -84,9 +123,9 @@
         self.tmpCell = nil;
 		
     }
-	
+	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	// Configure the cell...
-	[cell configureCell:[indexPath row] withLabel:@"Hello Blank"];
+	[cell configureCell:[indexPath row] withLabel:song.songName];
 	
     
     return (UITableViewCell*) cell;
@@ -145,6 +184,28 @@
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
 	 */
+	
+	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+	
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->bMenu=false;
+	
+	
+	
+
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	if ([song.bReady boolValue]  && ![song.bLocked boolValue]) {
+		
+		string nextSong = [song.songName UTF8String];
+		if (  !appDelegate.OFSAptr->isInTransition() && appDelegate.OFSAptr->isSongAvailiable(nextSong)) {
+			appDelegate.OFSAptr->changeSoundSet(nextSong,false);
+		}
+	}
+	
+	
+	
+	[(PlayerMenu *)[appDelegate.milgromViewController.viewController.viewControllers objectAtIndex:2] exit:nil];
+	
 }
 
 
@@ -165,6 +226,7 @@
 
 
 - (void)dealloc {
+	[songsArray release];
     [super dealloc];
 }
 

@@ -11,7 +11,13 @@ class testApp   {
 	
 public:
 	void setup();
+	void update();
+	void draw();
 	void exit();
+	
+	void buttonPressed(int button);
+	void nextLoop(int player);
+	void prevLoop(int player);
 	
 	void setMode(int player,int mode);
 	int getMode(int player);
@@ -39,12 +45,14 @@ public:
 	void saveSong(string songName);
 	
 	bool isInTransition();
-	bool isSoundSetAvailiable(string soundSet);
+	bool isSongAvailiable(string song,int playerNum=0);
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
 	
 	
 	void didBecomeAcive();
 	void willResignActive();
+	
+	
 	
 	int lastFrame;
 	

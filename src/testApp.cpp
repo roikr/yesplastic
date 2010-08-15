@@ -297,12 +297,20 @@ void testApp::update(){
 		bChangeSet = false;
 		if (bChangeAll) {
 			for (int i=0; i<3; i++) {
-				player[i].setMode(MANUAL_MODE);
-				player[i].changeSet(getPlayerName(i)+"_"+nextSoundSet,true);
+				string str = getPlayerName(i)+"_"+nextSoundSet;
+				if (player[i].getCurrentSoundSet()!=str) {
+					player[i].setMode(MANUAL_MODE);
+					player[i].changeSet(str,true);
+				}
+				
 			}
 		} else {
-			player[controller].setMode(MANUAL_MODE);
-			player[controller].changeSet(getPlayerName(controller)+"_"+nextSoundSet);
+			string str = getPlayerName(controller)+"_"+nextSoundSet;
+			if (player[controller].getCurrentSoundSet()!=str) {
+				player[controller].setMode(MANUAL_MODE);
+				player[controller].changeSet(str);
+			}
+			
 		}
 	}
 	 

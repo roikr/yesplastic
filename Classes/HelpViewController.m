@@ -19,7 +19,7 @@
 		UIScrollView *tempScrollView=(UIScrollView *)self.view;
 		tempScrollView.contentSize=CGSizeMake(480,1180);
     }
-    return self;
+    return self; 
 }
 
 

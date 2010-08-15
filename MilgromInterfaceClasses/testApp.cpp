@@ -15,10 +15,22 @@ void testApp::setup(){
 	
 }
 
-bool testApp::isSoundSetAvailiable(string soundSet) {
+bool testApp::isSongAvailiable(string song,int playerNum) {
+//	vector<string> soundSets = ofListFolders(ofToDataPath("SOUNDS"));
+//	for (vector<string>::iterator iter = soundSets.begin(); iter!=soundSets.end(); iter++) {
+//		if (*iter == getPlayerName(playerNum)+"_"+song) {
+//			return true;
+//		}
+//	}
 	return true;
 }
 
+
+void testApp::draw(){
+}
+
+void testApp::update(){
+}
 
 
 
@@ -54,6 +66,20 @@ void testApp::exit() {
 }
 
 
+void testApp::buttonPressed(int button) {
+	
+//	if (player[controller].isEnabled() && !player[controller].isInTransition()) {					
+//		if ( player[controller].getMode() == MANUAL_MODE ) {
+//			player[controller].play(button);	
+//		}
+//		
+//		if ( player[controller].getMode() == LOOP_MODE ) {
+//			player[controller].changeLoop(button);		
+//		}			
+//	}
+	
+}
+
 
 
 //--------------------------------------------------------------
@@ -85,6 +111,14 @@ void testApp::touchUp(float x, float y, int touchId) {
 	
 		
 	
+}
+
+void testApp::nextLoop(int player) {
+	//this->player[player].changeLoop((this->player[player].getCurrentLoop()+1)%8);
+}
+
+void testApp::prevLoop(int player) {
+	//this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
 }
 
 	

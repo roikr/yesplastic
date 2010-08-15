@@ -8,12 +8,17 @@
 
 #import "PlayerMenu.h"
 #import "SetsTable.h"
+#import "MilgromInterfaceAppDelegate.h"
+#import "testApp.h"
+#import "CustomSlider.h"
 
 
 @implementation PlayerMenu
 
 @synthesize setsTable;
 @synthesize setsView;
+@synthesize volumeSlider;
+@synthesize bpmSlider;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -58,7 +63,31 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+}
+
+- (void)updateView {
+	
+	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
+	bpmSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM();
+}
+
+
+- (void)volumeChanged:(id)sender {
+	
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setVolume(volumeSlider.value);
+	
+}
+
+- (void) bpmChanged:(id)sender {
+	
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setBPM(bpmSlider.value);
+}
+
 - (void)exit:(id)sender {
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->bMenu=false;
 	[self.navigationController popViewControllerAnimated:YES];
 	
 }

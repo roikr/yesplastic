@@ -115,18 +115,26 @@
 		MilgromLog(@"Song: %@",[song songName]);
 		NSArray *soundSets = [song.soundSets allObjects];
 		while (currentSet/2 < [soundSets count] )  {
-		
+			MilgromLog(@"currentSet: %i",currentSet);
 			SoundSet *soundSet = [soundSets objectAtIndex:currentSet/2];
 			if (![soundSet.bReady boolValue]) {
-				MilgromLog(@"%i: SoundSet: %@ is not ready",currentSet/2,[soundSet setName]);
+				MilgromLog(@"%i: SoundSet: %@ is not ready",currentSet,[soundSet setName]);
+				frame.size.width = (float)currentSet * 270/6;
+				self.frame = frame;
 				[[AssetLoader alloc] initWithSet:soundSet delegate:self];
+				
 				return; 
 			} else {
 				currentSet++;
 				VideoSet *videoSet = [soundSet videoSet];
 				if (![videoSet.bReady boolValue]) {
-					MilgromLog(@"%i: VideoSet: %@ is not ready",currentSet/2,[videoSet setName]);
+					
+					MilgromLog(@"%i: VideoSet: %@ is not ready",currentSet,[videoSet setName]);
+					frame.size.width = (float)currentSet * 270/6;
+					self.frame = frame;
+
 					[[AssetLoader alloc] initWithSet:videoSet delegate:self];
+					
 					return;
 				} else {
 					currentSet++;
