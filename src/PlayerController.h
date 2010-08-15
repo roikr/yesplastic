@@ -36,6 +36,7 @@ public:
 	
 	void threadedFunction();
 	
+	void setPush(bool bPush);
 	void setState(int state);
 	float getScale();
 	bool isInTransition();

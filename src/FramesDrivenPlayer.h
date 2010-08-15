@@ -11,6 +11,7 @@
 #include "TexturesPlayer.h"
 #include "ofxFramesDriver.h"
 #include "ofxOnePointTracks.h"
+#include "ofxRKTexture.h"
 
 
 class FramesDrivenPlayer : public TexturesPlayer{
@@ -25,6 +26,7 @@ public:
 	void exit();
 	
 	void play(int i);
+	void setPush(bool bPush);
 	void setState(int state);
 	void setFont(ofTrueTypeFont * font);
 	
@@ -88,6 +90,11 @@ private:
 	//string subSoundSet;
 	vector<int>sequences; // for samples
 	vector<int>specSeqs;
+	
+	bool bPush;
+	int pushWidth;
+	int pushHeight;
+	ofxRKTexture pushTexture;
 	
 };
 

@@ -439,39 +439,39 @@ NSString * const kCacheFolder=@"URLCache";
 
 -(void)addDemo:(NSArray *)theArray download:(BOOL)bDownload {
 	
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext_];
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
 	[song setSongName:[theArray objectAtIndex:0]];
 	[song setBLocked:[NSNumber numberWithBool:NO]];
 	[song setBDemo:[NSNumber numberWithBool:YES]];
 	if (!bDownload) {
-		[song setBReady:[NSNumber numberWithBool:YES]];
+		[song setBReady:[NSNumber numberWithBool:YES]];  
 	}
 	
 	SoundSet *soundSet;
 	VideoSet *videoSet;
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext_];
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
 	[soundSet setSetName:[theArray objectAtIndex:1]];
 	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext_];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
 	[videoSet setSetName:[theArray objectAtIndex:2]];
 	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
 	[soundSet setVideoSet:videoSet];
 	[song addSoundSetsObject:soundSet];
 	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext_];
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
 	[soundSet setSetName:[theArray objectAtIndex:3]];
 	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext_];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
 	[videoSet setSetName:[theArray objectAtIndex:4]];
 	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
 	[soundSet setVideoSet:videoSet];
 	[song addSoundSetsObject:soundSet];
 	
 	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:managedObjectContext_];
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
 	[soundSet setSetName:[theArray objectAtIndex:5]];
 	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:managedObjectContext_];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
 	[videoSet setSetName:[theArray objectAtIndex:6]];
 	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
 	[soundSet setVideoSet:videoSet];

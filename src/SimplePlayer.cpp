@@ -52,12 +52,15 @@ void SimplePlayer::setup(string setName) {
 	solo_y = xml.getValue("solo:y",0);
 	solo_scale = xml.getValue("solo:scale",0.0);
 	
-	
-	
 		
 	string path = "VIDEOS/" + xml.getAttribute("actor","path","",0);
 	xml.pushTag("actor");
 	ofLog(OF_LOG_VERBOSE,"setup: %s",path.c_str());
+	ofLog(OF_LOG_VERBOSE,"push: %s",path.c_str());
+	pushWidth = xml.getAttribute("sequence", "width", 0);
+	pushHeight = xml.getAttribute("sequence", "height", 0);
+	pushTexture.setup(ofToDataPath("VIDEOS/"+setName+"/"+setName+"_PUSH.pvr"),pushWidth,pushHeight);
+	bPush = false;
 	actor.setup(&xml, path);
 	xml.popTag();
 	
@@ -95,6 +98,8 @@ void SimplePlayer::prepareOut() {
 		actor.unload(i);
 	ofLog(OF_LOG_VERBOSE,"%s: loading out actor",setName.c_str());
 	actor.load(SEQUENCE_OUT);
+	
+	pushTexture.unload();
 
 }
 
@@ -106,6 +111,8 @@ void SimplePlayer::initIn() {
 	actor.init(SEQUENCE_IDLE);
 	ofLog(OF_LOG_VERBOSE,"%s: initializing in actor",setName.c_str());
 	actor.init(SEQUENCE_IN);
+	
+	
 }
 
 void SimplePlayer::prepareIn() {
@@ -116,6 +123,8 @@ void SimplePlayer::prepareIn() {
 	actor.load(SEQUENCE_IDLE);
 	ofLog(OF_LOG_VERBOSE,"%s: loading in actor",setName.c_str());
 	actor.load(SEQUENCE_IN);
+	
+	
 	
 }
 
@@ -141,6 +150,8 @@ void SimplePlayer::initSet() {
 	ofLog(OF_LOG_VERBOSE,"%s: initializing out actor",setName.c_str());
 	actor.init(SEQUENCE_OUT);
 	
+	pushTexture.init();
+	
 }
 
 void SimplePlayer::prepareSet() {
@@ -153,6 +164,8 @@ void SimplePlayer::prepareSet() {
 	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
 		actor.load(i);
 	
+	pushTexture.load();
+	
 }
 
 void SimplePlayer::releaseSet() {
@@ -162,6 +175,8 @@ void SimplePlayer::releaseSet() {
 	
 	for (int i=SEQUENCE_IDLE; i<=SEQUENCE_OUT; i++) 
 		actor.release(i);
+	
+	pushTexture.release();
 	
 }
 
@@ -218,6 +233,7 @@ void SimplePlayer::draw(){
 	
 	
 	
+	
 	switch (actor.getCurrentSequence()) {
 		case SEQUENCE_IN:
 		case SEQUENCE_OUT:
@@ -228,9 +244,20 @@ void SimplePlayer::draw(){
 			break;
 	}
 	
+	if (bPush) {
+		pushTexture.draw(x,y,0,0,pushWidth,pushHeight,1.0f);
+		
+	}
+	
+	
+	
+	
 	//font->drawString(debugStr,x,y);
 }
 
+void SimplePlayer::setPush(bool bPush) {
+	this->bPush = bPush;
+}
 
 void SimplePlayer::setState(int state) {
 	this->state = state;

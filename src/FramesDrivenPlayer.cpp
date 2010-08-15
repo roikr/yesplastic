@@ -53,7 +53,13 @@ void FramesDrivenPlayer::setup(string setName) {
 	solo_y = xml.getValue("solo:y",0);
 	solo_scale = xml.getValue("solo:scale",0.0);
 	
+	xml.pushTag("actor", 0);
+	pushWidth = xml.getAttribute("sequence", "width", 0);
+	pushHeight = xml.getAttribute("sequence", "height", 0);
+	pushTexture.setup(ofToDataPath("VIDEOS/"+setName+"/"+setName+"_PUSH.pvr"),pushWidth,pushHeight);
+	bPush = false;
 	
+	xml.popTag();
 	
 		
 	
@@ -133,7 +139,9 @@ void FramesDrivenPlayer::prepareOut() {
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
 		lipsActor.unload(i);
 	
-
+	pushTexture.unload();
+	
+	
 }
 
 void FramesDrivenPlayer::initIn() {
@@ -183,6 +191,8 @@ void FramesDrivenPlayer::initSet() {
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
 		lipsActor.init(i);
 	
+	pushTexture.init();
+	
 }
 
 void FramesDrivenPlayer::prepareSet() {
@@ -199,6 +209,8 @@ void FramesDrivenPlayer::prepareSet() {
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
 		lipsActor.load(i);
 	
+	pushTexture.load();
+	
 }
 
 void FramesDrivenPlayer::releaseSet() {
@@ -213,6 +225,8 @@ void FramesDrivenPlayer::releaseSet() {
 	ofLog(OF_LOG_VERBOSE,"%s: releasing lips actor",setName.c_str());
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
 		lipsActor.release(i);
+	
+	pushTexture.release();
 	
 }
 
@@ -410,10 +424,16 @@ void FramesDrivenPlayer::draw(){
 			lipsActor.draw(x+lx,y+ly);
 	}
 
-	
+	if (bPush) {
+		pushTexture.draw(x,y,0,0,pushWidth,pushHeight,1.0f);
+		
+	}
 	//font->drawString(debugStr,x,y);
 }
 
+void FramesDrivenPlayer::setPush(bool bPush) {
+	this->bPush = bPush;
+}
 
 void FramesDrivenPlayer::setState(int state) {
 	this->state = state;

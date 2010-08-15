@@ -9,6 +9,7 @@
 
 #include "ofxRKActor.h"
 #include "TexturesPlayer.h"
+#include "ofxRKTexture.h"
 
 
 class SimplePlayer : public TexturesPlayer {
@@ -22,6 +23,7 @@ public:
 	void exit();
 	
 	void play(int i);
+	void setPush(bool bPush);
 	void setState(int state);
 	void setFont(ofTrueTypeFont * font);
 	
@@ -69,6 +71,10 @@ private:
 	
 	string debugStr;
 	
+	bool bPush;
+	int pushWidth;
+	int pushHeight;
+	ofxRKTexture pushTexture;
 	
 };
 

@@ -61,6 +61,7 @@ class testApp;
 - (void) save:(id)sender;
 - (void) trigger:(id)sender;
 - (void) loop:(id)sender;
+- (void)updateLoops:(id)sender;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
 - (void) show;

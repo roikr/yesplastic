@@ -13,6 +13,7 @@ public:
 	virtual void exit() = 0;
 	
 	virtual void play(int i) = 0;
+	virtual void setPush(bool bPush) = 0;
 	virtual void setState(int state) = 0;
 	
 	virtual void initIn() = 0;

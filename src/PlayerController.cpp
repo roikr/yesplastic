@@ -366,6 +366,15 @@ void PlayerController::draw() {
 	getTexturesPlayer()->draw();
 }
 
+
+void PlayerController::setPush(bool bPush) {
+
+	if (!enable) 
+		return;
+	getTexturesPlayer()->setPush(bPush);
+}
+
+
 void PlayerController::setState(int state){
 	if (!enable) 
 		return;

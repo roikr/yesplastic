@@ -15,11 +15,16 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 480
 
-#define SOLO_STATE 0
-#define BAND_STATE 1
+enum {
+	SOLO_STATE,
+	BAND_STATE,
+};
 
-#define MANUAL_MODE 0
-#define LOOP_MODE 1
+
+enum {
+	MANUAL_MODE,
+	LOOP_MODE
+};
 
 enum {
 	SONG_IDLE,

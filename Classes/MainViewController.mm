@@ -325,7 +325,12 @@
 }
 
 - (void) loop:(id)sender {
-	UIButton *button = (UIButton*)sender;
+	UIButton *button;
+	for (int i=0; i<[loopsView.subviews count]; i++) {
+		button = (UIButton*)[loopsView.subviews objectAtIndex:i];
+		button.selected = NO;
+	}
+	button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
 //	if (button.tag == 7) {
@@ -333,6 +338,12 @@
 //		loopsView.hidden = YES;
 //	}
 	
+}
+
+- (void)updateLoops:(id)sender {
+	UIButton *button = (UIButton*)sender;
+	
+	button.selected = YES;
 }
 
 - (void) nextLoop:(id)sender {

@@ -614,19 +614,23 @@ void testApp::touchDown(float x, float y, int touchId) {
 	
 	if (state==BAND_STATE) {
 		controller = (int)x/160;
-		nextLoopNum = player[controller].getCurrentLoop();
+		//nextLoopNum = player[controller].getCurrentLoop();
 	}
 	
 	
-	
+	/*
 	if (state==SOLO_STATE && y>=360) {
 		button = 4*(((int)y-360)/60)+(int)x/80;
 		
 		buttonPressed(button);
 		bButtonDown = true; // for view 
-	} else {
-		
-		
+	} */
+	
+	player[controller].setPush(true);
+	
+	
+	if (state==SOLO_STATE) {
+	
 		measure m;
 		m.x = x;
 		m.y = y;
@@ -656,6 +660,7 @@ void testApp::touchMoved(float x, float y, int touchId) {
 
 	measures.push_back(m);
 	
+	/*
 	switch (state) {
 		case SOLO_STATE: 
 			
@@ -666,6 +671,7 @@ void testApp::touchMoved(float x, float y, int touchId) {
 			
 			break;
 	}
+	 */
 }
 
 
@@ -673,11 +679,13 @@ void testApp::touchUp(float x, float y, int touchId) {
 	//printf("touchUp: %.f, %.f %i\n", x, y, touchId);
 	
 	if (touchId!=0 || bMenu) {
-		if (!measures.empty()) {
+		if (!measures.empty()) { 
 			measures.clear();
 		}
 		return;
 	}
+	
+	player[controller].setPush(false);
 	
 	switch (state) {
 		case SOLO_STATE: {
@@ -729,13 +737,14 @@ void testApp::touchUp(float x, float y, int touchId) {
 		} break;
 			
 			
-			
+		/*
 		case BAND_STATE: 
 			
 			if (player[controller].getCurrentLoop() != nextLoopNum ) 
 				player[controller].changeLoop(nextLoopNum);
 			
 			break;
+		 */
 	}
 	
 	if (measures.size()<=1 && !bButtonDown) {
@@ -749,11 +758,26 @@ void testApp::touchUp(float x, float y, int touchId) {
 }
 
 void testApp::nextLoop(int player) {
-	this->player[player].changeLoop((this->player[player].getCurrentLoop()+1)%8);
+	switch (this->player[player].getMode()) {
+		case MANUAL_MODE:
+			setMode(player, LOOP_MODE);
+			break;
+		default:
+			this->player[player].changeLoop((this->player[player].getCurrentLoop()+1)%8);
+			break;
+	}
 }
 
 void testApp::prevLoop(int player) {
-	this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
+	switch (this->player[player].getMode()) {
+		case MANUAL_MODE:
+			setMode(player, LOOP_MODE);
+			break;
+		default:
+			this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
+			break;
+	}
+	
 }
 
 	
