@@ -11,9 +11,10 @@
 class testApp;
 @class EAGLView;
 @class TouchView;
+@class SongViewController;
+@class CustomFontTextField;
 
-
-@interface MainViewController : UIViewController<UINavigationControllerDelegate> {
+@interface MainViewController : UIViewController<UINavigationControllerDelegate,UITextFieldDelegate> {
 
 	
 	
@@ -35,8 +36,9 @@ class testApp;
 	UIButton *loopButton;
 	
 	
-	
+	CustomFontTextField	*songName;
 }
+
 
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
@@ -54,6 +56,8 @@ class testApp;
 
 @property (nonatomic, retain) NSArray *playerControllers;
 
+@property (nonatomic,retain) IBOutlet CustomFontTextField *songName;
+
 - (void) bringMenu:(id)sender;
 - (void) checkState:(id)sender;
 - (void) play:(id)sender;
@@ -64,8 +68,7 @@ class testApp;
 - (void)updateLoops:(id)sender;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
-- (void) show;
-- (void) hide;
+- (void) updateViews;
 
 //- (void) updateTables;
 

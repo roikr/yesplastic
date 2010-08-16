@@ -16,6 +16,9 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "TouchView.h"
 #import "MilgromMacros.h"
+#import "CustomFontTextField.h"
+
+//#import "SongViewController.h"
 
 
 @implementation MainViewController
@@ -34,7 +37,7 @@
 @synthesize triggerButton;
 @synthesize loopButton;
 
-
+@synthesize songName;
 
 
 /*
@@ -139,30 +142,43 @@
 	return YES;	
 }
 
-
-
-
-- (void)hide {
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	switch (toInterfaceOrientation) {
+		case UIInterfaceOrientationPortrait:
+		case UIInterfaceOrientationPortraitUpsideDown:
+			
+			OFSAptr->setState(SOLO_STATE);
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+		case UIInterfaceOrientationLandscapeLeft:
+			OFSAptr->setState(BAND_STATE);
+			break;
+		default:
+			break;
+	}
+	
 	triggersView.hidden = YES;
 	loopsView.hidden = YES;
 	bandLoopsView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
+	
 }
 
-
-
-- (void)show {
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE:
 			setMenuButton.hidden = NO;
 			switch (OFSAptr->getMode(0)) {
 				case LOOP_MODE:
 					loopsView.hidden = NO;
-					triggersView.hidden = YES;
 					break;
 				case MANUAL_MODE:
-					loopsView.hidden = YES;
 					triggersView.hidden = NO;
 					break;
 				default:
@@ -176,6 +192,30 @@
 		default:
 			break;
 	}
+}
+
+
+
+- (void)updateViews {
+	switch (OFSAptr->getMode(0)) {
+		case LOOP_MODE:
+			loopsView.hidden = NO;
+			triggersView.hidden = YES;
+			break;
+		case MANUAL_MODE:
+			loopsView.hidden = YES;
+			triggersView.hidden = NO;
+			break;
+		default:
+			break;
+	}
+	
+}
+
+
+
+- (void)show {
+	
 }
 
 
@@ -264,8 +304,28 @@
 }
 
 - (void) save:(id)sender {
-	OFSAptr->saveSong("hello");
+	
+	songName.hidden = NO;
+	[songName becomeFirstResponder];
+//	if (self.songViewController == nil) {
+//		self.songViewController = [[SongViewController alloc] initWithNibName:@"SongViewController" bundle:nil];
+//		songViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//	}
+//	
+//	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+//	[appDelegate.milgromViewController presentModalViewController:self.songViewController animated:YES];
+	
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	songName.hidden = YES;
+
+	OFSAptr->saveSong([songName.text UTF8String]);
+	return NO;
+}
+
+
 
 
 - (void) checkState:(id)sender {
@@ -358,6 +418,8 @@
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->prevLoop(button.tag);
 }
+
+
 
 
 

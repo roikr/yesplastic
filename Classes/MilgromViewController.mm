@@ -80,34 +80,19 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	//[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	if ([self.viewController.visibleViewController isKindOfClass:[MainViewController self]]) {
-		
-		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-		
-		switch (toInterfaceOrientation) {
-			case UIInterfaceOrientationPortrait:
-			case UIInterfaceOrientationPortraitUpsideDown:
-				
-				appDelegate.OFSAptr->setState(SOLO_STATE);
-				break;
-			case UIInterfaceOrientationLandscapeRight:
-			case UIInterfaceOrientationLandscapeLeft:
-				appDelegate.OFSAptr->setState(BAND_STATE);
-				break;
-			default:
-				break;
-		}
-		[(MainViewController*)self.viewController.visibleViewController hide];
-	}
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[self.viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	if ([self.viewController.visibleViewController isKindOfClass:[MainViewController self]]) {
-		[(MainViewController*)self.viewController.visibleViewController show];
-	}
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[self.viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+														  
+	
+	
 }
 
 

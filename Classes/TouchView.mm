@@ -116,7 +116,7 @@
 		appDelegate.OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);
 		
 		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
-			[viewController show];
+			[viewController updateViews];
 		}
 	}
 }
