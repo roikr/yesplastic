@@ -8,6 +8,7 @@
 
 #import "MilgromInterfaceAppDelegate.h"
 #import "BandMenu.h"
+#import "SongsTable.h"
 #import "MilgromViewController.h"
 #import "URLCacheAlert.h"
 #import "MilgromMacros.h"
@@ -17,7 +18,6 @@
 #include "Song.h"
 #include "VideoSet.h"
 #include "SoundSet.h"
-#include "HelpViewController.h"
 
 
 NSString * const kMilgromURL=@"roikr.com";
@@ -47,7 +47,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize window;
 @synthesize milgromViewController;
 @synthesize OFSAptr;
-@synthesize help;
+
 
 
 
@@ -415,6 +415,58 @@ NSString * const kCacheFolder=@"URLCache";
 	return NO;
 }
 
+-(void)addSong:(NSString *)songName {
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+	[song setSongName:songName];
+	
+	[song setBReady:[NSNumber numberWithBool:YES]];
+	
+	
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+	
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
+								[[NSSortDescriptor alloc] initWithKey:@"playerNum" ascending:YES],
+									nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
+	
+	
+		
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"setName like %@ || setName like %@ || setName like %@",
+							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(0).c_str() encoding:NSASCIIStringEncoding],
+							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(1).c_str() encoding:NSASCIIStringEncoding],
+							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(2).c_str() encoding:NSASCIIStringEncoding]];
+    
+	
+	[request setPredicate:predicate];
+	
+	
+	
+	NSError *error;
+	
+	NSArray *fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
+	
+	if (fetchResults == nil) {
+	}
+	
+	[song setSoundSets:[NSSet setWithArray:fetchResults]];
+	[request release];
+	
+	
+	
+	if (![self.managedObjectContext save:&error]) {
+		MilgromLog(@"MilgromInterfaceAppDelegate:addSong error: %@",[error description]);
+	}
+	
+	BandMenu *bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0];
+	
+	[bandMenu.songsTable addSong:song];
+	
+	
+}
+
 - (void)addDemos {
 	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] download:YES];
@@ -456,6 +508,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[videoSet setSetName:[theArray objectAtIndex:2]];
 	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
 	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:0]];
 	[song addSoundSetsObject:soundSet];
 	
 	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
@@ -465,6 +518,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[videoSet setSetName:[theArray objectAtIndex:4]];
 	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
 	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:1]];
 	[song addSoundSetsObject:soundSet];
 	
 	
@@ -475,25 +529,13 @@ NSString * const kCacheFolder=@"URLCache";
 	[videoSet setSetName:[theArray objectAtIndex:6]];
 	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
 	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:2]];
 	[song addSoundSetsObject:soundSet];
 	
-	
-	
-	
-	
 }
 
 
-- (void)bringHelp {
-	
-	if (self.help == nil) {
-		self.help = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
-		help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	}
-	
-	
-	[self.milgromViewController presentModalViewController:self.help animated:YES];
-}
+
 
 
 

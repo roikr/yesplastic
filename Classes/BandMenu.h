@@ -10,22 +10,26 @@
 
 @class SongsTable;
 @class MainViewController;
+@class HelpViewController;
 
 @interface BandMenu : UIViewController {
 	SongsTable *songsTable;
 	UIView *songsView;
 	MainViewController *mainViewController;
+	HelpViewController *help;
 	
 }
 
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
 @property (nonatomic,retain ) MainViewController *mainViewController;
+@property (nonatomic,retain) HelpViewController *help;
 
 - (void)edit:(id)sender;
 - (void)exit:(id)sender;
 - (void)help:(id)sender;
 - (void)link:(id)sender;
+
 
 
 

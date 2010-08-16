@@ -11,6 +11,7 @@
 
 @class SongCell;
 @class SoundSet;
+@class Song;
 @interface SongsTable : UITableViewController {
 	SongCell *tmpCell;
 	
@@ -24,7 +25,7 @@
 @property (nonatomic,retain) NSMutableArray *songsArray;
 @property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;
 
--(void)addSong;
+-(void)addSong:(Song *)song;
 - (void)deleteSong:(SongCell*)songCell;
 - (void)updateContext;
 @end

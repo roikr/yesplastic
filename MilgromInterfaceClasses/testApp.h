@@ -47,6 +47,7 @@ public:
 	bool isInTransition();
 	bool isSongAvailiable(string song,int playerNum=0);
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
+	string getCurrentSoundSetName(int playerNum);
 	
 	
 	void didBecomeAcive();

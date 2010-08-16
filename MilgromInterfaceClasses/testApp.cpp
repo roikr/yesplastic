@@ -194,3 +194,20 @@ void testApp::willResignActive() {
 
 void testApp::playRandomLoop() {
 }
+
+string testApp::getCurrentSoundSetName(int playerNum) {
+	switch (playerNum) {
+		case 0:
+			return "GTR_HEAT";
+			break;
+		case 1:
+			return "VOC_HEAT";
+			break;
+		case 2:
+			return "DRM_HEAT";
+			break;
+		default:
+			return "";
+			break;
+	}
+}

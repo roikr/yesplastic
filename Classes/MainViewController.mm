@@ -322,6 +322,9 @@
 	songName.hidden = YES;
 
 	OFSAptr->saveSong([songName.text UTF8String]);
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[appDelegate addSong:songName.text];
+	
 	return NO;
 }
 

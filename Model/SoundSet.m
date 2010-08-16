@@ -2,7 +2,7 @@
 //  SoundSet.m
 //  MilgromInterface
 //
-//  Created by Roee Kremer on 8/11/10.
+//  Created by Roee Kremer on 8/17/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 
 @implementation SoundSet 
 
+@dynamic playerNum;
 @dynamic videoSet;
 
 @end

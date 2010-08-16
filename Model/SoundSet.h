@@ -2,7 +2,7 @@
 //  SoundSet.h
 //  MilgromInterface
 //
-//  Created by Roee Kremer on 8/11/10.
+//  Created by Roee Kremer on 8/17/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 {
 }
 
+@property (nonatomic, retain) NSNumber * playerNum;
 @property (nonatomic, retain) VideoSet * videoSet;
 
 @end

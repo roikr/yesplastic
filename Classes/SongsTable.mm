@@ -45,7 +45,7 @@
 	
 	
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
-								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:YES],
+								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:NO],
 								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO]
 								,nil];
 	[request setSortDescriptors:sortDescriptors];
@@ -70,16 +70,7 @@
 
 
 
--(void)addSong {
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:managedObjectContext];
-	[song setSongName:@"My Song"];
-	
-	[song setBReady:[NSNumber numberWithBool:YES]];
-	
-	
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-	}
+-(void)addSong:(Song *)song {
 	
 	[songsArray addObject:song];
 	
@@ -87,6 +78,7 @@
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	 [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
+ 
 
 - (void)deleteSong:(SongCell*)songCell {
 	
@@ -143,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [songsArray count];
+    return [songsArray count]; 
 }
 
 
