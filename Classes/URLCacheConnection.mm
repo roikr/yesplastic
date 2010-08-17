@@ -101,6 +101,7 @@ Copyright (C) 2008-2010 Apple Inc. All Rights Reserved.
 	[receivedData release];
 	[lastModified release];
 	[connection release];
+	[response release];
 	[super dealloc];
 }
 

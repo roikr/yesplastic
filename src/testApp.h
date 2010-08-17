@@ -58,16 +58,15 @@ public:
 	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
 	
 	bool loadSong(string songName);
-	void playSong();
-	bool getIsSongPlaying();
-	void stopSong();
-	void recordSong();
 	void saveSong(string songName);
+	void setSongState(int songState);
+	int  getSongState();
 	
 	bool isInTransition();
 	
 	bool isSongAvailiable(string song,int playerNum=0);
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
+	string getCurrentSoundSetName(int playerNum);
 	
 	
 	void didBecomeAcive();
@@ -99,6 +98,7 @@ private:
 	ofxXmlSettings xml;
 		
 	int state;
+	int songState;
 	
 	map<string,int>oscMap;
 	//ofxOscReceiver receiver;

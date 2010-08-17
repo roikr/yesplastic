@@ -21,6 +21,7 @@
 @synthesize songsView;
 @synthesize mainViewController;
 @synthesize help;
+@synthesize back;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -39,6 +40,7 @@
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
 		[self.songsView addSubview:songsTable.view];
+		back.hidden = NO;
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	}
 }
@@ -85,7 +87,8 @@
 	button.selected = !button.selected;
 }
 
-- (void)exit:(id)sender {
+- (void)back:(id)sender {
+
 	
 	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
 		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
@@ -125,9 +128,7 @@
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
 						break;
 		case 1:
-			[self exit:nil];
-			//[songsTable addSong];
-			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
 			break;
 		case 2:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/user/yesplastictube"]];

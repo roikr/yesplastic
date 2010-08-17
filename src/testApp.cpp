@@ -296,8 +296,13 @@ void testApp::changeSoundSet(string nextSoundSet, bool bChangeAll) {
 	this->bChangeAll = bChangeAll;
 	this->nextSoundSet = nextSoundSet;
 	bChangeSet = true;
+}
+
+string testApp::getCurrentSoundSetName(int playerNum) {
+	return player[playerNum].getCurrentSoundSet();
 	
 }
+
 
 string testApp::getPlayerName(int playerNum)  {
 	switch (playerNum) {
@@ -840,41 +845,54 @@ void testApp::setBPM(float bpm) {
 	}
 }
 
-//TODO: implement these
-void testApp::playSong() {
-	
+void testApp::setSongState(int songState) {
+	this->songState = songState;
 	for (int i=0;i<3;i++) {
-		player[i].playSong();
-	}
-}
-
-void testApp::stopSong() {
-	for (int i=0;i<3;i++) {
-		player[i].stopSong();
-	}
-//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
-//	MidiTrack::SetSongMode(SONG_IDLE);
-//	for (int i=0;i<3;i++)
-//		this->player[i].getMidiTrack()->setMode(MANUAL_MODE,false);
-//	
-//	if (bRecord) {
-//		saveMidi();
-//	}
-}
-
-void testApp::recordSong() {
-	for (int i=0;i<3;i++) {
-		player[i].recordSong();
+		switch(songState) {
+			case SONG_IDLE:
+				player[i].stopSong();
+				//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
+				//	MidiTrack::SetSongMode(SONG_IDLE);
+				//	for (int i=0;i<3;i++)
+				//		this->player[i].getMidiTrack()->setMode(MANUAL_MODE,false);
+				//	
+				//	if (bRecord) {
+				//		saveMidi();
+				//	}
+				break;
+			case SONG_PLAY:
+				player[i].playSong();
+				break;
+			case SONG_RECORD:
+				player[i].recordSong();
+				break;
+		}
+				
 	}
 	
 }
 
-bool testApp::getIsSongPlaying() {
-	bool res = false;
-	for (int i=0;i<3;i++)
-		res = res || player[i].getIsPlaying();
-	return res;
+
+int  testApp::getSongState() {
+	switch (songState) {
+		case SONG_PLAY:
+			songState = SONG_IDLE;
+			
+			for (int i=0;i<3;i++)
+				if (player[i].getIsPlaying()) {
+					songState = SONG_PLAY;
+					break;
+				}
+
+			break;
+		default:
+			break;
+	}
+	
+	return songState;
 }
+
+
 
 bool testApp::loadSong(string songName) {
 	ofxXmlSettings songXml;
@@ -890,7 +908,7 @@ bool testApp::loadSong(string songName) {
 		for (int i=0; i<3; i++) {
 			player[i].setMode(MANUAL_MODE);
 			string sound_set = songXml.getAttribute("player", "sound_set", "", i);
-			player[i].changeSet(getPlayerName(i)+"_"+sound_set);
+			player[i].changeSet(sound_set);
 			player[i].loadSong(ofToDocumentsPath(getPlayerName(i)+"_"+songName+".xml"));
 		}
 	songXml.popTag();

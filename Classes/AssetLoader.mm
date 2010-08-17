@@ -65,7 +65,7 @@
 		//[self buttonsEnabled:NO];
 		//[self startAnimation];
 		
-		MilgromLog(@"AssetLoader::initWithURL, dataPath:%@",dataPath);
+		MilgromLog(@"AssetLoader::initWithSet, dataPath:%@",dataPath);
 		
 		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
 			
@@ -86,6 +86,14 @@
 	return self;
 }
 
+
+- (void)dealloc
+{
+	MilgromLog(@"AssetLoader::dealloc");
+	[set release];
+	[filePath release];
+	[super dealloc];
+}
 
 #pragma mark -
 #pragma mark URLCacheConnectionDelegate methods
@@ -113,6 +121,7 @@
 
 
 - (void) connectionProgress:(NSNumber *)theProgress {
+	//MilgromLog(@"AssetLoader::connectionProgress");
 	[self.delegate loaderProgress:theProgress];
 	//MilgromLog(@"AssetLoader::connectionProgress: %3.2f",[theProgress floatValue] *100);
 }

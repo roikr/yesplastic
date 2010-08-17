@@ -246,6 +246,11 @@
 	//[controller checkState:nil];
 	//[renderer setupView];
 	
+	if ([viewController.viewControllers count] > 1) {
+		MainViewController *mainViewController = (MainViewController *)[viewController.viewControllers objectAtIndex:1];
+		[mainViewController updateViews];
+	}
+	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);

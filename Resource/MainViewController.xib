@@ -80,11 +80,11 @@
 								</object>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">OPEN_MENU_PRESS.png</string>
+									<string key="NSResourceName">OPEN_MENU.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">OPEN_MENU.png</string>
+									<string key="NSResourceName">OPEN_MENU_PRESS.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="1060732207">
@@ -107,16 +107,16 @@
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">SET_MENU_B_PRESS.png</string>
+									<string key="NSResourceName">SET_MENU_B.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">SET_MENU_B.png</string>
+									<string key="NSResourceName">SET_MENU_B_PRESS.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="741302335">
 								<reference key="NSNextResponder" ref="863361826"/>
-								<int key="NSvFlags">289</int>
+								<int key="NSvFlags">-2147483359</int>
 								<string key="NSFrame">{{134, 0}, {50, 45}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -134,11 +134,11 @@
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">SAVE_B_PRESS.png</string>
+									<string key="NSResourceName">SAVE_B.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">SAVE_B.png</string>
+									<string key="NSResourceName">SAVE_B_PRESS.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="541363912">
@@ -158,19 +158,15 @@
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">RECORD_B_PRESS.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUIDisabledImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">RECORD_B_NOACTIVE.png</string>
+									<string key="NSResourceName">RECORD_B.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUISelectedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">RECORD_B_SELECT.png</string>
+									<string key="NSResourceName">RECORD_B_OVERLY.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">RECORD_B.png</string>
+									<string key="NSResourceName">RECORD_B_PRESS.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="14781122">
@@ -190,19 +186,35 @@
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">PLAY_B.png</string>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">PLAY_B_PRESS.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUIDisabledImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">PLAY_B_NOACTIVE.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUISelectedImage">
+							</object>
+							<object class="IBUIButton" id="404010622">
+								<reference key="NSNextResponder" ref="863361826"/>
+								<int key="NSvFlags">-2147483359</int>
+								<string key="NSFrame">{{250, 0}, {50, 45}}</string>
+								<reference key="NSSuperview" ref="863361826"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<reference key="IBUIFont" ref="806562837"/>
+								<reference key="IBUIHighlightedTitleColor" ref="438986558"/>
+								<reference key="IBUIDisabledTitleColor" ref="771441115"/>
+								<reference key="IBUINormalTitleColor" ref="438986558"/>
+								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
+								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">PLAY_B_PAUSE.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">PLAY_B.png</string>
+									<string key="NSResourceName">PLAY_B_PAUSE_PRESS.png</string>
 								</object>
 							</object>
 						</object>
@@ -467,30 +479,12 @@
 					<int key="connectionID">104</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">save:</string>
-						<reference key="source" ref="741302335"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">1</int>
-					</object>
-					<int key="connectionID">105</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">saveButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="741302335"/>
 					</object>
 					<int key="connectionID">106</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">record:</string>
-						<reference key="source" ref="541363912"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">1</int>
-					</object>
-					<int key="connectionID">107</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -501,39 +495,12 @@
 					<int key="connectionID">108</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">play:</string>
-						<reference key="source" ref="14781122"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">1</int>
-					</object>
-					<int key="connectionID">109</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">playButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="14781122"/>
 					</object>
 					<int key="connectionID">110</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">bringMenu:</string>
-						<reference key="source" ref="345070952"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">111</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">bringMenu:</string>
-						<reference key="source" ref="1060732207"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">112</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -607,11 +574,73 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">stopButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="404010622"/>
+					</object>
+					<int key="connectionID">127</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">save:</string>
+						<reference key="source" ref="741302335"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">129</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">record:</string>
+						<reference key="source" ref="541363912"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">130</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">play:</string>
+						<reference key="source" ref="14781122"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">131</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">stop:</string>
+						<reference key="source" ref="404010622"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">132</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="4507289"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">124</int>
+					<int key="connectionID">133</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">menu:</string>
+						<reference key="source" ref="345070952"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">134</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">menu:</string>
+						<reference key="source" ref="1060732207"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">135</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -671,6 +700,7 @@
 							<reference ref="741302335"/>
 							<reference ref="345070952"/>
 							<reference ref="1060732207"/>
+							<reference ref="404010622"/>
 						</object>
 						<reference key="parent" ref="140016098"/>
 					</object>
@@ -750,6 +780,11 @@
 						<reference key="object" ref="4507289"/>
 						<reference key="parent" ref="140016098"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">125</int>
+						<reference key="object" ref="404010622"/>
+						<reference key="parent" ref="863361826"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -760,6 +795,7 @@
 					<string>-2.CustomClassName</string>
 					<string>122.CustomClassName</string>
 					<string>122.IBPluginDependency</string>
+					<string>125.IBPluginDependency</string>
 					<string>51.CustomClassName</string>
 					<string>51.IBEditorWindowLastContentRect</string>
 					<string>51.IBPluginDependency</string>
@@ -782,12 +818,14 @@
 					<string>64.IBPluginDependency</string>
 					<string>65.IBPluginDependency</string>
 					<string>66.IBPluginDependency</string>
+					<string>66.IBViewBoundsToFrameTransform</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MainViewController</string>
 					<string>UIResponder</string>
 					<string>CustomFontTextField</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>TouchView</string>
 					<string>{{189, 425}, {320, 480}}</string>
@@ -817,6 +855,9 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AUN6AAAAAAAAA</bytes>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -835,7 +876,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">124</int>
+			<int key="maxID">135</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -855,14 +896,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bringMenu:</string>
-							<string>checkState:</string>
 							<string>loop:</string>
+							<string>menu:</string>
 							<string>nextLoop:</string>
 							<string>play:</string>
 							<string>prevLoop:</string>
 							<string>record:</string>
 							<string>save:</string>
+							<string>stop:</string>
 							<string>trigger:</string>
 							<string>updateLoops:</string>
 						</object>
@@ -884,29 +925,25 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bringMenu:</string>
-							<string>checkState:</string>
 							<string>loop:</string>
+							<string>menu:</string>
 							<string>nextLoop:</string>
 							<string>play:</string>
 							<string>prevLoop:</string>
 							<string>record:</string>
 							<string>save:</string>
+							<string>stop:</string>
 							<string>trigger:</string>
 							<string>updateLoops:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">bringMenu:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">checkState:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
 								<string key="name">loop:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">menu:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -927,6 +964,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">save:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">stop:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -952,6 +993,7 @@
 							<string>saveButton</string>
 							<string>setMenuButton</string>
 							<string>songName</string>
+							<string>stopButton</string>
 							<string>triggerButton</string>
 							<string>triggersView</string>
 						</object>
@@ -966,6 +1008,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>CustomFontTextField</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIView</string>
 						</object>
@@ -983,6 +1026,7 @@
 							<string>saveButton</string>
 							<string>setMenuButton</string>
 							<string>songName</string>
+							<string>stopButton</string>
 							<string>triggerButton</string>
 							<string>triggersView</string>
 						</object>
@@ -1023,6 +1067,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">songName</string>
 								<string key="candidateClassName">CustomFontTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">stopButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">triggerButton</string>
@@ -1195,14 +1243,14 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">UITextField</string>
 					<string key="superclassName">UIControl</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="943390604">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="757311954">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
-					<reference key="sourceIdentifier" ref="943390604"/>
+					<reference key="sourceIdentifier" ref="757311954"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
@@ -1261,7 +1309,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../MilgromInterface.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../Milgrom.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1270,13 +1318,12 @@
 				<string>OPEN_MENU.png</string>
 				<string>OPEN_MENU_PRESS.png</string>
 				<string>PLAY_B.png</string>
-				<string>PLAY_B_NOACTIVE.png</string>
 				<string>PLAY_B_PAUSE.png</string>
+				<string>PLAY_B_PAUSE_PRESS.png</string>
 				<string>PLAY_B_PRESS.png</string>
 				<string>RECORD_B.png</string>
-				<string>RECORD_B_NOACTIVE.png</string>
+				<string>RECORD_B_OVERLY.png</string>
 				<string>RECORD_B_PRESS.png</string>
-				<string>RECORD_B_SELECT.png</string>
 				<string>SAVE_B.png</string>
 				<string>SAVE_B_PRESS.png</string>
 				<string>SET_MENU_B.png</string>
@@ -1292,7 +1339,6 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{50, 45}</string>
 				<string>{50, 45}</string>
 				<string>{50, 45}</string>
 				<string>{50, 45}</string>

@@ -24,6 +24,7 @@
 @implementation MainViewController
 
 @synthesize playButton;
+@synthesize stopButton;
 @synthesize recordButton;
 @synthesize menuButton;
 @synthesize setMenuButton;
@@ -55,18 +56,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 		
-	/*
-	self.actionToolBar.hidden = true;
-	
-	menuController.view.hidden = true;
-	menuController.view.alpha = 0.5;
-	menuController.view.backgroundColor = [UIColor blackColor];
-	[self.view addSubview:[menuController view]];
-	 */
-	
-	saveButton.enabled = NO;
-	//recordButton.enabled = NO;
-	//topMenu.hidden = YES;
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	OFSAptr = appDelegate.OFSAptr;
@@ -174,7 +163,7 @@
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE:
 			setMenuButton.hidden = NO;
-			switch (OFSAptr->getMode(0)) {
+			switch (OFSAptr->getMode(OFSAptr->controller)) {
 				case LOOP_MODE:
 					loopsView.hidden = NO;
 					break;
@@ -197,24 +186,84 @@
 
 
 - (void)updateViews {
-	switch (OFSAptr->getMode(0)) {
-		case LOOP_MODE:
-			loopsView.hidden = NO;
-			triggersView.hidden = YES;
-			break;
-		case MANUAL_MODE:
-			loopsView.hidden = YES;
-			triggersView.hidden = NO;
-			break;
-		default:
-			break;
+	if (self.navigationController.topViewController != self) {
+		return;
 	}
 	
-}
+	
+	
+	if (bModeChanged) {
+		switch (OFSAptr->getMode(OFSAptr->controller)) {
+			case LOOP_MODE:
+				loopsView.hidden = NO;
+				triggersView.hidden = YES;
+				break;
+			case MANUAL_MODE:
+				loopsView.hidden = YES;
+				triggersView.hidden = NO;
+				break;
+			default:
+				break;
+		}
+		
+		bModeChanged = false;
+	}
+	
+	if (OFSAptr->isInTransition()!=bInTransition) {
+		if (OFSAptr->isInTransition()) {
+			
+			playButton.hidden = YES;
+			recordButton.hidden = YES;
+			stopButton.hidden = YES;
+			menuButton.hidden = YES;
+			setMenuButton.hidden = YES;
+			saveButton.hidden = YES;
+			
+			
+			
+			
+		} else {
+			
+			playButton.hidden = NO;
+			recordButton.hidden = NO;
+			menuButton.hidden = OFSAptr->getState() == SOLO_STATE;
+			setMenuButton.hidden = OFSAptr->getState() == BAND_STATE;
+			
+			
+			
+		}
+		bInTransition = OFSAptr->isInTransition();
+	}
+	
+	if (songState != OFSAptr->getSongState()) {
+		switch (OFSAptr->getSongState()) {
+			case SONG_IDLE:
+				stopButton.hidden = YES;
+				playButton.hidden = NO;
+				recordButton.selected = NO;
+				if (OFSAptr->getState() == SOLO_STATE) {
+					setMenuButton.hidden = NO;
 
+				}
+				break;
+			case SONG_PLAY:
+				setMenuButton.hidden = YES;
+				stopButton.hidden = NO;
+				playButton.hidden = YES;
+				recordButton.selected = NO;
+				break;
+			case SONG_RECORD:
+				setMenuButton.hidden = YES;
+				stopButton.hidden = YES;
+				playButton.hidden = NO;
+				break;
 
-
-- (void)show {
+			default:
+				break;
+		}
+		songState = OFSAptr->getSongState();
+	
+	}
 	
 }
 
@@ -234,10 +283,24 @@
 
 
 
+- (void)interrupt {
+	if (OFSAptr->getSongState() != SONG_IDLE) {
+		OFSAptr->setSongState(SONG_IDLE);
+		playButton.hidden = NO;
+		recordButton.hidden = NO;
+		stopButton.hidden = YES;
+		if (OFSAptr->getState() == SOLO_STATE) {
+			setMenuButton.hidden = NO;
+		}
+		
+	}
+	
+}
 
-
-- (void) bringMenu:(id)sender {
-	 
+- (void) menu:(id)sender {
+	[self interrupt];
+	
+			 
 	
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE: {
@@ -266,45 +329,42 @@
 
 
 - (void) play:(id)sender {
-	if (recordButton.selected) 
-		return;
 	
-	
-		
-	if (playButton.selected) {
-		OFSAptr->stopSong();
-		recordButton.enabled = YES;
+	if (recordButton.selected) {
+		[self stop:nil];
 	}
-	else {
-		OFSAptr->playSong();
-		recordButton.enabled = NO;
-	}
+			
+	OFSAptr->setSongState(SONG_PLAY);
 	
-	playButton.selected = !playButton.selected;
+	
+	
 	
 }
 
+- (void) stop:(id)sender {
+	OFSAptr->setSongState(SONG_IDLE);
+}
+
 - (void) record:(id)sender {
-	if (playButton.selected) 
+	if (playButton.hidden) 
 		return;
 	
 	
 	
 	if (recordButton.selected) {
-		OFSAptr->stopSong();
-		playButton.enabled = YES;
-		saveButton.enabled = YES;
+		[self stop:nil];
+		
 	}
 	else {
-		OFSAptr->recordSong();
-		playButton.enabled = NO;
+		OFSAptr->setSongState(SONG_RECORD);
+		saveButton.hidden = NO;
 	}
 	
 	recordButton.selected = !recordButton.selected;
 }
 
 - (void) save:(id)sender {
-	
+	[self interrupt];
 	songName.hidden = NO;
 	[songName becomeFirstResponder];
 //	if (self.songViewController == nil) {
@@ -320,10 +380,11 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	songName.hidden = YES;
-
-	OFSAptr->saveSong([songName.text UTF8String]);
+	saveButton.hidden = YES;
+	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[appDelegate addSong:songName.text];
+	[appDelegate saveSong:songName.text];
+	
 	
 	return NO;
 }
@@ -331,38 +392,7 @@
 
 
 
-- (void) checkState:(id)sender {
-	
-	if (OFSAptr->isInTransition()) {
-		if (playButton.enabled)
-			playButton.enabled = NO;
-		
-		if (recordButton.enabled)
-			recordButton.enabled = NO;
-		
-		if (menuButton.enabled) 
-			menuButton.enabled = NO;
-		
-		if (saveButton.enabled) 
-			saveButton.enabled = NO;
-			
-			
-	} else {
-		
-		if (!playButton.enabled)
-			playButton.enabled = YES;
-		
-		if (!menuButton.enabled) 
-			menuButton.enabled = YES;
-		
-		if (playButton.selected != OFSAptr->getIsSongPlaying()) 
-			playButton.selected = OFSAptr->getIsSongPlaying();
-		
-		if (!OFSAptr->getIsSongPlaying() && !recordButton.enabled ) {
-			recordButton.enabled = YES;
-		}
-	}
-}	
+
 		
 /*
 - (void) updateTables {
@@ -439,6 +469,10 @@
 	[super viewDidAppear:animated];
 	MilgromLog(@"MainViewController::viewDidAppear");
     [self becomeFirstResponder];
+	
+	songState = OFSAptr->getSongState();
+	bModeChanged = true;
+	bInTransition = OFSAptr->isInTransition();
 }
 
 - (void)viewWillAppear:(BOOL)animated {

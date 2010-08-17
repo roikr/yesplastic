@@ -38,11 +38,9 @@ public:
 	void setBPM(float bpm);
 	
 	bool loadSong(string songName);
-	void playSong();
-	bool getIsSongPlaying();
-	void stopSong();
-	void recordSong();
 	void saveSong(string songName);
+	void setSongState(int songState);
+	int  getSongState();
 	
 	bool isInTransition();
 	bool isSongAvailiable(string song,int playerNum=0);
@@ -65,6 +63,7 @@ private:
 	float volume;
 	float bpm;
 	int state;
+	int songState;
 		
 	
 	

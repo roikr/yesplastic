@@ -92,17 +92,7 @@ NSString * const kCacheFolder=@"URLCache";
     return YES;
 }
 
-- (void)loadSong:(Song*)song {
-	//
-	
-	string nextSong = [song.songName UTF8String];
-	if (  !OFSAptr->isInTransition() && OFSAptr->isSongAvailiable(nextSong)) {
-		
-		OFSAptr->changeSoundSet(nextSong, true);
-	}
-	
-	[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] exit:nil];
-}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -415,11 +405,14 @@ NSString * const kCacheFolder=@"URLCache";
 	return NO;
 }
 
--(void)addSong:(NSString *)songName {
+-(void)saveSong:(NSString *)songName {
+	OFSAptr->saveSong([songName UTF8String]);
+	
 	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
 	[song setSongName:songName];
 	
 	[song setBReady:[NSNumber numberWithBool:YES]];
+	[song setBDemo:[NSNumber numberWithBool:NO]];
 	
 	
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -465,6 +458,25 @@ NSString * const kCacheFolder=@"URLCache";
 	[bandMenu.songsTable addSong:song];
 	
 	
+}
+
+
+- (void)loadSong:(Song*)song {
+	//
+	
+	string nextSong = [song.songName UTF8String];
+	if ([song.bDemo boolValue]) {
+		if (  !OFSAptr->isInTransition() && OFSAptr->isSongAvailiable(nextSong)) {
+			
+			OFSAptr->changeSoundSet(nextSong, true);
+		}
+		
+	} else {
+		OFSAptr->loadSong([song.songName UTF8String]);
+	}
+	
+	
+	[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
 }
 
 - (void)addDemos {

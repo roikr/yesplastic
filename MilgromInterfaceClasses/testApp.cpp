@@ -12,6 +12,7 @@
 void testApp::setup(){	
 	
 	controller = 0;
+	songState = SONG_IDLE;
 	
 }
 
@@ -178,6 +179,18 @@ void testApp::saveSong(string songName) {
 
 	
 }
+
+void setSongState(int songState) {
+	this->songState = songState;
+}
+
+
+int  getSongState() {
+	
+	
+	return songState;
+}
+
 	
 
 

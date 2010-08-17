@@ -48,7 +48,7 @@ class testApp;
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
 - (void)loadSong:(Song*)song;
-- (void)addSong:(NSString *)songName;
+- (void)saveSong:(NSString *)songName;
 
 
 

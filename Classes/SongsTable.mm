@@ -10,6 +10,7 @@
 #import "SongCell.h"
 
 #import "MilgromInterfaceAppDelegate.h"
+#import "MilgromViewController.h"
 #import "Song.h"
 #import "SoundSet.h"
 #import "VideoSet.h"
@@ -224,6 +225,22 @@
 #pragma mark -
 #pragma mark Table view delegate
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	if (!cell.selected) {
+		Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+		
+		[appDelegate loadSong:song];
+		
+	} else {
+		MilgromLog(@"SongsTable::willSelectRowAtIndexPath: Song already selected");
+		[(BandMenu *)[appDelegate.milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
+	}
+
+	return indexPath;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
 	/*
@@ -237,10 +254,8 @@
 	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	//[appDelegate.viewController dismissMenu:self];
 	
-	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	[appDelegate loadSong:song];
+	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	MilgromLog(@"SongsTable::didSelectRowAtIndexPath: cell.selected: %u",cell.selected);
 }
 
 

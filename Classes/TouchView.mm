@@ -111,13 +111,13 @@
 		
 		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
-		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
+//		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
 		
 		appDelegate.OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);
 		
-		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
-			[viewController updateViews];
-		}
+//		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
+//			[viewController updateViews];
+//		}
 	}
 }
 

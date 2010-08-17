@@ -97,7 +97,7 @@ void PlayerController::changeSet(string soundSet,bool bLoadDemo) {
 	
 	
 	
-	if (isInTransition()) {
+	if (isInTransition() || soundSet == this->soundSet) {
 		return;
 	}
 	
@@ -631,8 +631,10 @@ void PlayerController::recordSong() {
 }
 
 void PlayerController::stopSong() {
+	setMode(MANUAL_MODE);
 	songMode = SONG_IDLE;
 	song.stop();
+	
 }
 
 bool PlayerController::getIsPlaying() {

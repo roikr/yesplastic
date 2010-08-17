@@ -19,6 +19,7 @@ class testApp;
 	
 	
 	UIButton *playButton;
+	UIButton *stopButton;
 	UIButton *recordButton;
 	UIButton *menuButton;
 	UIButton *setMenuButton;
@@ -37,10 +38,15 @@ class testApp;
 	
 	
 	CustomFontTextField	*songName;
+	
+	bool bInTransition;
+	bool bModeChanged;
+	int songState;
 }
 
 
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UIButton *stopButton;
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
 @property (nonatomic, retain) IBOutlet UIButton *menuButton;
 @property (nonatomic, retain) IBOutlet UIButton *setMenuButton;
@@ -58,17 +64,18 @@ class testApp;
 
 @property (nonatomic,retain) IBOutlet CustomFontTextField *songName;
 
-- (void) bringMenu:(id)sender;
-- (void) checkState:(id)sender;
+- (void) menu:(id)sender;
 - (void) play:(id)sender;
+- (void) stop:(id)sender;
 - (void) record:(id)sender;
 - (void) save:(id)sender;
 - (void) trigger:(id)sender;
 - (void) loop:(id)sender;
-- (void)updateLoops:(id)sender;
+- (void) updateLoops:(id)sender;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
+- (void) interrupt;
 
 //- (void) updateTables;
 

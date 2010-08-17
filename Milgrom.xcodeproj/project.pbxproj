@@ -58,6 +58,7 @@
 		E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0A12106B0D001CB593 /* QuartzCore.framework */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
+		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
 		E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4C8B40A1217E7E500C34620 /* SetsTable.mm */; };
 		E4C91C881201D8FC00279928 /* TRIGGER_B_PRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E4C91C871201D8FC00279928 /* TRIGGER_B_PRESS.png */; };
 		E4C91C8C1201DC9700279928 /* LoopButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C91C8B1201DC9700279928 /* LoopButton.xib */; };
@@ -268,6 +269,8 @@
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D1AC11F82BFA00B57223 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
+		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
+		E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFontTextField.m; sourceTree = "<group>"; };
 		E4C8B40A1217E7E500C34620 /* SetsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetsTable.mm; sourceTree = "<group>"; };
 		E4C91C871201D8FC00279928 /* TRIGGER_B_PRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TRIGGER_B_PRESS.png; sourceTree = "<group>"; };
 		E4C91C8B1201DC9700279928 /* LoopButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoopButton.xib; path = Resource/LoopButton.xib; sourceTree = "<group>"; };
@@ -441,6 +444,8 @@
 				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
 				E4C91C9E1201E79400279928 /* CustomSlider.h */,
 				E4C91C9F1201E79400279928 /* CustomSlider.m */,
+				E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */,
+				E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */,
 			);
 			name = ViewControllers;
 			path = Classes;
@@ -1110,6 +1115,7 @@
 				E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */,
 				E48503FC1214BB3600D2271F /* TouchView.mm in Sources */,
 				E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */,
+				E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
