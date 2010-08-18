@@ -11,6 +11,7 @@
 //#include "ofxOsc.h"
 #include "ofxRKThread.h"
 #include "ofxRKTexture.h"
+#include "ofxSndFile.h"
 
 
 struct measure {
@@ -61,6 +62,9 @@ public:
 	void saveSong(string songName);
 	void setSongState(int songState);
 	int  getSongState();
+	bool getIsPlaying();
+	
+	void renderAudio() ;
 	
 	bool isInTransition();
 	
@@ -129,6 +133,7 @@ private:
 	
 	float bpm;
 	
+	ofxSndFile song;
 	
 };
 

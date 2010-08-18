@@ -27,7 +27,7 @@ void PlayerController::setup(int playerNum) {
 	currentPlayer = 0;
 	midiInstrument = 0;
 	midiTrack.setup();
-	songMode = SONG_IDLE;
+	songState = SONG_IDLE;
 	song.setup();
 	//midiTrack = 0;
 	
@@ -411,7 +411,7 @@ void PlayerController::play(int num) {
 		
 		midiInstrument->noteOn(midi, 127*volume);
 		
-		if (songMode==SONG_RECORD) { //TODO: get current playing note from midi instrument...
+		if (songState==SONG_RECORD) { //TODO: get current playing note from midi instrument...
 			event e;
 			e.channel = 1;
 			e.note = midi+12; // when playing we substract 12
@@ -481,18 +481,6 @@ string PlayerController::getCurrentSet() {
 }
  */
 
-int PlayerController::getSongMode() {
-	return songMode;
-}
-
-
-void PlayerController::setSongMode(int songMode) {
-	this->songMode = songMode;
-	//startTick = 0;
-	//startTime = ofGetElapsedTimeMillis();
-	//ofxRKAQSoundPlayer::Start();
-	cout << "SetSongMode: " << songMode << "\n"; 
-}
 	
 void PlayerController::sync() {
 	if (!enable)
@@ -554,8 +542,9 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	
 	
 	
-	switch (songMode) {
-		case SONG_PLAY: {
+	switch (songState) {
+		case SONG_PLAY:
+		case SONG_RENDER_AUDIO: {
 			events.clear();
 			song.process(events);
 			for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
@@ -563,7 +552,10 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 				//printf("loop note:  %i\n", note);
 				if (iter->bNoteOn) {
 					midiInstrument->noteOn(note, iter->velocity*volume);
-					currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
+					if (songState==SONG_PLAY) {
+						currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
+					}
+					
 				}
 				
 				else {
@@ -581,6 +573,9 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 			
 			song.process(events); // add events from loops :-)
 		} break;
+			
+		 
+			
 		default:
 			break;
 	}
@@ -618,32 +613,41 @@ void PlayerController::loadDemo() {
 	loadSong(ofToDataPath("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml"));
 }
 
-void PlayerController::playSong() {
+void PlayerController::setSongState(int songState) {
 	setMode(MANUAL_MODE);
-	songMode = SONG_PLAY;
-	song.play();
+	switch (songState) {
+		case SONG_IDLE:
+			song.stop();
+			break;
+		case SONG_PLAY:
+		case SONG_RENDER_AUDIO:
+			song.play();
+			break;
+		case SONG_RECORD:
+			song.record();
+			break;
+		
+			
+
+		default:
+			break;
+	}
+	this->songState = songState;
 }
 
-void PlayerController::recordSong() {
-	setMode(MANUAL_MODE);
-	songMode = SONG_RECORD;
-	song.record();
+int  PlayerController::getSongState() {
+	return songState;
 }
 
-void PlayerController::stopSong() {
-	setMode(MANUAL_MODE);
-	songMode = SONG_IDLE;
-	song.stop();
-	
+bool PlayerController::getIsRecording() {
+	return song.getIsRecording();
 }
 
 bool PlayerController::getIsPlaying() {
 	return song.getIsPlaying();
 }
 
-bool PlayerController::getIsRecording() {
-	return song.getIsRecording();
-}
+
 
 void PlayerController::saveSong(string filename) {
 	song.saveTrack(filename);

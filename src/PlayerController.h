@@ -52,9 +52,6 @@ public:
 	int getCurrentLoop();
 	void changeLoop(int loopNum);
 	
-	void setSongMode(int songMode);
-	int getSongMode();
-	
 	void processWithBlocks(float *left,float *right);
 	
 	void setVolume(float volume); //  0.0 to 1.0
@@ -63,20 +60,21 @@ public:
 	void setBPM(int bpmVal);
 	
 	void loadSong(string filename);
-		void playSong();
-	void recordSong();
-	void stopSong();
-	bool getIsPlaying();
+	void setSongState(int songState);
+	int  getSongState();
+	
 	void saveSong(string filename);
 	
-	
+	bool getIsRecording();
+	bool getIsPlaying();
+
 	
 private:
 	
 	void loadDemo(); // parallel to change set so I have to provide the set name
 
 	
-	bool getIsRecording(); // TODO: do I really need it ?
+	
 	
 	void loadSoundSet(string soundSet);
 	
@@ -119,7 +117,8 @@ private:
 	
 	int currentLoop;
 	
-	int songMode;
+	int songState;
+	
 	ofxMidiTrack song;
 	vector<event> recordEvents;
 	

@@ -133,6 +133,7 @@ void testApp::setup(){
 	rBlock = new float[blockLength];
 
 	bpm = 120; // TODO: send bpm to players
+	song.setup(blockLength,true);
 	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
 	ofSeedRandom();
 	
@@ -148,7 +149,6 @@ bool testApp::isSongAvailiable(string song,int playerNum) {
 	}
 	return false;
 }
-
 
 
 
@@ -176,8 +176,37 @@ void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 		output[i*nChannels + 1] = rBlock[i];
 	}
 	
+}
+
+void testApp::renderAudio() {
+	
+	ofSoundStreamStop();
+	
+	cout << "renderAudio started" << endl;
+	
+	song.open(ofToDataPath("temp.wav"));
+	
+	for (int i=0;i<3;i++) {
+		player[i].setSongState(SONG_RENDER_AUDIO);
+	}
+	
+	while (getSongState()==SONG_RENDER_AUDIO) {
 	
 	
+		memset(lBlock, 0, blockLength*sizeof(float));
+		memset(rBlock, 0, blockLength*sizeof(float));
+		
+		for (int i=0;i<3;i++) {
+			player[i].processWithBlocks(lBlock, rBlock);
+		}
+		
+		song.saveWithBlocks(lBlock, rBlock);
+	}
+		
+	song.close();	
+	
+	cout << "renderAudio finished" << endl;
+	ofSoundStreamStart();
 }
 
 
@@ -846,45 +875,55 @@ void testApp::setBPM(float bpm) {
 }
 
 void testApp::setSongState(int songState) {
+	
+	//bool bRenderAudio = songState==SONG_IDLE && this->songState == SONG_RECORD;
+	
 	this->songState = songState;
 	for (int i=0;i<3;i++) {
-		switch(songState) {
-			case SONG_IDLE:
-				player[i].stopSong();
-				//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
-				//	MidiTrack::SetSongMode(SONG_IDLE);
-				//	for (int i=0;i<3;i++)
-				//		this->player[i].getMidiTrack()->setMode(MANUAL_MODE,false);
-				//	
-				//	if (bRecord) {
-				//		saveMidi();
-				//	}
-				break;
-			case SONG_PLAY:
-				player[i].playSong();
-				break;
-			case SONG_RECORD:
-				player[i].recordSong();
-				break;
-		}
-				
+		player[i].setSongState(songState);
 	}
+	
+	
+	//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
+	//	MidiTrack::SetSongMode(SONG_IDLE);
+	//	for (int i=0;i<3;i++)
+	//		this->player[i].getMidiTrack()->setMode(MANUAL_MODE,false);
+	//	
+	//	if (bRecord) {
+	//		saveMidi();
+	//	}
+							
+	
 	
 }
 
-
+bool testApp::getIsPlaying() {
+	for (int i=0;i<3;i++) {
+		if (player[i].getIsPlaying()) {
+			return true;
+		}
+	}
+	return false;
+}
+		
+			
+	
+	
+	
 int  testApp::getSongState() {
 	switch (songState) {
 		case SONG_PLAY:
-			songState = SONG_IDLE;
-			
-			for (int i=0;i<3;i++)
-				if (player[i].getIsPlaying()) {
-					songState = SONG_PLAY;
-					break;
+		case SONG_RENDER_AUDIO:
+			if (! getIsPlaying()) {
+				songState = SONG_IDLE;
+				for (int i=0;i<3;i++) {
+					if (player[i].getSongState()!=SONG_IDLE) {
+						player[i].setSongState(SONG_IDLE);
+					}
 				}
-
+			}
 			break;
+			
 		default:
 			break;
 	}

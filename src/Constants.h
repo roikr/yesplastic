@@ -29,7 +29,8 @@ enum {
 enum {
 	SONG_IDLE,
 	SONG_RECORD,
-	SONG_PLAY
+	SONG_PLAY,
+	SONG_RENDER_AUDIO
 };
 
 enum {
