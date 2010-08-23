@@ -44,6 +44,11 @@
 		E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727B12143DB90058D07B /* ofxXmlSettings.cpp */; };
 		E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444728B12143EE60058D07B /* ofxSndFile.cpp */; };
 		E44472B812143FEE0058D07B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
+		E4749CB1121D796500886A6E /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749CB0121D796500886A6E /* OpenGLTOMovie.m */; };
+		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
+		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
+		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
+		E4749D52121D914600886A6E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D51121D914600886A6E /* MobileCoreServices.framework */; };
 		E480B6CC1212152400096300 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C51212152400096300 /* Song.m */; };
 		E480B6CD1212152400096300 /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C71212152400096300 /* Set.m */; };
 		E480B6CE1212152400096300 /* VideoSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C91212152400096300 /* VideoSet.m */; };
@@ -56,6 +61,9 @@
 		E498DDFA121069EB001CB593 /* MilgromViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF8121069EB001CB593 /* MilgromViewController.mm */; };
 		E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0512106AFA001CB593 /* OpenGLES.framework */; };
 		E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0A12106B0D001CB593 /* QuartzCore.framework */; };
+		E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */; };
+		E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */; };
+		E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -245,6 +253,12 @@
 		E444728B12143EE60058D07B /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
 		E444728C12143EE60058D07B /* ofxSndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSndFile.h; sourceTree = "<group>"; };
 		E44472B712143FEE0058D07B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E4749CAF121D796500886A6E /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4749CB0121D796500886A6E /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
+		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E4749D51121D914600886A6E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E480B6C41212152400096300 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
 		E480B6C51212152400096300 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E480B6C61212152400096300 /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Set.h; path = Model/Set.h; sourceTree = "<group>"; };
@@ -265,9 +279,13 @@
 		E498DDF8121069EB001CB593 /* MilgromViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MilgromViewController.mm; sourceTree = "<group>"; };
 		E498DE0512106AFA001CB593 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E498DE0A12106B0D001CB593 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E4998B7212203191006EC3BA /* AVPlayerDemoPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVPlayerDemoPlaybackView.h; path = AVPlayerClasses/AVPlayerDemoPlaybackView.h; sourceTree = "<group>"; };
+		E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVPlayerDemoPlaybackView.m; path = AVPlayerClasses/AVPlayerDemoPlaybackView.m; sourceTree = "<group>"; };
+		E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AVPlayerDemoPlaybackView.xib; path = AVPlayerClasses/AVPlayerDemoPlaybackView.xib; sourceTree = "<group>"; };
+		E4998B7512203191006EC3BA /* AVPlayerDemoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVPlayerDemoPlaybackViewController.h; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.h; sourceTree = "<group>"; };
+		E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVPlayerDemoPlaybackViewController.m; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.m; sourceTree = "<group>"; };
 		E4B3D17C11F823E000B57223 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
-		E4B3D1AC11F82BFA00B57223 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
 		E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFontTextField.m; sourceTree = "<group>"; };
@@ -409,6 +427,10 @@
 				E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */,
 				E4D1EB99121141C7004D4E25 /* libz.dylib in Frameworks */,
 				E44472B812143FEE0058D07B /* AudioToolbox.framework in Frameworks */,
+				E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */,
+				E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */,
+				E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */,
+				E4749D52121D914600886A6E /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +484,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				E4998B711220317E006EC3BA /* AVPlayer */,
 				E444725212143D810058D07B /* addons */,
 				E444721012143D2F0058D07B /* src */,
 				E4D1EB3712113350004D4E25 /* Classes */,
@@ -488,6 +511,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4749D3B121D908700886A6E /* AVFoundation.framework */,
+				E4749D3F121D909D00886A6E /* CoreMedia.framework */,
+				E4749D43121D90C100886A6E /* CoreVideo.framework */,
+				E4749D51121D914600886A6E /* MobileCoreServices.framework */,
 				E4D1EB98121141C7004D4E25 /* libz.dylib */,
 				E498DE0512106AFA001CB593 /* OpenGLES.framework */,
 				E498DE0A12106B0D001CB593 /* QuartzCore.framework */,
@@ -732,6 +759,18 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		E4998B711220317E006EC3BA /* AVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				E4998B7212203191006EC3BA /* AVPlayerDemoPlaybackView.h */,
+				E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */,
+				E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */,
+				E4998B7512203191006EC3BA /* AVPlayerDemoPlaybackViewController.h */,
+				E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */,
+			);
+			name = AVPlayer;
+			sourceTree = "<group>";
+		};
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +797,8 @@
 		E4D1EB3712113350004D4E25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E4749CAF121D796500886A6E /* OpenGLTOMovie.h */,
+				E4749CB0121D796500886A6E /* OpenGLTOMovie.m */,
 				E44471C2121438540058D07B /* ZipArchive */,
 				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
@@ -766,7 +807,6 @@
 				E4D1EB4E12113431004D4E25 /* AssetLoader.mm */,
 				E4D1EB50121134E1004D4E25 /* URLCacheConnection.h */,
 				E4D1EB3D121133F3004D4E25 /* URLCacheConnection.mm */,
-				E4B3D1AC11F82BFA00B57223 /* Constants.h */,
 				E4D1EB3B121133F3004D4E25 /* URLCacheAlert.h */,
 				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
 			);
@@ -1052,6 +1092,7 @@
 				E498DDF4121069DD001CB593 /* MilgromViewController.xib in Resources */,
 				E444727D12143DB90058D07B /* install.xml in Resources */,
 				E48111361214460D008ABBCC /* precache in Resources */,
+				E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,6 +1157,9 @@
 				E48503FC1214BB3600D2271F /* TouchView.mm in Sources */,
 				E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */,
 				E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */,
+				E4749CB1121D796500886A6E /* OpenGLTOMovie.m in Sources */,
+				E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */,
+				E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

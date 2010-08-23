@@ -17,8 +17,9 @@
 #import "TouchView.h"
 #import "MilgromMacros.h"
 #import "CustomFontTextField.h"
-
+#import "MilgromViewController.h"
 //#import "SongViewController.h"
+
 
 
 @implementation MainViewController
@@ -117,7 +118,7 @@
 		button.tag = i;
 	}
 	
-	
+	saveButton.hidden = NO; // TODO: move this
 	
 }
 
@@ -228,6 +229,7 @@
 			recordButton.hidden = NO;
 			menuButton.hidden = OFSAptr->getState() == SOLO_STATE;
 			setMenuButton.hidden = OFSAptr->getState() == BAND_STATE;
+			
 			
 			
 			
@@ -365,8 +367,10 @@
 
 - (void) save:(id)sender {
 	[self interrupt];
+	
 	songName.hidden = NO;
 	[songName becomeFirstResponder];
+	
 //	if (self.songViewController == nil) {
 //		self.songViewController = [[SongViewController alloc] initWithNibName:@"SongViewController" bundle:nil];
 //		songViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -377,6 +381,9 @@
 	
 }
 
+
+
+	
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	songName.hidden = YES;
@@ -391,7 +398,12 @@
 
 
 
-
+- (void)render:(id)sender {
+	[self interrupt];
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[appDelegate.milgromViewController renderAnimation];
+}
 
 		
 /*

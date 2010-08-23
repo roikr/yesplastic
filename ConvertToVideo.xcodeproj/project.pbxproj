@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
+		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		E44D7777121AF0EA004FAE5C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D7776121AF0EA004FAE5C /* CoreVideo.framework */; };
+		E44D77B5121B00EA004FAE5C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D77B4121B00EA004FAE5C /* AVFoundation.framework */; };
+		E44D77E0121B05CB004FAE5C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D77DF121B05CB004FAE5C /* MobileCoreServices.framework */; };
+		E44D7838121B4238004FAE5C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D7837121B4238004FAE5C /* CoreMedia.framework */; };
+		E4749C68121D739300886A6E /* ConvertToVideoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C62121D739300886A6E /* ConvertToVideoAppDelegate.m */; };
+		E4749C69121D739300886A6E /* ConvertToVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C64121D739300886A6E /* ConvertToVideoViewController.m */; };
+		E4749C6A121D739300886A6E /* ConvertToVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4749C65121D739300886A6E /* ConvertToVideoViewController.xib */; };
+		E4749C6B121D739300886A6E /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C67121D739300886A6E /* EAGLView.m */; };
+		E4749C6D121D73A500886A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C6C121D73A500886A6E /* main.m */; };
+		E4749C70121D73B500886A6E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4749C6E121D73B500886A6E /* MainWindow.xib */; };
+		E4749C71121D73B500886A6E /* temp.wav in Resources */ = {isa = PBXBuildFile; fileRef = E4749C6F121D73B500886A6E /* temp.wav */; };
+		E4749C7E121D73CE00886A6E /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C7D121D73CE00886A6E /* OpenGLTOMovie.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* ConvertToVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConvertToVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		32CA4F630368D1EE00C91783 /* ConvertToVideo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertToVideo_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* ConvertToVideo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ConvertToVideo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		E44D7776121AF0EA004FAE5C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E44D77B4121B00EA004FAE5C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E44D77DF121B05CB004FAE5C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E44D7837121B4238004FAE5C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E4749C61121D739300886A6E /* ConvertToVideoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvertToVideoAppDelegate.h; path = ConvertToVideoClasses/ConvertToVideoAppDelegate.h; sourceTree = "<group>"; };
+		E4749C62121D739300886A6E /* ConvertToVideoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConvertToVideoAppDelegate.m; path = ConvertToVideoClasses/ConvertToVideoAppDelegate.m; sourceTree = "<group>"; };
+		E4749C63121D739300886A6E /* ConvertToVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvertToVideoViewController.h; path = ConvertToVideoClasses/ConvertToVideoViewController.h; sourceTree = "<group>"; };
+		E4749C64121D739300886A6E /* ConvertToVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConvertToVideoViewController.m; path = ConvertToVideoClasses/ConvertToVideoViewController.m; sourceTree = "<group>"; };
+		E4749C65121D739300886A6E /* ConvertToVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ConvertToVideoViewController.xib; path = ConvertToVideoClasses/ConvertToVideoViewController.xib; sourceTree = "<group>"; };
+		E4749C66121D739300886A6E /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = ConvertToVideoClasses/EAGLView.h; sourceTree = "<group>"; };
+		E4749C67121D739300886A6E /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = ConvertToVideoClasses/EAGLView.m; sourceTree = "<group>"; };
+		E4749C6C121D73A500886A6E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ConvertToVideoClasses/main.m; sourceTree = "<group>"; };
+		E4749C6E121D73B500886A6E /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ConvertToVideoClasses/MainWindow.xib; sourceTree = "<group>"; };
+		E4749C6F121D73B500886A6E /* temp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = temp.wav; path = ConvertToVideoClasses/temp.wav; sourceTree = "<group>"; };
+		E4749C7C121D73CE00886A6E /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4749C7D121D73CE00886A6E /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
+				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
+				E44D7777121AF0EA004FAE5C /* CoreVideo.framework in Frameworks */,
+				E44D77B5121B00EA004FAE5C /* AVFoundation.framework in Frameworks */,
+				E44D77E0121B05CB004FAE5C /* MobileCoreServices.framework in Frameworks */,
+				E44D7838121B4238004FAE5C /* CoreMedia.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* ConvertToVideo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				E4749C60121D737C00886A6E /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E4749C6C121D73A500886A6E /* main.m */,
+				32CA4F630368D1EE00C91783 /* ConvertToVideo_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E4749C6E121D73B500886A6E /* MainWindow.xib */,
+				E4749C6F121D73B500886A6E /* temp.wav */,
+				8D1107310486CEB800E47090 /* ConvertToVideo-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E44D7837121B4238004FAE5C /* CoreMedia.framework */,
+				E44D7776121AF0EA004FAE5C /* CoreVideo.framework */,
+				E44D77B4121B00EA004FAE5C /* AVFoundation.framework */,
+				E44D77DF121B05CB004FAE5C /* MobileCoreServices.framework */,
+				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
+				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4749C60121D737C00886A6E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E4749C61121D739300886A6E /* ConvertToVideoAppDelegate.h */,
+				E4749C62121D739300886A6E /* ConvertToVideoAppDelegate.m */,
+				E4749C63121D739300886A6E /* ConvertToVideoViewController.h */,
+				E4749C64121D739300886A6E /* ConvertToVideoViewController.m */,
+				E4749C65121D739300886A6E /* ConvertToVideoViewController.xib */,
+				E4749C66121D739300886A6E /* EAGLView.h */,
+				E4749C67121D739300886A6E /* EAGLView.m */,
+				E4749C7C121D73CE00886A6E /* OpenGLTOMovie.h */,
+				E4749C7D121D73CE00886A6E /* OpenGLTOMovie.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* ConvertToVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "ConvertToVideo" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConvertToVideo;
+			productName = ConvertToVideo;
+			productReference = 1D6058910D05DD3D006BFB54 /* ConvertToVideo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ConvertToVideo" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* ConvertToVideo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4749C6A121D739300886A6E /* ConvertToVideoViewController.xib in Resources */,
+				E4749C70121D73B500886A6E /* MainWindow.xib in Resources */,
+				E4749C71121D73B500886A6E /* temp.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4749C68121D739300886A6E /* ConvertToVideoAppDelegate.m in Sources */,
+				E4749C69121D739300886A6E /* ConvertToVideoViewController.m in Sources */,
+				E4749C6B121D739300886A6E /* EAGLView.m in Sources */,
+				E4749C6D121D73A500886A6E /* main.m in Sources */,
+				E4749C7E121D73CE00886A6E /* OpenGLTOMovie.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (G22F3GL4MN)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ConvertToVideo_Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "ConvertToVideo-Info.plist";
+				PRODUCT_NAME = ConvertToVideo;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62D69DEA-7DF7-4B36-8C3C-A3432F096E5A";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (G22F3GL4MN)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ConvertToVideo_Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "ConvertToVideo-Info.plist";
+				PRODUCT_NAME = ConvertToVideo;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62D69DEA-7DF7-4B36-8C3C-A3432F096E5A";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "ConvertToVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ConvertToVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

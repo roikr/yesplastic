@@ -274,6 +274,8 @@
     // For example: self.myOutlet = nil;
 	self.songsArray = nil;
 	
+	// TODO: after some memory warnings the songs disappear, I supposed the problem is here and with viewDidLoad;
+	
 }
 
 

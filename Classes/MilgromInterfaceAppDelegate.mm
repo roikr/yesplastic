@@ -66,16 +66,18 @@ NSString * const kCacheFolder=@"URLCache";
 	//[window addSubview:viewController.view]; // need to add before making visible to allow rotation
 	//[window addSubview:milgromViewController.view];
 	
-    [window makeKeyAndVisible];
+   
 		
 	//[window bringSubviewToFront:viewController.view];
 	
 	
 	//glView.controller = self;
 	self.OFSAptr = new testApp;
+	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
 	OFSAptr->setup();
 	OFSAptr->setState(BAND_STATE);
-	OFSAptr->lastFrame = 0;
+	//OFSAptr->lastFrame = 0;
+	
 	
 	
 	/* turn off the NSURLCache shared cache */

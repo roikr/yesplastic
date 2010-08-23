@@ -544,7 +544,8 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	
 	switch (songState) {
 		case SONG_PLAY:
-		case SONG_RENDER_AUDIO: {
+		case SONG_RENDER_AUDIO: 
+		case SONG_RENDER_VIDEO: {
 			events.clear();
 			song.process(events);
 			for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
@@ -552,7 +553,8 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 				//printf("loop note:  %i\n", note);
 				if (iter->bNoteOn) {
 					midiInstrument->noteOn(note, iter->velocity*volume);
-					if (songState==SONG_PLAY) {
+					
+					if (songState!=SONG_RENDER_AUDIO) {
 						currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
 					}
 					
@@ -560,7 +562,9 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 				
 				else {
 					if (playerNum!=2) {
-						midiInstrument->noteOff(note);
+						if (songState!=SONG_RENDER_VIDEO) {
+							midiInstrument->noteOff(note);
+						}
 					}
 				}
 			}
@@ -579,9 +583,11 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 		default:
 			break;
 	}
+	
 	midiInstrument->preProcess();
 	midiInstrument->mixWithBlocks(left,right);
 	midiInstrument->postProcess();
+	
 	
 	
 	recordEvents.clear(); // TODO: is it safe ?
@@ -621,6 +627,7 @@ void PlayerController::setSongState(int songState) {
 			break;
 		case SONG_PLAY:
 		case SONG_RENDER_AUDIO:
+		case SONG_RENDER_VIDEO:
 			song.play();
 			break;
 		case SONG_RECORD:
@@ -640,11 +647,11 @@ int  PlayerController::getSongState() {
 }
 
 bool PlayerController::getIsRecording() {
-	return song.getIsRecording();
+	return song.getIsRecording() || midiInstrument->getIsPlaying();
 }
 
 bool PlayerController::getIsPlaying() {
-	return song.getIsPlaying();
+	return song.getIsPlaying() || midiInstrument->getIsPlaying();
 }
 
 

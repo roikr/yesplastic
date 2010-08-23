@@ -1,8 +1,8 @@
 //
-//  MilgromViewController.h
-//  Milgrom
+//  ConvertToVideoViewController.h
+//  ConvertToVideo
 //
-//  Created by Roee Kremer on 8/9/10.
+//  Created by Roee Kremer on 8/17/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,15 +15,10 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@class EAGLView;
-
-@interface MilgromViewController : UIViewController
+@interface ConvertToVideoViewController : UIViewController
 {
-    UINavigationController *viewController;
-	EAGLView *eAGLView;
-	EAGLContext *context;
-	
-   
+    EAGLContext *context;
+    GLuint program;
     
     BOOL animating;
     BOOL displayLinkSupported;
@@ -35,18 +30,18 @@
 	 */
     id displayLink;
     NSTimer *animationTimer;
-	CFTimeInterval startTime;
+	
+		
 	
 }
-
-@property (nonatomic, retain) IBOutlet UINavigationController *viewController;
-@property (nonatomic,retain) IBOutlet EAGLView *eAGLView;
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
 
-- (void)startAnimation;
+
+
+- (void) startAnimation;
 - (void)stopAnimation;
-- (void)renderAnimation;
+- (void) write;
 
 @end

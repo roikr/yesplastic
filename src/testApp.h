@@ -72,10 +72,6 @@ public:
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
 	string getCurrentSoundSetName(int playerNum);
 	
-	
-	void didBecomeAcive();
-	void willResignActive();
-	
 	int lastFrame;
 	
 	int controller;
@@ -83,6 +79,9 @@ public:
 	bool bMenu;
 	
 	void playRandomLoop();
+	
+	void soundStreamStart();
+	void soundStreamStop();
 	
 private:
 	

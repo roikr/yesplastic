@@ -1,8 +1,8 @@
 //
 //  EAGLView.h
-//  Milgrom
+//  ConvertToVideo
 //
-//  Created by Roee Kremer on 8/9/10.
+//  Created by Roee Kremer on 8/17/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,9 +12,6 @@
 #import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
-
-
-
 
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
@@ -30,15 +27,9 @@
     
     // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view.
     GLuint defaultFramebuffer, colorRenderbuffer;
-	
-	//float eyeX;
-	//float eyeY;
-	//float dist;
-	
 }
 
 @property (nonatomic, retain) EAGLContext *context;
-@property  GLint framebufferHeight;
 
 - (void)setFramebuffer;
 - (BOOL)presentFramebuffer;

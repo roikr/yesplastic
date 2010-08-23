@@ -108,6 +108,7 @@
 	self.userInteractionEnabled = YES;
 	
 	if (![song.bReady boolValue]) { 
+		return; // TODO: move this
 		self.userInteractionEnabled = NO;
 		CGRect frame = self.frame;
 		frame.size.width = 0;

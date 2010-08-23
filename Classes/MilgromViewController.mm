@@ -18,11 +18,16 @@
 #import "HelpViewController.h"
 #import "Constants.h"
 #import "MilgromMacros.h"
-
+#import "OpenGLTOMovie.h"
+#import "AVPlayerDemoPlaybackViewController.h"
+#import <CoreMedia/CoreMedia.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
+- (void) play;
+- (void) export;
 @end
 
 @implementation MilgromViewController
@@ -179,6 +184,8 @@
             animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) target:self selector:@selector(drawFrame) userInfo:nil repeats:TRUE];
         
 		startTime = CACurrentMediaTime();
+		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+		appDelegate.OFSAptr->lastFrame = -1;
         animating = TRUE;
     }
 }
@@ -205,46 +212,7 @@
 - (void)drawFrame
 {
     [self.eAGLView setFramebuffer];
-    /*
-    // Replace the implementation of this method to do your own custom drawing.
-    static const GLfloat squareVertices[] = {
-        -0.5f, -0.33f,
-        0.5f, -0.33f,
-        -0.5f,  0.33f,
-        0.5f,  0.33f,
-    };
     
-    static const GLubyte squareColors[] = {
-        255, 255,   0, 255,
-        0,   255, 255, 255,
-        0,     0,   0,   0,
-        255,   0, 255, 255,
-    };
-    
-    static float transY = 0.0f;
-    
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0.0f, (GLfloat)(sinf(transY)/2.0f), 0.0f);
-	transY += 0.075f;
-	
-	glVertexPointer(2, GL_FLOAT, 0, squareVertices);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glColorPointer(4, GL_UNSIGNED_BYTE, 0, squareColors);
-	glEnableClientState(GL_COLOR_ARRAY);
-    
-    
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	 
-	 */
-	
-	//[controller checkState:nil];
-	//[renderer setupView];
 	
 	if ([viewController.viewControllers count] > 1) {
 		MainViewController *mainViewController = (MainViewController *)[viewController.viewControllers objectAtIndex:1];
@@ -252,19 +220,32 @@
 	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
-	if (frame>appDelegate.OFSAptr->lastFrame) {
-		appDelegate.OFSAptr->lastFrame = frame;
+	if (animating) {
+		int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
+		if (frame>appDelegate.OFSAptr->lastFrame) {
+			appDelegate.OFSAptr->lastFrame = frame;
+			appDelegate.OFSAptr->update();
+		}
+		glLoadIdentity();
+		glScalef(1.0, -1.0,1.0);
+		glTranslatef(0, -self.eAGLView.framebufferHeight, 0);
+	} else {
+		glLoadIdentity();
 		appDelegate.OFSAptr->update();
 	}
-	
+
+		
 	
 	
 	
 	appDelegate.OFSAptr->draw();
-    
-    [self.eAGLView presentFramebuffer];
+	
+	//glPushMatrix();
+	//glScalef(1.0, -1.0,1.0);
+	//glTranslatef(0, framebufferHeight, 0);
+    if (animating) {
+		[self.eAGLView presentFramebuffer];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -281,6 +262,105 @@
 	[viewController viewDidAppear:animated];
 }
 
+- (void)renderAnimation {
+	[self stopAnimation];
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	testApp *OFSAptr = [appDelegate OFSAptr];
+	
+	
+	
+	dispatch_queue_t myCustomQueue;
+	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
+	dispatch_async(myCustomQueue, ^{
+		OFSAptr->soundStreamStop();
+		OFSAptr->renderAudio();
+		OFSAptr->setSongState(SONG_RENDER_VIDEO);
+		
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"];
+		
+		
+		
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] WithSize:CGSizeMake(480, 320) 
+		 
+						 withDrawFrame:^(int frameNum) {
+							 //NSLog(@"rendering frame: %i",frameNum);
+							 [self drawFrame];
+							 
+						 }
+		 
+						 withDidFinish:^(int frameNum) {
+							 return (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
+						 }
+		 
+				 withCompletionHandler:^ {
+					 NSLog(@"write completed");
+					[self export];
+					 
+				 }];
+	});
+	
+	
+	dispatch_release(myCustomQueue);
+	
+		
+}
+
+- (void) export {
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *exportPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+	
+	NSError *error;
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath]) {
+		if (![[NSFileManager defaultManager] removeItemAtPath:exportPath error:&error]) {
+			NSLog(@"removeItemAtPath error: %@",[error description]);
+		}
+	}
+	
+	
+	[OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
+				  withVideoURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"]] 
+				  withAudioURL: [NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] //[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]]
+	 
+		   withProgressHandler:^(float progress) {NSLog(@"progress: %f",progress);}
+		 withCompletionHandler:^ {
+			 NSLog(@"export completed");
+			 dispatch_async(dispatch_get_main_queue(),
+				^{
+					MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+					appDelegate.OFSAptr->soundStreamStart();
+					appDelegate.OFSAptr->setSongState(SONG_IDLE);
+					[self startAnimation];
+					[self play];
+				});
+			 
+			
+		 }
+	 ];
+	
+	NSLog(@"export end");
+	
+}
+
+
+-(void) play {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	
+	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
+	
+	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
+	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
+	
+	[self.viewController pushViewController:mPlaybackViewController animated:NO];
+	
+}
 
 
 

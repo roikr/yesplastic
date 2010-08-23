@@ -156,20 +156,14 @@ bool testApp::isSongAvailiable(string song,int playerNum) {
 void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 	
 	
+	
 	memset(lBlock, 0, bufferSize*sizeof(float));
 	memset(rBlock, 0, bufferSize*sizeof(float));
 	
 	for (int i=0;i<3;i++) {
 		player[i].processWithBlocks(lBlock, rBlock);
 	}
-	
-//	float TWO_PI = 6.28;
-//	
-//	while (phase > TWO_PI){
-//		phase -= TWO_PI;
-//	}
-//	
-//	sin(phase+=TWO_PI/bufferSize;
+		
 		
 	for (int i = 0; i < bufferSize; i++){
 		output[i*nChannels] = lBlock[i];
@@ -178,36 +172,6 @@ void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 	
 }
 
-void testApp::renderAudio() {
-	
-	ofSoundStreamStop();
-	
-	cout << "renderAudio started" << endl;
-	
-	song.open(ofToDataPath("temp.wav"));
-	
-	for (int i=0;i<3;i++) {
-		player[i].setSongState(SONG_RENDER_AUDIO);
-	}
-	
-	while (getSongState()==SONG_RENDER_AUDIO) {
-	
-	
-		memset(lBlock, 0, blockLength*sizeof(float));
-		memset(rBlock, 0, blockLength*sizeof(float));
-		
-		for (int i=0;i<3;i++) {
-			player[i].processWithBlocks(lBlock, rBlock);
-		}
-		
-		song.saveWithBlocks(lBlock, rBlock);
-	}
-		
-	song.close();	
-	
-	cout << "renderAudio finished" << endl;
-	ofSoundStreamStart();
-}
 
 
 void testApp::threadedFunction() {
@@ -384,6 +348,15 @@ void testApp::update(){
 		}
 	}
 	 
+	if (songState==SONG_RENDER_VIDEO) {
+		
+		for (int j=0; j<7; j++) {
+			for (int i=0;i<3;i++) {
+				player[i].processWithBlocks(lBlock, rBlock);
+			}
+		}
+		
+	}
 	
 	for (int i=0;i<3;i++)
 		player[i].update();
@@ -401,6 +374,7 @@ void testApp::update(){
 		
 	}
  */
+	
 }
 
 
@@ -874,11 +848,44 @@ void testApp::setBPM(float bpm) {
 	}
 }
 
+void testApp::renderAudio() {
+	
+	setSongState(SONG_RENDER_AUDIO);
+		
+	cout << "renderAudio started" << endl;
+	
+	song.open(ofToDocumentsPath("temp.wav"));
+	
+	
+	
+	while (getSongState()==SONG_RENDER_AUDIO) {
+		
+		
+		memset(lBlock, 0, blockLength*sizeof(float));
+		memset(rBlock, 0, blockLength*sizeof(float));
+		
+		for (int i=0;i<3;i++) {
+			player[i].processWithBlocks(lBlock, rBlock);
+		}
+		
+		song.saveWithBlocks(lBlock, rBlock);
+	}
+	
+	song.close();	
+	
+	cout << "renderAudio finished" << endl;
+	
+}
+
+
 void testApp::setSongState(int songState) {
 	
-	//bool bRenderAudio = songState==SONG_IDLE && this->songState == SONG_RECORD;
 	
+				
 	this->songState = songState;
+	
+	
+	
 	for (int i=0;i<3;i++) {
 		player[i].setSongState(songState);
 	}
@@ -897,23 +904,12 @@ void testApp::setSongState(int songState) {
 	
 }
 
-bool testApp::getIsPlaying() {
-	for (int i=0;i<3;i++) {
-		if (player[i].getIsPlaying()) {
-			return true;
-		}
-	}
-	return false;
-}
-		
-			
-	
-	
-	
 int  testApp::getSongState() {
+	
 	switch (songState) {
 		case SONG_PLAY:
 		case SONG_RENDER_AUDIO:
+		case SONG_RENDER_VIDEO:
 			if (! getIsPlaying()) {
 				songState = SONG_IDLE;
 				for (int i=0;i<3;i++) {
@@ -928,8 +924,25 @@ int  testApp::getSongState() {
 			break;
 	}
 	
+	
+	
 	return songState;
 }
+
+
+bool testApp::getIsPlaying() {
+	for (int i=0;i<3;i++) {
+		if (player[i].getIsPlaying()) {
+			return true;
+		}
+	}
+	return false;
+}
+		
+			
+	
+	
+	
 
 
 
@@ -981,14 +994,10 @@ void testApp::saveSong(string songName) {
 }
 	
 
-
-void testApp::didBecomeAcive() {
-	cout << "testApp::didBecomeAcive" << endl;
+void testApp::soundStreamStart() {
 	ofSoundStreamStart();
 }
 
-void testApp::willResignActive() {
-	cout << "testApp::willResignActive" << endl;
+void testApp::soundStreamStop() {
 	ofSoundStreamStop();
-
 }
