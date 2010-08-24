@@ -53,8 +53,8 @@ public:
 	float getVolume();
 	void setVolume(float vol);
 	
-	float getBPM();
-	void setBPM(float bpm);
+	int getBPM();
+	void setBPM(int bpm);
 	
 	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
 	
@@ -95,7 +95,9 @@ private:
 	bool bButtonDown;
 	int button;
 		
-		
+	
+	bool bPush;
+	
 	ofTrueTypeFont	verdana;
 		
 	ofxXmlSettings xml;

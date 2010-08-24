@@ -69,7 +69,7 @@
 	//[setsTable viewDidAppear:animated];
 	MilgromLog(@"PlayerMenu::viewDidAppear");
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
-	bpmSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM();
+	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 50.0)/150.0;
 
    
 }
@@ -90,7 +90,8 @@
 
 - (void) bpmChanged:(id)sender {
 	
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setBPM(bpmSlider.value);
+	//ofClamp(bpm*150.0+50.0,50,200)
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setBPM(bpmSlider.value * 150.0 + 50);
 }
 
 - (void)exit:(id)sender {

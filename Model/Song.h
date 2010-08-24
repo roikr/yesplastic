@@ -1,8 +1,8 @@
 //
 //  Song.h
-//  MilgromInterface
+//  Milgrom
 //
-//  Created by Roee Kremer on 8/11/10.
+//  Created by Roee Kremer on 8/24/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSNumber * bLocked;
 @property (nonatomic, retain) NSString * songName;
 @property (nonatomic, retain) NSNumber * bReady;
+@property (nonatomic, retain) NSNumber * bpm;
 @property (nonatomic, retain) NSNumber * bDemo;
 @property (nonatomic, retain) NSSet* soundSets;
 

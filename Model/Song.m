@@ -1,8 +1,8 @@
 // 
 //  Song.m
-//  MilgromInterface
+//  Milgrom
 //
-//  Created by Roee Kremer on 8/11/10.
+//  Created by Roee Kremer on 8/24/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 @dynamic bLocked;
 @dynamic songName;
 @dynamic bReady;
+@dynamic bpm;
 @dynamic bDemo;
 @dynamic soundSets;
 

@@ -123,6 +123,7 @@ void testApp::setup(){
 	bTrans = false;
 	bMove = false;
 	bMenu = false;
+	bPush = false;
 	
 	
 	sampleRate 			= 44100;
@@ -655,13 +656,32 @@ void testApp::touchDown(float x, float y, int touchId) {
 	//printf("touchDown: %.f, %.f %i\n", x, y, touchId);
 	
 	
-	
-	if (state==BAND_STATE) {
-		controller = (int)x/160;
-		//nextLoopNum = player[controller].getCurrentLoop();
+	switch (state) {
+		case BAND_STATE: {
+			int xmod = (int)x % 160;
+			if (xmod>25 && xmod < 135 && y>75 && y<245) {
+				controller = (int)x/160;
+				player[controller].setPush(true);
+				bPush = true;
+			}
+			
+			
+			//nextLoopNum = player[controller].getCurrentLoop();
+		} break;
+		case SOLO_STATE: {
+			if (x>50 && x<270 && y>100 && y<350) {
+				player[controller].setPush(true);
+				bPush = true;
+			}
+			
+			measure m;
+			m.x = x;
+			m.y = y;
+			m.t = ofGetElapsedTimeMillis();
+			measures.push_back(m);
+			break;
+		}
 	}
-	
-	
 	/*
 	if (state==SOLO_STATE && y>=360) {
 		button = 4*(((int)y-360)/60)+(int)x/80;
@@ -669,19 +689,6 @@ void testApp::touchDown(float x, float y, int touchId) {
 		buttonPressed(button);
 		bButtonDown = true; // for view 
 	} */
-	
-	player[controller].setPush(true);
-	
-	
-	if (state==SOLO_STATE) {
-	
-		measure m;
-		m.x = x;
-		m.y = y;
-		m.t = ofGetElapsedTimeMillis();
-		measures.push_back(m);
-	}
-		
 	
 }
 
@@ -729,8 +736,10 @@ void testApp::touchUp(float x, float y, int touchId) {
 		return;
 	}
 	
-	player[controller].setPush(false);
-	
+	if (bPush) {
+		player[controller].setPush(false);
+	}
+		
 	switch (state) {
 		case SOLO_STATE: {
 			
@@ -791,8 +800,12 @@ void testApp::touchUp(float x, float y, int touchId) {
 		 */
 	}
 	
-	if (measures.size()<=1 && !bButtonDown) {
-		setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
+	if (bPush) {
+		bPush = false;
+			
+		if (measures.size()<=1 ) { // && !bButtonDown
+			setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
+		}
 	}
 	
 	measures.clear();
@@ -836,12 +849,12 @@ void testApp::setVolume(float vol) {
 
 
 
-float testApp::getBPM() {
-	return (bpm - 50.0)/150.00;
+int testApp::getBPM() {
+	return bpm; 
 }
 
-void testApp::setBPM(float bpm) {
-	this->bpm = ofClamp(bpm*150.0+50.0,50,200);
+void testApp::setBPM(int bpm) {
+	this->bpm = bpm;
 	
 	for (int i=0;i<3;i++) {
 		player[i].setBPM(this->bpm);
