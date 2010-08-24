@@ -144,24 +144,45 @@ void testApp::setBPM(float bpm) {
 }
 
 
-void testApp::playSong() {
+void testApp::renderAudio() {
 	
+		
+}
+
+
+void testApp::setSongState(int songState) {
+	
+	
+	
+	this->songState = songState;
+	
+	
+	
+		
 	
 }
 
-void testApp::stopSong() {
+int  testApp::getSongState() {
 	
+	//switch (songState) {
+//		case SONG_PLAY:
+//		case SONG_RENDER_AUDIO:
+//		case SONG_RENDER_VIDEO:
+//			if (! getIsPlaying()) {
+//				songState = SONG_IDLE;
+//				
+//			}
+//			break;
+//			
+//		default:
+//			break;
+//	}
+	
+	
+	
+	return songState;
 }
 
-void testApp::recordSong() {
-	
-	
-}
-
-bool testApp::getIsSongPlaying() {
-	
-	return false;
-}
 
 bool testApp::loadSong(string songName) {
 	
@@ -180,30 +201,7 @@ void testApp::saveSong(string songName) {
 	
 }
 
-void setSongState(int songState) {
-	this->songState = songState;
-}
 
-
-int  getSongState() {
-	
-	
-	return songState;
-}
-
-	
-
-
-void testApp::didBecomeAcive() {
-	cout << "testApp::didBecomeAcive" << endl;
-	
-}
-
-void testApp::willResignActive() {
-	cout << "testApp::willResignActive" << endl;
-	;
-
-}
 
 void testApp::playRandomLoop() {
 }
@@ -224,3 +222,11 @@ string testApp::getCurrentSoundSetName(int playerNum) {
 			break;
 	}
 }
+
+void testApp::soundStreamStart() {
+}
+
+void testApp::soundStreamStop() {
+	
+}
+

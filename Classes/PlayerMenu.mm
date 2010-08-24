@@ -66,6 +66,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	//[setsTable viewDidAppear:animated];
 	MilgromLog(@"PlayerMenu::viewDidAppear");
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
 	bpmSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM();
@@ -75,6 +76,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	//[setsTable viewWillAppear:animated];
 	MilgromLog(@"PlayerMenu::viewWillAppear");
 }
 

@@ -41,17 +41,19 @@ public:
 	void saveSong(string songName);
 	void setSongState(int songState);
 	int  getSongState();
+	bool getIsPlaying();
+	
+	void renderAudio() ;
 	
 	bool isInTransition();
 	bool isSongAvailiable(string song,int playerNum=0);
 	void changeSoundSet(string nextSoundSet, bool bChangeAll);
 	string getCurrentSoundSetName(int playerNum);
 	
-	
-	void didBecomeAcive();
-	void willResignActive();
-	
 	void playRandomLoop();
+	void soundStreamStart();
+	void soundStreamStop();	
+	
 	
 	int lastFrame;
 	

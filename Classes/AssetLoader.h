@@ -21,7 +21,7 @@
 
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id<AssetLoaderDelegate> delegate;
 @property (nonatomic, copy) NSString *filePath;
 @property (nonatomic, retain) Set *set;
 

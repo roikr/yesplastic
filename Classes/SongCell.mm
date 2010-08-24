@@ -17,7 +17,7 @@
 
 @interface NSObject (PrivateMethods)
 
-- (void)update;
+
 @end
 
 
@@ -27,12 +27,13 @@
 @synthesize lock;
 @synthesize deleteButton;
 @synthesize songsTable;
-@synthesize song; 
+
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
+		
     }
     return self;
 }
@@ -96,63 +97,51 @@
 
 - (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable {
 	
-	self.song = theSong;
+	
 	self.label.text = theSong.songName;
 	self.songsTable = theTable;
-	currentSet = 0;
-	[self update];
+	
+	
+	
 	
 }
 
-- (void)update {
-	self.userInteractionEnabled = YES;
-	
-	if (![song.bReady boolValue]) { 
-		return; // TODO: move this
-		self.userInteractionEnabled = NO;
-		CGRect frame = self.frame;
-		frame.size.width = 0;
-		self.frame = frame;
-		MilgromLog(@"Song: %@",[song songName]);
-		NSArray *soundSets = [song.soundSets allObjects];
-		while (currentSet/2 < [soundSets count] )  {
-			MilgromLog(@"currentSet: %i",currentSet);
-			SoundSet *soundSet = [soundSets objectAtIndex:currentSet/2];
-			if (![soundSet.bReady boolValue]) {
-				MilgromLog(@"%i: SoundSet: %@ is not ready",currentSet,[soundSet setName]);
-				frame.size.width = (float)currentSet * 270/6;
-				self.frame = frame;
-				[[AssetLoader alloc] initWithSet:soundSet delegate:self];
-				
-				return; 
-			} else {
-				currentSet++;
-				VideoSet *videoSet = [soundSet videoSet];
-				if (![videoSet.bReady boolValue]) {
-					
-					MilgromLog(@"%i: VideoSet: %@ is not ready",currentSet,[videoSet setName]);
-					frame.size.width = (float)currentSet * 270/6;
-					self.frame = frame;
+- (NSNumber *)progress {
+	return _progress;
+}
 
-					[[AssetLoader alloc] initWithSet:videoSet delegate:self];
-					
-					return;
-				} else {
-					currentSet++;
-				}
-
-
-			}
-			
-		}
-		frame.size.width = 270;
-		self.frame = frame;
-		self.userInteractionEnabled = YES;
-		[song setBReady:[NSNumber numberWithBool:YES]];
-		[songsTable updateContext];
+- (void) setProgress:(NSNumber *)theProgress {
+	if ([theProgress floatValue]<1.0f) {
 		
-	} 
+		self.userInteractionEnabled = NO;
+		
+		CGRect frame = self.frame;
+		frame.size.width  = [theProgress floatValue]*270.0;
+		self.frame = frame;
+		
+				
+	} else {
+		self.userInteractionEnabled = YES;
+		CGRect frame = self.frame;
+		frame.size.width = 270.0;
+		self.frame = frame;
+		
+	}
+	
+	_progress = theProgress;
+	
 }
+
+/*
+- (void)didMoveToSuperview {
+	[super didMoveToSuperview];
+	self.progress = self.progress;
+}
+
+- (void)didMoveToWindow {
+	[super didMoveToWindow];
+}
+*/
 
 - (void) delete:(id)sender {
 	[songsTable deleteSong:self];
@@ -161,33 +150,9 @@
 
 - (void)dealloc {
 	[songsTable release];
-	[song release];
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark AssetLoader methods
-
-- (void) loaderDidFail:(AssetLoader *)theLoader {
-	[self update];
-}
-
-- (void) loaderDidFinish:(AssetLoader *)theLoader {
-	
-	Set *set = theLoader.set;
-	MilgromLog(@"Set: %@ is ready",[set setName]);
-	[set setBReady:[NSNumber numberWithBool:YES]];
-	[songsTable updateContext];
-	[self update];
-	
-}
-
-- (void) loaderProgress:(NSNumber *)theProgress {
-	CGRect frame = self.frame;
-	frame.size.width = (float)currentSet * 270/6 + [theProgress floatValue] * 270/6;
-	self.frame = frame;
-	//MilgromLog(@"loaderProgress: %3.2f, width: %3.0f/%3.0f",[theProgress floatValue] *100,self.frame.size.width,270);
-}
 
 
 @end

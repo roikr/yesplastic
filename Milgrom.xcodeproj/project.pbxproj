@@ -44,6 +44,7 @@
 		E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727B12143DB90058D07B /* ofxXmlSettings.cpp */; };
 		E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444728B12143EE60058D07B /* ofxSndFile.cpp */; };
 		E44472B812143FEE0058D07B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
+		E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = E44D9D231223D1C400477CE0 /* DemoLoader.mm */; };
 		E4749CB1121D796500886A6E /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749CB0121D796500886A6E /* OpenGLTOMovie.m */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
@@ -253,6 +254,8 @@
 		E444728B12143EE60058D07B /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
 		E444728C12143EE60058D07B /* ofxSndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSndFile.h; sourceTree = "<group>"; };
 		E44472B712143FEE0058D07B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E44D9D221223D1C400477CE0 /* DemoLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoLoader.h; path = Classes/DemoLoader.h; sourceTree = "<group>"; };
+		E44D9D231223D1C400477CE0 /* DemoLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DemoLoader.mm; path = Classes/DemoLoader.mm; sourceTree = "<group>"; };
 		E4749CAF121D796500886A6E /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
 		E4749CB0121D796500886A6E /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -484,12 +487,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				E4998B711220317E006EC3BA /* AVPlayer */,
-				E444725212143D810058D07B /* addons */,
 				E444721012143D2F0058D07B /* src */,
 				E4D1EB3712113350004D4E25 /* Classes */,
 				080E96DDFE201D6D7F000001 /* ViewControllers */,
 				E490A1A21206C536008512EA /* Model */,
+				E44471C2121438540058D07B /* ZipArchive */,
+				E4998B711220317E006EC3BA /* AVPlayer */,
+				E444725212143D810058D07B /* addons */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E4B3D2C211F83D4100B57223 /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -797,18 +801,19 @@
 		E4D1EB3712113350004D4E25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E4749CAF121D796500886A6E /* OpenGLTOMovie.h */,
-				E4749CB0121D796500886A6E /* OpenGLTOMovie.m */,
-				E44471C2121438540058D07B /* ZipArchive */,
 				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
+				E44D9D221223D1C400477CE0 /* DemoLoader.h */,
+				E44D9D231223D1C400477CE0 /* DemoLoader.mm */,
 				E4D1EB4D12113431004D4E25 /* AssetLoader.h */,
 				E4D1EB4E12113431004D4E25 /* AssetLoader.mm */,
 				E4D1EB50121134E1004D4E25 /* URLCacheConnection.h */,
 				E4D1EB3D121133F3004D4E25 /* URLCacheConnection.mm */,
 				E4D1EB3B121133F3004D4E25 /* URLCacheAlert.h */,
 				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
+				E4749CAF121D796500886A6E /* OpenGLTOMovie.h */,
+				E4749CB0121D796500886A6E /* OpenGLTOMovie.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1160,6 +1165,7 @@
 				E4749CB1121D796500886A6E /* OpenGLTOMovie.m in Sources */,
 				E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */,
 				E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */,
+				E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

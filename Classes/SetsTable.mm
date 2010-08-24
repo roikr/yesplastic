@@ -208,6 +208,18 @@
 	
 }
 
+//- (void)viewDidAppear:(BOOL)animated {
+//	[super viewDidAppear:animated];
+//	MilgromLog(@"SetsTable::viewDidAppear");
+//	
+//	
+//	
+//}
+//
+//- (void)viewWillAppear:(BOOL)animated {
+//	[super viewWillAppear:animated];
+//	MilgromLog(@"SetsTable::viewWillAppear");
+//}
 
 #pragma mark -
 #pragma mark Memory management

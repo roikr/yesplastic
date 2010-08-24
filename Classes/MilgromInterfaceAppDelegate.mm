@@ -20,6 +20,7 @@
 #include "SoundSet.h"
 
 
+
 NSString * const kMilgromURL=@"roikr.com";
 NSString * const kCacheFolder=@"URLCache";
 
@@ -39,6 +40,7 @@ NSString * const kCacheFolder=@"URLCache";
 + (BOOL)unzipPrecache;
 - (void)addDemos;
 - (void)addDemo:(NSArray *)theArray download:(BOOL)bDownload;
+- (void)loadDemos;
  
 @end
 
@@ -47,8 +49,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize window;
 @synthesize milgromViewController;
 @synthesize OFSAptr;
-
-
+@synthesize queuedDemos;
 
 
 #pragma mark -
@@ -61,6 +62,8 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if ([MilgromInterfaceAppDelegate unzipPrecache])
 		[self addDemos];
+	
+	[self loadDemos]; 
 	
     // Add the view controller's view to the window and display.
 	//[window addSubview:viewController.view]; // need to add before making visible to allow rotation
@@ -151,6 +154,7 @@ NSString * const kCacheFolder=@"URLCache";
              abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
              */
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			MilgromLog(@"MilgromInterfaceAppDelegate:addSong error: %@",[error description]);
             abort();
         } 
     }
@@ -373,7 +377,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (!documentsDirectory) {
 		MilgromLog(@"Documents directory not found!");
-		return YES;
+		return NO;
 	}
 	
 	
@@ -450,10 +454,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[request release];
 	
 	
-	
-	if (![self.managedObjectContext save:&error]) {
-		MilgromLog(@"MilgromInterfaceAppDelegate:addSong error: %@",[error description]);
-	}
+	[self saveContext];
 	
 	BandMenu *bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0];
 	
@@ -487,10 +488,8 @@ NSString * const kCacheFolder=@"URLCache";
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] download:YES];
 	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] download:YES];
 	
-	NSError *error;
-	if (![managedObjectContext_ save:&error]) {
-		MilgromLog(@"%@",[error description]);
-	}
+	[self saveContext];
+	
 	
 	//[songsArray addObject:song];
 	
@@ -548,7 +547,88 @@ NSString * const kCacheFolder=@"URLCache";
 	
 }
 
+-(void)loadDemos {
+	
+	
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+	
+	
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
+								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:YES],
+								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO]
+								,nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bDemo == YES AND bReady = NO"]; //  AND bReady == YES AND bLocked == NO
+    [request setPredicate:predicate];
+	
+	NSError *error;
+	NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+	
+	if (mutableFetchResults == nil) {
+	}
+	
+	[self setQueuedDemos:mutableFetchResults];
+	[mutableFetchResults release];
+	[request release];
+	
+	if ([queuedDemos count]) {
+		[[DemoLoader alloc] initWithSong:[queuedDemos objectAtIndex:0] delegate:self];
+	}
+			
+	
+//	dispatch_queue_t myCustomQueue = dispatch_queue_create("demosQueue", NULL);
+//	dispatch_retain(myCustomQueue);
+//	
+//	dispatch_async(myCustomQueue, ^{
+//	});		
+		
+}
 
+
+#pragma mark -
+#pragma mark DemoLoader methods
+
+
+
+- (void) loaderDidFinish:(DemoLoader *)theLoader {
+	
+	Song *song = theLoader.song;
+	MilgromLog(@"Song: %@ is ready",[song songName]);
+	
+	[queuedDemos removeObject:song];
+	
+	if ([queuedDemos count]) {
+		[[DemoLoader alloc] initWithSong:[queuedDemos objectAtIndex:0] delegate:self];
+	}
+	/*
+	if ([queuedDemos count]) {
+				
+		dispatch_async(myCustomQueue, ^{
+			[[DemoLoader alloc] initWithSong:[queuedDemos objectAtIndex:0] delegate:self];
+		});
+	
+	} else
+		dispatch_release(myCustomQueue);
+	*/
+	// TODO: clean on exit
+	
+	//[self update];
+	
+	
+}
+
+- (void) loader:(DemoLoader *)theLoader withProgress:(NSNumber *)theProgress {
+	
+	Song *song = theLoader.song;
+	BandMenu *bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0];
+	
+	[bandMenu.songsTable updateSong:song withProgress:theProgress];
+	
+}
 
 
 

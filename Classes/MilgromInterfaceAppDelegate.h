@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#import "DemoLoader.h"
 
 extern NSString * const kCacheFolder;
 extern NSString * const kMilgromURL;
@@ -19,7 +20,7 @@ class testApp;
 
 
 
-@interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate> {
+@interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate> {
     UIWindow *window;
     
 	
@@ -30,6 +31,9 @@ class testApp;
 	MilgromViewController *milgromViewController;
 	
 	testApp *OFSAptr;
+	
+	NSMutableArray *queuedDemos;
+	
 	
 	
 }
@@ -43,6 +47,7 @@ class testApp;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property testApp *OFSAptr;
+@property (nonatomic, retain) NSMutableArray *queuedDemos;
 
 
 - (NSString *)applicationDocumentsDirectory;

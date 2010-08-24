@@ -89,11 +89,11 @@
 	
 }
 
-- (void)updateContext {
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-		
-	}
+-(void)updateSong:(Song *)song withProgress:(NSNumber *)theProgress {
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0];
+	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	[cell setProgress:theProgress];
+	
 }
 
 /*
@@ -158,6 +158,9 @@
 	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	[cell updateBackgroundWithNumber:[indexPath row]];
 	[cell configureWithSong:song withSongsTable:self];
+	if (![song.bReady boolValue]) {
+		[cell setProgress:[NSNumber numberWithFloat:0.0f]];
+	}
 		    
     
     return (UITableViewCell*) cell;

@@ -113,6 +113,7 @@
 	MilgromLog(@"AssetLoader::connectionDidFinish");
 	[[NSFileManager defaultManager] createFileAtPath:filePath contents:theConnection.receivedData  attributes:nil];
 	MilgromLog(@"zip file written");
+	//[self unzipAsset];
 	[self performSelectorInBackground:@selector(unzipAsset) withObject:nil];
 	
 	
@@ -150,6 +151,7 @@
 	//[unzippedAssets addObject:asset.identifier];
 	//[self archive];
 	MilgromLog(@"unzipping finished");
+	
 	[self performSelectorOnMainThread:@selector(unzipAssetDidFinish) withObject:nil waitUntilDone:NO];
 	[pool release];
 	
