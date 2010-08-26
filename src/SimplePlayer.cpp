@@ -89,55 +89,52 @@ void SimplePlayer::setFont(ofTrueTypeFont * font) {
 	this->font = font;
 }
 
-void SimplePlayer::prepareOut() {
-	if (!enable)
-		return;
-	
-	ofLog(OF_LOG_VERBOSE,"%s: unloading actor",setName.c_str());
-	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
-		actor.unload(i);
-	ofLog(OF_LOG_VERBOSE,"%s: loading out actor",setName.c_str());
-	actor.load(SEQUENCE_OUT);
-	
-	pushTexture.unload();
 
+void SimplePlayer::initIdle() {
+	ofLog(OF_LOG_VERBOSE,"%s: initializing idle actor",setName.c_str());
+	actor.init(SEQUENCE_IDLE);
 }
+
+void SimplePlayer::loadIdle() {
+	ofLog(OF_LOG_VERBOSE,"%s: loading idle actor",setName.c_str());
+	actor.load(SEQUENCE_IDLE);
+}
+
+void SimplePlayer::unloadIdle() {
+	ofLog(OF_LOG_VERBOSE,"%s: unloading idle actor",setName.c_str());
+	actor.unload(SEQUENCE_IDLE);
+}
+
+
 
 void SimplePlayer::initIn() {
 	if (!enable)
 		return;
 	
-	ofLog(OF_LOG_VERBOSE,"%s: initializing idle actor",setName.c_str());
-	actor.init(SEQUENCE_IDLE);
 	ofLog(OF_LOG_VERBOSE,"%s: initializing in actor",setName.c_str());
 	actor.init(SEQUENCE_IN);
-	
-	
+
 }
 
-void SimplePlayer::prepareIn() {
+void SimplePlayer::loadIn() {
 	if (!enable)
 		return;
 
-	ofLog(OF_LOG_VERBOSE,"%s: loading idle actor",setName.c_str());
-	actor.load(SEQUENCE_IDLE);
 	ofLog(OF_LOG_VERBOSE,"%s: loading in actor",setName.c_str());
 	actor.load(SEQUENCE_IN);
 	
-	
-	
 }
 
-void SimplePlayer::finishOut() {
+void SimplePlayer::unloadIn() {
 	if (!enable)
 		return;
 	
-	ofLog(OF_LOG_VERBOSE,"%s: unloading idle actor",setName.c_str());
-	actor.unload(SEQUENCE_IDLE);
-	ofLog(OF_LOG_VERBOSE,"%s: unloading out actor",setName.c_str());
-	actor.unload(SEQUENCE_OUT);
-	
+	ofLog(OF_LOG_VERBOSE,"%s: unloading in actor",setName.c_str());
+	actor.unload(SEQUENCE_IN);
+		
 }
+
+
 	
 
 void SimplePlayer::initSet() {
@@ -147,19 +144,16 @@ void SimplePlayer::initSet() {
 	ofLog(OF_LOG_VERBOSE,"%s: initializing actor",setName.c_str());
 	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
 		actor.init(i);
-	ofLog(OF_LOG_VERBOSE,"%s: initializing out actor",setName.c_str());
-	actor.init(SEQUENCE_OUT);
-	
+		
 	pushTexture.init();
 	
 }
 
-void SimplePlayer::prepareSet() {
+void SimplePlayer::loadSet() {
 	if (!enable)
 		return;
 	
-	ofLog(OF_LOG_VERBOSE,"%s: unloading in actor",setName.c_str());
-	actor.unload(SEQUENCE_IN);
+	
 	ofLog(OF_LOG_VERBOSE,"%s: loading actor",setName.c_str());
 	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
 		actor.load(i);
@@ -168,7 +162,47 @@ void SimplePlayer::prepareSet() {
 	
 }
 
-void SimplePlayer::releaseSet() {
+void SimplePlayer::unloadSet() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: unloading actor",setName.c_str());
+	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
+		actor.unload(i);
+	
+	pushTexture.unload();
+	
+}
+
+void SimplePlayer::initOut() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: initializing out actor",setName.c_str());
+	actor.init(SEQUENCE_OUT);
+		
+}
+
+void SimplePlayer::loadOut() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: loading out actor",setName.c_str());
+	actor.load(SEQUENCE_OUT);
+	
+}
+
+void SimplePlayer::unloadOut() {
+	if (!enable)
+		return;
+	
+	
+	ofLog(OF_LOG_VERBOSE,"%s: unloading out actor",setName.c_str());
+	actor.unload(SEQUENCE_OUT);
+	
+}
+
+void SimplePlayer::release() {
 	if (!enable)
 		return;
 	ofLog(OF_LOG_VERBOSE,"%s: releasing actor",setName.c_str());
@@ -299,7 +333,7 @@ void SimplePlayer::play(int num) {
 }
 
 void SimplePlayer::exit() {
-	releaseSet();
+	release();
 	
 }
 

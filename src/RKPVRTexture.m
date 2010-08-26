@@ -142,7 +142,7 @@ typedef struct _PVRTexHeader
 	
 	if (_name != 0) {
 		glDeleteTextures(1, &_name);
-		NSLog(@"createGLTexture: Delete Texture in GPU: %d", _name);
+		//NSLog(@"createGLTexture: Delete Texture in GPU: %d", _name);
 	}
 		
 	glGenTextures(1, &_name);
@@ -150,7 +150,7 @@ typedef struct _PVRTexHeader
 	
 	
 	
-	NSLog(@"Create Texture in GPU: %d", _name);
+	//NSLog(@"Create Texture in GPU: %d", _name);
 		
 	glCompressedTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, dataLength, bytes);
 		
@@ -172,7 +172,7 @@ typedef struct _PVRTexHeader
 {
 	if (_name != 0) {              //this is the only change - need to implement better wrapper however will do it in the wrapper
 		glDeleteTextures(1, &_name);
-		NSLog(@"unload: Delete Texture in GPU: %d", _name);
+		//NSLog(@"unload: Delete Texture in GPU: %d", _name);
 		_name = 0;
 	}
 }
@@ -231,9 +231,9 @@ typedef struct _PVRTexHeader
 
 - (void)dealloc
 {
-	[self unload];
+	//[self unload];
 	[data release];
-	NSLog(@"RKPVRTexture dealloc");
+	//NSLog(@"RKPVRTexture dealloc");
 	[super dealloc];
 }
 

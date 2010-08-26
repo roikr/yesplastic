@@ -77,6 +77,14 @@ NSString * const kCacheFolder=@"URLCache";
 	//glView.controller = self;
 	self.OFSAptr = new testApp;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
+	
+	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+	dispatch_async(aQueue, ^{
+		while (1) {
+			OFSAptr->threadedFunction();
+		}
+	});
+	
 	OFSAptr->setup();
 	OFSAptr->setState(BAND_STATE);
 	//OFSAptr->lastFrame = 0;
@@ -471,12 +479,12 @@ NSString * const kCacheFolder=@"URLCache";
 	if ([song.bDemo boolValue]) {
 		if (  !OFSAptr->isInTransition() && OFSAptr->isSongAvailiable(nextSong)) {
 			
-			OFSAptr->changeSoundSet(nextSong, true);
+			OFSAptr->loadSong(nextSong,true);
 			OFSAptr->setBPM([song.bpm integerValue]);
 		}
 		
 	} else {
-		OFSAptr->loadSong([song.songName UTF8String]);
+		OFSAptr->loadSong([song.songName UTF8String],false);
 		OFSAptr->setBPM([song.bpm integerValue]);
 	}
 	

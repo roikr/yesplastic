@@ -7,24 +7,41 @@
 #include "Constants.h"
 #include "ofxMidiInstrument.h"
 
+enum {
+	TRANSITION_IDLE,
+	TRANSITION_UNLOAD_SET,
+	TRANSITION_UNLOAD_SET_FINISHED,
+	TRANSITION_LOAD_SET,
+	TRANSITION_LOAD_SET_FINISHED,
+	TRANSITION_RELEASE_SET,
+	TRANSITION_RELEASE_SET_FINISHED,
+	TRANSITION_INIT_IN_OUT,
+	TRANSITION_INIT_IN_OUT_FINISHED,
+	TRANSITION_PLAYING_OUT,
+	TRANSITION_PLAYING_IN,
+	TRANSITION_INIT_SET,
+	TRANSITION_INIT_SET_FINISHED,
+	TRANSITION_CHANGE_SOUND_SET,
+	TRANSITION_CHANGE_SOUND_SET_FINISHED
+};
+
 
 PlayerController::PlayerController() {
 	transitionState = TRANSITION_IDLE;
 	enable = false;
+	bVisible = false;
+	
+	currentPlayer = 0;
+	videoSet = "";
 	
 };
 
 void PlayerController::setup(int playerNum) {
-	enable = true;	
+	
 	this->playerNum = playerNum;
 	
-	
-	
 	mode = MANUAL_MODE;	
-	
-	
-		
-	currentPlayer = 0;
+			
 	midiInstrument = 0;
 	midiTrack.setup();
 	songState = SONG_IDLE;
@@ -34,10 +51,98 @@ void PlayerController::setup(int playerNum) {
 }
 
 
-void  PlayerController::loadSoundSet(string soundSet) {
-	
-	ofLog(OF_LOG_VERBOSE,"loadSoundSet: %s",soundSet.c_str());
+void  PlayerController::loadSet(string soundSet,string songName){
+	this->soundSet = soundSet;
+	this->songName = songName;
+	bAnimatedTransition = false;
+	enable = false;	
+	transitionState = TRANSITION_CHANGE_SOUND_SET;
+}
 
+void PlayerController::changeSet(string soundSet) {
+	
+	
+	
+	if (isInTransition() || soundSet == this->soundSet) {
+		return;
+	}
+	this->soundSet = soundSet;
+	bAnimatedTransition = true;
+	enable = false;	
+	transitionState = TRANSITION_CHANGE_SOUND_SET;
+}
+
+
+void  PlayerController::loadSoundSet() {
+	
+	int start = ofGetElapsedTimeMillis();
+	
+	midiTrack.pause();
+	ofLog(OF_LOG_VERBOSE,"loadSoundSet: %s",soundSet.c_str());
+	
+	this->soundSet = soundSet;
+	
+	string path = "SOUNDS/"+soundSet+"/"+soundSet;
+	
+	ofxXmlSettings xml;
+	string xmlpath = path+".xml";
+	bool loaded = xml.loadFile(xmlpath);
+	ofLog(OF_LOG_VERBOSE,"xml loading %s",loaded ? "succeeded" : "failed");
+	assert(loaded);
+	
+	
+	xml.pushTag("sound_set");
+	bFramesDriverPlayer = xml.getAttribute("video", "lips", 0, 0);
+	nextVideoSet =	xml.getValue("video","");
+	
+	//ofLog(OF_LOG_VERBOSE,"using video: %s",nextVideoSet.c_str());
+	
+	multi = xml.tagExists("multi");
+	volume = xml.getValue("volume", 1.0f);
+	
+	if (xml.tagExists("notes")) {
+		xml.pushTag("notes");
+		for (int i=0; i<xml.getNumTags("note");i++) {
+			int midi = (xml.getAttribute("note", "midi", 0, i) -12) % 24 ;// ("note", 0, i)-36) % 24;
+			
+			int sample = xml.getAttribute("note", "sample", 0, i)-1;
+			midiToSample[midi] = sample;
+			
+			int key = xml.getAttribute("note", "key", 0, i);
+			if (key)
+				keyToMidi[key-1] = midi;
+			
+			midiNotes.push_back(midi);
+			
+			//ofLog(OF_LOG_VERBOSE,"parsing note %d: midi=%d, video=%d, key=%d",i,midi,video,key);
+			
+		}
+		xml.popTag();
+	}
+	
+	// ticks trick
+	/*
+	 if (multi && xml.tagExists("priorities")) {
+	 xml.pushTag("priorities");
+	 for (int i=0;i<xml.getNumTags("priority");i++)
+	 priorities.push_back(xml.getValue("priority",0,i)); 
+	 xml.popTag();
+	 }
+	 */
+	
+	set<int> chokeGroup;
+	if (multi && xml.tagExists("choke_group")) {
+		xml.pushTag("choke_group");
+		for (int i=0;i<xml.getNumTags("note");i++) 
+			chokeGroup.insert(xml.getValue("note", 0, i)-1); // -1 because in the xml we start from 1
+		xml.popTag();
+	}
+	
+	
+	
+	xml.popTag(); // sound_set
+	
+	
 	
 	if (midiInstrument) {
 		midiInstrument->exit();
@@ -49,11 +154,9 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	int i;
 	//loops.clear();
 	
-	string path = "SOUNDS/"+soundSet+"/"+soundSet; 
-	
 	for (i=0; i<midiNotes.size();i++) {
 		string soundname = path+"_"+ofToString(i+1) + ".aif";
-		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
+		//ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
 		
 		midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i]); // TODO: add choke mechanics
 		
@@ -83,150 +186,42 @@ void  PlayerController::loadSoundSet(string soundSet) {
 	
 	currentLoop = 0;
 	
-	if (bLoadDemo) {
-		bLoadDemo = false;
-		loadDemo();
+	if (!bAnimatedTransition) {
+		if (songName!="") {
+			ofDisableDataPath();
+			song.loadTrack(songName);
+			ofEnableDataPath();
+		} else {
+			song.loadTrack("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml");
+		}
 	}
+	
+	
 	//midiTrack->playLoop(currentLoop);
 	
+	midiTrack.play();
+	
+	ofLog(OF_LOG_VERBOSE,"loadSoundSet finished: %i [ms]",ofGetElapsedTimeMillis()-start);
+	
 }
 
 
 
-void PlayerController::changeSet(string soundSet,bool bLoadDemo) {
+TexturesPlayer *PlayerController::createTexturePlayer(string soundSet,string videoSet) {
+	TexturesPlayer *player;
 	
+	if (playerNum == 1) //  && videoSet == "VOC_CORE"
+		player = new FramesDrivenPlayer(soundSet);
+	else
+		player = new SimplePlayer;
 	
-	
-	if (isInTransition() || soundSet == this->soundSet) {
-		return;
-	}
-	
-	this->bLoadDemo = bLoadDemo;
-	
-	bool bFirstTime = !currentPlayer;
-	
-	this->soundSet = soundSet;
-	
-	ofLog(OF_LOG_VERBOSE,"change set to %s",soundSet.c_str()); //,prefix.c_str());
-	
-	string path = "SOUNDS/"+soundSet+"/"+soundSet;
-	
-	ofxXmlSettings xml;
-	string xmlpath = path+".xml";
-	bool loaded = xml.loadFile(xmlpath);
-	
-	if (loaded) { // TODO: if not ?
-		enable = true;
-		xml.pushTag("sound_set");
-		
-		bFramesDriverPlayer = xml.getAttribute("video", "lips", 0, 0);
-		
-		nextVideoSet =	xml.getValue("video","");
-		
-		ofLog(OF_LOG_VERBOSE,"using video: %s",nextVideoSet.c_str());
-		
-		
-		multi = xml.tagExists("multi");
-		volume = xml.getValue("volume", 1.0f);
-		
-		
-		
-		
-		
-		if (xml.tagExists("notes")) {
-			xml.pushTag("notes");
-			for (int i=0; i<xml.getNumTags("note");i++) {
-				int midi = (xml.getAttribute("note", "midi", 0, i) -12) % 24 ;// ("note", 0, i)-36) % 24;
-				
-				int sample = xml.getAttribute("note", "sample", 0, i)-1;
-				midiToSample[midi] = sample;
-				
-				int key = xml.getAttribute("note", "key", 0, i);
-				if (key)
-					keyToMidi[key-1] = midi;
-				
-				midiNotes.push_back(midi);
-				
-				//ofLog(OF_LOG_VERBOSE,"parsing note %d: midi=%d, video=%d, key=%d",i,midi,video,key);
-				
-			}
-			xml.popTag();
-		}
-		
-		// ticks trick
-		/*
-		 if (multi && xml.tagExists("priorities")) {
-		 xml.pushTag("priorities");
-		 for (int i=0;i<xml.getNumTags("priority");i++)
-		 priorities.push_back(xml.getValue("priority",0,i)); 
-		 xml.popTag();
-		 }
-		 */
-		
-		set<int> chokeGroup;
-		if (multi && xml.tagExists("choke_group")) {
-			xml.pushTag("choke_group");
-			for (int i=0;i<xml.getNumTags("note");i++) 
-				chokeGroup.insert(xml.getValue("note", 0, i)-1); // -1 because in the xml we start from 1
-			xml.popTag();
-		}
-		
-		
-		
-		xml.popTag(); // sound_set
-		
-		
-	} else {
-		enable = false;
-	}
-	
-	ofLog(OF_LOG_VERBOSE,"xml loading %s",loaded ? "succeeded" : "failed");
-	
-	if (nextVideoSet!=videoSet) {
-		if (playerNum == 1) //  && videoSet == "VOC_CORE"
-			nextPlayer = new FramesDrivenPlayer(soundSet);
-		else
-			nextPlayer = new SimplePlayer;
-		
-		nextPlayer->setup(nextVideoSet);
-		
-	}
-	
-	
-	
-	if (bFirstTime) {
-		
-		currentPlayer = nextPlayer;
-		nextPlayer = 0;
-		
-		transitionState = TRANSITION_SETUP;
-		while (transitionState != TRANSITION_IDLE);
-		
-		currentPlayer->prepareIn();
-		currentPlayer->prepareSet();
-		
-		
-		
-		//midiTrack.setupSoundSet();
-		
-		
-		//midiTrack.setTexturesPlayer(currentPlayer);
-		
-	} else if (/*getMidiTrack()->getCurrentSet()!=setNum &&*/ !isInTransition()) {
-		midiTrack.pause();
-		
-		if (nextVideoSet!=videoSet) {
-			
-			currentPlayer->prepareOut();
-			transitionState = TRANSITION_INIT_IN;
-		}
-		else {
-			//nextSetNum = setNum;
-			transitionState = TRANSITION_CHANGE_SOUND_SET;
-		}
-		
-	}
+	player->setup(videoSet);
+	return player;
 }
+
+
+
+
 
 
 
@@ -241,152 +236,195 @@ bool PlayerController::isInTransition() {
 }
 
 void PlayerController::threadedFunction() {
-	if (!enable) 
-		return;
 	
 	
-//	switch (transitionState) {
-//		case TRANSITION_SETUP:
-//		case TRANSITION_INIT_IN:
-//		case TRANSITION_RELEASE_SET: 
-//		case TRANSITION_INIT_SET:
-//		case TRANSITION_CHANGE_SOUND_SET:
-//			ofLog(OF_LOG_VERBOSE,"threadedFunction: %i",transitionState);
-//			break;
-//	}
-	
-	
-	switch (transitionState) {
-		case TRANSITION_SETUP:
-			currentPlayer->initIn();
-			currentPlayer->initSet();
-			loadSoundSet(soundSet);
-			transitionState = TRANSITION_IDLE;
-			break;
-		case TRANSITION_INIT_IN:
-			nextPlayer->initIn();
-			transitionState = TRANSITION_INIT_IN_FINISHED;
-			break;
-		case TRANSITION_RELEASE_SET: 
-			previousPlayer->releaseSet();
-			transitionState = TRANSITION_RELEASE_SET_FINISHED;
-			break;
-		case TRANSITION_INIT_SET:
-			currentPlayer->initSet();
-			transitionState = TRANSITION_INIT_SET_FINISHED;
-			break;
-		case TRANSITION_CHANGE_SOUND_SET:
-			loadSoundSet(soundSet);
-			transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED;
-			break;
-	}
+	if (!bAnimatedTransition) {
+		switch (transitionState) {
+			case TRANSITION_CHANGE_SOUND_SET:
+				loadSoundSet();
+				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED;
+				break;
 
+			case TRANSITION_UNLOAD_SET:
+				previousPlayer->release();
+				delete previousPlayer;
+				previousPlayer = 0;
+				transitionState = TRANSITION_UNLOAD_SET_FINISHED;
+				break;
+
+			case TRANSITION_LOAD_SET:
+				
+				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
+				nextPlayer->initIdle();
+				nextPlayer->initSet();
+				transitionState = TRANSITION_LOAD_SET_FINISHED;
+				break;
+		}
+	} else {
+		switch (transitionState) {
+			case TRANSITION_CHANGE_SOUND_SET:
+				loadSoundSet();
+				
+				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED;
+				break;
+			case TRANSITION_INIT_IN_OUT:
+				currentPlayer->initOut();
+				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
+				nextPlayer->initIn();
+				nextPlayer->initIdle();
+				transitionState = TRANSITION_INIT_IN_OUT_FINISHED;
+				break;
+			case TRANSITION_RELEASE_SET: 
+				previousPlayer->release();
+				delete previousPlayer;
+				previousPlayer = 0;
+				transitionState = TRANSITION_RELEASE_SET_FINISHED;
+				break;
+			case TRANSITION_INIT_SET:
+				currentPlayer->initSet();
+				transitionState = TRANSITION_INIT_SET_FINISHED;
+				break;
+			
+		}
+		
+	}
+	
+	
 }
 	
 	
 void PlayerController::update() {
-	if (!enable) 
-		return;
 	
-//	switch (transitionState) {
-//		
-//		case TRANSITION_INIT_IN_FINISHED:
-//		case TRANSITION_PLAYING_IN:
-//		case TRANSITION_PLAYING_OUT:
-//		case TRANSITION_RELEASE_SET_FINISHED:
-//		case TRANSITION_INIT_SET_FINISHED:
-//		case TRANSITION_CHANGE_SOUND_SET_FINISHED:
-//			ofLog(OF_LOG_VERBOSE,"update: %i",transitionState);
-//			break;
-//			
-//	}
 	
-	switch (transitionState) {
-		case TRANSITION_IDLE:
-			break;
-		case TRANSITION_INIT_IN_FINISHED:
-			nextPlayer->prepareIn();
-			currentPlayer->startTransition(false);
-			transitionState = TRANSITION_PLAYING_IN;
-			break;
-		case TRANSITION_PLAYING_IN:
-			if (currentPlayer->didTransitionEnd()) {
-				previousPlayer = currentPlayer;
+	if (!bAnimatedTransition) {
+		switch (transitionState) {
+			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
+				if (nextVideoSet!=videoSet) {
+					if (currentPlayer) {
+						previousPlayer = currentPlayer;
+						currentPlayer = 0;
+						previousPlayer->unloadIdle();
+						previousPlayer->unloadSet();
+						transitionState = TRANSITION_UNLOAD_SET;
+
+					} else {
+						transitionState = TRANSITION_LOAD_SET;
+					}
+				}
+				else {
+					transitionState = TRANSITION_IDLE;
+					enable = true;	
+				}
+				break;
+			case TRANSITION_UNLOAD_SET_FINISHED:
+				
+				transitionState = TRANSITION_LOAD_SET;
+				break;
+			case TRANSITION_LOAD_SET_FINISHED:
+				nextPlayer->loadIdle();
+				nextPlayer->loadSet();
 				currentPlayer = nextPlayer;
-				//midiTrack.setTexturesPlayer(currentPlayer);
-				currentPlayer->startTransition(true);
-				currentPlayer->update();
 				nextPlayer = 0;
-				transitionState = TRANSITION_PLAYING_OUT;
-			}
-			break;
-		case TRANSITION_PLAYING_OUT:
-			if (currentPlayer->didTransitionEnd()) {
-				previousPlayer->finishOut();
-				transitionState = TRANSITION_RELEASE_SET;
-			}
-			break;
-		case TRANSITION_RELEASE_SET_FINISHED:
-			transitionState = TRANSITION_INIT_SET;
-			break;
-		case TRANSITION_INIT_SET_FINISHED:
-			currentPlayer->prepareSet();
-			delete previousPlayer;
-			previousPlayer = 0;
-			videoSet = nextVideoSet;
-			//midiTrack->exit(); // done in loadSoundSet
-			//midiTrack.releaseSoundSet();
-			transitionState = TRANSITION_CHANGE_SOUND_SET;
-			break;
-		case TRANSITION_CHANGE_SOUND_SET_FINISHED:
-			midiTrack.play();
-			//midiTrack.setupSoundSet(); // done in loadSoundSet
-			transitionState = TRANSITION_IDLE;
-			break;
-		default:
-			break;
-	
+				transitionState = TRANSITION_IDLE;
+				enable = true;	
+				break;
+			
+		}
+		
+	} else {
+		switch (transitionState) {
+			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
+				
+				if (nextVideoSet!=videoSet) {
+					transitionState = TRANSITION_INIT_IN_OUT;
+				}
+				else {
+					transitionState = TRANSITION_IDLE;
+					enable = true;	
+				}
+				break;
+			case TRANSITION_INIT_IN_OUT_FINISHED:
+				nextPlayer->loadIn();
+				nextPlayer->loadIdle();
+				currentPlayer->loadOut();
+				currentPlayer->startTransition(false);
+				transitionState = TRANSITION_PLAYING_IN;
+				break;
+			case TRANSITION_PLAYING_IN:
+				if (currentPlayer->didTransitionEnd()) {
+					previousPlayer = currentPlayer;
+					currentPlayer = nextPlayer;
+					//midiTrack.setTexturesPlayer(currentPlayer);
+					currentPlayer->startTransition(true);
+					//currentPlayer->update(); // TODO: do i need it ?
+					nextPlayer = 0;
+					transitionState = TRANSITION_PLAYING_OUT;
+				}
+				break;
+			case TRANSITION_PLAYING_OUT:
+				if (currentPlayer->didTransitionEnd()) {
+					previousPlayer->unloadOut();
+					previousPlayer->unloadIdle();
+					previousPlayer->unloadSet();
+					currentPlayer->unloadIn();
+					transitionState = TRANSITION_RELEASE_SET;
+				}
+				break;
+			case TRANSITION_RELEASE_SET_FINISHED:
+				transitionState = TRANSITION_INIT_SET;
+				break;
+			case TRANSITION_INIT_SET_FINISHED:
+				
+				currentPlayer->loadSet();
+				
+				videoSet = nextVideoSet;
+				transitionState = TRANSITION_IDLE;
+				enable = true;	
+				break;
+			
+			default:
+				break;
+				
+		}
+		
 	}
 	
-	currentPlayer->update();
+	
+	if (currentPlayer) {
+		currentPlayer->update();
+	}
+	
+	
 				
 			
 	
 }
 
 void PlayerController::translate() {
-	if (!enable) 
-		return;
-	getTexturesPlayer()->translate();
+	if (currentPlayer) 
+		currentPlayer->translate();
 }
 
 void PlayerController::draw() {
-	if (!enable) 
-		return;
-	getTexturesPlayer()->draw();
+	if (currentPlayer) 
+		currentPlayer->draw();
 }
 
 
 void PlayerController::setPush(bool bPush) {
 
-	if (!enable) 
-		return;
-	getTexturesPlayer()->setPush(bPush);
+	if (currentPlayer) 
+		currentPlayer->setPush(bPush);
 }
 
 
 void PlayerController::setState(int state){
-	if (!enable) 
-		return;
-	getTexturesPlayer()->setState(state);
-	
+	if (currentPlayer) 
+		currentPlayer->setState(state);
 }
 
 float PlayerController::getScale(){
-	if (!enable) 
-		return 0.0;
-	return getTexturesPlayer()->getScale();
-	
+	return currentPlayer ? currentPlayer->getScale() : 0.0;
 }
 
 
@@ -457,9 +495,7 @@ void PlayerController::exit() {
 }
 
 
-TexturesPlayer *PlayerController::getTexturesPlayer() {
-	return currentPlayer;
-}
+
 
 
 bool PlayerController::isEnabled() {
@@ -523,6 +559,9 @@ int PlayerController::getCurrentLoop() {
 }
 
 void PlayerController::processWithBlocks(float *left,float *right) {
+	if (!enable) {
+		return;
+	}
 	vector<event> events;
 	midiTrack.process(events);
 	for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
@@ -608,16 +647,6 @@ void PlayerController::setBPM(int bpmVal) {
 	song.setBPM(bpmVal);
 }
 
-
-void PlayerController::loadSong(string filename) {
-	ofDisableDataPath();
-	song.loadTrack(filename);
-	ofEnableDataPath();
-}
-
-void PlayerController::loadDemo() {
-	loadSong(ofToDataPath("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml"));
-}
 
 void PlayerController::setSongState(int songState) {
 	setMode(MANUAL_MODE);

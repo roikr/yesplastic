@@ -26,7 +26,7 @@ void ofxRKSequence::setup(ofxXmlSettings *xml,int seq,string path) {
 			a.texture = new ofxRKTexture();
 			string filename =prefix+"_" + ofToString(k) + ".pvr";
 			k++;
-			ofLog(OF_LOG_VERBOSE,"loading: %s, start: %u, number: %u",filename.c_str(),a.start,a.number);
+			//ofLog(OF_LOG_VERBOSE,"loading: %s, start: %u, number: %u",filename.c_str(),a.start,a.number);
 			a.texture->setup(ofToDataPath(path+"/"+filename),width,height);
 			atlases.push_back(a);
 		}

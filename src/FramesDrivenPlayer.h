@@ -30,13 +30,19 @@ public:
 	void setState(int state);
 	void setFont(ofTrueTypeFont * font);
 	
+	void initIdle();
+	void loadIdle();
+	void unloadIdle();
 	void initIn();
-	void prepareIn();
+	void loadIn();
+	void unloadIn();
 	void initSet();
-	void prepareSet();
-	void prepareOut();
-	void finishOut();
-	void releaseSet();
+	void loadSet();
+	void unloadSet();
+	void initOut();
+	void loadOut();
+	void unloadOut();
+	void release();
 	
 	
 	//int sequencesNumber();

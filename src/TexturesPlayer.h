@@ -16,13 +16,19 @@ public:
 	virtual void setPush(bool bPush) = 0;
 	virtual void setState(int state) = 0;
 	
+	virtual void initIdle() = 0;
+	virtual void loadIdle() = 0;
+	virtual void unloadIdle() = 0;
 	virtual void initIn() = 0;
-	virtual void prepareIn() = 0;
+	virtual void loadIn() = 0;
+	virtual void unloadIn() = 0;
 	virtual void initSet() = 0;
-	virtual void prepareSet() = 0;
-	virtual void prepareOut() = 0;
-	virtual void finishOut() = 0;
-	virtual void releaseSet() = 0;
+	virtual void loadSet() = 0;
+	virtual void unloadSet() = 0;
+	virtual void initOut() = 0;
+	virtual void loadOut() = 0;
+	virtual void unloadOut() = 0;
+	virtual void release() = 0;
 	
 	
 	//int sequencesNumber();

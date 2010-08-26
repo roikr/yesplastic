@@ -31,7 +31,10 @@ public:
 	//void keyPressed(int key);
 	void play(int num);
 		
-	void changeSet(string soundSet,bool bLoadDemo = false);
+	
+	void loadSet(string soundSet,string songName="");
+	void changeSet(string soundSet);
+		
 	string getCurrentSoundSet();
 	
 	void threadedFunction();
@@ -59,7 +62,6 @@ public:
 	
 	void setBPM(int bpmVal);
 	
-	void loadSong(string filename);
 	void setSongState(int songState);
 	int  getSongState();
 	
@@ -71,14 +73,12 @@ public:
 	
 private:
 	
-	void loadDemo(); // parallel to change set so I have to provide the set name
-
+	void unloadVideoSet();
 	
+	void loadSoundSet();
+	void loadVideoSet();
 	
-	
-	void loadSoundSet(string soundSet);
-	
-	TexturesPlayer *getTexturesPlayer();
+	TexturesPlayer *createTexturePlayer(string soundSet,string videoSet);
 		
 	TexturesPlayer *previousPlayer;
 	TexturesPlayer *currentPlayer;
@@ -91,6 +91,7 @@ private:
 	
 	string videoSet;
 	string nextVideoSet;
+	string songName;
 	//string soundSetPath;
 	bool bFramesDriverPlayer;
 	
@@ -121,8 +122,9 @@ private:
 	
 	ofxMidiTrack song;
 	vector<event> recordEvents;
-	
-	bool bLoadDemo;
+		
+	bool bVisible;
+	bool bAnimatedTransition;
 
 };
 

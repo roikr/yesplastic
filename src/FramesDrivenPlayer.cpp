@@ -33,13 +33,8 @@ void FramesDrivenPlayer::setup(string setName) {
 	ofxXmlSettings xml;
 	this->setName = setName;
 	bool loaded = xml.loadFile("VIDEOS/"+setName+"/"+setName+".xml");
+	assert(loaded);
 	enable = true;
-	if (!loaded) {
-		enable = false;
-		return;
-	}
-	
-	
 	
 	xml.pushTag("video_set");
 	displayName = xml.getValue("id","");
@@ -125,57 +120,68 @@ void FramesDrivenPlayer::setup(string setName) {
 
 
 
-void FramesDrivenPlayer::prepareOut() {
-	if (!enable)
-		return;
-	
-	ofLog(OF_LOG_VERBOSE,"%s: unloading actor",setName.c_str());
-	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
-		actor.unload(*i);
-	ofLog(OF_LOG_VERBOSE,"%s: loading out actor",setName.c_str());
-	actor.load(specSeqs[SEQUENCE_OUT]);
-	
-	ofLog(OF_LOG_VERBOSE,"%s: unloading lips actor",setName.c_str());
-	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
-		lipsActor.unload(i);
-	
-	pushTexture.unload();
-	
-	
-}
 
-void FramesDrivenPlayer::initIn() {
+void FramesDrivenPlayer::initIdle() {
 	if (!enable)
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: initializing idle actor",setName.c_str());
 	actor.init(specSeqs[SEQUENCE_IDLE]);
-	ofLog(OF_LOG_VERBOSE,"%s: initializing in actor",setName.c_str());
-	actor.init(specSeqs[SEQUENCE_IN]);
-}
-
-void FramesDrivenPlayer::prepareIn() {
-	if (!enable)
-		return;
-
-	ofLog(OF_LOG_VERBOSE,"%s: loading idle actor",setName.c_str());
-	actor.load(specSeqs[SEQUENCE_IDLE]);
-	ofLog(OF_LOG_VERBOSE,"%s: loading in actor",setName.c_str());
-	actor.load(specSeqs[SEQUENCE_IN]);
 	
 }
 
-void FramesDrivenPlayer::finishOut() {
+void FramesDrivenPlayer::loadIdle() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: loading idle actor",setName.c_str());
+	actor.load(specSeqs[SEQUENCE_IDLE]);
+	
+	
+}
+
+void FramesDrivenPlayer::unloadIdle() {
 	if (!enable)
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading idle actor",setName.c_str());
 	actor.unload(specSeqs[SEQUENCE_IDLE]);
-	ofLog(OF_LOG_VERBOSE,"%s: unloading out actor",setName.c_str());
-	actor.unload(specSeqs[SEQUENCE_OUT]);
+		
+}
+
+
+
+
+
+void FramesDrivenPlayer::initIn() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: initializing in actor",setName.c_str());
+	actor.init(specSeqs[SEQUENCE_IN]);
+}
+
+void FramesDrivenPlayer::loadIn() {
+	if (!enable)
+		return;
+
+	ofLog(OF_LOG_VERBOSE,"%s: loading in actor",setName.c_str());
+	actor.load(specSeqs[SEQUENCE_IN]);
 	
 }
+
+void FramesDrivenPlayer::unloadIn() {
+	if (!enable)
+		return;
 	
+	ofLog(OF_LOG_VERBOSE,"%s: unloading in actor",setName.c_str());
+	actor.unload(specSeqs[SEQUENCE_IN]);
+	
+}
+
+
+
+
 
 void FramesDrivenPlayer::initSet() {
 	if (!enable)
@@ -184,9 +190,7 @@ void FramesDrivenPlayer::initSet() {
 	ofLog(OF_LOG_VERBOSE,"%s: initializing actor",setName.c_str());
 	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
 		actor.init(*i);
-	ofLog(OF_LOG_VERBOSE,"%s: initializing out actor",setName.c_str());
-	actor.init(specSeqs[SEQUENCE_OUT]);
-	
+		
 	ofLog(OF_LOG_VERBOSE,"%s: initializing lips actor",setName.c_str());
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
 		lipsActor.init(i);
@@ -195,12 +199,10 @@ void FramesDrivenPlayer::initSet() {
 	
 }
 
-void FramesDrivenPlayer::prepareSet() {
+void FramesDrivenPlayer::loadSet() {
 	if (!enable)
 		return;
 	
-	ofLog(OF_LOG_VERBOSE,"%s: unloading in actor",setName.c_str());
-	actor.unload(specSeqs[SEQUENCE_IN]);
 	ofLog(OF_LOG_VERBOSE,"%s: loading actor",setName.c_str());
 	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
 		actor.load(*i);
@@ -213,7 +215,57 @@ void FramesDrivenPlayer::prepareSet() {
 	
 }
 
-void FramesDrivenPlayer::releaseSet() {
+void FramesDrivenPlayer::unloadSet() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: unloading actor",setName.c_str());
+	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
+		actor.unload(*i);
+		
+	ofLog(OF_LOG_VERBOSE,"%s: unloading lips actor",setName.c_str());
+	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
+		lipsActor.unload(i);
+	
+	pushTexture.unload();
+	
+	
+}
+
+void FramesDrivenPlayer::initOut() {
+	if (!enable)
+		return;
+	
+	
+	ofLog(OF_LOG_VERBOSE,"%s: initializing out actor",setName.c_str());
+	actor.init(specSeqs[SEQUENCE_OUT]);
+	
+	
+	
+}
+
+void FramesDrivenPlayer::loadOut() {
+	if (!enable)
+		return;
+	
+	
+	ofLog(OF_LOG_VERBOSE,"%s: loading out actor",setName.c_str());
+	actor.load(specSeqs[SEQUENCE_OUT]);
+	
+}
+
+void FramesDrivenPlayer::unloadOut() {
+	if (!enable)
+		return;
+	
+	ofLog(OF_LOG_VERBOSE,"%s: unloading out actor",setName.c_str());
+	actor.unload(specSeqs[SEQUENCE_OUT]);
+	
+}
+
+
+
+void FramesDrivenPlayer::release() {
 	if (!enable)
 		return;
 	ofLog(OF_LOG_VERBOSE,"%s: releasing actor",setName.c_str());
@@ -462,7 +514,7 @@ float FramesDrivenPlayer::getScale() {
 
 
 void FramesDrivenPlayer::exit() {
-	releaseSet();
+	release(); // TODO: handle exit regarding threads and contexts
 	
 }
 

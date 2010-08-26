@@ -102,7 +102,7 @@ void testApp::setup(){
 	
 	bButtonDown = false;
 	
-	startThread();
+	//startThread();
 	
 	
 	for(int i=0;i<3;i++) {
@@ -110,7 +110,7 @@ void testApp::setup(){
 		//player[i].setFont(&verdana);
 		//player[i].loadSet();
 		//player[i].getTexturesPlayer()->setState(state);
-		player[i].changeSet(getPlayerName(i)+"_"+"HEAT",true);
+		//player[i].loadSet(getPlayerName(i)+"_"+"HEAT","");
 		
 		
 	}
@@ -176,9 +176,14 @@ void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 
 
 void testApp::threadedFunction() {
-	int i=0;
-	while (1) 
-		player[i++%3].threadedFunction();
+	
+	for (int i=0;i<3;i++) {
+		player[i].threadedFunction();
+		if (player[i].isInTransition()) {
+			break;	
+		}
+	}
+	
 }
 
 
@@ -286,8 +291,40 @@ bool testApp::isInTransition() {
 	return false;
 }
 
-void testApp::changeSoundSet(string nextSoundSet, bool bChangeAll) {
-	this->bChangeAll = bChangeAll;
+void testApp::loadSong(string songName,bool bDemo) {
+	 
+	ofxXmlSettings songXml;
+	printf("testApp::loadSong: %s\n",songName.c_str());
+		
+	
+	if (!bDemo) {
+		ofDisableDataPath();
+
+		bool bLoaded = songXml.loadFile(ofToDocumentsPath(songName+".xml"));
+		assert(bLoaded);
+		songXml.pushTag("song");
+		for (int i=0; i<3; i++) {
+			player[i].setMode(MANUAL_MODE);
+			string sound_set = songXml.getAttribute("player", "sound_set", "", i);
+			player[i].loadSet(sound_set,ofToDocumentsPath(getPlayerName(i)+"_"+songName+".xml"));
+		}
+		songXml.popTag();
+		
+		ofEnableDataPath();	
+		
+	} else {
+		for (int i=0; i<3; i++) {
+			string str = getPlayerName(i)+"_"+songName;
+			if (player[i].getCurrentSoundSet()!=str) {
+				player[i].setMode(MANUAL_MODE);
+				player[i].loadSet(str);
+			}
+			
+		}
+	}
+}
+
+void testApp::changeSoundSet(string nextSoundSet) {
 	this->nextSoundSet = nextSoundSet;
 	bChangeSet = true;
 }
@@ -330,23 +367,14 @@ void testApp::update(){
 	
 	if (bChangeSet) {
 		bChangeSet = false;
-		if (bChangeAll) {
-			for (int i=0; i<3; i++) {
-				string str = getPlayerName(i)+"_"+nextSoundSet;
-				if (player[i].getCurrentSoundSet()!=str) {
-					player[i].setMode(MANUAL_MODE);
-					player[i].changeSet(str,true);
-				}
-				
-			}
-		} else {
-			string str = getPlayerName(controller)+"_"+nextSoundSet;
-			if (player[controller].getCurrentSoundSet()!=str) {
-				player[controller].setMode(MANUAL_MODE);
-				player[controller].changeSet(str);
-			}
-			
+		
+		string str = getPlayerName(controller)+"_"+nextSoundSet;
+		if (player[controller].getCurrentSoundSet()!=str) {
+			player[controller].setMode(MANUAL_MODE);
+			player[controller].changeSet(str);
 		}
+			
+		
 	}
 	 
 	if (songState==SONG_RENDER_VIDEO) {
@@ -359,8 +387,12 @@ void testApp::update(){
 		
 	}
 	
-	for (int i=0;i<3;i++)
+	for (int i=0;i<3;i++) {
 		player[i].update();
+		if (player[i].isInTransition()) {
+			break;
+		}
+	}
 /*
 	if (measures.size()==1) {
 		
@@ -608,7 +640,7 @@ void testApp::draw(){
 
 void testApp::exit() {
 	printf("exit()\n");
-	stopThread();
+	//stopThread();
 	for (int i=0;i<3;i++) {
 		//setMode(i,MANUAL_MODE);
 		player[i].exit();
@@ -959,28 +991,6 @@ bool testApp::getIsPlaying() {
 
 
 
-bool testApp::loadSong(string songName) {
-	ofxXmlSettings songXml;
-	printf("testApp::loadSong: %s\n",songName.c_str());
-	ofDisableDataPath();
-	
-	
-	
-	if (!songXml.loadFile(ofToDocumentsPath(songName+".xml"))) 
-		return false;
-	
-	songXml.pushTag("song");
-		for (int i=0; i<3; i++) {
-			player[i].setMode(MANUAL_MODE);
-			string sound_set = songXml.getAttribute("player", "sound_set", "", i);
-			player[i].changeSet(sound_set);
-			player[i].loadSong(ofToDocumentsPath(getPlayerName(i)+"_"+songName+".xml"));
-		}
-	songXml.popTag();
-
-	ofEnableDataPath();	
-	return true;
-}
 
 
 

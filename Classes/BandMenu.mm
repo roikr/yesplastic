@@ -39,10 +39,14 @@
     [super viewDidLoad];
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
-		[self.songsView addSubview:songsTable.view];
-		back.hidden = NO;
-		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	}
+		
+	[self.songsView addSubview:songsTable.view];
+		
+	back.hidden = NO;
+		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
+	
+
 }
 
 
@@ -63,6 +67,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+	//self.songsTable = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

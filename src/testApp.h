@@ -20,7 +20,7 @@ struct measure {
 	int t;
 };
 
-class testApp : public ofSimpleApp, public ofxRKThread  {
+class testApp : public ofSimpleApp  {
 	
 public:
 	void setup();
@@ -58,7 +58,6 @@ public:
 	
 	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
 	
-	bool loadSong(string songName);
 	void saveSong(string songName);
 	void setSongState(int songState);
 	int  getSongState();
@@ -69,7 +68,9 @@ public:
 	bool isInTransition();
 	
 	bool isSongAvailiable(string song,int playerNum=0);
-	void changeSoundSet(string nextSoundSet, bool bChangeAll);
+	void loadSong(string songName,bool bDemo);
+	void changeSoundSet(string nextSoundSet);
+	
 	string getCurrentSoundSetName(int playerNum);
 	
 	int lastFrame;
@@ -108,9 +109,9 @@ private:
 	map<string,int>oscMap;
 	//ofxOscReceiver receiver;
 	
-	int bChangeSet; // to delay change video set to next update (so draw wont change)
+	int bChangeSet; // //TODO: is it realy needed ?  to delay change video set to next update (so draw wont change)
 	string nextSoundSet;
-	bool bChangeAll;
+	
 	
 	float alpha;
 	bool bTrans;
@@ -135,7 +136,7 @@ private:
 	float bpm;
 	
 	ofxSndFile song;
-	
+		
 };
 
 

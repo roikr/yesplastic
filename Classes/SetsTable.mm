@@ -198,7 +198,7 @@
 		
 		string nextSong = [song.songName UTF8String];
 		if (  !appDelegate.OFSAptr->isInTransition() && appDelegate.OFSAptr->isSongAvailiable(nextSong)) {
-			appDelegate.OFSAptr->changeSoundSet(nextSong,false);
+			appDelegate.OFSAptr->changeSoundSet(nextSong);
 		}
 	}
 	
