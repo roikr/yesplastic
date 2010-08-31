@@ -85,6 +85,7 @@ public:
 	void soundStreamStop();
 	
 	float getProgress();
+	float getPlayhead();
 	
 	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
 	bool bTempDoc;

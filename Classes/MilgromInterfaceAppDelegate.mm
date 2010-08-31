@@ -20,7 +20,7 @@
 #include "SoundSet.h"
 #import "MainViewController.h"
 #include "PlayerMenu.h"
-#import "OpenGLTOMovie.h"
+#import "ShareViewController.h"
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
@@ -59,6 +59,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize playerControllers;
 @synthesize OFSAptr;
 @synthesize queuedDemos;
+@synthesize shareViewController;
 
 
 #pragma mark -
@@ -383,6 +384,11 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
+- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated {
+	[self.milgromViewController presentModalViewController:modalViewController animated:animated];
+}
+
+
 
 
 - (void)dealloc {
@@ -674,89 +680,26 @@ NSString * const kCacheFolder=@"URLCache";
 	[milgromViewController.viewController popViewControllerAnimated:YES];
 }
 
-- (void)renderAnimation {
-	[milgromViewController stopAnimation];
-	
-	
-	dispatch_queue_t myCustomQueue;
-	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
-	
-	dispatch_async(myCustomQueue, ^{
-		OFSAptr->soundStreamStop();
-		OFSAptr->renderAudio();
-		OFSAptr->setSongState(SONG_RENDER_VIDEO);
-		
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"];
-		
-		
-		
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] WithSize:CGSizeMake(480, 320) 
-		 
-						 withDrawFrame:^(int frameNum) {
-							 //NSLog(@"rendering frame: %i",frameNum);
-							 [self.milgromViewController drawFrame];
-							 
-						 }
-		 
-						 withDidFinish:^(int frameNum) {
-							 return (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
-						 }
-		 
-				 withCompletionHandler:^ {
-					 NSLog(@"write completed");
-					 [self export];
-					 
-				 }];
-	});
-	
-	
-	dispatch_release(myCustomQueue);
-	
-	
-}
 
-- (void) export {
+#pragma mark -
+#pragma mark ShareViewController methods
+
+- (void)share {
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *exportPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
-	
-	NSError *error;
-	
-	if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath]) {
-		if (![[NSFileManager defaultManager] removeItemAtPath:exportPath error:&error]) {
-			NSLog(@"removeItemAtPath error: %@",[error description]);
-		}
+	if (self.shareViewController == nil) {
+		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+		shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	}
 	
-	
-	[OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
-				  withVideoURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"]] 
-				  withAudioURL: [NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] //[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]]
-	 
-		   withProgressHandler:^(float progress) {NSLog(@"progress: %f",progress);}
-		 withCompletionHandler:^ {
-			 NSLog(@"export completed");
-			 dispatch_async(dispatch_get_main_queue(),
-							^{
-								OFSAptr->soundStreamStart();
-								OFSAptr->setSongState(SONG_IDLE);
-								[milgromViewController startAnimation];
-								[self play];
-							});
-			 
-			 
-		 }
-	 ];
-	
-	NSLog(@"export end");
-	
+	[self.milgromViewController presentModalViewController:self.shareViewController animated:YES];
+	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
+	[milgromViewController stopAnimation];
+	[shareViewController render];
 }
 
-
--(void) play {
+- (void)play {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
 	
 	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
@@ -767,6 +710,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[self.milgromViewController.viewController pushViewController:mPlaybackViewController animated:NO];
 	
 }
+
 
 
 #pragma mark -

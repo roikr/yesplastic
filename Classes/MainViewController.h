@@ -12,14 +12,16 @@ class testApp;
 @class EAGLView;
 @class TouchView;
 @class CustomFontTextField;
+@class SaveViewController;
 
-@interface MainViewController : UIViewController<UINavigationControllerDelegate,UITextFieldDelegate> {
+@interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
 	
 	
 	UIButton *playButton;
 	UIButton *stopButton;
 	UIButton *recordButton;
+	UIButton *shareButton;
 	UIButton *menuButton;
 	UIButton *setMenuButton;
 	UIButton *saveButton;
@@ -35,8 +37,7 @@ class testApp;
 	UIButton *triggerButton;
 	UIButton *loopButton;
 	
-	
-	CustomFontTextField	*songName;
+	SaveViewController *saveViewController;
 	
 }
 
@@ -47,6 +48,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIButton *menuButton;
 @property (nonatomic, retain) IBOutlet UIButton *setMenuButton;
 @property (nonatomic, retain) IBOutlet UIButton *saveButton;
+@property (nonatomic, retain) IBOutlet UIButton *shareButton;
 @property (nonatomic, retain) IBOutlet UIView *triggersView;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
@@ -54,16 +56,15 @@ class testApp;
 @property (nonatomic,assign) IBOutlet UIButton *triggerButton;
 @property (nonatomic,assign )IBOutlet UIButton *loopButton;
 
+@property (nonatomic, retain) SaveViewController *saveViewController;
 
-
-@property (nonatomic,retain) IBOutlet CustomFontTextField *songName;
 
 - (void) menu:(id)sender;
 - (void) play:(id)sender;
 - (void) stop:(id)sender;
 - (void) record:(id)sender;
 - (void) save:(id)sender;
-- (void) render:(id)sender;
+- (void) share:(id)sender;
 - (void) trigger:(id)sender;
 - (void) loop:(id)sender;
 - (void) updateLoops:(id)sender;

@@ -189,12 +189,26 @@ void testApp::threadedFunction() {
 }
 
 float testApp::getProgress() {
-	float progress = 0.0f;
 	
-	for (int i=0;i<3;i++)
-		progress+=player[i].getProgress();
+	if (isInTransition()) {
+		float progress = 0.0f;
+		
+		for (int i=0;i<3;i++)
+			progress+=player[i].getProgress();
+		
+		return progress/3.0;
+	} 
 	
-	return progress/3.0;
+	return 0.0f;
+}
+
+float testApp::getPlayhead() {
+	
+	if (songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO || songState == SONG_PLAY) {
+		return player[2].getPlayhead();
+	}
+	
+	return 0.0f;
 }
 
 
@@ -819,6 +833,7 @@ void testApp::touchUp(float x, float y, int touchId) {
 						vx = 0;
 					
 					
+					bNeedDisplay = true; // TODO: is this exact ?
 					
 					if (fabs(vx)>1.0) {
 						if (controller < 2 && vx<0) 

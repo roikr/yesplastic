@@ -16,8 +16,7 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "TouchView.h"
 #import "MilgromMacros.h"
-#import "CustomFontTextField.h"
-//#import "SongViewController.h"
+#import "SaveViewController.h"
 
 
 
@@ -29,6 +28,7 @@
 @synthesize menuButton;
 @synthesize setMenuButton;
 @synthesize saveButton;
+@synthesize shareButton;
 @synthesize triggersView;
 @synthesize loopsView;
 @synthesize bandLoopsView;
@@ -36,8 +36,7 @@
 
 @synthesize triggerButton;
 @synthesize loopButton;
-
-@synthesize songName;
+@synthesize saveViewController;
 
 
 /*
@@ -325,39 +324,27 @@
 - (void) save:(id)sender {
 	OFSAptr->setSongState(SONG_IDLE);
 	
-	songName.hidden = NO;
-	[songName becomeFirstResponder];
 	
-//	if (self.songViewController == nil) {
-//		self.songViewController = [[SongViewController alloc] initWithNibName:@"SongViewController" bundle:nil];
-//		songViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//	}
-//	
-//	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-//	[appDelegate.milgromViewController presentModalViewController:self.songViewController animated:YES];
+	if (self.saveViewController == nil) {
+		self.saveViewController = [[SaveViewController alloc] initWithNibName:@"SaveViewController" bundle:nil];
+		saveViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	
+	
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] presentModalViewController:self.saveViewController animated:YES];
 	
 }
 
 
 
 	
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
-	songName.hidden = YES;
-	saveButton.hidden = YES;
-	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[appDelegate saveSong:songName.text];
-	
-	
-	return NO;
-}
 
 
 
-- (void)render:(id)sender {
+
+- (void)share:(id)sender {
 	OFSAptr->setSongState(SONG_IDLE);
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] renderAnimation];
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] share];
 }
 
 		

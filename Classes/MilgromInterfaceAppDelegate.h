@@ -17,6 +17,7 @@ extern NSString * const kMilgromURL;
 @class MilgromViewController;
 @class Song;
 @class MainViewController;
+@class ShareViewController;
 class testApp;
 
 
@@ -37,6 +38,7 @@ class testApp;
 	
 	NSArray *playerControllers;
 	MainViewController *mainViewController;
+	ShareViewController *shareViewController;
 	
 }
 
@@ -54,6 +56,7 @@ class testApp;
 @property testApp *OFSAptr;
 @property (nonatomic, retain) NSMutableArray *queuedDemos;
 
+@property (nonatomic,retain ) ShareViewController *shareViewController;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
@@ -62,7 +65,8 @@ class testApp;
 - (void)pushSetMenu;
 - (void)pushMain;
 - (void)pop;
-- (void)renderAnimation;
-
+- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
+- (void)share;
+- (void)play;
 @end
 

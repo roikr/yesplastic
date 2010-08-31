@@ -71,7 +71,7 @@ public:
 	bool getIsPlaying();
 	
 	float getProgress();
-
+	float getPlayhead();
 	
 private:
 	

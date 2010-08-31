@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="51"/>
+			<integer value="54"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -220,7 +220,7 @@
 							<object class="IBUIButton" id="388573076">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{76, 0}, {50, 45}}</string>
+								<string key="NSFrame">{{67, 3}, {68, 42}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -231,13 +231,17 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="806562837"/>
-								<string key="IBUINormalTitle">R</string>
 								<reference key="IBUIHighlightedTitleColor" ref="438986558"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAwIDAAA</bytes>
-								</object>
+								<reference key="IBUINormalTitleColor" ref="438986558"/>
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
+								<object class="NSCustomResource" key="IBUIHighlightedImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">SHARE_PRESS.png</string>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">SHARE.png</string>
+								</object>
 							</object>
 						</object>
 						<string key="NSFrame">{{0, 20}, {320, 45}}</string>
@@ -421,33 +425,6 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUITextField" id="4507289">
-						<reference key="NSNextResponder" ref="140016098"/>
-						<int key="NSvFlags">-2147483358</int>
-						<string key="NSFrame">{{20, 73}, {280, 60}}</string>
-						<reference key="NSSuperview" ref="140016098"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText"/>
-						<int key="IBUIBorderStyle">2</int>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">36</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<bool key="IBUIClearsOnBeginEditing">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
-						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
-							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						</object>
-						<int key="IBUIClearButtonMode">1</int>
-					</object>
 				</object>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
@@ -588,14 +565,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">songName</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="4507289"/>
-					</object>
-					<int key="connectionID">123</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">stopButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="404010622"/>
@@ -639,14 +608,6 @@
 					<int key="connectionID">132</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="4507289"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">133</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">menu:</string>
 						<reference key="source" ref="345070952"/>
@@ -666,12 +627,20 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">render:</string>
+						<string key="label">share:</string>
 						<reference key="source" ref="388573076"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">140</int>
+					<int key="connectionID">141</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shareButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="388573076"/>
+					</object>
+					<int key="connectionID">142</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -703,7 +672,6 @@
 							<reference ref="863361826"/>
 							<reference ref="751729622"/>
 							<reference ref="299169620"/>
-							<reference ref="4507289"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -808,11 +776,6 @@
 						<reference key="parent" ref="534281007"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">122</int>
-						<reference key="object" ref="4507289"/>
-						<reference key="parent" ref="140016098"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">125</int>
 						<reference key="object" ref="404010622"/>
 						<reference key="parent" ref="863361826"/>
@@ -830,8 +793,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
-					<string>122.CustomClassName</string>
-					<string>122.IBPluginDependency</string>
 					<string>125.IBPluginDependency</string>
 					<string>138.IBPluginDependency</string>
 					<string>138.IBViewBoundsToFrameTransform</string>
@@ -842,6 +803,7 @@
 					<string>53.IBPluginDependency</string>
 					<string>54.IBEditorWindowLastContentRect</string>
 					<string>54.IBPluginDependency</string>
+					<string>54.IBViewBoundsToFrameTransform</string>
 					<string>55.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
@@ -864,20 +826,21 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MainViewController</string>
 					<string>UIResponder</string>
-					<string>CustomFontTextField</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUMGAAAAAAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCiAAAwiwAAA</bytes>
 					</object>
 					<string>TouchView</string>
-					<string>{{189, 425}, {320, 480}}</string>
+					<string>{{606, 507}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{355, 742}, {324, 41}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwnwAAA</bytes>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -923,19 +886,11 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">140</int>
+			<int key="maxID">142</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">CustomFontTextField</string>
-					<string key="superclassName">UITextField</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/CustomFontTextField.h</string>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">MainViewController</string>
 					<string key="superclassName">UIViewController</string>
@@ -949,8 +904,8 @@
 							<string>play:</string>
 							<string>prevLoop:</string>
 							<string>record:</string>
-							<string>render:</string>
 							<string>save:</string>
+							<string>share:</string>
 							<string>stop:</string>
 							<string>trigger:</string>
 							<string>updateLoops:</string>
@@ -980,8 +935,8 @@
 							<string>play:</string>
 							<string>prevLoop:</string>
 							<string>record:</string>
-							<string>render:</string>
 							<string>save:</string>
+							<string>share:</string>
 							<string>stop:</string>
 							<string>trigger:</string>
 							<string>updateLoops:</string>
@@ -1013,11 +968,11 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">render:</string>
+								<string key="name">save:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">save:</string>
+								<string key="name">share:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -1046,7 +1001,7 @@
 							<string>recordButton</string>
 							<string>saveButton</string>
 							<string>setMenuButton</string>
-							<string>songName</string>
+							<string>shareButton</string>
 							<string>stopButton</string>
 							<string>triggerButton</string>
 							<string>triggersView</string>
@@ -1061,7 +1016,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
-							<string>CustomFontTextField</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIView</string>
@@ -1079,7 +1034,7 @@
 							<string>recordButton</string>
 							<string>saveButton</string>
 							<string>setMenuButton</string>
-							<string>songName</string>
+							<string>shareButton</string>
 							<string>stopButton</string>
 							<string>triggerButton</string>
 							<string>triggersView</string>
@@ -1119,8 +1074,8 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">songName</string>
-								<string key="candidateClassName">CustomFontTextField</string>
+								<string key="name">shareButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">stopButton</string>
@@ -1295,16 +1250,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">UITextField</string>
-					<string key="superclassName">UIControl</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="757311954">
+					<string key="className">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
 					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UIView</string>
-					<reference key="sourceIdentifier" ref="757311954"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
@@ -1382,6 +1332,8 @@
 				<string>SAVE_B_PRESS.png</string>
 				<string>SET_MENU_B.png</string>
 				<string>SET_MENU_B_PRESS.png</string>
+				<string>SHARE.png</string>
+				<string>SHARE_PRESS.png</string>
 				<string>arrows_drm_left.png</string>
 				<string>arrows_drm_right.png</string>
 				<string>arrows_gtr_left.png</string>
@@ -1406,6 +1358,8 @@
 				<string>{50, 45}</string>
 				<string>{50, 45}</string>
 				<string>{50, 45}</string>
+				<string>{68, 42}</string>
+				<string>{68, 42}</string>
 				<string>{40, 40}</string>
 				<string>{40, 40}</string>
 				<string>{40, 40}</string>

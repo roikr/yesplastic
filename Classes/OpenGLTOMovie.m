@@ -201,7 +201,7 @@
 	dispatch_async(myCustomQueue, ^{
 		while ([session status] != AVAssetExportSessionStatusCompleted) {
 			progressHandler([session progress]);
-			[NSThread sleepForTimeInterval:0.1f];
+			[NSThread sleepForTimeInterval:0.04f];
 		}
 	});
 	

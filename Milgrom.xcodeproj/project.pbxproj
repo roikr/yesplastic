@@ -66,7 +66,7 @@
 		E48111361214460D008ABBCC /* precache in Resources */ = {isa = PBXBuildFile; fileRef = E48111351214460D008ABBCC /* precache */; };
 		E48503FC1214BB3600D2271F /* TouchView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48503FB1214BB3600D2271F /* TouchView.mm */; };
 		E490A1451206AB58008512EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E490A1441206AB58008512EA /* CoreData.framework */; };
-		E498DDF4121069DD001CB593 /* MilgromViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E498DDF3121069DD001CB593 /* MilgromViewController.xib */; };
+		E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E493D3D7122DB16700163EF9 /* MilgromViewController.xib */; };
 		E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF6121069EB001CB593 /* EAGLView.mm */; };
 		E498DDFA121069EB001CB593 /* MilgromViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF8121069EB001CB593 /* MilgromViewController.mm */; };
 		E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0512106AFA001CB593 /* OpenGLES.framework */; };
@@ -74,6 +74,10 @@
 		E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */; };
 		E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */; };
 		E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */; };
+		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
+		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
+		E4A6FC4C122D8BC800A5C4D9 /* ShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */; };
+		E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -294,7 +298,7 @@
 		E48503FB1214BB3600D2271F /* TouchView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchView.mm; sourceTree = "<group>"; };
 		E490A1441206AB58008512EA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Milgrom.xcdatamodel; sourceTree = "<group>"; };
-		E498DDF3121069DD001CB593 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
+		E493D3D7122DB16700163EF9 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
 		E498DDF5121069EB001CB593 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		E498DDF6121069EB001CB593 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
 		E498DDF7121069EB001CB593 /* MilgromViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilgromViewController.h; sourceTree = "<group>"; };
@@ -306,6 +310,12 @@
 		E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AVPlayerDemoPlaybackView.xib; path = AVPlayerClasses/AVPlayerDemoPlaybackView.xib; sourceTree = "<group>"; };
 		E4998B7512203191006EC3BA /* AVPlayerDemoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVPlayerDemoPlaybackViewController.h; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.h; sourceTree = "<group>"; };
 		E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVPlayerDemoPlaybackViewController.m; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.m; sourceTree = "<group>"; };
+		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
+		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
+		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
+		E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareViewController.mm; sourceTree = "<group>"; };
+		E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Resource/ShareViewController.xib; sourceTree = "<group>"; };
 		E4B3D17C11F823E000B57223 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
@@ -476,6 +486,10 @@
 				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
+				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
+				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
+				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
+				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
 				E4DF708011FEA13300EBD904 /* PlayerMenu.h */,
 				E4DF708111FEA13300EBD904 /* PlayerMenu.mm */,
 				E4DF714611FEB55A00EBD904 /* SetsTable.h */,
@@ -799,18 +813,20 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E493D3D7122DB16700163EF9 /* MilgromViewController.xib */,
 				E48111351214460D008ABBCC /* precache */,
 				E444720112143ABC0058D07B /* Milgrom-Info.plist */,
-				E498DDF3121069DD001CB593 /* MilgromViewController.xib */,
 				E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */,
-				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
-				E4C91C8B1201DC9700279928 /* LoopButton.xib */,
-				E4C91C8D1201DCEF00279928 /* TriggerButton.xib */,
 				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
+				E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */,
 				E4D4A20F11FD8F7100C92628 /* BandMenu.xib */,
 				E4D4A1E811FD7A9600C92628 /* SongsTable.xib */,
 				E4DF703A11FE9EB000EBD904 /* SongCell.xib */,
+				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
 				E4DE50541200185200BF31AF /* MainViewController.xib */,
+				E4C91C8B1201DC9700279928 /* LoopButton.xib */,
+				E4C91C8D1201DCEF00279928 /* TriggerButton.xib */,
+				E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */,
 				E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */,
 				E4DF714C11FEB58400EBD904 /* SetsTable.xib */,
 				E4DF708511FEA1CF00EBD904 /* SetCell.xib */,
@@ -1123,7 +1139,6 @@
 				E4C91C9B1201E4C700279928 /* slider2_B_PUSH.png in Resources */,
 				E4C91C9C1201E4C700279928 /* slider2_B.png in Resources */,
 				E4D4FFF71201FBDF00F8B7B2 /* HelpViewController.xib in Resources */,
-				E498DDF4121069DD001CB593 /* MilgromViewController.xib in Resources */,
 				E444727D12143DB90058D07B /* install.xml in Resources */,
 				E48111361214460D008ABBCC /* precache in Resources */,
 				E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */,
@@ -1135,6 +1150,9 @@
 				E44F6DC5122A4DD70002386C /* DRM_CELL1_PROGRESS.png in Resources */,
 				E44F6DC6122A4DD70002386C /* DRM_CELL2_PROGRESS.png in Resources */,
 				E44F6DC7122A4DD70002386C /* DRM_CELL3_PROGRESS.png in Resources */,
+				E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */,
+				E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */,
+				E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,6 +1222,8 @@
 				E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */,
 				E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */,
 				E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */,
+				E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */,
+				E4A6FC4C122D8BC800A5C4D9 /* ShareViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,7 @@
 @synthesize songsView;
 
 @synthesize help;
-@synthesize back;
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -41,7 +41,7 @@
 		
 	[self.songsView addSubview:songsTable.view];
 		
-	back.hidden = NO;
+	
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	
 
@@ -89,10 +89,6 @@
 	button.selected = !button.selected;
 }
 
-- (void)back:(id)sender {
-
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushMain];
-}
 
 - (void)help:(id)sender {
 		
@@ -104,7 +100,7 @@
 	
 	//MilgromInterfaceAppDelegate *appDelegate = ;
 	
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).milgromViewController presentModalViewController:self.help animated:YES];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]) presentModalViewController:self.help animated:YES];
 	//[self.navigationController presentModalViewController:self.help animated:YES];
 }
 
@@ -113,8 +109,9 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
-						break;
+			[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] play];
+			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
+			break;
 		case 1:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
 			break;

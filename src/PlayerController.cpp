@@ -299,6 +299,14 @@ float PlayerController::getProgress() {
 //	}
 	return isInTransition() ? (float)transitionState/(float)TRANSITION_IDLE : 1.0f;
 }
+
+float PlayerController::getPlayhead() {
+	//	if (nextPlayer) {
+	//		progress = nextPlayer->getProgress();
+	//	}
+	return songState != SONG_RECORD && songState != SONG_IDLE ? song.getPlayhead() : 0.0f;
+}
+
 	
 void PlayerController::update() {
 	
