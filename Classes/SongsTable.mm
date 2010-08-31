@@ -10,13 +10,12 @@
 #import "SongCell.h"
 
 #import "MilgromInterfaceAppDelegate.h"
-#import "MilgromViewController.h"
 #import "Song.h"
 #import "SoundSet.h"
 #import "VideoSet.h"
 #import "MilgromMacros.h"
 #import "BandMenu.h"
-
+#import "testApp.h"
 
 
 @implementation SongsTable
@@ -238,7 +237,7 @@
 		
 	} else {
 		MilgromLog(@"SongsTable::willSelectRowAtIndexPath: Song already selected");
-		[(BandMenu *)[appDelegate.milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
+		
 	}
 
 	return indexPath;
@@ -259,7 +258,32 @@
 	
 	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
 	MilgromLog(@"SongsTable::didSelectRowAtIndexPath: cell.selected: %u",cell.selected);
+	
+	NSArray *modes = [[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil];
+	[self performSelector:@selector(updateProgress:) withObject:cell afterDelay:0.1 inModes:modes];
 }
+
+
+
+- (void)updateProgress:(SongCell*)cell
+{
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	if (appDelegate.OFSAptr->isInTransition()) {
+		float temp = appDelegate.OFSAptr->getProgress();
+		//MilgromLog(@"Progress: %f",temp);
+		cell.progress = [NSNumber numberWithFloat:temp];
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateProgress:) withObject:cell afterDelay:0.1 inModes:modes];
+	} else {
+		[appDelegate pushMain];
+		cell.progress = [NSNumber numberWithFloat:1.0f];
+	}
+
+	
+	
+}
+
 
 
 #pragma mark -

@@ -14,6 +14,7 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "SoundSet.h"
 #import "VideoSet.h"
+#import "CustomImageView.h"
 
 @interface NSObject (PrivateMethods)
 
@@ -27,6 +28,7 @@
 @synthesize lock;
 @synthesize deleteButton;
 @synthesize songsTable;
+@synthesize progressView;
 
 
 
@@ -84,6 +86,11 @@
 	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",@"CELL5_PRESS.png",nil];
 	NSArray * cells_selected = [NSArray arrayWithObjects:@"CELL1_SELECT.png",@"CELL2_SELECT.png",@"CELL3_SELECT.png",@"CELL4_SELECT.png",@"CELL5_SELECT.png",nil];
 	
+	NSArray * cells_progress = [NSArray arrayWithObjects:@"CELL1_PROGRESS.png",@"CELL2_PROGRESS.png",@"CELL3_PROGRESS.png",@"CELL4_PROGRESS.png",@"CELL5_PROGRESS.png",nil];
+	
+	self.progressView.image =  [UIImage imageNamed:[cells_progress objectAtIndex:num%[cells_progress count]]];
+	
+	
 	
 	//[cell.bkg setImage:[UIImage imageNamed:[cellsBkgs objectAtIndex:[indexPath row]%[cellsBkgs count]]]];
 	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
@@ -101,10 +108,10 @@
 	self.label.text = theSong.songName;
 	self.songsTable = theTable;
 	
-	
-	
+	progressView.hidden = YES;
 	
 }
+
 
 - (NSNumber *)progress {
 	return _progress;
@@ -114,17 +121,18 @@
 	if ([theProgress floatValue]<1.0f) {
 		
 		self.userInteractionEnabled = NO;
+		progressView.hidden = NO;
 		
-		CGRect frame = self.frame;
-		frame.size.width  = [theProgress floatValue]*270.0;
-		self.frame = frame;
+		[progressView setRect:CGRectMake(0, 0, [theProgress floatValue],1.0f)];
+
+		
+		//progressView.frame = frame;
 		
 				
 	} else {
 		self.userInteractionEnabled = YES;
-		CGRect frame = self.frame;
-		frame.size.width = 270.0;
-		self.frame = frame;
+		progressView.hidden = YES;
+		
 		
 	}
 	

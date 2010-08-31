@@ -11,7 +11,6 @@
 class testApp;
 @class EAGLView;
 @class TouchView;
-@class SongViewController;
 @class CustomFontTextField;
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate,UITextFieldDelegate> {
@@ -30,7 +29,7 @@ class testApp;
 	
 	testApp *OFSAptr;
 	
-	NSArray *playerControllers;
+	
 	
 	
 	UIButton *triggerButton;
@@ -39,9 +38,6 @@ class testApp;
 	
 	CustomFontTextField	*songName;
 	
-	bool bInTransition;
-	bool bModeChanged;
-	int songState;
 }
 
 
@@ -60,8 +56,6 @@ class testApp;
 
 
 
-@property (nonatomic, retain) NSArray *playerControllers;
-
 @property (nonatomic,retain) IBOutlet CustomFontTextField *songName;
 
 - (void) menu:(id)sender;
@@ -76,7 +70,6 @@ class testApp;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
-- (void) interrupt;
 
 //- (void) updateTables;
 

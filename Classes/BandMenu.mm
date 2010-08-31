@@ -8,8 +8,6 @@
 
 #import "BandMenu.h"
 #import "SongsTable.h"
-#import "MainViewController.h"
-#import "MilgromViewController.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromMacros.h"
 #import "HelpViewController.h"
@@ -19,7 +17,7 @@
 
 @synthesize songsTable;
 @synthesize songsView;
-@synthesize mainViewController;
+
 @synthesize help;
 @synthesize back;
 
@@ -76,7 +74,6 @@
 - (void)dealloc {
 	
 	[songsTable release]; // TODO: need to check ?
-	[mainViewController release];
 	//[help release];
     [super dealloc];
 }
@@ -94,22 +91,7 @@
 
 - (void)back:(id)sender {
 
-	
-	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
-		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-		//self.menuController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		
-		
-		//self.menuController = [[MenuViewController alloc] init];
-		
-		//menuController.mainController = self; // TODO: move testApp to app delegate
-	}
-	
-	[self.navigationController pushViewController:self.mainViewController animated:YES];
-	
-	//[self dismissModalViewControllerAnimated:YES];
-	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	//[appDelegate.viewController dismissMenu:self];
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushMain];
 }
 
 - (void)help:(id)sender {
@@ -119,10 +101,11 @@
 		help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	}
 	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	[appDelegate.milgromViewController presentModalViewController:self.help animated:YES];
+	//MilgromInterfaceAppDelegate *appDelegate = ;
 	
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).milgromViewController presentModalViewController:self.help animated:YES];
+	//[self.navigationController presentModalViewController:self.help animated:YES];
 }
 
 - (void)link:(id)sender {

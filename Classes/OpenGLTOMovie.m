@@ -77,7 +77,7 @@
 	//NSLog(@"Writing Started");
 	
 		
-		//NSLog(@"video session started");
+	//NSLog(@"video session started");
 	int frameNum = 0;
 	
 	do if([input isReadyForMoreMediaData])

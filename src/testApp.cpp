@@ -101,6 +101,8 @@ void testApp::setup(){
 	bChangeSet = false; 
 	
 	bButtonDown = false;
+	bNeedDisplay = false;
+	bTempDoc = false;
 	
 	//startThread();
 	
@@ -186,12 +188,23 @@ void testApp::threadedFunction() {
 	
 }
 
+float testApp::getProgress() {
+	float progress = 0.0f;
+	
+	for (int i=0;i<3;i++)
+		progress+=player[i].getProgress();
+	
+	return progress/3.0;
+}
+
 
 int testApp::getMode(int player) {
 	return this->player[controller].getMode();
 }
 
 void testApp::setMode(int player,int mode) {
+	
+	
 	bool looping = false;
 	
 	int i;
@@ -212,6 +225,7 @@ void testApp::setMode(int player,int mode) {
 	//	return;
 	
 	this->player[player].setMode(mode);
+	bNeedDisplay = true;
 	
 }
 
@@ -255,6 +269,7 @@ void testApp::setState(int state) {
 	if (this->state == state)
 		return;
 	
+	
 	animStart = ofGetElapsedTimeMillis();
 	bTrans = true;
 	
@@ -270,7 +285,7 @@ void testApp::setState(int state) {
 		default:
 			break;
 	}
-	
+	bNeedDisplay = true;
 	/*
 	if (menu.mode!=MENU_IDLE) {
 		menu.setPlayer(player+controller, state);
@@ -292,14 +307,15 @@ bool testApp::isInTransition() {
 }
 
 void testApp::loadSong(string songName,bool bDemo) {
-	 
-	ofxXmlSettings songXml;
+	this->bDemo = bDemo;
+	bTempDoc = false;
+	
 	printf("testApp::loadSong: %s\n",songName.c_str());
 		
 	
 	if (!bDemo) {
 		ofDisableDataPath();
-
+		ofxXmlSettings songXml;
 		bool bLoaded = songXml.loadFile(ofToDocumentsPath(songName+".xml"));
 		assert(bLoaded);
 		songXml.pushTag("song");
@@ -327,6 +343,8 @@ void testApp::loadSong(string songName,bool bDemo) {
 void testApp::changeSoundSet(string nextSoundSet) {
 	this->nextSoundSet = nextSoundSet;
 	bChangeSet = true;
+	bDemo = false;
+	bTempDoc = true;
 }
 
 string testApp::getCurrentSoundSetName(int playerNum) {
@@ -926,7 +944,7 @@ void testApp::renderAudio() {
 void testApp::setSongState(int songState) {
 	
 	
-				
+		
 	this->songState = songState;
 	
 	
@@ -935,6 +953,11 @@ void testApp::setSongState(int songState) {
 		player[i].setSongState(songState);
 	}
 	
+	if (songState==SONG_RECORD) {
+		bTempDoc = true;
+		bDemo = false;
+	}
+	bNeedDisplay = true;
 	
 	//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;
 	//	MidiTrack::SetSongMode(SONG_IDLE);
@@ -956,12 +979,14 @@ int  testApp::getSongState() {
 		case SONG_RENDER_AUDIO:
 		case SONG_RENDER_VIDEO:
 			if (! getIsPlaying()) {
+				
 				songState = SONG_IDLE;
 				for (int i=0;i<3;i++) {
 					if (player[i].getSongState()!=SONG_IDLE) {
 						player[i].setSongState(SONG_IDLE);
 					}
 				}
+				bNeedDisplay = true;
 			}
 			break;
 			
@@ -985,20 +1010,12 @@ bool testApp::getIsPlaying() {
 }
 		
 			
-	
-	
-	
-
-
-
-
-
 
 void testApp::saveSong(string songName) {
 	
 	printf("testApp::saveSong: %s\n",songName.c_str());
 
-	
+	bTempDoc = false;
 	ofxXmlSettings songXml;
 	ofDisableDataPath();
 	
@@ -1013,6 +1030,7 @@ void testApp::saveSong(string songName) {
 	
 	songXml.saveFile(ofToDocumentsPath(songName+".xml"));
 	ofEnableDataPath();	
+	
 	
 }
 	

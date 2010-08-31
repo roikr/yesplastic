@@ -28,5 +28,6 @@
 -(void)addSong:(Song *)song;
 -(void)updateSong:(Song *)song withProgress:(NSNumber *)theProgress;
 - (void)deleteSong:(SongCell*)songCell;
+- (void)updateProgress:(SongCell*)cell;
 
 @end

@@ -48,10 +48,11 @@ public:
 	float getScale();
 	string displayName;
 	
+	float getProgress();
 
 private:
 	
-	
+	float progress;
 	
 	string getDebugString();
 	int getCurrentFrame();

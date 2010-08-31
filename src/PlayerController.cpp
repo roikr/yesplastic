@@ -8,11 +8,13 @@
 #include "ofxMidiInstrument.h"
 
 enum {
-	TRANSITION_IDLE,
+	TRANSITION_CHANGE_SOUND_SET,
+	TRANSITION_CHANGE_SOUND_SET_FINISHED,
 	TRANSITION_UNLOAD_SET,
 	TRANSITION_UNLOAD_SET_FINISHED,
 	TRANSITION_LOAD_SET,
 	TRANSITION_LOAD_SET_FINISHED,
+	TRANSITION_IDLE,
 	TRANSITION_RELEASE_SET,
 	TRANSITION_RELEASE_SET_FINISHED,
 	TRANSITION_INIT_IN_OUT,
@@ -20,9 +22,8 @@ enum {
 	TRANSITION_PLAYING_OUT,
 	TRANSITION_PLAYING_IN,
 	TRANSITION_INIT_SET,
-	TRANSITION_INIT_SET_FINISHED,
-	TRANSITION_CHANGE_SOUND_SET,
-	TRANSITION_CHANGE_SOUND_SET_FINISHED
+	TRANSITION_INIT_SET_FINISHED
+	
 };
 
 
@@ -76,7 +77,7 @@ void PlayerController::changeSet(string soundSet) {
 void  PlayerController::loadSoundSet() {
 	
 	int start = ofGetElapsedTimeMillis();
-	
+	progress = 0.0f;
 	midiTrack.pause();
 	ofLog(OF_LOG_VERBOSE,"loadSoundSet: %s",soundSet.c_str());
 	
@@ -292,6 +293,12 @@ void PlayerController::threadedFunction() {
 	
 }
 	
+float PlayerController::getProgress() {
+//	if (nextPlayer) {
+//		progress = nextPlayer->getProgress();
+//	}
+	return isInTransition() ? (float)transitionState/(float)TRANSITION_IDLE : 1.0f;
+}
 	
 void PlayerController::update() {
 	
@@ -325,6 +332,7 @@ void PlayerController::update() {
 				nextPlayer->loadSet();
 				currentPlayer = nextPlayer;
 				nextPlayer = 0;
+				progress = 1.0f;
 				transitionState = TRANSITION_IDLE;
 				enable = true;	
 				break;

@@ -9,8 +9,6 @@
 #import "SetsTable.h"
 #import "SetCell.h"
 #import "MilgromInterfaceAppDelegate.h"
-#import "MilgromViewController.h"
-#import "PlayerMenu.h"
 #import "Song.h"
 #import "testApp.h"
 
@@ -202,9 +200,9 @@
 		}
 	}
 	
+	[appDelegate pop];
 	
-	
-	[(PlayerMenu *)[appDelegate.milgromViewController.viewController.viewControllers objectAtIndex:2] exit:nil];
+	//[(PlayerMenu *)[appDelegate.milgromViewController.viewController.viewControllers objectAtIndex:2] exit:nil];
 	
 }
 

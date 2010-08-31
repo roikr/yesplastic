@@ -34,12 +34,10 @@ void SimplePlayer::setup(string setName) {
 	ofxXmlSettings xml;
 	this->setName = setName;
 	bool loaded = xml.loadFile("VIDEOS/"+setName+"/"+setName+".xml");
+	enable = false;
+	assert(loaded);
 	enable = true;
-	if (!loaded) {
-		enable = false;
-		return;
-	}
-	
+	progress = 0.0f;
 	xml.pushTag("video_set");
 	displayName = xml.getValue("id","");
 	
@@ -142,8 +140,10 @@ void SimplePlayer::initSet() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: initializing actor",setName.c_str());
-	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
+	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) {
 		actor.init(i);
+		progress = (i-SEQUENCE_SAMPLE_1)/(SEQUENCE_SAMPLE_8 - SEQUENCE_SAMPLE_1);
+	}
 		
 	pushTexture.init();
 	
@@ -155,11 +155,18 @@ void SimplePlayer::loadSet() {
 	
 	
 	ofLog(OF_LOG_VERBOSE,"%s: loading actor",setName.c_str());
-	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
+	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) {
 		actor.load(i);
+		//progress = 0.5*(1.0+i-SEQUENCE_SAMPLE_1)/(SEQUENCE_SAMPLE_8 - SEQUENCE_SAMPLE_1);
+	}
 	
 	pushTexture.load();
 	
+}
+
+float SimplePlayer::getProgress() {
+	ofLog(OF_LOG_VERBOSE,"actor %s progress: %f",setName.c_str(),progress);
+	return progress;
 }
 
 void SimplePlayer::unloadSet() {

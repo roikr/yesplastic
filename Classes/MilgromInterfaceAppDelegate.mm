@@ -18,6 +18,12 @@
 #include "Song.h"
 #include "VideoSet.h"
 #include "SoundSet.h"
+#import "MainViewController.h"
+#include "PlayerMenu.h"
+#import "OpenGLTOMovie.h"
+#import "AVPlayerDemoPlaybackViewController.h"
+#import <CoreMedia/CoreMedia.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 
@@ -41,13 +47,16 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)addDemos;
 - (void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload;
 - (void)loadDemos;
- 
+- (void) play;
+- (void) export;
 @end
 
 @implementation MilgromInterfaceAppDelegate
 
 @synthesize window;
 @synthesize milgromViewController;
+@synthesize mainViewController;
+@synthesize playerControllers;
 @synthesize OFSAptr;
 @synthesize queuedDemos;
 
@@ -76,12 +85,22 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	//glView.controller = self;
 	self.OFSAptr = new testApp;
+	self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+	
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
 	
 	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 	dispatch_async(aQueue, ^{
 		while (1) {
 			OFSAptr->threadedFunction();
+			if (OFSAptr->bNeedDisplay) {
+				if (mainViewController) {
+					dispatch_async(dispatch_get_main_queue(), ^{
+						[mainViewController updateViews];
+					});
+					OFSAptr->bNeedDisplay = false;
+				}
+			}
 		}
 	});
 	
@@ -370,8 +389,9 @@ NSString * const kCacheFolder=@"URLCache";
 	[managedObjectContext_ release];
 	[managedObjectModel_ release];
 	[persistentStoreCoordinator_ release];
-   
+	//TODO: release player controllers
 	[milgromViewController release];
+	[mainViewController release];
     [window release];
     [super dealloc];
 }
@@ -459,6 +479,7 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	[song setSoundSets:[NSSet setWithArray:fetchResults]];
+	[song setBpm:[NSNumber numberWithInteger:OFSAptr->getBPM()]];
 	[request release];
 	
 	
@@ -489,7 +510,7 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	
-	[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
+	//[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
 }
 
 - (void)addDemos {
@@ -597,6 +618,154 @@ NSString * const kCacheFolder=@"URLCache";
 //	dispatch_async(myCustomQueue, ^{
 //	});		
 		
+}
+
+#pragma mark -
+#pragma mark View Controller Stack Management
+
+- (void)pushMain {
+	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
+		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+		//self.menuController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		
+		
+		//self.menuController = [[MenuViewController alloc] init];
+		
+		//menuController.mainController = self; // TODO: move testApp to app delegate
+	}
+	
+	[milgromViewController.viewController pushViewController:self.mainViewController animated:YES];
+	
+	//[self dismissModalViewControllerAnimated:YES];
+	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	//[appDelegate.viewController dismissMenu:self];
+	
+	
+}
+
+- (void)pushSetMenu {
+	//TODO: replace with NULL as done in the page controll example
+	
+	if (self.playerControllers == nil) { // this check use in case of loading after warning message...
+		NSMutableArray *controllers = [[NSMutableArray alloc] init];
+		for (unsigned i = 0; i < 3; i++) {
+			PlayerMenu *controller = [[PlayerMenu alloc] initWithNibName:@"PlayerMenu" bundle:nil];
+			//PlayerViewContorller *controller = [[PlayerViewContorller alloc] init];
+			//controller.mainController = self;
+			[controllers addObject:controller];
+			[controller release];
+		}
+		self.playerControllers = [NSArray arrayWithArray:controllers];
+		[controllers release];
+	}
+	
+	//topMenu.hidden = YES;
+	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
+	
+	//[controller show];
+	[milgromViewController.viewController pushViewController:controller animated:YES];
+	//[self presentModalViewController:controller animated:YES];
+	//controller.view.hidden = NO;
+	OFSAptr->bMenu=true; // TODO: change upon return
+}
+
+
+- (void) pop {
+	[milgromViewController.viewController popViewControllerAnimated:YES];
+}
+
+- (void)renderAnimation {
+	[milgromViewController stopAnimation];
+	
+	
+	dispatch_queue_t myCustomQueue;
+	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
+	dispatch_async(myCustomQueue, ^{
+		OFSAptr->soundStreamStop();
+		OFSAptr->renderAudio();
+		OFSAptr->setSongState(SONG_RENDER_VIDEO);
+		
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"];
+		
+		
+		
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] WithSize:CGSizeMake(480, 320) 
+		 
+						 withDrawFrame:^(int frameNum) {
+							 //NSLog(@"rendering frame: %i",frameNum);
+							 [self.milgromViewController drawFrame];
+							 
+						 }
+		 
+						 withDidFinish:^(int frameNum) {
+							 return (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
+						 }
+		 
+				 withCompletionHandler:^ {
+					 NSLog(@"write completed");
+					 [self export];
+					 
+				 }];
+	});
+	
+	
+	dispatch_release(myCustomQueue);
+	
+	
+}
+
+- (void) export {
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *exportPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+	
+	NSError *error;
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath]) {
+		if (![[NSFileManager defaultManager] removeItemAtPath:exportPath error:&error]) {
+			NSLog(@"removeItemAtPath error: %@",[error description]);
+		}
+	}
+	
+	
+	[OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
+				  withVideoURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"]] 
+				  withAudioURL: [NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] //[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]]
+	 
+		   withProgressHandler:^(float progress) {NSLog(@"progress: %f",progress);}
+		 withCompletionHandler:^ {
+			 NSLog(@"export completed");
+			 dispatch_async(dispatch_get_main_queue(),
+							^{
+								OFSAptr->soundStreamStart();
+								OFSAptr->setSongState(SONG_IDLE);
+								[milgromViewController startAnimation];
+								[self play];
+							});
+			 
+			 
+		 }
+	 ];
+	
+	NSLog(@"export end");
+	
+}
+
+
+-(void) play {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	
+	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
+	
+	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
+	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
+	
+	[self.milgromViewController.viewController pushViewController:mPlaybackViewController animated:NO];
+	
 }
 
 

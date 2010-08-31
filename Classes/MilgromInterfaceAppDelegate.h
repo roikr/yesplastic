@@ -16,6 +16,7 @@ extern NSString * const kMilgromURL;
 
 @class MilgromViewController;
 @class Song;
+@class MainViewController;
 class testApp;
 
 
@@ -34,12 +35,16 @@ class testApp;
 	
 	NSMutableArray *queuedDemos;
 	
-	
+	NSArray *playerControllers;
+	MainViewController *mainViewController;
 	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
+
+@property (nonatomic,retain ) MainViewController *mainViewController;
+@property (nonatomic, retain) NSArray *playerControllers;
 
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
@@ -54,8 +59,10 @@ class testApp;
 - (void)saveContext;
 - (void)loadSong:(Song*)song;
 - (void)saveSong:(NSString *)songName;
-
-
+- (void)pushSetMenu;
+- (void)pushMain;
+- (void)pop;
+- (void)renderAnimation;
 
 @end
 

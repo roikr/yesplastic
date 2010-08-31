@@ -10,6 +10,7 @@
 #import "AssetLoader.h"
 
 @class CustomFontLabel;
+@class CustomImageView;
 @class SongsTable;
 @class Song;
 @interface SongCell : UITableViewCell {
@@ -18,7 +19,7 @@
 	UIButton *deleteButton;
 	SongsTable *songsTable;
 	NSNumber * _progress;
-		
+	CustomImageView *progressView;
 	
 	
 }
@@ -28,6 +29,7 @@
 @property (nonatomic,retain) IBOutlet UIButton *deleteButton;
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain) NSNumber *progress;
+@property (nonatomic,retain) IBOutlet CustomImageView *progressView;
 
 
 - (void) updateBackgroundWithNumber:(NSInteger)num;

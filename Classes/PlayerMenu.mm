@@ -37,9 +37,11 @@
     [super viewDidLoad];
 	if (self.setsTable == nil) {
 		self.setsTable = [[SetsTable alloc] initWithNibName:@"SetsTable" bundle:nil];
-		[self.setsView addSubview:setsTable.view];
+		
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	}
+	
+	[self.setsView addSubview:setsTable.view];
 }
 
 

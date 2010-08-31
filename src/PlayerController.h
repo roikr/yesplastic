@@ -69,9 +69,13 @@ public:
 	
 	bool getIsRecording();
 	bool getIsPlaying();
+	
+	float getProgress();
 
 	
 private:
+	
+	float progress;
 	
 	void unloadVideoSet();
 	
@@ -125,6 +129,7 @@ private:
 		
 	bool bVisible;
 	bool bAnimatedTransition;
+	
 
 };
 

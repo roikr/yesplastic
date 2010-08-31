@@ -18,16 +18,11 @@
 #import "HelpViewController.h"
 #import "Constants.h"
 #import "MilgromMacros.h"
-#import "OpenGLTOMovie.h"
-#import "AVPlayerDemoPlaybackViewController.h"
-#import <CoreMedia/CoreMedia.h>
-#import <AVFoundation/AVFoundation.h>
 
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
-- (void) play;
-- (void) export;
+
 @end
 
 @implementation MilgromViewController
@@ -262,105 +257,6 @@
 	[viewController viewDidAppear:animated];
 }
 
-- (void)renderAnimation {
-	[self stopAnimation];
-	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	testApp *OFSAptr = [appDelegate OFSAptr];
-	
-	
-	
-	dispatch_queue_t myCustomQueue;
-	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
-	
-	dispatch_async(myCustomQueue, ^{
-		OFSAptr->soundStreamStop();
-		OFSAptr->renderAudio();
-		OFSAptr->setSongState(SONG_RENDER_VIDEO);
-		
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"];
-		
-		
-		
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] WithSize:CGSizeMake(480, 320) 
-		 
-						 withDrawFrame:^(int frameNum) {
-							 //NSLog(@"rendering frame: %i",frameNum);
-							 [self drawFrame];
-							 
-						 }
-		 
-						 withDidFinish:^(int frameNum) {
-							 return (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
-						 }
-		 
-				 withCompletionHandler:^ {
-					 NSLog(@"write completed");
-					[self export];
-					 
-				 }];
-	});
-	
-	
-	dispatch_release(myCustomQueue);
-	
-		
-}
-
-- (void) export {
-	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *exportPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
-	
-	NSError *error;
-	
-	if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath]) {
-		if (![[NSFileManager defaultManager] removeItemAtPath:exportPath error:&error]) {
-			NSLog(@"removeItemAtPath error: %@",[error description]);
-		}
-	}
-	
-	
-	[OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
-				  withVideoURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"]] 
-				  withAudioURL: [NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] //[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]]
-	 
-		   withProgressHandler:^(float progress) {NSLog(@"progress: %f",progress);}
-		 withCompletionHandler:^ {
-			 NSLog(@"export completed");
-			 dispatch_async(dispatch_get_main_queue(),
-				^{
-					MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-					appDelegate.OFSAptr->soundStreamStart();
-					appDelegate.OFSAptr->setSongState(SONG_IDLE);
-					[self startAnimation];
-					[self play];
-				});
-			 
-			
-		 }
-	 ];
-	
-	NSLog(@"export end");
-	
-}
-
-
--(void) play {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	
-	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
-	
-	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
-	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
-	
-	[self.viewController pushViewController:mPlaybackViewController animated:NO];
-	
-}
 
 
 

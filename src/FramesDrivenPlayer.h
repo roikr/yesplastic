@@ -51,11 +51,14 @@ public:
 	float getScale();
 	string displayName;
 	
-
+	float getProgress();
+	
 private:
 	
 	int getCurrentFrame();
 	void setDrivenSample(string sampleName);
+	
+	float progress;
 	
 	ofxRKActor lipsActor;
 	ofxFramesDriver driver;

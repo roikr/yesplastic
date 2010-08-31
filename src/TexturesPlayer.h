@@ -36,6 +36,8 @@ public:
 	virtual bool didTransitionEnd() = 0;
 	virtual float getScale() = 0;
 	
+	virtual float getProgress() = 0;
+	
 };
 
 #endif

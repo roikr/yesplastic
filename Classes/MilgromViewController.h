@@ -47,6 +47,7 @@
 
 - (void)startAnimation;
 - (void)stopAnimation;
-- (void)renderAnimation;
+- (void)drawFrame;
+
 
 @end

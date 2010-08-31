@@ -84,6 +84,11 @@ public:
 	void soundStreamStart();
 	void soundStreamStop();
 	
+	float getProgress();
+	
+	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
+	bool bTempDoc;
+	bool bDemo;
 private:
 	
 	string getPlayerName(int playerNum); // using to build SoundSet name from Song name

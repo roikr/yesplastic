@@ -188,8 +188,10 @@ void FramesDrivenPlayer::initSet() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: initializing actor",setName.c_str());
-	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
+	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) {
 		actor.init(*i);
+		progress = distance(sequences.begin(),i)/distance(sequences.begin(),sequences.end());
+	}
 		
 	ofLog(OF_LOG_VERBOSE,"%s: initializing lips actor",setName.c_str());
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
@@ -204,8 +206,10 @@ void FramesDrivenPlayer::loadSet() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: loading actor",setName.c_str());
-	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
+	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) {
 		actor.load(*i);
+		//progress = 0.5*(1.0+distance(sequences.begin(),i)/distance(sequences.begin(),sequences.end()));
+	}
 	
 	ofLog(OF_LOG_VERBOSE,"%s: loading lips actor",setName.c_str());
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
@@ -213,6 +217,11 @@ void FramesDrivenPlayer::loadSet() {
 	
 	pushTexture.load();
 	
+}
+
+float FramesDrivenPlayer::getProgress() {
+	ofLog(OF_LOG_VERBOSE,"actor %s progress: %f",setName.c_str(),progress);
+	return progress;
 }
 
 void FramesDrivenPlayer::unloadSet() {
