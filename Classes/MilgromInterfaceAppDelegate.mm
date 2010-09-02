@@ -504,7 +504,8 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)loadSong:(Song*)song {
-	//
+	
+	OFSAptr->setSongState(SONG_IDLE); // if there is previous song which is playing there...
 	
 	string nextSong = [song.songName UTF8String];
 	if ([song.bDemo boolValue]) {

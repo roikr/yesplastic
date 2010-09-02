@@ -28,6 +28,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.songName.returnKeyType = UIReturnKeyDone;
 	[songName becomeFirstResponder];
 }
 
@@ -54,12 +55,15 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
 	
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] saveSong:songName.text];
-	
-	[self dismissModalViewControllerAnimated:YES];
+	[self done:nil];
 	return NO;
+}
+
+- (void)done:(id)sender {
+	[songName resignFirstResponder];
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] saveSong:songName.text];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)cancel:(id)sender {

@@ -76,9 +76,20 @@
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	SongCell *cell;
+	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
+		cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+		[cell setSelected:NO animated:NO];
+	}
+	
+	cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	[cell setSelected:YES animated:YES];
+	
+	
 	 [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
- 
+
+
 
 - (void)deleteSong:(SongCell*)songCell {
 	
@@ -256,6 +267,8 @@
 	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	//[appDelegate.viewController dismissMenu:self];
 	
+	//OFSAptr->setSongState(SONG_IDLE);
+	
 	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
 	MilgromLog(@"SongsTable::didSelectRowAtIndexPath: cell.selected: %u",cell.selected);
 	
@@ -276,7 +289,7 @@
 		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 		[self performSelector:@selector(updateProgress:) withObject:cell afterDelay:0.1 inModes:modes];
 	} else {
-		[appDelegate pushMain];
+		[appDelegate pushMain]; // TODO: prevent double push
 		cell.progress = [NSNumber numberWithFloat:1.0f];
 	}
 

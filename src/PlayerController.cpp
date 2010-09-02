@@ -9,6 +9,7 @@
 
 enum {
 	TRANSITION_CHANGE_SOUND_SET,
+	TRANSITION_LOAD_SONG,
 	TRANSITION_CHANGE_SOUND_SET_FINISHED,
 	TRANSITION_UNLOAD_SET,
 	TRANSITION_UNLOAD_SET_FINISHED,
@@ -53,11 +54,20 @@ void PlayerController::setup(int playerNum) {
 
 
 void  PlayerController::loadSet(string soundSet,string songName){
-	this->soundSet = soundSet;
-	this->songName = songName;
+	
+	
 	bAnimatedTransition = false;
 	enable = false;	
-	transitionState = TRANSITION_CHANGE_SOUND_SET;
+	this->songName = songName;
+	
+		
+	if (getCurrentSoundSet() == soundSet) {
+		transitionState = TRANSITION_LOAD_SONG;
+	} else {
+		this->soundSet = soundSet;
+		transitionState = TRANSITION_CHANGE_SOUND_SET;
+	}
+
 }
 
 void PlayerController::changeSet(string soundSet) {
@@ -73,8 +83,24 @@ void PlayerController::changeSet(string soundSet) {
 	transitionState = TRANSITION_CHANGE_SOUND_SET;
 }
 
+void PlayerController::loadSong() {
+	if (songName!="") { 
+		ofDisableDataPath();
+		song.loadTrack(songName);
+		ofEnableDataPath();
+		
+		
+	} else {
+		song.loadTrack("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml");
+	}
+	
+}
 
 void  PlayerController::loadSoundSet() {
+	
+	
+		
+	
 	
 	int start = ofGetElapsedTimeMillis();
 	progress = 0.0f;
@@ -187,15 +213,7 @@ void  PlayerController::loadSoundSet() {
 	
 	currentLoop = 0;
 	
-	if (!bAnimatedTransition) {
-		if (songName!="") {
-			ofDisableDataPath();
-			song.loadTrack(songName);
-			ofEnableDataPath();
-		} else {
-			song.loadTrack("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml");
-		}
-	}
+	
 	
 	
 	//midiTrack->playLoop(currentLoop);
@@ -243,8 +261,14 @@ void PlayerController::threadedFunction() {
 		switch (transitionState) {
 			case TRANSITION_CHANGE_SOUND_SET:
 				loadSoundSet();
-				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED;
+				transitionState = TRANSITION_LOAD_SONG;
 				break;
+				
+			case TRANSITION_LOAD_SONG:
+				loadSong();
+				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
+				break;
+
 
 			case TRANSITION_UNLOAD_SET:
 				previousPlayer->release();
@@ -266,7 +290,11 @@ void PlayerController::threadedFunction() {
 			case TRANSITION_CHANGE_SOUND_SET:
 				loadSoundSet();
 				
-				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED;
+				transitionState = TRANSITION_LOAD_SONG;
+				break;
+			case TRANSITION_LOAD_SONG:
+				song.clear();
+				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
 				break;
 			case TRANSITION_INIT_IN_OUT:
 				currentPlayer->initOut();
@@ -297,14 +325,27 @@ float PlayerController::getProgress() {
 //	if (nextPlayer) {
 //		progress = nextPlayer->getProgress();
 //	}
-	return isInTransition() ? (float)transitionState/(float)TRANSITION_IDLE : 1.0f;
+	
+	float progress;
+	if (isInTransition()) {
+		progress = transitionState;
+		if (transitionState == TRANSITION_LOAD_SONG) {
+			progress+=song.getProgress();
+		}
+		progress/=(float)TRANSITION_IDLE;
+	} else {
+		progress = 1.0f;
+	}
+
+	
+	return  progress;
 }
 
 float PlayerController::getPlayhead() {
 	//	if (nextPlayer) {
 	//		progress = nextPlayer->getProgress();
 	//	}
-	return songState != SONG_RECORD && songState != SONG_IDLE ? song.getPlayhead() : 0.0f;
+	return songState == SONG_PLAY || songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO ? song.getPlayhead() : 0.0f;
 }
 
 	
@@ -665,14 +706,19 @@ void PlayerController::setBPM(int bpmVal) {
 
 
 void PlayerController::setSongState(int songState) {
-	setMode(MANUAL_MODE);
+	
 	switch (songState) {
 		case SONG_IDLE:
+			song.stop();
+			setMode(MANUAL_MODE);
+			break;
+		case SONG_TRIGGER_RECORD:
 			song.stop();
 			break;
 		case SONG_PLAY:
 		case SONG_RENDER_AUDIO:
 		case SONG_RENDER_VIDEO:
+			setMode(MANUAL_MODE);
 			song.play();
 			break;
 		case SONG_RECORD:

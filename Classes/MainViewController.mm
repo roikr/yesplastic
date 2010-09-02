@@ -194,6 +194,7 @@
 		switch (OFSAptr->getSongState()) {
 			case SONG_IDLE:
 			case SONG_RECORD:
+			case SONG_TRIGGER_RECORD:
 				playButton.hidden = NO;
 				
 				
@@ -264,9 +265,10 @@
 
 
 - (void) menu:(id)sender {
-	OFSAptr->setSongState(SONG_IDLE);
 	
-			 
+	if (OFSAptr->getSongState()==SONG_RECORD ) {
+		OFSAptr->setSongState(SONG_IDLE);
+	}
 	
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE: 
@@ -315,7 +317,7 @@
 		[self stop:nil];
 	}
 	else {
-		OFSAptr->setSongState(SONG_RECORD);
+		OFSAptr->setSongState(SONG_TRIGGER_RECORD);
 		
 	}
 	

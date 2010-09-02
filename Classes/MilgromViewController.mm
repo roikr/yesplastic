@@ -215,6 +215,9 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	appDelegate.OFSAptr->getSongState(); // just to update bNeedDisplay
+	
 	if (animating) {
 		int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
 		if (frame>appDelegate.OFSAptr->lastFrame) {

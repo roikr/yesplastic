@@ -82,6 +82,8 @@ private:
 	void loadSoundSet();
 	void loadVideoSet();
 	
+	void loadSong();
+	
 	TexturesPlayer *createTexturePlayer(string soundSet,string videoSet);
 		
 	TexturesPlayer *previousPlayer;
@@ -95,7 +97,7 @@ private:
 	
 	string videoSet;
 	string nextVideoSet;
-	string songName;
+	
 	//string soundSetPath;
 	bool bFramesDriverPlayer;
 	
@@ -124,6 +126,7 @@ private:
 	
 	int songState;
 	
+	string songName;
 	ofxMidiTrack song;
 	vector<event> recordEvents;
 		

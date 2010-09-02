@@ -238,6 +238,11 @@ void testApp::setMode(int player,int mode) {
 	//if (mode == LOOP_MODE && player == 1) // && this->player[1].getMidiTrack()->getCurrentSoundSet()!="CHECKIT")
 	//	return;
 	
+	if (songState == SONG_TRIGGER_RECORD) {
+		startRecording();
+	}
+	
+	
 	this->player[player].setMode(mode);
 	bNeedDisplay = true;
 	
@@ -345,10 +350,10 @@ void testApp::loadSong(string songName,bool bDemo) {
 	} else {
 		for (int i=0; i<3; i++) {
 			string str = getPlayerName(i)+"_"+songName;
-			if (player[i].getCurrentSoundSet()!=str) {
-				player[i].setMode(MANUAL_MODE);
-				player[i].loadSet(str);
-			}
+			
+			player[i].setMode(MANUAL_MODE);
+			player[i].loadSet(str);
+			
 			
 		}
 	}
@@ -699,6 +704,11 @@ void testApp::exit() {
 
 void testApp::buttonPressed(int button) {
 	
+	if (songState == SONG_TRIGGER_RECORD) {
+		startRecording();
+	}
+	
+	
 	if (player[controller].isEnabled() && !player[controller].isInTransition()) {					
 		if ( player[controller].getMode() == MANUAL_MODE ) {
 			player[controller].play(button);	
@@ -956,12 +966,18 @@ void testApp::renderAudio() {
 }
 
 
+void testApp::startRecording() {
+	setSongState(SONG_RECORD);
+	
+}
+
 void testApp::setSongState(int songState) {
 	
 	
 		
 	this->songState = songState;
 	
+		
 	
 	
 	for (int i=0;i<3;i++) {
@@ -987,7 +1003,17 @@ void testApp::setSongState(int songState) {
 	
 }
 
-int  testApp::getSongState() {
+int  testApp::getSongState() { // should be called frequently to observe changes
+	
+	if (songState == SONG_TRIGGER_RECORD) {
+		for (int i=0; i<3; i++) {
+			if (getMode(i) == LOOP_MODE) {
+				startRecording();
+				break;
+			}
+		}
+		
+	}
 	
 	switch (songState) {
 		case SONG_PLAY:
@@ -1045,6 +1071,7 @@ void testApp::saveSong(string songName) {
 	
 	songXml.saveFile(ofToDocumentsPath(songName+".xml"));
 	ofEnableDataPath();	
+	bNeedDisplay = true;
 	
 	
 }

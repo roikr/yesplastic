@@ -35,7 +35,6 @@ public:
 	void prevLoop(int player);
 	
 	
-	
 	int getMode(int player);
 	void setMode(int player,int mode);
 	
@@ -91,6 +90,8 @@ public:
 	bool bTempDoc;
 	bool bDemo;
 private:
+	
+	void startRecording();
 	
 	string getPlayerName(int playerNum); // using to build SoundSet name from Song name
 	
