@@ -274,7 +274,8 @@
 			break;
 			
 		case BAND_STATE: {
-			[self.navigationController popViewControllerAnimated:YES];
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop]; 
+			//[self.navigationController popViewControllerAnimated:YES];
 			//[self presentModalViewController:menuController animated:YES];
 			//menuController.view.hidden = NO;
 		} break;

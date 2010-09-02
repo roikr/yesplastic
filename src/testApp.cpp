@@ -90,17 +90,17 @@ void testApp::setup(){
 	
 	
 
-	filename = "images/buttons.pvr";
-	buttons.setup(ofToDataPath(filename));
-	buttons.init();
-	buttons.load();
+//	filename = "images/buttons.pvr";
+//	buttons.setup(ofToDataPath(filename));
+//	buttons.init();
+//	buttons.load();
 	
 	
 	
 	lastFrame = 0;
 	bChangeSet = false; 
 	
-	bButtonDown = false;
+//	bButtonDown = false;
 	bNeedDisplay = false;
 	bTempDoc = false;
 	
@@ -578,93 +578,93 @@ void testApp::draw(){
 	
 	ofPopMatrix();
 	
-	int x;
-	int y;
-	
-	if (!bTrans ) {
-		switch (state) {
-			case SOLO_STATE:
-			{
-				if (!bMove && measures.empty() && !bMenu) 
-					for (i=0;i<8;i++) {
-						
-						y = 360+(i/4) * 60;
-						x = 10+(i%4)*80;
-						if (player[controller].getMode() == MANUAL_MODE)
-							buttons.draw(x,y,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
-						else
-							buttons.draw(x,y,i*60,(controller*2+1)*60,60,60,i==player[controller].getCurrentLoop() ?  1.0f : 0.4f );
-					}
-				
-			} break;
-			case BAND_STATE:
-			
-			{
-				
-				/*
-				for (i=0;i<8;i++) 
-					if (player[controller].getMidiTrack()->getMode() == MANUAL_MODE)
-						buttons.draw(i*60,260,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
-					else
-						buttons.draw(i*60,260,i*60,(controller*2+1)*60,60,60,i==player[controller].getMidiTrack()->getCurrentLoop() ?  1.0f : 0.4f );
-				*/
-				
-				
-					
-				
-				if (!measures.empty() ) 
-					buttons.draw(50+controller*160,260,nextLoopNum*60,(controller*2+1)*60,60,60,  1.0f );
-				
-			} 
-			 
-			break;
-				
-		}
-		
-		
-		//for(i=0;i<3;i++) {
-			/*
-			float alpha =1.0f;
-			if (state==BAND_STATE && player[i].getMidiTrack()->getMode() == MANUAL_MODE) {
-				alpha = 1.0f;
-			} 
-			
-			if (player[i].bFade) {
-				float t = (float)(time - player[i].fadeStart)/250.0;
-				if (t >= 1) 
-					player[i].bFade = false;
-				else {
-					alpha = easeInOutQuad(t,alpha > 0.0f ? 0.0f : 1.0f,ty);
-				}
-					
-			}
-			 */
-			//player[i].mask.draw(player[i].mask_x*scale,0,player[i].mask_width,320,1.0f);
-			//player[i].mask.draw(player[i].mask_x*scale,0,0,0,player[i].mask_width,320,0.0f);
-		//
-	//}
-		 
-		
-		/*
-		if (menu.mode != MENU_IDLE && !bTrans) 
-			menu.draw();
-		 */
-	}
-	
-	
-	/*
-	 
-	 ui.draw(10,0,bPlay ? 90 : 10,0,20,20,bPlay ? 1.0f : 0.4f);
-	 ui.draw(450,0,bRecord ? 370 : 450,0,20,20,bRecord ? 1.0f : 0.4f);
-	 
-	 if (bpmDown) {
-	 ui.draw(40,0,40,0,20,20,1.0f);
-	 ui.draw(420,0,420,0,20,20,1.0f);
-	 ui.draw((bpmVal - 50.0)/150.0 * 380.0 + 40.0,0,60,0,20,20,1.0f);
-	 }
-	 else
-	 ui.draw((float)(MidiTrack::GetBPM() - 50)/150.0 * 380.0 + 40.0,0,60,0,20,20,0.4f);
-	 */
+//	int x;
+//	int y;
+//	
+//	if (!bTrans ) {
+//		switch (state) {
+//			case SOLO_STATE:
+//			{
+//				if (!bMove && measures.empty() && !bMenu) 
+//					for (i=0;i<8;i++) {
+//						
+//						y = 360+(i/4) * 60;
+//						x = 10+(i%4)*80;
+//						if (player[controller].getMode() == MANUAL_MODE)
+//							buttons.draw(x,y,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
+//						else
+//							buttons.draw(x,y,i*60,(controller*2+1)*60,60,60,i==player[controller].getCurrentLoop() ?  1.0f : 0.4f );
+//					}
+//				
+//			} break;
+//			case BAND_STATE:
+//			
+//			{
+//				
+//				/*
+//				for (i=0;i<8;i++) 
+//					if (player[controller].getMidiTrack()->getMode() == MANUAL_MODE)
+//						buttons.draw(i*60,260,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
+//					else
+//						buttons.draw(i*60,260,i*60,(controller*2+1)*60,60,60,i==player[controller].getMidiTrack()->getCurrentLoop() ?  1.0f : 0.4f );
+//				*/
+//				
+//				
+//					
+//				
+//				if (!measures.empty() ) 
+//					buttons.draw(50+controller*160,260,nextLoopNum*60,(controller*2+1)*60,60,60,  1.0f );
+//				
+//			} 
+//			 
+//			break;
+//				
+//		}
+//		
+//		
+//		//for(i=0;i<3;i++) {
+//			/*
+//			float alpha =1.0f;
+//			if (state==BAND_STATE && player[i].getMidiTrack()->getMode() == MANUAL_MODE) {
+//				alpha = 1.0f;
+//			} 
+//			
+//			if (player[i].bFade) {
+//				float t = (float)(time - player[i].fadeStart)/250.0;
+//				if (t >= 1) 
+//					player[i].bFade = false;
+//				else {
+//					alpha = easeInOutQuad(t,alpha > 0.0f ? 0.0f : 1.0f,ty);
+//				}
+//					
+//			}
+//			 */
+//			//player[i].mask.draw(player[i].mask_x*scale,0,player[i].mask_width,320,1.0f);
+//			//player[i].mask.draw(player[i].mask_x*scale,0,0,0,player[i].mask_width,320,0.0f);
+//		//
+//	//}
+//		 
+//		
+//		/*
+//		if (menu.mode != MENU_IDLE && !bTrans) 
+//			menu.draw();
+//		 */
+//	}
+//	
+//	
+//	/*
+//	 
+//	 ui.draw(10,0,bPlay ? 90 : 10,0,20,20,bPlay ? 1.0f : 0.4f);
+//	 ui.draw(450,0,bRecord ? 370 : 450,0,20,20,bRecord ? 1.0f : 0.4f);
+//	 
+//	 if (bpmDown) {
+//	 ui.draw(40,0,40,0,20,20,1.0f);
+//	 ui.draw(420,0,420,0,20,20,1.0f);
+//	 ui.draw((bpmVal - 50.0)/150.0 * 380.0 + 40.0,0,60,0,20,20,1.0f);
+//	 }
+//	 else
+//	 ui.draw((float)(MidiTrack::GetBPM() - 50)/150.0 * 380.0 + 40.0,0,60,0,20,20,0.4f);
+//	 */
 	
 	
 	
@@ -765,7 +765,7 @@ void testApp::touchDown(float x, float y, int touchId) {
 void testApp::touchMoved(float x, float y, int touchId) {
 	//printf("touchMoved: %.f, %.f %i\n", x, y, touchId);
 	
-	if (touchId!=0 || bButtonDown) 
+	if (touchId!=0) // || bButtonDown) 
 		return;
 	
 	measure m;
@@ -874,7 +874,7 @@ void testApp::touchUp(float x, float y, int touchId) {
 	}
 	
 	measures.clear();
-	bButtonDown = false;
+//	bButtonDown = false;
 	
 	
 }

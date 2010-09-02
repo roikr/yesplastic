@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class CustomImageView;
+@class AVAssetExportSession;
 
 @interface ShareViewController : UIViewController {
 	CustomImageView *progressView;
@@ -20,4 +21,5 @@
 
 - (void)done:(id)sender;
 - (void)render;
+
 @end

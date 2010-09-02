@@ -137,13 +137,17 @@
 	[writer endSessionAtSourceTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum-1))];
 	[writer finishWriting];
 	NSLog(@"Writing finished with status: %i",[writer status]);
-	completionHandler();
+	
+	dispatch_async(dispatch_get_main_queue(), ^{
+		completionHandler();
+	});
+	
 
 }
 	
 	 
 
-+ (void)exportToURL:(NSURL*)url withVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL 
++ (AVAssetExportSession *)exportToURL:(NSURL*)url withVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL 
 					withProgressHandler:(void (^)(float))progressHandler withCompletionHandler:(void (^)(void))completionHandler {
 	
 
@@ -173,7 +177,7 @@
 	[compositionAudioTrack insertTimeRange:audioTimeRangeInAsset ofTrack:clipAudioTrack atTime:kCMTimeZero error:&error];
 	
 			
-	AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:composition presetName:AVAssetExportPresetHighestQuality]; //AVAssetExportPresetHighestQuality
+	AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:composition presetName:AVAssetExportPresetHighestQuality]; // AVAssetExportPresetPassthrough
 		
 	session.outputURL = url;
 	session.outputFileType = AVFileTypeQuickTimeMovie;
@@ -187,28 +191,31 @@
 	//session.videoComposition = videoComposition;
 	
 	[session exportAsynchronouslyWithCompletionHandler:^
-	 {
+	{
 		
-		NSLog(@"export did finished with status: %i",[session status]);
-		completionHandler();
-		//[self exportDidFinish:session];
+		//NSLog(@"export did finished with status: %i",[session status]);
+		dispatch_async(dispatch_get_main_queue(), ^{
+			completionHandler();
+		});
 		 
 	 }];
 	
+	/*
 	dispatch_queue_t myCustomQueue;
 	myCustomQueue = dispatch_queue_create("exportQueue", NULL);
 	
 	dispatch_async(myCustomQueue, ^{
 		while ([session status] != AVAssetExportSessionStatusCompleted) {
 			progressHandler([session progress]);
-			[NSThread sleepForTimeInterval:0.04f];
+			//[NSThread sleepForTimeInterval:0.04f];
 		}
 	});
 	
 	
 	dispatch_release(myCustomQueue);
+	 */
 	
-	[session autorelease];
+	return session ;
 	
 }
 

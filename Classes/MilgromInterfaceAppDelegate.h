@@ -66,6 +66,7 @@ class testApp;
 - (void)pushMain;
 - (void)pop;
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
+- (void)dismissModalViewControllerAnimated:(BOOL)animated;
 - (void)share;
 - (void)play;
 @end

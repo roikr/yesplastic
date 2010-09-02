@@ -390,7 +390,7 @@ static NSString* const AVPlayerDemoPlaybackViewControllerDurationObservationCont
 }
 
 - (void) done:(id)sender {
-	[self.navigationController popViewControllerAnimated:NO];
+	[self dismissModalViewControllerAnimated:NO];
 }
 
 @end

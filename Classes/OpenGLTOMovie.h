@@ -10,6 +10,7 @@
 
 
 
+@class AVAssetExportSession;
 
 @interface OpenGLTOMovie : NSObject {
 
@@ -17,7 +18,7 @@
 }
 
 + (void)writeToVideoURL:(NSURL*)videoURL WithSize:(CGSize)size withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler;
-+ (void)exportToURL:(NSURL*)url withVideoURL:(NSURL*) videoURL withAudioURL:(NSURL*)audioURL 
++ (AVAssetExportSession *)exportToURL:(NSURL*)url withVideoURL:(NSURL*) videoURL withAudioURL:(NSURL*)audioURL 
 					withProgressHandler:(void (^)(float))progressHandler withCompletionHandler:(void (^)(void))completionHandler;
 
 

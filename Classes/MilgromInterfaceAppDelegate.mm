@@ -388,6 +388,10 @@ NSString * const kCacheFolder=@"URLCache";
 	[self.milgromViewController presentModalViewController:modalViewController animated:animated];
 }
 
+- (void)dismissModalViewControllerAnimated:(BOOL)animated {
+	[self.milgromViewController dismissModalViewControllerAnimated:animated];
+}
+
 
 
 
@@ -691,9 +695,10 @@ NSString * const kCacheFolder=@"URLCache";
 		shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	}
 	
-	[self.milgromViewController presentModalViewController:self.shareViewController animated:YES];
+	[self presentModalViewController:self.shareViewController animated:YES]; 
+	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
+	// not so
 	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
-	[milgromViewController stopAnimation];
 	[shareViewController render];
 }
 
@@ -707,7 +712,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
 	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
 	
-	[self.milgromViewController.viewController pushViewController:mPlaybackViewController animated:NO];
+	[self presentModalViewController:mPlaybackViewController animated:NO];
 	
 }
 

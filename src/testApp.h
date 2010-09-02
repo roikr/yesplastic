@@ -98,9 +98,9 @@ private:
 	
 	ofxRKTexture background;
 	
-	ofxRKTexture buttons;
-	bool bButtonDown;
-	int button;
+//	ofxRKTexture buttons;
+//	bool bButtonDown;
+//	int button;
 		
 	
 	bool bPush;
@@ -120,10 +120,10 @@ private:
 	
 	
 	float alpha;
-	bool bTrans;
+	bool bTrans;  // I believe it is the transtion between BAND and SOLO states
 	int animStart;
 		
-	bool bMove;
+	bool bMove; // dragging around
 	int moveTime;
 	float sx;
 	

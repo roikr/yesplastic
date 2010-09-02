@@ -13,9 +13,13 @@
 #import "Constants.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromViewController.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface ShareViewController ()
 - (void) export;	
+- (void)exportDidFinish;
+- (void)updateExportProgress:(AVAssetExportSession *)theSession;
 @end
 
 @implementation ShareViewController
@@ -78,17 +82,22 @@
 }
 
 - (void)render {
-	
 	[self setProgress:[NSNumber numberWithFloat:0.0f]];
-	dispatch_queue_t myCustomQueue;
-	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
 	MilgromViewController * milgromViewController = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).milgromViewController;
 	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
 	
+	[milgromViewController stopAnimation];
+	OFSAptr->soundStreamStop();
+
+	dispatch_queue_t myCustomQueue;
+	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
 	dispatch_async(myCustomQueue, ^{
-		OFSAptr->soundStreamStop();
+				
 		OFSAptr->renderAudio();
 		OFSAptr->setSongState(SONG_RENDER_VIDEO);
+		
 		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"];
@@ -101,6 +110,7 @@
 							 //NSLog(@"rendering frame: %i",frameNum);
 							 [milgromViewController drawFrame];
 							 [self setProgress:[NSNumber numberWithFloat:OFSAptr->getPlayhead()]];
+							 // TODO: playhead is only by DRM
 							 
 						 }
 		 
@@ -123,6 +133,8 @@
 
 - (void) export {
 	
+	self.progress = [NSNumber numberWithFloat:0.0f];
+	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *exportPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
 	
@@ -134,42 +146,63 @@
 		}
 	}
 	
-	MilgromViewController * milgromViewController = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).milgromViewController;
-	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
-	
-	[OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
+	AVAssetExportSession * session = [OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
 				  withVideoURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"]] 
 				  withAudioURL: [NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] //[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]]
 	 
-		   withProgressHandler:^(float progress) {
-			   dispatch_async(dispatch_get_main_queue(),^{
-				   [self setProgress:[NSNumber numberWithFloat:progress]];
-				   //NSLog(@"progress: %f",progress);
-			   });
-			}
+		   withProgressHandler:nil
+	 
+//			^(float progress) {
+//			   dispatch_async(dispatch_get_main_queue(),^{
+//				   [self setProgress:[NSNumber numberWithFloat:progress]];
+//				   NSLog(@"progress: %f",progress);
+//			   });
+//			}
 		 withCompletionHandler:^ {
-			 NSLog(@"export completed");
-			 dispatch_async(dispatch_get_main_queue(),
-				^{
-					OFSAptr->soundStreamStart();
-					OFSAptr->setSongState(SONG_IDLE);
-					[milgromViewController startAnimation];
-					
-				});
-			 
-			 
+			 [self exportDidFinish];
 		 }
 	 ];
+	
+	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	[self performSelector:@selector(updateExportProgress:) withObject:session	afterDelay:0.1 inModes:modes];
 	
 	NSLog(@"export end");
 	
 }
 
 
+- (void)updateExportProgress:(AVAssetExportSession *)theSession
+{
+	
+	if ([theSession status]==AVAssetExportSessionStatusExporting) {
+		
+		self.progress = [NSNumber numberWithFloat:[theSession progress]];
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateExportProgress:) withObject:theSession afterDelay:0.1 inModes:modes];
+	} else {
+		self.progress = [NSNumber numberWithFloat:1.0f];
+	}
+	
+	
+	
+}
+
+- (void)exportDidFinish {
+	MilgromViewController * milgromViewController = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).milgromViewController;
+	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
+	
+	
+	OFSAptr->soundStreamStart();
+	OFSAptr->setSongState(SONG_IDLE);
+	[milgromViewController startAnimation];
+	
+	NSLog(@"exportDidFinish");
+}
+
 
 
 - (void)done:(id)sender {
-	[self dismissModalViewControllerAnimated:YES];
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
 }
 
 
