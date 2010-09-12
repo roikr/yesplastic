@@ -15,6 +15,7 @@ enum {
 	TRANSITION_UNLOAD_SET_FINISHED,
 	TRANSITION_LOAD_SET,
 	TRANSITION_LOAD_SET_FINISHED,
+	TRANSITION_BEFORE_IDLE,
 	TRANSITION_IDLE,
 	TRANSITION_RELEASE_SET,
 	TRANSITION_RELEASE_SET_FINISHED,
@@ -45,10 +46,10 @@ void PlayerController::setup(int playerNum) {
 	mode = MANUAL_MODE;	
 			
 	midiInstrument = 0;
-	midiTrack.setup();
+	looper.setup();
 	songState = SONG_IDLE;
 	song.setup();
-	//midiTrack = 0;
+	//looper = 0;
 	
 }
 
@@ -57,7 +58,7 @@ void  PlayerController::loadSet(string soundSet,string songName){
 	
 	
 	bAnimatedTransition = false;
-	enable = false;	
+	
 	this->songName = songName;
 	
 		
@@ -79,7 +80,7 @@ void PlayerController::changeSet(string soundSet) {
 	}
 	this->soundSet = soundSet;
 	bAnimatedTransition = true;
-	enable = false;	
+		
 	transitionState = TRANSITION_CHANGE_SOUND_SET;
 }
 
@@ -104,7 +105,6 @@ void  PlayerController::loadSoundSet() {
 	
 	int start = ofGetElapsedTimeMillis();
 	progress = 0.0f;
-	midiTrack.pause();
 	ofLog(OF_LOG_VERBOSE,"loadSoundSet: %s",soundSet.c_str());
 	
 	this->soundSet = soundSet;
@@ -124,7 +124,7 @@ void  PlayerController::loadSoundSet() {
 	
 	//ofLog(OF_LOG_VERBOSE,"using video: %s",nextVideoSet.c_str());
 	
-	multi = xml.tagExists("multi");
+	bMulti = xml.tagExists("multi");
 	volume = xml.getValue("volume", 1.0f);
 	
 	if (xml.tagExists("notes")) {
@@ -158,7 +158,7 @@ void  PlayerController::loadSoundSet() {
 	 */
 	
 	set<int> chokeGroup;
-	if (multi && xml.tagExists("choke_group")) {
+	if (bMulti && xml.tagExists("choke_group")) {
 		xml.pushTag("choke_group");
 		for (int i=0;i<xml.getNumTags("note");i++) 
 			chokeGroup.insert(xml.getValue("note", 0, i)-1); // -1 because in the xml we start from 1
@@ -185,40 +185,30 @@ void  PlayerController::loadSoundSet() {
 		string soundname = path+"_"+ofToString(i+1) + ".aif";
 		//ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
 		
-		midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i]); // TODO: add choke mechanics
-		
-		
-		/*
-		 if (multi)
-		 midiInstrument->loadSound(soundname, midiNotes[i],127,chokeGroup.find(i)!=chokeGroup.end());
-		 else
-		 midiInstrument->loadSound(soundname, midiNotes[i],127);
-		 */
+		if (bMulti)
+			midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i],chokeGroup.find(i)!=chokeGroup.end());
+		else
+			midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i]);
 		
 	}
 	
-	midiInstrument->setup(256, multi,44100); // TODO: move these out
+	midiInstrument->setup(256, 44100); // TODO: move these out
 	
-	midiTrack.clear();
+	looper.clear();
 	
 	
 	string pathPrefix = ofToDataPath(path);
 	ofDisableDataPath(); // ofxXmlSettings uses ofToDataPath();
 	for (i=0;i<8;i++) {
-		midiTrack.loadLoop(pathPrefix+"_"+ofToString(i+1)+".xml");
+		looper.loadLoop(pathPrefix+"_"+ofToString(i+1)+".xml");
 	}
 	ofEnableDataPath();
 	
-	midiTrack.play();
-	
 	currentLoop = 0;
 	
+	//looper->playLoop(currentLoop);
 	
 	
-	
-	//midiTrack->playLoop(currentLoop);
-	
-	midiTrack.play();
 	
 	ofLog(OF_LOG_VERBOSE,"loadSoundSet finished: %i [ms]",ofGetElapsedTimeMillis()-start);
 	
@@ -260,6 +250,7 @@ void PlayerController::threadedFunction() {
 	if (!bAnimatedTransition) {
 		switch (transitionState) {
 			case TRANSITION_CHANGE_SOUND_SET:
+				looper.pause();
 				loadSoundSet();
 				transitionState = TRANSITION_LOAD_SONG;
 				break;
@@ -284,10 +275,17 @@ void PlayerController::threadedFunction() {
 				nextPlayer->initSet();
 				transitionState = TRANSITION_LOAD_SET_FINISHED;
 				break;
+			case TRANSITION_BEFORE_IDLE:
+				looper.play();
+				enable = true;
+				transitionState = TRANSITION_IDLE;
+				break;
+
 		}
 	} else {
 		switch (transitionState) {
 			case TRANSITION_CHANGE_SOUND_SET:
+				looper.pause();
 				loadSoundSet();
 				
 				transitionState = TRANSITION_LOAD_SONG;
@@ -313,6 +311,12 @@ void PlayerController::threadedFunction() {
 				currentPlayer->initSet();
 				transitionState = TRANSITION_INIT_SET_FINISHED;
 				break;
+			case TRANSITION_BEFORE_IDLE:
+				looper.play();
+				enable = true;
+				transitionState = TRANSITION_IDLE;
+				break;
+				
 			
 		}
 		
@@ -368,8 +372,8 @@ void PlayerController::update() {
 					}
 				}
 				else {
-					transitionState = TRANSITION_IDLE;
-					enable = true;	
+					transitionState = TRANSITION_BEFORE_IDLE;
+					
 				}
 				break;
 			case TRANSITION_UNLOAD_SET_FINISHED:
@@ -382,8 +386,8 @@ void PlayerController::update() {
 				currentPlayer = nextPlayer;
 				nextPlayer = 0;
 				progress = 1.0f;
-				transitionState = TRANSITION_IDLE;
-				enable = true;	
+				transitionState = TRANSITION_BEFORE_IDLE;
+				
 				break;
 			
 		}
@@ -396,8 +400,7 @@ void PlayerController::update() {
 					transitionState = TRANSITION_INIT_IN_OUT;
 				}
 				else {
-					transitionState = TRANSITION_IDLE;
-					enable = true;	
+					transitionState = TRANSITION_BEFORE_IDLE;
 				}
 				break;
 			case TRANSITION_INIT_IN_OUT_FINISHED:
@@ -411,7 +414,6 @@ void PlayerController::update() {
 				if (currentPlayer->didTransitionEnd()) {
 					previousPlayer = currentPlayer;
 					currentPlayer = nextPlayer;
-					//midiTrack.setTexturesPlayer(currentPlayer);
 					currentPlayer->startTransition(true);
 					//currentPlayer->update(); // TODO: do i need it ?
 					nextPlayer = 0;
@@ -435,8 +437,7 @@ void PlayerController::update() {
 				currentPlayer->loadSet();
 				
 				videoSet = nextVideoSet;
-				transitionState = TRANSITION_IDLE;
-				enable = true;	
+				transitionState = TRANSITION_BEFORE_IDLE;
 				break;
 			
 			default:
@@ -490,19 +491,18 @@ float PlayerController::getScale(){
 
 
 void PlayerController::play(int num) {
-	if (!enable) 
+	if (isInTransition()) 
 		return;
 	
 	if (mode == MANUAL_MODE) {
-		if (playerNum != 2) {
-			midiInstrument->noteOffAll();
-		}
+		
 		int midi = keyToMidi[num];
 		cout << "num: " << num << ", midi: " << midi <<endl;
 		currentPlayer->play(midiToSample[midi]);
 		
 		
-		
+		if (!bMulti) // ROIKR: for non drummer, stop all notes on trigger
+			midiInstrument->noteOffAll();
 		
 		midiInstrument->noteOn(midi, 127*volume);
 		
@@ -519,7 +519,7 @@ void PlayerController::play(int num) {
 		
 	}
 	else if (mode == LOOP_MODE)
-		midiTrack.playLoop(num);
+		looper.playLoop(num);
 	
 }
 
@@ -531,10 +531,10 @@ void PlayerController::keyPressed(int key) {
 	if (isInTransition()) 
 		return;
 	
-	if (midiTrack.getMode() == MANUAL_MODE) 
-		midiTrack.play(key);
-	else if (midiTrack.getMode() == LOOP_MODE)
-		midiTrack.changeLoop(key);
+	if (looper.getMode() == MANUAL_MODE) 
+		looper.play(key);
+	else if (looper.getMode() == LOOP_MODE)
+		looper.changeLoop(key);
 	
 }
  */
@@ -548,7 +548,7 @@ void PlayerController::exit() {
 	//	(*iter)->exit();
 	currentPlayer->exit();
 	
-	midiTrack.clear();
+	looper.clear();
 }
 
 
@@ -576,23 +576,21 @@ string PlayerController::getCurrentSet() {
 
 	
 void PlayerController::sync() {
-	if (!enable)
-		return;
-	midiTrack.sync();
+	
+	looper.sync();
 }
 
 void  PlayerController::setMode(int mode) { // 
-	if (!enable)
-		return;
+	
 	
 	this->mode =  mode; 
 	
 	switch (mode) {
 		case LOOP_MODE:
-			midiTrack.playLoop(currentLoop);
+			looper.playLoop(currentLoop);
 			break;
 		case MANUAL_MODE:
-			midiTrack.stopLoop();
+			looper.stopLoop();
 			break;
 		default:
 			break;
@@ -608,7 +606,10 @@ int  PlayerController::getMode() {
 
 void PlayerController::changeLoop(int loopNum) {
 	currentLoop = loopNum;
-	midiTrack.playLoop(currentLoop);
+	looper.playLoop(currentLoop);
+//	if (bMulti) {
+//		midiInstrument->noteOffAll();
+//	}
 }
 
 int PlayerController::getCurrentLoop() {
@@ -619,20 +620,34 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	if (!enable) {
 		return;
 	}
+	
+	
 	vector<event> events;
-	midiTrack.process(events);
+	looper.process(events);
+	
+	if (isInTransition()) {
+		return;
+	}
+	
+	// if it is not the drummer, we should stop other notes on each note on
+	if (!bMulti) { 
+		for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
+			if (iter->bNoteOn) { // if there is note on, we can stop all other notes
+				midiInstrument->noteOffAll();
+				break;
+			} else { // otherwise, stop only those who note off
+				int note = (iter->note - 12) % 24;
+				midiInstrument->noteOff(note);
+			}
+		}
+	}
+	
 	for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
 		int note = (iter->note - 12) % 24;
-		//printf("loop note:  %i\n", note);
+		cout << "tick: " << iter->absolute << endl; // DEBUG
 		if (iter->bNoteOn) {
 			midiInstrument->noteOn(note, iter->velocity*volume);
 			currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
-		}
-						 
-		else {
-			if (playerNum!=2) {
-				midiInstrument->noteOff(note);
-			}
 		}
 	}
 	
@@ -644,6 +659,19 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 		case SONG_RENDER_VIDEO: {
 			events.clear();
 			song.process(events);
+			
+			if (!bMulti && songState!=SONG_RENDER_VIDEO) { 
+				for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
+					if (iter->bNoteOn) { // if there is note on, we can stop all other notes
+						midiInstrument->noteOffAll();
+						break;
+					} else { // otherwise, stop only those who note off
+						int note = (iter->note - 12) % 24;
+						midiInstrument->noteOff(note);
+					}
+				}
+			}
+			
 			for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
 				int note = (iter->note - 12) % 24;
 				//printf("loop note:  %i\n", note);
@@ -654,14 +682,6 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 						currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
 					}
 					
-				}
-				
-				else {
-					if (playerNum!=2) {
-						if (songState!=SONG_RENDER_VIDEO) {
-							midiInstrument->noteOff(note);
-						}
-					}
 				}
 			}
 		} break;
@@ -700,7 +720,7 @@ float PlayerController::getVolume() {
 }
 
 void PlayerController::setBPM(int bpmVal) {
-	midiTrack.setBPM(bpmVal);
+	looper.setBPM(bpmVal);
 	song.setBPM(bpmVal);
 }
 

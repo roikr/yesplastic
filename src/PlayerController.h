@@ -106,11 +106,9 @@ private:
 	
 	
 	
-	ofxMidiLooper midiTrack;
+	ofxMidiLooper looper;
 
 	//string prefix;
-	
-	bool multi;
 	
 	vector<int> midiNotes;
 	map<int,int> keyToMidi;
@@ -133,7 +131,7 @@ private:
 	bool bVisible;
 	bool bAnimatedTransition;
 	
-
+	bool bMulti;
 };
 
 #endif

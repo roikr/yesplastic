@@ -336,7 +336,7 @@ void SimplePlayer::play(int num) {
 	nextSequence = SEQUENCE_SAMPLE_1 + num;
 	actor.setSequence(nextSequence);
 	actor.firstFrame();
-	cout << "num: " << num << ", name: " << actor.getSequenceName(nextSequence) << endl;
+	//cout << "num: " << num << ", name: " << actor.getSequenceName(nextSequence) << endl; // DEBUG
 }
 
 void SimplePlayer::exit() {

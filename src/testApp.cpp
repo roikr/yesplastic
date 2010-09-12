@@ -407,7 +407,7 @@ void testApp::update(){
 		
 		string str = getPlayerName(controller)+"_"+nextSoundSet;
 		if (player[controller].getCurrentSoundSet()!=str) {
-			player[controller].setMode(MANUAL_MODE);
+			//player[controller].setMode(MANUAL_MODE);
 			player[controller].changeSet(str);
 		}
 			
