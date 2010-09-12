@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -37,9 +38,10 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIButton" id="28629461">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{70, 60}</string>
+				<reference key="NSSuperview"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUIContentHorizontalAlignment">0</int>
@@ -94,24 +96,6 @@
 						<int key="IBEventType">1</int>
 					</object>
 					<int key="connectionID">5</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">updateLoops:</string>
-						<reference key="source" ref="28629461"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">6</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">updateLoops:</string>
-						<reference key="source" ref="28629461"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">8</int>
-					</object>
-					<int key="connectionID">7</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -186,16 +170,16 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bringMenu:</string>
-							<string>checkState:</string>
 							<string>loop:</string>
+							<string>menu:</string>
 							<string>nextLoop:</string>
 							<string>play:</string>
 							<string>prevLoop:</string>
 							<string>record:</string>
 							<string>save:</string>
+							<string>share:</string>
+							<string>stop:</string>
 							<string>trigger:</string>
-							<string>updateLoops:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -215,29 +199,25 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bringMenu:</string>
-							<string>checkState:</string>
 							<string>loop:</string>
+							<string>menu:</string>
 							<string>nextLoop:</string>
 							<string>play:</string>
 							<string>prevLoop:</string>
 							<string>record:</string>
 							<string>save:</string>
+							<string>share:</string>
+							<string>stop:</string>
 							<string>trigger:</string>
-							<string>updateLoops:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">bringMenu:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">checkState:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
 								<string key="name">loop:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">menu:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -261,11 +241,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">trigger:</string>
+								<string key="name">share:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">updateLoops:</string>
+								<string key="name">stop:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">trigger:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -282,6 +266,8 @@
 							<string>recordButton</string>
 							<string>saveButton</string>
 							<string>setMenuButton</string>
+							<string>shareButton</string>
+							<string>stopButton</string>
 							<string>triggerButton</string>
 							<string>triggersView</string>
 						</object>
@@ -290,6 +276,8 @@
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIView</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -311,6 +299,8 @@
 							<string>recordButton</string>
 							<string>saveButton</string>
 							<string>setMenuButton</string>
+							<string>shareButton</string>
+							<string>stopButton</string>
 							<string>triggerButton</string>
 							<string>triggersView</string>
 						</object>
@@ -346,6 +336,14 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">setMenuButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">shareButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">stopButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">

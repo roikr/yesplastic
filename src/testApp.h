@@ -33,6 +33,7 @@ public:
 	void buttonPressed(int button);
 	void nextLoop(int player);
 	void prevLoop(int player);
+	int getCurrentLoop(int player);
 	
 	
 	int getMode(int player);

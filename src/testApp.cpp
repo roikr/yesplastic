@@ -259,27 +259,27 @@ void testApp::playRandomLoop() {
 		setMode(0, LOOP_MODE);
 		setMode(1, LOOP_MODE);
 		setMode(2, LOOP_MODE);
-		player[0].play(getRandomLoop());
-		player[1].play(getRandomLoop());
-		player[2].play(getRandomLoop());
+		player[0].changeLoop(getRandomLoop());
+		player[1].changeLoop(getRandomLoop());
+		player[2].changeLoop(getRandomLoop());
 	} else if (x<0.70) {
 		setMode(0, LOOP_MODE);
 		setMode(1, MANUAL_MODE);
 		setMode(2, LOOP_MODE);
-		player[0].play(getRandomLoop());
-		player[2].play(getRandomLoop());
+		player[0].changeLoop(getRandomLoop());
+		player[2].changeLoop(getRandomLoop());
 	} else if (x<0.85) {
 		setMode(0, LOOP_MODE);
 		setMode(1, LOOP_MODE);
 		setMode(2, MANUAL_MODE);
-		player[0].play(getRandomLoop());
-		player[1].play(getRandomLoop());
+		player[0].changeLoop(getRandomLoop());
+		player[1].changeLoop(getRandomLoop());
 	} else  {
 		setMode(0, MANUAL_MODE);
 		setMode(1, LOOP_MODE);
 		setMode(2, LOOP_MODE);
-		player[1].play(getRandomLoop());
-		player[2].play(getRandomLoop());
+		player[1].changeLoop(getRandomLoop());
+		player[2].changeLoop(getRandomLoop());
 	}
 	
 }
@@ -716,6 +716,7 @@ void testApp::buttonPressed(int button) {
 		
 		if ( player[controller].getMode() == LOOP_MODE ) {
 			player[controller].changeLoop(button);		
+			bNeedDisplay = true;
 		}			
 	}
 		
@@ -896,6 +897,7 @@ void testApp::nextLoop(int player) {
 			break;
 		default:
 			this->player[player].changeLoop((this->player[player].getCurrentLoop()+1)%8);
+			bNeedDisplay = true;
 			break;
 	}
 }
@@ -907,9 +909,14 @@ void testApp::prevLoop(int player) {
 			break;
 		default:
 			this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
+			bNeedDisplay = true;
 			break;
 	}
 	
+}
+
+int testApp::getCurrentLoop(int player) {
+	return this->player[player].getCurrentLoop();
 }
 
 	

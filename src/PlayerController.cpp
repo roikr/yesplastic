@@ -518,8 +518,8 @@ void PlayerController::play(int num) {
 		
 		
 	}
-	else if (mode == LOOP_MODE)
-		looper.playLoop(num);
+//	else if (mode == LOOP_MODE)
+//		looper.playLoop(num);
 	
 }
 

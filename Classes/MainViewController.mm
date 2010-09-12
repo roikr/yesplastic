@@ -205,6 +205,12 @@
 						switch (OFSAptr->getMode(OFSAptr->controller)) {
 							case LOOP_MODE:
 								loopsView.hidden = NO;
+								UIButton *button;
+								for (int i=0; i<[loopsView.subviews count]; i++) {
+									button = (UIButton*)[loopsView.subviews objectAtIndex:i];
+									button.selected = button.tag == OFSAptr->getCurrentLoop(OFSAptr->controller);
+								}
+								
 								break;
 							case MANUAL_MODE:
 								triggersView.hidden = NO;
@@ -378,10 +384,10 @@
 
 - (void) loop:(id)sender {
 	UIButton *button;
-	for (int i=0; i<[loopsView.subviews count]; i++) {
-		button = (UIButton*)[loopsView.subviews objectAtIndex:i];
-		button.selected = NO;
-	}
+//	for (int i=0; i<[loopsView.subviews count]; i++) {
+//		button = (UIButton*)[loopsView.subviews objectAtIndex:i];
+//		button.selected = NO;
+//	}
 	button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
@@ -392,11 +398,11 @@
 	
 }
 
-- (void)updateLoops:(id)sender {
-	UIButton *button = (UIButton*)sender;
-	
-	button.selected = YES;
-}
+//- (void)updateLoops:(id)sender {
+//	UIButton *button = (UIButton*)sender;
+//	
+//	button.selected = YES;
+//}
 
 - (void) nextLoop:(id)sender {
 	UIButton *button = (UIButton*)sender;
