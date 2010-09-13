@@ -29,6 +29,7 @@
 @synthesize deleteButton;
 @synthesize songsTable;
 @synthesize progressView;
+@synthesize song;
 
 
 
@@ -52,11 +53,16 @@
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate {
-	if (editing) {
-		deleteButton.hidden = NO;
-	} else {
-		deleteButton.hidden = YES;
-	}	
+	
+	if (![song.bDemo boolValue]) {
+		if (editing) {
+			deleteButton.hidden = NO;
+		} else {
+			deleteButton.hidden = YES;
+		}	
+	}
+	
+	
 }
 
 
@@ -104,7 +110,7 @@
 
 - (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable {
 	
-	
+	self.song = theSong;
 	self.label.text = theSong.songName;
 	self.songsTable = theTable;
 	
@@ -158,6 +164,7 @@
 
 - (void)dealloc {
 	[songsTable release];
+	[song release];
     [super dealloc];
 }
 

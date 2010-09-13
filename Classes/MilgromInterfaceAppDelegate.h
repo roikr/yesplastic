@@ -65,6 +65,7 @@ class testApp;
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
 - (void)loadSong:(Song*)song;
+-(BOOL)canSave:(NSString *)songName;
 - (void)saveSong:(NSString *)songName;
 - (void)pushSetMenu;
 - (void)pushMain;
@@ -73,5 +74,6 @@ class testApp;
 - (void)dismissModalViewControllerAnimated:(BOOL)animated;
 - (void)share;
 - (void)play;
++ (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 @end
 

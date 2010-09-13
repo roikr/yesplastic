@@ -20,6 +20,7 @@
 	SongsTable *songsTable;
 	NSNumber * _progress;
 	CustomImageView *progressView;
+	Song *song;
 	
 	
 }
@@ -30,6 +31,7 @@
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain) NSNumber *progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
+@property (nonatomic,retain) Song *song;
 
 
 - (void) updateBackgroundWithNumber:(NSInteger)num;

@@ -48,6 +48,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)loadDemos;
 - (void) play;
 - (void) export;
++ (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 @end
 
 @implementation MilgromInterfaceAppDelegate
@@ -232,6 +233,25 @@ NSString * const kCacheFolder=@"URLCache";
     }
 }    
 
++ (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:cancel otherButtonTitles: nil];	
+	[alert show];
+	[alert release];
+	
+}
+
+
+
+- (void)dealloc {
+	[managedObjectContext_ release];
+	[managedObjectModel_ release];
+	[persistentStoreCoordinator_ release];
+	//TODO: release player controllers
+	[milgromViewController release];
+	[mainViewController release];
+    [window release];
+    [super dealloc];
+}
 
 #pragma mark -
 #pragma mark URLCache 
@@ -428,6 +448,9 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
+#pragma mark -
+#pragma mark Navigation Stack
+
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated {
 	[self.milgromViewController presentModalViewController:modalViewController animated:animated];
 }
@@ -438,32 +461,134 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 
+- (void)pushMain {
+	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
+		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+		//self.menuController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		
+		
+		//self.menuController = [[MenuViewController alloc] init];
+		
+		//menuController.mainController = self; // TODO: move testApp to app delegate
+	}
+	
+	[milgromViewController.viewController pushViewController:self.mainViewController animated:YES];
+	
+	//[self dismissModalViewControllerAnimated:YES];
+	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	//[appDelegate.viewController dismissMenu:self];
+	
+	
+}
 
-- (void)dealloc {
-	[managedObjectContext_ release];
-	[managedObjectModel_ release];
-	[persistentStoreCoordinator_ release];
-	//TODO: release player controllers
-	[milgromViewController release];
-	[mainViewController release];
-    [window release];
-    [super dealloc];
+- (void)pushSetMenu {
+	//TODO: replace with NULL as done in the page controll example
+	
+	if (self.playerControllers == nil) { // this check use in case of loading after warning message...
+		NSMutableArray *controllers = [[NSMutableArray alloc] init];
+		for (unsigned i = 0; i < 3; i++) {
+			PlayerMenu *controller = [[PlayerMenu alloc] initWithNibName:@"PlayerMenu" bundle:nil];
+			//PlayerViewContorller *controller = [[PlayerViewContorller alloc] init];
+			//controller.mainController = self;
+			[controllers addObject:controller];
+			[controller release];
+		}
+		self.playerControllers = [NSArray arrayWithArray:controllers];
+		[controllers release];
+	}
+	
+	//topMenu.hidden = YES;
+	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
+	
+	//[controller show];
+	[milgromViewController.viewController pushViewController:controller animated:YES];
+	//[self presentModalViewController:controller animated:YES];
+	//controller.view.hidden = NO;
+	OFSAptr->bMenu=true; // TODO: change upon return
+}
+
+
+- (void) pop {
+	[milgromViewController.viewController popViewControllerAnimated:YES];
 }
 
 
 
+#pragma mark -
+#pragma mark Songs Management
+
+-(BOOL)canSave:(NSString *)songName {
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+	
+		
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"songName like %@",songName];
+							 	
+	[request setPredicate:predicate];
+	
+	
+	NSError *error;
+	
+	NSArray *fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
+	
+	if (fetchResults==nil) {
+		return NO;
+	}
+	
+	if ([fetchResults count]) {
+	
+		Song *song = (Song *)[fetchResults objectAtIndex:0];
+		if ([song.bDemo boolValue]) {
+			return NO;
+		}
+	}
+	
+	return YES;
+
+	
+	
+}
+
+
 -(void)saveSong:(NSString *)songName {
-	OFSAptr->saveSong([songName UTF8String]);
-	
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
-	[song setSongName:songName];
-	
-	[song setBReady:[NSNumber numberWithBool:YES]];
-	[song setBDemo:[NSNumber numberWithBool:NO]];
-	
 	
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"songName like %@",songName];
+	[request setPredicate:predicate];
+	
+	NSError *error;
+	NSArray *fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
+	[request release];
+	request = nil;
+	if (fetchResults==nil) {
+		return;
+	}
+	
+	Song *song;
+	if ([fetchResults count]) {
+		song = (Song *)[fetchResults objectAtIndex:0];
+	}
+	else {
+		song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+		[song setSongName:songName];
+		
+		[song setBReady:[NSNumber numberWithBool:YES]];
+		[song setBDemo:[NSNumber numberWithBool:NO]];
+		
+		[bandMenu.songsTable addSong:song]; // TODO: here ?
+
+	} 
+
+	
+	OFSAptr->saveSong([songName UTF8String]);
+	
+	
+	request = [[NSFetchRequest alloc] init];
+	entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
 	[request setEntity:entity];
 	
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
@@ -474,7 +599,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 		
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"setName like %@ || setName like %@ || setName like %@",
+	predicate = [NSPredicate predicateWithFormat:@"setName like %@ || setName like %@ || setName like %@",
 							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(0).c_str() encoding:NSASCIIStringEncoding],
 							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(1).c_str() encoding:NSASCIIStringEncoding],
 							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(2).c_str() encoding:NSASCIIStringEncoding]];
@@ -484,9 +609,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	
-	NSError *error;
-	
-	NSArray *fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
+	fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
 	
 	if (fetchResults == nil) {
 	}
@@ -497,10 +620,6 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	[self saveContext];
-	
-	
-	[bandMenu.songsTable addSong:song];
-	
 	
 }
 
@@ -631,60 +750,6 @@ NSString * const kCacheFolder=@"URLCache";
 //	dispatch_async(myCustomQueue, ^{
 //	});		
 		
-}
-
-#pragma mark -
-#pragma mark View Controller Stack Management
-
-- (void)pushMain {
-	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
-		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-		//self.menuController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		
-		
-		//self.menuController = [[MenuViewController alloc] init];
-		
-		//menuController.mainController = self; // TODO: move testApp to app delegate
-	}
-	
-	[milgromViewController.viewController pushViewController:self.mainViewController animated:YES];
-	
-	//[self dismissModalViewControllerAnimated:YES];
-	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	//[appDelegate.viewController dismissMenu:self];
-	
-	
-}
-
-- (void)pushSetMenu {
-	//TODO: replace with NULL as done in the page controll example
-	
-	if (self.playerControllers == nil) { // this check use in case of loading after warning message...
-		NSMutableArray *controllers = [[NSMutableArray alloc] init];
-		for (unsigned i = 0; i < 3; i++) {
-			PlayerMenu *controller = [[PlayerMenu alloc] initWithNibName:@"PlayerMenu" bundle:nil];
-			//PlayerViewContorller *controller = [[PlayerViewContorller alloc] init];
-			//controller.mainController = self;
-			[controllers addObject:controller];
-			[controller release];
-		}
-		self.playerControllers = [NSArray arrayWithArray:controllers];
-		[controllers release];
-	}
-	
-	//topMenu.hidden = YES;
-	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
-	
-	//[controller show];
-	[milgromViewController.viewController pushViewController:controller animated:YES];
-	//[self presentModalViewController:controller animated:YES];
-	//controller.view.hidden = NO;
-	OFSAptr->bMenu=true; // TODO: change upon return
-}
-
-
-- (void) pop {
-	[milgromViewController.viewController popViewControllerAnimated:YES];
 }
 
 

@@ -9,6 +9,7 @@
 #import "SaveViewController.h"
 #import "CustomFontTextField.h"
 #import "MilgromInterfaceAppDelegate.h"
+#import "MilgromMacros.h"
 
 
 @implementation SaveViewController
@@ -29,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.songName.returnKeyType = UIReturnKeyDone;
-	[songName becomeFirstResponder];
+	
 }
 
 
@@ -54,6 +55,18 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	MilgromLog(@"SaveViewController::viewDidAppear");
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"SaveViewController::viewWillAppear");
+	[songName becomeFirstResponder];
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	
 	[self done:nil];
@@ -61,9 +74,16 @@
 }
 
 - (void)done:(id)sender {
-	[songName resignFirstResponder];
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] saveSong:songName.text];
-	[self dismissModalViewControllerAnimated:YES];
+	
+	if (![songName.text length]) {
+		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Plz enter the song name" withCancel:@"OK"];
+	} else if ([(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] canSave:songName.text]) {
+		[songName resignFirstResponder];
+		[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] saveSong:songName.text];
+		[self dismissModalViewControllerAnimated:YES];
+	} else {
+		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Cannot save with preset song name" withCancel:@"OK"];
+	}
 }
 
 - (void)cancel:(id)sender {
