@@ -140,6 +140,8 @@ void testApp::setup(){
 	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
 	ofSeedRandom();
 	
+	bInitialized = true;
+	
 }
 
 
@@ -515,6 +517,9 @@ float interp (float a,float x,float y) {
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+	if (!bInitialized)
+		return;
 	//	printf("draw()\n");
 	
 	float ts;

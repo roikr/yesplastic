@@ -32,6 +32,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+			
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void) loadData {
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	self.managedObjectContext = appDelegate.managedObjectContext;
 	
@@ -63,9 +69,8 @@
 	[mutableFetchResults release];
 	[request release];
 	
-		
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	[self.tableView reloadData];
 }
 
 

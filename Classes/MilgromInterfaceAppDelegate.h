@@ -18,6 +18,7 @@ extern NSString * const kMilgromURL;
 @class Song;
 @class MainViewController;
 @class ShareViewController;
+@class BandMenu;
 class testApp;
 
 
@@ -36,15 +37,18 @@ class testApp;
 	
 	NSMutableArray *queuedDemos;
 	
+	BandMenu *bandMenu;
 	NSArray *playerControllers;
 	MainViewController *mainViewController;
 	ShareViewController *shareViewController;
+	
 	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
 
+@property (nonatomic, retain) BandMenu *bandMenu;
 @property (nonatomic,retain ) MainViewController *mainViewController;
 @property (nonatomic, retain) NSArray *playerControllers;
 

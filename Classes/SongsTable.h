@@ -29,5 +29,5 @@
 -(void)updateSong:(Song *)song withProgress:(NSNumber *)theProgress;
 - (void)deleteSong:(SongCell*)songCell;
 - (void)updateProgress:(SongCell*)cell;
-
+- (void) loadData;
 @end

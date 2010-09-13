@@ -34,16 +34,15 @@ NSString * const kCacheFolder=@"URLCache";
 
 /*
  - (void) initUI;
- - (void) startAnimation;
- - (void) stopAnimation;
  - (void) buttonsEnabled:(BOOL)flag;
  - (void) getFileModificationDate;
  - (void) displayImageWithURL:(NSURL *)theURL;
  - (void) displayCachedImage;
 */
+- (void) continueLaunching;
  - (void) initCache;
  - (void) clearCache;
-+ (BOOL)unzipPrecache;
++ (void)unzipPrecache;
 - (void)addDemos;
 - (void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload;
 - (void)loadDemos;
@@ -56,6 +55,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize window;
 @synthesize milgromViewController;
 @synthesize mainViewController;
+@synthesize bandMenu;
 @synthesize playerControllers;
 @synthesize OFSAptr;
 @synthesize queuedDemos;
@@ -69,26 +69,72 @@ NSString * const kCacheFolder=@"URLCache";
     
     
 	// Override point for customization after application launch.
+	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
 	
-	if ([MilgromInterfaceAppDelegate unzipPrecache])
-		[self addDemos];
-	
-	[self loadDemos]; 
-	
-    // Add the view controller's view to the window and display.
-	//[window addSubview:viewController.view]; // need to add before making visible to allow rotation
-	//[window addSubview:milgromViewController.view];
-	
-   
 		
-	//[window bringSubviewToFront:viewController.view];
-	
-	
-	//glView.controller = self;
 	self.OFSAptr = new testApp;
-	self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+	//self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
+	self.bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0]; // TODO: not so nice using the stack
+	
+		
+    return YES;
+}
+
+- (void)unzipPrecache {
+	
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	if (!documentsDirectory) {
+		MilgromLog(@"Documents directory not found!");
+		return;
+	}
+	
+	
+	
+	if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
+		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache"];
+		
+		if (precache) {
+			MilgromLog(@"unzipping precache");
+			
+			ZipArchive *zip = [[ZipArchive alloc] init];
+			[zip UnzipOpenFile:precache];
+			[zip UnzipFileTo:[paths objectAtIndex:0] overWrite:YES];
+			[zip UnzipCloseFile];
+		} 
+		/*
+		 else {
+		 NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"data"];
+		 NSError * error = nil;
+		 if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
+		 URLCacheAlertWithError(error);
+		 return;
+		 }
+		 
+		 
+		 }
+		 */
+		
+		[self addDemos];
+	}
+	
+	
+	[self performSelectorOnMainThread:@selector(continueLaunching) withObject:nil waitUntilDone:NO];
+	[pool release];
+}
+
+- (void) continueLaunching {
+	[bandMenu.activityIndicator stopAnimating];
+	
+	[self loadDemos];
+	[bandMenu loadData];
 	
 	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 	dispatch_async(aQueue, ^{
@@ -122,10 +168,8 @@ NSString * const kCacheFolder=@"URLCache";
     /* prepare to use our own on-disk cache */
 	[self initCache];
 	
-    return YES;
+	
 }
-
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -407,47 +451,6 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
-+ (BOOL)unzipPrecache {
-	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	if (!documentsDirectory) {
-		MilgromLog(@"Documents directory not found!");
-		return NO;
-	}
-	
-	
-	
-	if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
-		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache"];
-		
-		if (precache) {
-			MilgromLog(@"unzipping precache");
-			
-			ZipArchive *zip = [[ZipArchive alloc] init];
-			[zip UnzipOpenFile:precache];
-			[zip UnzipFileTo:[paths objectAtIndex:0] overWrite:YES];
-			[zip UnzipCloseFile];
-		} 
-		/*
-		 else {
-		 NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"data"];
-		 NSError * error = nil;
-		 if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
-		 URLCacheAlertWithError(error);
-		 return;
-		 }
-		 
-		 
-		 }
-		 */
-		return YES;
-		
-	}
-	return NO;
-}
 
 -(void)saveSong:(NSString *)songName {
 	OFSAptr->saveSong([songName UTF8String]);
@@ -495,7 +498,6 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self saveContext];
 	
-	BandMenu *bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0];
 	
 	[bandMenu.songsTable addSong:song];
 	
@@ -754,7 +756,6 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) loader:(DemoLoader *)theLoader withProgress:(NSNumber *)theProgress {
 	
 	Song *song = theLoader.song;
-	BandMenu *bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0];
 	
 	[bandMenu.songsTable updateSong:song withProgress:theProgress];
 	

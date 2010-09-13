@@ -15,6 +15,7 @@
 	SongsTable *songsTable;
 	UIView *songsView;
 	HelpViewController *help;
+	UIActivityIndicatorView *activityIndicator;
 	
 	
 }
@@ -22,12 +23,13 @@
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
 @property (nonatomic,retain) HelpViewController *help;
+@property (nonatomic,retain ) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 - (void)edit:(id)sender;
 - (void)help:(id)sender;
 - (void)link:(id)sender;
-
+- (void) loadData;
 
 
 @end

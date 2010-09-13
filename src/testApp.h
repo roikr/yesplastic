@@ -23,6 +23,10 @@ struct measure {
 class testApp : public ofSimpleApp  {
 	
 public:
+	testApp() {
+		bInitialized = false;
+	}
+	
 	void setup();
 	void update();
 	void draw();
@@ -145,6 +149,7 @@ private:
 	
 	ofxSndFile song;
 		
+	bool bInitialized;
 };
 
 

@@ -17,6 +17,7 @@
 
 @synthesize songsTable;
 @synthesize songsView;
+@synthesize activityIndicator;
 
 @synthesize help;
 
@@ -48,7 +49,9 @@
 
 }
 
-
+- (void) loadData {
+	[self.songsTable loadData];
+}
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
