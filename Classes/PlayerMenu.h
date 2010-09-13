@@ -17,14 +17,19 @@
 	
 	CustomSlider *volumeSlider;
 	CustomSlider *bpmSlider;
+	
+	BOOL currentSetChanged;
+	
 }
 
 @property (nonatomic,retain) SetsTable *setsTable;
 @property (nonatomic,retain) IBOutlet UIView *setsView;
 @property (nonatomic,retain ) IBOutlet CustomSlider *volumeSlider;
 @property (nonatomic,retain) IBOutlet CustomSlider *bpmSlider;
+@property BOOL currentSetChanged;
 
 - (void)exit:(id)sender;
 - (void)volumeChanged:(id)sender ;
 - (void)bpmChanged:(id)sender;
+- (void) loadData; // load the sets list from the store to the table
 @end

@@ -68,7 +68,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    
+    //[bandMenu.activityIndicator startAnimating];
 	// Override point for customization after application launch.
 	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
 	
@@ -571,6 +571,7 @@ NSString * const kCacheFolder=@"URLCache";
 	Song *song;
 	if ([fetchResults count]) {
 		song = (Song *)[fetchResults objectAtIndex:0];
+		[bandMenu.songsTable selectSong:song];
 	}
 	else {
 		song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
@@ -641,6 +642,13 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->setBPM([song.bpm integerValue]);
 	}
 	
+	if (self.playerControllers != nil) { // to later refresh of the selected sets
+		for (unsigned i = 0; i < 3; i++) {
+			PlayerMenu *controller = [playerControllers objectAtIndex:i];
+			controller.currentSetChanged = YES;
+		}
+	}
+	
 	
 	//[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
 }
@@ -679,6 +687,7 @@ NSString * const kCacheFolder=@"URLCache";
 	SoundSet *soundSet;
 	VideoSet *videoSet;
 	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
 	[soundSet setSetName:[theArray objectAtIndex:1]];
 	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
 	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
@@ -689,6 +698,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[song addSoundSetsObject:soundSet];
 	
 	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
 	[soundSet setSetName:[theArray objectAtIndex:3]];
 	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
 	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
@@ -700,6 +710,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
 	[soundSet setSetName:[theArray objectAtIndex:5]];
 	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
 	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];

@@ -335,9 +335,10 @@ void testApp::loadSong(string songName,bool bDemo) {
 		
 	
 	if (!bDemo) {
-		ofDisableDataPath();
+		ofDisableDataPath(); // be careful of threads
 		ofxXmlSettings songXml;
 		bool bLoaded = songXml.loadFile(ofToDocumentsPath(songName+".xml"));
+		ofEnableDataPath();	
 		assert(bLoaded);
 		songXml.pushTag("song");
 		for (int i=0; i<3; i++) {
@@ -347,7 +348,7 @@ void testApp::loadSong(string songName,bool bDemo) {
 		}
 		songXml.popTag();
 		
-		ofEnableDataPath();	
+		
 		
 	} else {
 		for (int i=0; i<3; i++) {

@@ -25,6 +25,7 @@
 @property (nonatomic,retain) NSMutableArray *songsArray;
 @property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;
 
+-(void)selectSong:(Song *)song;
 -(void)addSong:(Song *)song;
 -(void)updateSong:(Song *)song withProgress:(NSNumber *)theProgress;
 - (void)deleteSong:(SongCell*)songCell;

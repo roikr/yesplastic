@@ -28,7 +28,7 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-
+/*
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -36,6 +36,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+ */
 
 -(void) loadData {
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -73,6 +74,17 @@
 	[self.tableView reloadData];
 }
 
+-(void)selectSong:(Song *)song {
+	
+	SongCell *cell;
+	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
+		cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+		[cell setSelected:NO animated:NO];
+	}
+	
+	cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0]];
+	[cell setSelected:YES animated:YES];
+}
 
 
 -(void)addSong:(Song *)song {
@@ -81,15 +93,8 @@
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	SongCell *cell;
-	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
-		cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		[cell setSelected:NO animated:NO];
-	}
 	
-	cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-	[cell setSelected:YES animated:YES];
-	
+	[self selectSong:song];
 	
 	 [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }

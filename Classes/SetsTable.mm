@@ -10,6 +10,7 @@
 #import "SetCell.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "Song.h"
+#import "SoundSet.h"
 #import "testApp.h"
 
 
@@ -22,15 +23,20 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-
+/*
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+ */
+
+-(void) loadData {
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.managedObjectContext;
-	
-	
-	
+	appDelegate.managedObjectContext; // TODO: why is that - ok to initialize it in case it didn't been initialized yet
+
 	//songsArray = [[NSMutableArray alloc] init]; // TODO: temporal
 	
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -48,10 +54,7 @@
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bDemo == YES"]; //  AND bReady == YES AND bLocked == NO
     [request setPredicate:predicate];
 	
-	
-	
 	NSError *error;
-	
 	NSArray *fetchResults = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
 	
 	if (fetchResults == nil) {
@@ -59,10 +62,40 @@
 	
 	[self setSongsArray:fetchResults];
 	[request release];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	[self.tableView reloadData];
+	
 }
+
+- (void) selectCurrentSet {
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.managedObjectContext; // TODO: why is that - ok to initialize it in case it didn't been initialized yet
+
+	
+	NSFetchRequest * request = [[NSFetchRequest alloc] init];
+	NSEntityDescription * entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:appDelegate.managedObjectContext];
+	[request setEntity:entity];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"setName like %@",
+				 [NSString stringWithCString:appDelegate.OFSAptr->getCurrentSoundSetName(appDelegate.OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
+    
+	
+	[request setPredicate:predicate];
+	
+	NSError *error;
+	NSArray * fetchResults = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
+	
+	if (fetchResults == nil) {
+	}
+	
+	if ([fetchResults count]) {
+		SoundSet *soundSet = (SoundSet*)[fetchResults objectAtIndex:0];
+		Song *demo = [soundSet demo];
+		[self selectSong:demo];
+	}
+	
+}
+
 
 
 /*
@@ -94,6 +127,18 @@
 */
 
 
+-(void)selectSong:(Song *)song {
+	
+	SetCell *cell;
+	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
+		cell = (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+		[cell setSelected:NO animated:NO];
+	}
+	
+	cell = (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0]];
+	[cell setSelected:YES animated:YES];
+}
+
 #pragma mark -
 #pragma mark Table view data source
 
@@ -121,7 +166,7 @@
         self.tmpCell = nil;
 		
     }
-	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+	Song  *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	// Configure the cell...
 	[cell configureCell:[indexPath row] withLabel:song.songName];
 	
@@ -183,14 +228,11 @@
 	 [detailViewController release];
 	 */
 	
-	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+	Song  *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->bMenu=false;
-	
-	
-	
-
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.OFSAptr->bMenu=false;
+	
 	
 	if ([song.bReady boolValue]  && ![song.bLocked boolValue]) {
 		
@@ -199,6 +241,7 @@
 			appDelegate.OFSAptr->changeSoundSet(nextSong);
 		}
 	}
+	 
 	
 	[appDelegate pop];
 	

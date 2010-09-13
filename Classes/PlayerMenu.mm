@@ -20,6 +20,8 @@
 @synthesize setsView;
 @synthesize volumeSlider;
 @synthesize bpmSlider;
+@synthesize currentSetChanged;
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -37,13 +39,18 @@
     [super viewDidLoad];
 	if (self.setsTable == nil) {
 		self.setsTable = [[SetsTable alloc] initWithNibName:@"SetsTable" bundle:nil];
+		[self.setsTable loadData];
 		
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	}
 	
 	[self.setsView addSubview:setsTable.view];
+	currentSetChanged = YES;
 }
 
+- (void) loadData {
+	[self.setsTable loadData];
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -72,7 +79,10 @@
 	MilgromLog(@"PlayerMenu::viewDidAppear");
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
 	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 80.0)/80.0;
-
+	if (currentSetChanged) {
+		currentSetChanged = NO;
+		[self.setsTable selectCurrentSet];
+	}
    
 }
 

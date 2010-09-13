@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @class SetCell;
+@class Song;
 @interface SetsTable : UITableViewController {
 	SetCell *tmpCell;
 	
 	NSArray *songsArray;
+	
 }
 
 @property (nonatomic,assign) IBOutlet SetCell *tmpCell;
 @property (nonatomic,retain) NSArray *songsArray;
+
+- (void) loadData;
+- (void) selectCurrentSet;
+-(void)selectSong:(Song *)song;
 @end
