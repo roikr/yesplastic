@@ -1,0 +1,128 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* YouTubeUpload */ = {
+		activeExec = 0;
+		executables = (
+			E4C44A5212435F0B007ACEBC /* YouTubeUpload */,
+		);
+	};
+	28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {733, 455}}";
+			sepNavSelRange = "{379, 0}";
+			sepNavVisRange = "{0, 844}";
+			sepNavWindowFrame = "{{809, 37}, {954, 890}}";
+		};
+	};
+	28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {895, 3575}}";
+			sepNavSelRange = "{4489, 0}";
+			sepNavVisRange = "{3335, 2152}";
+			sepNavWindowFrame = "{{707, 106}, {954, 890}}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = E4C44A5212435F0B007ACEBC /* YouTubeUpload */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* YouTubeUpload */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* YouTubeUpload */,
+		);
+		codeSenseManager = E4C44A6212435F10007ACEBC /* Code sense */;
+		executables = (
+			E4C44A5212435F0B007ACEBC /* YouTubeUpload */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					555,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 306405173;
+			PBXWorkspaceStateSaveDate = 306405173;
+		};
+		perUserProjectItems = {
+			E4C44BE91243631D007ACEBC /* PBXBookmark */ = E4C44BE91243631D007ACEBC /* PBXBookmark */;
+			E4C44DAC12436CE6007ACEBC /* PBXTextBookmark */ = E4C44DAC12436CE6007ACEBC /* PBXTextBookmark */;
+		};
+		sourceControlManager = E4C44A6112435F10007ACEBC /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	E4C44A5212435F0B007ACEBC /* YouTubeUpload */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = YouTubeUpload;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	E4C44A6112435F10007ACEBC /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	E4C44A6212435F10007ACEBC /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	E4C44BE91243631D007ACEBC /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
+	};
+	E4C44DAC12436CE6007ACEBC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
+		name = "YouTubeUploadViewController.h: 18";
+		rLen = 0;
+		rLoc = 379;
+		rType = 0;
+		vrLen = 844;
+		vrLoc = 0;
+	};
+}
