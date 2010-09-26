@@ -21,6 +21,7 @@
     return self;
 }
 
+/*
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 	
     [super setSelected:selected animated:animated];
@@ -30,8 +31,9 @@
 	
     // Configure the view for the selected state
 }
+ */
 
-
+/*
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
 	
@@ -40,21 +42,27 @@
 //	oldFrame.origin.y = (highlighted && !self.selected) ? 5 : 0;
 //	self.label.frame = oldFrame;
 }
+ */
  
 
-- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel {
-	NSArray * cells = [NSArray arrayWithObjects:@"DRM_CELL1.png",@"DRM_CELL2.png",@"DRM_CELL3.png",nil];
+- (void) configureCell:(NSInteger)num withPlayerName:(NSString *)playerName withLabel:(NSString*)theLabel {
+	//NSArray * cells = [NSArray arrayWithObjects:@"DRM_CELL1.png",@"DRM_CELL2.png",@"DRM_CELL3.png",nil];
 	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"DRM_CELL1_PUSH.png",@"DRM_CELL2_PUSH.png",@"DRM_CELL3_PUSH.png",nil];
-	NSArray * cells_selected = [NSArray arrayWithObjects:@"DRM_CELL1_SELECT.png",@"DRM_CELL2_SELECT.png",@"DRM_CELL3_SELECT.png",nil];
+	//NSArray * cells_selected = [NSArray arrayWithObjects:@"DRM_CELL1_SELECT.png",@"DRM_CELL2_SELECT.png",@"DRM_CELL3_SELECT.png",nil];
 	//NSArray * cells_progress = [NSArray arrayWithObjects:@"DRM_CELL1_PROGRESS.png",@"DRM_CELL2_PROGRESS.png",@"DRM_CELL3_PROGRESS.png",nil];
 	
 	
 	//[cell.bkg setImage:[UIImage imageNamed:[cellsBkgs objectAtIndex:[indexPath row]%[cellsBkgs count]]]];
-	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
 	
-	[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
 	
-	[(UIImageView*)self.selectedBackgroundView setImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
+	//[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
+	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_CELL_%i.png",playerName,(num % 3)+1 ]]];
+	
+	//[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
+	//[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
+	
+	//[(UIImageView*)self.selectedBackgroundView setImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
+	[(UIImageView*)self.selectedBackgroundView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"SETCELL_SELECT_%i.png",(num % 3)+1]]];
 	//[(UIImageView*)self.selectedBackgroundView setHighlightedImage:[UIImage imageNamed:[cells_pressed objectAtIndex:num%[cells_pressed count]]]];
 	
 	label.text = theLabel;

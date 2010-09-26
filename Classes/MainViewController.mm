@@ -34,8 +34,8 @@
 @synthesize bandLoopsView;
 
 
-@synthesize triggerButton;
-@synthesize loopButton;
+//@synthesize triggerButton;
+//@synthesize loopButton;
 @synthesize saveViewController;
 
 
@@ -76,27 +76,37 @@
 	
 	
 	for (int i=0; i<8; i++) {
-		[[NSBundle mainBundle] loadNibNamed:@"LoopButton" owner:self options:nil];
-		UIButton *button = loopButton;
-		self.loopButton = nil;
+		//[[NSBundle mainBundle] loadNibNamed:@"LoopButton" owner:self options:nil];
+		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+		[button addTarget:self action:@selector(loop:) forControlEvents:UIControlEventTouchDown];
+		//self.loopButton = nil;
 		[loopsView addSubview:button];
 		
-		CGRect frame = button.frame;
+		//CGRect frame = button.frame;
+		CGRect frame;
 		frame.origin.x = (i % 4)*80+5;
 		frame.origin.y = (int)(i/4) * 60;
+		frame.size.width = 70;
+		frame.size.height = 60;
 		button.frame = frame;
 		button.tag = i;
 	}
 	
 	for (int i=0; i<8; i++) {
-		[[NSBundle mainBundle] loadNibNamed:@"TriggerButton" owner:self options:nil];
-		UIButton *button = triggerButton;
-		self.triggerButton = nil;
+		//[[NSBundle mainBundle] loadNibNamed:@"TriggerButton" owner:self options:nil];
+		//UIButton *button = triggerButton;
+		//self.triggerButton = nil;
+		
+		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+		[button addTarget:self action:@selector(trigger:) forControlEvents:UIControlEventTouchDown];
 		[triggersView addSubview:button];
 		
-		CGRect frame = button.frame;
+		//CGRect frame = button.frame;
+		CGRect frame;
 		frame.origin.x = (i % 4)*80+5;
 		frame.origin.y = (int)(i/4) * 60;
+		frame.size.width = 70;
+		frame.size.height = 60;
 		button.frame = frame;
 		button.tag = i;
 	}
@@ -199,30 +209,51 @@
 				
 				
 				switch (OFSAptr->getState()) {
-					case SOLO_STATE:
+					case SOLO_STATE: {
 						setMenuButton.hidden = NO;
+						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
+						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 						
 						switch (OFSAptr->getMode(OFSAptr->controller)) {
-							case LOOP_MODE:
+							case LOOP_MODE: {
 								loopsView.hidden = NO;
+								NSString *selected = [NSString stringWithFormat:@"%@_LOOP_P.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
+								
 								UIButton *button;
 								for (int i=0; i<[loopsView.subviews count]; i++) {
 									button = (UIButton*)[loopsView.subviews objectAtIndex:i];
+									
+									NSString *normal = [NSString stringWithFormat:@"%@_LOOP_%i.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],i+1];
+									[button setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
+									[button setImage:[UIImage imageNamed:selected] forState:UIControlStateSelected];
+
 									button.selected = button.tag == OFSAptr->getCurrentLoop(OFSAptr->controller);
 								}
 								
-								break;
-							case MANUAL_MODE:
+							} break;
+							case MANUAL_MODE: {
 								triggersView.hidden = NO;
-								break;
+								
+								UIButton *button;
+								for (int i=0; i<[triggersView.subviews count]; i++) {
+									button = (UIButton*)[triggersView.subviews objectAtIndex:i];
+									
+									NSString *normal = [NSString stringWithFormat:@"%@_TB_%i.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],i+1];
+									[button setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
+									NSString *highlighted = [NSString stringWithFormat:@"%@_TB_%i_P.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],i+1];
+									[button setImage:[UIImage imageNamed:highlighted] forState:UIControlStateHighlighted];
+									
+								}
+							} break;
 							default:
 								break;
 						}
 						
-						break;
-					case BAND_STATE:
+					} break;
+					case BAND_STATE: {
 						menuButton.hidden = NO;
 						bandLoopsView.hidden = NO;
+					} break;
 					default:
 						break;
 				}

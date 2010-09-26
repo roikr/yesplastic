@@ -10,7 +10,6 @@
 #import "SetsTable.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "testApp.h"
-#import "CustomSlider.h"
 #import "MilgromMacros.h"
 
 
@@ -18,9 +17,12 @@
 
 @synthesize setsTable;
 @synthesize setsView;
+@synthesize doneButton;
+@synthesize background;
 @synthesize volumeSlider;
 @synthesize bpmSlider;
 @synthesize currentSetChanged;
+@synthesize playerName;
 
 
 /*
@@ -39,7 +41,37 @@
     [super viewDidLoad];
 	if (self.setsTable == nil) {
 		self.setsTable = [[SetsTable alloc] initWithNibName:@"SetsTable" bundle:nil];
+		
+		//controller.bpmSlider.playerName = controller.playerName;
+		//controller.volumeSlider.playerName = controller.playerName;
+		setsTable.playerName = playerName;
+		
 		[self.setsTable loadData];
+		
+		NSString *doneButtonName = [NSString stringWithFormat:@"%@_DONE.png",playerName];
+		[doneButton setImage:[UIImage imageNamed:doneButtonName] forState:UIControlStateNormal];
+		
+		NSString *backgroundName = [NSString stringWithFormat:@"%@_SET_BACK.png",playerName];
+		[background setImage:[UIImage imageNamed:backgroundName]];
+		
+				
+		
+		
+		[bpmSlider setMinimumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]] forState:UIControlStateNormal];
+		[bpmSlider setMaximumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]] forState:UIControlStateNormal];
+		[bpmSlider setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
+		//CGRect frame = bpmSlider.frame;
+		//frame.size = minTrack.size;
+		//bpmSlider.frame = frame;
+		
+		
+		[volumeSlider setMinimumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]] forState:UIControlStateNormal];
+		[volumeSlider setMaximumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]] forState:UIControlStateNormal];
+		[volumeSlider setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
+		//CGRect frame = volumeSlider.frame;
+		//frame.size = minTrack.size;
+		//volumeSlider.frame = frame;
+		
 		
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	}

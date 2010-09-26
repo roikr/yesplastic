@@ -18,6 +18,7 @@ extern NSString * const kMilgromURL;
 @class Song;
 @class MainViewController;
 @class ShareViewController;
+@class YouTubeUploadViewController;
 @class BandMenu;
 class testApp;
 
@@ -41,6 +42,7 @@ class testApp;
 	NSArray *playerControllers;
 	MainViewController *mainViewController;
 	ShareViewController *shareViewController;
+	YouTubeUploadViewController *youTubeViewController;
 	
 	
 }
@@ -61,6 +63,7 @@ class testApp;
 @property (nonatomic, retain) NSMutableArray *queuedDemos;
 
 @property (nonatomic,retain ) ShareViewController *shareViewController;
+@property (nonatomic,retain ) YouTubeUploadViewController *youTubeViewController;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
@@ -73,6 +76,7 @@ class testApp;
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
 - (void)dismissModalViewControllerAnimated:(BOOL)animated;
 - (void)share;
+- (void)youTubeUpload;
 - (void)play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 @end

@@ -76,6 +76,8 @@ public:
 	void changeSoundSet(string nextSoundSet);
 	
 	string getCurrentSoundSetName(int playerNum);
+	string getPlayerName(int playerNum); // using to build SoundSet name from Song name and for loop and triggers buttons
+
 	
 	int lastFrame;
 	
@@ -98,8 +100,7 @@ private:
 	
 	void startRecording();
 	
-	string getPlayerName(int playerNum); // using to build SoundSet name from Song name
-	
+		
 	float scale;
 	
 	ofxRKTexture background;

@@ -12,9 +12,10 @@
 @interface CustomSlider : UISlider {
 	UIImage *minTrack;
 	UIImage *maxTrack;
+	NSString * playerName;
 }
 
 @property (nonatomic,retain) UIImage *minTrack;
 @property (nonatomic,retain) UIImage *maxTrack;
-
+@property (nonatomic,retain ) NSString *playerName;
 @end

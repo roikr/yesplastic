@@ -202,8 +202,15 @@
 
 
 - (void)done:(id)sender {
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
+	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
 }
+
+- (void)youTube:(id)sender {
+	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
+}
+
 
 
 @end

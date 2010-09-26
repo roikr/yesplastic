@@ -13,6 +13,7 @@
 
 @synthesize minTrack;
 @synthesize maxTrack;
+@synthesize playerName;
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -26,12 +27,10 @@
 {
     if (self = [super initWithCoder: decoder])
     {
-		NSArray * mins = [NSArray arrayWithObjects:@"DRM_SLIDER1_OVERLY.png",@"DRM_SLIDER2_OVERLY.png",nil];
-		NSArray * maxes = [NSArray arrayWithObjects:@"DRM_SLIDER1_BACKGROUND.png",@"DRM_SLIDER2_BACKGROUND.png",nil];
 		
-		self.minTrack = [UIImage imageNamed:[mins objectAtIndex:self.tag]];
-		self.maxTrack = [UIImage imageNamed:[maxes objectAtIndex:self.tag]];
-		[self setThumbImage: [UIImage imageNamed:@"slider2_B.png"] forState:UIControlStateNormal];
+		self.minTrack = [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]];
+		self.maxTrack = [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]];
+		[self setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
 		//[self setThumbImage: [UIImage imageNamed:@"slider2_B_PUSH.png"] forState:UIControlStateHighlighted];
 		CGRect frame = self.frame;
 		frame.size = minTrack.size;

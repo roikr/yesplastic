@@ -14,11 +14,13 @@
 	SetCell *tmpCell;
 	
 	NSArray *songsArray;
+	NSString * playerName;
 	
 }
 
 @property (nonatomic,assign) IBOutlet SetCell *tmpCell;
 @property (nonatomic,retain) NSArray *songsArray;
+@property (nonatomic,retain) NSString *playerName;
 
 - (void) loadData;
 - (void) selectCurrentSet;

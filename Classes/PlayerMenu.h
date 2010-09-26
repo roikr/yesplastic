@@ -9,27 +9,35 @@
 #import <UIKit/UIKit.h>
 
 @class SetsTable;
-@class CustomSlider;
 
 @interface PlayerMenu : UIViewController {
 	SetsTable *setsTable;
 	UIView *setsView;
 	
-	CustomSlider *volumeSlider;
-	CustomSlider *bpmSlider;
+	UIButton *doneButton;
+	UIImageView *background;
+	
+	UISlider *volumeSlider;
+	UISlider *bpmSlider;
 	
 	BOOL currentSetChanged;
+	NSString * playerName;
 	
 }
 
 @property (nonatomic,retain) SetsTable *setsTable;
 @property (nonatomic,retain) IBOutlet UIView *setsView;
-@property (nonatomic,retain ) IBOutlet CustomSlider *volumeSlider;
-@property (nonatomic,retain) IBOutlet CustomSlider *bpmSlider;
+@property (nonatomic,retain) IBOutlet UIButton *doneButton;
+@property (nonatomic,retain) IBOutlet UIImageView *background;
+
+@property (nonatomic,retain ) IBOutlet UISlider *volumeSlider;
+@property (nonatomic,retain) IBOutlet UISlider *bpmSlider;
 @property BOOL currentSetChanged;
+@property (nonatomic,retain) NSString *playerName;
 
 - (void)exit:(id)sender;
 - (void)volumeChanged:(id)sender ;
 - (void)bpmChanged:(id)sender;
 - (void) loadData; // load the sets list from the store to the table
+
 @end

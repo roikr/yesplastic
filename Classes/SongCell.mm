@@ -41,7 +41,7 @@
     return self;
 }
 
-
+/*
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 
     [super setSelected:selected animated:animated];
@@ -51,6 +51,7 @@
 
     // Configure the view for the selected state
 }
+ */
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate {
 	
@@ -88,11 +89,11 @@
 }
  
 - (void) updateBackgroundWithNumber:(NSInteger)num {
-	NSArray * cells = [NSArray arrayWithObjects:@"CELL1.png",@"CELL2.png",@"CELL3.png",@"CELL4.png",@"CELL5.png",nil];
-	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",@"CELL5_PRESS.png",nil];
-	NSArray * cells_selected = [NSArray arrayWithObjects:@"CELL1_SELECT.png",@"CELL2_SELECT.png",@"CELL3_SELECT.png",@"CELL4_SELECT.png",@"CELL5_SELECT.png",nil];
+	NSArray * cells = [NSArray arrayWithObjects:@"CELL1.png",@"CELL2.png",@"CELL3.png",@"CELL4.png",nil];
+	//NSArray * cells_pressed = [NSArray arrayWithObjects:@"CELL1_PRESS.png",@"CELL2_PRESS.png",@"CELL3_PRESS.png",@"CELL4_PRESS.png",nil];
+	NSArray * cells_selected = [NSArray arrayWithObjects:@"CELL1_SELECT.png",@"CELL2_SELECT.png",@"CELL3_SELECT.png",@"CELL4_SELECT.png",nil];
 	
-	NSArray * cells_progress = [NSArray arrayWithObjects:@"CELL1_PROGRESS.png",@"CELL2_PROGRESS.png",@"CELL3_PROGRESS.png",@"CELL4_PROGRESS.png",@"CELL5_PROGRESS.png",nil];
+	NSArray * cells_progress = [NSArray arrayWithObjects:@"CELL1_PROGRESS.png",@"CELL2_PROGRESS.png",@"CELL3_PROGRESS.png",@"CELL4_PROGRESS.png",nil];
 	
 	self.progressView.image =  [UIImage imageNamed:[cells_progress objectAtIndex:num%[cells_progress count]]];
 	
@@ -101,7 +102,7 @@
 	//[cell.bkg setImage:[UIImage imageNamed:[cellsBkgs objectAtIndex:[indexPath row]%[cellsBkgs count]]]];
 	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
 	
-	[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
+	//[(UIImageView*)self.backgroundView setHighlightedImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
 	
 	[(UIImageView*)self.selectedBackgroundView setImage:[UIImage imageNamed:[cells_selected objectAtIndex:num%[cells_selected count]]]];
 	//[(UIImageView*)self.selectedBackgroundView setHighlightedImage:[UIImage imageNamed:[cells_pressed objectAtIndex:num%[cells_pressed count]]]];

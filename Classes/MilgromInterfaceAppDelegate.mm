@@ -24,6 +24,7 @@
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
+#import "YouTubeUploadViewController.h"
 
 
 
@@ -47,7 +48,6 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload;
 - (void)loadDemos;
 - (void) play;
-- (void) export;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 @end
 
@@ -61,6 +61,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize OFSAptr;
 @synthesize queuedDemos;
 @synthesize shareViewController;
+@synthesize youTubeViewController;
 
 
 #pragma mark -
@@ -249,6 +250,8 @@ NSString * const kCacheFolder=@"URLCache";
 	//TODO: release player controllers
 	[milgromViewController release];
 	[mainViewController release];
+	[shareViewController release];
+	[youTubeViewController release];
     [window release];
     [super dealloc];
 }
@@ -488,6 +491,8 @@ NSString * const kCacheFolder=@"URLCache";
 		NSMutableArray *controllers = [[NSMutableArray alloc] init];
 		for (unsigned i = 0; i < 3; i++) {
 			PlayerMenu *controller = [[PlayerMenu alloc] initWithNibName:@"PlayerMenu" bundle:nil];
+			controller.playerName = [NSString stringWithCString:OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding];
+			
 			//PlayerViewContorller *controller = [[PlayerViewContorller alloc] init];
 			//controller.mainController = self;
 			[controllers addObject:controller];
@@ -506,6 +511,46 @@ NSString * const kCacheFolder=@"URLCache";
 	//controller.view.hidden = NO;
 	OFSAptr->bMenu=true; // TODO: change upon return
 }
+
+- (void)share {
+	
+	if (self.shareViewController == nil) {
+		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+		//shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	
+	//[self presentModalViewController:self.shareViewController animated:YES]; 
+	[milgromViewController.viewController pushViewController:shareViewController animated:YES];
+	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
+	// not so
+	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
+	[shareViewController render];
+}
+
+- (void)youTubeUpload {
+	
+	if (self.youTubeViewController == nil) {
+		self.youTubeViewController = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
+	}
+	
+	[milgromViewController.viewController pushViewController:youTubeViewController animated:YES];
+	
+}
+
+- (void)play {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	
+	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
+	
+	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
+	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
+	
+	[self presentModalViewController:mPlaybackViewController animated:NO];
+	
+}
+
 
 
 - (void) pop {
@@ -764,36 +809,6 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
-#pragma mark -
-#pragma mark ShareViewController methods
-
-- (void)share {
-	
-	if (self.shareViewController == nil) {
-		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-		shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-	}
-	
-	[self presentModalViewController:self.shareViewController animated:YES]; 
-	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
-	// not so
-	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
-	[shareViewController render];
-}
-
-- (void)play {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	
-	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
-	
-	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
-	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
-	
-	[self presentModalViewController:mPlaybackViewController animated:NO];
-	
-}
 
 
 

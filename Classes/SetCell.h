@@ -20,6 +20,6 @@
 @property (nonatomic,retain) IBOutlet CustomFontLabel *label;
 
 
-- (void) configureCell:(NSInteger)num withLabel:(NSString*)theLabel;
+- (void) configureCell:(NSInteger)num withPlayerName:(NSString *)playerName withLabel:(NSString*)theLabel;
 
 @end

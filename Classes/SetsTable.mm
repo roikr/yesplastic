@@ -18,6 +18,7 @@
 
 @synthesize tmpCell;
 @synthesize songsArray;
+@synthesize playerName;
 
 
 #pragma mark -
@@ -168,7 +169,7 @@
     }
 	Song  *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	// Configure the cell...
-	[cell configureCell:[indexPath row] withLabel:song.songName];
+	[cell configureCell:[indexPath row] withPlayerName:playerName withLabel:song.songName];
 	
     
     return (UITableViewCell*) cell;

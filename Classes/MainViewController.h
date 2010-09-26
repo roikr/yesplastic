@@ -34,8 +34,8 @@ class testApp;
 	
 	
 	
-	UIButton *triggerButton;
-	UIButton *loopButton;
+	//UIButton *triggerButton;
+	//UIButton *loopButton;
 	
 	SaveViewController *saveViewController;
 	
@@ -53,8 +53,8 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 
-@property (nonatomic,assign) IBOutlet UIButton *triggerButton;
-@property (nonatomic,assign )IBOutlet UIButton *loopButton;
+//@property (nonatomic,assign) IBOutlet UIButton *triggerButton;
+//@property (nonatomic,assign )IBOutlet UIButton *loopButton;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 
