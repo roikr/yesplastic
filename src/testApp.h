@@ -25,6 +25,7 @@ class testApp : public ofSimpleApp  {
 public:
 	testApp() {
 		bInitialized = false;
+		bChangeSet = false;
 	}
 	
 	void setup();
@@ -148,7 +149,7 @@ private:
 	
 	float bpm;
 	
-	ofxSndFile song;
+	ofxSndFile song; // just for saving
 		
 	bool bInitialized;
 };

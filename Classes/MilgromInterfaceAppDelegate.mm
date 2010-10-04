@@ -84,6 +84,8 @@ NSString * const kCacheFolder=@"URLCache";
     return YES;
 }
 
+
+
 - (void)unzipPrecache {
 	
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -448,6 +450,12 @@ NSString * const kCacheFolder=@"URLCache";
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
+	
+	if (mPlaybackViewController)
+	{
+		[mPlaybackViewController release];
+		mPlaybackViewController = nil;
+	}
 }
 
 
@@ -520,11 +528,12 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	//[self presentModalViewController:self.shareViewController animated:YES]; 
+	shareViewController.bRender = YES;
 	[milgromViewController.viewController pushViewController:shareViewController animated:YES];
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	// not so
 	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
-	[shareViewController render];
+	//[shareViewController render]; // TODO: move this to when view appear or whatever
 }
 
 - (void)youTubeUpload {
@@ -538,17 +547,21 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)play {
+	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
+	if (!mPlaybackViewController)
+		mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
 	
-	AVPlayerDemoPlaybackViewController * mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
+
 	
 	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
 	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
 	
-	[self presentModalViewController:mPlaybackViewController animated:NO];
+	//[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds([defaults doubleForKey:AVPlayerDemoContentTimeUserDefaultsKey], NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
 	
+	[self presentModalViewController:mPlaybackViewController animated:NO];
 }
 
 

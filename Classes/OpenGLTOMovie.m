@@ -40,7 +40,7 @@
 								   [NSNumber numberWithUnsignedInt:size.width],AVVideoWidthKey,
 								   [NSNumber numberWithUnsignedInt:size.height],AVVideoHeightKey,nil];
 	
-	input = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
+	input = [[AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings] retain];
 	input.expectsMediaDataInRealTime = NO;
 	
 	
@@ -64,7 +64,7 @@
 	
 	
 	
-	writer = [AVAssetWriter assetWriterWithURL:videoURL fileType:(NSString*)kUTTypeQuickTimeMovie error:&error];
+	writer = [AVAssetWriter assetWriterWithURL:videoURL fileType:(NSString*)kUTTypeQuickTimeMovie  error:&error]; // kUTTypeMPEG4
 	if (error) {
 		NSLog(@"AVAssetWriter: %@",[error description]);
 	}
@@ -177,7 +177,7 @@
 	[compositionAudioTrack insertTimeRange:audioTimeRangeInAsset ofTrack:clipAudioTrack atTime:kCMTimeZero error:&error];
 	
 			
-	AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:composition presetName:AVAssetExportPresetHighestQuality]; // AVAssetExportPresetPassthrough
+	AVAssetExportSession *session = [[[AVAssetExportSession alloc] initWithAsset:composition presetName:AVAssetExportPresetHighestQuality] retain]; // AVAssetExportPresetPassthrough
 		
 	session.outputURL = url;
 	session.outputFileType = AVFileTypeQuickTimeMovie;

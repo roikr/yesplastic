@@ -11,15 +11,18 @@
 @class CustomImageView;
 @class AVAssetExportSession;
 
-@interface ShareViewController : UIViewController {
+@interface ShareViewController : UIViewController<UINavigationControllerDelegate> {
 	CustomImageView *progressView;
+	BOOL bRender;
 }
 
 @property (nonatomic,retain) NSNumber *progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
+@property BOOL bRender;
 
 
 - (void)done:(id)sender;
+- (void)play:(id)sender;
 - (void)youTube:(id)sender;
 - (void)render;
 

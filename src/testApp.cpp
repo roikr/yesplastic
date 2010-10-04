@@ -136,7 +136,7 @@ void testApp::setup(){
 	rBlock = new float[blockLength];
 
 	bpm = 120; // TODO: send bpm to players
-	song.setup(blockLength,true);
+	song.setupForSave(blockLength);
 	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
 	ofSeedRandom();
 	
@@ -206,9 +206,12 @@ float testApp::getProgress() {
 
 float testApp::getPlayhead() {
 	
+// TODO: return playhead 
+	/*
 	if (songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO || songState == SONG_PLAY) {
 		return player[2].getPlayhead();
 	}
+	 */
 	
 	return 0.0f;
 }

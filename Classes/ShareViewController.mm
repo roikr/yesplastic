@@ -25,6 +25,7 @@
 @implementation ShareViewController
 
 @synthesize progressView;
+@synthesize bRender;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -36,18 +37,30 @@
 }
 */
 
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder: decoder]) {
+		bRender = NO;
+	}
+	
+	return self;
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	self.progressView.image =  [UIImage imageNamed:@"CELL1_PROGRESS.png"];
-	
+	self.navigationController.delegate = self;
 	
 }
 
-
-
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	if (bRender) {
+		bRender = NO;
+		[self render];
+	}
+}
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
@@ -191,10 +204,10 @@
 	MilgromViewController * milgromViewController = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).milgromViewController;
 	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
 	
-	
-	OFSAptr->soundStreamStart();
 	OFSAptr->setSongState(SONG_IDLE);
+	OFSAptr->soundStreamStart();
 	[milgromViewController startAnimation];
+	
 	
 	NSLog(@"exportDidFinish");
 }
@@ -210,6 +223,12 @@
 	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
 }
+
+- (void)play:(id)sender {
+	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+}
+
 
 
 

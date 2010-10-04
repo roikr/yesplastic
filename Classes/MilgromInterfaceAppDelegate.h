@@ -20,6 +20,7 @@ extern NSString * const kMilgromURL;
 @class ShareViewController;
 @class YouTubeUploadViewController;
 @class BandMenu;
+@class AVPlayerDemoPlaybackViewController;
 class testApp;
 
 
@@ -44,6 +45,7 @@ class testApp;
 	ShareViewController *shareViewController;
 	YouTubeUploadViewController *youTubeViewController;
 	
+	AVPlayerDemoPlaybackViewController* mPlaybackViewController;
 	
 }
 

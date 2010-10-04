@@ -241,9 +241,9 @@
 	//glPushMatrix();
 	//glScalef(1.0, -1.0,1.0);
 	//glTranslatef(0, framebufferHeight, 0);
-    if (animating) {
+	if (animating) {
 		[self.eAGLView presentFramebuffer];
-	}
+   }
 }
 
 - (void)didReceiveMemoryWarning

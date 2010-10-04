@@ -19,7 +19,7 @@
 	UIButton *deleteButton;
 	SongsTable *songsTable;
 	NSNumber * _progress;
-	CustomImageView *progressView;
+	CustomImageView *progressView; 
 	Song *song;
 	
 	
