@@ -92,7 +92,7 @@ void PlayerController::loadSong() {
 		
 		
 	} else {
-		song.loadTrack("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.xml");
+		song.loadTrack(ofToDataPath("SOUNDS/"+soundSet +"/"+soundSet + "_SONG.mid")); // need data path because mid and not xml
 	}
 	
 }
@@ -200,7 +200,7 @@ void  PlayerController::loadSoundSet() {
 	string pathPrefix = ofToDataPath(path);
 	ofDisableDataPath(); // ofxXmlSettings uses ofToDataPath();
 	for (i=0;i<8;i++) {
-		looper.loadLoop(pathPrefix+"_"+ofToString(i+1)+".xml");
+		looper.loadLoop(pathPrefix+"_"+ofToString(i+1)+".mid");
 	}
 	ofEnableDataPath();
 	
