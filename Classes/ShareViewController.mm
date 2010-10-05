@@ -14,7 +14,8 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "ActionCell.h"
+#import "CustomFontLabel.h"
 
 @interface ShareViewController ()
 - (void) export;	
@@ -24,6 +25,8 @@
 
 @implementation ShareViewController
 
+@synthesize tmpCell;
+@synthesize dataSourceArray;
 @synthesize progressView;
 @synthesize bRender;
 
@@ -53,12 +56,19 @@
 	self.progressView.image =  [UIImage imageNamed:@"CELL1_PROGRESS.png"];
 	self.navigationController.delegate = self;
 	
+	self.dataSourceArray = [NSArray arrayWithObjects: @"Email",@"YouTube",@"FaceBook",@"Play",@"Render",@"Done",nil];
+								
+	
 }
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	if (bRender) {
 		bRender = NO;
-		[self render];
+		
+		
+		bFaceBookUploaded = NO;
+		bYouTubeUploaded = NO;
+		//[self action];
 	}
 }
 // Override to allow orientations other than the default portrait orientation.
@@ -77,12 +87,14 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+	self.dataSourceArray = nil;	// this will release and set to nil
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 
 - (void)dealloc {
+	[dataSourceArray release];
     [super dealloc];
 }
 
@@ -210,8 +222,81 @@
 	
 	
 	NSLog(@"exportDidFinish");
+	
 }
 
+- (void)action {
+	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
+	//sheet.title = @"Illustrations";
+	sheet.delegate = self;
+	[sheet addButtonWithTitle:@"Email"];
+	
+	if (bYouTubeUploaded) {
+		[sheet addButtonWithTitle:@"Email youtube feed"];
+	} else {
+		[sheet addButtonWithTitle:@"Upload to YouTube"];
+	}
+	
+	if (bFaceBookUploaded) {
+		[sheet addButtonWithTitle:@"Email facebook feed"];
+	} else {
+		[sheet addButtonWithTitle:@"Upload to FaceBook"];
+	}
+	
+	[sheet addButtonWithTitle:@"Play"];
+	[sheet addButtonWithTitle:@"Render"];
+	[sheet addButtonWithTitle:@"Done"];
+	
+	sheet.actionSheetStyle = UIActionSheetStyleDefault;
+	
+	[sheet showInView:self.view];
+	//sheet.cancelButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
+	
+}
+
+- (void)actionSheet:(UIActionSheet *)modalView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Change the navigation bar style, also make the status bar match with it
+    switch (buttonIndex)
+    {
+        case 0:
+        {
+           
+            break;
+        }
+        case 1:
+        {
+            if (bYouTubeUploaded) {
+				
+			} else {
+				
+			}
+            break;
+        }
+        case 2:
+        {
+            [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
+            break;
+        }
+		case 3:
+        {
+            [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+            break;
+        }
+		case 4:
+        {
+            [self render];
+            break;
+        }
+		case 5:
+        {
+            
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
+            break;
+        }
+			
+    }
+}
 
 
 - (void)done:(id)sender {
@@ -227,6 +312,92 @@
 - (void)play:(id)sender {
 	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+}
+
+
+#pragma mark -
+#pragma mark - UITableView delegates
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [self.dataSourceArray count];
+}
+
+
+
+// the table's selection has changed, show the alert or action sheet
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	// deselect the current row (don't keep the table selection persistent)
+	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+	
+	
+	switch (indexPath.row)
+	{
+		case 0:
+		{
+			
+			break;
+		}
+		case 1:
+		{
+			if (bYouTubeUploaded) {
+				
+			} else {
+				
+			}
+			break;
+		}
+		case 2:
+		{
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
+			break;
+		}
+		case 3:
+		{
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+			break;
+		}
+		case 4:
+		{
+			[self render];
+			break;
+		}
+		case 5:
+		{
+			
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
+			break;
+		}
+	}
+}
+
+// to determine which UITableViewCell to be used on a given row.
+//
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+		
+	
+	static NSString *CellIdentifier = @"Cell";
+    
+	
+	ActionCell *cell = (ActionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        [[NSBundle mainBundle] loadNibNamed:@"ActionCell" owner:self options:nil];
+        cell = tmpCell;
+        self.tmpCell = nil;
+    }
+	
+	cell.label.text = [self.dataSourceArray objectAtIndex: indexPath.row];
+
+	
+	return cell;
 }
 
 

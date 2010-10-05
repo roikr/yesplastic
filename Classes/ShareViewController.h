@@ -10,20 +10,31 @@
 
 @class CustomImageView;
 @class AVAssetExportSession;
+@class ActionCell;
 
-@interface ShareViewController : UIViewController<UINavigationControllerDelegate> {
+@interface ShareViewController : UITableViewController<UINavigationControllerDelegate,UIActionSheetDelegate> {
+	ActionCell *tmpCell;
+	
 	CustomImageView *progressView;
 	BOOL bRender;
+	BOOL bYouTubeUploaded;
+	BOOL bFaceBookUploaded;
+	
+	NSArray	*dataSourceArray;
 }
+
+@property (nonatomic,assign) IBOutlet ActionCell *tmpCell;
 
 @property (nonatomic,retain) NSNumber *progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
 @property BOOL bRender;
+@property (nonatomic, retain) NSArray *dataSourceArray;
 
 
 - (void)done:(id)sender;
 - (void)play:(id)sender;
 - (void)youTube:(id)sender;
 - (void)render;
+- (void)action;
 
 @end

@@ -301,6 +301,9 @@
 		E48A87321259A87B004490CE /* GDataServiceGoogleYouTube.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A85F81259A87B004490CE /* GDataServiceGoogleYouTube.m */; };
 		E490A1451206AB58008512EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E490A1441206AB58008512EA /* CoreData.framework */; };
 		E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E493D3D7122DB16700163EF9 /* MilgromViewController.xib */; };
+		E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */; };
+		E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */; };
+		E4964076125BA7FF0058DB34 /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4964075125BA7FF0058DB34 /* ActionCell.xib */; };
 		E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF6121069EB001CB593 /* EAGLView.mm */; };
 		E498DDFA121069EB001CB593 /* MilgromViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF8121069EB001CB593 /* MilgromViewController.mm */; };
 		E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0512106AFA001CB593 /* OpenGLES.framework */; };
@@ -308,14 +311,13 @@
 		E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */; };
 		E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */; };
 		E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */; };
+		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
 		E4A6FC4C122D8BC800A5C4D9 /* ShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */; };
 		E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
-		E4C44D93124365E3007ACEBC /* YouTubeUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C44D91124365E3007ACEBC /* YouTubeUploadViewController.m */; };
-		E4C44D94124365E3007ACEBC /* YouTubeUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C44D92124365E3007ACEBC /* YouTubeUploadViewController.xib */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -830,6 +832,10 @@
 		E490A1441206AB58008512EA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Milgrom.xcdatamodel; sourceTree = "<group>"; };
 		E493D3D7122DB16700163EF9 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
+		E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YouTubeUploadViewController.xib; path = YouTubeUpload/YouTubeUploadViewController.xib; sourceTree = "<group>"; };
+		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
+		E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadViewController.m; path = YouTubeUpload/Classes/YouTubeUploadViewController.m; sourceTree = "<group>"; };
+		E4964075125BA7FF0058DB34 /* ActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionCell.xib; path = Resource/ActionCell.xib; sourceTree = "<group>"; };
 		E498DDF5121069EB001CB593 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		E498DDF6121069EB001CB593 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
 		E498DDF7121069EB001CB593 /* MilgromViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilgromViewController.h; sourceTree = "<group>"; };
@@ -841,6 +847,8 @@
 		E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AVPlayerDemoPlaybackView.xib; path = AVPlayerClasses/AVPlayerDemoPlaybackView.xib; sourceTree = "<group>"; };
 		E4998B7512203191006EC3BA /* AVPlayerDemoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVPlayerDemoPlaybackViewController.h; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.h; sourceTree = "<group>"; };
 		E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVPlayerDemoPlaybackViewController.m; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.m; sourceTree = "<group>"; };
+		E49BD07E125A7AB1005A0FAC /* ActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionCell.h; sourceTree = "<group>"; };
+		E49BD07F125A7AB1005A0FAC /* ActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionCell.m; sourceTree = "<group>"; };
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
@@ -850,9 +858,6 @@
 		E4B3D17C11F823E000B57223 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
-		E4C44D90124365E3007ACEBC /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeUploadViewController.h; sourceTree = "<group>"; };
-		E4C44D91124365E3007ACEBC /* YouTubeUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeUploadViewController.m; sourceTree = "<group>"; };
-		E4C44D92124365E3007ACEBC /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YouTubeUploadViewController.xib; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -975,6 +980,8 @@
 				E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */,
 				E47BC951122A8E5A00B6149A /* CustomImageView.h */,
 				E47BC952122A8E5A00B6149A /* CustomImageView.m */,
+				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
+				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
 			);
 			name = ViewControllers;
 			path = Classes;
@@ -1816,6 +1823,7 @@
 				E4DF703A11FE9EB000EBD904 /* SongCell.xib */,
 				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
 				E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */,
+				E4964075125BA7FF0058DB34 /* ActionCell.xib */,
 				E4DE50541200185200BF31AF /* MainViewController.xib */,
 				E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */,
 				E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */,
@@ -1829,10 +1837,10 @@
 		E4C44C2012436581007ACEBC /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */,
+				E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */,
+				E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */,
 				E48A83531259A87A004490CE /* GData Sources */,
-				E4C44D90124365E3007ACEBC /* YouTubeUploadViewController.h */,
-				E4C44D91124365E3007ACEBC /* YouTubeUploadViewController.m */,
-				E4C44D92124365E3007ACEBC /* YouTubeUploadViewController.xib */,
 			);
 			name = YouTube;
 			sourceTree = "<group>";
@@ -2031,7 +2039,6 @@
 				E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */,
 				E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */,
 				E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */,
-				E4C44D94124365E3007ACEBC /* YouTubeUploadViewController.xib in Resources */,
 				E42D132F124F796A007BEEB0 /* ARROWS_DRM_LEFT.png in Resources */,
 				E42D1330124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png in Resources */,
 				E42D1331124F796A007BEEB0 /* ARROWS_GTR_LEFT.png in Resources */,
@@ -2154,6 +2161,8 @@
 				E42D14FE124F896C007BEEB0 /* SETCELL_SELECT_3.png in Resources */,
 				E48A863A1259A87B004490CE /* GDataOAuthViewTouch.xib in Resources */,
 				E48A863C1259A87B004490CE /* GDataOAuthWindow.xib in Resources */,
+				E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */,
+				E4964076125BA7FF0058DB34 /* ActionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2224,7 +2233,6 @@
 				E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */,
 				E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */,
 				E4A6FC4C122D8BC800A5C4D9 /* ShareViewController.mm in Sources */,
-				E4C44D93124365E3007ACEBC /* YouTubeUploadViewController.m in Sources */,
 				E48A85F91259A87B004490CE /* GDataFramework.m in Sources */,
 				E48A85FA1259A87B004490CE /* GDataUtilities.m in Sources */,
 				E48A85FB1259A87B004490CE /* GDataObject.m in Sources */,
@@ -2341,6 +2349,8 @@
 				E48A87301259A87B004490CE /* GDataYouTubeStatistics.m in Sources */,
 				E48A87311259A87B004490CE /* GDataQueryYouTube.m in Sources */,
 				E48A87321259A87B004490CE /* GDataServiceGoogleYouTube.m in Sources */,
+				E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */,
+				E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

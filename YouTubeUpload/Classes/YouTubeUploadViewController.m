@@ -6,8 +6,9 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "YouTubeUploadViewController.h"
-#import "GData.h"
+ #import "YouTubeUploadViewController.h"
+//#import "GData.h"
+#import "GDataYouTubeConstants.h"
 #import "GDataServiceGoogleYouTube.h"
 #import "GDataEntryYouTubeUpload.h"
 
@@ -96,7 +97,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 }
 
 - (void) cancel:(id)sender {
-	
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -171,7 +172,9 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	
 	
 	// load the file data
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"];
+	//NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"];
+	NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+	
 	NSData *data = [NSData dataWithContentsOfFile:path];
 	NSString *filename = [path lastPathComponent];
 	
@@ -186,8 +189,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	NSString *descStr = description.text;
 	GDataMediaDescription *desc = [GDataMediaDescription textConstructWithString:descStr];
 	
-	NSString *keywordsStr = nil;//[mKeywordsField stringValue];
-	GDataMediaKeywords *keywords = [GDataMediaKeywords keywordsWithString:keywordsStr];
+//	NSString *keywordsStr = nil;//[mKeywordsField stringValue];
+//	GDataMediaKeywords *keywords = [GDataMediaKeywords keywordsWithString:keywordsStr];
 	
 	BOOL isPrivate = YES;//([mPrivateCheckbox state] == NSOnState);
 	
@@ -198,8 +201,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	//[mediaGroup setMediaKeywords:keywords];
 	[mediaGroup setIsPrivate:isPrivate];
 	
-	NSString *mimeType = [GDataUtilities MIMETypeForFileAtPath:path
-											   defaultMIMEType:@"video/quicktime"];
+	NSString *mimeType = [GDataUtilities MIMETypeForFileAtPath:path defaultMIMEType:@"video/quicktime"];
 	
 	// create the upload entry with the mediaGroup and the file data
 	GDataEntryYouTubeUpload *entry;
@@ -253,6 +255,7 @@ ofTotalByteCount:(unsigned long long)dataLength {
 	[mUploadProgressIndicator setProgress:0.0];
 	
 	[self setUploadTicket:nil];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 
