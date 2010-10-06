@@ -82,7 +82,7 @@ typedef struct _PVRTexHeader
 @synthesize height = _height;
 @synthesize internalFormat = _internalFormat;
 @synthesize hasAlpha = _hasAlpha;
-
+@synthesize data;
 
 - (BOOL)unpackPVRData {
 	BOOL success = FALSE;
@@ -162,7 +162,8 @@ typedef struct _PVRTexHeader
 	}
 		
 			
-	
+	[data release]; // TODO: leave it like that ?
+	self.data = nil;
 	
 	
 	return TRUE;
@@ -181,7 +182,7 @@ typedef struct _PVRTexHeader
 {
 	if (self = [super init])
 	{
-		data = [[NSData dataWithContentsOfFile:path] retain];
+		self.data = [NSData dataWithContentsOfFile:path];
 		
 		
 		
@@ -232,7 +233,7 @@ typedef struct _PVRTexHeader
 - (void)dealloc
 {
 	//[self unload];
-	[data release];
+	//[data release]; // moved to after loading
 	//NSLog(@"RKPVRTexture dealloc");
 	[super dealloc];
 }

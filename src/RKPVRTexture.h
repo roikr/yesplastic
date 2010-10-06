@@ -74,5 +74,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 @property (readonly) uint32_t height;
 @property (readonly) GLenum internalFormat;
 @property (readonly) BOOL hasAlpha;
+@property (nonatomic, retain) NSData *data;
 
 @end
