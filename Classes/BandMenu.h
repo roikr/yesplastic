@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class SongsTable;
-@class HelpViewController;
 
 @interface BandMenu : UIViewController {
 	SongsTable *songsTable;
 	UIView *songsView;
-	HelpViewController *help;
 	UIActivityIndicatorView *activityIndicator;
 	
 	
@@ -22,7 +20,6 @@
 
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
-@property (nonatomic,retain) HelpViewController *help;
 @property (nonatomic,retain ) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 

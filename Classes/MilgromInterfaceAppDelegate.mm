@@ -19,6 +19,7 @@
 #include "VideoSet.h"
 #include "SoundSet.h"
 #import "MainViewController.h"
+#import "HelpViewController.h"
 #include "PlayerMenu.h"
 #import "ShareViewController.h"
 #import "AVPlayerDemoPlaybackViewController.h"
@@ -492,6 +493,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 }
 
+
 - (void)pushSetMenu {
 	//TODO: replace with NULL as done in the page controll example
 	
@@ -570,7 +572,12 @@ NSString * const kCacheFolder=@"URLCache";
 	[milgromViewController.viewController popViewControllerAnimated:YES];
 }
 
-
+- (void)help {
+	HelpViewController *helpView = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+	helpView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	
+	[self presentModalViewController:helpView animated:YES];
+}
 
 #pragma mark -
 #pragma mark Songs Management

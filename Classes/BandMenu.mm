@@ -10,7 +10,7 @@
 #import "SongsTable.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromMacros.h"
-#import "HelpViewController.h"
+
 
 
 @implementation BandMenu
@@ -19,7 +19,7 @@
 @synthesize songsView;
 @synthesize activityIndicator;
 
-@synthesize help;
+
 
 
 /*
@@ -95,17 +95,7 @@
 
 
 - (void)help:(id)sender {
-		
-	if (self.help == nil) {
-		self.help = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
-		help.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	}
-	
-	
-	//MilgromInterfaceAppDelegate *appDelegate = ;
-	
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]) presentModalViewController:self.help animated:YES];
-	//[self.navigationController presentModalViewController:self.help animated:YES];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]) help];
 }
 
 - (void)link:(id)sender {

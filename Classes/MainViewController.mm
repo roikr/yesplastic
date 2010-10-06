@@ -32,6 +32,9 @@
 @synthesize triggersView;
 @synthesize loopsView;
 @synthesize bandLoopsView;
+@synthesize bandHelp;
+@synthesize soloHelp;
+@synthesize bShowHelp;
 
 
 //@synthesize triggerButton;
@@ -59,7 +62,7 @@
 	OFSAptr = appDelegate.OFSAptr;
 	
 	[(TouchView*)self.view  setViewController:self];
-	 
+	bShowHelp = NO;
 	
 	
 	//[self.view addSubview:menuController.view];
@@ -148,6 +151,8 @@
 	bandLoopsView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
+	bandHelp.hidden = YES;
+	soloHelp.hidden = YES;
 	
 }
 
@@ -155,27 +160,6 @@
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	[self updateViews];
 	
-//	switch (OFSAptr->getState()) {
-//		case SOLO_STATE:
-//			setMenuButton.hidden = NO;
-//			switch (OFSAptr->getMode(OFSAptr->controller)) {
-//				case LOOP_MODE:
-//					loopsView.hidden = NO;
-//					break;
-//				case MANUAL_MODE:
-//					triggersView.hidden = NO;
-//					break;
-//				default:
-//					break;
-//			}
-//			break;
-//		case BAND_STATE:
-//			bandLoopsView.hidden = NO;
-//			menuButton.hidden = NO;
-//			break;
-//		default:
-//			break;
-//	}
 }
 
 
@@ -196,6 +180,8 @@
 	loopsView.hidden = YES;
 	triggersView.hidden = YES;
 	bandLoopsView.hidden = YES;
+	bandHelp.hidden = YES;
+	soloHelp.hidden = YES;
 	recordButton.selected = OFSAptr->getSongState() == SONG_RECORD;
 	
 	
@@ -249,17 +235,20 @@
 								break;
 						}
 						
+						soloHelp.hidden = !bShowHelp;
+						
 					} break;
 					case BAND_STATE: {
 						menuButton.hidden = NO;
 						bandLoopsView.hidden = NO;
+						bandHelp.hidden = !bShowHelp;
 					} break;
 					default:
 						break;
 				}
 				
 				
-								
+							
 								
 				break;	
 				
@@ -279,7 +268,7 @@
 		recordButton.hidden = NO;
 
 		
-			
+		
 	}
 		
 }
@@ -302,6 +291,8 @@
 
 
 - (void) menu:(id)sender {
+	
+	[self hideHelp];
 	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
@@ -329,6 +320,8 @@
 
 - (void) play:(id)sender {
 	
+	[self hideHelp];
+	
 	if (recordButton.selected) {
 		[self stop:nil];
 	}
@@ -341,10 +334,13 @@
 }
 
 - (void) stop:(id)sender {
+	[self hideHelp];
 	OFSAptr->setSongState(SONG_IDLE);
 }
 
 - (void) record:(id)sender {
+	[self hideHelp];
+	
 	if (playButton.hidden) 
 		return;
 	
@@ -362,6 +358,7 @@
 }
 
 - (void) save:(id)sender {
+	[self hideHelp];
 	OFSAptr->setSongState(SONG_IDLE);
 	
 	
@@ -383,6 +380,7 @@
 
 
 - (void)share:(id)sender {
+	[self hideHelp];
 	OFSAptr->setSongState(SONG_IDLE);
 	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] share];
 }
@@ -401,6 +399,7 @@
 */
 
 - (void) trigger:(id)sender {
+	[self hideHelp];
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
@@ -414,6 +413,7 @@
 }
 
 - (void) loop:(id)sender {
+	[self hideHelp];
 	UIButton *button;
 //	for (int i=0; i<[loopsView.subviews count]; i++) {
 //		button = (UIButton*)[loopsView.subviews objectAtIndex:i];
@@ -436,18 +436,36 @@
 //}
 
 - (void) nextLoop:(id)sender {
+	[self hideHelp];
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->nextLoop(button.tag);
 	
 }
 
 - (void) prevLoop:(id)sender {
+	[self hideHelp];
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->prevLoop(button.tag);
 }
 
 
+- (void) showHelp:(id)sender {
+	bShowHelp = YES;
+	[self updateViews];
+}
 
+- (void)hideHelp {
+	
+	if (bShowHelp) {
+		bShowHelp = NO;
+		[self updateViews];
+	}
+}
+
+- (void) moreHelp:(id)sender {
+	[self hideHelp];
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] help];
+}
 
 
 - (void)dealloc {

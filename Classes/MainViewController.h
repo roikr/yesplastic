@@ -16,7 +16,8 @@ class testApp;
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
-	
+	UIView *bandHelp;
+	UIView *soloHelp;
 	
 	UIButton *playButton;
 	UIButton *stopButton;
@@ -38,6 +39,7 @@ class testApp;
 	//UIButton *loopButton;
 	
 	SaveViewController *saveViewController;
+	BOOL bShowHelp;
 	
 }
 
@@ -52,11 +54,14 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *triggersView;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
+@property (nonatomic, retain) IBOutlet UIView *bandHelp;
+@property (nonatomic, retain) IBOutlet UIView *soloHelp;
 
 //@property (nonatomic,assign) IBOutlet UIButton *triggerButton;
 //@property (nonatomic,assign )IBOutlet UIButton *loopButton;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
+@property BOOL bShowHelp;
 
 
 - (void) menu:(id)sender;
@@ -71,6 +76,9 @@ class testApp;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
+- (void) showHelp:(id)sender;
+- (void) hideHelp;
+- (void) moreHelp:(id)sender;
 
 //- (void) updateTables;
 

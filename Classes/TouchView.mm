@@ -37,6 +37,10 @@
 	//	NSLog(@"touchesBegan: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
 	
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).mainViewController hideHelp];
+
+	
+	
 	//self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5) target:controller selector:@selector(bringPlayerMenu:) userInfo:nil repeats:NO];
 	
 	for(UITouch *touch in touches) {

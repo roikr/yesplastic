@@ -75,11 +75,13 @@ class testApp;
 - (void)pushSetMenu;
 - (void)pushMain;
 - (void)pop;
+- (void)help;
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
 - (void)dismissModalViewControllerAnimated:(BOOL)animated;
 - (void)share;
 - (void)youTubeUpload;
 - (void)play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
+
 @end
 

@@ -51,6 +51,7 @@
 
 - (void) exit:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
+	[self release];
 }
 - (void)dealloc {
     [super dealloc];
