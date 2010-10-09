@@ -5,7 +5,6 @@
 
 using namespace std; 
 
-class ofxRKPVRTexture;
 
 class ofxRKTexture {
 	
@@ -43,7 +42,10 @@ protected:
 	
 	string filename;
 	
-	ofxRKPVRTexture *texture;
+	GLuint _name;
+	uint32_t _width, _height;
+	GLenum _internalFormat;
+	bool _hasAlpha;
 	
 };
 

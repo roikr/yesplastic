@@ -1,0 +1,224 @@
+// !$*UTF8*$!
+{
+	1D3623240D0F684500981E51 /* ConvertToVideoAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {704, 402}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 520}";
+		};
+	};
+	1D3623250D0F684500981E51 /* ConvertToVideoAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {895, 793}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{446, 729}";
+			sepNavWindowFrame = "{{130, 231}, {954, 687}}";
+		};
+	};
+	1D6058900D05DD3D006BFB54 /* ConvertToVideo */ = {
+		activeExec = 0;
+		executables = (
+			E4BAF0CE125EFD8100AE1ED0 /* ConvertToVideo */,
+		);
+	};
+	28EC4C5611D54ECE0027AA9F /* ConvertToVideoViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {957, 663}}";
+			sepNavSelRange = "{1191, 0}";
+			sepNavVisRange = "{465, 794}";
+			sepNavWindowFrame = "{{61, 154}, {1067, 827}}";
+		};
+	};
+	28EC4C5711D54ECE0027AA9F /* ConvertToVideoViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1426, 7839}}";
+			sepNavSelRange = "{5616, 0}";
+			sepNavVisRange = "{99, 832}";
+			sepNavWindowFrame = "{{532, 166}, {1067, 827}}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = E4BAF0CE125EFD8100AE1ED0 /* ConvertToVideo */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* ConvertToVideo */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* ConvertToVideo */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = E4BAF0E0125EFD8500AE1ED0 /* Code sense */;
+		executables = (
+			E4BAF0CE125EFD8100AE1ED0 /* ConvertToVideo */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					863,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 308232882;
+			PBXWorkspaceStateSaveDate = 308232882;
+		};
+		perUserProjectItems = {
+			E4BAF11F125EFEBE00AE1ED0 /* PBXTextBookmark */ = E4BAF11F125EFEBE00AE1ED0 /* PBXTextBookmark */;
+			E4BAF131125F036500AE1ED0 /* PlistBookmark */ = E4BAF131125F036500AE1ED0 /* PlistBookmark */;
+			E4BAF362125F345000AE1ED0 /* PBXTextBookmark */ = E4BAF362125F345000AE1ED0 /* PBXTextBookmark */;
+			E4BAF363125F345000AE1ED0 /* PBXTextBookmark */ = E4BAF363125F345000AE1ED0 /* PBXTextBookmark */;
+			E4BAF3FC125F433500AE1ED0 /* PBXTextBookmark */ = E4BAF3FC125F433500AE1ED0 /* PBXTextBookmark */;
+			E4BAF3FD125F433500AE1ED0 /* PBXTextBookmark */ = E4BAF3FD125F433500AE1ED0 /* PBXTextBookmark */;
+			E4BAF3FE125F433500AE1ED0 /* PBXTextBookmark */ = E4BAF3FE125F433500AE1ED0 /* PBXTextBookmark */;
+		};
+		sourceControlManager = E4BAF0DF125EFD8500AE1ED0 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	E4BAF0CE125EFD8100AE1ED0 /* ConvertToVideo */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = ConvertToVideo;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	E4BAF0DF125EFD8500AE1ED0 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	E4BAF0E0125EFD8500AE1ED0 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	E4BAF11F125EFEBE00AE1ED0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* ConvertToVideoAppDelegate.h */;
+		name = "ConvertToVideoAppDelegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 520;
+		vrLoc = 0;
+	};
+	E4BAF131125F036500AE1ED0 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* ConvertToVideo-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/roikr/Developer/YesPlastic/ConvertToVideo/ConvertToVideo-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	E4BAF208125F09B200AE1ED0 /* OpenGLTOMovie.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1160, 4004}}";
+			sepNavSelRange = "{4966, 0}";
+			sepNavVisRange = "{4613, 617}";
+			sepNavWindowFrame = "{{96, 98}, {1067, 827}}";
+		};
+	};
+	E4BAF209125F09B200AE1ED0 /* OpenGLTOMovie.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1594, 351}}";
+			sepNavSelRange = "{475, 231}";
+			sepNavVisRange = "{0, 714}";
+		};
+	};
+	E4BAF362125F345000AE1ED0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* ConvertToVideoAppDelegate.m */;
+		name = "ConvertToVideoAppDelegate.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 733;
+		vrLoc = 442;
+	};
+	E4BAF363125F345000AE1ED0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28EC4C5711D54ECE0027AA9F /* ConvertToVideoViewController.m */;
+		name = "ConvertToVideoViewController.m: 217";
+		rLen = 0;
+		rLoc = 5616;
+		rType = 0;
+		vrLen = 1143;
+		vrLoc = 3166;
+	};
+	E4BAF3FC125F433500AE1ED0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E4BAF208125F09B200AE1ED0 /* OpenGLTOMovie.m */;
+		name = "OpenGLTOMovie.m: 121";
+		rLen = 0;
+		rLoc = 4966;
+		rType = 0;
+		vrLen = 764;
+		vrLoc = 4768;
+	};
+	E4BAF3FD125F433500AE1ED0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28EC4C5611D54ECE0027AA9F /* ConvertToVideoViewController.h */;
+		name = "ConvertToVideoViewController.h: 45";
+		rLen = 0;
+		rLoc = 1191;
+		rType = 0;
+		vrLen = 794;
+		vrLoc = 465;
+	};
+	E4BAF3FE125F433500AE1ED0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28EC4C5711D54ECE0027AA9F /* ConvertToVideoViewController.m */;
+		name = "ConvertToVideoViewController.m: 217";
+		rLen = 0;
+		rLoc = 5616;
+		rType = 0;
+		vrLen = 832;
+		vrLoc = 99;
+	};
+}

@@ -7,48 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* ConvertToVideoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* ConvertToVideoAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2514C27B10084DCA00A42282 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27910084DCA00A42282 /* Shader.fsh */; };
+		2514C27C10084DCA00A42282 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27A10084DCA00A42282 /* Shader.vsh */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		28EC4C5911D54ECE0027AA9F /* ConvertToVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EC4C5711D54ECE0027AA9F /* ConvertToVideoViewController.m */; };
+		28EC4C5A11D54ECE0027AA9F /* ConvertToVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EC4C5811D54ECE0027AA9F /* ConvertToVideoViewController.xib */; };
+		28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* EAGLView.m */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
-		E44D7777121AF0EA004FAE5C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D7776121AF0EA004FAE5C /* CoreVideo.framework */; };
-		E44D77B5121B00EA004FAE5C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D77B4121B00EA004FAE5C /* AVFoundation.framework */; };
-		E44D77E0121B05CB004FAE5C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D77DF121B05CB004FAE5C /* MobileCoreServices.framework */; };
-		E44D7838121B4238004FAE5C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44D7837121B4238004FAE5C /* CoreMedia.framework */; };
-		E4749C68121D739300886A6E /* ConvertToVideoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C62121D739300886A6E /* ConvertToVideoAppDelegate.m */; };
-		E4749C69121D739300886A6E /* ConvertToVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C64121D739300886A6E /* ConvertToVideoViewController.m */; };
-		E4749C6A121D739300886A6E /* ConvertToVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4749C65121D739300886A6E /* ConvertToVideoViewController.xib */; };
-		E4749C6B121D739300886A6E /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C67121D739300886A6E /* EAGLView.m */; };
-		E4749C6D121D73A500886A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C6C121D73A500886A6E /* main.m */; };
-		E4749C70121D73B500886A6E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4749C6E121D73B500886A6E /* MainWindow.xib */; };
-		E4749C71121D73B500886A6E /* temp.wav in Resources */ = {isa = PBXBuildFile; fileRef = E4749C6F121D73B500886A6E /* temp.wav */; };
-		E4749C7E121D73CE00886A6E /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749C7D121D73CE00886A6E /* OpenGLTOMovie.m */; };
+		E4BAF11D125EFEB300AE1ED0 /* temp.wav in Resources */ = {isa = PBXBuildFile; fileRef = E4BAF11C125EFEB300AE1ED0 /* temp.wav */; };
+		E4BAF15D125F04F700AE1ED0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BAF15C125F04F700AE1ED0 /* AVFoundation.framework */; };
+		E4BAF161125F050100AE1ED0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BAF160125F050100AE1ED0 /* CoreMedia.framework */; };
+		E4BAF165125F051400AE1ED0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BAF164125F051400AE1ED0 /* CoreVideo.framework */; };
+		E4BAF1E3125F058600AE1ED0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BAF1E2125F058600AE1ED0 /* MobileCoreServices.framework */; };
+		E4BAF20A125F09B200AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF208125F09B200AE1ED0 /* OpenGLTOMovie.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* ConvertToVideoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertToVideoAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* ConvertToVideoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertToVideoAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* ConvertToVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConvertToVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2514C27910084DCA00A42282 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		2514C27A10084DCA00A42282 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28EC4C5611D54ECE0027AA9F /* ConvertToVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertToVideoViewController.h; sourceTree = "<group>"; };
+		28EC4C5711D54ECE0027AA9F /* ConvertToVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertToVideoViewController.m; sourceTree = "<group>"; };
+		28EC4C5811D54ECE0027AA9F /* ConvertToVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConvertToVideoViewController.xib; sourceTree = "<group>"; };
+		28FD14FC0DC6FC130079059D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		28FD14FD0DC6FC130079059D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ConvertToVideo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertToVideo_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ConvertToVideo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ConvertToVideo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		E44D7776121AF0EA004FAE5C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		E44D77B4121B00EA004FAE5C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		E44D77DF121B05CB004FAE5C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		E44D7837121B4238004FAE5C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		E4749C61121D739300886A6E /* ConvertToVideoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvertToVideoAppDelegate.h; path = ConvertToVideoClasses/ConvertToVideoAppDelegate.h; sourceTree = "<group>"; };
-		E4749C62121D739300886A6E /* ConvertToVideoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConvertToVideoAppDelegate.m; path = ConvertToVideoClasses/ConvertToVideoAppDelegate.m; sourceTree = "<group>"; };
-		E4749C63121D739300886A6E /* ConvertToVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvertToVideoViewController.h; path = ConvertToVideoClasses/ConvertToVideoViewController.h; sourceTree = "<group>"; };
-		E4749C64121D739300886A6E /* ConvertToVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConvertToVideoViewController.m; path = ConvertToVideoClasses/ConvertToVideoViewController.m; sourceTree = "<group>"; };
-		E4749C65121D739300886A6E /* ConvertToVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ConvertToVideoViewController.xib; path = ConvertToVideoClasses/ConvertToVideoViewController.xib; sourceTree = "<group>"; };
-		E4749C66121D739300886A6E /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = ConvertToVideoClasses/EAGLView.h; sourceTree = "<group>"; };
-		E4749C67121D739300886A6E /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = ConvertToVideoClasses/EAGLView.m; sourceTree = "<group>"; };
-		E4749C6C121D73A500886A6E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ConvertToVideoClasses/main.m; sourceTree = "<group>"; };
-		E4749C6E121D73B500886A6E /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ConvertToVideoClasses/MainWindow.xib; sourceTree = "<group>"; };
-		E4749C6F121D73B500886A6E /* temp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = temp.wav; path = ConvertToVideoClasses/temp.wav; sourceTree = "<group>"; };
-		E4749C7C121D73CE00886A6E /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
-		E4749C7D121D73CE00886A6E /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
+		E4BAF11C125EFEB300AE1ED0 /* temp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = temp.wav; sourceTree = "<group>"; };
+		E4BAF15C125F04F700AE1ED0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E4BAF160125F050100AE1ED0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E4BAF164125F051400AE1ED0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E4BAF1E2125F058600AE1ED0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E4BAF208125F09B200AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLTOMovie.m; sourceTree = "<group>"; };
+		E4BAF209125F09B200AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTOMovie.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,16 +64,31 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
 				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
-				E44D7777121AF0EA004FAE5C /* CoreVideo.framework in Frameworks */,
-				E44D77B5121B00EA004FAE5C /* AVFoundation.framework in Frameworks */,
-				E44D77E0121B05CB004FAE5C /* MobileCoreServices.framework in Frameworks */,
-				E44D7838121B4238004FAE5C /* CoreMedia.framework in Frameworks */,
+				E4BAF15D125F04F700AE1ED0 /* AVFoundation.framework in Frameworks */,
+				E4BAF161125F050100AE1ED0 /* CoreMedia.framework in Frameworks */,
+				E4BAF165125F051400AE1ED0 /* CoreVideo.framework in Frameworks */,
+				E4BAF1E3125F058600AE1ED0 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E4BAF208125F09B200AE1ED0 /* OpenGLTOMovie.m */,
+				E4BAF209125F09B200AE1ED0 /* OpenGLTOMovie.h */,
+				28FD14FC0DC6FC130079059D /* EAGLView.h */,
+				28FD14FD0DC6FC130079059D /* EAGLView.m */,
+				1D3623240D0F684500981E51 /* ConvertToVideoAppDelegate.h */,
+				1D3623250D0F684500981E51 /* ConvertToVideoAppDelegate.m */,
+				28EC4C5611D54ECE0027AA9F /* ConvertToVideoViewController.h */,
+				28EC4C5711D54ECE0027AA9F /* ConvertToVideoViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,10 +97,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2514C27610084DB600A42282 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				2514C27910084DCA00A42282 /* Shader.fsh */,
+				2514C27A10084DCA00A42282 /* Shader.vsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				E4749C60121D737C00886A6E /* Classes */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				2514C27610084DB600A42282 /* Shaders */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -93,8 +122,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E4749C6C121D73A500886A6E /* main.m */,
 				32CA4F630368D1EE00C91783 /* ConvertToVideo_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -102,9 +131,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E4749C6E121D73B500886A6E /* MainWindow.xib */,
-				E4749C6F121D73B500886A6E /* temp.wav */,
+				E4BAF11C125EFEB300AE1ED0 /* temp.wav */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ConvertToVideo-Info.plist */,
+				28EC4C5811D54ECE0027AA9F /* ConvertToVideoViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -112,32 +142,16 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E44D7837121B4238004FAE5C /* CoreMedia.framework */,
-				E44D7776121AF0EA004FAE5C /* CoreVideo.framework */,
-				E44D77B4121B00EA004FAE5C /* AVFoundation.framework */,
-				E44D77DF121B05CB004FAE5C /* MobileCoreServices.framework */,
+				E4BAF1E2125F058600AE1ED0 /* MobileCoreServices.framework */,
+				E4BAF15C125F04F700AE1ED0 /* AVFoundation.framework */,
+				E4BAF160125F050100AE1ED0 /* CoreMedia.framework */,
+				E4BAF164125F051400AE1ED0 /* CoreVideo.framework */,
 				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
 				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E4749C60121D737C00886A6E /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				E4749C61121D739300886A6E /* ConvertToVideoAppDelegate.h */,
-				E4749C62121D739300886A6E /* ConvertToVideoAppDelegate.m */,
-				E4749C63121D739300886A6E /* ConvertToVideoViewController.h */,
-				E4749C64121D739300886A6E /* ConvertToVideoViewController.m */,
-				E4749C65121D739300886A6E /* ConvertToVideoViewController.xib */,
-				E4749C66121D739300886A6E /* EAGLView.h */,
-				E4749C67121D739300886A6E /* EAGLView.m */,
-				E4749C7C121D73CE00886A6E /* OpenGLTOMovie.h */,
-				E4749C7D121D73CE00886A6E /* OpenGLTOMovie.m */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,9 +203,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4749C6A121D739300886A6E /* ConvertToVideoViewController.xib in Resources */,
-				E4749C70121D73B500886A6E /* MainWindow.xib in Resources */,
-				E4749C71121D73B500886A6E /* temp.wav in Resources */,
+				2514C27B10084DCA00A42282 /* Shader.fsh in Resources */,
+				2514C27C10084DCA00A42282 /* Shader.vsh in Resources */,
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				28EC4C5A11D54ECE0027AA9F /* ConvertToVideoViewController.xib in Resources */,
+				E4BAF11D125EFEB300AE1ED0 /* temp.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,11 +218,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4749C68121D739300886A6E /* ConvertToVideoAppDelegate.m in Sources */,
-				E4749C69121D739300886A6E /* ConvertToVideoViewController.m in Sources */,
-				E4749C6B121D739300886A6E /* EAGLView.m in Sources */,
-				E4749C6D121D73A500886A6E /* main.m in Sources */,
-				E4749C7E121D73CE00886A6E /* OpenGLTOMovie.m in Sources */,
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* ConvertToVideoAppDelegate.m in Sources */,
+				28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */,
+				28EC4C5911D54ECE0027AA9F /* ConvertToVideoViewController.m in Sources */,
+				E4BAF20A125F09B200AE1ED0 /* OpenGLTOMovie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +233,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (G22F3GL4MN)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -226,7 +241,6 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "ConvertToVideo-Info.plist";
 				PRODUCT_NAME = ConvertToVideo;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62D69DEA-7DF7-4B36-8C3C-A3432F096E5A";
 			};
 			name = Debug;
 		};
@@ -234,14 +248,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (G22F3GL4MN)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ConvertToVideo_Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "ConvertToVideo-Info.plist";
 				PRODUCT_NAME = ConvertToVideo;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62D69DEA-7DF7-4B36-8C3C-A3432F096E5A";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -256,7 +268,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -270,7 +282,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

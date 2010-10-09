@@ -45,7 +45,7 @@
 					<object class="IBUITextField" id="613481282">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{129, 55}, {171, 31}}</string>
+						<string key="NSFrame">{{129, 20}, {171, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -69,7 +69,7 @@
 					<object class="IBUILabel" id="502790392">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 58}, {84, 21}}</string>
+						<string key="NSFrame">{{20, 23}, {84, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -91,7 +91,7 @@
 					<object class="IBUITextField" id="558001516">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{129, 94}, {171, 31}}</string>
+						<string key="NSFrame">{{129, 59}, {171, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -114,7 +114,7 @@
 					<object class="IBUILabel" id="542328076">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 97}, {80, 21}}</string>
+						<string key="NSFrame">{{20, 62}, {80, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -130,7 +130,7 @@
 					<object class="IBUITextField" id="77562577">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{70, 133}, {230, 31}}</string>
+						<string key="NSFrame">{{70, 98}, {230, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -152,7 +152,7 @@
 					<object class="IBUILabel" id="200080466">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 136}, {42, 21}}</string>
+						<string key="NSFrame">{{20, 101}, {42, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -168,7 +168,7 @@
 					<object class="IBUILabel" id="306368996">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 165}, {90, 21}}</string>
+						<string key="NSFrame">{{20, 130}, {90, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -184,7 +184,7 @@
 					<object class="IBUITextView" id="677665860">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{20, 194}, {280, 211}}</string>
+						<string key="NSFrame">{{20, 159}, {280, 211}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -204,7 +204,7 @@
 					<object class="IBUIButton" id="304366699">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{54, 423}, {74, 37}}</string>
+						<string key="NSFrame">{{60, 423}, {74, 37}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -230,7 +230,7 @@
 					<object class="IBUIButton" id="138012078">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{180, 423}, {74, 37}}</string>
+						<string key="NSFrame">{{186, 423}, {74, 37}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -248,12 +248,11 @@
 					</object>
 					<object class="IBUIProgressView" id="121243500">
 						<reference key="NSNextResponder" ref="774585933"/>
-						<int key="NSvFlags">295</int>
-						<string key="NSFrame">{{20, 20}, {280, 9}}</string>
+						<int key="NSvFlags">271</int>
+						<string key="NSFrame">{{20, 394}, {280, 9}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<float key="IBUIProgress">0.5</float>
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 480}</string>
@@ -358,6 +357,14 @@
 					</object>
 					<int key="connectionID">39</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mUploadProgressIndicator</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="121243500"/>
+					</object>
+					<int key="connectionID">40</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -387,14 +394,14 @@
 							<reference ref="613481282"/>
 							<reference ref="558001516"/>
 							<reference ref="542328076"/>
-							<reference ref="121243500"/>
 							<reference ref="200080466"/>
 							<reference ref="77562577"/>
 							<reference ref="306368996"/>
 							<reference ref="677665860"/>
 							<reference ref="502790392"/>
-							<reference ref="138012078"/>
+							<reference ref="121243500"/>
 							<reference ref="304366699"/>
+							<reference ref="138012078"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -524,17 +531,17 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCWAAAw5KAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCcAAAw98AAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDqIAAw5AAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDOgAAw98AAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAw8eAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAw8CAAA</bytes>
 					</object>
-					<string>{{209, 356}, {320, 480}}</string>
+					<string>{{142, 399}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
@@ -554,7 +561,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -649,7 +656,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">YouTubeUploadViewController.h</string>
+						<string key="minorKey">Classes/YouTubeUploadViewController.h</string>
 					</object>
 				</object>
 			</object>
@@ -723,20 +730,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">Foundation.framework/Headers/NSURLConnection.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">QuartzCore.framework/Headers/CAAnimation.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">QuartzCore.framework/Headers/CALayer.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -905,7 +898,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">Milgrom.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">YouTubeUpload.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">131</string>
 	</data>

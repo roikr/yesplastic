@@ -62,10 +62,10 @@ void testApp::setup(){
 	 */
 	
 	
-	cout << "listening for osc messages on port " << PORT << "\n";
+	//cout << "listening for osc messages on port " << PORT << "\n";
 	//receiver.setup( PORT );
 	
-	printf("setup()\n");
+	//printf("setup()\n");
 	
 	//ofBackground(0, 0, 0);
 	
@@ -137,7 +137,8 @@ void testApp::setup(){
 
 	bpm = 120; // TODO: send bpm to players
 	song.setupForSave(blockLength);
-	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
+		
+	soundStreamSetup();
 	ofSeedRandom();
 	
 	bInitialized = true;
@@ -1092,6 +1093,11 @@ void testApp::saveSong(string songName) {
 	
 }
 	
+void testApp::soundStreamSetup() {
+	
+	
+	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
+}
 
 void testApp::soundStreamStart() {
 	ofSoundStreamStart();
@@ -1099,4 +1105,8 @@ void testApp::soundStreamStart() {
 
 void testApp::soundStreamStop() {
 	ofSoundStreamStop();
+}
+
+void testApp::soundStreamClose() {
+	ofSoundStreamClose();
 }

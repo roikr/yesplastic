@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ConvertToVideoViewController.h"
 #import "EAGLView.h"
-
+#import <AVFoundation/AVFoundation.h>
 #import "OpenGLTOMovie.h"
 
 
@@ -35,12 +35,16 @@ enum {
 - (BOOL)validateProgram:(GLuint)prog;
 - (void)drawFrame;
 
-- (void)export;
+- (void)render;
+//- (void)export;
+//- (void)updateExportProgress:(AVAssetExportSession *)theSession;
+//- (void)exportDidFinish;
 @end
 
 @implementation ConvertToVideoViewController
 
 @synthesize animating, context;
+@synthesize progressView;
 
 
 - (void)awakeFromNib
@@ -59,7 +63,7 @@ enum {
     [(EAGLView *)self.view setContext:context];
     [(EAGLView *)self.view setFramebuffer];
     
-	[self write];
+	//[self write];
     
     animating = FALSE;
     displayLinkSupported = FALSE;
@@ -74,7 +78,7 @@ enum {
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
         displayLinkSupported = TRUE;
 	
-	
+	[self render];
 	
 }
 
@@ -102,6 +106,7 @@ enum {
     [super viewWillAppear:animated];
 }
 
+/*
 - (void) write {
 	
 	dispatch_queue_t myCustomQueue;
@@ -159,7 +164,136 @@ enum {
 	NSLog(@"export end");
 	
 }
+*/
 
+- (NSNumber *)progress {
+	return [NSNumber numberWithFloat:0];
+}
+
+
+- (void) setProgress:(NSNumber *)theProgress {
+	progressView.progress = [theProgress floatValue];
+	
+}
+
+- (void)render {
+	[self setProgress:[NSNumber numberWithFloat:0.0f]];
+	
+	//[milgromViewController stopAnimation];
+	
+	
+	dispatch_queue_t myCustomQueue;
+	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
+	dispatch_async(myCustomQueue, ^{
+		
+		//OFSAptr->renderAudio();
+		//OFSAptr->setSongState(SONG_RENDER_VIDEO);
+		
+		
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+		
+		
+		
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]] WithSize:CGSizeMake(480, 320) 
+		 
+						 withDrawFrame:^(int frameNum) {
+							 //NSLog(@"rendering frame: %i",frameNum);
+							 //[milgromViewController drawFrame];
+							 [self drawFrame];
+							 //[self setProgress:[NSNumber numberWithFloat:OFSAptr->getPlayhead()]];
+							 // TODO: playhead is only by DRM
+							 
+						 }
+		 
+						 withDidFinish:^(int frameNum) {
+							 //return (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
+							 return frameNum==100;
+						 }
+		 
+				 withCompletionHandler:^ {
+					 NSLog(@"write completed");
+					 self.progress = [NSNumber numberWithFloat:0.0f];
+					 //[self export];
+					 
+				 }];
+	});
+	
+	
+	dispatch_release(myCustomQueue);
+	
+	
+}
+/*
+
+- (void) export {
+	
+	self.progress = [NSNumber numberWithFloat:0.0f];
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *exportPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+	
+	NSError *error;
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath]) {
+		if (![[NSFileManager defaultManager] removeItemAtPath:exportPath error:&error]) {
+			NSLog(@"removeItemAtPath error: %@",[error description]);
+		}
+	}
+	
+	AVAssetExportSession * session = [OpenGLTOMovie exportToURL:[NSURL fileURLWithPath:exportPath]
+												   withVideoURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"]] 
+												   withAudioURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]] // [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]
+									  
+											withProgressHandler:nil
+									  
+									  //			^(float progress) {
+									  //			   dispatch_async(dispatch_get_main_queue(),^{
+									  //				   [self setProgress:[NSNumber numberWithFloat:progress]];
+									  //				   NSLog(@"progress: %f",progress);
+									  //			   });
+									  //			}
+										  withCompletionHandler:^ {
+											  [self exportDidFinish];
+										  }
+									  ];
+	
+	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	[self performSelector:@selector(updateExportProgress:) withObject:session	afterDelay:0.1 inModes:modes];
+	
+	NSLog(@"export end");
+	
+}
+*/
+
+/*
+- (void)updateExportProgress:(AVAssetExportSession *)theSession
+{
+	
+	if ([theSession status]==AVAssetExportSessionStatusExporting) {
+		
+		self.progress = [NSNumber numberWithFloat:[theSession progress]];
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateExportProgress:) withObject:theSession afterDelay:0.1 inModes:modes];
+	} else {
+		self.progress = [NSNumber numberWithFloat:1.0f];
+	}
+	
+	
+	
+}
+
+- (void)exportDidFinish {
+	
+	//[milgromViewController startAnimation];
+	
+	self.progress = [NSNumber numberWithFloat:0.0f];
+	NSLog(@"exportDidFinish");
+	
+}
+
+*/
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self stopAnimation];

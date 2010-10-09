@@ -2,7 +2,7 @@
 //  Song.m
 //  Milgrom
 //
-//  Created by Roee Kremer on 8/24/10.
+//  Created by Roee Kremer on 10/6/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,11 +12,12 @@
 
 @implementation Song 
 
+@dynamic bReady;
+@dynamic bExported;
+@dynamic bDemo;
 @dynamic bLocked;
 @dynamic songName;
-@dynamic bReady;
 @dynamic bpm;
-@dynamic bDemo;
 @dynamic soundSets;
 
 @end

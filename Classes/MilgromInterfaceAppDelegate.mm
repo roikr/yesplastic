@@ -72,16 +72,16 @@ NSString * const kCacheFolder=@"URLCache";
     
     //[bandMenu.activityIndicator startAnimating];
 	// Override point for customization after application launch.
-	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
 	
 		
 	self.OFSAptr = new testApp;
 	//self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
-	self.bandMenu = (BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0]; // TODO: not so nice using the stack
+	self.bandMenu = (BandMenu *)milgromViewController.viewController.visibleViewController; 
 	
-		
+	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
+	
     return YES;
 }
 
@@ -141,10 +141,10 @@ NSString * const kCacheFolder=@"URLCache";
 	[self loadDemos];
 	[bandMenu loadData];
 	
-	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0); // TODO: no high priority
 	dispatch_async(aQueue, ^{
 		while (1) {
-			OFSAptr->threadedFunction();
+			//OFSAptr->threadedFunction();
 			if (OFSAptr->bNeedDisplay) {
 				if (mainViewController) {
 					dispatch_async(dispatch_get_main_queue(), ^{
@@ -543,6 +543,17 @@ NSString * const kCacheFolder=@"URLCache";
 	if (self.youTubeViewController == nil) {
 		self.youTubeViewController = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
 	}
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	if (!documentsDirectory) {
+		//MilgromLog(@"Documents directory not found!");
+		return;
+	}
+	NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+	[youTubeViewController configureWithVideoName:@"Milgrom's video" andPath:path]; // [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]
 	
 	[milgromViewController.viewController pushViewController:youTubeViewController animated:YES];
 	

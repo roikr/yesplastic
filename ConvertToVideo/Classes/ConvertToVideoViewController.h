@@ -31,17 +31,20 @@
     id displayLink;
     NSTimer *animationTimer;
 	
+	UIProgressView *progressView;
+	
 		
 	
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
-
+@property (nonatomic,retain) IBOutlet UIProgressView *progressView;
+@property (nonatomic,retain) NSNumber *progress;
 
 
 - (void) startAnimation;
 - (void)stopAnimation;
-- (void) write;
+//- (void) write;
 
 @end

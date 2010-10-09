@@ -103,14 +103,16 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
+			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] share];
 			break;
 		case 1:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
+			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
 			break;
 		case 2:
 			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/user/yesplastictube"]];
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
 			break;
 		default:
 			break;

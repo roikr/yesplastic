@@ -12,7 +12,7 @@
 @implementation YouTubeUploadAppDelegate
 
 @synthesize window;
-@synthesize viewController;
+@synthesize navigationController;
 
 
 #pragma mark -
@@ -23,9 +23,11 @@
     // Override point for customization after application launch.
 
     // Add the view controller's view to the window and display.
-    [window addSubview:viewController.view];
+    [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
-
+	YouTubeUploadViewController * youTube = (YouTubeUploadViewController*)navigationController.visibleViewController;
+	[youTube configureWithVideoName:@"Roee's test" andPath:[[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]];
+	
     return YES;
 }
 
@@ -79,7 +81,7 @@
 
 
 - (void)dealloc {
-    [viewController release];
+    [navigationController release];
     [window release];
     [super dealloc];
 }

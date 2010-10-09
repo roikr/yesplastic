@@ -215,6 +215,7 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.OFSAptr->threadedFunction(); // TODO: remove from here
 	
 	appDelegate.OFSAptr->getSongState(); // just to update bNeedDisplay
 	

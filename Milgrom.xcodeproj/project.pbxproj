@@ -145,14 +145,10 @@
 		E44471DB121438CD0058D07B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E44471DA121438CD0058D07B /* main.m */; };
 		E444723412143D300058D07B /* FramesDrivenPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444721212143D300058D07B /* FramesDrivenPlayer.cpp */; };
 		E444723812143D300058D07B /* ofMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444721912143D300058D07B /* ofMain.mm */; };
-		E444723912143D300058D07B /* ofxiPhoneSoundStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444721B12143D300058D07B /* ofxiPhoneSoundStream.mm */; };
 		E444723A12143D300058D07B /* ofxRKActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444721C12143D300058D07B /* ofxRKActor.cpp */; };
-		E444723C12143D300058D07B /* ofxRKPVRTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444722112143D300058D07B /* ofxRKPVRTexture.mm */; };
 		E444723D12143D300058D07B /* ofxRKSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444722212143D300058D07B /* ofxRKSequence.cpp */; };
 		E444723E12143D300058D07B /* ofxRKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444722512143D300058D07B /* ofxRKTexture.mm */; };
-		E444723F12143D300058D07B /* ofxRKThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444722712143D300058D07B /* ofxRKThread.mm */; };
 		E444724012143D300058D07B /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444722812143D300058D07B /* PlayerController.cpp */; };
-		E444724212143D300058D07B /* RKPVRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = E444722D12143D300058D07B /* RKPVRTexture.m */; };
 		E444724312143D300058D07B /* SimplePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444722E12143D300058D07B /* SimplePlayer.cpp */; };
 		E444724512143D300058D07B /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444723112143D300058D07B /* testApp.cpp */; };
 		E444726B12143DAA0058D07B /* ofxFramesDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444725512143DAA0058D07B /* ofxFramesDriver.cpp */; };
@@ -169,19 +165,16 @@
 		E444728012143DB90058D07B /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727912143DB90058D07B /* tinyxmlparser.cpp */; };
 		E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727B12143DB90058D07B /* ofxXmlSettings.cpp */; };
 		E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444728B12143EE60058D07B /* ofxSndFile.cpp */; };
-		E44472B812143FEE0058D07B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
 		E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = E44D9D231223D1C400477CE0 /* DemoLoader.mm */; };
 		E44F6DBD122A4DC60002386C /* CELL1_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DB8122A4DC60002386C /* CELL1_PROGRESS.png */; };
 		E44F6DBE122A4DC60002386C /* CELL2_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DB9122A4DC60002386C /* CELL2_PROGRESS.png */; };
 		E44F6DBF122A4DC60002386C /* CELL3_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DBA122A4DC60002386C /* CELL3_PROGRESS.png */; };
 		E44F6DC0122A4DC60002386C /* CELL4_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DBB122A4DC60002386C /* CELL4_PROGRESS.png */; };
-		E4749CB1121D796500886A6E /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4749CB0121D796500886A6E /* OpenGLTOMovie.m */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
 		E4749D52121D914600886A6E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D51121D914600886A6E /* MobileCoreServices.framework */; };
 		E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47BC952122A8E5A00B6149A /* CustomImageView.m */; };
-		E480B6CC1212152400096300 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C51212152400096300 /* Song.m */; };
 		E480B6CD1212152400096300 /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C71212152400096300 /* Set.m */; };
 		E480B6CE1212152400096300 /* VideoSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C91212152400096300 /* VideoSet.m */; };
 		E480B6CF1212152400096300 /* SoundSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6CB1212152400096300 /* SoundSet.m */; };
@@ -317,6 +310,9 @@
 		E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */; };
 		E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */; };
 		E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */; };
+		E49A3C8F1261016000879E26 /* PVRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = E49A3C8D1261016000879E26 /* PVRTexture.m */; };
+		E49A3D041261158700879E26 /* ofxiPhoneSoundStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = E49A3D021261158700879E26 /* ofxiPhoneSoundStream.mm */; };
+		E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
 		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
@@ -324,6 +320,9 @@
 		E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
+		E4BAF0FA125EFE5000AE1ED0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF0F8125EFE5000AE1ED0 /* Song.m */; };
+		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
+		E4BAF2C6125F241C00AE1ED0 /* temp.wav in Resources */ = {isa = PBXBuildFile; fileRef = E4BAF2C5125F241C00AE1ED0 /* temp.wav */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -523,22 +522,14 @@
 		E444721312143D300058D07B /* FramesDrivenPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesDrivenPlayer.h; sourceTree = "<group>"; };
 		E444721812143D300058D07B /* ofMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMain.h; sourceTree = "<group>"; };
 		E444721912143D300058D07B /* ofMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofMain.mm; sourceTree = "<group>"; };
-		E444721A12143D300058D07B /* ofSoundStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofSoundStream.h; sourceTree = "<group>"; };
-		E444721B12143D300058D07B /* ofxiPhoneSoundStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneSoundStream.mm; sourceTree = "<group>"; };
 		E444721C12143D300058D07B /* ofxRKActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKActor.cpp; sourceTree = "<group>"; };
 		E444721D12143D300058D07B /* ofxRKActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKActor.h; sourceTree = "<group>"; };
-		E444722012143D300058D07B /* ofxRKPVRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKPVRTexture.h; sourceTree = "<group>"; };
-		E444722112143D300058D07B /* ofxRKPVRTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxRKPVRTexture.mm; sourceTree = "<group>"; };
 		E444722212143D300058D07B /* ofxRKSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKSequence.cpp; sourceTree = "<group>"; };
 		E444722312143D300058D07B /* ofxRKSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKSequence.h; sourceTree = "<group>"; };
 		E444722412143D300058D07B /* ofxRKTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKTexture.h; sourceTree = "<group>"; };
 		E444722512143D300058D07B /* ofxRKTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxRKTexture.mm; sourceTree = "<group>"; };
-		E444722612143D300058D07B /* ofxRKThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKThread.h; sourceTree = "<group>"; };
-		E444722712143D300058D07B /* ofxRKThread.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxRKThread.mm; sourceTree = "<group>"; };
 		E444722812143D300058D07B /* PlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerController.cpp; sourceTree = "<group>"; };
 		E444722912143D300058D07B /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
-		E444722C12143D300058D07B /* RKPVRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKPVRTexture.h; sourceTree = "<group>"; };
-		E444722D12143D300058D07B /* RKPVRTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKPVRTexture.m; sourceTree = "<group>"; };
 		E444722E12143D300058D07B /* SimplePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimplePlayer.cpp; sourceTree = "<group>"; };
 		E444722F12143D300058D07B /* SimplePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlayer.h; sourceTree = "<group>"; };
 		E444723112143D300058D07B /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
@@ -576,16 +567,12 @@
 		E44F6DB9122A4DC60002386C /* CELL2_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL2_PROGRESS.png; sourceTree = "<group>"; };
 		E44F6DBA122A4DC60002386C /* CELL3_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL3_PROGRESS.png; sourceTree = "<group>"; };
 		E44F6DBB122A4DC60002386C /* CELL4_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL4_PROGRESS.png; sourceTree = "<group>"; };
-		E4749CAF121D796500886A6E /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
-		E4749CB0121D796500886A6E /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E4749D51121D914600886A6E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E47BC951122A8E5A00B6149A /* CustomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageView.h; sourceTree = "<group>"; };
 		E47BC952122A8E5A00B6149A /* CustomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageView.m; sourceTree = "<group>"; };
-		E480B6C41212152400096300 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
-		E480B6C51212152400096300 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E480B6C61212152400096300 /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Set.h; path = Model/Set.h; sourceTree = "<group>"; };
 		E480B6C71212152400096300 /* Set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Set.m; path = Model/Set.m; sourceTree = "<group>"; };
 		E480B6C81212152400096300 /* VideoSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoSet.h; path = Model/VideoSet.h; sourceTree = "<group>"; };
@@ -856,10 +843,14 @@
 		E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AVPlayerDemoPlaybackView.xib; path = AVPlayerClasses/AVPlayerDemoPlaybackView.xib; sourceTree = "<group>"; };
 		E4998B7512203191006EC3BA /* AVPlayerDemoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVPlayerDemoPlaybackViewController.h; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.h; sourceTree = "<group>"; };
 		E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVPlayerDemoPlaybackViewController.m; path = AVPlayerClasses/AVPlayerDemoPlaybackViewController.m; sourceTree = "<group>"; };
+		E49A3C8D1261016000879E26 /* PVRTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVRTexture.m; sourceTree = "<group>"; };
+		E49A3C8E1261016000879E26 /* PVRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTexture.h; sourceTree = "<group>"; };
+		E49A3D021261158700879E26 /* ofxiPhoneSoundStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneSoundStream.mm; sourceTree = "<group>"; };
+		E49A3D031261158700879E26 /* ofSoundStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofSoundStream.h; sourceTree = "<group>"; };
 		E49BD07E125A7AB1005A0FAC /* ActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionCell.h; sourceTree = "<group>"; };
 		E49BD07F125A7AB1005A0FAC /* ActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionCell.m; sourceTree = "<group>"; };
-		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
-		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
+		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveViewController.h; path = Classes/SaveViewController.h; sourceTree = "<group>"; };
+		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SaveViewController.mm; path = Classes/SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
 		E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareViewController.mm; sourceTree = "<group>"; };
@@ -867,6 +858,11 @@
 		E4B3D17C11F823E000B57223 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
+		E4BAF0F8125EFE5000AE1ED0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
+		E4BAF0F9125EFE5000AE1ED0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
+		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
+		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4BAF2C5125F241C00AE1ED0 /* temp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = temp.wav; path = ConvertToVideo/temp.wav; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -913,8 +909,8 @@
 		E4DE4F9A11FFFCAB00BF31AF /* SAVE_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAVE_B.png; sourceTree = "<group>"; };
 		E4DE500511FFFDEB00BF31AF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resource/Default.png; sourceTree = "<group>"; };
 		E4DE50541200185200BF31AF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Resource/MainViewController.xib; sourceTree = "<group>"; };
-		E4DE508B1200237B00BF31AF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
-		E4DE508C1200237B00BF31AF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		E4DE508B1200237B00BF31AF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = Classes/HelpViewController.h; sourceTree = "<group>"; };
+		E4DE508C1200237B00BF31AF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = Classes/HelpViewController.m; sourceTree = "<group>"; };
 		E4DF703A11FE9EB000EBD904 /* SongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SongCell.xib; path = Resource/SongCell.xib; sourceTree = "<group>"; };
 		E4DF707D11FEA10C00EBD904 /* SetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCell.h; sourceTree = "<group>"; };
 		E4DF707E11FEA10C00EBD904 /* SetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCell.m; sourceTree = "<group>"; };
@@ -938,61 +934,19 @@
 				E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */,
 				E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */,
 				E4D1EB99121141C7004D4E25 /* libz.dylib in Frameworks */,
-				E44472B812143FEE0058D07B /* AudioToolbox.framework in Frameworks */,
 				E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */,
 				E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */,
 				E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */,
 				E4749D52121D914600886A6E /* MobileCoreServices.framework in Frameworks */,
 				E4C44D971243661A007ACEBC /* Security.framework in Frameworks */,
 				E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */,
+				E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				E498DDF7121069EB001CB593 /* MilgromViewController.h */,
-				E498DDF8121069EB001CB593 /* MilgromViewController.mm */,
-				E498DDF5121069EB001CB593 /* EAGLView.h */,
-				E498DDF6121069EB001CB593 /* EAGLView.mm */,
-				E4D4A20A11FD8F4500C92628 /* BandMenu.h */,
-				E4D4A20B11FD8F4500C92628 /* BandMenu.mm */,
-				E4D4A1D311FD79EE00C92628 /* SongsTable.h */,
-				E4D4A1D411FD79EE00C92628 /* SongsTable.mm */,
-				E4D4A27411FDA23700C92628 /* SongCell.h */,
-				E4D4A27511FDA23700C92628 /* SongCell.mm */,
-				E4B3D17C11F823E000B57223 /* MainViewController.h */,
-				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
-				E48503FA1214BB3600D2271F /* TouchView.h */,
-				E48503FB1214BB3600D2271F /* TouchView.mm */,
-				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
-				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
-				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
-				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
-				E4DF708011FEA13300EBD904 /* PlayerMenu.h */,
-				E4DF708111FEA13300EBD904 /* PlayerMenu.mm */,
-				E4DF714611FEB55A00EBD904 /* SetsTable.h */,
-				E4C8B40A1217E7E500C34620 /* SetsTable.mm */,
-				E4DF707D11FEA10C00EBD904 /* SetCell.h */,
-				E4DF707E11FEA10C00EBD904 /* SetCell.m */,
-				E4D4A1C811FD71D500C92628 /* CustomFontLabel.h */,
-				E4D4A1C911FD71D500C92628 /* CustomFontLabel.m */,
-				E4DE508B1200237B00BF31AF /* HelpViewController.h */,
-				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
-				E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */,
-				E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */,
-				E47BC951122A8E5A00B6149A /* CustomImageView.h */,
-				E47BC952122A8E5A00B6149A /* CustomImageView.m */,
-				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
-				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
-			);
-			name = ViewControllers;
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1004,15 +958,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				E4C44C2012436581007ACEBC /* YouTube */,
-				E444721012143D2F0058D07B /* src */,
-				E444725212143D810058D07B /* addons */,
 				E4D1EB3712113350004D4E25 /* Classes */,
-				080E96DDFE201D6D7F000001 /* ViewControllers */,
+				E444721012143D2F0058D07B /* src */,
+				E4BAF28E125F199600AE1ED0 /* CovertToVideo */,
+				E4C44C2012436581007ACEBC /* YouTube */,
 				E4998B711220317E006EC3BA /* AVPlayer */,
 				E44471C2121438540058D07B /* ZipArchive */,
 				E490A1A21206C536008512EA /* Model */,
-				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E4B3D2C211F83D4100B57223 /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -1273,6 +1225,7 @@
 				E444722912143D300058D07B /* PlayerController.h */,
 				E444722812143D300058D07B /* PlayerController.cpp */,
 				E444721112143D300058D07B /* Constants.h */,
+				E444725212143D810058D07B /* addons */,
 				E444728412143E130058D07B /* myOF */,
 				E444728312143DD60058D07B /* video */,
 			);
@@ -1290,6 +1243,7 @@
 				E444726712143DAA0058D07B /* ofxRKUtilities */,
 			);
 			name = addons;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		E444725312143DAA0058D07B /* ofxFramesDriver */ = {
@@ -1417,10 +1371,8 @@
 				E444722312143D300058D07B /* ofxRKSequence.h */,
 				E444722412143D300058D07B /* ofxRKTexture.h */,
 				E444722512143D300058D07B /* ofxRKTexture.mm */,
-				E444722012143D300058D07B /* ofxRKPVRTexture.h */,
-				E444722112143D300058D07B /* ofxRKPVRTexture.mm */,
-				E444722C12143D300058D07B /* RKPVRTexture.h */,
-				E444722D12143D300058D07B /* RKPVRTexture.m */,
+				E49A3C8D1261016000879E26 /* PVRTexture.m */,
+				E49A3C8E1261016000879E26 /* PVRTexture.h */,
 			);
 			name = video;
 			sourceTree = "<group>";
@@ -1428,12 +1380,10 @@
 		E444728412143E130058D07B /* myOF */ = {
 			isa = PBXGroup;
 			children = (
-				E444721A12143D300058D07B /* ofSoundStream.h */,
-				E444721B12143D300058D07B /* ofxiPhoneSoundStream.mm */,
+				E49A3D021261158700879E26 /* ofxiPhoneSoundStream.mm */,
+				E49A3D031261158700879E26 /* ofSoundStream.h */,
 				E444721812143D300058D07B /* ofMain.h */,
 				E444721912143D300058D07B /* ofMain.mm */,
-				E444722612143D300058D07B /* ofxRKThread.h */,
-				E444722712143D300058D07B /* ofxRKThread.mm */,
 			);
 			name = myOF;
 			sourceTree = "<group>";
@@ -1806,8 +1756,8 @@
 		E490A1A21206C536008512EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E480B6C41212152400096300 /* Song.h */,
-				E480B6C51212152400096300 /* Song.m */,
+				E4BAF0F8125EFE5000AE1ED0 /* Song.m */,
+				E4BAF0F9125EFE5000AE1ED0 /* Song.h */,
 				E480B6C61212152400096300 /* Set.h */,
 				E480B6C71212152400096300 /* Set.m */,
 				E480B6C81212152400096300 /* VideoSet.h */,
@@ -1833,9 +1783,115 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E4BAF2C5125F241C00AE1ED0 /* temp.wav */,
+				E4BC39EB125DA96800B492E4 /* xib */,
+				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E48111351214460D008ABBCC /* precache */,
 				E444720112143ABC0058D07B /* Milgrom-Info.plist */,
 				E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */,
+				E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E4BAF28E125F199600AE1ED0 /* CovertToVideo */ = {
+			isa = PBXGroup;
+			children = (
+				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
+				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
+			);
+			name = CovertToVideo;
+			sourceTree = "<group>";
+		};
+		E4BC39D5125DA87300B492E4 /* Band */ = {
+			isa = PBXGroup;
+			children = (
+				E4D4A20A11FD8F4500C92628 /* BandMenu.h */,
+				E4D4A20B11FD8F4500C92628 /* BandMenu.mm */,
+				E4D4A1D311FD79EE00C92628 /* SongsTable.h */,
+				E4D4A1D411FD79EE00C92628 /* SongsTable.mm */,
+				E4D4A27411FDA23700C92628 /* SongCell.h */,
+				E4D4A27511FDA23700C92628 /* SongCell.mm */,
+			);
+			name = Band;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E4BC39D6125DA88200B492E4 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				E4DF708011FEA13300EBD904 /* PlayerMenu.h */,
+				E4DF708111FEA13300EBD904 /* PlayerMenu.mm */,
+				E4DF714611FEB55A00EBD904 /* SetsTable.h */,
+				E4C8B40A1217E7E500C34620 /* SetsTable.mm */,
+				E4DF707D11FEA10C00EBD904 /* SetCell.h */,
+				E4DF707E11FEA10C00EBD904 /* SetCell.m */,
+			);
+			name = Player;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E4BC39D7125DA8AB00B492E4 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
+				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
+				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
+				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
+			);
+			name = Share;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E4BC39D8125DA8CA00B492E4 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				E4D4A1C811FD71D500C92628 /* CustomFontLabel.h */,
+				E4D4A1C911FD71D500C92628 /* CustomFontLabel.m */,
+				E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */,
+				E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */,
+				E47BC951122A8E5A00B6149A /* CustomImageView.h */,
+				E47BC952122A8E5A00B6149A /* CustomImageView.m */,
+			);
+			name = Custom;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E4BC39D9125DA8DD00B492E4 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E498DDF7121069EB001CB593 /* MilgromViewController.h */,
+				E498DDF8121069EB001CB593 /* MilgromViewController.mm */,
+				E498DDF5121069EB001CB593 /* EAGLView.h */,
+				E498DDF6121069EB001CB593 /* EAGLView.mm */,
+				E4B3D17C11F823E000B57223 /* MainViewController.h */,
+				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
+				E48503FA1214BB3600D2271F /* TouchView.h */,
+				E48503FB1214BB3600D2271F /* TouchView.mm */,
+			);
+			name = Main;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E4BC39DA125DA91000B492E4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
+				E44D9D221223D1C400477CE0 /* DemoLoader.h */,
+				E44D9D231223D1C400477CE0 /* DemoLoader.mm */,
+				E4D1EB4D12113431004D4E25 /* AssetLoader.h */,
+				E4D1EB4E12113431004D4E25 /* AssetLoader.mm */,
+				E4D1EB50121134E1004D4E25 /* URLCacheConnection.h */,
+				E4D1EB3D121133F3004D4E25 /* URLCacheConnection.mm */,
+				E4D1EB3B121133F3004D4E25 /* URLCacheAlert.h */,
+				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		E4BC39EB125DA96800B492E4 /* xib */ = {
+			isa = PBXGroup;
+			children = (
 				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
 				E493D3D7122DB16700163EF9 /* MilgromViewController.xib */,
 				E4D4A20F11FD8F7100C92628 /* BandMenu.xib */,
@@ -1849,9 +1905,8 @@
 				E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */,
 				E4DF714C11FEB58400EBD904 /* SetsTable.xib */,
 				E4DF708511FEA1CF00EBD904 /* SetCell.xib */,
-				E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */,
 			);
-			name = Resources;
+			name = xib;
 			sourceTree = "<group>";
 		};
 		E4C44C2012436581007ACEBC /* YouTube */ = {
@@ -1868,19 +1923,18 @@
 		E4D1EB3712113350004D4E25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
-				E44D9D221223D1C400477CE0 /* DemoLoader.h */,
-				E44D9D231223D1C400477CE0 /* DemoLoader.mm */,
-				E4D1EB4D12113431004D4E25 /* AssetLoader.h */,
-				E4D1EB4E12113431004D4E25 /* AssetLoader.mm */,
-				E4D1EB50121134E1004D4E25 /* URLCacheConnection.h */,
-				E4D1EB3D121133F3004D4E25 /* URLCacheConnection.mm */,
-				E4D1EB3B121133F3004D4E25 /* URLCacheAlert.h */,
-				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
-				E4749CAF121D796500886A6E /* OpenGLTOMovie.h */,
-				E4749CB0121D796500886A6E /* OpenGLTOMovie.m */,
+				E4BC39D9125DA8DD00B492E4 /* Main */,
+				E4BC39D8125DA8CA00B492E4 /* Custom */,
+				E4BC39D7125DA8AB00B492E4 /* Share */,
+				E4BC39D6125DA88200B492E4 /* Player */,
+				E4BC39D5125DA87300B492E4 /* Band */,
+				E4BC39DA125DA91000B492E4 /* Utils */,
+				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
+				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
+				E4DE508B1200237B00BF31AF /* HelpViewController.h */,
+				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2184,6 +2238,7 @@
 				E43BE95D125C968F009C8845 /* MAIN_HELP.png in Resources */,
 				E43BE95E125C968F009C8845 /* MORE_HELP.png in Resources */,
 				E43BE95F125C968F009C8845 /* SOLO_HELP.png in Resources */,
+				E4BAF2C6125F241C00AE1ED0 /* temp.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2209,7 +2264,6 @@
 				E4D1EB3F121133F3004D4E25 /* URLCacheAlert.mm in Sources */,
 				E4D1EB40121133F3004D4E25 /* URLCacheConnection.mm in Sources */,
 				E4D1EB4F12113431004D4E25 /* AssetLoader.mm in Sources */,
-				E480B6CC1212152400096300 /* Song.m in Sources */,
 				E480B6CD1212152400096300 /* Set.m in Sources */,
 				E480B6CE1212152400096300 /* VideoSet.m in Sources */,
 				E480B6CF1212152400096300 /* SoundSet.m in Sources */,
@@ -2221,14 +2275,10 @@
 				E44471DB121438CD0058D07B /* main.m in Sources */,
 				E444723412143D300058D07B /* FramesDrivenPlayer.cpp in Sources */,
 				E444723812143D300058D07B /* ofMain.mm in Sources */,
-				E444723912143D300058D07B /* ofxiPhoneSoundStream.mm in Sources */,
 				E444723A12143D300058D07B /* ofxRKActor.cpp in Sources */,
-				E444723C12143D300058D07B /* ofxRKPVRTexture.mm in Sources */,
 				E444723D12143D300058D07B /* ofxRKSequence.cpp in Sources */,
 				E444723E12143D300058D07B /* ofxRKTexture.mm in Sources */,
-				E444723F12143D300058D07B /* ofxRKThread.mm in Sources */,
 				E444724012143D300058D07B /* PlayerController.cpp in Sources */,
-				E444724212143D300058D07B /* RKPVRTexture.m in Sources */,
 				E444724312143D300058D07B /* SimplePlayer.cpp in Sources */,
 				E444724512143D300058D07B /* testApp.cpp in Sources */,
 				E444726B12143DAA0058D07B /* ofxFramesDriver.cpp in Sources */,
@@ -2247,7 +2297,6 @@
 				E48503FC1214BB3600D2271F /* TouchView.mm in Sources */,
 				E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */,
 				E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */,
-				E4749CB1121D796500886A6E /* OpenGLTOMovie.m in Sources */,
 				E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */,
 				E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */,
 				E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */,
@@ -2372,6 +2421,10 @@
 				E48A87321259A87B004490CE /* GDataServiceGoogleYouTube.m in Sources */,
 				E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */,
 				E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */,
+				E4BAF0FA125EFE5000AE1ED0 /* Song.m in Sources */,
+				E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */,
+				E49A3C8F1261016000879E26 /* PVRTexture.m in Sources */,
+				E49A3D041261158700879E26 /* ofxiPhoneSoundStream.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

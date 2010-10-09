@@ -9,7 +9,6 @@
 
 #include "ofxXmlSettings.h"
 //#include "ofxOsc.h"
-#include "ofxRKThread.h"
 #include "ofxRKTexture.h"
 #include "ofxSndFile.h"
 
@@ -88,8 +87,10 @@ public:
 	
 	void playRandomLoop();
 	
+	void soundStreamSetup();
 	void soundStreamStart();
 	void soundStreamStop();
+	void soundStreamClose();
 	
 	float getProgress();
 	float getPlayhead();

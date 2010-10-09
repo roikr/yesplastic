@@ -36,7 +36,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 @synthesize videoTitle;
 @synthesize description;
 @synthesize mUploadProgressIndicator;
-
+@synthesize videoName;
+@synthesize path;
 
 
 /*
@@ -61,7 +62,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 - (void)viewDidLoad {
     [super viewDidLoad];
 	username.text = @"roikr75";
-	videoTitle.text = @"test";
+	password.text = @"kremer220175";
+	videoTitle.text = videoName;
 }
 
 
@@ -92,7 +94,17 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
     [super dealloc];
 }
 
+- (void) configureWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath {
+	self.videoName = theVideoName;
+	self.path = thePath;
+}
+
 - (void) upload:(id)sender {
+
+	
+	// load the file data
+	
+	
 	[self uploadVideoFile];
 }
 
@@ -160,20 +172,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	
 	
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	if (!documentsDirectory) {
-		//MilgromLog(@"Documents directory not found!");
-		return;
-	}
-	
-	
-	
-	// load the file data
-	//NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"];
-	NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
 	
 	NSData *data = [NSData dataWithContentsOfFile:path];
 	NSString *filename = [path lastPathComponent];

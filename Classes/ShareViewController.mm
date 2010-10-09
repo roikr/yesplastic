@@ -18,9 +18,9 @@
 #import "CustomFontLabel.h"
 
 @interface ShareViewController ()
-- (void) export;	
-- (void)exportDidFinish;
-- (void)updateExportProgress:(AVAssetExportSession *)theSession;
+//- (void) export;	
+//- (void)exportDidFinish;
+//- (void)updateExportProgress:(AVAssetExportSession *)theSession;
 @end
 
 @implementation ShareViewController
@@ -114,7 +114,8 @@
 	
 	[milgromViewController stopAnimation];
 	OFSAptr->soundStreamStop();
-
+	//OFSAptr->soundStreamClose();
+	
 	dispatch_queue_t myCustomQueue;
 	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
 	
@@ -125,11 +126,10 @@
 		
 		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.mov"];
+		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
 		
-		
-		
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] WithSize:CGSizeMake(480, 320) 
+//		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]] WithSize:CGSizeMake(480, 320) 
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
 		 
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
@@ -140,12 +140,22 @@
 						 }
 		 
 						 withDidFinish:^(int frameNum) {
-							 return (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
+							
+							 int res = (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
+							  NSLog(@"writing video, frame: %i, finished: %i",frameNum,res);
+							 return res;
 						 }
 		 
 				 withCompletionHandler:^ {
 					 NSLog(@"write completed");
-					 [self export];
+					 //[self export];
+					 OFSAptr->setSongState(SONG_IDLE);
+					 OFSAptr->soundStreamStart();
+					 [milgromViewController startAnimation];
+					 
+					 
+					 
+					 
 					 
 				 }];
 	});
@@ -156,6 +166,7 @@
 	
 }
 
+/*
 - (void) export {
 	
 	self.progress = [NSNumber numberWithFloat:0.0f];
@@ -224,7 +235,7 @@
 	NSLog(@"exportDidFinish");
 	
 }
-
+*/
 - (void)action {
 	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
 	//sheet.title = @"Illustrations";
@@ -351,12 +362,13 @@
 				
 			} else {
 				
+				[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
 			}
 			break;
 		}
 		case 2:
 		{
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
+			
 			break;
 		}
 		case 3:
