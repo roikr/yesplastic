@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="51"/>
+			<integer value="54"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -102,33 +102,10 @@
 								<reference key="IBUINormalTitleColor" ref="438986558"/>
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 							</object>
-							<object class="IBUIButton" id="561080161">
-								<reference key="NSNextResponder" ref="863361826"/>
-								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{70, 0}, {40, 40}}</string>
-								<reference key="NSSuperview" ref="863361826"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-									<integer value="257" key="IBUIAccessibilityTraits"/>
-								</object>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIFont" ref="806562837"/>
-								<reference key="IBUIHighlightedTitleColor" ref="438986558"/>
-								<reference key="IBUIDisabledTitleColor" ref="771441115"/>
-								<reference key="IBUINormalTitleColor" ref="438986558"/>
-								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
-								<object class="NSCustomResource" key="IBUINormalImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">INFO_B.png</string>
-								</object>
-							</object>
 							<object class="IBUIButton" id="741302335">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">-2147483359</int>
-								<string key="NSFrame">{{120, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{70, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -151,7 +128,7 @@
 							<object class="IBUIButton" id="388573076">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{170, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{120, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -168,6 +145,29 @@
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">SHARE_B.png</string>
+								</object>
+							</object>
+							<object class="IBUIButton" id="561080161">
+								<reference key="NSNextResponder" ref="863361826"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{170, 0}, {40, 40}}</string>
+								<reference key="NSSuperview" ref="863361826"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+									<integer value="257" key="IBUIAccessibilityTraits"/>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<reference key="IBUIFont" ref="806562837"/>
+								<reference key="IBUIHighlightedTitleColor" ref="438986558"/>
+								<reference key="IBUIDisabledTitleColor" ref="771441115"/>
+								<reference key="IBUINormalTitleColor" ref="438986558"/>
+								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">INFO_B.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="541363912">
@@ -959,7 +959,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUNaAAAAAAAAA</bytes>
+						<bytes key="NSTransformStruct">AUKMAAAAAAAAA</bytes>
 					</object>
 					<string>TouchView</string>
 					<string>{{196, 91}, {320, 480}}</string>

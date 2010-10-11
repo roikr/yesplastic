@@ -74,6 +74,7 @@ class testApp;
 - (void)saveSong:(NSString *)songName;
 - (void)pushSetMenu;
 - (void)pushMain;
+- (void)pushViewController:(UIViewController *)controller;
 - (void)pop;
 - (void)help;
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;

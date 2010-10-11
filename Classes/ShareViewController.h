@@ -7,34 +7,32 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 
 @class CustomImageView;
-@class AVAssetExportSession;
-@class ActionCell;
 
-@interface ShareViewController : UITableViewController<UINavigationControllerDelegate,UIActionSheetDelegate> {
-	ActionCell *tmpCell;
-	
+
+@interface ShareViewController : UIViewController <UINavigationControllerDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate> {
 	CustomImageView *progressView;
-	BOOL bRender;
+	BOOL bRendered;
 	BOOL bYouTubeUploaded;
 	BOOL bFaceBookUploaded;
 	
-	NSArray	*dataSourceArray;
+	NSInteger state;
+	UIView *renderingView;
 }
 
-@property (nonatomic,assign) IBOutlet ActionCell *tmpCell;
+
 
 @property (nonatomic,retain) NSNumber *progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
-@property BOOL bRender;
-@property (nonatomic, retain) NSArray *dataSourceArray;
 
+//@property (nonatomic, retain) NSArray *dataSourceArray;
+//@property (nonatomic,assign) IBOutlet ActionCell *tmpCell;
 
-- (void)done:(id)sender;
-- (void)play:(id)sender;
-- (void)youTube:(id)sender;
-- (void)render;
-- (void)action;
+@property (nonatomic, retain) IBOutlet UIView *renderingView;
+
+- (void)menu;
 
 @end

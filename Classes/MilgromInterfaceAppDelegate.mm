@@ -530,8 +530,8 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	//[self presentModalViewController:self.shareViewController animated:YES]; 
-	shareViewController.bRender = YES;
 	[milgromViewController.viewController pushViewController:shareViewController animated:YES];
+	
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	// not so
 	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
@@ -577,7 +577,9 @@ NSString * const kCacheFolder=@"URLCache";
 	[self presentModalViewController:mPlaybackViewController animated:NO];
 }
 
-
+- (void)pushViewController:(UIViewController *)controller {
+	[milgromViewController.viewController pushViewController:controller animated:YES];
+}
 
 - (void) pop {
 	[milgromViewController.viewController popViewControllerAnimated:YES];

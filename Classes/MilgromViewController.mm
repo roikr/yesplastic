@@ -18,7 +18,7 @@
 #import "HelpViewController.h"
 #import "Constants.h"
 #import "MilgromMacros.h"
-
+#import "ShareViewController.h"
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
@@ -74,8 +74,9 @@
 		return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 	} else if ([self.viewController.visibleViewController isKindOfClass:[HelpViewController self]]) {
 		return NO;
+	} else if ([self.viewController.visibleViewController isKindOfClass:[ShareViewController self]]) {
+		//return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 	}
-   
 	return YES;
 }
 
@@ -113,17 +114,23 @@
 {
     [self startAnimation];
     
-    [super viewWillAppear:animated];
+    //[super viewWillAppear:animated];
 	
 	MilgromLog(@"MilgromViewController::viewWillAppear");
 	[viewController viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	//[super viewDidAppear:animated];
+	MilgromLog(@"MilgromViewController::viewDidAppear");
+	[viewController viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self stopAnimation];
     
-    [super viewWillDisappear:animated];
+   // [super viewWillDisappear:animated];
 }
 
 - (void)viewDidUnload
@@ -255,11 +262,7 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	MilgromLog(@"MilgromViewController::viewDidAppear");
-	[viewController viewDidAppear:animated];
-}
+
 
 
 

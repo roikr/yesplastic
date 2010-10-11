@@ -61,8 +61,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	username.text = @"roikr75";
-	password.text = @"kremer220175";
+	username.text = @"kingyorts";
+	password.text = @"56565656";
 	videoTitle.text = videoName;
 }
 
@@ -191,7 +191,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 //	NSString *keywordsStr = nil;//[mKeywordsField stringValue];
 //	GDataMediaKeywords *keywords = [GDataMediaKeywords keywordsWithString:keywordsStr];
 	
-	BOOL isPrivate = YES;//([mPrivateCheckbox state] == NSOnState);
+	BOOL isPrivate = NO;//([mPrivateCheckbox state] == NSOnState);
 	
 	GDataYouTubeMediaGroup *mediaGroup = [GDataYouTubeMediaGroup mediaGroup];
 	[mediaGroup setMediaTitle:title];

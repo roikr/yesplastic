@@ -16,19 +16,34 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ActionCell.h"
 #import "CustomFontLabel.h"
+#import "MilgromMacros.h"
+
+enum {
+	ACTION_NONE,
+	ACTION_UPLOAD_TO_YOUTUBE,
+	ACTION_POST_ON_FACEBOOK,
+	ACTION_UPLOAD_TO_FACEBOOK,
+	ACTION_SEND_VIA_MAIL,
+	ACTION_DONE,
+	ACTION_RENDER,
+	ACTION_PLAY
+};
 
 @interface ShareViewController ()
 //- (void) export;	
 //- (void)exportDidFinish;
 //- (void)updateExportProgress:(AVAssetExportSession *)theSession;
+- (void)render;
+- (void)action;
+- (void)sendViaMail;
 @end
 
 @implementation ShareViewController
 
-@synthesize tmpCell;
-@synthesize dataSourceArray;
+
 @synthesize progressView;
-@synthesize bRender;
+@synthesize renderingView;
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -43,7 +58,9 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder: decoder]) {
-		bRender = NO;
+		bRendered = NO;
+		bFaceBookUploaded = NO;
+		bYouTubeUploaded = NO;
 	}
 	
 	return self;
@@ -56,25 +73,33 @@
 	self.progressView.image =  [UIImage imageNamed:@"CELL1_PROGRESS.png"];
 	self.navigationController.delegate = self;
 	
-	self.dataSourceArray = [NSArray arrayWithObjects: @"Email",@"YouTube",@"FaceBook",@"Play",@"Render",@"Done",nil];
+	//self.dataSourceArray = [NSArray arrayWithObjects: @"Email",@"YouTube",@"FaceBook",@"Play",@"Render",@"Done",nil];
 								
 	
 }
 
+/*
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-	if (bRender) {
-		bRender = NO;
-		
-		
-		bFaceBookUploaded = NO;
-		bYouTubeUploaded = NO;
-		//[self action];
-	}
+	MilgromLog(@"ShareViewController - navigationController didShowViewController");
+	
 }
+*/
+- (void)viewWillAppear:(BOOL)animated
+{
+	MilgromLog(@"ShareViewController::viewWillAppear");
+	
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	MilgromLog(@"ShareViewController::viewDidAppear");
+	[self menu];
+	
+}
+
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return YES;
+	return YES;//interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 }
 
 
@@ -87,14 +112,14 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.dataSourceArray = nil;	// this will release and set to nil
+	//self.dataSourceArray = nil;	// this will release and set to nil
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 
 - (void)dealloc {
-	[dataSourceArray release];
+	//[dataSourceArray release];
     [super dealloc];
 }
 
@@ -107,6 +132,7 @@
 }
 
 - (void)render {
+	renderingView.hidden = NO;
 	[self setProgress:[NSNumber numberWithFloat:0.0f]];
 	
 	MilgromViewController * milgromViewController = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).milgromViewController;
@@ -152,7 +178,9 @@
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
 					 [milgromViewController startAnimation];
-					 
+					 bRendered = YES;
+					 renderingView.hidden = YES;
+					 [self action];
 					 
 					 
 					 
@@ -236,27 +264,33 @@
 	
 }
 */
-- (void)action {
+- (void)menu {
 	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
+	
 	//sheet.title = @"Illustrations";
 	sheet.delegate = self;
-	[sheet addButtonWithTitle:@"Email"];
 	
-	if (bYouTubeUploaded) {
-		[sheet addButtonWithTitle:@"Email youtube feed"];
-	} else {
+	
+	if (!bYouTubeUploaded) {
 		[sheet addButtonWithTitle:@"Upload to YouTube"];
+		
+	} else {
+		[sheet addButtonWithTitle:@"Post on facebook"];
 	}
 	
-	if (bFaceBookUploaded) {
-		[sheet addButtonWithTitle:@"Email facebook feed"];
-	} else {
+	if (!bFaceBookUploaded) {
 		[sheet addButtonWithTitle:@"Upload to FaceBook"];
 	}
 	
-	[sheet addButtonWithTitle:@"Play"];
-	[sheet addButtonWithTitle:@"Render"];
+		
+	
+	[sheet addButtonWithTitle:@"Send via mail"];
+	
+	
+	
 	[sheet addButtonWithTitle:@"Done"];
+	[sheet addButtonWithTitle:@"Render"];
+	[sheet addButtonWithTitle:@"Play"];
 	
 	sheet.actionSheetStyle = UIActionSheetStyleDefault;
 	
@@ -265,131 +299,168 @@
 	
 }
 
+
 - (void)actionSheet:(UIActionSheet *)modalView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // Change the navigation bar style, also make the status bar match with it
-    switch (buttonIndex)
-    {
-        case 0:
-        {
-           
-            break;
-        }
-        case 1:
-        {
-            if (bYouTubeUploaded) {
-				
-			} else {
-				
-			}
-            break;
-        }
-        case 2:
-        {
-            [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
-            break;
-        }
-		case 3:
-        {
-            [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
-            break;
-        }
-		case 4:
-        {
-            [self render];
-            break;
-        }
-		case 5:
-        {
-            
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
-            break;
-        }
-			
-    }
-}
-
-
-- (void)done:(id)sender {
-	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
-}
-
-- (void)youTube:(id)sender {
-	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
-}
-
-- (void)play:(id)sender {
-	//[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
-}
-
-
-#pragma mark -
-#pragma mark - UITableView delegates
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-	return 1;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	return [self.dataSourceArray count];
-}
-
-
-
-// the table's selection has changed, show the alert or action sheet
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	// deselect the current row (don't keep the table selection persistent)
-	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+	if (bFaceBookUploaded && buttonIndex>0) { // no more facebook option
+		buttonIndex++;
+	}
 	
-	
-	switch (indexPath.row)
+	state = ACTION_NONE;
+		
+	switch (buttonIndex)
 	{
 		case 0:
-		{
-			
+			state = !bYouTubeUploaded ? ACTION_UPLOAD_TO_YOUTUBE : ACTION_POST_ON_FACEBOOK;
 			break;
-		}
 		case 1:
-		{
-			if (bYouTubeUploaded) {
-				
-			} else {
-				
-				[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
-			}
+			state = ACTION_UPLOAD_TO_FACEBOOK;
 			break;
-		}
+		
 		case 2:
-		{
-			
+			state = ACTION_SEND_VIA_MAIL;
 			break;
-		}
+			
 		case 3:
-		{
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+			state = ACTION_DONE;
 			break;
-		}
+		
 		case 4:
-		{
-			[self render];
+			bRendered = NO;
 			break;
-		}
+		
 		case 5:
-		{
-			
+			state = ACTION_PLAY;
+			break;
+		
+	}
+	
+	switch (state) {
+		case ACTION_DONE:
 			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
 			break;
-		}
+		
+		default:
+			if (!bRendered ) {
+				[self performSelector:@selector(render)];
+			} else {
+				[self performSelector:@selector(action)];
+			}
+
+			break;
 	}
+
 }
 
+
+- (NSString *)getVideoPath {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	if (!documentsDirectory) {
+		MilgromLog(@"Documents directory not found!");
+		return @"";
+	}
+	return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+}
+
+							
+- (void)action {
+	
+	switch (state)
+	{
+		case ACTION_UPLOAD_TO_YOUTUBE:
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
+			break;
+	
+		case ACTION_UPLOAD_TO_FACEBOOK:
+			[self menu];
+			break;
+		
+		case ACTION_SEND_VIA_MAIL:
+			[self sendViaMail];
+			break;
+	
+		case ACTION_PLAY:
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+			break;
+		default: 
+			[self menu];
+			break;
+	}	
+}
+
+
+- (void)sendViaMail {
+	
+	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+	if (mailClass != nil)
+	{
+		// We must always check whether the current device is configured for sending emails
+		if ([mailClass canSendMail])
+		{
+			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+			picker.mailComposeDelegate = self;
+			
+			[picker setSubject:@"Milgrom"];
+			
+			// Attach an video to the email
+			//NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"png"];
+			NSData *myData = [NSData dataWithContentsOfFile:[self getVideoPath]];
+			[picker addAttachmentData:myData mimeType:@"video/mov" fileName:@"milgrom.mov"];
+			
+			
+			
+			
+			//[picker setMessageBody:[self getMessage] isHTML:YES];
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] presentModalViewController:picker animated:YES];
+			//[self presentModalViewController:picker animated:YES];
+			[picker release];
+			
+			
+		}
+		
+	}
+	
+}
+
+
+
+
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
+{	
+	//appDelegate.toolbar.hidden = NO;
+	//message.hidden = NO;
+	// Notifies users about errors associated with the interface
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			//message.text = @"Result: canceled";
+			break;
+		case MFMailComposeResultSaved:
+			//message.text = @"Result: saved";
+			break;
+		case MFMailComposeResultSent: 
+			//message.text = @"Result: sent";
+			
+		 break;
+		case MFMailComposeResultFailed:
+			//message.text = @"Result: failed";
+			break;
+		default:
+			//message.text = @"Result: not sent";
+			break;
+	}
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
+	
+}
+
+
+
+/*
 // to determine which UITableViewCell to be used on a given row.
 //
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -411,7 +482,7 @@
 	
 	return cell;
 }
-
+*/
 
 
 

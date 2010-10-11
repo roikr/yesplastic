@@ -322,7 +322,6 @@
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
 		E4BAF0FA125EFE5000AE1ED0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF0F8125EFE5000AE1ED0 /* Song.m */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
-		E4BAF2C6125F241C00AE1ED0 /* temp.wav in Resources */ = {isa = PBXBuildFile; fileRef = E4BAF2C5125F241C00AE1ED0 /* temp.wav */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -339,6 +338,7 @@
 		E4D4A21011FD8F7100C92628 /* BandMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4D4A20F11FD8F7100C92628 /* BandMenu.xib */; };
 		E4D4A27611FDA23700C92628 /* SongCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D4A27511FDA23700C92628 /* SongCell.mm */; };
 		E4D4FFF71201FBDF00F8B7B2 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */; };
+		E4D82B2A1262EF3400768E33 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4D82B291262EF3400768E33 /* MessageUI.framework */; };
 		E4DE4FB611FFFCAB00BF31AF /* CELL1.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DE4F6311FFFCAB00BF31AF /* CELL1.png */; };
 		E4DE4FB811FFFCAB00BF31AF /* CELL1_SELECT.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DE4F6511FFFCAB00BF31AF /* CELL1_SELECT.png */; };
 		E4DE4FB911FFFCAB00BF31AF /* CELL2.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DE4F6611FFFCAB00BF31AF /* CELL2.png */; };
@@ -862,7 +862,6 @@
 		E4BAF0F9125EFE5000AE1ED0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
 		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
-		E4BAF2C5125F241C00AE1ED0 /* temp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = temp.wav; path = ConvertToVideo/temp.wav; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -888,6 +887,7 @@
 		E4D4A27411FDA23700C92628 /* SongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongCell.h; sourceTree = "<group>"; };
 		E4D4A27511FDA23700C92628 /* SongCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SongCell.mm; sourceTree = "<group>"; };
 		E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Resource/HelpViewController.xib; sourceTree = "<group>"; };
+		E4D82B291262EF3400768E33 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E4DE4F6311FFFCAB00BF31AF /* CELL1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL1.png; sourceTree = "<group>"; };
 		E4DE4F6511FFFCAB00BF31AF /* CELL1_SELECT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL1_SELECT.png; sourceTree = "<group>"; };
 		E4DE4F6611FFFCAB00BF31AF /* CELL2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL2.png; sourceTree = "<group>"; };
@@ -941,6 +941,7 @@
 				E4C44D971243661A007ACEBC /* Security.framework in Frameworks */,
 				E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */,
 				E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */,
+				E4D82B2A1262EF3400768E33 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +972,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				E4C44D961243661A007ACEBC /* Security.framework */,
 				E4C44D981243661E007ACEBC /* SystemConfiguration.framework */,
+				E4D82B291262EF3400768E33 /* MessageUI.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1783,7 +1785,6 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E4BAF2C5125F241C00AE1ED0 /* temp.wav */,
 				E4BC39EB125DA96800B492E4 /* xib */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E48111351214460D008ABBCC /* precache */,
@@ -2238,7 +2239,6 @@
 				E43BE95D125C968F009C8845 /* MAIN_HELP.png in Resources */,
 				E43BE95E125C968F009C8845 /* MORE_HELP.png in Resources */,
 				E43BE95F125C968F009C8845 /* SOLO_HELP.png in Resources */,
-				E4BAF2C6125F241C00AE1ED0 /* temp.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
