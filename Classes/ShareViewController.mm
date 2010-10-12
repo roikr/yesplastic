@@ -18,6 +18,7 @@
 #import "CustomFontLabel.h"
 #import "MilgromMacros.h"
 
+
 enum {
 	ACTION_NONE,
 	ACTION_UPLOAD_TO_YOUTUBE,
@@ -43,6 +44,7 @@ enum {
 
 @synthesize progressView;
 @synthesize renderingView;
+@synthesize facebookController;
 
 
 /*
@@ -120,6 +122,7 @@ enum {
 
 - (void)dealloc {
 	//[dataSourceArray release];
+	[facebookController release];
     [super dealloc];
 }
 
@@ -376,7 +379,12 @@ enum {
 			break;
 	
 		case ACTION_UPLOAD_TO_FACEBOOK:
-			[self menu];
+			if (self.facebookController == nil) {
+				self.facebookController = [[FacebookUploadController alloc] initWithDelegate:self];
+			}
+			
+			[facebookController publish];
+			
 			break;
 		
 		case ACTION_SEND_VIA_MAIL:
@@ -458,7 +466,13 @@ enum {
 	
 }
 
+- (void) facebookControllerDidFail:(FacebookUploadController *)theController {
+	[self menu];
+}
 
+- (void) facebookControllerDidFinish:(FacebookUploadController *)theController {
+	[self menu];
+}
 
 /*
 // to determine which UITableViewCell to be used on a given row.

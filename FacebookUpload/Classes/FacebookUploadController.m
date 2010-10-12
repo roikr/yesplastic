@@ -17,6 +17,11 @@ static NSString* kAppId = @"142588289117470";
 static NSString* kApiKey = @"e06968ce5ad567d5685a8ebabfd63619";
 static NSString* kAppSecret = @"05e64b714292c6405e111357e7110078";
 
+enum  {
+	FACEBOOK_NONE,
+	FACEBOOK_PUBLISH_LINK,
+	FACEBOOK_UPLOAD_VIDEO
+};
 
 @interface FacebookUploadController (PrivateMethods) 
 - (void) login;
@@ -25,12 +30,15 @@ static NSString* kAppSecret = @"05e64b714292c6405e111357e7110078";
 
 @implementation FacebookUploadController
 
-- (id)init {
+@synthesize delegate;
+
+- (id)initWithDelegate:(id<FacebookControllerDelegate>)theDelegate {
+	
 	if (self = [super init]) {
-		
+		self.delegate = theDelegate;
 		_permissions =  [[NSArray arrayWithObjects: @"read_stream", @"offline_access",@"publish_stream",nil] retain];
 		_facebook = [[Facebook alloc] init];
-		[self login];
+		
 	}
 	return self;
 }
@@ -68,6 +76,18 @@ static NSString* kAppSecret = @"05e64b714292c6405e111357e7110078";
 			result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7],
 			result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]
 			];
+	
+}
+
+-(void)publish {
+	if (![_facebook isSessionValid]) {
+		state = FACEBOOK_PUBLISH_LINK;
+		[self login];
+	} else {
+		NSLog(@"published");
+		[delegate facebookControllerDidFinish:self];
+	}
+
 	
 }
 
@@ -139,7 +159,14 @@ static NSString* kAppSecret = @"05e64b714292c6405e111357e7110078";
  */ 
 -(void) fbDidLogin {
 	NSLog(@"logged in");
-	[self uploadVideo];
+	
+	switch (state) {
+		case FACEBOOK_PUBLISH_LINK:
+			[self publish];
+			break;
+		default:
+			break;
+	}
 }
 
 /**
@@ -147,6 +174,7 @@ static NSString* kAppSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)fbDidNotLogin:(BOOL)cancelled {
 	NSLog(@"did not login");
+	[delegate facebookControllerDidFail:self];
 }
 
 /**

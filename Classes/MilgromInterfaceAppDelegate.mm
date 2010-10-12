@@ -732,10 +732,11 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)addDemos {
-	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] bpm:126 download:NO ];
-	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] bpm:136 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] bpm:160 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
+//	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] bpm:126 download:NO ];
+//	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
+//	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] bpm:136 download:NO];
+//	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] bpm:160 download:NO];
 	
 	[self saveContext];
 	

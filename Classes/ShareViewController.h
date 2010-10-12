@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
-
+#import "FacebookUploadController.h"
 
 @class CustomImageView;
 
 
-@interface ShareViewController : UIViewController <UINavigationControllerDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate> {
+
+@interface ShareViewController : UIViewController <UINavigationControllerDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate,FacebookControllerDelegate> {
 	CustomImageView *progressView;
 	BOOL bRendered;
 	BOOL bYouTubeUploaded;
@@ -21,6 +22,8 @@
 	
 	NSInteger state;
 	UIView *renderingView;
+	
+	FacebookUploadController *facebookController;
 }
 
 
@@ -32,6 +35,8 @@
 //@property (nonatomic,assign) IBOutlet ActionCell *tmpCell;
 
 @property (nonatomic, retain) IBOutlet UIView *renderingView;
+
+@property (nonatomic, retain) FacebookUploadController *facebookController;
 
 - (void)menu;
 
