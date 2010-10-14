@@ -102,7 +102,7 @@ void testApp::setup(){
 	
 //	bButtonDown = false;
 	bNeedDisplay = false;
-	bTempDoc = false;
+	
 	
 	//startThread();
 	
@@ -332,8 +332,9 @@ bool testApp::isInTransition() {
 }
 
 void testApp::loadSong(string songName,bool bDemo) {
-	this->bDemo = bDemo;
-	bTempDoc = false;
+
+	bIsSongOverwritten = false;
+	bIsSongValid = true;
 	
 	printf("testApp::loadSong: %s\n",songName.c_str());
 		
@@ -369,8 +370,8 @@ void testApp::loadSong(string songName,bool bDemo) {
 void testApp::changeSoundSet(string nextSoundSet) {
 	this->nextSoundSet = nextSoundSet;
 	bChangeSet = true;
-	bDemo = false;
-	bTempDoc = true;
+	bIsSongValid = false;
+	
 }
 
 string testApp::getCurrentSoundSetName(int playerNum) {
@@ -1002,8 +1003,8 @@ void testApp::setSongState(int songState) {
 	}
 	
 	if (songState==SONG_RECORD) {
-		bTempDoc = true;
-		bDemo = false;
+		bIsSongOverwritten = true;
+		bIsSongValid = true;
 	}
 	bNeedDisplay = true;
 	
@@ -1073,7 +1074,7 @@ void testApp::saveSong(string songName) {
 	
 	printf("testApp::saveSong: %s\n",songName.c_str());
 
-	bTempDoc = false;
+	bIsSongOverwritten = false;
 	ofxXmlSettings songXml;
 	ofDisableDataPath();
 	
@@ -1092,6 +1093,17 @@ void testApp::saveSong(string songName) {
 	
 	
 }
+
+bool testApp::isSongValid() {
+	return bIsSongValid;
+}
+
+
+bool testApp::isSongOverwritten() {
+	return bIsSongOverwritten;
+}
+
+
 	
 void testApp::soundStreamSetup() {
 	

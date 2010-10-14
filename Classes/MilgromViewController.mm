@@ -112,16 +112,18 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self startAnimation];
-    
-    //[super viewWillAppear:animated];
-	
+    [super viewWillAppear:animated]; // TODO: was deleted before, any bug ?
 	MilgromLog(@"MilgromViewController::viewWillAppear");
+	[self startAnimation];
+    
+    
+	
+	
 	[viewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	//[super viewDidAppear:animated];
+	[super viewDidAppear:animated];
 	MilgromLog(@"MilgromViewController::viewDidAppear");
 	[viewController viewDidAppear:animated];
 }

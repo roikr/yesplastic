@@ -21,7 +21,6 @@
 @synthesize background;
 @synthesize volumeSlider;
 @synthesize bpmSlider;
-@synthesize currentSetChanged;
 @synthesize playerName;
 
 
@@ -77,7 +76,7 @@
 	}
 	
 	[self.setsView addSubview:setsTable.view];
-	currentSetChanged = YES;
+	
 }
 
 - (void) loadData {
@@ -109,19 +108,18 @@
 	[super viewDidAppear:animated];
 	//[setsTable viewDidAppear:animated];
 	MilgromLog(@"PlayerMenu::viewDidAppear");
-	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
-	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 80.0)/80.0;
-	if (currentSetChanged) {
-		currentSetChanged = NO;
-		[self.setsTable selectCurrentSet];
-	}
-   
+	   
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	//[setsTable viewWillAppear:animated];
 	MilgromLog(@"PlayerMenu::viewWillAppear");
+	[setsTable viewWillAppear:animated];
+	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
+	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 80.0)/80.0;
+	
+	
+	
 }
 
 

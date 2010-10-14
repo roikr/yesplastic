@@ -19,8 +19,6 @@
 	
 	UISlider *volumeSlider;
 	UISlider *bpmSlider;
-	
-	BOOL currentSetChanged;
 	NSString * playerName;
 	
 }
@@ -32,7 +30,6 @@
 
 @property (nonatomic,retain ) IBOutlet UISlider *volumeSlider;
 @property (nonatomic,retain) IBOutlet UISlider *bpmSlider;
-@property BOOL currentSetChanged;
 @property (nonatomic,retain) NSString *playerName;
 
 - (void)exit:(id)sender;

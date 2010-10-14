@@ -11,18 +11,21 @@
 #import "FacebookUploadController.h"
 
 @class CustomImageView;
-
+@class YouTubeUploadViewController;
 
 
 @interface ShareViewController : UIViewController <UINavigationControllerDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate,FacebookControllerDelegate> {
 	CustomImageView *progressView;
-	BOOL bRendered;
-	BOOL bYouTubeUploaded;
-	BOOL bFaceBookUploaded;
+	
+	BOOL _didUploadToYouTube;
+	BOOL _didUploadToFacebook;
+	BOOL _hasBeenRendered;
+	BOOL isTemporary;
 	
 	NSInteger state;
 	UIView *renderingView;
 	
+	YouTubeUploadViewController *youTubeViewController;
 	FacebookUploadController *facebookController;
 }
 
@@ -36,8 +39,15 @@
 
 @property (nonatomic, retain) IBOutlet UIView *renderingView;
 
+@property (nonatomic,retain ) YouTubeUploadViewController *youTubeViewController;
 @property (nonatomic, retain) FacebookUploadController *facebookController;
 
+@property (readonly) BOOL didUploadToYouTube;
+@property (readonly) BOOL didUploadToFacebook;
+@property (readonly) BOOL hasBeenRendered;
+
+
+- (void)prepare;
 - (void)menu;
 
 @end

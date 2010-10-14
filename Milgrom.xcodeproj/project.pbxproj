@@ -861,8 +861,8 @@
 		E49A3D031261158700879E26 /* ofSoundStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofSoundStream.h; sourceTree = "<group>"; };
 		E49BD07E125A7AB1005A0FAC /* ActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionCell.h; sourceTree = "<group>"; };
 		E49BD07F125A7AB1005A0FAC /* ActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionCell.m; sourceTree = "<group>"; };
-		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveViewController.h; path = Classes/SaveViewController.h; sourceTree = "<group>"; };
-		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SaveViewController.mm; path = Classes/SaveViewController.mm; sourceTree = "<group>"; };
+		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
+		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
 		E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareViewController.mm; sourceTree = "<group>"; };
@@ -1919,18 +1919,6 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		E4BC39D7125DA8AB00B492E4 /* Share */ = {
-			isa = PBXGroup;
-			children = (
-				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
-				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
-				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
-				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
-			);
-			name = Share;
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		E4BC39D8125DA8CA00B492E4 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -1956,6 +1944,12 @@
 				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
+				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
+				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
+				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
+				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
+				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
+				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
 			);
 			name = Main;
 			path = Classes;
@@ -1964,6 +1958,8 @@
 		E4BC39DA125DA91000B492E4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E4DE508B1200237B00BF31AF /* HelpViewController.h */,
+				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
 				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				E44D9D221223D1C400477CE0 /* DemoLoader.h */,
 				E44D9D231223D1C400477CE0 /* DemoLoader.mm */,
@@ -2014,15 +2010,10 @@
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
 				E4BC39D9125DA8DD00B492E4 /* Main */,
-				E4BC39D8125DA8CA00B492E4 /* Custom */,
-				E4BC39D7125DA8AB00B492E4 /* Share */,
-				E4BC39D6125DA88200B492E4 /* Player */,
 				E4BC39D5125DA87300B492E4 /* Band */,
+				E4BC39D6125DA88200B492E4 /* Player */,
 				E4BC39DA125DA91000B492E4 /* Utils */,
-				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
-				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
-				E4DE508B1200237B00BF31AF /* HelpViewController.h */,
-				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
+				E4BC39D8125DA8CA00B492E4 /* Custom */,
 			);
 			name = Classes;
 			sourceTree = "<group>";

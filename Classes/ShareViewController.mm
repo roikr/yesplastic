@@ -6,18 +6,20 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "ShareViewController.h"
-#import "CustomImageView.h"
+#import "MilgromInterfaceAppDelegate.h"
+#import "MilgromViewController.h"
 #import "OpenGLTOMovie.h"
 #import "testApp.h"
 #import "Constants.h"
-#import "MilgromInterfaceAppDelegate.h"
-#import "MilgromViewController.h"
-#import <AVFoundation/AVFoundation.h>
-#import "ActionCell.h"
-#import "CustomFontLabel.h"
-#import "MilgromMacros.h"
+#import "YouTubeUploadViewController.h"
 
+//#import "ActionCell.h"
+//#import "CustomFontLabel.h"
+#import "CustomImageView.h"
+#import "MilgromMacros.h"
+#import "Song.h"
 
 enum {
 	ACTION_NONE,
@@ -45,6 +47,7 @@ enum {
 @synthesize progressView;
 @synthesize renderingView;
 @synthesize facebookController;
+@synthesize youTubeViewController;
 
 
 /*
@@ -57,16 +60,87 @@ enum {
 }
 */
 
+/*
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder: decoder]) {
-		bRendered = NO;
-		bFaceBookUploaded = NO;
-		bYouTubeUploaded = NO;
+		
+		
 	}
 	
 	return self;
 }
+ */
+
+- (void)prepare {
+	
+	isTemporary =  [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] isSongTemporary];
+
+	if (isTemporary) {
+		_didUploadToYouTube = NO;
+		_didUploadToFacebook = NO;
+		_hasBeenRendered = NO;
+		
+	}
+}
+
+- (BOOL)hasBeenRendered {
+	if (isTemporary) {
+		return _hasBeenRendered;
+	} else {
+		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+		return [song.bExported boolValue];
+	}
+
+}
+
+- (BOOL)didUploadToYouTube {
+	if (isTemporary) {
+		return _didUploadToYouTube;
+	} else {
+		//Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+		return NO;
+	}
+}
+
+- (BOOL)didUploadToFacebook {
+	if (isTemporary) {
+		return _didUploadToFacebook;
+	} else {
+		//Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+		return NO;
+	}
+}
+
+		
+
+
+
+- (NSString *)getVideoName {
+	if (isTemporary) {
+		return @"milgrom";
+	} else {
+		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+		return [song songName];
+	}
+}
+
+- (NSString *)getVideoPath {
+	
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	if (!documentsDirectory) {
+		MilgromLog(@"Documents directory not found!");
+		return @"";
+	}
+	
+	return [[[paths objectAtIndex:0] stringByAppendingPathComponent:[self getVideoName]] stringByAppendingPathExtension:@".mov"];
+}
+
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -88,11 +162,13 @@ enum {
 */
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated]; 
 	MilgromLog(@"ShareViewController::viewWillAppear");
 	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated]; 
 	MilgromLog(@"ShareViewController::viewDidAppear");
 	[self menu];
 	
@@ -122,6 +198,7 @@ enum {
 
 - (void)dealloc {
 	//[dataSourceArray release];
+	[youTubeViewController release];
 	[facebookController release];
     [super dealloc];
 }
@@ -134,11 +211,14 @@ enum {
 	[progressView setRect:CGRectMake(0, 0, [theProgress floatValue],1.0f)];
 }
 
+
+
 - (void)render {
 	renderingView.hidden = NO;
 	[self setProgress:[NSNumber numberWithFloat:0.0f]];
 	
-	MilgromViewController * milgromViewController = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).milgromViewController;
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	MilgromViewController * milgromViewController = appDelegate.milgromViewController;
 	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
 	
 	[milgromViewController stopAnimation];
@@ -155,10 +235,10 @@ enum {
 		
 		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
+		//NSString *videoPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
 		
 //		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]] WithSize:CGSizeMake(480, 320) 
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[self getVideoPath]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
 		 
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
@@ -181,12 +261,18 @@ enum {
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
 					 [milgromViewController startAnimation];
-					 bRendered = YES;
+					 
+					 if (isTemporary) {
+						 _hasBeenRendered = YES;
+					 } else {
+						 Song * song = [appDelegate currentSong];
+						 [song setBExported:[NSNumber numberWithBool:YES]];
+						 [appDelegate saveContext];
+						 
+					 }
+					 
 					 renderingView.hidden = YES;
 					 [self action];
-					 
-					 
-					 
 					 
 				 }];
 	});
@@ -274,14 +360,14 @@ enum {
 	sheet.delegate = self;
 	
 	
-	if (!bYouTubeUploaded) {
+	if (!self.didUploadToYouTube) {
 		[sheet addButtonWithTitle:@"Upload to YouTube"];
 		
 	} else {
 		[sheet addButtonWithTitle:@"Post on facebook"];
 	}
 	
-	if (!bFaceBookUploaded) {
+	if (!self.didUploadToFacebook) {
 		[sheet addButtonWithTitle:@"Upload to FaceBook"];
 	}
 	
@@ -306,7 +392,7 @@ enum {
 - (void)actionSheet:(UIActionSheet *)modalView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // Change the navigation bar style, also make the status bar match with it
-	if (bFaceBookUploaded && buttonIndex>0) { // no more facebook option
+	if (self.didUploadToFacebook && buttonIndex>0) { // no more facebook option
 		buttonIndex++;
 	}
 	
@@ -315,7 +401,7 @@ enum {
 	switch (buttonIndex)
 	{
 		case 0:
-			state = !bYouTubeUploaded ? ACTION_UPLOAD_TO_YOUTUBE : ACTION_POST_ON_FACEBOOK;
+			state = !self.didUploadToYouTube ? ACTION_UPLOAD_TO_YOUTUBE : ACTION_POST_ON_FACEBOOK;
 			break;
 		case 1:
 			state = ACTION_UPLOAD_TO_FACEBOOK;
@@ -330,7 +416,7 @@ enum {
 			break;
 		
 		case 4:
-			bRendered = NO;
+			
 			break;
 		
 		case 5:
@@ -341,11 +427,11 @@ enum {
 	
 	switch (state) {
 		case ACTION_DONE:
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop];
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController];
 			break;
 		
 		default:
-			if (!bRendered ) {
+			if (!self.hasBeenRendered ) {
 				[self performSelector:@selector(render)];
 			} else {
 				[self performSelector:@selector(action)];
@@ -357,25 +443,21 @@ enum {
 }
 
 
-- (NSString *)getVideoPath {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	if (!documentsDirectory) {
-		MilgromLog(@"Documents directory not found!");
-		return @"";
-	}
-	return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
-}
-
 							
 - (void)action {
 	
 	switch (state)
 	{
 		case ACTION_UPLOAD_TO_YOUTUBE:
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] youTubeUpload];
+			
+			if (self.youTubeViewController == nil) {
+				self.youTubeViewController = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
+			}
+			
+			
+			[youTubeViewController configureWithVideoName:[self getVideoName] andPath:[self getVideoPath]]; // [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushViewController:youTubeViewController];
+								
 			break;
 	
 		case ACTION_UPLOAD_TO_FACEBOOK:
@@ -412,12 +494,12 @@ enum {
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
 			
-			[picker setSubject:@"Milgrom"];
+			[picker setSubject:[self getVideoName]];
 			
 			// Attach an video to the email
 			//NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"png"];
 			NSData *myData = [NSData dataWithContentsOfFile:[self getVideoPath]];
-			[picker addAttachmentData:myData mimeType:@"video/mov" fileName:@"milgrom.mov"];
+			[picker addAttachmentData:myData mimeType:@"video/mov" fileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
 			
 			
 			

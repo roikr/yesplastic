@@ -25,7 +25,7 @@
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
-#import "YouTubeUploadViewController.h"
+
 
 
 
@@ -61,8 +61,10 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize playerControllers;
 @synthesize OFSAptr;
 @synthesize queuedDemos;
-@synthesize shareViewController;
-@synthesize youTubeViewController;
+
+
+@synthesize currentSong;
+
 
 
 #pragma mark -
@@ -85,6 +87,76 @@ NSString * const kCacheFolder=@"URLCache";
     return YES;
 }
 
+
+-(void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload {
+	
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+	[song setSongName:[theArray objectAtIndex:0]];
+	[song setBLocked:[NSNumber numberWithBool:NO]];
+	[song setBDemo:[NSNumber numberWithBool:YES]];
+	if (!bDownload) {
+		[song setBReady:[NSNumber numberWithBool:YES]];  
+	}
+	[song setBpm:[NSNumber numberWithInteger:bpm]];
+	
+	SoundSet *soundSet;
+	VideoSet *videoSet;
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
+	[soundSet setSetName:[theArray objectAtIndex:1]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:2]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
+	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:0]];
+	[song addSoundSetsObject:soundSet];
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
+	[soundSet setSetName:[theArray objectAtIndex:3]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:4]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
+	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:1]];
+	[song addSoundSetsObject:soundSet];
+	
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
+	[soundSet setSetName:[theArray objectAtIndex:5]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:6]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
+	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:2]];
+	[song addSoundSetsObject:soundSet];
+	
+}
+
+- (void)addDemos {
+	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] bpm:126 download:NO ];
+	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] bpm:136 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] bpm:160 download:NO];
+	
+	[self saveContext];
+	
+	
+	//[songsArray addObject:song];
+	
+	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	
+	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
+	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
 
 
 - (void)unzipPrecache {
@@ -253,9 +325,7 @@ NSString * const kCacheFolder=@"URLCache";
 	//TODO: release player controllers
 	[milgromViewController release];
 	[mainViewController release];
-	[shareViewController release];
-	[youTubeViewController release];
-    [window release];
+	[window release];
     [super dealloc];
 }
 
@@ -522,42 +592,6 @@ NSString * const kCacheFolder=@"URLCache";
 	OFSAptr->bMenu=true; // TODO: change upon return
 }
 
-- (void)share {
-	
-	if (self.shareViewController == nil) {
-		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-		//shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-	}
-	
-	//[self presentModalViewController:self.shareViewController animated:YES]; 
-	[milgromViewController.viewController pushViewController:shareViewController animated:YES];
-	
-	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
-	// not so
-	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
-	//[shareViewController render]; // TODO: move this to when view appear or whatever
-}
-
-- (void)youTubeUpload {
-	
-	if (self.youTubeViewController == nil) {
-		self.youTubeViewController = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
-	}
-	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	if (!documentsDirectory) {
-		//MilgromLog(@"Documents directory not found!");
-		return;
-	}
-	NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"video.mov"];
-	[youTubeViewController configureWithVideoName:@"Milgrom's video" andPath:path]; // [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]
-	
-	[milgromViewController.viewController pushViewController:youTubeViewController animated:YES];
-	
-}
 
 - (void)play {
 	
@@ -581,7 +615,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[milgromViewController.viewController pushViewController:controller animated:YES];
 }
 
-- (void) pop {
+- (void) popViewController {
 	[milgromViewController.viewController popViewControllerAnimated:YES];
 }
 
@@ -595,7 +629,19 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark -
 #pragma mark Songs Management
 
--(BOOL)canSave:(NSString *)songName {
+-(BOOL)canSave {
+	return  OFSAptr->isSongOverwritten() && OFSAptr->isSongValid();
+}
+
+-(BOOL)canShare {
+	return (![currentSong.bDemo boolValue] || OFSAptr->isSongOverwritten()) && OFSAptr->isSongValid();
+}
+
+- (BOOL)isSongTemporary {
+	return [currentSong.bDemo boolValue] || OFSAptr->isSongOverwritten();
+}
+
+-(BOOL)canSaveSongName:(NSString *)songName {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
 	[request setEntity:entity];
@@ -646,22 +692,23 @@ NSString * const kCacheFolder=@"URLCache";
 		return;
 	}
 	
-	Song *song;
+	
 	if ([fetchResults count]) {
-		song = (Song *)[fetchResults objectAtIndex:0];
-		[bandMenu.songsTable selectSong:song];
+		self.currentSong = (Song *)[fetchResults objectAtIndex:0];
+		[bandMenu.songsTable selectCurrentSong];
 	}
 	else {
-		song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
-		[song setSongName:songName];
+		self.currentSong = (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+		[currentSong setSongName:songName];
 		
-		[song setBReady:[NSNumber numberWithBool:YES]];
-		[song setBDemo:[NSNumber numberWithBool:NO]];
+		[currentSong setBReady:[NSNumber numberWithBool:YES]];
+		[currentSong setBDemo:[NSNumber numberWithBool:NO]];
 		
-		[bandMenu.songsTable addSong:song]; // TODO: here ?
+		[bandMenu.songsTable addCurrentSong]; // TODO: here ?
 
 	} 
-
+	
+	[currentSong setBExported:[NSNumber numberWithBool:NO]];
 	
 	OFSAptr->saveSong([songName UTF8String]);
 	
@@ -693,8 +740,8 @@ NSString * const kCacheFolder=@"URLCache";
 	if (fetchResults == nil) {
 	}
 	
-	[song setSoundSets:[NSSet setWithArray:fetchResults]];
-	[song setBpm:[NSNumber numberWithInteger:OFSAptr->getBPM()]];
+	[currentSong setSoundSets:[NSSet setWithArray:fetchResults]];
+	[currentSong setBpm:[NSNumber numberWithInteger:OFSAptr->getBPM()]];
 	[request release];
 	
 	
@@ -704,7 +751,10 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)loadSong:(Song*)song {
-	
+	self.currentSong = song;
+	//self.currentSoundSets = nil; // TODO: check if it really frees...
+	//self.currentSoundSets = [NSMutableArray arrayWithArray:[song.soundSets allObjects]];
+		
 	OFSAptr->setSongState(SONG_IDLE); // if there is previous song which is playing there...
 	
 	string nextSong = [song.songName UTF8String];
@@ -720,86 +770,46 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->setBPM([song.bpm integerValue]);
 	}
 	
-	if (self.playerControllers != nil) { // to later refresh of the selected sets
-		for (unsigned i = 0; i < 3; i++) {
-			PlayerMenu *controller = [playerControllers objectAtIndex:i];
-			controller.currentSetChanged = YES;
-		}
-	}
-	
-	
-	//[(BandMenu *)[milgromViewController.viewController.viewControllers objectAtIndex:0] back:nil];
 }
 
-- (void)addDemos {
-	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
-//	[self addDemo:[NSArray arrayWithObjects:@"HEAT",@"GTR_HEAT",@"GTR_ELECTRO",@"VOC_HEAT",@"VOC_BB",@"DRM_HEAT",@"DRM_ELECTRO",nil] bpm:126 download:NO ];
-//	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_POP",@"DRM_PACIFIST",@"DRM_NEOJAZZ",nil] bpm:146 download:NO];
-//	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_HH",@"DRM_BOY",@"DRM_OLDSCHOOL",nil] bpm:136 download:NO];
-//	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",nil] bpm:160 download:NO];
+- (SoundSet*)getCurrentSoundSet {
+	NSFetchRequest * request = [[NSFetchRequest alloc] init];
+	NSEntityDescription * entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[request setEntity:entity];
 	
-	[self saveContext];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"setName like %@",
+							  [NSString stringWithCString:OFSAptr->getCurrentSoundSetName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
+    
 	
+	[request setPredicate:predicate];
 	
-	//[songsArray addObject:song];
+	NSError *error;
+	NSArray * fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
 	
-	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	if (fetchResults == nil) {
+	}
 	
-	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
-	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	return [fetchResults count] ? [fetchResults objectAtIndex:0] : nil;
 }
 
--(void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload {
+- (Song*)getDemoForCurrentSoundSet {
+	return [[self getCurrentSoundSet] demo];
+}
+
+- (BOOL)loadSoundSetByDemo:(Song*)demo {
 	
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
-	[song setSongName:[theArray objectAtIndex:0]];
-	[song setBLocked:[NSNumber numberWithBool:NO]];
-	[song setBDemo:[NSNumber numberWithBool:YES]];
-	if (!bDownload) {
-		[song setBReady:[NSNumber numberWithBool:YES]];  
+	string nextSong = [demo.songName UTF8String];
+	if (OFSAptr->isInTransition() || !OFSAptr->isSongAvailiable(nextSong)) {
+		return NO;
 	}
-	[song setBpm:[NSNumber numberWithInteger:bpm]];
 	
-	SoundSet *soundSet;
-	VideoSet *videoSet;
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
-	[soundSet setDemo:song];
-	[soundSet setSetName:[theArray objectAtIndex:1]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:2]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
-	[soundSet setVideoSet:videoSet];
-	[soundSet setPlayerNum:[NSNumber numberWithInt:0]];
-	[song addSoundSetsObject:soundSet];
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
-	[soundSet setDemo:song];
-	[soundSet setSetName:[theArray objectAtIndex:3]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:4]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
-	[soundSet setVideoSet:videoSet];
-	[soundSet setPlayerNum:[NSNumber numberWithInt:1]];
-	[song addSoundSetsObject:soundSet];
-	
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
-	[soundSet setDemo:song];
-	[soundSet setSetName:[theArray objectAtIndex:5]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:6]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
-	[soundSet setVideoSet:videoSet];
-	[soundSet setPlayerNum:[NSNumber numberWithInt:2]];
-	[song addSoundSetsObject:soundSet];
+	OFSAptr->bMenu=false;
+		
+	OFSAptr->changeSoundSet(nextSong);
+	return YES;
 	
 }
+
 
 -(void)loadDemos {
 	
@@ -846,6 +856,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 
+
 #pragma mark -
 #pragma mark DemoLoader methods
 
@@ -882,7 +893,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	Song *song = theLoader.song;
 	
-	[bandMenu.songsTable updateSong:song withProgress:theProgress];
+	[bandMenu.songsTable updateSong:song WithProgress:theProgress];
 	
 }
 

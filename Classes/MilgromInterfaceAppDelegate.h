@@ -16,9 +16,8 @@ extern NSString * const kMilgromURL;
 
 @class MilgromViewController;
 @class Song;
+@class SoundSet;
 @class MainViewController;
-@class ShareViewController;
-@class YouTubeUploadViewController;
 @class BandMenu;
 @class AVPlayerDemoPlaybackViewController;
 class testApp;
@@ -42,10 +41,11 @@ class testApp;
 	BandMenu *bandMenu;
 	NSArray *playerControllers;
 	MainViewController *mainViewController;
-	ShareViewController *shareViewController;
-	YouTubeUploadViewController *youTubeViewController;
 	
 	AVPlayerDemoPlaybackViewController* mPlaybackViewController;
+	
+	Song *currentSong;
+	
 	
 }
 
@@ -63,24 +63,26 @@ class testApp;
 
 @property testApp *OFSAptr;
 @property (nonatomic, retain) NSMutableArray *queuedDemos;
-
-@property (nonatomic,retain ) ShareViewController *shareViewController;
-@property (nonatomic,retain ) YouTubeUploadViewController *youTubeViewController;
+@property (nonatomic, retain) Song *currentSong;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
 - (void)loadSong:(Song*)song;
--(BOOL)canSave:(NSString *)songName;
+- (SoundSet*)getCurrentSoundSet;
+- (Song*)getDemoForCurrentSoundSet;
+- (BOOL)loadSoundSetByDemo:(Song*)demo;
+- (BOOL)canSaveSongName:(NSString *)songName;
+- (BOOL)canSave;
+- (BOOL)canShare;
+- (BOOL)isSongTemporary;
 - (void)saveSong:(NSString *)songName;
 - (void)pushSetMenu;
 - (void)pushMain;
 - (void)pushViewController:(UIViewController *)controller;
-- (void)pop;
+- (void)popViewController;
 - (void)help;
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
 - (void)dismissModalViewControllerAnimated:(BOOL)animated;
-- (void)share;
-- (void)youTubeUpload;
 - (void)play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 

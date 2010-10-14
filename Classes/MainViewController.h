@@ -13,6 +13,8 @@ class testApp;
 @class TouchView;
 @class CustomFontTextField;
 @class SaveViewController;
+@class ShareViewController;
+
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
@@ -39,6 +41,7 @@ class testApp;
 	//UIButton *loopButton;
 	
 	SaveViewController *saveViewController;
+	ShareViewController *shareViewController;
 	BOOL bShowHelp;
 	
 }
@@ -61,6 +64,8 @@ class testApp;
 //@property (nonatomic,assign )IBOutlet UIButton *loopButton;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
+@property (nonatomic,retain ) ShareViewController *shareViewController;
+
 @property BOOL bShowHelp;
 
 

@@ -25,9 +25,9 @@
 @property (nonatomic,retain) NSMutableArray *songsArray;
 @property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;
 
--(void)selectSong:(Song *)song;
--(void)addSong:(Song *)song;
--(void)updateSong:(Song *)song withProgress:(NSNumber *)theProgress;
+-(void)selectCurrentSong;
+-(void)addCurrentSong;
+-(void)updateSong:(Song*)song WithProgress:(NSNumber *)theProgress; // needed for loading and downloading
 - (void)deleteSong:(SongCell*)songCell;
 - (void)updateProgress:(SongCell*)cell;
 - (void) loadData;

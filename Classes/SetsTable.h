@@ -15,6 +15,7 @@
 	
 	NSArray *songsArray;
 	NSString * playerName;
+	NSInteger playerNum;
 	
 }
 
@@ -23,6 +24,5 @@
 @property (nonatomic,retain) NSString *playerName;
 
 - (void) loadData;
-- (void) selectCurrentSet;
--(void)selectSong:(Song *)song;
+
 @end

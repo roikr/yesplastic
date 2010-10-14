@@ -15,7 +15,7 @@
 #import "VideoSet.h"
 #import "MilgromMacros.h"
 #import "BandMenu.h"
-#import "testApp.h"
+#import "testApp.h" // for loading progress
 
 
 @implementation SongsTable
@@ -74,7 +74,7 @@
 	[self.tableView reloadData];
 }
 
--(void)selectSong:(Song *)song {
+-(void)selectCurrentSong {
 	
 	SongCell *cell;
 	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
@@ -82,19 +82,22 @@
 		[cell setSelected:NO animated:NO];
 	}
 	
+	Song * song = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] currentSong];
 	cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0]];
 	[cell setSelected:YES animated:YES];
 }
 
 
--(void)addSong:(Song *)song {
+-(void)addCurrentSong {
+	
+	Song * song = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] currentSong];
 	
 	[songsArray addObject:song];
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	
-	[self selectSong:song];
+	[self selectCurrentSong];
 	
 	 [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
@@ -109,7 +112,7 @@
 	
 }
 
--(void)updateSong:(Song *)song withProgress:(NSNumber *)theProgress {
+-(void)updateSong:(Song*)song WithProgress:(NSNumber *)theProgress {
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0];
 	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
 	[cell setProgress:theProgress];
@@ -250,14 +253,16 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-	if (!cell.selected) {
-		Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+	//SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
+	
+	//if (!cell.selected) {
+	if ([appDelegate currentSong] && song == [appDelegate currentSong]) {	
+		MilgromLog(@"SongsTable::willSelectRowAtIndexPath: Song already selected");
 		
-		[appDelegate loadSong:song];
 		
 	} else {
-		MilgromLog(@"SongsTable::willSelectRowAtIndexPath: Song already selected");
+		[appDelegate loadSong:song];
 		
 	}
 

@@ -11,7 +11,8 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "Song.h"
 #import "SoundSet.h"
-#import "testApp.h"
+#import "MilgromMacros.h"
+
 
 
 @implementation SetsTable
@@ -68,47 +69,28 @@
 	
 }
 
-- (void) selectCurrentSet {
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.managedObjectContext; // TODO: why is that - ok to initialize it in case it didn't been initialized yet
-
-	
-	NSFetchRequest * request = [[NSFetchRequest alloc] init];
-	NSEntityDescription * entity = [NSEntityDescription entityForName:@"SoundSet" inManagedObjectContext:appDelegate.managedObjectContext];
-	[request setEntity:entity];
-	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"setName like %@",
-				 [NSString stringWithCString:appDelegate.OFSAptr->getCurrentSoundSetName(appDelegate.OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
-    
-	
-	[request setPredicate:predicate];
-	
-	NSError *error;
-	NSArray * fetchResults = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
-	
-	if (fetchResults == nil) {
-	}
-	
-	if ([fetchResults count]) {
-		SoundSet *soundSet = (SoundSet*)[fetchResults objectAtIndex:0];
-		Song *demo = [soundSet demo];
-		[self selectSong:demo];
-	}
-	
-}
 
 
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+	[super viewDidAppear:animated];
+	MilgromLog(@"SetsTable::viewDidAppear");
+	
+	
+	
 }
-*/
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"SetsTable::viewWillAppear");
+	
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	//SetCell *cell =  (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:demo] inSection:0]];
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:[appDelegate getDemoForCurrentSoundSet]] inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+		
+}
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -128,17 +110,17 @@
 */
 
 
--(void)selectSong:(Song *)song {
-	
-	SetCell *cell;
-	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
-		cell = (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		[cell setSelected:NO animated:NO];
-	}
-	
-	cell = (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0]];
-	[cell setSelected:YES animated:YES];
-}
+//-(void)selectSong:(Song *)song {
+//	
+//	SetCell *cell;
+//	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
+//		cell = (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+//		[cell setSelected:NO animated:NO];
+//	}
+//	
+//	cell = (SetCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0]];
+//	[cell setSelected:YES animated:YES];
+//}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -229,39 +211,15 @@
 	 [detailViewController release];
 	 */
 	
-	Song  *song = (Song *)[songsArray objectAtIndex:indexPath.row];
-	
+	Song *song = [songsArray objectAtIndex:indexPath.row];
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.OFSAptr->bMenu=false;
-	
-	
-	if ([song.bReady boolValue]  && ![song.bLocked boolValue]) {
-		
-		string nextSong = [song.songName UTF8String];
-		if (  !appDelegate.OFSAptr->isInTransition() && appDelegate.OFSAptr->isSongAvailiable(nextSong)) {
-			appDelegate.OFSAptr->changeSoundSet(nextSong);
+	if ([song.bReady boolValue]  && ![song.bLocked boolValue] && song!=[appDelegate getDemoForCurrentSoundSet]) {
+		if ([appDelegate loadSoundSetByDemo:song]) {
+			[appDelegate popViewController];
 		}
 	}
-	 
-	
-	[appDelegate pop];
-	
-	//[(PlayerMenu *)[appDelegate.milgromViewController.viewController.viewControllers objectAtIndex:2] exit:nil];
-	
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//	[super viewDidAppear:animated];
-//	MilgromLog(@"SetsTable::viewDidAppear");
-//	
-//	
-//	
-//}
-//
-//- (void)viewWillAppear:(BOOL)animated {
-//	[super viewWillAppear:animated];
-//	MilgromLog(@"SetsTable::viewWillAppear");
-//}
 
 #pragma mark -
 #pragma mark Memory management

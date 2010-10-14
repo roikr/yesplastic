@@ -62,6 +62,9 @@ public:
 	
 	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
 	
+	bool isSongValid();
+	bool isSongOverwritten();
+	bool canRenderSong();
 	void saveSong(string songName);
 	void setSongState(int songState);
 	int  getSongState();
@@ -96,9 +99,12 @@ public:
 	float getPlayhead();
 	
 	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
-	bool bTempDoc;
-	bool bDemo;
+	
+	
 private:
+	
+	bool bIsSongOverwritten;
+	bool bIsSongValid;
 	
 	void startRecording();
 	

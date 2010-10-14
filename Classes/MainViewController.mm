@@ -17,7 +17,8 @@
 #import "TouchView.h"
 #import "MilgromMacros.h"
 #import "SaveViewController.h"
-
+#import "ShareViewController.h"
+#import "Song.h"
 
 
 @implementation MainViewController
@@ -40,6 +41,7 @@
 //@synthesize triggerButton;
 //@synthesize loopButton;
 @synthesize saveViewController;
+@synthesize shareViewController;
 
 
 /*
@@ -183,6 +185,7 @@
 	bandHelp.hidden = YES;
 	soloHelp.hidden = YES;
 	recordButton.selected = OFSAptr->getSongState() == SONG_RECORD;
+	shareButton.hidden = YES;
 	
 	
 	
@@ -264,7 +267,9 @@
 		
 		}
 		
-		saveButton.hidden = !OFSAptr->bTempDoc;
+		saveButton.hidden = ![(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] canSave];
+		shareButton.hidden = ![(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] canShare];
+
 		recordButton.hidden = NO;
 
 		
@@ -304,7 +309,7 @@
 			break;
 			
 		case BAND_STATE: {
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pop]; 
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
 			//[self.navigationController popViewControllerAnimated:YES];
 			//[self presentModalViewController:menuController animated:YES];
 			//menuController.view.hidden = NO;
@@ -382,7 +387,22 @@
 - (void)share:(id)sender {
 	[self hideHelp];
 	OFSAptr->setSongState(SONG_IDLE);
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] share];
+	
+	if (self.shareViewController == nil) {
+		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+		//shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	
+	[shareViewController prepare];
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushViewController:shareViewController];
+		
+	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
+	// not so
+	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
+	//[shareViewController render]; // TODO: move this to when view appear or whatever
+	
+	
+	
 }
 
 		
@@ -469,7 +489,8 @@
 
 
 - (void)dealloc {
-	
+	[saveViewController release];
+	[shareViewController release];
     [super dealloc];
 }
 
@@ -486,6 +507,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"MainViewController::viewWillAppear");
+	[self updateViews];
 }
 
 
