@@ -1,7 +1,7 @@
 #include "ofxRKTexture.h"
 #import <OpenGLES/ES1/glext.h>
 #import "PVRTexture.h"
-
+#include "ofMain.h"
 
 void ofxRKTexture::setup(string filename,int subWidth ,int subHeight ) {
 	
@@ -12,7 +12,7 @@ void ofxRKTexture::setup(string filename,int subWidth ,int subHeight ) {
 	
 	_subWidth = subWidth;
 	_subHeight = subHeight;
-	
+	bInitialized = false;
 	
 	
 	
@@ -26,7 +26,8 @@ void ofxRKTexture::init() {
 	_height = texture.height;
 	_internalFormat = texture.internalFormat;
 	_hasAlpha = texture.hasAlpha;
-	
+	bUnloaded = false;
+	bInitialized = true;
 	
 	_columnsNumber = _subWidth ? _width / _subWidth : 0;
 	//_rowFraction = (float)_subHeight / (float)texture->getHeight();
@@ -40,7 +41,11 @@ void ofxRKTexture::init() {
 }
 
 void ofxRKTexture::release() {
-	unload();
+	if (bInitialized) {
+		unload();
+	} else {
+		ofLog(OF_LOG_VERBOSE,"ofxRKTexture::release: %s has not been initialized",filename.c_str());
+	}
 	_columnsNumber = 0;
 	//_rowFraction = 0;
 	//_columnFraction = 0;
@@ -54,7 +59,11 @@ void ofxRKTexture::load(){
 
 
 void ofxRKTexture::unload() {
-	glDeleteTextures(1, &_name);	
+	if (!bUnloaded) {
+		bUnloaded = true;
+		glDeleteTextures(1, &_name);
+	}
+	
 }
 
 	

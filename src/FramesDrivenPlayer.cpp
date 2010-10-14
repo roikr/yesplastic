@@ -279,7 +279,7 @@ void FramesDrivenPlayer::release() {
 		return;
 	ofLog(OF_LOG_VERBOSE,"%s: releasing actor",setName.c_str());
 	
-	for (int i=0; i<actor.getTotalNumSequences(); i++) 
+	for (int i=0; i<actor.getTotalNumSequences(); i++) // MEMORY: for some reason I got sequences to release which I didn't init !!!
 		actor.release(i);
 	
 	

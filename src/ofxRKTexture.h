@@ -47,6 +47,8 @@ protected:
 	GLenum _internalFormat;
 	bool _hasAlpha;
 	
+	bool bUnloaded;
+	bool bInitialized;
 };
 
 
