@@ -330,9 +330,10 @@
 	if (recordButton.selected) {
 		[self stop:nil];
 	}
-			
-	OFSAptr->setSongState(SONG_PLAY);
-	
+		
+	if (OFSAptr->isSongValid()) {
+		OFSAptr->setSongState(SONG_PLAY);
+	}
 	
 	
 	
