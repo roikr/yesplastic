@@ -102,7 +102,7 @@ void testApp::setup(){
 	
 //	bButtonDown = false;
 	bNeedDisplay = false;
-	
+	bInTransition = false;
 	
 	//startThread();
 	
@@ -322,11 +322,13 @@ int	testApp::getState() {
 	return state;
 }
 
-bool testApp::isInTransition() {
+bool testApp::isInTransition() {	
 	for (int i=0; i<3; i++) {
 		if (player[i].isInTransition()) {
 			return true;
-		}
+		} 
+		
+
 	}
 	return false;
 }
@@ -411,6 +413,7 @@ void testApp::update(){
 	
 	
 	if (bChangeSet) {
+		bNeedDisplay = true;
 		bChangeSet = false;
 		
 		string str = getPlayerName(controller)+"_"+nextSoundSet;
@@ -432,12 +435,20 @@ void testApp::update(){
 		
 	}
 	
+	
 	for (int i=0;i<3;i++) {
 		player[i].update();
 		if (player[i].isInTransition()) {
 			break;
 		}
 	}
+	
+	
+	if (isInTransition()!=bInTransition) {
+		bInTransition = !bInTransition;
+		bNeedDisplay = true;
+	}
+		
 /*
 	if (measures.size()==1) {
 		

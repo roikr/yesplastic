@@ -159,6 +159,7 @@ private:
 	ofxSndFile song; // just for saving
 		
 	bool bInitialized;
+	bool bInTransition;
 };
 
 

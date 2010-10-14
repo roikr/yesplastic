@@ -30,6 +30,7 @@
 @synthesize setMenuButton;
 @synthesize saveButton;
 @synthesize shareButton;
+@synthesize infoButton;
 @synthesize triggersView;
 @synthesize loopsView;
 @synthesize bandLoopsView;
@@ -186,6 +187,7 @@
 	soloHelp.hidden = YES;
 	recordButton.selected = OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
+	infoButton.hidden = YES;
 	
 	
 	
@@ -271,7 +273,7 @@
 		shareButton.hidden = ![(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] canShare];
 
 		recordButton.hidden = NO;
-
+		infoButton.hidden = OFSAptr->getSongState() != SONG_IDLE;
 		
 		
 	}

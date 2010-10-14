@@ -28,9 +28,11 @@ class testApp;
 	UIButton *menuButton;
 	UIButton *setMenuButton;
 	UIButton *saveButton;
+	UIButton *infoButton;
 	UIView *triggersView;
 	UIView *loopsView;
 	UIView *bandLoopsView;
+	
 	
 	testApp *OFSAptr;
 	
@@ -54,6 +56,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIButton *setMenuButton;
 @property (nonatomic, retain) IBOutlet UIButton *saveButton;
 @property (nonatomic, retain) IBOutlet UIButton *shareButton;
+@property (nonatomic, retain) IBOutlet UIButton *infoButton;
 @property (nonatomic, retain) IBOutlet UIView *triggersView;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
