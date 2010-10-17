@@ -176,7 +176,7 @@ void  PlayerController::loadSoundSet() {
 		delete midiInstrument;
 	}
 	midiInstrument = new ofxMidiInstrument;
-	midiInstrument->setup(256, 44100); // TODO: move these out
+	midiInstrument->setup(256, bMulti ? 8 : 1); // , 44100 // TODO: move these out
 	
 	int i;
 	//loops.clear();
