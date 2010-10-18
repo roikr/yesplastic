@@ -248,10 +248,17 @@ void testApp::setMode(int player,int mode) {
 		startRecording();
 	}
 	
-	
 	this->player[player].setMode(mode);
 	bNeedDisplay = true;
-	
+}
+
+void testApp::stopLoops() {
+	for (int i=0;i<3;i++) {
+		if (this->player[i].getMode() == LOOP_MODE) {
+			this->player[i].setMode(MANUAL_MODE);
+		}
+	}
+	bNeedDisplay = true;
 }
 
 int getRandomLoop() {
@@ -435,6 +442,12 @@ void testApp::update(){
 		
 	}
 	
+	if (songState==SONG_RECORD) {
+		if (ofGetElapsedTimeMillis()-startRecordingTime > 30000) {
+			setSongState(SONG_IDLE);
+		}
+	}
+	
 	
 	for (int i=0;i<3;i++) {
 		player[i].update();
@@ -573,6 +586,11 @@ void testApp::draw(){
 			}
 			
 			tx += d/ts;
+			
+			if (bPush) {
+				bPush = false;
+				player[controller].setPush(false);
+			}
 		}
 		
 		if (bMove) {
@@ -901,9 +919,9 @@ void testApp::touchUp(float x, float y, int touchId) {
 	if (bPush) {
 		bPush = false;
 			
-		if (measures.size()<=1 ) { // && !bButtonDown
+		//if (measures.size()<=1 ) { // && !bButtonDown
 			setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
-		}
+		//}
 	}
 	
 	measures.clear();
@@ -997,26 +1015,24 @@ void testApp::renderAudio() {
 
 void testApp::startRecording() {
 	setSongState(SONG_RECORD);
+	startRecordingTime = ofGetElapsedTimeMillis();
 	
 }
 
 void testApp::setSongState(int songState) {
 	
-	
+	// song is valid and can Overwritten only when FINISHING RECORD
+	if (this->songState==SONG_RECORD && songState!=SONG_RECORD) {
+		bIsSongOverwritten = true;
+		bIsSongValid = true;
+	}
 		
 	this->songState = songState;
-	
-		
-	
 	
 	for (int i=0;i<3;i++) {
 		player[i].setSongState(songState);
 	}
 	
-	if (songState==SONG_RECORD) {
-		bIsSongOverwritten = true;
-		bIsSongValid = true;
-	}
 	bNeedDisplay = true;
 	
 	//	bool bRecord = MidiTrack::GetSongMode() == SONG_RECORD;

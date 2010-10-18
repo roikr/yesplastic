@@ -9,6 +9,7 @@
 #import "TouchView.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "testApp.h"
+#import "Constants.h"
 #import "MainViewController.h"
 #import "MilgromMacros.h"
 
@@ -37,9 +38,14 @@
 	//	NSLog(@"touchesBegan: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
 	
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).mainViewController hideHelp];
-
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+		return;
+	}
+	
+	[appDelegate.mainViewController hideHelp];
+
 	
 	//self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5) target:controller selector:@selector(bringPlayerMenu:) userInfo:nil repeats:NO];
 	
@@ -56,7 +62,7 @@
 		CGPoint touchPoint = [touch locationInView:self];
 		
 		if([touch tapCount] >= 1) {
-			MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+			
 			
 			appDelegate.OFSAptr->touchDown(touchPoint.x, touchPoint.y, touchIndex);
 		}
@@ -77,6 +83,12 @@
 	//[timer invalidate];
 	//self.timer = nil;
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+		return;
+	}
+	
+	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;
 		while(touchIndex < OF_MAX_TOUCHES && (activeTouches[touchIndex] != touch)) touchIndex++;
@@ -86,8 +98,6 @@
 		}
 		
 		CGPoint touchPoint = [touch locationInView:self];
-		
-		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
 		appDelegate.OFSAptr->touchMoved(touchPoint.x, touchPoint.y, touchIndex);
 	}
@@ -101,6 +111,13 @@
 	
 	//	NSLog(@"touchesEnded: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+		return;
+	}
+	
+	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;
 		while(touchIndex < OF_MAX_TOUCHES && (activeTouches[touchIndex] != touch)) touchIndex++;
@@ -112,9 +129,7 @@
 		activeTouches[touchIndex] = 0;
 		
 		CGPoint touchPoint = [touch locationInView:self];
-		
-		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
+	
 //		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
 		
 		appDelegate.OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);

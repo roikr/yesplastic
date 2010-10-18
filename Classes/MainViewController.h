@@ -46,6 +46,8 @@ class testApp;
 	ShareViewController *shareViewController;
 	BOOL bShowHelp;
 	
+	BOOL bAnimatingRecord;
+	NSTimeInterval shakeStartTime;
 }
 
 
@@ -87,6 +89,9 @@ class testApp;
 - (void) showHelp:(id)sender;
 - (void) hideHelp;
 - (void) moreHelp:(id)sender;
+
+- (void) fadeOutRecordButton;
+- (void) fadeInRecordButton;
 
 //- (void) updateTables;
 

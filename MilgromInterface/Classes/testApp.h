@@ -15,12 +15,16 @@ public:
 	void draw();
 	void exit();
 	
+		
+	
 	void buttonPressed(int button);
 	void nextLoop(int player);
 	void prevLoop(int player);
+	int getCurrentLoop(int player);
 	
 	void setMode(int player,int mode);
 	int getMode(int player);
+	void stopLoops();
 	
 	void setState(int state);
 	int	getState();
@@ -30,6 +34,7 @@ public:
 	void touchUp(float x, float y, int touchId);
 	
 	void moveBack();
+	void threadedFunction();
 		
 	float getVolume();
 	void setVolume(float vol);
@@ -37,7 +42,9 @@ public:
 	float getBPM();
 	void setBPM(float bpm);
 	
-	bool loadSong(string songName);
+	bool isSongValid();
+	bool isSongOverwritten();
+	bool canRenderSong();
 	void saveSong(string songName);
 	void setSongState(int songState);
 	int  getSongState();
@@ -45,14 +52,24 @@ public:
 	
 	void renderAudio() ;
 	
+	
 	bool isInTransition();
+	
 	bool isSongAvailiable(string song,int playerNum=0);
-	void changeSoundSet(string nextSoundSet, bool bChangeAll);
+	void loadSong(string songName,bool bDemo);
+	void changeSoundSet(string nextSoundSet);
+	
 	string getCurrentSoundSetName(int playerNum);
+	string getPlayerName(int playerNum); // using to build SoundSet name from Song name and for loop and triggers buttons
+
 	
 	void playRandomLoop();
 	void soundStreamStart();
 	void soundStreamStop();	
+	
+	float getProgress();
+	
+	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
 	
 	
 	int lastFrame;

@@ -66,7 +66,7 @@
 	
 	[(TouchView*)self.view  setViewController:self];
 	bShowHelp = NO;
-	
+	bAnimatingRecord = NO;
 	
 	//[self.view addSubview:menuController.view];
 	//menuController.view.hidden = YES;
@@ -185,7 +185,7 @@
 	bandLoopsView.hidden = YES;
 	bandHelp.hidden = YES;
 	soloHelp.hidden = YES;
-	recordButton.selected = OFSAptr->getSongState() == SONG_RECORD;
+	recordButton.selected = OFSAptr->getSongState() == SONG_TRIGGER_RECORD || OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
 	
@@ -201,7 +201,7 @@
 				
 				switch (OFSAptr->getState()) {
 					case SOLO_STATE: {
-						setMenuButton.hidden = NO;
+						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE;
 						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 						
@@ -252,8 +252,6 @@
 						break;
 				}
 				
-				
-							
 								
 				break;	
 				
@@ -273,8 +271,12 @@
 		shareButton.hidden = ![(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] canShare];
 
 		recordButton.hidden = NO;
-		infoButton.hidden = OFSAptr->getSongState() != SONG_IDLE;
+		infoButton.hidden = NO; // OFSAptr->getSongState() != SONG_IDLE;
 		
+		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
+			bAnimatingRecord = YES;
+			[self fadeOutRecordButton];
+		}
 		
 	}
 		
@@ -311,6 +313,7 @@
 			break;
 			
 		case BAND_STATE: {
+			OFSAptr->stopLoops();
 			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
 			//[self.navigationController popViewControllerAnimated:YES];
 			//[self presentModalViewController:menuController animated:YES];
@@ -353,7 +356,6 @@
 		return;
 	
 	
-	
 	if (recordButton.selected) {
 		[self stop:nil];
 	}
@@ -361,8 +363,34 @@
 		OFSAptr->setSongState(SONG_TRIGGER_RECORD);
 		
 	}
+}
+
+- (void) fadeOutRecordButton {
+	if (OFSAptr->getSongState() == SONG_RECORD) {
+		//[UIView animateWithDuration:0.2 animations:^{recordButton.alpha = 0.0;} completion:^(BOOL finished){ [self fadeInRecordButton]; }];
+		[UIView animateWithDuration:0.1 delay:0.5 
+							options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+						 animations:^{recordButton.alpha = 0.0;} 
+						 completion:^(BOOL finished){ [self fadeInRecordButton]; }];
+		
+		
+	} else {
+		bAnimatingRecord = NO;
+	}
+
 	
-	
+}
+
+- (void) fadeInRecordButton {
+	if (OFSAptr->getSongState() != SONG_RECORD) {
+		recordButton.alpha = 1.0;
+		bAnimatingRecord = NO;
+	} else {
+		[UIView animateWithDuration:0.1 delay:0.5 
+						options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+					 animations:^{recordButton.alpha = 1.0;} 
+					 completion:^(BOOL finished){ [self fadeOutRecordButton]; }];
+	}
 }
 
 - (void) save:(id)sender {
@@ -473,8 +501,21 @@
 
 
 - (void) showHelp:(id)sender {
-	bShowHelp = YES;
-	[self updateViews];
+	switch (OFSAptr->getSongState()) {
+		case SONG_IDLE:
+			bShowHelp = YES;
+			[self updateViews];
+			break;
+		case SONG_RECORD:
+			bShowHelp = YES;
+			OFSAptr->setSongState(SONG_IDLE);
+			
+			break;
+		default:
+			break;
+	}
+	
+	
 }
 
 - (void)hideHelp {
@@ -519,10 +560,18 @@
 	return YES;
 }
 
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+	MilgromLog(@"shake began");
+	shakeStartTime = [NSDate timeIntervalSinceReferenceDate];
+}
+
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-	MilgromLog(@"shake ended");
-	OFSAptr->playRandomLoop();
+	NSTimeInterval diff = [NSDate timeIntervalSinceReferenceDate]-shakeStartTime;
+	MilgromLog(@"shake ended: %2.2f",diff);
+	if ( diff > 0.5 && diff < 1.0) {
+		OFSAptr->playRandomLoop();
+	}
 }
 
 

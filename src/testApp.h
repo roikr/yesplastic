@@ -42,6 +42,7 @@ public:
 	
 	int getMode(int player);
 	void setMode(int player,int mode);
+	void stopLoops();
 	
 	void setState(int state);
 	int	getState();
@@ -105,6 +106,7 @@ private:
 	
 	bool bIsSongOverwritten;
 	bool bIsSongValid;
+	int startRecordingTime;
 	
 	void startRecording();
 	

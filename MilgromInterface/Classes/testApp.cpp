@@ -34,6 +34,23 @@ void testApp::update(){
 }
 
 
+string testApp::getPlayerName(int playerNum)  {
+	switch (playerNum) {
+		case 0:
+			return "GTR";
+			break;
+		case 1:
+			return "VOC";
+			break;
+		case 2:
+			return "DRM";
+			break;
+		default:
+			return "";
+			break;
+	}
+}
+
 
 void testApp::setMode(int player,int mode) {
 }
@@ -42,8 +59,13 @@ int testApp::getMode(int player) {
 	return MANUAL_MODE;
 }
 
+void testApp::stopLoops() {
+	bNeedDisplay = true;
+}
+
 void testApp::setState(int state) {
 	this->state = state;
+	bNeedDisplay = true;
 }
 
 int	testApp::getState() {
@@ -54,8 +76,8 @@ bool testApp::isInTransition() {
 	return false;
 }
 
-void testApp::changeSoundSet(string nextSoundSet, bool bChangeAll) {
-	
+void testApp::changeSoundSet(string nextSoundSet) {
+	bNeedDisplay = true;
 	
 }
 
@@ -89,7 +111,9 @@ void testApp::touchDown(float x, float y, int touchId) {
 	printf("touchDown: %.f, %.f %i\n", x, y, touchId);
 	
 	
-	
+	if (songState == SONG_TRIGGER_RECORD) {
+		setSongState(SONG_RECORD);
+	}
 	
 	
 }
@@ -122,6 +146,9 @@ void testApp::prevLoop(int player) {
 	//this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
 }
 
+int testApp::getCurrentLoop(int player) {
+	return 5;
+}
 	
 
 float testApp::getVolume() {
@@ -157,7 +184,7 @@ void testApp::setSongState(int songState) {
 	this->songState = songState;
 	
 	
-	
+	bNeedDisplay = true;
 		
 	
 }
@@ -184,11 +211,10 @@ int  testApp::getSongState() {
 }
 
 
-bool testApp::loadSong(string songName) {
+void testApp::loadSong(string songName,bool bDemo) {
 	
 	printf("testApp::loadSong: %s\n",songName.c_str());
 	
-	return true;
 }
 
 
@@ -223,6 +249,15 @@ string testApp::getCurrentSoundSetName(int playerNum) {
 	}
 }
 
+bool testApp::isSongValid() {
+	return true;
+}
+
+
+bool testApp::isSongOverwritten() {
+	return false;
+}
+
 void testApp::soundStreamStart() {
 }
 
@@ -230,3 +265,10 @@ void testApp::soundStreamStop() {
 	
 }
 
+void testApp::threadedFunction() {
+	
+}
+
+float testApp::getProgress() {
+	return 0.0f;
+}
