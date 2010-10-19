@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -272,7 +274,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>4</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -297,7 +299,7 @@
 							<real>309</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>194 225 1433 745 0 0 1680 1028 </string>
+						<string>1777 305 1433 745 1680 250 1280 800 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -308,14 +310,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>FBRequest.m</string>
+								<string>FBConnectGlobal.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>FBRequest.m</string>
+										<string>FBConnectGlobal.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E4B1B289126E11B5001A577D</string>
+										<string>E4B1B356126E359E001A577D</string>
 										<key>history</key>
 										<array>
 											<string>E4E941B812478948007CC156</string>
@@ -353,10 +353,11 @@
 											<string>E4B1B258126E0CF9001A577D</string>
 											<string>E4B1B283126E11B5001A577D</string>
 											<string>E4B1B284126E11B5001A577D</string>
-											<string>E4B1B285126E11B5001A577D</string>
 											<string>E4B1B286126E11B5001A577D</string>
 											<string>E4B1B287126E11B5001A577D</string>
-											<string>E4B1B288126E11B5001A577D</string>
+											<string>E4B1B353126E359E001A577D</string>
+											<string>E4B1B354126E359E001A577D</string>
+											<string>E4B1B355126E359E001A577D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -368,14 +369,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1102, 590}}</string>
+								<string>{{0, 0}, {1102, 587}}</string>
 								<key>RubberWindowFrame</key>
-								<string>194 225 1433 745 0 0 1680 1028 </string>
+								<string>1777 305 1433 745 1680 250 1280 800 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>590pt</string>
+							<string>587pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -388,14 +389,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 595}, {1102, 109}}</string>
+								<string>{{0, 592}, {1102, 112}}</string>
 								<key>RubberWindowFrame</key>
-								<string>194 225 1433 745 0 0 1680 1028 </string>
+								<string>1777 305 1433 745 1680 250 1280 800 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>109pt</string>
+							<string>112pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -414,9 +415,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E4B1B249126E0C63001A577D</string>
+				<string>E4B1B357126E359E001A577D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>E4B1B24A126E0C63001A577D</string>
+				<string>E4B1B358126E359E001A577D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -554,15 +555,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E4B1B254126E0C63001A577D</string>
-		<string>E4B1B255126E0C63001A577D</string>
 		<string>E43E62471246560B00B08062</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/roikr/Developer/YesPlastic/OldFacebookUpload/FacebookUpload.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>194 225 1433 745 0 0 1680 1028 </string>
+	<string>1777 305 1433 745 1680 250 1280 800 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -600,8 +597,6 @@
 							<string>267pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -641,7 +636,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>E43E62471246560B00B08062</string>
-				<string>E4B1B24B126E0C63001A577D</string>
+				<string>E4B1B359126E359E001A577D</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -739,10 +734,10 @@
 									<key>Frame</key>
 									<string>{{596, 0}, {706, 407}}</string>
 									<key>RubberWindowFrame</key>
-									<string>378 147 1302 810 0 0 1680 1028 </string>
+									<string>293 169 1302 810 0 0 1680 1028 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>378 147 1302 810 0 0 1680 1028 </string>
+								<string>293 169 1302 810 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -776,11 +771,11 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>378 147 1302 810 0 0 1680 1028 </string>
+			<string>293 169 1302 810 0 0 1680 1028 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

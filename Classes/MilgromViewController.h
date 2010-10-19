@@ -23,8 +23,6 @@
 	EAGLView *eAGLView;
 	EAGLContext *context;
 	
-   
-    
     BOOL animating;
     BOOL displayLinkSupported;
     NSInteger animationFrameInterval;

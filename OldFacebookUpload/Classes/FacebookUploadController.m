@@ -28,8 +28,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 @synthesize delegate;
 @synthesize session;
-@synthesize videoName;
-@synthesize path;
+
 
 - (id)initWithDelegate:(id<FacebookControllerDelegate>)theDelegate {
 	
@@ -45,12 +44,18 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 - (void) dealloc {
 	[session release];
-	[videoName release];
-	[path release];
 	[super dealloc];
 }
 
-
+- (void)login {
+	if (![session resume]) {
+		// Show the login dialog
+		FBLoginDialog* dialog = [[[FBLoginDialog alloc] init] autorelease];
+		dialog.delegate = self;
+		//m_FBDialogStage = 0;
+		[dialog show];
+	}	
+}
 	
 - (void) requestPermission { // Ask for extended permissions
 	FBPermissionDialog* dialog = [[[FBPermissionDialog alloc] init] autorelease];
@@ -64,16 +69,14 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 - (void) uploadVideoWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath {
 	
-	self.videoName = theVideoName;
-	self.path = thePath;
+	NSData *data = [NSData dataWithContentsOfFile:thePath];
 	
-	if (![session resume]) {
-		// Show the login dialog
-		FBLoginDialog* dialog = [[[FBLoginDialog alloc] init] autorelease];
-		dialog.delegate = self;
-		//m_FBDialogStage = 0;
-		[dialog show];
-	}
+	FBRequest *m_UploadRequest = [FBRequest requestWithSession: session delegate: self];
+	
+	NSMutableDictionary* Parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"video.upload", @"method", theVideoName, @"title", nil];
+	[m_UploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
+	
+		
 }
 
 
@@ -119,12 +122,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void)dialogDidSucceed:(FBDialog*)dialog {
 	NSLog(@"dialogDidSucceed");
 	if ([dialog isKindOfClass:[FBPermissionDialog class]]) {
-		NSData *data = [NSData dataWithContentsOfFile:path];
-		
-		FBRequest *m_UploadRequest = [FBRequest requestWithSession: session delegate: self];
-		
-		NSMutableDictionary* Parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"video.upload", @"method", videoName, @"title", nil];
-		[m_UploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
+		[delegate facebookControllerDidLogin:self];
 	}
 }
 
@@ -195,8 +193,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didLoad:(id)result {
 	NSLog(@"Video upload Success");
-	[delegate facebookControllerDidFinish:self];
-	[session logout];
+	[delegate facebookControllerDidFinishUploading:self];
+	//[session logout];
 }
 
 /**

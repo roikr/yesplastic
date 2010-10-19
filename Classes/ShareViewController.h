@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "FacebookUploadController.h"
+
 
 @class CustomImageView;
 @class YouTubeUploadViewController;
+@class FacebookUploadViewController;
 
 
-@interface ShareViewController : UIViewController <UINavigationControllerDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate,FacebookControllerDelegate> {
+@interface ShareViewController : UIViewController <UINavigationControllerDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate> {
 	CustomImageView *progressView;
 	
 	BOOL _didUploadToYouTube;
@@ -26,7 +27,7 @@
 	UIView *renderingView;
 	
 	YouTubeUploadViewController *youTubeViewController;
-	FacebookUploadController *facebookController;
+	FacebookUploadViewController *facebookViewController;
 }
 
 
@@ -40,7 +41,7 @@
 @property (nonatomic, retain) IBOutlet UIView *renderingView;
 
 @property (nonatomic,retain ) YouTubeUploadViewController *youTubeViewController;
-@property (nonatomic, retain) FacebookUploadController *facebookController;
+@property (nonatomic, retain) FacebookUploadViewController *facebookViewController;
 
 @property (readonly) BOOL didUploadToYouTube;
 @property (readonly) BOOL didUploadToFacebook;

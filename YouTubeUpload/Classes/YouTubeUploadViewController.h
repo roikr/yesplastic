@@ -21,6 +21,9 @@
 	
 	NSString *videoName;
 	NSString *path;
+	
+	UIView *inputView;
+	UIView *uploadView;
 }
 
 @property (nonatomic,retain) IBOutlet UITextField *username;
@@ -28,11 +31,15 @@
 @property (nonatomic,retain) IBOutlet UITextField *videoTitle;
 @property (nonatomic,retain) IBOutlet UITextView *description;
 @property (nonatomic,retain) IBOutlet UIProgressView *mUploadProgressIndicator;
+@property (nonatomic,retain) IBOutlet UIView *inputView;
+@property (nonatomic,retain) IBOutlet UIView *uploadView;
 @property (nonatomic,retain) NSString *videoName;
 @property (nonatomic,retain) NSString *path;
 
+
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
+- (void) cancelUpload:(id)sender;
 - (void) configureWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath;
 
 

@@ -708,7 +708,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 	} 
 	
-	[currentSong setBExported:[NSNumber numberWithBool:NO]];
+	[currentSong setBRendered:[NSNumber numberWithBool:NO]];
 	
 	OFSAptr->saveSong([songName UTF8String]);
 	

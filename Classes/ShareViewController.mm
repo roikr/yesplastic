@@ -14,6 +14,8 @@
 #import "testApp.h"
 #import "Constants.h"
 #import "YouTubeUploadViewController.h"
+#import "FacebookUploadViewController.h"
+
 
 //#import "ActionCell.h"
 //#import "CustomFontLabel.h"
@@ -46,8 +48,8 @@ enum {
 
 @synthesize progressView;
 @synthesize renderingView;
-@synthesize facebookController;
 @synthesize youTubeViewController;
+@synthesize facebookViewController;
 
 
 /*
@@ -89,7 +91,7 @@ enum {
 		return _hasBeenRendered;
 	} else {
 		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
-		return [song.bExported boolValue];
+		return [song.bRendered boolValue];
 	}
 
 }
@@ -199,7 +201,7 @@ enum {
 - (void)dealloc {
 	//[dataSourceArray release];
 	[youTubeViewController release];
-	[facebookController release];
+	[facebookViewController release];
     [super dealloc];
 }
 
@@ -266,7 +268,7 @@ enum {
 						 _hasBeenRendered = YES;
 					 } else {
 						 Song * song = [appDelegate currentSong];
-						 [song setBExported:[NSNumber numberWithBool:YES]];
+						 [song setBRendered:[NSNumber numberWithBool:YES]];
 						 [appDelegate saveContext];
 						 
 					 }
@@ -461,11 +463,13 @@ enum {
 			break;
 	
 		case ACTION_UPLOAD_TO_FACEBOOK:
-			if (self.facebookController == nil) {
-				self.facebookController = [[FacebookUploadController alloc] initWithDelegate:self];
+			if (self.facebookViewController == nil) {
+				self.facebookViewController = [[FacebookUploadViewController alloc] initWithNibName:@"FacebookUploadViewController" bundle:nil];
 			}
 			
-			[facebookController publish];
+			
+			[facebookViewController uploadWithVideoName:[self getVideoName] andPath:[self getVideoPath]]; // [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]
+			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushViewController:facebookViewController];
 			
 			break;
 		
@@ -546,14 +550,6 @@ enum {
 	}
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
 	
-}
-
-- (void) facebookControllerDidFail:(FacebookUploadController *)theController {
-	[self menu];
-}
-
-- (void) facebookControllerDidFinish:(FacebookUploadController *)theController {
-	[self menu];
 }
 
 /*

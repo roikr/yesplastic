@@ -16,8 +16,7 @@
 @interface FacebookUploadController : NSObject<FBRequestDelegate,FBDialogDelegate,FBSessionDelegate>{
 	FBSession* session;
 		
-	NSString *videoName;
-	NSString *path;
+	
 	
 	id <FacebookControllerDelegate> delegate;
 
@@ -25,17 +24,21 @@
 @property (nonatomic, assign) id<FacebookControllerDelegate> delegate;
 
 @property (nonatomic,retain) FBSession *session;
-@property (nonatomic,retain) NSString *videoName;
-@property (nonatomic,retain) NSString *path;
 
-- (id)initWithDelegate:(id<FacebookControllerDelegate>)theDelegate;
+
+
+- (id)initWithDelegate:(id<FacebookControllerDelegate>)theDelegate; 
+- (void)login;
 - (void) uploadVideoWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath;
 
 @end
 
 @protocol FacebookControllerDelegate<NSObject>
 
+- (void) facebookControllerDidLogin:(FacebookUploadController *)theController;
 - (void) facebookControllerDidFail:(FacebookUploadController *)theController;
-- (void) facebookControllerDidFinish:(FacebookUploadController *)theController;
+
+- (void) facebookControllerDidStartUploading:(FacebookUploadController *)theController;
+- (void) facebookControllerDidFinishUploading:(FacebookUploadController *)theController;
 
 @end

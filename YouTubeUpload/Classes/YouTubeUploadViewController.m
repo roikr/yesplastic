@@ -38,6 +38,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 @synthesize mUploadProgressIndicator;
 @synthesize videoName;
 @synthesize path;
+@synthesize inputView;
+@synthesize uploadView;
 
 
 /*
@@ -97,6 +99,9 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 - (void) configureWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath {
 	self.videoName = theVideoName;
 	self.path = thePath;
+	
+	inputView.hidden = NO;
+	uploadView.hidden = YES;
 }
 
 - (void) upload:(id)sender {
@@ -110,6 +115,10 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 
 - (void) cancel:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) cancelUpload:(id)sender {
+	
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -219,6 +228,9 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 							   didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
 	
 	[self setUploadTicket:ticket];
+	
+	inputView.hidden = YES;
+	uploadView.hidden = NO;
 	//[self updateUI];
 }
 
