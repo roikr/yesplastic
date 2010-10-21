@@ -105,7 +105,8 @@
 - (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader {
 }
 
-- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader {
+- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader  withURL:(NSURL*) theUrl {
+	NSLog(@"link: %@",[theUrl absoluteString]);
 }
 
 - (void) youTubeUploaderProgress:(float)progress {

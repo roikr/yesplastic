@@ -45,7 +45,7 @@
 -(void) youTubeUploaderDidFail:(YouTubeUploader *)theUploader;
 
 - (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader;
-- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader;
+- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader withURL:(NSURL*) theUrl;
 - (void) youTubeUploaderProgress:(float)progress;
 
 @end

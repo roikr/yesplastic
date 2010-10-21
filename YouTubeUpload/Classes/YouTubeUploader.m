@@ -12,6 +12,7 @@
 #import "GDataYouTubeConstants.h"
 #import "GDataServiceGoogleYouTube.h"
 #import "GDataEntryYouTubeUpload.h"
+#import "GDataEntryYouTubeVideo.h"
 
 NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_ouUT6HFwaWn1GQxuyAIK-zvoeFB-GU_cqx30q-0HggREKxXG-b8w";
 
@@ -201,7 +202,11 @@ ofTotalByteCount:(unsigned long long)dataLength {
 	
 	[self setUploadTicket:nil];
 	isUploading = NO;
-	[delegate youTubeUploaderDidFinishUploading:self];
+	
+	GDataLink *link = [videoEntry HTMLLink];
+	NSURL * url = [link URL];
+	//NSLog(@"location: %@",[videoEntry location]);
+	[delegate youTubeUploaderDidFinishUploading:self withURL:url];
 }
 
 @end

@@ -58,7 +58,14 @@
 - (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader{
 }
 
-- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader{
+- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader withURL:(NSURL*) theUrl {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload finished" 
+													message:[NSString stringWithFormat:@"link: %@",[theUrl absoluteString]]
+												   delegate:nil 
+										  cancelButtonTitle:@"OK" 
+										  otherButtonTitles: nil];
+	[alert show];
+	[alert release];
 }
 
 - (void) youTubeUploaderProgress:(float)progress {
