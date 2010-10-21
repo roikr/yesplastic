@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@class GDataServiceTicket;
 
+@class YouTubeUploader;
 @interface YouTubeUploadViewController : UIViewController {
+	YouTubeUploader *uploader;
+	
 	UITextField *username;
 	UITextField *password;
 	UITextField *videoTitle;
 	UITextView *description;
-	UIProgressView *mUploadProgressIndicator;
+		
 	
-	GDataServiceTicket *mUploadTicket;
 	
 	NSString *videoName;
 	NSString *path;
@@ -26,22 +27,18 @@
 	UIView *uploadView;
 }
 
+@property (nonatomic,retain) YouTubeUploader *uploader;
+
 @property (nonatomic,retain) IBOutlet UITextField *username;
 @property (nonatomic,retain) IBOutlet UITextField *password;
-@property (nonatomic,retain) IBOutlet UITextField *videoTitle;
-@property (nonatomic,retain) IBOutlet UITextView *description;
-@property (nonatomic,retain) IBOutlet UIProgressView *mUploadProgressIndicator;
-@property (nonatomic,retain) IBOutlet UIView *inputView;
-@property (nonatomic,retain) IBOutlet UIView *uploadView;
-@property (nonatomic,retain) NSString *videoName;
-@property (nonatomic,retain) NSString *path;
+@property (nonatomic,retain) IBOutlet UITextField *titleField;
+@property (nonatomic,retain) IBOutlet UITextView *descriptionView;
 
+@property (nonatomic,retain ) NSString *videoTitle;
+@property (nonatomic,retain) NSString* videoPath;
 
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
-- (void) cancelUpload:(id)sender;
-- (void) configureWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath;
-
 
 @end
 

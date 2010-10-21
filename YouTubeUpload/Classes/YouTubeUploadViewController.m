@@ -6,40 +6,25 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
- #import "YouTubeUploadViewController.h"
-//#import "GData.h"
-#import "GDataYouTubeConstants.h"
-#import "GDataServiceGoogleYouTube.h"
-#import "GDataEntryYouTubeUpload.h"
-
-NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_ouUT6HFwaWn1GQxuyAIK-zvoeFB-GU_cqx30q-0HggREKxXG-b8w";
-
+#import "YouTubeUploadViewController.h"
+#import "YouTubeUploader.h"
 
 @interface YouTubeUploadViewController (PrivateMethods)
-//- (void)updateUI;
 
-
-- (void)uploadVideoFile;
-
-- (GDataServiceTicket *)uploadTicket;
-- (void)setUploadTicket:(GDataServiceTicket *)ticket;
-
-- (GDataServiceGoogleYouTube *)youTubeService;
 
 
 @end
 
 @implementation YouTubeUploadViewController
 
+@synthesize uploader;
+
 @synthesize username;
 @synthesize password;
-@synthesize videoTitle;
-@synthesize description;
-@synthesize mUploadProgressIndicator;
-@synthesize videoName;
-@synthesize path;
-@synthesize inputView;
-@synthesize uploadView;
+@synthesize titleField;
+@synthesize descriptionView;
+@synthesize videoPath;
+
 
 
 /*
@@ -59,15 +44,12 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 */
 
 
-
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	username.text = @"kingyorts";
-	password.text = @"56565656";
-	videoTitle.text = videoName;
 }
-
+*/
 
 
 /*
@@ -92,33 +74,17 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 
 
 - (void)dealloc {
-	[mUploadTicket release];
+	[videoPath release];
+	[uploader release];
     [super dealloc];
 }
 
-- (void) configureWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath {
-	self.videoName = theVideoName;
-	self.path = thePath;
-	
-	inputView.hidden = NO;
-	uploadView.hidden = YES;
+-(void) setVideoTitle:(NSString *) title{
+	titleField.text = title;
 }
 
-- (void) upload:(id)sender {
-
-	
-	// load the file data
-	
-	
-	[self uploadVideoFile];
-}
-
-- (void) cancel:(id)sender {
-	[self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void) cancelUpload:(id)sender {
-	
+-(NSString *)videoTitle {
+	return titleField.text;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -126,148 +92,23 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	return NO;
 }
 
-#pragma mark -
 
-- (GDataServiceGoogleYouTube *)youTubeService {
+- (void) upload:(id)sender {
+
 	
-	static GDataServiceGoogleYouTube* service = nil;
-	
-	if (!service) {
-		service = [[GDataServiceGoogleYouTube alloc] init];
-		
-		[service setShouldCacheDatedData:YES];
-		[service setServiceShouldFollowNextLinks:YES];
-		[service setIsServiceRetryEnabled:YES];
+	if (uploader!=nil) {
+		uploader.username = username.text;
+		uploader.password = password.text;
+		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath];
 	}
 	
-	// update the username/password each time the service is requested
-	
-	
-	if ([username.text length] > 0 && [password.text length] > 0) {
-		[service setUserCredentialsWithUsername:username.text
-									   password:password.text];
-	} else {
-		// fetch unauthenticated
-		[service setUserCredentialsWithUsername:nil
-									   password:nil];
-	}
-	
-	[service setYouTubeDeveloperKey:kDeveloperKey];
-	
-	return service;
-}
-
-- (GDataServiceTicket *)uploadTicket {
-	return mUploadTicket;
-}
-
-- (void)setUploadTicket:(GDataServiceTicket *)ticket {
-	[mUploadTicket release];
-	mUploadTicket = [ticket retain];
-}
-
-
-
-- (void)uploadVideoFile {
-	
-	
-	
-	GDataServiceGoogleYouTube *service = [self youTubeService];
-	[service setYouTubeDeveloperKey:kDeveloperKey];
-	
-	
-	
-	NSURL *url = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:username.text];
-	
-	
-	
-	
-	
-	NSData *data = [NSData dataWithContentsOfFile:path];
-	NSString *filename = [path lastPathComponent];
-	
-	// gather all the metadata needed for the mediaGroup
-	NSString *titleStr = videoTitle.text;
-	GDataMediaTitle *title = [GDataMediaTitle textConstructWithString:titleStr];
-	
-	NSString *categoryStr = @"Film";//[[mCategoryPopup selectedItem] representedObject];
-	GDataMediaCategory *category = [GDataMediaCategory mediaCategoryWithString:categoryStr]; 
-	[category setScheme:kGDataSchemeYouTubeCategory];
-	
-	NSString *descStr = description.text;
-	GDataMediaDescription *desc = [GDataMediaDescription textConstructWithString:descStr];
-	
-//	NSString *keywordsStr = nil;//[mKeywordsField stringValue];
-//	GDataMediaKeywords *keywords = [GDataMediaKeywords keywordsWithString:keywordsStr];
-	
-	BOOL isPrivate = NO;//([mPrivateCheckbox state] == NSOnState);
-	
-	GDataYouTubeMediaGroup *mediaGroup = [GDataYouTubeMediaGroup mediaGroup];
-	[mediaGroup setMediaTitle:title];
-	[mediaGroup setMediaDescription:desc];
-	[mediaGroup addMediaCategory:category];
-	//[mediaGroup setMediaKeywords:keywords];
-	[mediaGroup setIsPrivate:isPrivate];
-	
-	NSString *mimeType = [GDataUtilities MIMETypeForFileAtPath:path defaultMIMEType:@"video/quicktime"];
-	
-	// create the upload entry with the mediaGroup and the file data
-	GDataEntryYouTubeUpload *entry;
-	entry = [GDataEntryYouTubeUpload uploadEntryWithMediaGroup:mediaGroup
-														  data:data
-													  MIMEType:mimeType
-														  slug:filename];
-	
-	SEL progressSel = @selector(ticket:hasDeliveredByteCount:ofTotalByteCount:);
-	[service setServiceUploadProgressSelector:progressSel];
-	
-	GDataServiceTicket *ticket;
-	ticket = [service fetchEntryByInsertingEntry:entry
-									  forFeedURL:url
-										delegate:self
-							   didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
-	
-	[self setUploadTicket:ticket];
-	
-	inputView.hidden = YES;
-	uploadView.hidden = NO;
-	//[self updateUI];
-}
-
-// progress callback
-- (void)ticket:(GDataServiceTicket *)ticket
-hasDeliveredByteCount:(unsigned long long)numberOfBytesRead 
-ofTotalByteCount:(unsigned long long)dataLength {
-	
-	
-	[mUploadProgressIndicator setProgress:(float)numberOfBytesRead/(float)dataLength];
-}
-
-// upload callback
-- (void)uploadTicket:(GDataServiceTicket *)ticket
-   finishedWithEntry:(GDataEntryYouTubeVideo *)videoEntry
-               error:(NSError *)error {
-	//	if (error == nil) {
-	//		// tell the user that the add worked
-	//		NSBeginAlertSheet(@"Uploaded", nil, nil, nil,
-	//						  [self window], nil, nil,
-	//						  nil, nil, @"Uploaded video: %@",
-	//						  [[videoEntry title] stringValue]);
-	//		
-	//		// refetch the current entries, in case the list of uploads
-	//		// has changed
-	//		[self fetchAllEntries];
-	//		[self updateUI];
-	//	} else {
-	//		NSBeginAlertSheet(@"Upload failed", nil, nil, nil,
-	//						  [self window], nil, nil,
-	//						  nil, nil, @"Upload failed: %@", error);
-	//	}
-	[mUploadProgressIndicator setProgress:0.0];
-	
-	[self setUploadTicket:nil];
 	[self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void) cancel:(id)sender {
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
 
 
 

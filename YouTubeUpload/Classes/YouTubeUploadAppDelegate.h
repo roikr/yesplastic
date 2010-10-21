@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YouTubeUploader.h"
 
+@class YouTubeUploadViewController;
 
-
-@interface YouTubeUploadAppDelegate : NSObject <UIApplicationDelegate> {
+@interface YouTubeUploadAppDelegate : NSObject <UIApplicationDelegate,YouTubeUploaderDelegate> {
     UIWindow *window;
-    UINavigationController *navigationController;
+    //UINavigationController *navigationController;
+	YouTubeUploadViewController *controller;
+	
+	YouTubeUploader *uploader;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+//@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) YouTubeUploader *uploader;
+@property (nonatomic, retain) IBOutlet YouTubeUploadViewController *controller;
 
 @end
 

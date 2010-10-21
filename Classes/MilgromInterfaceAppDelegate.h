@@ -20,6 +20,7 @@ extern NSString * const kMilgromURL;
 @class MainViewController;
 @class BandMenu;
 @class AVPlayerDemoPlaybackViewController;
+@class ShareManager;
 class testApp;
 
 
@@ -46,7 +47,7 @@ class testApp;
 	
 	Song *currentSong;
 	
-	
+	ShareManager *shareManager;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -64,6 +65,8 @@ class testApp;
 @property testApp *OFSAptr;
 @property (nonatomic, retain) NSMutableArray *queuedDemos;
 @property (nonatomic, retain) Song *currentSong;
+
+@property (nonatomic, retain) ShareManager *shareManager;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;

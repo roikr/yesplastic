@@ -416,6 +416,7 @@
 
 
 - (void)share:(id)sender {
+	
 	[self hideHelp];
 	OFSAptr->setSongState(SONG_IDLE);
 	

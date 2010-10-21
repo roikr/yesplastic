@@ -22,6 +22,7 @@
 #import "CustomImageView.h"
 #import "MilgromMacros.h"
 #import "Song.h"
+#import "ShareManager.h"
 
 enum {
 	ACTION_NONE,
@@ -48,8 +49,7 @@ enum {
 
 @synthesize progressView;
 @synthesize renderingView;
-@synthesize youTubeViewController;
-@synthesize facebookViewController;
+
 
 
 /*
@@ -200,9 +200,7 @@ enum {
 
 - (void)dealloc {
 	//[dataSourceArray release];
-	[youTubeViewController release];
-	[facebookViewController release];
-    [super dealloc];
+	[super dealloc];
 }
 
 - (NSNumber *)progress {
@@ -399,14 +397,18 @@ enum {
 	}
 	
 	state = ACTION_NONE;
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
 		
 	switch (buttonIndex)
 	{
-		case 0:
-			state = !self.didUploadToYouTube ? ACTION_UPLOAD_TO_YOUTUBE : ACTION_POST_ON_FACEBOOK;
+		case 0: 
+			
+			state = appDelegate.shareManager.isUploading ? ACTION_DONE : !self.didUploadToYouTube ? ACTION_UPLOAD_TO_YOUTUBE : ACTION_POST_ON_FACEBOOK;
 			break;
 		case 1:
-			state = ACTION_UPLOAD_TO_FACEBOOK;
+			state = appDelegate.shareManager.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
 			break;
 		
 		case 2:
@@ -448,37 +450,44 @@ enum {
 							
 - (void)action {
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
 	switch (state)
 	{
-		case ACTION_UPLOAD_TO_YOUTUBE:
+		case ACTION_UPLOAD_TO_YOUTUBE: {
 			
-			if (self.youTubeViewController == nil) {
-				self.youTubeViewController = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
-			}
+			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
+			[appDelegate pushViewController:controller];
+			controller.username.text = @"kingyorts";
+			controller.password.text = @"56565656";
+			controller.uploader = appDelegate.shareManager.youTubeUploader;
+			controller.videoTitle = [self getVideoName];
+			controller.descriptionView.text = @"testing";
+			controller.videoPath = [self getVideoPath];
 			
-			
-			[youTubeViewController configureWithVideoName:[self getVideoName] andPath:[self getVideoPath]]; // [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushViewController:youTubeViewController];
-								
-			break;
+			[controller release];
+		}	break;
 	
-		case ACTION_UPLOAD_TO_FACEBOOK:
-			if (self.facebookViewController == nil) {
-				self.facebookViewController = [[FacebookUploadViewController alloc] initWithNibName:@"FacebookUploadViewController" bundle:nil];
-			}
+		case ACTION_UPLOAD_TO_FACEBOOK: {
 			
 			
-			[facebookViewController uploadWithVideoName:[self getVideoName] andPath:[self getVideoPath]]; // [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushViewController:facebookViewController];
+			FacebookUploadViewController * controller = [[FacebookUploadViewController alloc] initWithNibName:@"FacebookUploadViewController" bundle:nil];
 			
-			break;
+			[appDelegate pushViewController:controller];
+			controller.uploader = appDelegate.shareManager.facebookUploader;
+			controller.videoTitle = [self getVideoName];
+			controller.descriptionView.text = @"testing";
+			controller.videoPath = [self getVideoPath];
+			[controller release];
+			
+		}	break;
 		
 		case ACTION_SEND_VIA_MAIL:
 			[self sendViaMail];
 			break;
 	
 		case ACTION_PLAY:
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] play];
+			[appDelegate play];
 			break;
 		default: 
 			[self menu];

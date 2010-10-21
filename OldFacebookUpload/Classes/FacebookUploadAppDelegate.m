@@ -7,12 +7,13 @@
 //
 
 #import "FacebookUploadAppDelegate.h"
-#import "FacebookUploadController.h"
+#import "FacebookUploadViewController.h"
 
 @implementation FacebookUploadAppDelegate
 
 @synthesize window;
 @synthesize controller;
+@synthesize uploader;
 
 
 #pragma mark -
@@ -24,11 +25,14 @@
     
     [window makeKeyAndVisible];
 	
-	controller = [[FacebookUploadController alloc] initWithDelegate:self];
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"IMG_0015" ofType:@"MOV"];
+	self.uploader = [FacebookUploader facebookUploaderWithDelegate:self];
 	
-	[controller uploadVideoWithVideoName:@"kremer the cat" andPath:path];
-	    
+	controller.uploader = uploader;
+	controller.videoTitle = @"kremer the cat";
+	controller.descriptionView.text = @"testing";
+	controller.videoPath = [[NSBundle mainBundle] pathForResource:@"IMG_0015" ofType:@"MOV"];
+	
+	
     return YES;
 }
 
@@ -82,17 +86,31 @@
 
 
 - (void)dealloc {
+	[uploader release];
 	[controller release];
     [window release];
     [super dealloc];
 }
 
-- (void) facebookControllerDidFail:(FacebookUploadController *)theController {
-}
-
-- (void) facebookControllerDidFinish:(FacebookUploadController *)theController {
+- (void) facebookUploaderDidLogin:(FacebookUploader *)theUploader {
 	
 }
+
+- (void) facebookUploaderDidFail:(FacebookUploader *)theUploader {
+}
+
+- (void) facebookUploaderDidStartUploading:(FacebookUploader *)theUploader {
+}
+
+- (void) facebookUploaderDidFinishUploading:(FacebookUploader *)theUploader {
+	NSLog(@"facebookUploaderDidFinishUploading");
+	
+}
+
+- (void) facebookUploaderProgress:(float)progress {
+	
+}
+
 
 
 @end

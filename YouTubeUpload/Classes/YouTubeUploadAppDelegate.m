@@ -12,7 +12,9 @@
 @implementation YouTubeUploadAppDelegate
 
 @synthesize window;
-@synthesize navigationController;
+//@synthesize navigationController;
+@synthesize uploader;
+@synthesize controller;
 
 
 #pragma mark -
@@ -23,11 +25,20 @@
     // Override point for customization after application launch.
 
     // Add the view controller's view to the window and display.
-    [window addSubview:navigationController.view];
+   // [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
-	YouTubeUploadViewController * youTube = (YouTubeUploadViewController*)navigationController.visibleViewController;
-	[youTube configureWithVideoName:@"Roee's test" andPath:[[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"]];
+	//YouTubeUploadViewController * controller = (YouTubeUploadViewController*)navigationController.visibleViewController;
+	self.uploader = [YouTubeUploader youTubeUploaderWithDelegate:self];
+	controller.username.text = @"kingyorts";
+	controller.password.text = @"56565656";
+	controller.uploader = uploader;
+	controller.videoTitle = @"kremer the cat";
+	controller.descriptionView.text = @"testing";
+	controller.videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"];
 	
+	
+	
+		
     return YES;
 }
 
@@ -81,10 +92,23 @@
 
 
 - (void)dealloc {
-    [navigationController release];
+    //[navigationController release];
+	[uploader release];
+	[controller release];
     [window release];
     [super dealloc];
 }
 
+-(void) youTubeUploaderDidFail:(YouTubeUploader *)theUploader {
+}
+
+- (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader {
+}
+
+- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader {
+}
+
+- (void) youTubeUploaderProgress:(float)progress {
+}
 
 @end

@@ -7,14 +7,17 @@
 //
 
 #import "FacebookUploadViewController.h"
+#import "FacebookUploader.h"
 
 
 @implementation FacebookUploadViewController
 
-@synthesize facebookController;
-@synthesize videoName;
-@synthesize path;
-@synthesize activityIndicatorView;
+@synthesize uploader;
+
+@synthesize titleField;
+@synthesize descriptionView;
+@synthesize videoPath;
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -26,15 +29,12 @@
 }
 */
 
-
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-		
-	
-	
 }
-
+*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -59,42 +59,50 @@
 
 
 - (void)dealloc {
-	[videoName release];
-	[path release];
-	[facebookController release];
+	[videoPath release];
+	[uploader release];
     [super dealloc];
 }
 
-- (void) uploadWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath {
+-(void) setVideoTitle:(NSString *) title{
+	titleField.text = title;
+}
+
+-(NSString *)videoTitle {
+	return titleField.text;
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return NO;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+	[textView resignFirstResponder];
+	return YES;
+}
+
+
+- (void) upload:(id)sender {
 	
-	if (self.facebookController == nil) {
-		self.facebookController = [[FacebookUploadController alloc] initWithDelegate:self];
+	if (uploader!=nil) {
+		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath];
 	}
-	
-	
-	self.videoName = theVideoName;
-	self.path = thePath;
-	[facebookController login];
-	[activityIndicatorView stopAnimating];
-	
+		
+	[self.navigationController popViewControllerAnimated:YES];
+
 }
 
-- (void) facebookControllerDidLogin:(FacebookUploadController *)theController {
-	[facebookController uploadVideoWithVideoName:videoName andPath:path];
-}
-
-- (void) facebookControllerDidFail:(FacebookUploadController *)theController {
+- (void) cancel:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) facebookControllerDidStartUploading:(FacebookUploadController *)theController {
-	[activityIndicatorView startAnimating];
+- (void) logout:(id)sender {
+	if (uploader!=nil && [uploader isConnected]) {
+		[uploader logout];
+	}
 }
 
-- (void) facebookControllerDidFinishUploading:(FacebookUploadController *)theController {
-	[activityIndicatorView stopAnimating];
-	[self.navigationController popViewControllerAnimated:YES];
-	
-}
 
 @end

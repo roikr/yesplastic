@@ -25,7 +25,7 @@
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "ShareManager.h"
 
 
 
@@ -64,8 +64,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 @synthesize currentSong;
-
-
+@synthesize shareManager;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -77,6 +76,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 		
 	self.OFSAptr = new testApp;
+	self.shareManager = [ShareManager shareManager];
 	//self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...

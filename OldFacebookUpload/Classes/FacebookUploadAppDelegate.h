@@ -7,17 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FacebookUploadController.h"
+#import "FacebookUploader.h"
 
-@class FacebookUploadController;
+@class FacebookUploadViewController;
 
-@interface FacebookUploadAppDelegate : NSObject <UIApplicationDelegate,FacebookControllerDelegate> {
+@interface FacebookUploadAppDelegate : NSObject <UIApplicationDelegate,FacebookUploaderDelegate> {
     UIWindow *window;
-	FacebookUploadController *controller;
+	FacebookUploadViewController *controller;
+	FacebookUploader *uploader;
+	
+	
+	
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) FacebookUploadController *controller;
+@property (nonatomic, retain) IBOutlet FacebookUploadViewController *controller;
+@property (nonatomic, retain) FacebookUploader *uploader;
 
 @end
  

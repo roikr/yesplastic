@@ -26,8 +26,6 @@
 	NSInteger state;
 	UIView *renderingView;
 	
-	YouTubeUploadViewController *youTubeViewController;
-	FacebookUploadViewController *facebookViewController;
 }
 
 
@@ -39,9 +37,6 @@
 //@property (nonatomic,assign) IBOutlet ActionCell *tmpCell;
 
 @property (nonatomic, retain) IBOutlet UIView *renderingView;
-
-@property (nonatomic,retain ) YouTubeUploadViewController *youTubeViewController;
-@property (nonatomic, retain) FacebookUploadViewController *facebookViewController;
 
 @property (readonly) BOOL didUploadToYouTube;
 @property (readonly) BOOL didUploadToFacebook;

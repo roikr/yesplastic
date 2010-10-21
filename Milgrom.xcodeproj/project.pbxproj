@@ -329,11 +329,13 @@
 		E4B1B2B1126E20B2001A577D /* FBPermissionDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B2A6126E20B2001A577D /* FBPermissionDialog.m */; };
 		E4B1B2B2126E20B2001A577D /* FBStreamDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B2A8126E20B2001A577D /* FBStreamDialog.m */; };
 		E4B1B2B3126E20B2001A577D /* FBConnect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E4B1B2A9126E20B2001A577D /* FBConnect.bundle */; };
-		E4B1B2CC126E20C2001A577D /* FacebookUploadController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B2CB126E20C2001A577D /* FacebookUploadController.m */; };
-		E4B1B344126E337C001A577D /* FacebookUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B342126E337C001A577D /* FacebookUploadViewController.m */; };
 		E4B1B345126E337C001A577D /* FacebookUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B1B343126E337C001A577D /* FacebookUploadViewController.xib */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
+		E4B5427F1270898C00851D86 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B5427E1270898C00851D86 /* ShareManager.m */; };
+		E4B54287127089C900851D86 /* FacebookUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54283127089C900851D86 /* FacebookUploadViewController.m */; };
+		E4B54288127089C900851D86 /* FacebookUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54285127089C900851D86 /* FacebookUploader.m */; };
+		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
 		E4BAF0FA125EFE5000AE1ED0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF0F8125EFE5000AE1ED0 /* Song.m */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
@@ -891,14 +893,18 @@
 		E4B1B2A7126E20B2001A577D /* FBStreamDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBStreamDialog.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBStreamDialog.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B2A8126E20B2001A577D /* FBStreamDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBStreamDialog.m; path = "../OpenSource/facebook-iphone-sdk/src/FBStreamDialog.m"; sourceTree = SOURCE_ROOT; };
 		E4B1B2A9126E20B2001A577D /* FBConnect.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBConnect.bundle; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect.bundle"; sourceTree = SOURCE_ROOT; };
-		E4B1B2CA126E20C2001A577D /* FacebookUploadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploadController.h; path = OldFacebookUpload/Classes/FacebookUploadController.h; sourceTree = "<group>"; };
-		E4B1B2CB126E20C2001A577D /* FacebookUploadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploadController.m; path = OldFacebookUpload/Classes/FacebookUploadController.m; sourceTree = "<group>"; };
-		E4B1B341126E337C001A577D /* FacebookUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploadViewController.h; path = OldFacebookUpload/FacebookUploadViewController.h; sourceTree = "<group>"; };
-		E4B1B342126E337C001A577D /* FacebookUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploadViewController.m; path = OldFacebookUpload/FacebookUploadViewController.m; sourceTree = "<group>"; };
 		E4B1B343126E337C001A577D /* FacebookUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FacebookUploadViewController.xib; path = OldFacebookUpload/FacebookUploadViewController.xib; sourceTree = "<group>"; };
 		E4B3D17C11F823E000B57223 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
+		E4B5427D1270898C00851D86 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
+		E4B5427E1270898C00851D86 /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
+		E4B54283127089C900851D86 /* FacebookUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploadViewController.m; path = OldFacebookUpload/Classes/FacebookUploadViewController.m; sourceTree = "<group>"; };
+		E4B54284127089C900851D86 /* FacebookUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploadViewController.h; path = OldFacebookUpload/Classes/FacebookUploadViewController.h; sourceTree = "<group>"; };
+		E4B54285127089C900851D86 /* FacebookUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploader.m; path = OldFacebookUpload/Classes/FacebookUploader.m; sourceTree = "<group>"; };
+		E4B54286127089C900851D86 /* FacebookUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploader.h; path = OldFacebookUpload/Classes/FacebookUploader.h; sourceTree = "<group>"; };
+		E4B54289127089EB00851D86 /* YouTubeUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploader.m; path = YouTubeUpload/Classes/YouTubeUploader.m; sourceTree = "<group>"; };
+		E4B5428A127089EB00851D86 /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = YouTubeUpload/Classes/YouTubeUploader.h; sourceTree = "<group>"; };
 		E4BAF0F8125EFE5000AE1ED0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E4BAF0F9125EFE5000AE1ED0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
 		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
@@ -1829,11 +1835,11 @@
 		E4AF9D7A1263694A003E9148 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
+				E4B54283127089C900851D86 /* FacebookUploadViewController.m */,
+				E4B54284127089C900851D86 /* FacebookUploadViewController.h */,
+				E4B54285127089C900851D86 /* FacebookUploader.m */,
+				E4B54286127089C900851D86 /* FacebookUploader.h */,
 				E4B1B295126E20B2001A577D /* FBConnect */,
-				E4B1B2CA126E20C2001A577D /* FacebookUploadController.h */,
-				E4B1B2CB126E20C2001A577D /* FacebookUploadController.m */,
-				E4B1B341126E337C001A577D /* FacebookUploadViewController.h */,
-				E4B1B342126E337C001A577D /* FacebookUploadViewController.m */,
 				E4B1B343126E337C001A577D /* FacebookUploadViewController.xib */,
 			);
 			name = Facebook;
@@ -1945,6 +1951,8 @@
 				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
 				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
 				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
+				E4B5427D1270898C00851D86 /* ShareManager.h */,
+				E4B5427E1270898C00851D86 /* ShareManager.m */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
 				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
 			);
@@ -1993,6 +2001,8 @@
 		E4C44C2012436581007ACEBC /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				E4B54289127089EB00851D86 /* YouTubeUploader.m */,
+				E4B5428A127089EB00851D86 /* YouTubeUploader.h */,
 				E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */,
 				E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */,
 				E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */,
@@ -2512,8 +2522,10 @@
 				E4B1B2B0126E20B2001A577D /* FBLoginDialog.m in Sources */,
 				E4B1B2B1126E20B2001A577D /* FBPermissionDialog.m in Sources */,
 				E4B1B2B2126E20B2001A577D /* FBStreamDialog.m in Sources */,
-				E4B1B2CC126E20C2001A577D /* FacebookUploadController.m in Sources */,
-				E4B1B344126E337C001A577D /* FacebookUploadViewController.m in Sources */,
+				E4B5427F1270898C00851D86 /* ShareManager.m in Sources */,
+				E4B54287127089C900851D86 /* FacebookUploadViewController.m in Sources */,
+				E4B54288127089C900851D86 /* FacebookUploader.m in Sources */,
+				E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2548,7 +2560,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62D69DEA-7DF7-4B36-8C3C-A3432F096E5A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8523836-2F4C-433B-8FED-B735D919B95B";
 				SDKROOT = iphoneos4.2;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 			};
@@ -2580,7 +2592,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62D69DEA-7DF7-4B36-8C3C-A3432F096E5A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8523836-2F4C-433B-8FED-B735D919B95B";
 				SDKROOT = iphoneos4.2;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 				VALIDATE_PRODUCT = YES;

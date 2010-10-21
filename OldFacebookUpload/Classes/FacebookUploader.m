@@ -1,53 +1,64 @@
 //
-//  FacebookUploadController.m
+//  FacebookUploader.m
 //  FacebookUpload
 //
-//  Created by Roee Kremer on 9/19/10.
+//  Created by Roee Kremer on 10/21/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "FacebookUploadController.h"
-#import <CommonCrypto/CommonDigest.h>
-
-
+#import "FacebookUploader.h"
 
 // Your Facebook APP Id must be set before running this example
 // See http://www.facebook.com/developers/createapp.php
-static NSString* kAppId = @"142588289117470";
+//static NSString* kAppId = @"142588289117470";
 static NSString* kApiKey = @"e06968ce5ad567d5685a8ebabfd63619";
 static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 
 
-@interface FacebookUploadController (PrivateMethods) 
+@interface FacebookUploader (PrivateMethods) 
+- (void)login;
 - (void) requestPermission;
-
 @end
 
-@implementation FacebookUploadController
+
+
+@implementation FacebookUploader
 
 @synthesize delegate;
 @synthesize session;
+@synthesize videoTitle;
+@synthesize videoDescription;
+@synthesize videoPath;
+@synthesize isUploading;
+@synthesize progress;
 
++ (FacebookUploader *) facebookUploaderWithDelegate:(id<FacebookUploaderDelegate>)theDelegate {
+	return [[[FacebookUploader alloc] initWithDelegate:theDelegate] autorelease];
+}
 
-- (id)initWithDelegate:(id<FacebookControllerDelegate>)theDelegate {
+- (id)initWithDelegate:(id<FacebookUploaderDelegate>)theDelegate {
 	
 	if (self = [super init]) {
 		self.delegate = theDelegate;
-		//_permissions =  [[NSArray arrayWithObjects: @"read_stream", @"offline_access",@"publish_stream",nil] retain];
-		self.session = [FBSession sessionForApplication: kApiKey secret: kApiSecret delegate: self] ;
-		
-		
+		isUploading = NO;
 	}
 	return self;
 }
 
 - (void) dealloc {
+	[videoTitle release];
+	[videoDescription release];
+	[videoPath release];
 	[session release];
 	[super dealloc];
 }
 
 - (void)login {
+	if ( self.session == nil) {
+		self.session = [FBSession sessionForApplication: kApiKey secret: kApiSecret delegate: self] ;
+	}
+		
 	if (![session resume]) {
 		// Show the login dialog
 		FBLoginDialog* dialog = [[[FBLoginDialog alloc] init] autorelease];
@@ -56,7 +67,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 		[dialog show];
 	}	
 }
-	
+
 - (void) requestPermission { // Ask for extended permissions
 	FBPermissionDialog* dialog = [[[FBPermissionDialog alloc] init] autorelease];
 	dialog.delegate = self;
@@ -67,19 +78,23 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 
 
-- (void) uploadVideoWithVideoName:(NSString *)theVideoName andPath:(NSString *)thePath {
+- (void) uploadVideoWithTitle:(NSString *)title withDescription:(NSString *)description andPath:(NSString *)path {
 	
-	NSData *data = [NSData dataWithContentsOfFile:thePath];
+	self.videoTitle = title;
+	self.videoDescription = description;
+	self.videoPath = path;
 	
-	FBRequest *m_UploadRequest = [FBRequest requestWithSession: session delegate: self];
+	[self login];
 	
-	NSMutableDictionary* Parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"video.upload", @"method", theVideoName, @"title", nil];
-	[m_UploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
-	
-		
 }
 
+- (void) logout {
+	[session logout];
+}
 
+- (BOOL) isConnected {
+	return [session isConnected];
+}
 
 /**
  * Called when a user has successfully logged in and begun a session.
@@ -97,8 +112,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)sessionDidNotLogin:(FBSession*)session {
 	NSLog(@"did not login");
-	[delegate facebookControllerDidFail:self];
-
+	[delegate facebookUploaderDidFail:self];
+	
 }
 
 /**
@@ -122,7 +137,16 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void)dialogDidSucceed:(FBDialog*)dialog {
 	NSLog(@"dialogDidSucceed");
 	if ([dialog isKindOfClass:[FBPermissionDialog class]]) {
-		[delegate facebookControllerDidLogin:self];
+		NSData *data = [NSData dataWithContentsOfFile:videoPath];
+		
+		FBRequest *uploadRequest = [FBRequest requestWithSession: session delegate: self];
+		
+		NSMutableDictionary* Parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"video.upload", @"method", 
+										   videoTitle, @"title", videoDescription,@"description",nil];
+		[uploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
+		
+		isUploading = YES;
+		//[delegate facebookUploaderDidLogin:self];
 	}
 }
 
@@ -131,7 +155,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)dialogDidCancel:(FBDialog*)dialog {
 	NSLog(@"dialogDidCancel");
-	[delegate facebookControllerDidFail:self];
+	[delegate facebookUploaderDidFail:self];
 }
 
 /**
@@ -139,7 +163,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)dialog:(FBDialog*)dialog didFailWithError:(NSError*)error {
 	NSLog(@"dialog didFailWithError");
-	[delegate facebookControllerDidFail:self];
+	[delegate facebookUploaderDidFail:self];
 }
 
 /**
@@ -182,7 +206,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error {
 	NSLog(@"request didFailWithError");
-	[delegate facebookControllerDidFail:self];
+	isUploading = NO;
+	[delegate facebookUploaderDidFail:self];
 }
 
 /**
@@ -193,7 +218,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didLoad:(id)result {
 	NSLog(@"Video upload Success");
-	[delegate facebookControllerDidFinishUploading:self];
+	isUploading = NO;
+	[delegate facebookUploaderDidFinishUploading:self];
 	//[session logout];
 }
 
@@ -202,11 +228,17 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)requestWasCancelled:(FBRequest*)request {
 	NSLog(@"requestWasCancelled");
-	[delegate facebookControllerDidFail:self];
+	isUploading = NO;
+	[delegate facebookUploaderDidFail:self];
 	
 }
 
 
+- (void)request:(FBRequest*)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+	progress = (float)totalBytesWritten/(float)totalBytesExpectedToWrite;
+	NSLog(@"facebook upload progress: %f",progress);
+	[delegate facebookUploaderProgress:progress];
+}
 
 
 
