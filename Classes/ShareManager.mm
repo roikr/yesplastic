@@ -7,7 +7,8 @@
 //
 
 #import "ShareManager.h"
-
+#import "MainViewController.h"
+#import "MilgromInterfaceAppDelegate.h"
 
 @implementation ShareManager
 
@@ -48,6 +49,9 @@
 }
 
 - (void) facebookUploaderProgress:(float)progress {
+	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] setShareProgress:progress];
+	
+	
 }
 
 
@@ -69,6 +73,7 @@
 }
 
 - (void) youTubeUploaderProgress:(float)progress {
+	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] setShareProgress:progress];
 }
 
 

@@ -105,7 +105,7 @@
 							<object class="IBUIButton" id="741302335">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">-2147483359</int>
-								<string key="NSFrame">{{70, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{230, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -125,10 +125,23 @@
 									<string key="NSResourceName">SAVE_B.png</string>
 								</object>
 							</object>
+							<object class="IBUIView" id="448266039">
+								<reference key="NSNextResponder" ref="863361826"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{280, 0}, {40, 40}}</string>
+								<reference key="NSSuperview" ref="863361826"/>
+								<object class="NSColor" key="IBUIBackgroundColor" id="719325150">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
+								</object>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
 							<object class="IBUIButton" id="388573076">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{120, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{280, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -144,13 +157,13 @@
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">SHARE_B.png</string>
+									<string key="NSResourceName">SHARE_B_BACKGROUND.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="561080161">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{170, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{330, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -173,7 +186,7 @@
 							<object class="IBUIButton" id="541363912">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{220, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{380, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -187,9 +200,9 @@
 								<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 								<object class="NSCustomResource" key="IBUISelectedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">RECORD_B_OVERLY.png</string>
+									<string key="NSResourceName">RECORD_B_ON.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUINormalImage">
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">RECORD_B.png</string>
 								</object>
@@ -197,7 +210,7 @@
 							<object class="IBUIButton" id="14781122">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{270, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{430, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -217,7 +230,7 @@
 							<object class="IBUIButton" id="404010622">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">-2147483359</int>
-								<string key="NSFrame">{{270, 0}, {40, 40}}</string>
+								<string key="NSFrame">{{430, 0}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -235,12 +248,9 @@
 								</object>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 20}, {320, 45}}</string>
+						<string key="NSFrame">{{0, 20}, {480, 45}}</string>
 						<reference key="NSSuperview" ref="140016098"/>
-						<object class="NSColor" key="IBUIBackgroundColor" id="719325150">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="719325150"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -466,11 +476,14 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 480}</string>
+				<string key="NSFrameSize">{480, 320}</string>
 				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="719325150"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="interfaceOrientation">3</int>
+				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</object>
@@ -724,6 +737,14 @@
 					</object>
 					<int key="connectionID">165</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shareProgressView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="448266039"/>
+					</object>
+					<int key="connectionID">169</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -786,6 +807,7 @@
 							<reference ref="741302335"/>
 							<reference ref="388573076"/>
 							<reference ref="561080161"/>
+							<reference ref="448266039"/>
 						</object>
 						<reference key="parent" ref="140016098"/>
 					</object>
@@ -900,6 +922,11 @@
 						<reference key="object" ref="431705949"/>
 						<reference key="parent" ref="929071667"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">168</int>
+						<reference key="object" ref="448266039"/>
+						<reference key="parent" ref="863361826"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -920,6 +947,9 @@
 					<string>146.IBViewBoundsToFrameTransform</string>
 					<string>150.IBPluginDependency</string>
 					<string>150.IBViewBoundsToFrameTransform</string>
+					<string>168.CustomClassName</string>
+					<string>168.IBPluginDependency</string>
+					<string>168.IBViewBoundsToFrameTransform</string>
 					<string>51.CustomClassName</string>
 					<string>51.IBEditorWindowLastContentRect</string>
 					<string>51.IBPluginDependency</string>
@@ -954,7 +984,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUOHAAAAAAAAA</bytes>
+						<bytes key="NSTransformStruct">AULwAAAAAAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform"/>
@@ -969,8 +999,13 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUKMAAAAAAAAA</bytes>
 					</object>
+					<string>CustomImageView</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AULwAAAAAAAAA</bytes>
+					</object>
 					<string>TouchView</string>
-					<string>{{196, 91}, {320, 480}}</string>
+					<string>{{147, 299}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1027,11 +1062,19 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">165</int>
+			<int key="maxID">169</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">CustomImageView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/CustomImageView.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">MainViewController</string>
 					<string key="superclassName">UIViewController</string>
@@ -1151,6 +1194,7 @@
 							<string>saveButton</string>
 							<string>setMenuButton</string>
 							<string>shareButton</string>
+							<string>shareProgressView</string>
 							<string>soloHelp</string>
 							<string>stopButton</string>
 							<string>triggersView</string>
@@ -1167,6 +1211,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>CustomImageView</string>
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIView</string>
@@ -1186,6 +1231,7 @@
 							<string>saveButton</string>
 							<string>setMenuButton</string>
 							<string>shareButton</string>
+							<string>shareProgressView</string>
 							<string>soloHelp</string>
 							<string>stopButton</string>
 							<string>triggersView</string>
@@ -1233,6 +1279,10 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">shareProgressView</string>
+								<string key="candidateClassName">CustomImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">soloHelp</string>
 								<string key="candidateClassName">UIView</string>
 							</object>
@@ -1249,20 +1299,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/MainViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../OpenSource/facebook-ios-sdk/src/JSON/NSObject+SBJSON.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../OpenSource/facebook-ios-sdk/src/JSON/SBJsonWriter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1516,9 +1552,9 @@
 				<string>PAUSE_B.png</string>
 				<string>PLAY_B.png</string>
 				<string>RECORD_B.png</string>
-				<string>RECORD_B_OVERLY.png</string>
+				<string>RECORD_B_ON.png</string>
 				<string>SAVE_B.png</string>
-				<string>SHARE_B.png</string>
+				<string>SHARE_B_BACKGROUND.png</string>
 				<string>SOLO_HELP.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
@@ -1536,7 +1572,7 @@
 				<string>{40, 40}</string>
 				<string>{40, 40}</string>
 				<string>{40, 40}</string>
-				<string>{50, 45}</string>
+				<string>{40, 40}</string>
 				<string>{40, 40}</string>
 				<string>{40, 40}</string>
 				<string>{320, 480}</string>

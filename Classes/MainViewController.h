@@ -14,7 +14,7 @@ class testApp;
 @class CustomFontTextField;
 @class SaveViewController;
 @class ShareViewController;
-
+@class CustomImageView;
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
@@ -48,6 +48,8 @@ class testApp;
 	
 	BOOL bAnimatingRecord;
 	NSTimeInterval shakeStartTime;
+	
+	CustomImageView *shareProgressView;
 }
 
 
@@ -70,6 +72,7 @@ class testApp;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 @property (nonatomic,retain ) ShareViewController *shareViewController;
+@property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
 
 @property BOOL bShowHelp;
 
@@ -80,6 +83,7 @@ class testApp;
 - (void) record:(id)sender;
 - (void) save:(id)sender;
 - (void) share:(id)sender;
+- (void) setShareProgress:(float) progress;
 - (void) trigger:(id)sender;
 - (void) loop:(id)sender;
 //- (void) updateLoops:(id)sender;

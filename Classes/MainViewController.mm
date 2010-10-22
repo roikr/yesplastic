@@ -19,6 +19,8 @@
 #import "SaveViewController.h"
 #import "ShareViewController.h"
 #import "Song.h"
+#import "CustomImageView.h"
+#import "ShareManager.h"
 
 
 @implementation MainViewController
@@ -43,7 +45,7 @@
 //@synthesize loopButton;
 @synthesize saveViewController;
 @synthesize shareViewController;
-
+@synthesize shareProgressView;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -67,6 +69,8 @@
 	[(TouchView*)self.view  setViewController:self];
 	bShowHelp = NO;
 	bAnimatingRecord = NO;
+	
+	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B_BACKGROUND.png"];
 	
 	//[self.view addSubview:menuController.view];
 	//menuController.view.hidden = YES;
@@ -189,7 +193,9 @@
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
 	
-	
+	if (![[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] isUploading]) {
+		[self setShareProgress:1.0f];
+	}
 	
 	if (!OFSAptr->isInTransition()) {
 		switch (OFSAptr->getSongState()) {
@@ -370,7 +376,7 @@
 		//[UIView animateWithDuration:0.2 animations:^{recordButton.alpha = 0.0;} completion:^(BOOL finished){ [self fadeInRecordButton]; }];
 		[UIView animateWithDuration:0.1 delay:0.5 
 							options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
-						 animations:^{recordButton.alpha = 0.0;} 
+						 animations:^{recordButton.imageView.alpha = 0.0;} 
 						 completion:^(BOOL finished){ [self fadeInRecordButton]; }];
 		
 		
@@ -383,12 +389,12 @@
 
 - (void) fadeInRecordButton {
 	if (OFSAptr->getSongState() != SONG_RECORD) {
-		recordButton.alpha = 1.0;
+		recordButton.imageView.alpha = 1.0;
 		bAnimatingRecord = NO;
 	} else {
 		[UIView animateWithDuration:0.1 delay:0.5 
 						options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
-					 animations:^{recordButton.alpha = 1.0;} 
+					 animations:^{recordButton.imageView.alpha = 1.0;} 
 					 completion:^(BOOL finished){ [self fadeOutRecordButton]; }];
 	}
 }
@@ -435,6 +441,12 @@
 	
 	
 	
+}
+
+
+
+- (void) setShareProgress:(float) progress {
+	[shareProgressView setRect:CGRectMake(0, 0, 1.0f,progress)];
 }
 
 		

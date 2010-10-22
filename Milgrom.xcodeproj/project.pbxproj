@@ -11,6 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		E4159BD81271EA8B00B28DAE /* SHARE_B_BACKGROUND.png in Resources */ = {isa = PBXBuildFile; fileRef = E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */; };
 		E42D132F124F796A007BEEB0 /* ARROWS_DRM_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */; };
 		E42D1330124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */; };
 		E42D1331124F796A007BEEB0 /* ARROWS_GTR_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1327124F796A007BEEB0 /* ARROWS_GTR_LEFT.png */; };
@@ -332,7 +333,7 @@
 		E4B1B345126E337C001A577D /* FacebookUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B1B343126E337C001A577D /* FacebookUploadViewController.xib */; };
 		E4B3D18411F823E000B57223 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B3D17D11F823E000B57223 /* MainViewController.mm */; };
 		E4B3D2D011F83D5200B57223 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B3D2C611F83D5200B57223 /* MainWindow.xib */; };
-		E4B5427F1270898C00851D86 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B5427E1270898C00851D86 /* ShareManager.m */; };
+		E4B5427F1270898C00851D86 /* ShareManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B5427E1270898C00851D86 /* ShareManager.mm */; };
 		E4B54287127089C900851D86 /* FacebookUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54283127089C900851D86 /* FacebookUploadViewController.m */; };
 		E4B54288127089C900851D86 /* FacebookUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54285127089C900851D86 /* FacebookUploader.m */; };
 		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
@@ -393,6 +394,7 @@
 		1D6058910D05DD3D006BFB54 /* Milgrom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Milgrom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SHARE_B_BACKGROUND.png; sourceTree = "<group>"; };
 		E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_LEFT.png; sourceTree = "<group>"; };
 		E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_RIGHT.png; sourceTree = "<group>"; };
 		E42D1327124F796A007BEEB0 /* ARROWS_GTR_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_GTR_LEFT.png; sourceTree = "<group>"; };
@@ -898,7 +900,7 @@
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
 		E4B5427D1270898C00851D86 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
-		E4B5427E1270898C00851D86 /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
+		E4B5427E1270898C00851D86 /* ShareManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareManager.mm; sourceTree = "<group>"; };
 		E4B54283127089C900851D86 /* FacebookUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploadViewController.m; path = OldFacebookUpload/Classes/FacebookUploadViewController.m; sourceTree = "<group>"; };
 		E4B54284127089C900851D86 /* FacebookUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploadViewController.h; path = OldFacebookUpload/Classes/FacebookUploadViewController.h; sourceTree = "<group>"; };
 		E4B54285127089C900851D86 /* FacebookUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploader.m; path = OldFacebookUpload/Classes/FacebookUploader.m; sourceTree = "<group>"; };
@@ -1952,7 +1954,7 @@
 				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
 				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
 				E4B5427D1270898C00851D86 /* ShareManager.h */,
-				E4B5427E1270898C00851D86 /* ShareManager.m */,
+				E4B5427E1270898C00851D86 /* ShareManager.mm */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
 				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
 			);
@@ -2072,6 +2074,7 @@
 		E4DE4F8511FFFCAB00BF31AF /* GENERAL BUTTONS */ = {
 			isa = PBXGroup;
 			children = (
+				E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */,
 				E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */,
 				E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */,
 				E42D1327124F796A007BEEB0 /* ARROWS_GTR_LEFT.png */,
@@ -2326,6 +2329,7 @@
 				E43BE95F125C968F009C8845 /* SOLO_HELP.png in Resources */,
 				E4B1B2B3126E20B2001A577D /* FBConnect.bundle in Resources */,
 				E4B1B345126E337C001A577D /* FacebookUploadViewController.xib in Resources */,
+				E4159BD81271EA8B00B28DAE /* SHARE_B_BACKGROUND.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2522,7 +2526,7 @@
 				E4B1B2B0126E20B2001A577D /* FBLoginDialog.m in Sources */,
 				E4B1B2B1126E20B2001A577D /* FBPermissionDialog.m in Sources */,
 				E4B1B2B2126E20B2001A577D /* FBStreamDialog.m in Sources */,
-				E4B5427F1270898C00851D86 /* ShareManager.m in Sources */,
+				E4B5427F1270898C00851D86 /* ShareManager.mm in Sources */,
 				E4B54287127089C900851D86 /* FacebookUploadViewController.m in Sources */,
 				E4B54288127089C900851D86 /* FacebookUploader.m in Sources */,
 				E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */,
