@@ -2,16 +2,16 @@
 {
 	1D3623240D0F684500981E51 /* YouTubeUploadAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {773, 377}}";
-			sepNavSelRange = "{552, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {852, 480}}";
+			sepNavSelRange = "{317, 23}";
 			sepNavVisRange = "{0, 781}";
 		};
 	};
 	1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1469}}";
-			sepNavSelRange = "{3619, 0}";
-			sepNavVisRange = "{2732, 942}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1378}}";
+			sepNavSelRange = "{970, 0}";
+			sepNavVisRange = "{355, 924}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* YouTubeUpload */ = {
@@ -22,17 +22,17 @@
 	};
 	28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {761, 739}}";
-			sepNavSelRange = "{445, 0}";
-			sepNavVisRange = "{0, 968}";
+			sepNavIntBoundsRect = "{{0, 0}, {852, 712}}";
+			sepNavSelRange = "{296, 0}";
+			sepNavVisRange = "{0, 997}";
 			sepNavWindowFrame = "{{815, 102}, {820, 867}}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 1521}}";
-			sepNavSelRange = "{1805, 0}";
-			sepNavVisRange = "{1718, 681}";
+			sepNavIntBoundsRect = "{{0, 0}, {852, 2301}}";
+			sepNavSelRange = "{2986, 0}";
+			sepNavVisRange = "{2622, 1231}";
 			sepNavWindowFrame = "{{35, 109}, {740, 889}}";
 		};
 	};
@@ -45,6 +45,7 @@
 			1D6058900D05DD3D006BFB54 /* YouTubeUpload */,
 		);
 		breakpoints = (
+			E423C06C12758D47000E334B /* YouTubeUploader.m:229 */,
 		);
 		codeSenseManager = E4C44A6212435F10007ACEBC /* Code sense */;
 		executables = (
@@ -73,12 +74,17 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 309370721;
-			PBXWorkspaceStateSaveDate = 309370721;
+			PBXPerProjectTemplateStateSaveDate = 309687760;
+			PBXWorkspaceStateSaveDate = 309687760;
 		};
 		perUserProjectItems = {
-			E4B54214127084B800851D86 /* PBXTextBookmark */ = E4B54214127084B800851D86 /* PBXTextBookmark */;
-			E4B543D51270AA3700851D86 /* PBXTextBookmark */ = E4B543D51270AA3700851D86 /* PBXTextBookmark */;
+			E423C05312758BE4000E334B /* PBXTextBookmark */ = E423C05312758BE4000E334B /* PBXTextBookmark */;
+			E423C05612758BE4000E334B /* PBXTextBookmark */ = E423C05612758BE4000E334B /* PBXTextBookmark */;
+			E423C07912758F48000E334B /* PBXTextBookmark */ = E423C07912758F48000E334B /* PBXTextBookmark */;
+			E423C08312758FED000E334B /* PBXTextBookmark */ = E423C08312758FED000E334B /* PBXTextBookmark */;
+			E423C08412758FED000E334B /* PBXTextBookmark */ = E423C08412758FED000E334B /* PBXTextBookmark */;
+			E423C08512758FED000E334B /* PBXTextBookmark */ = E423C08512758FED000E334B /* PBXTextBookmark */;
+			E423C08612758FED000E334B /* PBXTextBookmark */ = E423C08612758FED000E334B /* PBXTextBookmark */;
 			E4B543D61270AA3700851D86 /* PBXTextBookmark */ = E4B543D61270AA3700851D86 /* PBXTextBookmark */;
 			E4B543D71270AA3700851D86 /* PBXTextBookmark */ = E4B543D71270AA3700851D86 /* PBXTextBookmark */;
 			E4B543D81270AA3700851D86 /* PBXTextBookmark */ = E4B543D81270AA3700851D86 /* PBXTextBookmark */;
@@ -86,54 +92,117 @@
 			E4B543DB1270AA3700851D86 /* PBXTextBookmark */ = E4B543DB1270AA3700851D86 /* PBXTextBookmark */;
 			E4B543E11270AA3700851D86 /* PBXTextBookmark */ = E4B543E11270AA3700851D86 /* PBXTextBookmark */;
 			E4B543EC1270AAE600851D86 /* PBXTextBookmark */ = E4B543EC1270AAE600851D86 /* PBXTextBookmark */;
-			E4B543EE1270AAE600851D86 /* PBXTextBookmark */ = E4B543EE1270AAE600851D86 /* PBXTextBookmark */;
 			E4B543FA1270ABE500851D86 /* PBXTextBookmark */ = E4B543FA1270ABE500851D86 /* PBXTextBookmark */;
 			E4B543FB1270ABE500851D86 /* PBXTextBookmark */ = E4B543FB1270ABE500851D86 /* PBXTextBookmark */;
 			E4B543FC1270ABE500851D86 /* PBXTextBookmark */ = E4B543FC1270ABE500851D86 /* PBXTextBookmark */;
 			E4B544061270ACB700851D86 /* PBXTextBookmark */ = E4B544061270ACB700851D86 /* PBXTextBookmark */;
-			E4B544071270ACB700851D86 /* PBXTextBookmark */ = E4B544071270ACB700851D86 /* PBXTextBookmark */;
-			E4B544081270ACB700851D86 /* PBXTextBookmark */ = E4B544081270ACB700851D86 /* PBXTextBookmark */;
-			E4B544091270ACB700851D86 /* PBXTextBookmark */ = E4B544091270ACB700851D86 /* PBXTextBookmark */;
-			E4B544121270AD6000851D86 /* PBXTextBookmark */ = E4B544121270AD6000851D86 /* PBXTextBookmark */;
 		};
 		sourceControlManager = E4C44A6112435F10007ACEBC /* Source Control */;
 		userBuildSettings = {
 		};
 	};
+	E423C05312758BE4000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* YouTubeUploadAppDelegate.h */;
+		name = "YouTubeUploadAppDelegate.h: 14";
+		rLen = 23;
+		rLoc = 317;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	E423C05612758BE4000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E4B54116127074A600851D86 /* YouTubeUploader.h */;
+		name = "YouTubeUploader.h: 57";
+		rLen = 68;
+		rLoc = 1261;
+		rType = 0;
+		vrLen = 854;
+		vrLoc = 495;
+	};
+	E423C06C12758D47000E334B /* YouTubeUploader.m:229 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = E4B54115127074A600851D86 /* YouTubeUploader.m */;
+		functionName = "-uploadTicket:finishedWithEntry:error:";
+		hitCount = 2;
+		ignoreCount = 0;
+		lineNumber = 229;
+		location = YouTubeUpload;
+		modificationTime = 309694106.518207;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	E423C07912758F48000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */;
+		name = "YouTubeUploadAppDelegate.m: 32";
+		rLen = 0;
+		rLoc = 970;
+		rType = 0;
+		vrLen = 753;
+		vrLoc = 2661;
+	};
+	E423C08312758FED000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E4B54115127074A600851D86 /* YouTubeUploader.m */;
+		name = "YouTubeUploader.m: 251";
+		rLen = 0;
+		rLoc = 6502;
+		rType = 0;
+		vrLen = 1398;
+		vrLoc = 5380;
+	};
+	E423C08412758FED000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
+		name = "YouTubeUploadViewController.h: 13";
+		rLen = 0;
+		rLoc = 296;
+		rType = 0;
+		vrLen = 997;
+		vrLoc = 0;
+	};
+	E423C08512758FED000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		name = "YouTubeUploadViewController.m: 136";
+		rLen = 0;
+		rLoc = 2986;
+		rType = 0;
+		vrLen = 1310;
+		vrLoc = 2533;
+	};
+	E423C08612758FED000E334B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		name = "YouTubeUploadViewController.m: 136";
+		rLen = 0;
+		rLoc = 2986;
+		rType = 0;
+		vrLen = 1231;
+		vrLoc = 2622;
+	};
 	E4B54115127074A600851D86 /* YouTubeUploader.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 2665}}";
-			sepNavSelRange = "{5671, 12}";
-			sepNavVisRange = "{4969, 725}";
+			sepNavIntBoundsRect = "{{0, 0}, {950, 3718}}";
+			sepNavSelRange = "{6656, 0}";
+			sepNavVisRange = "{600, 675}";
 			sepNavWindowFrame = "{{51, 137}, {746, 840}}";
 		};
 	};
 	E4B54116127074A600851D86 /* YouTubeUploader.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 689}}";
-			sepNavSelRange = "{1305, 0}";
-			sepNavVisRange = "{247, 1140}";
+			sepNavIntBoundsRect = "{{0, 0}, {899, 871}}";
+			sepNavSelRange = "{422, 0}";
+			sepNavVisRange = "{25, 573}";
 		};
-	};
-	E4B54214127084B800851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
-		name = "YouTubeUploadViewController.h: 20";
-		rLen = 0;
-		rLoc = 402;
-		rType = 0;
-		vrLen = 907;
-		vrLoc = 55;
-	};
-	E4B543D51270AA3700851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1D3623240D0F684500981E51 /* YouTubeUploadAppDelegate.h */;
-		name = "YouTubeUploadAppDelegate.h: 23";
-		rLen = 0;
-		rLoc = 552;
-		rType = 0;
-		vrLen = 781;
-		vrLoc = 0;
 	};
 	E4B543D61270AA3700851D86 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -205,16 +274,6 @@
 		vrLen = 890;
 		vrLoc = 2222;
 	};
-	E4B543EE1270AAE600851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
-		name = "YouTubeUploadViewController.m: 83";
-		rLen = 0;
-		rLoc = 1805;
-		rType = 0;
-		vrLen = 681;
-		vrLoc = 1718;
-	};
 	E4B543FA1270ABE500851D86 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E4BC35F8125DA6FB00B492E4 /* GDataObject.m */;
@@ -254,46 +313,6 @@
 		rType = 0;
 		vrLen = 1093;
 		vrLoc = 4570;
-	};
-	E4B544071270ACB700851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4B54116127074A600851D86 /* YouTubeUploader.h */;
-		name = "YouTubeUploader.h: 48";
-		rLen = 0;
-		rLoc = 1305;
-		rType = 0;
-		vrLen = 1140;
-		vrLoc = 247;
-	};
-	E4B544081270ACB700851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4B54115127074A600851D86 /* YouTubeUploader.m */;
-		name = "YouTubeUploader.m: 206";
-		rLen = 0;
-		rLoc = 5543;
-		rType = 0;
-		vrLen = 1058;
-		vrLoc = 4636;
-	};
-	E4B544091270ACB700851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */;
-		name = "YouTubeUploadAppDelegate.m: 20";
-		rLen = 0;
-		rLoc = 395;
-		rType = 0;
-		vrLen = 815;
-		vrLoc = 2797;
-	};
-	E4B544121270AD6000851D86 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */;
-		name = "YouTubeUploadAppDelegate.m: 109";
-		rLen = 0;
-		rLoc = 3619;
-		rType = 0;
-		vrLen = 942;
-		vrLoc = 2732;
 	};
 	E4BC35F7125DA6FB00B492E4 /* GDataObject.h */ = {
 		uiCtxt = {

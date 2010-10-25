@@ -25,7 +25,8 @@
 - (id)init {
 	
 	if (self = [super init]) {
-		self.youTubeUploader = [YouTubeUploader youTubeUploaderWithDelegate:self];
+		self.youTubeUploader = [YouTubeUploader youTubeUploader];
+		[youTubeUploader addDelegate:self];
 		self.facebookUploader = [FacebookUploader facebookUploaderWithDelegate:self];
 		
 	}
@@ -33,7 +34,7 @@
 }
 
 -(BOOL) isUploading {
-	return facebookUploader.isUploading || youTubeUploader.isUploading;
+	return facebookUploader.isUploading || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOADING;
 }
 
 - (void) facebookUploaderDidLogin:(FacebookUploader *)theUploader {
@@ -55,22 +56,25 @@
 }
 
 
--(void) youTubeUploaderDidFail:(YouTubeUploader *)theUploader{
+-(void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader{
+	switch (theUploader.state) {
+		case YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload finished" 
+															message:[NSString stringWithFormat:@"link: %@",[theUploader.link absoluteString]]
+														   delegate:nil 
+												  cancelButtonTitle:@"OK" 
+												  otherButtonTitles: nil];
+			[alert show];
+			[alert release];
+		} break;
+		default:
+			break;
+	}
 }
 
 
-- (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader{
-}
 
-- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader withURL:(NSURL*) theUrl {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload finished" 
-													message:[NSString stringWithFormat:@"link: %@",[theUrl absoluteString]]
-												   delegate:nil 
-										  cancelButtonTitle:@"OK" 
-										  otherButtonTitles: nil];
-	[alert show];
-	[alert release];
-}
+
 
 - (void) youTubeUploaderProgress:(float)progress {
 	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] setShareProgress:progress];

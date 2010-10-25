@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+enum {
+	YOUTUBE_UPLOADER_STATE_IDLE,
+	YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS,
+	YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED,
+	YOUTUBE_UPLOADER_STATE_UPLOADING,
+	YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED,
+	YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED
+};
+
 @class GDataServiceTicket;
 
 @protocol YouTubeUploaderDelegate;
@@ -16,36 +25,37 @@
 @interface YouTubeUploader : NSObject {
 
 	GDataServiceTicket *mUploadTicket;
-	id <YouTubeUploaderDelegate> delegate;
+	NSMutableArray * delegates;
 	
 		
 	NSString *username;
 	NSString *password;
 	
-	BOOL isUploading;
 	float progress;
+	
+	NSURL *link;
+	NSInteger state;
 	
 }
 
-@property (nonatomic, assign) id<YouTubeUploaderDelegate> delegate;
+@property (nonatomic, retain) NSMutableArray * delegates;
 @property (nonatomic,retain) NSString *username;
 @property (nonatomic,retain) NSString *password;
-@property (readonly) BOOL isUploading;
 @property (readonly) float progress;
+@property (nonatomic,retain,readonly) NSURL *link;
+@property (readonly) NSInteger state;
 
 
-+ (YouTubeUploader *) youTubeUploaderWithDelegate:(id<YouTubeUploaderDelegate>)theDelegate; 
-- (id)initWithDelegate:(id<YouTubeUploaderDelegate>)theDelegate; 
++ (YouTubeUploader *) youTubeUploader; 
+-(void)addDelegate:(id<YouTubeUploaderDelegate>)delegate;
 - (void) uploadVideoWithTitle:(NSString *)title withDescription:(NSString *)description andPath:(NSString *)path;
 @end
 
 @protocol YouTubeUploaderDelegate<NSObject>
 
-//- (void) facebookUploaderDidLogin:(YouTubeUploader *)theUploader;
--(void) youTubeUploaderDidFail:(YouTubeUploader *)theUploader;
+@optional
 
-- (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader;
-- (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader withURL:(NSURL*) theUrl;
+- (void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader;
 - (void) youTubeUploaderProgress:(float)progress;
 
 @end

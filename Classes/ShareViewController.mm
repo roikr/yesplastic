@@ -172,7 +172,16 @@ enum {
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated]; 
 	MilgromLog(@"ShareViewController::viewDidAppear");
-	[self menu];
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.shareManager.isUploading) {
+		[appDelegate popViewController];
+	} else {
+		[self menu];
+	}
+
+			
+	
 	
 }
 
@@ -458,8 +467,6 @@ enum {
 			
 			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
 			[appDelegate pushViewController:controller];
-			controller.username.text = @"kingyorts";
-			controller.password.text = @"56565656";
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
 			controller.videoTitle = [self getVideoName];
 			controller.descriptionView.text = @"testing";

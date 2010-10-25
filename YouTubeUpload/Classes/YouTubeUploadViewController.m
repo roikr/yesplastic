@@ -7,17 +7,18 @@
 //
 
 #import "YouTubeUploadViewController.h"
-#import "YouTubeUploader.h"
 
 @interface YouTubeUploadViewController (PrivateMethods)
 
+- (void)save;
+- (void)unsave;
 
 
 @end
 
 @implementation YouTubeUploadViewController
 
-@synthesize uploader;
+
 
 @synthesize username;
 @synthesize password;
@@ -44,12 +45,18 @@
 */
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	username.text = [defaults objectForKey:@"YTUsername"];
+	password.text = [defaults objectForKey:@"YTPassword"];
+	
+	
 }
-*/
+
 
 
 /*
@@ -79,6 +86,16 @@
     [super dealloc];
 }
 
+
+-(void)setUploader:(YouTubeUploader *) theUploader {
+	uploader = theUploader;
+	[theUploader addDelegate:self];
+}
+
+-(YouTubeUploader *)uploader {
+	return uploader;
+}
+
 -(void) setVideoTitle:(NSString *) title{
 	titleField.text = title;
 }
@@ -87,8 +104,38 @@
 	return titleField.text;
 }
 
+- (void)save {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if (username.text!=@"") {
+		[defaults setObject:username.text forKey:@"YTUsername"];
+	} else {
+		[defaults removeObjectForKey:@"YTUsername"];
+	}
+	
+	if (password.text!=@"") {
+		[defaults setObject:password.text forKey:@"YTPassword"];
+	} else {
+		[defaults removeObjectForKey:@"YTPassword"];
+	}
+	
+	[defaults synchronize];
+}
+
+- (void)unsave {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:@"YTUsername"];
+	[defaults removeObjectForKey:@"YTPassword"];
+	[defaults synchronize];
+}
+
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
+	if (textField==username || textField==password) {
+		[self save];
+	}
+	
 	return NO;
 }
 
@@ -101,8 +148,6 @@
 		uploader.password = password.text;
 		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath];
 	}
-	
-	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) cancel:(id)sender {
@@ -110,6 +155,30 @@
 }
 
 
+- (void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader {
+	
+	switch (theUploader.state) {
+		case YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload eror" 
+															message:@"your username or password are incorrect"
+														   delegate:nil 
+												  cancelButtonTitle:@"OK" 
+												  otherButtonTitles: nil];
+			[alert show];
+			[alert release];
+		} break;
+			
+		case YOUTUBE_UPLOADER_STATE_UPLOADING: 
+			[self.navigationController popViewControllerAnimated:YES];
+			break;
+		default:
+			break;
+	}
+	
+	
+	
+	
+}
 
 
 

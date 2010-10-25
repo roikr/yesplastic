@@ -446,7 +446,7 @@
 
 
 - (void) setShareProgress:(float) progress {
-	[shareProgressView setRect:CGRectMake(0, 0, 1.0f,progress)];
+	[shareProgressView setRect:CGRectMake(0, 1.0-progress, 1.0f,progress)];
 }
 
 		

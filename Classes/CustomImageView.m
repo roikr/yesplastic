@@ -54,7 +54,7 @@
 		//create a rect with the size we want to crop the image to
 		//the X and Y here are zero so we start at the beginning of our
 		//newly created context	
-		CGRect clipRect = CGRectMake(0, 0, image.size.width*_rect.size.width, image.size.height*_rect.size.height);
+		CGRect clipRect = CGRectMake(image.size.width*_rect.origin.x, image.size.height*_rect.origin.y, image.size.width*_rect.size.width, image.size.height*_rect.size.height);
 		CGContextClipToRect( currentContext, clipRect);
 		
 		//create a rect equivalent to the full size of the image

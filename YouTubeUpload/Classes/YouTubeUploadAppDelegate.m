@@ -28,9 +28,8 @@
    // [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
 	//YouTubeUploadViewController * controller = (YouTubeUploadViewController*)navigationController.visibleViewController;
-	self.uploader = [YouTubeUploader youTubeUploaderWithDelegate:self];
-	controller.username.text = @"kingyorts";
-	controller.password.text = @"56565656";
+	self.uploader = [YouTubeUploader youTubeUploader];
+	[uploader addDelegate:self];
 	controller.uploader = uploader;
 	controller.videoTitle = @"kremer the cat";
 	controller.descriptionView.text = @"testing";
@@ -99,17 +98,10 @@
     [super dealloc];
 }
 
--(void) youTubeUploaderDidFail:(YouTubeUploader *)theUploader {
-}
-
-- (void) youTubekUploaderDidStartUploading:(YouTubeUploader *)theUploader {
-}
 
 - (void) youTubeUploaderDidFinishUploading:(YouTubeUploader *)theUploader  withURL:(NSURL*) theUrl {
 	NSLog(@"link: %@",[theUrl absoluteString]);
 }
 
-- (void) youTubeUploaderProgress:(float)progress {
-}
 
 @end

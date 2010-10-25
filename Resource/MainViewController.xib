@@ -125,7 +125,7 @@
 									<string key="NSResourceName">SAVE_B.png</string>
 								</object>
 							</object>
-							<object class="IBUIView" id="448266039">
+							<object class="IBUIButton" id="388573076">
 								<reference key="NSNextResponder" ref="863361826"/>
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{280, 0}, {40, 40}}</string>
@@ -134,15 +134,6 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MCAwAA</bytes>
 								</object>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							</object>
-							<object class="IBUIButton" id="388573076">
-								<reference key="NSNextResponder" ref="863361826"/>
-								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{280, 0}, {40, 40}}</string>
-								<reference key="NSSuperview" ref="863361826"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
@@ -159,6 +150,16 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">SHARE_B_BACKGROUND.png</string>
 								</object>
+							</object>
+							<object class="IBUIView" id="448266039">
+								<reference key="NSNextResponder" ref="863361826"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{280, 0}, {40, 40}}</string>
+								<reference key="NSSuperview" ref="863361826"/>
+								<reference key="IBUIBackgroundColor" ref="719325150"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIButton" id="561080161">
 								<reference key="NSNextResponder" ref="863361826"/>
@@ -1002,10 +1003,10 @@
 					<string>CustomImageView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AULwAAAAAAAAA</bytes>
+						<bytes key="NSTransformStruct">AUOMAAAAAAAAA</bytes>
 					</object>
 					<string>TouchView</string>
-					<string>{{147, 299}, {480, 320}}</string>
+					<string>{{12, 686}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

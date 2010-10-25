@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YouTubeUploader.h"
 
 
-@class YouTubeUploader;
-@interface YouTubeUploadViewController : UIViewController {
+@interface YouTubeUploadViewController : UIViewController<YouTubeUploaderDelegate> {
 	YouTubeUploader *uploader;
 	
 	UITextField *username;
