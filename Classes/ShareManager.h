@@ -7,17 +7,37 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "FacebookUploader.h"
 #import "YouTubeUploader.h"
 
-@interface ShareManager : NSObject<FacebookUploaderDelegate,YouTubeUploaderDelegate> {
+@interface ShareManager : NSObject<FacebookUploaderDelegate,YouTubeUploaderDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate> {
 	FacebookUploader *facebookUploader;
 	YouTubeUploader *youTubeUploader;
+	
+	BOOL _didUploadToYouTube;
+	BOOL _didUploadToFacebook;
+	BOOL _hasBeenRendered;
+	BOOL isTemporary;
+	
+	NSInteger state;
 }
-+ (ShareManager*) shareManager;
+
 
 @property (nonatomic,retain) FacebookUploader *facebookUploader;
 @property (nonatomic,retain) YouTubeUploader *youTubeUploader;
 @property (readonly) BOOL isUploading;
+
+@property (readonly) BOOL didUploadToYouTube;
+@property (readonly) BOOL didUploadToFacebook;
+@property (readonly) BOOL hasBeenRendered;
+
++ (ShareManager*) shareManager;
+- (void)setRendered;
+- (NSString *)getVideoName;
+- (NSString *)getVideoPath;
+- (void)menuWithView:(UIView *)view;
+- (void)action;
+
 
 @end

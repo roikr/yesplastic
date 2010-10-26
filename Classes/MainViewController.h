@@ -13,7 +13,6 @@ class testApp;
 @class TouchView;
 @class CustomFontTextField;
 @class SaveViewController;
-@class ShareViewController;
 @class CustomImageView;
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
@@ -43,13 +42,15 @@ class testApp;
 	//UIButton *loopButton;
 	
 	SaveViewController *saveViewController;
-	ShareViewController *shareViewController;
+	
 	BOOL bShowHelp;
 	
 	BOOL bAnimatingRecord;
 	NSTimeInterval shakeStartTime;
 	
 	CustomImageView *shareProgressView;
+	CustomImageView *renderProgressView;
+	
 }
 
 
@@ -67,12 +68,10 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 
-//@property (nonatomic,assign) IBOutlet UIButton *triggerButton;
-//@property (nonatomic,assign )IBOutlet UIButton *loopButton;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
-@property (nonatomic,retain ) ShareViewController *shareViewController;
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
+@property (nonatomic,retain ) CustomImageView *renderProgressView;
 
 @property BOOL bShowHelp;
 
@@ -86,7 +85,6 @@ class testApp;
 - (void) setShareProgress:(float) progress;
 - (void) trigger:(id)sender;
 - (void) loop:(id)sender;
-//- (void) updateLoops:(id)sender;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
@@ -97,6 +95,7 @@ class testApp;
 - (void) fadeOutRecordButton;
 - (void) fadeInRecordButton;
 
-//- (void) updateTables;
+- (void)render;
+
 
 @end

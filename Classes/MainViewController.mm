@@ -12,15 +12,17 @@
 #include "Constants.h"
 #include "testApp.h"
 
-
+#import <AVFoundation/AVFoundation.h>
 #import "MilgromInterfaceAppDelegate.h"
+#import "MilgromViewController.h"
 #import "TouchView.h"
 #import "MilgromMacros.h"
 #import "SaveViewController.h"
-#import "ShareViewController.h"
 #import "Song.h"
 #import "CustomImageView.h"
 #import "ShareManager.h"
+#import "OpenGLTOMovie.h"
+
 
 
 @implementation MainViewController
@@ -44,8 +46,8 @@
 //@synthesize triggerButton;
 //@synthesize loopButton;
 @synthesize saveViewController;
-@synthesize shareViewController;
 @synthesize shareProgressView;
+@synthesize renderProgressView;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -305,6 +307,8 @@
 
 
 
+
+
 - (void) menu:(id)sender {
 	
 	[self hideHelp];
@@ -426,13 +430,15 @@
 	[self hideHelp];
 	OFSAptr->setSongState(SONG_IDLE);
 	
-	if (self.shareViewController == nil) {
-		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-		//shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-	}
-	
-	[shareViewController prepare];
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushViewController:shareViewController];
+	ShareManager *shareManager = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] shareManager];
+	[shareManager menuWithView:self.view];
+//	if (self.shareViewController == nil) {
+//		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+//		//shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//	}
+//	
+//	[shareViewController prepare];
+//	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushViewController:shareViewController];
 		
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	// not so
@@ -547,7 +553,6 @@
 
 - (void)dealloc {
 	[saveViewController release];
-	[shareViewController release];
     [super dealloc];
 }
 
@@ -586,6 +591,77 @@
 		OFSAptr->playRandomLoop();
 	}
 }
+
+#pragma mark Render
+
+- (void) setRenderProgress:(float) progress {
+	//[renderProgressView setRect:CGRectMake(0, 1.0-progress, 1.0f,progress)];
+	MilgromLog(@"render progress: %0.2f",progress);
+}
+
+
+- (void)render {
+	//renderingView.hidden = NO;
+	[self setRenderProgress:0.0f];
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	MilgromViewController * milgromViewController = appDelegate.milgromViewController;
+	ShareManager *shareManager = [appDelegate shareManager];
+	
+	[milgromViewController stopAnimation];
+	OFSAptr->soundStreamStop();
+	
+	
+	dispatch_queue_t myCustomQueue;
+	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
+	dispatch_async(myCustomQueue, ^{
+		
+		OFSAptr->renderAudio();
+		OFSAptr->setSongState(SONG_RENDER_VIDEO);
+		
+		
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[shareManager getVideoPath]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
+		 
+						 withDrawFrame:^(int frameNum) {
+							 //NSLog(@"rendering frame: %i",frameNum);
+							 [milgromViewController drawFrame];
+							 [self setRenderProgress:OFSAptr->getPlayhead()];
+							 // TODO: playhead is only by DRM
+							 
+						 }
+		 
+						 withDidFinish:^(int frameNum) {
+							 
+							 int res = (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
+							 NSLog(@"writing video, frame: %i, finished: %i",frameNum,res);
+							 return res;
+						 }
+		 
+				 withCompletionHandler:^ {
+					 NSLog(@"write completed");
+					 
+					 OFSAptr->setSongState(SONG_IDLE);
+					 OFSAptr->soundStreamStart();
+					 [milgromViewController startAnimation];
+					 [shareManager setRendered];
+					 [shareManager action];
+					 
+					 
+					 //renderingView.hidden = YES;
+					 //[self action];
+					 
+				 }];
+	});
+	
+	
+	dispatch_release(myCustomQueue);
+	
+	
+}
+
+
 
 
 @end

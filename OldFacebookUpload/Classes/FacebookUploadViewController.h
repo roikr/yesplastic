@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class FacebookUploader;
+#import "FacebookUploader.h"
 
-@interface FacebookUploadViewController : UIViewController {
+
+@interface FacebookUploadViewController : UIViewController<FacebookUploaderDelegate> {
 	FacebookUploader *uploader;
 	
 	UITextField *titleField;

@@ -25,25 +25,27 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 @implementation FacebookUploader
 
-@synthesize delegate;
+@synthesize delegates;
 @synthesize session;
 @synthesize videoTitle;
 @synthesize videoDescription;
 @synthesize videoPath;
-@synthesize isUploading;
 @synthesize progress;
 
-+ (FacebookUploader *) facebookUploaderWithDelegate:(id<FacebookUploaderDelegate>)theDelegate {
-	return [[[FacebookUploader alloc] initWithDelegate:theDelegate] autorelease];
++ (FacebookUploader *) facebookUploader {
+	return [[[FacebookUploader alloc] init] autorelease];
 }
 
-- (id)initWithDelegate:(id<FacebookUploaderDelegate>)theDelegate {
+- (id)init {
 	
 	if (self = [super init]) {
-		self.delegate = theDelegate;
-		isUploading = NO;
-	}
-	return self;
+		self.delegates = [NSMutableArray array];
+		_state = FACEBOOK_UPLOADER_STATE_IDLE;	
+	} return self;
+}
+
+-(void)addDelegate:(id<FacebookUploaderDelegate>)delegate {
+	[delegates addObject:delegate];
 }
 
 - (void) dealloc {
@@ -52,6 +54,21 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 	[videoPath release];
 	[session release];
 	[super dealloc];
+}
+
+- (NSInteger) state {
+	return _state;
+}
+	
+- (void) setState:(NSInteger)newState {
+	_state = newState;
+	
+	for (id<FacebookUploaderDelegate> delegate in delegates) {
+		if ([delegate respondsToSelector:@selector(facebookUploaderStateChanged:)]) {
+			[delegate facebookUploaderStateChanged:self];
+		}
+	}
+	
 }
 
 - (void)login {
@@ -86,6 +103,13 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 	
 	[self login];
 	
+//if ([self isConnected]) {
+//		[self logout];
+//	} else {
+//		[self login];
+//	}
+
+	
 }
 
 - (void) logout {
@@ -112,8 +136,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)sessionDidNotLogin:(FBSession*)session {
 	NSLog(@"did not login");
-	[delegate facebookUploaderDidFail:self];
 	
+	self.state = FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN;
 }
 
 /**
@@ -128,6 +152,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)sessionDidLogout:(FBSession*)session {
 	NSLog(@"logged out");
+	
 }
 
 
@@ -137,7 +162,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void)dialogDidSucceed:(FBDialog*)dialog {
 	NSLog(@"dialogDidSucceed");
 	if ([dialog isKindOfClass:[FBPermissionDialog class]]) {
-		NSData *data = [NSData dataWithContentsOfFile:videoPath];
+		NSData *data = [NSData dataWithContentsOfFile:videoPath]; 
 		
 		FBRequest *uploadRequest = [FBRequest requestWithSession: session delegate: self];
 		
@@ -145,7 +170,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 										   videoTitle, @"title", videoDescription,@"description",nil];
 		[uploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
 		
-		isUploading = YES;
+		self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED;
 		//[delegate facebookUploaderDidLogin:self];
 	}
 }
@@ -155,7 +180,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)dialogDidCancel:(FBDialog*)dialog {
 	NSLog(@"dialogDidCancel");
-	[delegate facebookUploaderDidFail:self];
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED;
+	
 }
 
 /**
@@ -163,7 +189,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)dialog:(FBDialog*)dialog didFailWithError:(NSError*)error {
 	NSLog(@"dialog didFailWithError");
-	[delegate facebookUploaderDidFail:self];
+	self.state = FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN;
 }
 
 /**
@@ -191,7 +217,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  * Called just before the request is sent to the server.
  */
 - (void)requestLoading:(FBRequest*)request {
-	
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED;
 }
 
 /**
@@ -199,6 +225,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didReceiveResponse:(NSURLResponse*)response {
 	NSLog(@"request didReceiveResponse");
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOADING;
 }
 
 /**
@@ -206,8 +233,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error {
 	NSLog(@"request didFailWithError");
-	isUploading = NO;
-	[delegate facebookUploaderDidFail:self];
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_FAILED;
 }
 
 /**
@@ -218,9 +244,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didLoad:(id)result {
 	NSLog(@"Video upload Success");
-	isUploading = NO;
-	[delegate facebookUploaderDidFinishUploading:self];
-	//[session logout];
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_FINISHED;
 }
 
 /**
@@ -228,8 +252,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)requestWasCancelled:(FBRequest*)request {
 	NSLog(@"requestWasCancelled");
-	isUploading = NO;
-	[delegate facebookUploaderDidFail:self];
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED;
 	
 }
 
@@ -237,7 +260,13 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void)request:(FBRequest*)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 	progress = (float)totalBytesWritten/(float)totalBytesExpectedToWrite;
 	NSLog(@"facebook upload progress: %f",progress);
-	[delegate facebookUploaderProgress:progress];
+	
+	for (id<FacebookUploaderDelegate> delegate in delegates) {
+		if ([delegate respondsToSelector:@selector(facebookUploaderProgress:)]) {
+			[delegate facebookUploaderProgress:progress];
+		}
+	}
+
 }
 
 

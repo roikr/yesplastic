@@ -12,8 +12,6 @@
 
 @implementation FacebookUploadViewController
 
-@synthesize uploader;
-
 @synthesize titleField;
 @synthesize descriptionView;
 @synthesize videoPath;
@@ -64,6 +62,16 @@
     [super dealloc];
 }
 
+-(void)setUploader:(FacebookUploader *) theUploader {
+	uploader = theUploader;
+	[theUploader addDelegate:self];
+}
+
+-(FacebookUploader *)uploader {
+	return uploader;
+}
+
+
 -(void) setVideoTitle:(NSString *) title{
 	titleField.text = title;
 }
@@ -104,5 +112,9 @@
 	}
 }
 
+
+- (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader {
+	NSLog(@"new state: %i",theUploader.state);
+}
 
 @end

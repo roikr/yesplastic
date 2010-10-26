@@ -21,7 +21,6 @@
 #import "MainViewController.h"
 #import "HelpViewController.h"
 #include "PlayerMenu.h"
-#import "ShareViewController.h"
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>

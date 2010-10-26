@@ -25,7 +25,7 @@
     
     [window makeKeyAndVisible];
 	
-	self.uploader = [FacebookUploader facebookUploaderWithDelegate:self];
+	self.uploader = [FacebookUploader facebookUploader];
 	
 	controller.uploader = uploader;
 	controller.videoTitle = @"kremer the cat";
@@ -92,24 +92,6 @@
     [super dealloc];
 }
 
-- (void) facebookUploaderDidLogin:(FacebookUploader *)theUploader {
-	
-}
-
-- (void) facebookUploaderDidFail:(FacebookUploader *)theUploader {
-}
-
-- (void) facebookUploaderDidStartUploading:(FacebookUploader *)theUploader {
-}
-
-- (void) facebookUploaderDidFinishUploading:(FacebookUploader *)theUploader {
-	NSLog(@"facebookUploaderDidFinishUploading");
-	
-}
-
-- (void) facebookUploaderProgress:(float)progress {
-	
-}
 
 
 

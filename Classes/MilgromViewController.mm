@@ -18,7 +18,6 @@
 #import "HelpViewController.h"
 #import "Constants.h"
 #import "MilgromMacros.h"
-#import "ShareViewController.h"
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
@@ -74,9 +73,11 @@
 		return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 	} else if ([self.viewController.visibleViewController isKindOfClass:[HelpViewController self]]) {
 		return NO;
-	} else if ([self.viewController.visibleViewController isKindOfClass:[ShareViewController self]]) {
-		//return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
-	}
+	} 
+	
+//	else if ([self.viewController.visibleViewController isKindOfClass:[ShareViewController self]]) {
+//		//return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
+//	}
 	return YES;
 }
 

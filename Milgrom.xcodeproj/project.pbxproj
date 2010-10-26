@@ -318,7 +318,6 @@
 		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
-		E4A6FC4C122D8BC800A5C4D9 /* ShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */; };
 		E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */; };
 		E4B1B2AA126E20B2001A577D /* FBConnectGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B298126E20B2001A577D /* FBConnectGlobal.m */; };
 		E4B1B2AB126E20B2001A577D /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29A126E20B2001A577D /* FBSession.m */; };
@@ -872,8 +871,6 @@
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
-		E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareViewController.mm; sourceTree = "<group>"; };
 		E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Resource/ShareViewController.xib; sourceTree = "<group>"; };
 		E4B1B296126E20B2001A577D /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnect.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B297126E20B2001A577D /* FBConnectGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnectGlobal.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnectGlobal.h"; sourceTree = SOURCE_ROOT; };
@@ -1945,16 +1942,14 @@
 				E498DDF8121069EB001CB593 /* MilgromViewController.mm */,
 				E498DDF5121069EB001CB593 /* EAGLView.h */,
 				E498DDF6121069EB001CB593 /* EAGLView.mm */,
+				E4B5427D1270898C00851D86 /* ShareManager.h */,
+				E4B5427E1270898C00851D86 /* ShareManager.mm */,
 				E4B3D17C11F823E000B57223 /* MainViewController.h */,
 				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
 				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
 				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
-				E4A6FC49122D8BC800A5C4D9 /* ShareViewController.h */,
-				E4A6FC4A122D8BC800A5C4D9 /* ShareViewController.mm */,
-				E4B5427D1270898C00851D86 /* ShareManager.h */,
-				E4B5427E1270898C00851D86 /* ShareManager.mm */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
 				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
 			);
@@ -2393,7 +2388,6 @@
 				E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */,
 				E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */,
 				E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */,
-				E4A6FC4C122D8BC800A5C4D9 /* ShareViewController.mm in Sources */,
 				E48A85F91259A87B004490CE /* GDataFramework.m in Sources */,
 				E48A85FA1259A87B004490CE /* GDataUtilities.m in Sources */,
 				E48A85FB1259A87B004490CE /* GDataObject.m in Sources */,

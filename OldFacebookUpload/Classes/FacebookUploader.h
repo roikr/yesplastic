@@ -9,35 +9,45 @@
 #import <Foundation/Foundation.h>
 #import "FBConnect.h"
 
+enum {
+	FACEBOOK_UPLOADER_STATE_IDLE,
+	FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN,
+	FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED,
+	FACEBOOK_UPLOADER_STATE_UPLOADING,
+	FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED,
+	FACEBOOK_UPLOADER_STATE_UPLOAD_FAILED,
+	FACEBOOK_UPLOADER_STATE_UPLOAD_FINISHED
+};
+
 @protocol FacebookUploaderDelegate;
 
 
 @interface FacebookUploader : NSObject<FBRequestDelegate,FBDialogDelegate,FBSessionDelegate> {
 
 	FBSession* session;
-	id <FacebookUploaderDelegate> delegate;
+	NSMutableArray * delegates;
 	
 	NSString *videoTitle;
 	NSString *videoDescription;
 	NSString *videoPath;
 	
-	BOOL isUploading;
+	NSInteger _state;
 	float progress;
 	
 }
 
-@property (nonatomic, assign) id<FacebookUploaderDelegate> delegate;
+@property (nonatomic, retain) NSMutableArray * delegates;
 @property (nonatomic,retain) FBSession *session;
 @property (nonatomic,retain) NSString *videoTitle;
 @property (nonatomic,retain) NSString *videoDescription;
 @property (nonatomic,retain) NSString *videoPath;
 
-@property (readonly) BOOL isUploading;
+@property (readonly) NSInteger state;
 @property (readonly) float progress;
 
 
-+ (FacebookUploader *) facebookUploaderWithDelegate:(id<FacebookUploaderDelegate>)theDelegate; 
-- (id)initWithDelegate:(id<FacebookUploaderDelegate>)theDelegate; 
++ (FacebookUploader *) facebookUploader; 
+-(void) addDelegate:(id<FacebookUploaderDelegate>)delegate; 
 - (void) uploadVideoWithTitle:(NSString *)title withDescription:(NSString *)description andPath:(NSString *)path;
 - (void) logout;
 - (BOOL) isConnected;
@@ -45,11 +55,9 @@
 
 @protocol FacebookUploaderDelegate<NSObject>
 
-- (void) facebookUploaderDidLogin:(FacebookUploader *)theUploader;
-- (void) facebookUploaderDidFail:(FacebookUploader *)theUploader;
+@optional
 
-- (void) facebookUploaderDidStartUploading:(FacebookUploader *)theUploader;
-- (void) facebookUploaderDidFinishUploading:(FacebookUploader *)theUploader;
+- (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader;
 - (void) facebookUploaderProgress:(float)progress;
 
 @end
