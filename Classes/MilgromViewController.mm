@@ -240,7 +240,7 @@
 		glTranslatef(0, -self.eAGLView.framebufferHeight, 0);
 	} else {
 		glLoadIdentity();
-		appDelegate.OFSAptr->update();
+		//appDelegate.OFSAptr->update();
 	}
 
 		

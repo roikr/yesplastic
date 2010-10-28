@@ -214,7 +214,7 @@ float testApp::getPlayhead() {
 	}
 	 */
 	
-	return 0.0f;
+	return songState == SONG_RENDER_VIDEO && totalBlocks!=0 ? (float)currentBlock/(float)totalBlocks : 0.0f;
 }
 
 
@@ -406,6 +406,33 @@ string testApp::getPlayerName(int playerNum)  {
 	}
 }
 
+void testApp::seekFrame(int frame) {
+	
+	assert(songState==SONG_RENDER_VIDEO);
+	
+	//if (songState==SONG_RENDER_VIDEO) { // TODO: why 7 ? maybe because it is the ratio block per frame...the reason for the delay...
+//		for (int j=0; j<7; j++) {
+//			for (int i=0;i<3;i++) {
+//				player[i].processWithBlocks(lBlock, rBlock);
+//			}
+//		}
+//	}
+	
+	int reqBlock = (float)frame/25.0f*(float)sampleRate/(float)blockLength;
+	
+	for (;currentBlock<reqBlock;currentBlock++) { // TODO: or song finished...
+		for (int i=0;i<3;i++) {
+			player[i].processWithBlocks(lBlock, rBlock);
+		}
+	}
+	
+	for (int i=0;i<3;i++) {
+		player[i].update();
+
+	}
+	
+}
+
 
 void testApp::update(){
 	//	printf("update()\n");
@@ -431,17 +458,7 @@ void testApp::update(){
 			
 		
 	}
-	 
-	if (songState==SONG_RENDER_VIDEO) {
 		
-		for (int j=0; j<7; j++) {
-			for (int i=0;i<3;i++) {
-				player[i].processWithBlocks(lBlock, rBlock);
-			}
-		}
-		
-	}
-	
 	if (songState==SONG_RECORD) {
 		if (ofGetElapsedTimeMillis()-startRecordingTime > 30000) {
 			setSongState(SONG_IDLE);
@@ -992,6 +1009,7 @@ void testApp::renderAudio() {
 	song.open(ofToDocumentsPath("temp.wav"));
 	
 	
+	int block = 0;
 	
 	while (getSongState()==SONG_RENDER_AUDIO) {
 		
@@ -1004,11 +1022,14 @@ void testApp::renderAudio() {
 		}
 		
 		song.saveWithBlocks(lBlock, rBlock);
+		block++;
 	}
 	
 	song.close();	
 	
 	cout << "renderAudio finished" << endl;
+	
+	totalBlocks = block;
 	
 }
 
@@ -1028,6 +1049,10 @@ void testApp::setSongState(int songState) {
 	}
 		
 	this->songState = songState;
+	
+	if (songState == SONG_RENDER_VIDEO) { 
+		currentBlock = 0;
+	}
 	
 	for (int i=0;i<3;i++) {
 		player[i].setSongState(songState);

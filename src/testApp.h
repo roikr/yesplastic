@@ -32,6 +32,7 @@ public:
 	void draw();
 	void exit();
 	
+	void seekFrame(int frame); // for video rendering
 	void audioRequested( float * output, int bufferSize, int nChannels );
 	
 	void buttonPressed(int button);
@@ -99,6 +100,7 @@ public:
 	float getProgress();
 	float getPlayhead();
 	
+	
 	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
 	
 	
@@ -162,6 +164,9 @@ private:
 		
 	bool bInitialized;
 	bool bInTransition;
+	
+	int currentBlock;    //using to seekFrame for rendering video;
+	int totalBlocks; // calculating by renderAudio before rendering video
 };
 
 

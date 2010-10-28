@@ -41,6 +41,7 @@
 @synthesize bandHelp;
 @synthesize soloHelp;
 @synthesize bShowHelp;
+@synthesize renderView;
 
 
 //@synthesize triggerButton;
@@ -73,6 +74,7 @@
 	bAnimatingRecord = NO;
 	
 	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B_BACKGROUND.png"];
+	self.renderProgressView.image =  [UIImage imageNamed:@"CELL1_PROGRESS.png"];
 	
 	//[self.view addSubview:menuController.view];
 	//menuController.view.hidden = YES;
@@ -194,6 +196,7 @@
 	recordButton.selected = OFSAptr->getSongState() == SONG_TRIGGER_RECORD || OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
+	renderView.hidden = YES;
 	
 	if (![[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] isUploading]) {
 		[self setShareProgress:1.0f];
@@ -270,6 +273,9 @@
 				break;
 			
 				
+			case SONG_RENDER_VIDEO:
+				renderView.hidden = NO;
+				break;
 			default:
 				break;
 		
@@ -595,8 +601,7 @@
 #pragma mark Render
 
 - (void) setRenderProgress:(float) progress {
-	//[renderProgressView setRect:CGRectMake(0, 1.0-progress, 1.0f,progress)];
-	MilgromLog(@"render progress: %0.2f",progress);
+	[renderProgressView setRect:CGRectMake(0.0f, 0.0f,progress,1.0f)];
 }
 
 
@@ -620,12 +625,12 @@
 		OFSAptr->renderAudio();
 		OFSAptr->setSongState(SONG_RENDER_VIDEO);
 		
-		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[shareManager getVideoPath]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
 		 
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
+							 OFSAptr->seekFrame(frameNum);
 							 [milgromViewController drawFrame];
 							 [self setRenderProgress:OFSAptr->getPlayhead()];
 							 // TODO: playhead is only by DRM
@@ -635,7 +640,7 @@
 						 withDidFinish:^(int frameNum) {
 							 
 							 int res = (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
-							 NSLog(@"writing video, frame: %i, finished: %i",frameNum,res);
+							 NSLog(@"writing video, progrss: %2.2f, frame: %i, finished: %i",OFSAptr->getPlayhead(),frameNum,res);
 							 return res;
 						 }
 		 

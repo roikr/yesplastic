@@ -318,7 +318,6 @@
 		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
-		E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */; };
 		E4B1B2AA126E20B2001A577D /* FBConnectGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B298126E20B2001A577D /* FBConnectGlobal.m */; };
 		E4B1B2AB126E20B2001A577D /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29A126E20B2001A577D /* FBSession.m */; };
 		E4B1B2AC126E20B2001A577D /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29C126E20B2001A577D /* FBRequest.m */; };
@@ -871,7 +870,6 @@
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
-		E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Resource/ShareViewController.xib; sourceTree = "<group>"; };
 		E4B1B296126E20B2001A577D /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnect.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B297126E20B2001A577D /* FBConnectGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnectGlobal.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnectGlobal.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B298126E20B2001A577D /* FBConnectGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBConnectGlobal.m; path = "../OpenSource/facebook-iphone-sdk/src/FBConnectGlobal.m"; sourceTree = SOURCE_ROOT; };
@@ -906,8 +904,8 @@
 		E4B5428A127089EB00851D86 /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = YouTubeUpload/Classes/YouTubeUploader.h; sourceTree = "<group>"; };
 		E4BAF0F8125EFE5000AE1ED0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E4BAF0F9125EFE5000AE1ED0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
-		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
-		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ../ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
+		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ../ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -1007,7 +1005,6 @@
 			children = (
 				E4D1EB3712113350004D4E25 /* Classes */,
 				E444721012143D2F0058D07B /* src */,
-				E4BAF28E125F199600AE1ED0 /* CovertToVideo */,
 				E4C44C2012436581007ACEBC /* YouTube */,
 				E4AF9D7A1263694A003E9148 /* Facebook */,
 				E4998B711220317E006EC3BA /* AVPlayer */,
@@ -1884,15 +1881,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		E4BAF28E125F199600AE1ED0 /* CovertToVideo */ = {
-			isa = PBXGroup;
-			children = (
-				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
-				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
-			);
-			name = CovertToVideo;
-			sourceTree = "<group>";
-		};
 		E4BC39D5125DA87300B492E4 /* Band */ = {
 			isa = PBXGroup;
 			children = (
@@ -1946,6 +1934,8 @@
 				E4B5427E1270898C00851D86 /* ShareManager.mm */,
 				E4B3D17C11F823E000B57223 /* MainViewController.h */,
 				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
+				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
+				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
 				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
@@ -1984,7 +1974,6 @@
 				E4D4A1E811FD7A9600C92628 /* SongsTable.xib */,
 				E4DF703A11FE9EB000EBD904 /* SongCell.xib */,
 				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
-				E4A6FC4E122D8C1200A5C4D9 /* ShareViewController.xib */,
 				E4964075125BA7FF0058DB34 /* ActionCell.xib */,
 				E4DE50541200185200BF31AF /* MainViewController.xib */,
 				E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */,
@@ -2190,7 +2179,6 @@
 				E44F6DBF122A4DC60002386C /* CELL3_PROGRESS.png in Resources */,
 				E44F6DC0122A4DC60002386C /* CELL4_PROGRESS.png in Resources */,
 				E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */,
-				E4A6FC4F122D8C1200A5C4D9 /* ShareViewController.xib in Resources */,
 				E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */,
 				E42D132F124F796A007BEEB0 /* ARROWS_DRM_LEFT.png in Resources */,
 				E42D1330124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png in Resources */,

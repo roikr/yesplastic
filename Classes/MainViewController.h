@@ -31,6 +31,7 @@ class testApp;
 	UIView *triggersView;
 	UIView *loopsView;
 	UIView *bandLoopsView;
+	UIView *renderView;
 	
 	
 	testApp *OFSAptr;
@@ -67,11 +68,12 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
+@property (nonatomic, retain) IBOutlet UIView *renderView;
 
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
-@property (nonatomic,retain ) CustomImageView *renderProgressView;
+@property (nonatomic,retain ) IBOutlet CustomImageView *renderProgressView;
 
 @property BOOL bShowHelp;
 
