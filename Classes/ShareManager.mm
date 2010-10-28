@@ -203,6 +203,24 @@ enum {
 #pragma mark Uploaders delegates
 
 - (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader {
+	switch (theUploader.state) {
+		case FACEBOOK_UPLOADER_STATE_UPLOAD_FINISHED: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook upload" 
+															message:@"your upload finished"
+														   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
+			[alert show];
+			[alert release];
+		} break;
+		case FACEBOOK_UPLOADER_STATE_UPLOADING: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook upload" message:@"Upload in progress"
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+			[alert release];
+			
+		} break;
+		default:
+			break;
+	}
 }
 
 - (void) facebookUploaderProgress:(float)progress {
@@ -213,13 +231,18 @@ enum {
 -(void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader{
 	switch (theUploader.state) {
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED: {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload finished" 
-															message:[NSString stringWithFormat:@"link: %@",[theUploader.link absoluteString]]
-														   delegate:nil 
-												  cancelButtonTitle:@"OK" 
-												  otherButtonTitles: nil];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube upload" 
+															message:[NSString stringWithFormat:@"your upload finished. link: %@",[theUploader.link absoluteString]]
+														   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
 			[alert show];
 			[alert release];
+		} break;
+		case YOUTUBE_UPLOADER_STATE_UPLOADING: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube upload" message:@"Upload in progress"
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+			[alert release];
+			
 		} break;
 		default:
 			break;

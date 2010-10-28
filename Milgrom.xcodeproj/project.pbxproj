@@ -2542,13 +2542,14 @@
 				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
+					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
 					"$(HOME)/$(SDKROOT)/include",
 					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/src",
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "Milgrom-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"$(HOME)/$(SDKROOT)/lib",
+					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
 					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/Xcode/build/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = (
@@ -2560,7 +2561,7 @@
 				PRODUCT_NAME = Milgrom;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8523836-2F4C-433B-8FED-B735D919B95B";
 				SDKROOT = iphoneos4.2;
-				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
+				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 			};
 			name = Debug;
 		};
@@ -2574,13 +2575,14 @@
 				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
+					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
 					"$(HOME)/$(SDKROOT)/include",
 					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/src",
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "Milgrom-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"$(HOME)/$(SDKROOT)/lib",
+					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
 					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/Xcode/build/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = (
@@ -2592,7 +2594,7 @@
 				PRODUCT_NAME = Milgrom;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8523836-2F4C-433B-8FED-B735D919B95B";
 				SDKROOT = iphoneos4.2;
-				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
+				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
