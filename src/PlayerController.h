@@ -22,6 +22,7 @@ public:
 	PlayerController();
 	void setup(int playerNum);
 	void update();
+	void nextFrame();
 	void translate();
 	void draw();
 	
@@ -56,6 +57,7 @@ public:
 	void changeLoop(int loopNum);
 	
 	void processWithBlocks(float *left,float *right);
+	void processForVideo();
 	
 	void setVolume(float volume); //  0.0 to 1.0
 	float getVolume();

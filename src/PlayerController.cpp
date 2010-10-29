@@ -446,16 +446,12 @@ void PlayerController::update() {
 		}
 		
 	}
-	
-	
+}
+
+void PlayerController::nextFrame() {
 	if (currentPlayer) {
 		currentPlayer->update();
 	}
-	
-	
-				
-			
-	
 }
 
 void PlayerController::translate() {
@@ -616,6 +612,23 @@ int PlayerController::getCurrentLoop() {
 	return currentLoop;
 }
 
+
+
+void PlayerController::processForVideo() {
+	vector<event> events;
+		
+	song.process(events);
+
+	for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
+		int note = (iter->note - 12) % 24;
+		//printf("loop note:  %i\n", note);
+		if (iter->bNoteOn) {
+			currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
+		}
+	}	
+	
+}
+ 
 void PlayerController::processWithBlocks(float *left,float *right) {
 	if (!enable) {
 		return;
@@ -628,6 +641,7 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	if (isInTransition()) {
 		return;
 	}
+	
 	
 	// if it is not the drummer, we should stop other notes on each note on
 	if (!bMulti) { 
@@ -650,17 +664,15 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 			currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
 		}
 	}
-	
-	
+
 	
 	switch (songState) {
 		case SONG_PLAY:
-		case SONG_RENDER_AUDIO: 
-		case SONG_RENDER_VIDEO: {
+		case SONG_RENDER_AUDIO: {
 			events.clear();
 			song.process(events);
 			
-			if (!bMulti && songState!=SONG_RENDER_VIDEO) { 
+			if (!bMulti ) {  // && songState!=SONG_RENDER_VIDEO
 				for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
 					if (iter->bNoteOn) { // if there is note on, we can stop all other notes
 						midiInstrument->noteOffAll();
@@ -685,6 +697,7 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 				}
 			}
 		} break;
+		
 		case SONG_RECORD: {
 			for (vector<event>::iterator iter=recordEvents.begin(); iter!=recordEvents.end(); iter++) {
 				cout << "record note: " << iter->note << endl; 
@@ -703,9 +716,6 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	midiInstrument->preProcess();
 	midiInstrument->mixWithBlocks(left,right);
 	midiInstrument->postProcess();
-	
-	
-	
 	recordEvents.clear(); // TODO: is it safe ?
 	
 }

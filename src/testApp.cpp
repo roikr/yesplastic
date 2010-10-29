@@ -422,12 +422,12 @@ void testApp::seekFrame(int frame) {
 	
 	for (;currentBlock<reqBlock;currentBlock++) { // TODO: or song finished...
 		for (int i=0;i<3;i++) {
-			player[i].processWithBlocks(lBlock, rBlock);
+			player[i].processForVideo();
 		}
 	}
 	
 	for (int i=0;i<3;i++) {
-		player[i].update();
+		player[i].nextFrame();
 
 	}
 	
@@ -494,6 +494,12 @@ void testApp::update(){
 	}
  */
 	
+}
+
+void testApp::nextFrame() {
+	for (int i=0;i<3;i++) {
+		player[i].nextFrame();
+	}
 }
 
 

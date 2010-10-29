@@ -29,6 +29,7 @@ public:
 	
 	void setup();
 	void update();
+	void nextFrame();
 	void draw();
 	void exit();
 	

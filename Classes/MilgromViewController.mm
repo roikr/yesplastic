@@ -230,17 +230,18 @@
 	appDelegate.OFSAptr->getSongState(); // just to update bNeedDisplay
 	
 	if (animating) {
+		appDelegate.OFSAptr->update(); // now update is not linked to frame
+		
 		int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
 		if (frame>appDelegate.OFSAptr->lastFrame) {
 			appDelegate.OFSAptr->lastFrame = frame;
-			appDelegate.OFSAptr->update();
+			appDelegate.OFSAptr->nextFrame();
 		}
 		glLoadIdentity();
 		glScalef(1.0, -1.0,1.0);
 		glTranslatef(0, -self.eAGLView.framebufferHeight, 0);
 	} else {
 		glLoadIdentity();
-		//appDelegate.OFSAptr->update();
 	}
 
 		
