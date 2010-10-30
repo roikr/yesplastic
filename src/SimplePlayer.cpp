@@ -40,7 +40,7 @@ void SimplePlayer::setup(string setName) {
 	progress = 0.0f;
 	xml.pushTag("video_set");
 	displayName = xml.getValue("id","");
-	
+	switchSoundDelay = xml.getValue("delay", 0);
 	x = xml.getValue("x",0);
 	y = xml.getValue("y",0);
 	tx = xml.getValue("tx",x);

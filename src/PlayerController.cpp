@@ -35,6 +35,7 @@ PlayerController::PlayerController() {
 	bVisible = false;
 	
 	currentPlayer = 0;
+	bPlaySwitchSound = false;
 	videoSet = "";
 	
 };
@@ -51,6 +52,24 @@ void PlayerController::setup(int playerNum) {
 	song.setup();
 	//looper = 0;
 	
+	switchSound.load(ofToDataPath("SOUNDS/"+getName()+"_SWITCH.aif"),256);
+}
+
+string PlayerController::getName()  {
+	switch (playerNum) {
+		case 0:
+			return "GTR";
+			break;
+		case 1:
+			return "VOC";
+			break;
+		case 2:
+			return "DRM";
+			break;
+		default:
+			return "";
+			break;
+	}
 }
 
 
@@ -384,9 +403,14 @@ void PlayerController::update() {
 				nextPlayer->loadIdle();
 				currentPlayer->loadOut();
 				currentPlayer->startTransition(false);
+				switchStart = ofGetElapsedTimeMillis();
 				transitionState = TRANSITION_PLAYING_IN;
 				break;
 			case TRANSITION_PLAYING_IN:
+				if (!bPlaySwitchSound && ofGetElapsedTimeMillis()-switchStart > currentPlayer->getSwitchSoundDelay()) {
+					bPlaySwitchSound = true;
+					switchSound.play();
+				}
 				if (currentPlayer->didTransitionEnd()) {
 					previousPlayer = currentPlayer;
 					currentPlayer = nextPlayer;
@@ -588,6 +612,11 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 		return;
 	}
 	
+	if (bPlaySwitchSound) {
+		switchSound.mixWithBlocks(left,right);
+		switchSound.postProcess();
+		bPlaySwitchSound = switchSound.getIsPlaying();
+	}
 	
 	vector<event> events;
 	looper.process(events);

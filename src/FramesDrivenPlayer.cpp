@@ -38,7 +38,7 @@ void FramesDrivenPlayer::setup(string setName) {
 	
 	xml.pushTag("video_set");
 	displayName = xml.getValue("id","");
-	
+	switchSoundDelay = xml.getValue("delay", 0);
 	x = xml.getValue("x",0);
 	y = xml.getValue("y",0);
 	tx = xml.getValue("tx",x);

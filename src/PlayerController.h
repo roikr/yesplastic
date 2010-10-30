@@ -12,9 +12,10 @@ class ofxMidiInstrument;
 #include "TexturesPlayer.h"
 #include "ofxMidiLooper.h"
 #include "ofxMidiTrack.h"
+#include "ofxSndFile.h"
+
 #include <map>
 #include <set>
-
 
 class PlayerController  {
 
@@ -27,6 +28,8 @@ public:
 	void draw();
 	
 	void exit();
+	
+	string getName();
 	
 	//void touchDown(float x, float y);
 	//void keyPressed(int key);
@@ -132,6 +135,10 @@ private:
 	bool bAnimatedTransition;
 	
 	bool bMulti;
+	
+	ofxSndFile switchSound;
+	bool bPlaySwitchSound;
+	int switchStart;
 };
 
 #endif

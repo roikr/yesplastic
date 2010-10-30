@@ -38,6 +38,13 @@ public:
 	
 	virtual float getProgress() = 0;
 	
+	int getSwitchSoundDelay() {
+		return switchSoundDelay;
+	}
+	
+protected:
+	int switchSoundDelay;
+	
 };
 
 #endif

@@ -388,20 +388,7 @@ string testApp::getCurrentSoundSetName(int playerNum) {
 
 
 string testApp::getPlayerName(int playerNum)  {
-	switch (playerNum) {
-		case 0:
-			return "GTR";
-			break;
-		case 1:
-			return "VOC";
-			break;
-		case 2:
-			return "DRM";
-			break;
-		default:
-			return "";
-			break;
-	}
+	return player[playerNum].getName();
 }
 
 void testApp::seekFrame(int frame) {
