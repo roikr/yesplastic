@@ -50,7 +50,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 - (void) loadSongLoop;
-- (void) loadSoundSetLoop;
+//- (void) loadSoundSetLoop;
 @end
 
 @implementation MilgromInterfaceAppDelegate
@@ -859,30 +859,30 @@ NSString * const kCacheFolder=@"URLCache";
 		
 	OFSAptr->changeSoundSet(nextSong);
 	
-	//dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
-//	dispatch_async(aQueue, ^{
-//		while (OFSAptr->isInTransition()) {
-//			[milgromViewController setSecondaryContextCurrent];
-//			OFSAptr->update(); 
-//		}
-//	
-//	});
+	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
+	dispatch_async(aQueue, ^{
+		while (OFSAptr->isInTransition()) {
+			[milgromViewController setSecondaryContextCurrent];
+			OFSAptr->update(); 
+		}
 	
-	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-	[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
+	});
+	
+	//NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	//[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
 	
 	return YES;
 	
 }
 
-- (void) loadSoundSetLoop {
-	
-	if (OFSAptr->isInTransition()) {
-		OFSAptr->update(); // now update is not linked to frame
-		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-		[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
-	}
-}
+//- (void) loadSoundSetLoop {
+//	
+//	if (OFSAptr->isInTransition()) {
+//		OFSAptr->update(); // now update is not linked to frame
+//		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+//		[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
+//	}
+//}
 
 
 -(void)loadDemos {
