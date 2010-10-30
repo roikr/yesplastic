@@ -42,10 +42,8 @@ public:
 	void setState(int state);
 	float getScale();
 	bool isInTransition();
-	bool isEnabled();
+		
 	
-	bool enable;
-	int transitionState;
 	
 	void sync();
 	void setMode(int mode);
@@ -74,6 +72,8 @@ public:
 	float getPlayhead();
 	
 private:
+	bool bInitialized;
+	int transitionState;
 	
 	float progress;
 	

@@ -749,7 +749,7 @@ void testApp::buttonPressed(int button) {
 	}
 	
 	
-	if (player[controller].isEnabled() && !player[controller].isInTransition()) {					
+	if ( !player[controller].isInTransition()) {	// player[controller].isEnabled() &&				
 		if ( player[controller].getMode() == MANUAL_MODE ) {
 			player[controller].play(button);	
 		}

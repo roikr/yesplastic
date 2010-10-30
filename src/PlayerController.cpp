@@ -31,7 +31,7 @@ enum {
 
 PlayerController::PlayerController() {
 	transitionState = TRANSITION_IDLE;
-	enable = false;
+	bInitialized = false;
 	bVisible = false;
 	
 	currentPlayer = 0;
@@ -56,7 +56,7 @@ void PlayerController::setup(int playerNum) {
 
 void  PlayerController::loadSet(string soundSet,string songName){
 	
-	
+	bInitialized = false;
 	bAnimatedTransition = false;
 	
 	this->songName = songName;
@@ -78,9 +78,10 @@ void PlayerController::changeSet(string soundSet) {
 	if (isInTransition() || soundSet == this->soundSet) {
 		return;
 	}
+	looper.stopLoop();
 	this->soundSet = soundSet;
 	bAnimatedTransition = true;
-		
+	
 	transitionState = TRANSITION_CHANGE_SOUND_SET;
 }
 
@@ -106,6 +107,11 @@ void  PlayerController::loadSoundSet() {
 	int start = ofGetElapsedTimeMillis();
 	progress = 0.0f;
 	ofLog(OF_LOG_VERBOSE,"loadSoundSet: %s",soundSet.c_str());
+	
+	
+	midiNotes.clear();
+	keyToMidi.clear();
+	midiToSample.clear();
 	
 	this->soundSet = soundSet;
 	
@@ -183,7 +189,7 @@ void  PlayerController::loadSoundSet() {
 	
 	for (i=0; i<midiNotes.size();i++) {
 		string soundname = path+"_"+ofToString(i+1) + ".aif";
-		//ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
+		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
 		
 		if (bMulti)
 			midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i],chokeGroup.find(i)!=chokeGroup.end());
@@ -204,7 +210,7 @@ void  PlayerController::loadSoundSet() {
 	}
 	ofEnableDataPath();
 	
-	currentLoop = 0;
+	
 	
 	//looper->playLoop(currentLoop);
 	
@@ -306,8 +312,9 @@ void PlayerController::update() {
 				transitionState = TRANSITION_LOAD_SET_FINISHED;
 				break;
 			case TRANSITION_BEFORE_IDLE:
+				bInitialized = true;
+				currentLoop = 0;
 				looper.play();
-				enable = true;
 				transitionState = TRANSITION_IDLE;
 				break;
 
@@ -348,10 +355,10 @@ void PlayerController::update() {
 	} else {
 		switch (transitionState) {
 			case TRANSITION_CHANGE_SOUND_SET:
-				looper.pause();
-				loadSoundSet();
-				
-				transitionState = TRANSITION_LOAD_SONG;
+				if (!getIsPlaying()) {; // play last notes of the loop 
+					loadSoundSet();
+					transitionState = TRANSITION_LOAD_SONG;
+				}
 				break;
 			case TRANSITION_LOAD_SONG:
 				song.clear();
@@ -418,8 +425,10 @@ void PlayerController::update() {
 				break;
 				
 			case TRANSITION_BEFORE_IDLE:
-				looper.play();
-				enable = true;
+				
+				if (mode==LOOP_MODE) {
+					looper.playLoop(currentLoop);
+				}
 				transitionState = TRANSITION_IDLE;
 				break;
 			default:
@@ -497,31 +506,15 @@ void PlayerController::play(int num) {
 		
 		
 	}
-//	else if (mode == LOOP_MODE)
-//		looper.playLoop(num);
-	
+
 }
 
-/*
-void PlayerController::keyPressed(int key) {
-	if (!enable) 
-		return;
-	
-	if (isInTransition()) 
-		return;
-	
-	if (looper.getMode() == MANUAL_MODE) 
-		looper.play(key);
-	else if (looper.getMode() == LOOP_MODE)
-		looper.changeLoop(key);
-	
-}
- */
+
 
 
 void PlayerController::exit() {
 	//stopThread();
-	if (!enable) 
+	if (!bInitialized) 
 		return;
 	//for (vector<TexturesPlayer*>::iterator iter = videos.begin() ; iter!=videos.end();iter++)
 	//	(*iter)->exit();
@@ -529,29 +522,6 @@ void PlayerController::exit() {
 	
 	looper.clear();
 }
-
-
-
-
-
-bool PlayerController::isEnabled() {
-	return enable;
-}
-
-
-/*
-string PlayerController::getCurrentSet() {
-	
-	vector<TexturesPlayer*>::iterator iter = videos.begin();
-	while (iter!=videos.end() && (*iter)!=currentPlayer) {
-		iter++;
-	}
-	
-	return distance(videos.begin(), iter);
-	
-	
-}
- */
 
 	
 void PlayerController::sync() {
@@ -613,7 +583,8 @@ void PlayerController::processForVideo() {
 }
  
 void PlayerController::processWithBlocks(float *left,float *right) {
-	if (!enable) {
+	
+	if (!bInitialized) {
 		return;
 	}
 	
@@ -621,7 +592,8 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	vector<event> events;
 	looper.process(events);
 	
-	if (isInTransition()) {
+		
+	if (transitionState != TRANSITION_IDLE && transitionState != TRANSITION_CHANGE_SOUND_SET) {
 		return;
 	}
 	
