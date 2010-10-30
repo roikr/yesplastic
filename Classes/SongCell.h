@@ -18,7 +18,7 @@
 	UIImageView *lock;
 	UIButton *deleteButton;
 	SongsTable *songsTable;
-	NSNumber * _progress;
+	float progress;
 	CustomImageView *progressView; 
 	Song *song;
 	
@@ -29,7 +29,7 @@
 @property (nonatomic,retain) IBOutlet UIImageView *lock;
 @property (nonatomic,retain) IBOutlet UIButton *deleteButton;
 @property (nonatomic,retain) SongsTable *songsTable;
-@property (nonatomic,retain) NSNumber *progress;
+@property float progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
 @property (nonatomic,retain) Song *song;
 

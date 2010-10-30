@@ -97,8 +97,7 @@ void testApp::setup(){
 	
 	
 	
-	lastFrame = 0;
-	bChangeSet = false; 
+	//bChangeSet = false; 
 	
 //	bButtonDown = false;
 	bNeedDisplay = false;
@@ -180,16 +179,7 @@ void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 
 
 
-void testApp::threadedFunction() {
-	
-	for (int i=0;i<3;i++) {
-		player[i].threadedFunction();
-		if (player[i].isInTransition()) {
-			break;	
-		}
-	}
-	
-}
+
 
 float testApp::getProgress() {
 	
@@ -378,8 +368,16 @@ void testApp::loadSong(string songName,bool bDemo) {
 
 void testApp::changeSoundSet(string nextSoundSet) {
 	this->nextSoundSet = nextSoundSet;
-	bChangeSet = true;
 	bIsSongValid = false;
+	
+	bNeedDisplay = true;
+	
+	
+	string str = getPlayerName(controller)+"_"+nextSoundSet;
+	if (player[controller].getCurrentSoundSet()!=str) {
+		//player[controller].setMode(MANUAL_MODE);
+		player[controller].changeSet(str);
+	}
 	
 }
 
@@ -437,28 +435,7 @@ void testApp::seekFrame(int frame) {
 void testApp::update(){
 	//	printf("update()\n");
 	
-	/*
-	if (bChangeSet) {
-		menu.player->getMidiTrack()->setMode(MANUAL_MODE,false);
-		bChangeSet = false;
-		menu.player->changeSet(menu.setNum);
-	}
-	 */
 	
-	
-	if (bChangeSet) {
-		bNeedDisplay = true;
-		bChangeSet = false;
-		
-		string str = getPlayerName(controller)+"_"+nextSoundSet;
-		if (player[controller].getCurrentSoundSet()!=str) {
-			//player[controller].setMode(MANUAL_MODE);
-			player[controller].changeSet(str);
-		}
-			
-		
-	}
-		
 	if (songState==SONG_RECORD) {
 		if (ofGetElapsedTimeMillis()-startRecordingTime > 30000) {
 			setSongState(SONG_IDLE);

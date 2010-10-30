@@ -105,7 +105,7 @@
 	float totalProgress = ((float)currentSet + [theProgress floatValue] )/6.0;
 	
 	MilgromLog(@"loaderProgress: %3f, total: %3f",[theProgress floatValue] *100,totalProgress*100);
-	[self.delegate loader:self withProgress:[NSNumber numberWithFloat:totalProgress]];
+	[self.delegate loader:self withProgress:totalProgress];
 }
 
 

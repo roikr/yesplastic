@@ -25,7 +25,7 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import "ShareManager.h"
-
+#import <OpenGLES/EAGL.h>
 
 
 NSString * const kMilgromURL=@"roikr.com";
@@ -49,10 +49,13 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)loadDemos;
 - (void) play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
+- (void) loadSongLoop;
+- (void) loadSoundSetLoop;
 @end
 
 @implementation MilgromInterfaceAppDelegate
 
+@synthesize context;
 @synthesize window;
 @synthesize milgromViewController;
 @synthesize mainViewController;
@@ -78,8 +81,15 @@ NSString * const kCacheFolder=@"URLCache";
 	self.shareManager = [ShareManager shareManager];
 	//self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	
+	
+//	if (self.milgromViewController == nil) { // this check use in case of loading after warning message...
+//		self.milgromViewController = [[MilgromViewController alloc] initWithNibName:@"MilgromViewController" bundle:nil];
+//	}
+//	
+//	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
 	self.bandMenu = (BandMenu *)milgromViewController.viewController.visibleViewController; 
+	
 	
 	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
 	
@@ -212,9 +222,24 @@ NSString * const kCacheFolder=@"URLCache";
 	[self loadDemos];
 	[bandMenu loadData];
 	
+	//rendering = NO;
+	
+//	dispatch_queue_t updateQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
+//	dispatch_async(updateQueue, ^{
+//		while (1) {
+//			dispatch_async(dispatch_get_main_queue(), ^{
+//				
+//				
+//			});
+//		}
+//	});
+	
+	
+	
 	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0); // TODO: no high priority
 	dispatch_async(aQueue, ^{
 		while (1) {
+			OFSAptr->getSongState(); // just to update bNeedDisplay
 			//OFSAptr->threadedFunction();
 			if (OFSAptr->bNeedDisplay) {
 				if (mainViewController) {
@@ -229,9 +254,6 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	OFSAptr->setup();
 	OFSAptr->setState(BAND_STATE);
-	//OFSAptr->lastFrame = 0;
-	
-	
 	
 	/* turn off the NSURLCache shared cache */
 	
@@ -750,6 +772,12 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)loadSong:(Song*)song {
+	
+	if (currentSong && song ==  currentSong) {	
+		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
+		[self pushMain];
+	}
+	
 	self.currentSong = song;
 	//self.currentSoundSets = nil; // TODO: check if it really frees...
 	//self.currentSoundSets = [NSMutableArray arrayWithArray:[song.soundSets allObjects]];
@@ -757,6 +785,8 @@ NSString * const kCacheFolder=@"URLCache";
 	OFSAptr->setSongState(SONG_IDLE); // if there is previous song which is playing there...
 	
 	string nextSong = [song.songName UTF8String];
+	
+		
 	if ([song.bDemo boolValue]) {
 		if (  !OFSAptr->isInTransition() && OFSAptr->isSongAvailiable(nextSong)) {
 			
@@ -767,6 +797,29 @@ NSString * const kCacheFolder=@"URLCache";
 	} else {
 		OFSAptr->loadSong([song.songName UTF8String],false);
 		OFSAptr->setBPM([song.bpm integerValue]);
+	}
+	
+		
+		//[milgromViewController setContextCurrent];
+		
+	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	[self performSelector:@selector(loadSongLoop) withObject:nil afterDelay:0.01 inModes:modes];
+		 
+		
+	
+	
+}
+
+- (void) loadSongLoop {
+	
+	if (OFSAptr->isInTransition()) {
+		OFSAptr->update(); // now update is not linked to frame
+		[bandMenu.songsTable updateSong:currentSong WithProgress:OFSAptr->getProgress()];
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(loadSongLoop) withObject:nil afterDelay:0.01 inModes:modes];
+	} else {
+		[self pushMain]; // TODO: prevent double push
+		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
 	}
 	
 }
@@ -805,8 +858,30 @@ NSString * const kCacheFolder=@"URLCache";
 	OFSAptr->bMenu=false;
 		
 	OFSAptr->changeSoundSet(nextSong);
+	
+	//dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
+//	dispatch_async(aQueue, ^{
+//		while (OFSAptr->isInTransition()) {
+//			[milgromViewController setSecondaryContextCurrent];
+//			OFSAptr->update(); 
+//		}
+//	
+//	});
+	
+	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
+	
 	return YES;
 	
+}
+
+- (void) loadSoundSetLoop {
+	
+	if (OFSAptr->isInTransition()) {
+		OFSAptr->update(); // now update is not linked to frame
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
+	}
 }
 
 
@@ -888,7 +963,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 }
 
-- (void) loader:(DemoLoader *)theLoader withProgress:(NSNumber *)theProgress {
+- (void) loader:(DemoLoader *)theLoader withProgress:(float)theProgress {
 	
 	Song *song = theLoader.song;
 	

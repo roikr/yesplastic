@@ -21,28 +21,39 @@
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
-
+@property (nonatomic, retain) EAGLContext *secondaryContext;
 @end
 
 @implementation MilgromViewController
 
 @synthesize viewController;
 @synthesize eAGLView;
-@synthesize animating, context;
+@synthesize animating, context,secondaryContext;
+
+/*
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+				
+    }
+    return self;
+}
+ */
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
-    
-   
-    if (!aContext)
-        NSLog(@"Failed to create ES context");
-    else if (![EAGLContext setCurrentContext:aContext])
-        NSLog(@"Failed to set ES context current");
-    
+   	EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+	
+	
+	if (!aContext)
+		NSLog(@"Failed to create ES context");
+	else if (![EAGLContext setCurrentContext:aContext])
+		NSLog(@"Failed to set ES context current");
+	
 	self.context = aContext;
 	[aContext release];
+
 	
     [self.eAGLView setContext:context];
     [self.eAGLView setFramebuffer];
@@ -147,6 +158,22 @@
 	self.context = nil;	
 }
 
+- (void)setContextCurrent {
+	[EAGLContext setCurrentContext:context];
+}
+
+- (void)setSecondaryContextCurrent {
+	if (!secondaryContext) {
+		secondaryContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1 
+										 sharegroup:context.sharegroup];
+		
+	}
+		
+	if (!secondaryContext || ![EAGLContext setCurrentContext:secondaryContext]) {
+		MilgromLog(@"setSecondaryContextCurrent error");
+	}
+}
+
 - (NSInteger)animationFrameInterval
 {
     return animationFrameInterval;
@@ -189,8 +216,7 @@
             animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) target:self selector:@selector(drawFrame) userInfo:nil repeats:TRUE];
         
 		startTime = CACurrentMediaTime();
-		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-		appDelegate.OFSAptr->lastFrame = -1;
+		currentFrame =0;
         animating = TRUE;
     }
 }
@@ -214,7 +240,17 @@
     }
 }
 
-- (void)drawFrame
+- (void)renderFrame // SONG_RENDER_VIDEO
+{
+	[self.eAGLView setFramebuffer];
+    
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	glLoadIdentity();
+	appDelegate.OFSAptr->draw();
+	[self.eAGLView presentFramebuffer];
+}
+
+- (void)drawFrame // NORMAL_PLAY
 {
     [self.eAGLView setFramebuffer];
     
@@ -225,28 +261,16 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.OFSAptr->threadedFunction(); // TODO: remove from here
 	
-	appDelegate.OFSAptr->getSongState(); // just to update bNeedDisplay
-	
-	if (animating) {
-		appDelegate.OFSAptr->update(); // now update is not linked to frame
-		
-		int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
-		if (frame>appDelegate.OFSAptr->lastFrame) {
-			appDelegate.OFSAptr->lastFrame = frame;
-			appDelegate.OFSAptr->nextFrame();
-		}
-		glLoadIdentity();
-		glScalef(1.0, -1.0,1.0);
-		glTranslatef(0, -self.eAGLView.framebufferHeight, 0);
-	} else {
-		glLoadIdentity();
+	int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
+	if (frame>currentFrame) {
+		currentFrame = frame;
+		appDelegate.OFSAptr->nextFrame();
 	}
-
-		
 	
-	
+	glLoadIdentity();
+	glScalef(1.0, -1.0,1.0);
+	glTranslatef(0, -self.eAGLView.framebufferHeight, 0);
 	
 	appDelegate.OFSAptr->draw();
 	

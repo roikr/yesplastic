@@ -18,6 +18,10 @@
 #import "testApp.h" // for loading progress
 
 
+@interface SongsTable()
+
+@end
+
 @implementation SongsTable
 
 @synthesize tmpCell;
@@ -112,7 +116,7 @@
 	
 }
 
--(void)updateSong:(Song*)song WithProgress:(NSNumber *)theProgress {
+-(void)updateSong:(Song*)song WithProgress:(float)theProgress {
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0];
 	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
 	[cell setProgress:theProgress];
@@ -181,8 +185,9 @@
 	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	[cell updateBackgroundWithNumber:[indexPath row]];
 	[cell configureWithSong:song withSongsTable:self];
+	
 	if (![song.bReady boolValue]) {
-		[cell setProgress:[NSNumber numberWithFloat:0.0f]];
+		[cell setProgress:0.0f];
 	}
 		    
     
@@ -251,6 +256,7 @@
 #pragma mark -
 #pragma mark Table view delegate
 
+/*
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	//SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -268,49 +274,14 @@
 
 	return indexPath;
 }
-
+*/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
-	
-	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	//[appDelegate.viewController dismissMenu:self];
-	
-	//OFSAptr->setSongState(SONG_IDLE);
-	
-	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-	MilgromLog(@"SongsTable::didSelectRowAtIndexPath: cell.selected: %u",cell.selected);
-	
-	NSArray *modes = [[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil];
-	[self performSelector:@selector(updateProgress:) withObject:cell afterDelay:0.1 inModes:modes];
-}
-
-
-
-- (void)updateProgress:(SongCell*)cell
-{
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	if (appDelegate.OFSAptr->isInTransition()) {
-		float temp = appDelegate.OFSAptr->getProgress();
-		//MilgromLog(@"Progress: %f",temp);
-		cell.progress = [NSNumber numberWithFloat:temp];
-		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-		[self performSelector:@selector(updateProgress:) withObject:cell afterDelay:0.1 inModes:modes];
-	} else {
-		[appDelegate pushMain]; // TODO: prevent double push
-		cell.progress = [NSNumber numberWithFloat:1.0f];
-	}
-
-	
+    
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] loadSong:[songsArray objectAtIndex:indexPath.row]];
 	
 }
+
+
 
 
 

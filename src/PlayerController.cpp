@@ -244,86 +244,7 @@ bool PlayerController::isInTransition() {
 	return transitionState != TRANSITION_IDLE;
 }
 
-void PlayerController::threadedFunction() {
-	
-	
-	if (!bAnimatedTransition) {
-		switch (transitionState) {
-			case TRANSITION_CHANGE_SOUND_SET:
-				looper.pause();
-				loadSoundSet();
-				transitionState = TRANSITION_LOAD_SONG;
-				break;
-				
-			case TRANSITION_LOAD_SONG:
-				loadSong();
-				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
-				break;
 
-
-			case TRANSITION_UNLOAD_SET:
-				previousPlayer->release();
-				delete previousPlayer;
-				previousPlayer = 0;
-				transitionState = TRANSITION_UNLOAD_SET_FINISHED;
-				break;
-
-			case TRANSITION_LOAD_SET:
-				
-				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
-				nextPlayer->initIdle();
-				nextPlayer->initSet();
-				transitionState = TRANSITION_LOAD_SET_FINISHED;
-				break;
-			case TRANSITION_BEFORE_IDLE:
-				looper.play();
-				enable = true;
-				transitionState = TRANSITION_IDLE;
-				break;
-
-		}
-	} else {
-		switch (transitionState) {
-			case TRANSITION_CHANGE_SOUND_SET:
-				looper.pause();
-				loadSoundSet();
-				
-				transitionState = TRANSITION_LOAD_SONG;
-				break;
-			case TRANSITION_LOAD_SONG:
-				song.clear();
-				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
-				break;
-			case TRANSITION_INIT_IN_OUT:
-				currentPlayer->initOut();
-				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
-				nextPlayer->initIn();
-				nextPlayer->initIdle();
-				transitionState = TRANSITION_INIT_IN_OUT_FINISHED;
-				break;
-			case TRANSITION_RELEASE_SET: 
-				previousPlayer->release();
-				delete previousPlayer;
-				previousPlayer = 0;
-				transitionState = TRANSITION_RELEASE_SET_FINISHED;
-				break;
-			case TRANSITION_INIT_SET:
-				currentPlayer->initSet();
-				transitionState = TRANSITION_INIT_SET_FINISHED;
-				break;
-			case TRANSITION_BEFORE_IDLE:
-				looper.play();
-				enable = true;
-				transitionState = TRANSITION_IDLE;
-				break;
-				
-			
-		}
-		
-	}
-	
-	
-}
 	
 float PlayerController::getProgress() {
 //	if (nextPlayer) {
@@ -358,6 +279,38 @@ void PlayerController::update() {
 	
 	if (!bAnimatedTransition) {
 		switch (transitionState) {
+			case TRANSITION_CHANGE_SOUND_SET:
+				looper.pause();
+				loadSoundSet();
+				transitionState = TRANSITION_LOAD_SONG;
+				break;
+				
+			case TRANSITION_LOAD_SONG:
+				loadSong();
+				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
+				break;
+				
+				
+			case TRANSITION_UNLOAD_SET:
+				previousPlayer->release();
+				delete previousPlayer;
+				previousPlayer = 0;
+				transitionState = TRANSITION_UNLOAD_SET_FINISHED;
+				break;
+				
+			case TRANSITION_LOAD_SET:
+				
+				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
+				nextPlayer->initIdle();
+				nextPlayer->initSet();
+				transitionState = TRANSITION_LOAD_SET_FINISHED;
+				break;
+			case TRANSITION_BEFORE_IDLE:
+				looper.play();
+				enable = true;
+				transitionState = TRANSITION_IDLE;
+				break;
+
 			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
 				if (nextVideoSet!=videoSet) {
 					if (currentPlayer) {
@@ -394,14 +347,30 @@ void PlayerController::update() {
 		
 	} else {
 		switch (transitionState) {
-			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
+			case TRANSITION_CHANGE_SOUND_SET:
+				looper.pause();
+				loadSoundSet();
 				
+				transitionState = TRANSITION_LOAD_SONG;
+				break;
+			case TRANSITION_LOAD_SONG:
+				song.clear();
+				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
+				break;
+			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
 				if (nextVideoSet!=videoSet) {
 					transitionState = TRANSITION_INIT_IN_OUT;
 				}
 				else {
 					transitionState = TRANSITION_BEFORE_IDLE;
 				}
+				break;
+			case TRANSITION_INIT_IN_OUT:
+				currentPlayer->initOut();
+				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
+				nextPlayer->initIn();
+				nextPlayer->initIdle();
+				transitionState = TRANSITION_INIT_IN_OUT_FINISHED;
 				break;
 			case TRANSITION_INIT_IN_OUT_FINISHED:
 				nextPlayer->loadIn();
@@ -415,7 +384,7 @@ void PlayerController::update() {
 					previousPlayer = currentPlayer;
 					currentPlayer = nextPlayer;
 					currentPlayer->startTransition(true);
-					//currentPlayer->update(); // TODO: do i need it ?
+					currentPlayer->update(); // to avoid black in animation
 					nextPlayer = 0;
 					transitionState = TRANSITION_PLAYING_OUT;
 				}
@@ -429,17 +398,30 @@ void PlayerController::update() {
 					transitionState = TRANSITION_RELEASE_SET;
 				}
 				break;
+			case TRANSITION_RELEASE_SET: 
+				previousPlayer->release();
+				delete previousPlayer;
+				previousPlayer = 0;
+				transitionState = TRANSITION_RELEASE_SET_FINISHED;
+				break;
 			case TRANSITION_RELEASE_SET_FINISHED:
 				transitionState = TRANSITION_INIT_SET;
 				break;
+			case TRANSITION_INIT_SET:
+				currentPlayer->initSet();
+				transitionState = TRANSITION_INIT_SET_FINISHED;
+				break;
 			case TRANSITION_INIT_SET_FINISHED:
-				
 				currentPlayer->loadSet();
-				
 				videoSet = nextVideoSet;
 				transitionState = TRANSITION_BEFORE_IDLE;
 				break;
-			
+				
+			case TRANSITION_BEFORE_IDLE:
+				looper.play();
+				enable = true;
+				transitionState = TRANSITION_IDLE;
+				break;
 			default:
 				break;
 				
@@ -451,7 +433,8 @@ void PlayerController::update() {
 void PlayerController::nextFrame() {
 	if (currentPlayer) {
 		currentPlayer->update();
-	}
+	} 
+
 }
 
 void PlayerController::translate() {

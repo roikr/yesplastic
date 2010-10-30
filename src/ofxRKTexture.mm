@@ -26,8 +26,7 @@ void ofxRKTexture::init() {
 	_height = texture.height;
 	_internalFormat = texture.internalFormat;
 	_hasAlpha = texture.hasAlpha;
-	bUnloaded = false;
-	bInitialized = true;
+	
 	
 	_columnsNumber = _subWidth ? _width / _subWidth : 0;
 	//_rowFraction = (float)_subHeight / (float)texture->getHeight();
@@ -38,11 +37,14 @@ void ofxRKTexture::init() {
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	
+	bInitialized = true;
 }
 
 void ofxRKTexture::release() {
 	if (bInitialized) {
-		unload();
+		glDeleteTextures(1, &_name);
+		_name = 0;
 	} else {
 		ofLog(OF_LOG_VERBOSE,"ofxRKTexture::release: %s has not been initialized",filename.c_str());
 	}
@@ -59,11 +61,6 @@ void ofxRKTexture::load(){
 
 
 void ofxRKTexture::unload() {
-	if (!bUnloaded) {
-		bUnloaded = true;
-		glDeleteTextures(1, &_name);
-	}
-	
 }
 
 	

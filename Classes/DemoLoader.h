@@ -30,7 +30,7 @@
 @protocol DemoLoaderDelegate<NSObject>
 
 - (void) loaderDidFinish:(DemoLoader *)theLoader;
-- (void) loader:(DemoLoader *)theLoader withProgress:(NSNumber *)theProgress;
+- (void) loader:(DemoLoader *)theLoader withProgress:(float)theProgress;
 
 
 @end

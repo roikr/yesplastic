@@ -35,6 +35,10 @@
     NSTimer *animationTimer;
 	CFTimeInterval startTime;
 	
+	EAGLContext *secondaryContext;
+	
+	NSInteger currentFrame;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *viewController;
@@ -43,9 +47,13 @@
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
 
+
+- (void)setContextCurrent;
+- (void)setSecondaryContextCurrent;
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)drawFrame;
+- (void)renderFrame;
 
 
 @end

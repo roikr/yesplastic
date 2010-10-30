@@ -120,18 +120,18 @@
 }
 
 
-- (NSNumber *)progress {
-	return _progress;
+- (float) progress {
+	return progress;
 }
 
-- (void) setProgress:(NSNumber *)theProgress {
-	if ([theProgress floatValue]<1.0f) {
+- (void) setProgress:(float) theProgress {
+	if (theProgress<1.0f) {
 		
 		self.userInteractionEnabled = NO;
 		progressView.hidden = NO;
 		
-		[progressView setRect:CGRectMake(0, 0, [theProgress floatValue],1.0f)];
-
+		[progressView setRect:CGRectMake(0, 0, theProgress,1.0f)];
+		
 		
 		//progressView.frame = frame;
 		
@@ -143,7 +143,7 @@
 		
 	}
 	
-	_progress = theProgress;
+	progress = theProgress;
 	
 }
 

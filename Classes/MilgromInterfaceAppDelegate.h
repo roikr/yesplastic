@@ -14,6 +14,7 @@
 extern NSString * const kCacheFolder;
 extern NSString * const kMilgromURL;
 
+@class EAGLContext;
 @class MilgromViewController;
 @class Song;
 @class SoundSet;
@@ -27,7 +28,6 @@ class testApp;
 
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate> {
     UIWindow *window;
-    
 	
 	NSManagedObjectContext *managedObjectContext_;
 	NSManagedObjectModel *managedObjectModel_;
@@ -48,7 +48,11 @@ class testApp;
 	Song *currentSong;
 	
 	ShareManager *shareManager;
+	
+	//BOOL rendering;
 }
+
+@property (nonatomic, retain,readonly) EAGLContext *context;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
@@ -67,6 +71,7 @@ class testApp;
 @property (nonatomic, retain) Song *currentSong;
 
 @property (nonatomic, retain) ShareManager *shareManager;
+//@property BOOL rendering;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;

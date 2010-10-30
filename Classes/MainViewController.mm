@@ -631,7 +631,8 @@
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
 							 OFSAptr->seekFrame(frameNum);
-							 [milgromViewController drawFrame];
+
+							 [milgromViewController renderFrame];
 							 [self setRenderProgress:OFSAptr->getPlayhead()];
 							 // TODO: playhead is only by DRM
 							 

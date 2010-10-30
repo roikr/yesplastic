@@ -24,7 +24,7 @@ class testApp : public ofSimpleApp  {
 public:
 	testApp() {
 		bInitialized = false;
-		bChangeSet = false;
+		//bChangeSet = false;
 	}
 	
 	void setup();
@@ -55,8 +55,6 @@ public:
 	
 	void moveBack();
 		
-	void threadedFunction();
-	
 	float getVolume();
 	void setVolume(float vol);
 	
@@ -84,9 +82,6 @@ public:
 	string getCurrentSoundSetName(int playerNum);
 	string getPlayerName(int playerNum); // using to build SoundSet name from Song name and for loop and triggers buttons
 
-	
-	int lastFrame;
-	
 	int controller;
 	PlayerController player[3];
 	bool bMenu;
@@ -135,7 +130,7 @@ private:
 	map<string,int>oscMap;
 	//ofxOscReceiver receiver;
 	
-	int bChangeSet; // //TODO: is it realy needed ?  to delay change video set to next update (so draw wont change)
+	//int bChangeSet; // //TODO: is it realy needed ?  to delay change video set to next update (so draw wont change)
 	string nextSoundSet;
 	
 	
