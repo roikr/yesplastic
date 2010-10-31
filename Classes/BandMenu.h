@@ -14,6 +14,7 @@
 	SongsTable *songsTable;
 	UIView *songsView;
 	UIActivityIndicatorView *activityIndicator;
+	UIButton *editButton;
 	
 	
 }
@@ -21,12 +22,13 @@
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
 @property (nonatomic,retain ) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic,retain) IBOutlet UIButton *editButton;
 
 
 - (void)edit:(id)sender;
 - (void)help:(id)sender;
 - (void)link:(id)sender;
 - (void) loadData; // load the song list from the store to the table
-
+- (void)cancelEdit;
 
 @end

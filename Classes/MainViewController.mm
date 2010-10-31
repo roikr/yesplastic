@@ -42,6 +42,7 @@
 @synthesize soloHelp;
 @synthesize bShowHelp;
 @synthesize renderView;
+@synthesize interactionView;
 
 
 //@synthesize triggerButton;
@@ -317,8 +318,6 @@
 
 - (void) menu:(id)sender {
 	
-	[self hideHelp];
-	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
 	}
@@ -346,8 +345,7 @@
 
 - (void) play:(id)sender {
 	
-	[self hideHelp];
-	
+		
 	if (recordButton.selected) {
 		[self stop:nil];
 	}
@@ -361,12 +359,12 @@
 }
 
 - (void) stop:(id)sender {
-	[self hideHelp];
+	
 	OFSAptr->setSongState(SONG_IDLE);
 }
 
 - (void) record:(id)sender {
-	[self hideHelp];
+	
 	
 	if (playButton.hidden) 
 		return;
@@ -410,7 +408,7 @@
 }
 
 - (void) save:(id)sender {
-	[self hideHelp];
+	
 	OFSAptr->setSongState(SONG_IDLE);
 	
 	
@@ -433,7 +431,7 @@
 
 - (void)share:(id)sender {
 	
-	[self hideHelp];
+	
 	OFSAptr->setSongState(SONG_IDLE);
 	
 	ShareManager *shareManager = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] shareManager];
@@ -475,7 +473,7 @@
 */
 
 - (void) trigger:(id)sender {
-	[self hideHelp];
+	
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
@@ -489,7 +487,6 @@
 }
 
 - (void) loop:(id)sender {
-	[self hideHelp];
 	UIButton *button;
 //	for (int i=0; i<[loopsView.subviews count]; i++) {
 //		button = (UIButton*)[loopsView.subviews objectAtIndex:i];
@@ -512,14 +509,14 @@
 //}
 
 - (void) nextLoop:(id)sender {
-	[self hideHelp];
+	
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->nextLoop(button.tag);
 	
 }
 
 - (void) prevLoop:(id)sender {
-	[self hideHelp];
+	
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->prevLoop(button.tag);
 }
@@ -529,10 +526,12 @@
 	switch (OFSAptr->getSongState()) {
 		case SONG_IDLE:
 			bShowHelp = YES;
+			self.interactionView.userInteractionEnabled = NO;
 			[self updateViews];
 			break;
 		case SONG_RECORD:
 			bShowHelp = YES;
+			self.interactionView.userInteractionEnabled = NO;
 			OFSAptr->setSongState(SONG_IDLE);
 			
 			break;
@@ -545,10 +544,11 @@
 
 - (void)hideHelp {
 	
-	if (bShowHelp) {
-		bShowHelp = NO;
-		[self updateViews];
-	}
+	
+	bShowHelp = NO;
+	self.interactionView.userInteractionEnabled = YES;
+	[self updateViews];
+	
 }
 
 - (void) moreHelp:(id)sender {

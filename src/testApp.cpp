@@ -763,15 +763,18 @@ void testApp::touchDown(float x, float y, int touchId) {
 			int xmod = (int)x % 160;
 			if (xmod>25 && xmod < 135 && y>75 && y<245) {
 				controller = (int)x/160;
-				player[controller].setPush(true);
-				bPush = true;
+				if (songState!=SONG_PLAY && songState!=SONG_RENDER_VIDEO) {
+					player[controller].setPush(true);
+					bPush = true;
+				}
+				
 			}
 			
 			
 			//nextLoopNum = player[controller].getCurrentLoop();
 		} break;
 		case SOLO_STATE: {
-			if (x>50 && x<270 && y>100 && y<350) {
+			if (x>50 && x<270 && y>100 && y<350 && (songState!=SONG_PLAY && songState!=SONG_RENDER_VIDEO)) {
 				player[controller].setPush(true);
 				bPush = true;
 			}

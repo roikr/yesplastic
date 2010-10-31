@@ -18,6 +18,7 @@
 @synthesize songsTable;
 @synthesize songsView;
 @synthesize activityIndicator;
+@synthesize editButton;
 
 
 
@@ -93,12 +94,20 @@
 	button.selected = !button.selected;
 }
 
+- (void)cancelEdit {
+	if (editButton.selected) {
+		[self edit:editButton];
+	}
+}
+
 
 - (void)help:(id)sender {
+	[self cancelEdit];
 	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]) help];
 }
 
 - (void)link:(id)sender {
+	[self cancelEdit];
 	UIButton *button = (UIButton *)sender;
 	
 	switch (button.tag) {

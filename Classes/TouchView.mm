@@ -39,12 +39,16 @@
 	
 	
 	
+//	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+//	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+//		return;
+//	}
+	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+	
+	if (appDelegate.mainViewController.bShowHelp) {
 		return;
 	}
-	
-	[appDelegate.mainViewController hideHelp];
 
 	
 	//self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5) target:controller selector:@selector(bringPlayerMenu:) userInfo:nil repeats:NO];
@@ -84,10 +88,10 @@
 	//self.timer = nil;
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+	if (appDelegate.mainViewController.bShowHelp) {
 		return;
 	}
-	
+
 	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;
@@ -111,9 +115,9 @@
 	
 	//	NSLog(@"touchesEnded: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
-	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.OFSAptr->getSongState() == SONG_PLAY) {
+	if (appDelegate.mainViewController.bShowHelp) {
+		[appDelegate.mainViewController hideHelp];
 		return;
 	}
 	
@@ -131,7 +135,7 @@
 		CGPoint touchPoint = [touch locationInView:self];
 	
 //		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
-		
+		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 		appDelegate.OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);
 		
 //		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {

@@ -19,7 +19,7 @@ class testApp;
 
 	UIView *bandHelp;
 	UIView *soloHelp;
-	
+	UIView *interactionView;
 	UIButton *playButton;
 	UIButton *stopButton;
 	UIButton *recordButton;
@@ -32,6 +32,7 @@ class testApp;
 	UIView *loopsView;
 	UIView *bandLoopsView;
 	UIView *renderView;
+	
 	
 	
 	testApp *OFSAptr;
@@ -54,7 +55,7 @@ class testApp;
 	
 }
 
-
+@property (nonatomic, retain) IBOutlet UIView *interactionView;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 @property (nonatomic, retain) IBOutlet UIButton *stopButton;
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
@@ -91,7 +92,7 @@ class testApp;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
 - (void) showHelp:(id)sender;
-- (void) hideHelp;
+- (void)hideHelp;
 - (void) moreHelp:(id)sender;
 
 - (void) fadeOutRecordButton;
