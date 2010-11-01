@@ -95,10 +95,5 @@ class testApp;
 - (void)hideHelp;
 - (void) moreHelp:(id)sender;
 
-- (void) fadeOutRecordButton;
-- (void) fadeInRecordButton;
-
-- (void)render;
-
 
 @end

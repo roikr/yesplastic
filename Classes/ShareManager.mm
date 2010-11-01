@@ -6,6 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "ShareManager.h"
 #import "MainViewController.h"
 #import "MilgromInterfaceAppDelegate.h"
@@ -13,6 +14,8 @@
 #import "MilgromMacros.h"
 #import "YouTubeUploadViewController.h"
 #import "FacebookUploadViewController.h"
+#import "ExportManager.h"
+#import "testApp.h"
 
 enum {
 	ACTION_NONE,
@@ -20,6 +23,8 @@ enum {
 	ACTION_POST_ON_FACEBOOK,
 	ACTION_UPLOAD_TO_FACEBOOK,
 	ACTION_SEND_VIA_MAIL,
+	ACTION_SEND_RINGTONE,
+	ACTION_ADD_TO_LIBRARY,
 	ACTION_DONE,
 	ACTION_RENDER,
 	ACTION_PLAY
@@ -27,7 +32,12 @@ enum {
 
 @interface ShareManager ()
 - (void)action;
-- (void)sendViaMail;
+- (void)sendViaMailWithSubject:(NSString *)subject withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName;
+- (void)export;
+- (void)updateExportProgress:(ExportManager*)manager;
+- (void)exportDidFinish;
+- (void)exportToLibrary;
+
 @end
 
 @implementation ShareManager
@@ -50,8 +60,21 @@ enum {
 		self.facebookUploader = [FacebookUploader facebookUploader];
 		[facebookUploader addDelegate:self];
 		
+		canSendMail = [MFMailComposeViewController canSendMail];
+		
 	}
 	return self;
+}
+
+- (void)prepare {
+	isTemporary =  [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] isSongTemporary];
+	
+	if (isTemporary) {
+		_didUploadToYouTube = NO;
+		_didUploadToFacebook = NO;
+		_hasBeenRendered = NO;
+		
+	}
 }
 
 -(BOOL) isUploading {
@@ -103,8 +126,6 @@ enum {
 
 
 
-
-
 - (NSString *)getVideoName {
 	if (isTemporary) {
 		return @"milgrom";
@@ -126,7 +147,7 @@ enum {
 		return @"";
 	}
 	
-	return [[[paths objectAtIndex:0] stringByAppendingPathComponent:[self getVideoName]] stringByAppendingPathExtension:@".mov"];
+	return [[[paths objectAtIndex:0] stringByAppendingPathComponent:[self getVideoName]] stringByAppendingPathExtension:@"mov"];
 }
 
 
@@ -134,35 +155,23 @@ enum {
 #pragma mark mailClass
 
 
-- (void)sendViaMail {
+- (void)sendViaMailWithSubject:(NSString *)subject withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName {
 	
 	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
 	if (mailClass != nil)
 	{
 		// We must always check whether the current device is configured for sending emails
-		if ([mailClass canSendMail])
-		{
-			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-			picker.mailComposeDelegate = self;
-			
-			[picker setSubject:[self getVideoName]];
-			
-			// Attach an video to the email
-			//NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"png"];
-			NSData *myData = [NSData dataWithContentsOfFile:[self getVideoPath]];
-			[picker addAttachmentData:myData mimeType:@"video/mov" fileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
-			
-			
-			
-			
-			//[picker setMessageBody:[self getMessage] isHTML:YES];
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] presentModalViewController:picker animated:YES];
-			//[self presentModalViewController:picker animated:YES];
-			[picker release];
-			
-			
-		}
+		MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+		picker.mailComposeDelegate = self;
 		
+		[picker setSubject:subject];
+		[picker addAttachmentData:data mimeType:mimeType fileName:fileName];
+		
+		//[picker setMessageBody:[self getMessage] isHTML:YES];
+		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] presentModalViewController:picker animated:YES];
+		//[self presentModalViewController:picker animated:YES];
+		[picker release];
+
 	}
 	
 }
@@ -254,19 +263,13 @@ enum {
 	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] setShareProgress:progress];
 }
 
+
+
+
+
 #pragma mark actionSheet
 
 - (void)menuWithView:(UIView *)view {
-	
-	isTemporary =  [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] isSongTemporary];
-	
-	if (isTemporary) {
-		_didUploadToYouTube = NO;
-		_didUploadToFacebook = NO;
-		_hasBeenRendered = NO;
-		
-	}
-	
 	
 	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
 	
@@ -286,9 +289,13 @@ enum {
 		[sheet addButtonWithTitle:@"Upload to FaceBook"];
 	}
 	
+	[sheet addButtonWithTitle:@"Add to Library"];
+
 	
-	
-	[sheet addButtonWithTitle:@"Send via mail"];
+	if (canSendMail) {
+		[sheet addButtonWithTitle:@"Send via mail"];
+		[sheet addButtonWithTitle:@"Send ringtone"];
+	}
 	
 	
 	
@@ -313,6 +320,10 @@ enum {
 		buttonIndex++;
 	}
 	
+	if (!canSendMail && buttonIndex>3) { // skip send mail result (2)
+		buttonIndex+=2;
+	}
+	
 	state = ACTION_NONE;
 	
 	
@@ -326,20 +337,25 @@ enum {
 		case 1:
 			state = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
 			break;
-			
 		case 2:
+			state = ACTION_ADD_TO_LIBRARY;
+			break;
+		case 3:
 			state = ACTION_SEND_VIA_MAIL;
 			break;
-			
-		case 3:
-			state = ACTION_DONE;
-			break;
-			
 		case 4:
-			
+			state = ACTION_SEND_RINGTONE;
 			break;
 			
 		case 5:
+			state = ACTION_DONE;
+			break;
+			
+		case 6:
+			
+			break;
+			
+		case 7:
 			state = ACTION_PLAY;
 			break;
 			
@@ -349,13 +365,27 @@ enum {
 		case ACTION_DONE:
 			//			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController];
 			break;
-			
-		default:
+		
+		case ACTION_UPLOAD_TO_YOUTUBE:
+		case ACTION_UPLOAD_TO_FACEBOOK:
+		case ACTION_ADD_TO_LIBRARY:
+		case ACTION_SEND_VIA_MAIL:
+		case ACTION_PLAY:
 			if (!self.hasBeenRendered ) {
 				[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] performSelector:@selector(render)];
 			} else {
 				[self performSelector:@selector(action)];
 			}
+			break;
+			
+		case ACTION_SEND_RINGTONE:
+			[self performSelector:@selector(export)];
+			//[self performSelector:@selector(action)];
+			break;
+
+
+		default:
+			
 			
 			break;
 	}
@@ -397,14 +427,114 @@ enum {
 			
 		}	break;
 			
-		case ACTION_SEND_VIA_MAIL:
-			[self sendViaMail];
+		case ACTION_ADD_TO_LIBRARY:
+			[self exportToLibrary];
 			break;
+			
+		case ACTION_SEND_VIA_MAIL: 
+		{
+			
+			NSData *myData = [NSData dataWithContentsOfFile:[self getVideoPath]];
+			[self sendViaMailWithSubject:[self getVideoName] withData:myData withMimeType:@"video/mov" 
+							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
+		} break;
+			
+		case ACTION_SEND_RINGTONE: 
+		{
+			
+			NSString *filename = [[self getVideoName] stringByAppendingPathExtension:@"m4r"];
+			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+			NSData *myData = [NSData dataWithContentsOfFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:filename]];
+			[self sendViaMailWithSubject:[self getVideoName] withData:myData withMimeType:@"audio/m4r" 
+							withFileName:filename];
+		} break;
 			
 		case ACTION_PLAY:
 			[appDelegate play];
 			break;
 	}	
+}
+
+
+- (void)export {
+	
+	//renderingView.hidden = NO;
+	//[self setRenderProgress:0.0f];
+	
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->soundStreamStop();
+	
+	//ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	ExportManager *manager = [ExportManager  exportAudio:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]]
+							  
+												   toURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:[[self getVideoName] stringByAppendingPathExtension:@"m4r"]]]
+							  
+							  
+								   withCompletionHandler:^ {
+									   NSLog(@"export completed");
+									   
+									   [self exportDidFinish];
+								   }];
+	
+	NSArray *modes = [[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil];
+	[self performSelector:@selector(updateExportProgress:) withObject:manager afterDelay:0.5 inModes:modes];
+	
+	
+}
+
+
+
+- (void)updateExportProgress:(ExportManager*)manager
+{
+	
+	if (!manager.didFinish) {
+		//[self setRenderProgress:manager.progress];
+		NSLog(@"export audio, progrss: %2.2f",manager.progress);
+		
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateExportProgress:) withObject:manager afterDelay:0.5 inModes:modes];
+	}
+}
+
+
+- (void)exportDidFinish {
+	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->soundStreamStart();
+	[self action];
+	//[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] shareManager] menuWithView:self.view];
+	
+}
+
+
+
+- (void)exportToLibrary
+{
+	NSURL *outputURL = [NSURL fileURLWithPath:[self getVideoPath]];
+	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+	if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
+		[library writeVideoAtPathToSavedPhotosAlbum:outputURL
+									completionBlock:^(NSURL *assetURL, NSError *error){
+										dispatch_async(dispatch_get_main_queue(), ^{
+											if (error) {
+												NSLog(@"writeVideoToAssestsLibrary failed: %@", error);
+												UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+																									message:[error localizedRecoverySuggestion]
+																								   delegate:nil
+																						  cancelButtonTitle:@"OK"
+																						  otherButtonTitles:nil];
+												[alertView show];
+												[alertView release];
+											}
+											else {
+												//_showSavedVideoToAssestsLibrary = YES;
+												
+											}
+										});
+										
+									}];
+	}
+	[library release];
 }
 
 

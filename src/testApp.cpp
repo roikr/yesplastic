@@ -195,7 +195,9 @@ float testApp::getProgress() {
 	return 0.0f;
 }
 
-float testApp::getPlayhead() {
+
+
+float testApp::getRenderProgress(){
 	
 // TODO: return playhead 
 	/*
@@ -204,7 +206,18 @@ float testApp::getPlayhead() {
 	}
 	 */
 	
-	return songState == SONG_RENDER_VIDEO && totalBlocks!=0 ? (float)currentBlock/(float)totalBlocks : 0.0f;
+	float playhead = 0;
+	
+	for (int i=0;i<3;i++) {
+		float temp = player[i].getPlayhead();
+		if (temp > playhead) {
+			playhead = temp;
+		}
+	}
+
+	
+	//return songState == SONG_RENDER_VIDEO && totalBlocks!=0 ? (float)currentBlock/(float)totalBlocks : 0.0f;
+	return playhead/duration;
 }
 
 
@@ -1022,6 +1035,17 @@ void testApp::setSongState(int songState) {
 	}
 		
 	this->songState = songState;
+	
+	if (songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO) {
+		duration = 0;
+		
+		for (int i=0;i<3;i++) {
+			float temp = player[i].getDuration();
+			if (temp > duration) {
+				duration = temp;
+			}
+		}
+	}		
 	
 	if (songState == SONG_RENDER_VIDEO) { 
 		currentBlock = 0;

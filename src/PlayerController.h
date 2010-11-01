@@ -72,7 +72,9 @@ public:
 	bool getIsPlaying();
 	
 	float getProgress();
+	float getDuration();
 	float getPlayhead();
+	
 	
 private:
 	bool bInitialized;

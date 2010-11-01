@@ -94,7 +94,7 @@ public:
 	void soundStreamClose();
 	
 	float getProgress();
-	float getPlayhead();
+	float getRenderProgress();
 	
 	
 	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
@@ -161,6 +161,7 @@ private:
 	bool bInitialized;
 	bool bInTransition;
 	
+	float duration;
 	int currentBlock;    //using to seekFrame for rendering video;
 	int totalBlocks; // calculating by renderAudio before rendering video
 };

@@ -291,11 +291,16 @@ float PlayerController::getProgress() {
 	return  progress;
 }
 
+float PlayerController::getDuration() {
+	return song.getDuration();
+}
+
 float PlayerController::getPlayhead() {
 	//	if (nextPlayer) {
 	//		progress = nextPlayer->getProgress();
 	//	}
-	return songState == SONG_PLAY || songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO ? song.getPlayhead() : 0.0f;
+	//return songState == SONG_PLAY || songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO ? song.getPlayhead() : 0.0f;
+	return song.getPlayhead();
 }
 
 	

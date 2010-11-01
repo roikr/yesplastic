@@ -19,7 +19,7 @@
 	BOOL _didUploadToFacebook;
 	BOOL _hasBeenRendered;
 	BOOL isTemporary;
-	
+	BOOL canSendMail;
 	NSInteger state;
 }
 
@@ -38,6 +38,7 @@
 - (NSString *)getVideoPath;
 - (void)menuWithView:(UIView *)view;
 - (void)action;
+- (void)prepare;
 
 
 @end

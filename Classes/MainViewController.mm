@@ -12,7 +12,6 @@
 #include "Constants.h"
 #include "testApp.h"
 
-#import <AVFoundation/AVFoundation.h>
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromViewController.h"
 #import "TouchView.h"
@@ -24,6 +23,18 @@
 #import "OpenGLTOMovie.h"
 
 
+@interface MainViewController() 
+
+- (void) fadeOutRecordButton;
+- (void) fadeInRecordButton;
+
+- (void)renderAudio;
+- (void)updateRenderProgress;
+- (void)renderAudioDidFinish;
+- (void)render;
+
+
+@end
 
 @implementation MainViewController
 
@@ -275,6 +286,7 @@
 			
 				
 			case SONG_RENDER_VIDEO:
+			case SONG_RENDER_AUDIO:
 				renderView.hidden = NO;
 				break;
 			default:
@@ -429,36 +441,6 @@
 
 
 
-- (void)share:(id)sender {
-	
-	
-	OFSAptr->setSongState(SONG_IDLE);
-	
-	ShareManager *shareManager = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] shareManager];
-	[shareManager menuWithView:self.view];
-//	if (self.shareViewController == nil) {
-//		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-//		//shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//	}
-//	
-//	[shareViewController prepare];
-//	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushViewController:shareViewController];
-		
-	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
-	// not so
-	//[shareViewController setProgress:[NSNumber numberWithFloat:0.5f]];
-	//[shareViewController render]; // TODO: move this to when view appear or whatever
-	
-	
-	
-}
-
-
-
-- (void) setShareProgress:(float) progress {
-	[shareProgressView setRect:CGRectMake(0, 1.0-progress, 1.0f,progress)];
-}
-
 		
 /*
 - (void) updateTables {
@@ -598,15 +580,85 @@
 	}
 }
 
-#pragma mark Render
+#pragma mark Render && Share
+
+- (void) setShareProgress:(float) progress {
+	[shareProgressView setRect:CGRectMake(0, 1.0-progress, 1.0f,progress)];
+}
+
+- (void)share:(id)sender {
+	
+	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
+	OFSAptr->setSongState(SONG_IDLE);
+	[self renderAudio];
+	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
+	
+}
+
 
 - (void) setRenderProgress:(float) progress {
 	[renderProgressView setRect:CGRectMake(0.0f, 0.0f,progress,1.0f)];
 }
 
 
+- (void)renderAudio {
+	[self setRenderProgress:0.0f];
+	
+	dispatch_queue_t myCustomQueue;
+	myCustomQueue = dispatch_queue_create("renderAudioQueue", NULL);
+	
+	//[milgromViewController stopAnimation];
+	OFSAptr->soundStreamStop();
+	
+	dispatch_async(myCustomQueue, ^{
+		
+		OFSAptr->renderAudio();
+		
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self renderAudioDidFinish];
+		});
+		
+		
+	});
+	
+	dispatch_release(myCustomQueue);
+	
+	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
+	
+}
+
+- (void)updateRenderProgress
+{
+	
+	if (OFSAptr->getSongState()==SONG_RENDER_AUDIO) {
+		float progress = OFSAptr->getRenderProgress();
+		[self setRenderProgress:progress];
+		NSLog(@"export audio, progrss: %2.2f",progress);
+		
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
+	}
+}
+
+
+- (void)renderAudioDidFinish {
+	
+	OFSAptr->setSongState(SONG_IDLE);
+	OFSAptr->soundStreamStart();
+	//[milgromViewController startAnimation];
+	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] menuWithView:self.view];
+	
+}
+
+
+
+
+
+
 - (void)render {
-	//renderingView.hidden = NO;
+	
 	[self setRenderProgress:0.0f];
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -615,6 +667,7 @@
 	
 	[milgromViewController stopAnimation];
 	OFSAptr->soundStreamStop();
+	OFSAptr->setSongState(SONG_RENDER_VIDEO);
 	
 	
 	dispatch_queue_t myCustomQueue;
@@ -622,8 +675,8 @@
 	
 	dispatch_async(myCustomQueue, ^{
 		
-		OFSAptr->renderAudio();
-		OFSAptr->setSongState(SONG_RENDER_VIDEO);
+		//OFSAptr->renderAudio();
+		
 		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[shareManager getVideoPath]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
@@ -631,9 +684,9 @@
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
 							 OFSAptr->seekFrame(frameNum);
-
+							 
 							 [milgromViewController renderFrame];
-							 [self setRenderProgress:OFSAptr->getPlayhead()];
+							 [self setRenderProgress:OFSAptr->getRenderProgress()];
 							 // TODO: playhead is only by DRM
 							 
 						 }
@@ -641,7 +694,7 @@
 						 withDidFinish:^(int frameNum) {
 							 
 							 int res = (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
-							 NSLog(@"writing video, progrss: %2.2f, frame: %i, finished: %i",OFSAptr->getPlayhead(),frameNum,res);
+							 NSLog(@"writing video, progrss: %2.2f, frame: %i, finished: %i",OFSAptr->getRenderProgress(),frameNum,res);
 							 return res;
 						 }
 		 
@@ -664,10 +717,8 @@
 	
 	dispatch_release(myCustomQueue);
 	
-	
 }
 
-
-
+				   
 
 @end

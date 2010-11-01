@@ -171,6 +171,7 @@
 		E44F6DBE122A4DC60002386C /* CELL2_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DB9122A4DC60002386C /* CELL2_PROGRESS.png */; };
 		E44F6DBF122A4DC60002386C /* CELL3_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DBA122A4DC60002386C /* CELL3_PROGRESS.png */; };
 		E44F6DC0122A4DC60002386C /* CELL4_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DBB122A4DC60002386C /* CELL4_PROGRESS.png */; };
+		E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E44F8469127EF0C90063FFA1 /* ExportManager.m */; };
 		E4570FD61268774600BA52A9 /* ofxMidiSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4570FD51268774600BA52A9 /* ofxMidiSample.cpp */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
@@ -305,6 +306,7 @@
 		E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */; };
 		E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */; };
 		E4964076125BA7FF0058DB34 /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4964075125BA7FF0058DB34 /* ActionCell.xib */; };
+		E4987FD5127F5CED00A07C65 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4987FD4127F5CED00A07C65 /* AssetsLibrary.framework */; };
 		E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF6121069EB001CB593 /* EAGLView.mm */; };
 		E498DDFA121069EB001CB593 /* MilgromViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF8121069EB001CB593 /* MilgromViewController.mm */; };
 		E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0512106AFA001CB593 /* OpenGLES.framework */; };
@@ -583,6 +585,8 @@
 		E44F6DB9122A4DC60002386C /* CELL2_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL2_PROGRESS.png; sourceTree = "<group>"; };
 		E44F6DBA122A4DC60002386C /* CELL3_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL3_PROGRESS.png; sourceTree = "<group>"; };
 		E44F6DBB122A4DC60002386C /* CELL4_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL4_PROGRESS.png; sourceTree = "<group>"; };
+		E44F8468127EF0C90063FFA1 /* ExportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportManager.h; sourceTree = "<group>"; };
+		E44F8469127EF0C90063FFA1 /* ExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportManager.m; sourceTree = "<group>"; };
 		E4570FD41268774600BA52A9 /* ofxMidiSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiSample.h; sourceTree = "<group>"; };
 		E4570FD51268774600BA52A9 /* ofxMidiSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiSample.cpp; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -850,6 +854,7 @@
 		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
 		E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadViewController.m; path = YouTubeUpload/Classes/YouTubeUploadViewController.m; sourceTree = "<group>"; };
 		E4964075125BA7FF0058DB34 /* ActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionCell.xib; path = Resource/ActionCell.xib; sourceTree = "<group>"; };
+		E4987FD4127F5CED00A07C65 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E498DDF5121069EB001CB593 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		E498DDF6121069EB001CB593 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
 		E498DDF7121069EB001CB593 /* MilgromViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilgromViewController.h; sourceTree = "<group>"; };
@@ -986,6 +991,7 @@
 				E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */,
 				E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */,
 				E4D82B2A1262EF3400768E33 /* MessageUI.framework in Frameworks */,
+				E4987FD5127F5CED00A07C65 /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1023,7 @@
 				E4C44D961243661A007ACEBC /* Security.framework */,
 				E4C44D981243661E007ACEBC /* SystemConfiguration.framework */,
 				E4D82B291262EF3400768E33 /* MessageUI.framework */,
+				E4987FD4127F5CED00A07C65 /* AssetsLibrary.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1936,8 +1943,10 @@
 				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
-				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
 				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
+				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
+				E44F8468127EF0C90063FFA1 /* ExportManager.h */,
+				E44F8469127EF0C90063FFA1 /* ExportManager.m */,
 				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
 				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
@@ -2512,6 +2521,7 @@
 				E4B54287127089C900851D86 /* FacebookUploadViewController.m in Sources */,
 				E4B54288127089C900851D86 /* FacebookUploader.m in Sources */,
 				E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */,
+				E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
