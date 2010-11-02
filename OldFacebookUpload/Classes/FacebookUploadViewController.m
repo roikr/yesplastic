@@ -97,9 +97,6 @@
 	if (uploader!=nil) {
 		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath];
 	}
-		
-	[self.navigationController popViewControllerAnimated:YES];
-
 }
 
 - (void) cancel:(id)sender {
@@ -115,6 +112,13 @@
 
 - (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader {
 	NSLog(@"new state: %i",theUploader.state);
+	switch ([theUploader state]) {
+		case FACEBOOK_UPLOADER_STATE_UPLOADING:
+			[self.navigationController popViewControllerAnimated:YES];
+			break;
+		default:
+			break;
+	}
 }
 
 @end

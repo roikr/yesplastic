@@ -78,7 +78,7 @@ enum {
 }
 
 -(BOOL) isUploading {
-	return facebookUploader.state == FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED || facebookUploader.state == FACEBOOK_UPLOADER_STATE_UPLOADING || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOADING;
+	return facebookUploader.state == FACEBOOK_UPLOADER_STATE_UPLOADING || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOADING;
 }
 
 
@@ -415,7 +415,7 @@ enum {
 			
 		case ACTION_UPLOAD_TO_FACEBOOK: {
 			
-			
+			[facebookUploader login];
 			FacebookUploadViewController * controller = [[FacebookUploadViewController alloc] initWithNibName:@"FacebookUploadViewController" bundle:nil];
 			
 			[appDelegate pushViewController:controller];

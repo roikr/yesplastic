@@ -12,7 +12,7 @@
 enum {
 	FACEBOOK_UPLOADER_STATE_IDLE,
 	FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN,
-	FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED,
+	FACEBOOK_UPLOADER_STATE_DID_LOGIN,
 	FACEBOOK_UPLOADER_STATE_UPLOADING,
 	FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED,
 	FACEBOOK_UPLOADER_STATE_UPLOAD_FAILED,
@@ -49,6 +49,7 @@ enum {
 + (FacebookUploader *) facebookUploader; 
 -(void) addDelegate:(id<FacebookUploaderDelegate>)delegate; 
 - (void) uploadVideoWithTitle:(NSString *)title withDescription:(NSString *)description andPath:(NSString *)path;
+- (void)login;
 - (void) logout;
 - (BOOL) isConnected;
 @end

@@ -26,6 +26,7 @@
     [window makeKeyAndVisible];
 	
 	self.uploader = [FacebookUploader facebookUploader];
+	[uploader login];
 	
 	controller.uploader = uploader;
 	controller.videoTitle = @"kremer the cat";

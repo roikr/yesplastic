@@ -17,7 +17,6 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 
 @interface FacebookUploader (PrivateMethods) 
-- (void)login;
 - (void) requestPermission;
 @end
 
@@ -63,6 +62,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void) setState:(NSInteger)newState {
 	_state = newState;
 	
+	NSLog(@"FacebookUploader state changed: %i",_state);
+	
 	for (id<FacebookUploaderDelegate> delegate in delegates) {
 		if ([delegate respondsToSelector:@selector(facebookUploaderStateChanged:)]) {
 			[delegate facebookUploaderStateChanged:self];
@@ -101,7 +102,15 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 	self.videoDescription = description;
 	self.videoPath = path;
 	
-	[self login];
+	if ([self isConnected] && self.state == FACEBOOK_UPLOADER_STATE_DID_LOGIN) {
+		NSData *data = [NSData dataWithContentsOfFile:videoPath]; 
+		
+		FBRequest *uploadRequest = [FBRequest requestWithSession: session delegate: self];
+		
+		NSMutableDictionary* Parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"video.upload", @"method", 
+										   videoTitle, @"title", videoDescription,@"description",nil];
+		[uploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
+	}
 	
 //if ([self isConnected]) {
 //		[self logout];
@@ -152,7 +161,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)sessionDidLogout:(FBSession*)session {
 	NSLog(@"logged out");
-	
+	[self login];
 }
 
 
@@ -162,15 +171,9 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void)dialogDidSucceed:(FBDialog*)dialog {
 	NSLog(@"dialogDidSucceed");
 	if ([dialog isKindOfClass:[FBPermissionDialog class]]) {
-		NSData *data = [NSData dataWithContentsOfFile:videoPath]; 
 		
-		FBRequest *uploadRequest = [FBRequest requestWithSession: session delegate: self];
 		
-		NSMutableDictionary* Parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"video.upload", @"method", 
-										   videoTitle, @"title", videoDescription,@"description",nil];
-		[uploadRequest call: @"facebook.video.upload" params: Parameters dataParam: data];
-		
-		self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED;
+		self.state = FACEBOOK_UPLOADER_STATE_DID_LOGIN;
 		//[delegate facebookUploaderDidLogin:self];
 	}
 }
@@ -189,7 +192,14 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)dialog:(FBDialog*)dialog didFailWithError:(NSError*)error {
 	NSLog(@"dialog didFailWithError");
-	self.state = FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN;
+	if ([dialog isKindOfClass:[FBPermissionDialog class]]) {
+		self.state = FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN;
+	}
+	
+	if ([dialog isKindOfClass:[FBLoginDialog class]]) {
+		self.state = FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN;
+	}
+	
 }
 
 /**
@@ -217,7 +227,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  * Called just before the request is sent to the server.
  */
 - (void)requestLoading:(FBRequest*)request {
-	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_REQUESTED;
+	self.state = FACEBOOK_UPLOADER_STATE_UPLOADING;
 }
 
 /**
@@ -225,7 +235,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)request:(FBRequest*)request didReceiveResponse:(NSURLResponse*)response {
 	NSLog(@"request didReceiveResponse");
-	self.state = FACEBOOK_UPLOADER_STATE_UPLOADING;
+	
 }
 
 /**
