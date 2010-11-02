@@ -162,8 +162,8 @@ private:
 	bool bInTransition;
 	
 	float duration;
-	int currentBlock;    //using to seekFrame for rendering video;
-	int totalBlocks; // calculating by renderAudio before rendering video
+	int currentBlock;    //using to seekFrame and renderAudio for rendering video & audio;
+	//int totalBlocks; // calculating by renderAudio before rendering video
 };
 
 

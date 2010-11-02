@@ -73,10 +73,13 @@ public:
 	
 	float getProgress();
 	float getDuration();
-	float getPlayhead();
+	
 	
 	
 private:
+	
+	float getPlayhead();
+	
 	bool bInitialized;
 	int transitionState;
 	

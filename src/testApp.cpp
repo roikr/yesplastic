@@ -199,23 +199,17 @@ float testApp::getProgress() {
 
 float testApp::getRenderProgress(){
 	
-// TODO: return playhead 
-	/*
-	if (songState == SONG_RENDER_AUDIO || songState == SONG_RENDER_VIDEO || songState == SONG_PLAY) {
-		return player[2].getPlayhead();
-	}
-	 */
 	
-	float playhead = 0;
-	
-	for (int i=0;i<3;i++) {
-		float temp = player[i].getPlayhead();
-		if (temp > playhead) {
-			playhead = temp;
-		}
-	}
+//	float playhead = 0;
+//	
+//	for (int i=0;i<3;i++) {
+//		float temp = player[i].getPlayhead();
+//		if (temp > playhead) {
+//			playhead = temp;
+//		}
+//	}
 
-	
+	float playhead = (float)currentBlock * (float)blockLength / (float)sampleRate;
 	//return songState == SONG_RENDER_VIDEO && totalBlocks!=0 ? (float)currentBlock/(float)totalBlocks : 0.0f;
 	return playhead/duration;
 }
@@ -995,7 +989,7 @@ void testApp::renderAudio() {
 	song.open(ofToDocumentsPath("temp.wav"));
 	
 	
-	int block = 0;
+	currentBlock = 0;
 	
 	while (getSongState()==SONG_RENDER_AUDIO) {
 		
@@ -1008,14 +1002,14 @@ void testApp::renderAudio() {
 		}
 		
 		song.saveWithBlocks(lBlock, rBlock);
-		block++;
+		currentBlock++;
 	}
 	
 	song.close();	
 	
 	cout << "renderAudio finished" << endl;
 	
-	totalBlocks = block;
+	//totalBlocks = block;
 	
 }
 
