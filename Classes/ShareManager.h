@@ -20,6 +20,7 @@
 	BOOL _hasBeenRendered;
 	BOOL isTemporary;
 	BOOL canSendMail;
+	NSInteger action;
 	NSInteger state;
 }
 
@@ -38,7 +39,7 @@
 - (NSString *)getVideoPath;
 - (void)menuWithView:(UIView *)view;
 - (void)action;
-- (void)prepare;
+//- (void)prepare;
 
 
 @end

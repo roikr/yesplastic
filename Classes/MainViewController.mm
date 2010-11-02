@@ -27,11 +27,10 @@
 
 - (void) fadeOutRecordButton;
 - (void) fadeInRecordButton;
-
-- (void)renderAudio;
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
-- (void)render;
+
+
 
 
 @end
@@ -588,9 +587,9 @@
 
 - (void)share:(id)sender {
 	
-	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
+	//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
 	OFSAptr->setSongState(SONG_IDLE);
-	[self renderAudio];
+	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] menuWithView:self.view];
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	
 }
@@ -648,7 +647,7 @@
 	OFSAptr->setSongState(SONG_IDLE);
 	OFSAptr->soundStreamStart();
 	//[milgromViewController startAnimation];
-	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] menuWithView:self.view];
+	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] action];
 	
 }
 
@@ -657,7 +656,7 @@
 
 
 
-- (void)render {
+- (void)renderVideo {
 	
 	[self setRenderProgress:0.0f];
 	

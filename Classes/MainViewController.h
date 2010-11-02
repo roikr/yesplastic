@@ -95,5 +95,7 @@ class testApp;
 - (void)hideHelp;
 - (void) moreHelp:(id)sender;
 
+- (void)renderAudio;
+- (void)renderVideo;
 
 @end

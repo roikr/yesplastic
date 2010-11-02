@@ -18,13 +18,18 @@
 #import "testApp.h"
 
 enum {
-	ACTION_NONE,
+	STATE_IDLE,
+	STATE_RENDER_AUDIO,
+	STATE_EXPORT_AUDIO,
+	STATE_RENDER_VIDEO,
+};
+
+enum {
 	ACTION_UPLOAD_TO_YOUTUBE,
-	ACTION_POST_ON_FACEBOOK,
 	ACTION_UPLOAD_TO_FACEBOOK,
+	ACTION_ADD_TO_LIBRARY,
 	ACTION_SEND_VIA_MAIL,
 	ACTION_SEND_RINGTONE,
-	ACTION_ADD_TO_LIBRARY,
 	ACTION_DONE,
 	ACTION_RENDER,
 	ACTION_PLAY
@@ -62,19 +67,13 @@ enum {
 		
 		canSendMail = [MFMailComposeViewController canSendMail];
 		
+		
 	}
 	return self;
 }
 
 - (void)prepare {
-	isTemporary =  [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] isSongTemporary];
 	
-	if (isTemporary) {
-		_didUploadToYouTube = NO;
-		_didUploadToFacebook = NO;
-		_hasBeenRendered = NO;
-		
-	}
 }
 
 -(BOOL) isUploading {
@@ -271,6 +270,16 @@ enum {
 
 - (void)menuWithView:(UIView *)view {
 	
+	
+	isTemporary =  [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] isSongTemporary];
+	
+	if (isTemporary) {
+		_didUploadToYouTube = NO;
+		_didUploadToFacebook = NO;
+		_hasBeenRendered = NO;
+		
+	}
+	
 	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
 	
 	
@@ -314,7 +323,7 @@ enum {
 - (void)actionSheet:(UIActionSheet *)modalView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	
-	
+	state = STATE_IDLE;
 	// Change the navigation bar style, also make the status bar match with it
 	if (self.didUploadToFacebook && buttonIndex>0) { // no more facebook option
 		buttonIndex++;
@@ -324,31 +333,28 @@ enum {
 		buttonIndex+=2;
 	}
 	
-	state = ACTION_NONE;
-	
-	
 	
 	switch (buttonIndex)
 	{
 		case 0: 
 			
-			state = self.isUploading ? ACTION_DONE : !self.didUploadToYouTube ? ACTION_UPLOAD_TO_YOUTUBE : ACTION_POST_ON_FACEBOOK;
+			action = self.isUploading ? ACTION_DONE : ACTION_UPLOAD_TO_YOUTUBE ;
 			break;
 		case 1:
-			state = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
+			action = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
 			break;
 		case 2:
-			state = ACTION_ADD_TO_LIBRARY;
+			action = ACTION_ADD_TO_LIBRARY;
 			break;
 		case 3:
-			state = ACTION_SEND_VIA_MAIL;
+			action = ACTION_SEND_VIA_MAIL;
 			break;
 		case 4:
-			state = ACTION_SEND_RINGTONE;
+			action = ACTION_SEND_RINGTONE;
 			break;
 			
 		case 5:
-			state = ACTION_DONE;
+			action = ACTION_DONE;
 			break;
 			
 		case 6:
@@ -356,50 +362,66 @@ enum {
 			break;
 			
 		case 7:
-			state = ACTION_PLAY;
+			action = ACTION_PLAY;
 			break;
 			
 	}
 	
-	switch (state) {
-		case ACTION_DONE:
-			//			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController];
-			break;
-		
-		case ACTION_UPLOAD_TO_YOUTUBE:
-		case ACTION_UPLOAD_TO_FACEBOOK:
-		case ACTION_ADD_TO_LIBRARY:
-		case ACTION_SEND_VIA_MAIL:
-		case ACTION_PLAY:
-			if (!self.hasBeenRendered ) {
-				[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] performSelector:@selector(render)];
-			} else {
-				[self performSelector:@selector(action)];
-			}
-			break;
-			
-		case ACTION_SEND_RINGTONE:
-			[self performSelector:@selector(export)];
-			//[self performSelector:@selector(action)];
-			break;
-
-
-		default:
-			
-			
-			break;
-	}
+	[self performSelector:@selector(action)];
 	
 }
-
 
 
 - (void)action {
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+	
+	switch (state) {
+		case STATE_IDLE:
+			switch (action) {
+				case ACTION_DONE:
+					break;
+				default:
+					if (!self.hasBeenRendered ) {
+						state = STATE_RENDER_AUDIO;
+						[[appDelegate mainViewController] renderAudio];
+						return;
+					} 
+					break;
+			}
+			
+			break;
+			
+		case STATE_RENDER_AUDIO:
+			switch (action) {
+				case ACTION_UPLOAD_TO_YOUTUBE:
+				case ACTION_UPLOAD_TO_FACEBOOK:
+				case ACTION_ADD_TO_LIBRARY:
+				case ACTION_SEND_VIA_MAIL:
+				case ACTION_PLAY:
+					state = STATE_RENDER_VIDEO;
+					[[appDelegate mainViewController] renderVideo];
+					return;
+					break;
+				case ACTION_SEND_RINGTONE:
+					[self export];
+					return;
+					break;
+				default:
+					break;
+			}
+			break;
+
+		default:
+			break;
+	}
 	
 	
-	switch (state)
+	
+		
+	
+	switch (action)
 	{
 		case ACTION_UPLOAD_TO_YOUTUBE: {
 			

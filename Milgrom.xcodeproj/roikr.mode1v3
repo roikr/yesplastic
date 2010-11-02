@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>E40CE56F12801C3A005E697E</string>
+						<string>E40CE59212802593005E697E</string>
 						<key>history</key>
 						<array>
 							<string>E40CE56D12801C3A005E697E</string>
@@ -306,19 +306,18 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
+								<string>E4D1EB3712113350004D4E25</string>
+								<string>E4BC39D9125DA8DD00B492E4</string>
 								<string>E444721012143D2F0058D07B</string>
-								<string>E4AF9D7A1263694A003E9148</string>
-								<string>E4B1B295126E20B2001A577D</string>
-								<string>E4B3D2C211F83D4100B57223</string>
-								<string>E4BC39EB125DA96800B492E4</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>10</integer>
 									<integer>4</integer>
-									<integer>2</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -360,7 +359,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.h</string>
+								<string>ShareManager.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -368,11 +367,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.h</string>
+										<string>ShareManager.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E40CE56812801C3A005E697E</string>
+										<string>E40CE59112802593005E697E</string>
 										<key>history</key>
 										<array>
 											<string>E4DF70F811FEADE100EBD904</string>
@@ -505,7 +504,6 @@
 											<string>E44F8492127F00AF0063FFA1</string>
 											<string>E4987F8C127F38A500A07C65</string>
 											<string>E4987F8E127F38A500A07C65</string>
-											<string>E4987F8F127F38A500A07C65</string>
 											<string>E4987F90127F38A500A07C65</string>
 											<string>E4987F91127F38A500A07C65</string>
 											<string>E4987F92127F38A500A07C65</string>
@@ -513,9 +511,7 @@
 											<string>E4987F94127F38A500A07C65</string>
 											<string>E4987F98127F38A500A07C65</string>
 											<string>E4987FC6127F42F300A07C65</string>
-											<string>E4987FFA127F649D00A07C65</string>
 											<string>E4987FFB127F649D00A07C65</string>
-											<string>E40CE4BE128005D4005E697E</string>
 											<string>E40CE4BF128005D4005E697E</string>
 											<string>E40CE4C1128005D4005E697E</string>
 											<string>E40CE4C2128005D4005E697E</string>
@@ -524,11 +520,14 @@
 											<string>E40CE52212801722005E697E</string>
 											<string>E40CE52312801722005E697E</string>
 											<string>E40CE52412801722005E697E</string>
-											<string>E40CE56312801C3A005E697E</string>
-											<string>E40CE56412801C3A005E697E</string>
 											<string>E40CE56512801C3A005E697E</string>
 											<string>E40CE56612801C3A005E697E</string>
-											<string>E40CE56712801C3A005E697E</string>
+											<string>E40CE5871280256E005E697E</string>
+											<string>E40CE5881280256E005E697E</string>
+											<string>E40CE5891280256E005E697E</string>
+											<string>E40CE58A1280256E005E697E</string>
+											<string>E40CE58B1280256E005E697E</string>
+											<string>E40CE58C1280256E005E697E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -728,11 +727,11 @@
 	<array>
 		<string>E40CE57712801C3A005E697E</string>
 		<string>E40CE57812801C3A005E697E</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>E4B3D14D11F81F7F00B57223</string>
 		<string>E40CE56B12801C3A005E697E</string>
+		<string>E4B3D14D11F81F7F00B57223</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/roikr/Developer/YesPlastic/Milgrom.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -759,7 +758,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.cpp</string>
+								<string>MainViewController.mm</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -828,7 +827,7 @@
 			<key>WindowToolGUID</key>
 			<string>E4B3D14D11F81F7F00B57223</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -1062,6 +1061,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1107,7 +1108,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
