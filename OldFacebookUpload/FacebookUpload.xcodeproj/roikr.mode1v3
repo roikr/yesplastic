@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -264,7 +266,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
-								<string>E4577FA5126D9DB300726FD3</string>
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>1C37FABC05509CD000000102</string>
@@ -272,13 +273,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>26</integer>
-									<integer>22</integer>
+									<integer>12</integer>
+									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {309, 744}}</string>
+							<string>{{0, 0}, {309, 593}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -290,14 +291,14 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {326, 762}}</string>
+						<string>{{0, 0}, {326, 611}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
 							<real>309</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>78 180 1356 803 0 0 1680 1028 </string>
+						<string>185 267 1161 652 0 0 1680 1028 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -308,14 +309,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>FacebookUploadViewController.m</string>
+								<string>FacebookUploadViewController.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +322,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>FacebookUploadViewController.m</string>
+										<string>FacebookUploadViewController.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E40CE4F0128012D1005E697E</string>
+										<string>E4E443661282D21A003ADDA9</string>
 										<key>history</key>
 										<array>
 											<string>E4E941B812478948007CC156</string>
@@ -350,11 +349,11 @@
 											<string>E4A881A51276C83700F20D7B</string>
 											<string>E4A881A61276C83700F20D7B</string>
 											<string>E4A881A71276C83700F20D7B</string>
-											<string>E4A881A81276C83700F20D7B</string>
-											<string>E4A881A91276C83700F20D7B</string>
-											<string>E40CE4ED128012D1005E697E</string>
 											<string>E40CE4EE128012D1005E697E</string>
-											<string>E40CE4EF128012D1005E697E</string>
+											<string>E4E443221282CF31003ADDA9</string>
+											<string>E4E443231282CF31003ADDA9</string>
+											<string>E4E443241282CF31003ADDA9</string>
+											<string>E4E443321282CF3A003ADDA9</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -366,14 +365,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1025, 614}}</string>
+								<string>{{0, 0}, {830, 450}}</string>
 								<key>RubberWindowFrame</key>
-								<string>78 180 1356 803 0 0 1680 1028 </string>
+								<string>185 267 1161 652 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>614pt</string>
+							<string>450pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -386,18 +385,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 619}, {1025, 143}}</string>
+								<string>{{0, 455}, {830, 156}}</string>
 								<key>RubberWindowFrame</key>
-								<string>78 180 1356 803 0 0 1680 1028 </string>
+								<string>185 267 1161 652 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>143pt</string>
+							<string>156pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1025pt</string>
+					<string>830pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -412,9 +411,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E40CE4F1128012D1005E697E</string>
+				<string>E4E443611282D0F4003ADDA9</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>E40CE4F2128012D1005E697E</string>
+				<string>E4E443621282D0F4003ADDA9</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -552,16 +551,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E40CE4F3128012D1005E697E</string>
-		<string>E40CE4F4128012D1005E697E</string>
+		<string>E4E4436E1282D21A003ADDA9</string>
+		<string>E4E4436F1282D21A003ADDA9</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>E43E62471246560B00B08062</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>/Users/roikr/Developer/YesPlastic/OldFacebookUpload/FacebookUpload.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>78 180 1356 803 0 0 1680 1028 </string>
+	<string>185 267 1161 652 0 0 1680 1028 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -599,8 +597,6 @@
 							<string>267pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -640,7 +636,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>E43E62471246560B00B08062</string>
-				<string>E40CE4D9128007F6005E697E</string>
+				<string>E4E443631282D0F4003ADDA9</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -738,10 +734,10 @@
 									<key>Frame</key>
 									<string>{{596, 0}, {706, 407}}</string>
 									<key>RubberWindowFrame</key>
-									<string>276 150 1302 810 0 0 1680 1028 </string>
+									<string>289 159 1302 810 0 0 1680 1028 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>276 150 1302 810 0 0 1680 1028 </string>
+								<string>289 159 1302 810 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -764,18 +760,18 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>E40CE4DA128007F6005E697E</string>
+				<string>E4E443671282D21A003ADDA9</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>E40CE4DB128007F6005E697E</string>
-				<string>E40CE4DC128007F6005E697E</string>
-				<string>E40CE4DD128007F6005E697E</string>
-				<string>E40CE4DE128007F6005E697E</string>
-				<string>E40CE4DF128007F6005E697E</string>
+				<string>E4E443681282D21A003ADDA9</string>
+				<string>E4E443691282D21A003ADDA9</string>
+				<string>E4E4436A1282D21A003ADDA9</string>
+				<string>E4E4436B1282D21A003ADDA9</string>
+				<string>E4E4436C1282D21A003ADDA9</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>276 150 1302 810 0 0 1680 1028 </string>
+			<string>289 159 1302 810 0 0 1680 1028 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
@@ -797,14 +793,12 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>FacebookUploader.m</string>
+										<string></string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -825,6 +819,8 @@
 							<string>388pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -860,8 +856,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>E40CE4E7128009E1005E697E</string>
-				<string>E40CE4E8128009E1005E697E</string>
+				<string>E4E441F712829516003ADDA9</string>
+				<string>E4E441F812829516003ADDA9</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
@@ -870,7 +866,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
@@ -889,8 +885,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -926,7 +920,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>E40CE4E0128007F6005E697E</string>
+				<string>E4E4436D1282D21A003ADDA9</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -936,7 +930,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

@@ -25,6 +25,14 @@
 	
 	UIView *inputView;
 	UIView *uploadView;
+	
+	UIScrollView *srcollView;
+	BOOL viewIsScrolled;
+	BOOL keyboardShown;
+	float kbHeight;
+	
+	UIView *activeView;
+	
 }
 
 @property (nonatomic,retain) YouTubeUploader *uploader;
@@ -33,12 +41,16 @@
 @property (nonatomic,retain) IBOutlet UITextField *password;
 @property (nonatomic,retain) IBOutlet UITextField *titleField;
 @property (nonatomic,retain) IBOutlet UITextView *descriptionView;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign) UIView *activeView;
+
 
 @property (nonatomic,retain ) NSString *videoTitle;
 @property (nonatomic,retain) NSString* videoPath;
 
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
+- (void) touchDown:(id)sender;
 
 @end
 

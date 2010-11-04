@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -276,8 +274,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>10</integer>
-									<integer>4</integer>
+									<integer>15</integer>
+									<integer>12</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -312,12 +310,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>YouTubeUploader.m</string>
+								<string>YouTubeUploadViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +325,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>YouTubeUploader.m</string>
+										<string>YouTubeUploadViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E4D9A7AD127952980084AA22</string>
+										<string>E4E443411282D0BC003ADDA9</string>
 										<key>history</key>
 										<array>
 											<string>E4B543D61270AA3700851D86</string>
@@ -345,7 +345,10 @@
 											<string>E4B544061270ACB700851D86</string>
 											<string>E423C05312758BE4000E334B</string>
 											<string>E4D9A7AB127952980084AA22</string>
-											<string>E4D9A7AC127952980084AA22</string>
+											<string>E4E443031282CCE2003ADDA9</string>
+											<string>E4E443041282CCE2003ADDA9</string>
+											<string>E4E4433F1282D0BC003ADDA9</string>
+											<string>E4E443401282D0BC003ADDA9</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -403,9 +406,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E4D9A7AE127952980084AA22</string>
+				<string>E4E443421282D0BC003ADDA9</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>E4D9A7AF127952980084AA22</string>
+				<string>E4E443431282D0BC003ADDA9</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -543,6 +546,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>E4E4434C1282D0BC003ADDA9</string>
+		<string>E4E4434D1282D0BC003ADDA9</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>E4C44A5F12435F0F007ACEBC</string>
 		<string>/Users/roikr/Developer/YesPlastic/YouTubeUpload/YouTubeUpload.xcodeproj</string>
 	</array>
@@ -575,9 +582,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {876, 386}}</string>
+								<string>{{0, 0}, {1004, 386}}</string>
 								<key>RubberWindowFrame</key>
-								<string>377 147 876 847 0 0 1680 1028 </string>
+								<string>377 147 1004 847 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -599,9 +606,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 391}, {876, 415}}</string>
+								<string>{{0, 391}, {1004, 415}}</string>
 								<key>RubberWindowFrame</key>
-								<string>377 147 876 847 0 0 1680 1028 </string>
+								<string>377 147 1004 847 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -624,7 +631,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>E4C44A5F12435F0F007ACEBC</string>
-				<string>E4D9A7B0127952980084AA22</string>
+				<string>E4E443441282D0BC003ADDA9</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -633,7 +640,7 @@
 			<key>WindowContentMinSize</key>
 			<string>486 300</string>
 			<key>WindowString</key>
-			<string>377 147 876 847 0 0 1680 1028 </string>
+			<string>377 147 1004 847 0 0 1680 1028 </string>
 			<key>WindowToolGUID</key>
 			<string>E4C44A5F12435F0F007ACEBC</string>
 			<key>WindowToolIsVisible</key>
@@ -746,13 +753,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>E423BFA312757AB1000E334B</string>
+				<string>E4E443451282D0BC003ADDA9</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>E423BFA412757AB1000E334B</string>
-				<string>E423BFA512757AB1000E334B</string>
-				<string>E423BFA612757AB1000E334B</string>
-				<string>E423BFA712757AB1000E334B</string>
-				<string>E423BFA812757AB1000E334B</string>
+				<string>E4E443461282D0BC003ADDA9</string>
+				<string>E4E443471282D0BC003ADDA9</string>
+				<string>E4E443481282D0BC003ADDA9</string>
+				<string>E4E443491282D0BC003ADDA9</string>
+				<string>E4E4434A1282D0BC003ADDA9</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -871,8 +878,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -908,7 +913,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>E423BFA912757AB1000E334B</string>
+				<string>E4E4434B1282D0BC003ADDA9</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -918,7 +923,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

@@ -137,6 +137,7 @@
 		E4BC3A17125DAC9400B492E4 /* video.mov in Resources */ = {isa = PBXBuildFile; fileRef = E4BC3A16125DAC9400B492E4 /* video.mov */; };
 		E4C44BEE12436342007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44BED12436342007ACEBC /* Security.framework */; };
 		E4C44BF312436369007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44BF212436369007ACEBC /* SystemConfiguration.framework */; };
+		E4E442E01282C976003ADDA9 /* youtube_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E442DF1282C976003ADDA9 /* youtube_logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -401,6 +402,7 @@
 		E4BC3A16125DAC9400B492E4 /* video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video.mov; sourceTree = "<group>"; };
 		E4C44BED12436342007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44BF212436369007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E4E442DF1282C976003ADDA9 /* youtube_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +467,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E4E442DF1282C976003ADDA9 /* youtube_logo.png */,
 				E4BC3A16125DAC9400B492E4 /* video.mov */,
 				2899E5210DE3E06400AC0155 /* YouTubeUploadViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -886,6 +889,7 @@
 				E4BC38D4125DA6FE00B492E4 /* GDataOAuthViewTouch.xib in Resources */,
 				E4BC38D6125DA6FE00B492E4 /* GDataOAuthWindow.xib in Resources */,
 				E4BC3A17125DAC9400B492E4 /* video.mov in Resources */,
+				E4E442E01282C976003ADDA9 /* youtube_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

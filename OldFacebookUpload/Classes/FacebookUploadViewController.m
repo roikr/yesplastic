@@ -9,12 +9,19 @@
 #import "FacebookUploadViewController.h"
 #import "FacebookUploader.h"
 
+@interface FacebookUploadViewController ()
+- (void)registerForKeyboardNotifications;
+
+-(void)scroll;
+@end
 
 @implementation FacebookUploadViewController
 
 @synthesize titleField;
 @synthesize descriptionView;
 @synthesize videoPath;
+@synthesize activeView;
+@synthesize scrollView;
 
 
 /*
@@ -27,12 +34,15 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[self registerForKeyboardNotifications];
+	viewIsScrolled = NO;
+	keyboardShown = NO;
 }
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -80,15 +90,96 @@
 	return titleField.text;
 }
 
+- (void) touchDown:(id)sender {
+	NSLog(@"touchDown");
+	for (UIView *view in [self.scrollView subviews]) {  
+        if ([view isFirstResponder]) {  
+            [view resignFirstResponder];
+			break;
+        }
+    }   
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
-	return NO;
+	return YES;
+}
+
+
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+	activeView = textView;
+	
+	if (keyboardShown && !viewIsScrolled) {
+		[self scroll];
+	}
+	
+	return YES;
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-	[textView resignFirstResponder];
+	activeView = nil;
 	return YES;
+}
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillShow:)
+												 name:UIKeyboardWillShowNotification object:nil];
+	
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide:)
+												 name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)scroll {
+	
+	CGSize contentSize = scrollView.contentSize;
+	contentSize.height+=kbHeight;
+	scrollView.contentSize = contentSize;
+	
+    [scrollView setContentOffset:CGPointMake(0.0, activeView.frame.origin.y) animated:YES];
+	
+    viewIsScrolled = YES;
+}
+
+
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWillShow:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+	kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+	
+	
+	if (!viewIsScrolled && activeView==descriptionView) {
+		[self scroll];
+	}
+	
+	keyboardShown = YES;
+	
+   
+}
+
+
+// Called when the UIKeyboardDidHideNotification is sent
+- (void)keyboardWillHide:(NSNotification*)aNotification
+{
+	if (viewIsScrolled) {
+		
+		[scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+		viewIsScrolled = NO;
+	}
+	
+	keyboardShown = NO;
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)theScrollView {
+	CGSize contentSize = theScrollView.contentSize;
+	contentSize.height-=kbHeight;
+	theScrollView.contentSize = contentSize;
 }
 
 
@@ -104,8 +195,14 @@
 }
 
 - (void) logout:(id)sender {
-	if (uploader!=nil && [uploader isConnected]) {
-		[uploader logout];
+	
+	if (uploader!=nil) {
+		if ([uploader isConnected]) {
+			[uploader logout];
+		} else {
+			[uploader login];
+		}
+
 	}
 }
 

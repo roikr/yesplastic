@@ -384,6 +384,8 @@
 		E4DF708611FEA1CF00EBD904 /* SetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF708511FEA1CF00EBD904 /* SetCell.xib */; };
 		E4DF714D11FEB58400EBD904 /* PlayerMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */; };
 		E4DF714E11FEB58400EBD904 /* SetsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714C11FEB58400EBD904 /* SetsTable.xib */; };
+		E4E443831282D2CD003ADDA9 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E443821282D2CD003ADDA9 /* facebook_logo.png */; };
+		E4E443861282D2F3003ADDA9 /* youtube_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E443851282D2F3003ADDA9 /* youtube_logo.png */; };
 		E4F0DB27120861BE00D28745 /* Milgrom.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -969,6 +971,8 @@
 		E4DF714611FEB55A00EBD904 /* SetsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetsTable.h; sourceTree = "<group>"; };
 		E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlayerMenu.xib; path = Resource/PlayerMenu.xib; sourceTree = "<group>"; };
 		E4DF714C11FEB58400EBD904 /* SetsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetsTable.xib; path = Resource/SetsTable.xib; sourceTree = "<group>"; };
+		E4E443821282D2CD003ADDA9 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook_logo.png; path = OldFacebookUpload/facebook_logo.png; sourceTree = "<group>"; };
+		E4E443851282D2F3003ADDA9 /* youtube_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youtube_logo.png; path = YouTubeUpload/youtube_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1838,6 +1842,7 @@
 		E4AF9D7A1263694A003E9148 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
+				E4E443821282D2CD003ADDA9 /* facebook_logo.png */,
 				E4B54283127089C900851D86 /* FacebookUploadViewController.m */,
 				E4B54284127089C900851D86 /* FacebookUploadViewController.h */,
 				E4B54285127089C900851D86 /* FacebookUploader.m */,
@@ -1996,6 +2001,7 @@
 		E4C44C2012436581007ACEBC /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				E4E443851282D2F3003ADDA9 /* youtube_logo.png */,
 				E4B54289127089EB00851D86 /* YouTubeUploader.m */,
 				E4B5428A127089EB00851D86 /* YouTubeUploader.h */,
 				E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */,
@@ -2322,6 +2328,8 @@
 				E4B1B2B3126E20B2001A577D /* FBConnect.bundle in Resources */,
 				E4B1B345126E337C001A577D /* FacebookUploadViewController.xib in Resources */,
 				E4159BD81271EA8B00B28DAE /* SHARE_B_BACKGROUND.png in Resources */,
+				E4E443831282D2CD003ADDA9 /* facebook_logo.png in Resources */,
+				E4E443861282D2F3003ADDA9 /* youtube_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

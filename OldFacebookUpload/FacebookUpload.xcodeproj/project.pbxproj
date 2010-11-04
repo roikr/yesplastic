@@ -27,6 +27,7 @@
 		E4B53F5C1270454E00851D86 /* FacebookUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B53F5B1270454E00851D86 /* FacebookUploader.m */; };
 		E4B53F6A127047A800851D86 /* FacebookUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B53F67127047A800851D86 /* FacebookUploadViewController.xib */; };
 		E4B53F6B127047A800851D86 /* FacebookUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B53F68127047A800851D86 /* FacebookUploadViewController.m */; };
+		E4E4423A1282A82F003ADDA9 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E442391282A82F003ADDA9 /* facebook_logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		E4B53F67127047A800851D86 /* FacebookUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookUploadViewController.xib; sourceTree = "<group>"; };
 		E4B53F68127047A800851D86 /* FacebookUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookUploadViewController.m; sourceTree = "<group>"; };
 		E4B53F69127047A800851D86 /* FacebookUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookUploadViewController.h; sourceTree = "<group>"; };
+		E4E442391282A82F003ADDA9 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E4E442391282A82F003ADDA9 /* facebook_logo.png */,
 				E4B53F67127047A800851D86 /* FacebookUploadViewController.xib */,
 				E48BA3D6124EAF320036F994 /* IMG_0015.MOV */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -226,6 +229,7 @@
 				E48BA3D7124EAF320036F994 /* IMG_0015.MOV in Resources */,
 				E4577FC3126D9DB300726FD3 /* FBConnect.bundle in Resources */,
 				E4B53F6A127047A800851D86 /* FacebookUploadViewController.xib in Resources */,
+				E4E4423A1282A82F003ADDA9 /* facebook_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
