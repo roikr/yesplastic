@@ -11,13 +11,12 @@
 #import "MilgromViewController.h"
 #import "EAGLView.h"
 #import "MilgromInterfaceAppDelegate.h"
-#include "testApp.h"
-#import "BandMenu.h"
-#import "PlayerMenu.h"
 #import "MainViewController.h"
-#import "HelpViewController.h"
+#include "testApp.h"
 #import "Constants.h"
 #import "MilgromMacros.h"
+
+
 
 @interface MilgromViewController ()
 @property (nonatomic, retain) EAGLContext *context;
@@ -77,19 +76,10 @@
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	if ([self.viewController.visibleViewController isKindOfClass:[BandMenu self]]) {
-		return interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
-	} else if ([self.viewController.visibleViewController isKindOfClass:[PlayerMenu self]]) {
-		return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
-	} else if ([self.viewController.visibleViewController isKindOfClass:[HelpViewController self]]) {
-		return NO;
-	} 
 	
-//	else if ([self.viewController.visibleViewController isKindOfClass:[ShareViewController self]]) {
-//		//return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
-//	}
-	return YES;
+    // Return YES for supported orientations
+	return [self.viewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+	
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -98,12 +88,22 @@
 	[self.viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	
+	MainViewController *mainViewController = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController];
+	if (self.viewController.visibleViewController != mainViewController) {
+		[mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	}
+	
+	
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	[self.viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-														  
+	
+	MainViewController *mainViewController = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController];
+	if (self.viewController.visibleViewController != mainViewController) {
+		[mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	}
 	
 	
 }
