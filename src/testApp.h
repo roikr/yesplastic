@@ -72,6 +72,7 @@ public:
 	bool getIsPlaying();
 	
 	void renderAudio() ;
+	void cancelRenderingAudio();
 	
 	bool isInTransition();
 	

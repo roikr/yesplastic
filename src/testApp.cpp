@@ -400,7 +400,7 @@ string testApp::getPlayerName(int playerNum)  {
 
 void testApp::seekFrame(int frame) {
 	
-	assert(songState==SONG_RENDER_VIDEO);
+	//assert(songState==SONG_RENDER_VIDEO); // can be for cancelRendering
 	
 	//if (songState==SONG_RENDER_VIDEO) { // TODO: why 7 ? maybe because it is the ratio block per frame...the reason for the delay...
 //		for (int j=0; j<7; j++) {
@@ -1008,6 +1008,8 @@ void testApp::renderAudio() {
 	song.close();	
 	
 	cout << "renderAudio finished" << endl;
+	
+	setSongState(SONG_IDLE);
 	
 	//totalBlocks = block;
 	

@@ -97,5 +97,6 @@ class testApp;
 
 - (void)renderAudio;
 - (void)renderVideo;
+- (void)cancelRendering:(id)sender;
 
 @end

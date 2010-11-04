@@ -22,6 +22,7 @@ enum {
 	STATE_RENDER_AUDIO,
 	STATE_EXPORT_AUDIO,
 	STATE_RENDER_VIDEO,
+	STATE_CANCELED
 };
 
 enum {
@@ -371,6 +372,9 @@ enum {
 	
 }
 
+- (void)cancel {
+	state = STATE_CANCELED;
+}
 
 - (void)action {
 	
@@ -411,6 +415,10 @@ enum {
 				default:
 					break;
 			}
+			break;
+			
+		case STATE_CANCELED:
+			return;
 			break;
 
 		default:

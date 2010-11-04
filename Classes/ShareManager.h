@@ -33,12 +33,15 @@
 @property (readonly) BOOL didUploadToFacebook;
 @property (readonly) BOOL hasBeenRendered;
 
+
+
 + (ShareManager*) shareManager;
 - (void)setRendered;
 - (NSString *)getVideoName;
 - (NSString *)getVideoPath;
 - (void)menuWithView:(UIView *)view;
 - (void)action;
+- (void)cancel;
 //- (void)prepare;
 
 

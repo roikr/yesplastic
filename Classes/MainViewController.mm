@@ -644,14 +644,11 @@
 
 - (void)renderAudioDidFinish {
 	
-	OFSAptr->setSongState(SONG_IDLE);
 	OFSAptr->soundStreamStart();
 	//[milgromViewController startAnimation];
 	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] action];
 	
 }
-
-
 
 
 
@@ -717,6 +714,20 @@
 	dispatch_release(myCustomQueue);
 	
 }
+
+- (void)cancelRendering:(id)sender {
+	switch (OFSAptr->getSongState()) {
+		case SONG_RENDER_VIDEO:
+			[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] cancel];
+			OFSAptr->setSongState(SONG_IDLE);
+			break;
+		default:
+			break;
+	}
+	
+	
+}
+
 
 				   
 
