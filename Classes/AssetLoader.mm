@@ -69,7 +69,7 @@
 		
 		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
 			
-			NSURL *theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromURL,set.filename]];
+			NSURL *theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/milgrom/%@",kMilgromFileServerURL,set.filename]];
 			MilgromLog(@"Downloading Asset from: %@",[theURL absoluteString]);
 			[[URLCacheConnection alloc] initWithURL:theURL delegate:self];
 		} else {

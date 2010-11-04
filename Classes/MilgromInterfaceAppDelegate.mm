@@ -28,7 +28,7 @@
 #import <OpenGLES/EAGL.h>
 
 
-NSString * const kMilgromURL=@"roikr.com";
+NSString * const kMilgromFileServerURL=@"roikr.com";
 NSString * const kCacheFolder=@"URLCache";
 
 @interface NSObject (PrivateMethods)

@@ -26,6 +26,7 @@
 	
 	UIView *activeView;
 	
+	NSString *additionalText;
 	
 	
 }
@@ -39,6 +40,7 @@
 
 @property (nonatomic,retain ) NSString *videoTitle;
 @property (nonatomic,retain) NSString* videoPath;
+@property (nonatomic,retain) NSString* additionalText;
 
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;

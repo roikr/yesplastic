@@ -39,6 +39,7 @@
 - (void)setRendered;
 - (NSString *)getVideoName;
 - (NSString *)getVideoPath;
+- (NSString *)getVideoTitle;
 - (void)menuWithView:(UIView *)view;
 - (void)action;
 - (void)cancel;

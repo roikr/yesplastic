@@ -36,6 +36,8 @@ enum {
 	ACTION_PLAY
 };
 
+static NSString* kMilgromURL = @"www.milgrom.com";
+
 @interface ShareManager ()
 - (void)action;
 - (void)sendViaMailWithSubject:(NSString *)subject withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName;
@@ -127,12 +129,10 @@ enum {
 
 
 - (NSString *)getVideoName {
-	if (isTemporary) {
-		return @"milgrom";
-	} else {
-		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
-		return [song songName];
-	}
+	
+	Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+	return [song songName];
+	
 }
 
 - (NSString *)getVideoPath {
@@ -147,7 +147,15 @@ enum {
 		return @"";
 	}
 	
-	return [[[paths objectAtIndex:0] stringByAppendingPathComponent:[self getVideoName]] stringByAppendingPathExtension:@"mov"];
+	
+	return isTemporary ? [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp"] :
+		[[paths objectAtIndex:0] stringByAppendingPathComponent:[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong] songName]]; 
+		
+}
+
+- (NSString *)getVideoTitle {
+	return [@"milgrom plays " stringByAppendingString:[self getVideoName]];
+	
 }
 
 
@@ -167,7 +175,7 @@ enum {
 		[picker setSubject:subject];
 		[picker addAttachmentData:data mimeType:mimeType fileName:fileName];
 		
-		//[picker setMessageBody:[self getMessage] isHTML:YES];
+		[picker setMessageBody:[NSString stringWithFormat:@"<br/><br/><a href='%@'>visit milgrom</a>",kMilgromURL] isHTML:YES];
 		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] presentModalViewController:picker animated:YES];
 		//[self presentModalViewController:picker animated:YES];
 		[picker release];
@@ -436,9 +444,10 @@ enum {
 			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
 			[appDelegate pushViewController:controller];
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
-			controller.videoTitle = [self getVideoName];
+			controller.videoTitle = [self getVideoTitle];
+			controller.additionalText = kMilgromURL;
 			controller.descriptionView.text = @"testing";
-			controller.videoPath = [self getVideoPath];
+			controller.videoPath = [[self getVideoPath] stringByAppendingPathExtension:@"mov"];
 			
 			[controller release];
 		}	break;
@@ -450,9 +459,10 @@ enum {
 			
 			[appDelegate pushViewController:controller];
 			controller.uploader = appDelegate.shareManager.facebookUploader;
-			controller.videoTitle = [self getVideoName];
+			controller.videoTitle = [self getVideoTitle];
+			controller.additionalText = kMilgromURL;
 			controller.descriptionView.text = @"testing";
-			controller.videoPath = [self getVideoPath];
+			controller.videoPath = [[self getVideoPath]  stringByAppendingPathExtension:@"mov" ];
 			[controller release];
 			
 		}	break;
@@ -464,19 +474,17 @@ enum {
 		case ACTION_SEND_VIA_MAIL: 
 		{
 			
-			NSData *myData = [NSData dataWithContentsOfFile:[self getVideoPath]];
-			[self sendViaMailWithSubject:[self getVideoName] withData:myData withMimeType:@"video/mov" 
+			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"mov"]];
+			[self sendViaMailWithSubject:[self getVideoTitle] withData:myData withMimeType:@"video/mov" 
 							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
 		} break;
 			
 		case ACTION_SEND_RINGTONE: 
 		{
 			
-			NSString *filename = [[self getVideoName] stringByAppendingPathExtension:@"m4r"];
-			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-			NSData *myData = [NSData dataWithContentsOfFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:filename]];
-			[self sendViaMailWithSubject:[self getVideoName] withData:myData withMimeType:@"audio/m4r" 
-							withFileName:filename];
+			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];
+			[self sendViaMailWithSubject:[self getVideoTitle] withData:myData withMimeType:@"audio/m4r" 
+							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"m4r"]];
 		} break;
 			
 		case ACTION_PLAY:
@@ -499,7 +507,7 @@ enum {
 	
 	ExportManager *manager = [ExportManager  exportAudio:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]]
 							  
-												   toURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:[[self getVideoName] stringByAppendingPathExtension:@"m4r"]]]
+												   toURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"m4r"]]
 							  
 							  
 								   withCompletionHandler:^ {
@@ -540,7 +548,7 @@ enum {
 
 - (void)exportToLibrary
 {
-	NSURL *outputURL = [NSURL fileURLWithPath:[self getVideoPath]];
+	NSURL *outputURL = [NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"mov"]];
 	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 	if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
 		[library writeVideoAtPathToSavedPhotosAlbum:outputURL

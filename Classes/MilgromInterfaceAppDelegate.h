@@ -12,7 +12,7 @@
 #import "DemoLoader.h"
 
 extern NSString * const kCacheFolder;
-extern NSString * const kMilgromURL;
+extern NSString * const kMilgromFileServerURL;
 
 @class EAGLContext;
 @class MilgromViewController;

@@ -29,6 +29,7 @@
 @synthesize videoPath;
 @synthesize scrollView;
 @synthesize activeView;
+@synthesize additionalText;
 
 
 
@@ -61,6 +62,7 @@
 	[self registerForKeyboardNotifications];
 	viewIsScrolled = NO;
 	keyboardShown = NO;
+	additionalText = @"";
 		
 }
 
@@ -241,7 +243,7 @@
 	if (uploader!=nil) {
 		uploader.username = username.text;
 		uploader.password = password.text;
-		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath];
+		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath]; //[descriptionView.text stringByAppendingString:additionalText]
 	}
 }
 
