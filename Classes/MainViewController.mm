@@ -85,7 +85,7 @@
 	bAnimatingRecord = NO;
 	
 	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B_BACKGROUND.png"];
-	self.renderProgressView.image =  [UIImage imageNamed:@"CELL1_PROGRESS.png"];
+	self.renderProgressView.image =  [UIImage imageNamed:@"BAR_OVERLY.png"];
 	
 	//[self.view addSubview:menuController.view];
 	//menuController.view.hidden = YES;
@@ -268,6 +268,12 @@
 					case BAND_STATE: {
 						menuButton.hidden = NO;
 						bandLoopsView.hidden = NO;
+						for (int i=0;i<[bandLoopsView.subviews count];i++) {
+							UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
+							//MilgromLog(@"button: %i, tag: %i, mode: %i",i, button.tag,OFSAptr->getMode(button.tag));
+							button.selected = OFSAptr->getMode(button.tag) == MANUAL_MODE;
+						}
+						
 						bandHelp.hidden = !bShowHelp;
 					} break;
 					default:
@@ -280,6 +286,18 @@
 			case SONG_PLAY:
 		
 				stopButton.hidden = NO;
+				
+				switch (OFSAptr->getState()) {
+					case SOLO_STATE: 
+						soloHelp.hidden = !bShowHelp;
+						break;
+					case BAND_STATE: 
+						bandHelp.hidden = !bShowHelp;
+						break;
+					default:
+						break;
+				}
+				
 				
 				break;
 			
@@ -428,8 +446,8 @@
 		saveViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	}
 	
-	
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] presentModalViewController:self.saveViewController animated:YES];
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] pushViewController:self.saveViewController];
+	//[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] presentModalViewController:self.saveViewController animated:YES];
 	
 }
 
@@ -506,6 +524,7 @@
 - (void) showHelp:(id)sender {
 	switch (OFSAptr->getSongState()) {
 		case SONG_IDLE:
+		case SONG_PLAY:
 			bShowHelp = YES;
 			self.interactionView.userInteractionEnabled = NO;
 			[self updateViews];

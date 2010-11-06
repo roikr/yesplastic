@@ -12,6 +12,7 @@
 
 // listen on port 12345
 #define PORT 12345
+#define RECORD_LIMIT 60000
 
 
 enum {
@@ -216,7 +217,7 @@ float testApp::getRenderProgress(){
 
 
 int testApp::getMode(int player) {
-	return this->player[controller].getMode();
+	return this->player[player].getMode();
 }
 
 void testApp::setMode(int player,int mode) {
@@ -431,7 +432,7 @@ void testApp::update(){
 	
 	
 	if (songState==SONG_RECORD) {
-		if (ofGetElapsedTimeMillis()-startRecordingTime > 30000) {
+		if (ofGetElapsedTimeMillis()-startRecordingTime > RECORD_LIMIT) {
 			setSongState(SONG_IDLE);
 		}
 	}
