@@ -128,11 +128,14 @@
     [super viewWillAppear:animated];
 }
 */
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+	
 }
-*/
+ */
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -278,7 +281,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] loadSong:[songsArray objectAtIndex:indexPath.row]];
-	
+	self.view.userInteractionEnabled = NO;
 }
 
 
@@ -299,7 +302,7 @@
 	[super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
-	self.songsArray = nil;
+	//self.songsArray = nil;
 	
 	// TODO: after some memory warnings the songs disappear, I supposed the problem is here and with viewDidLoad;
 	

@@ -208,7 +208,7 @@ void  PlayerController::loadSoundSet() {
 	
 	for (i=0; i<midiNotes.size();i++) {
 		string soundname = path+"_"+ofToString(i+1) + ".aif";
-		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
+//		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
 		
 		if (bMulti)
 			midiInstrument->loadSample(ofToDataPath(soundname), midiNotes[i],chokeGroup.find(i)!=chokeGroup.end());

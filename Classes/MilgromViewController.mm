@@ -78,7 +78,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	
     // Return YES for supported orientations
-	return [self.viewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+	return [self.viewController.visibleViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
 	
 }
 

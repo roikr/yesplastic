@@ -40,10 +40,10 @@
 	MilgromLog(@"BandView::viewDidLoad");
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
+		
 	}
 		
 	[self.songsView addSubview:songsTable.view];
-		
 	
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	
@@ -68,6 +68,11 @@
 }
 
 - (void)viewDidUnload {
+	self.editButton = nil;
+	self.activityIndicator = nil;
+	self.songsView = nil;
+	//[songsTable release];
+	//self.songsTable = nil;
     [super viewDidUnload];
 	//self.songsTable = nil;
     // Release any retained subviews of the main view.
@@ -135,6 +140,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"BandView::viewWillAppear");
+	songsTable.view.userInteractionEnabled = YES;
 }
 
 

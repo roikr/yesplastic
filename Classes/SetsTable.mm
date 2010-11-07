@@ -213,7 +213,13 @@
 	
 	Song *song = [songsArray objectAtIndex:indexPath.row];
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if ([song.bReady boolValue]  && ![song.bLocked boolValue] && song!=[appDelegate getDemoForCurrentSoundSet]) {
+	
+	if (song==[appDelegate getDemoForCurrentSoundSet]) {
+		[appDelegate popViewController];
+		return;
+	}
+	if ([song.bReady boolValue]  && ![song.bLocked boolValue] ) // && song!=[appDelegate getDemoForCurrentSoundSet]
+	{
 		if ([appDelegate loadSoundSetByDemo:song]) {
 			[appDelegate popViewController];
 		}

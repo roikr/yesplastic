@@ -73,7 +73,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    //[bandMenu.activityIndicator startAnimating];
+    
 	// Override point for customization after application launch.
 	
 		
@@ -89,7 +89,7 @@ NSString * const kCacheFolder=@"URLCache";
 //	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
 	self.bandMenu = (BandMenu *)milgromViewController.viewController.visibleViewController; 
-	
+	[bandMenu.activityIndicator startAnimating];
 	
 	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
 	
@@ -776,6 +776,7 @@ NSString * const kCacheFolder=@"URLCache";
 	if (currentSong && song ==  currentSong) {	
 		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
 		[self pushMain];
+		return;
 	}
 	
 	self.currentSong = song;

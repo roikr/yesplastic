@@ -44,6 +44,7 @@ void ofxRKTexture::init() {
 void ofxRKTexture::release() {
 	if (bInitialized) {
 		glDeleteTextures(1, &_name);
+		//ofLog(OF_LOG_VERBOSE, "ofxRKTexture::release texture: %i",_name);
 		_name = 0;
 	} else {
 		ofLog(OF_LOG_VERBOSE,"ofxRKTexture::release: %s has not been initialized",filename.c_str());

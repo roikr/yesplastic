@@ -187,6 +187,7 @@ typedef struct _PVRTexHeader
 			glDeleteTextures(1, &_name);
 		
 		glGenTextures(1, &_name);
+		//NSLog(@"allocating texture: %i",_name);
 		glBindTexture(GL_TEXTURE_2D, _name);
 	}
 	

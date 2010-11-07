@@ -46,36 +46,38 @@
 		setsTable.playerName = playerName;
 		
 		[self.setsTable loadData];
-		
-		NSString *doneButtonName = [NSString stringWithFormat:@"%@_DONE.png",playerName];
-		[doneButton setImage:[UIImage imageNamed:doneButtonName] forState:UIControlStateNormal];
-		
-		NSString *backgroundName = [NSString stringWithFormat:@"%@_SET_BACK.png",playerName];
-		[background setImage:[UIImage imageNamed:backgroundName]];
-		
-				
-		
-		
-		[bpmSlider setMinimumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]] forState:UIControlStateNormal];
-		[bpmSlider setMaximumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]] forState:UIControlStateNormal];
-		[bpmSlider setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
-		//CGRect frame = bpmSlider.frame;
-		//frame.size = minTrack.size;
-		//bpmSlider.frame = frame;
-		
-		
-		[volumeSlider setMinimumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]] forState:UIControlStateNormal];
-		[volumeSlider setMaximumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]] forState:UIControlStateNormal];
-		[volumeSlider setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
-		//CGRect frame = volumeSlider.frame;
-		//frame.size = minTrack.size;
-		//volumeSlider.frame = frame;
-		
-		
-		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	}
+		
+	NSString *doneButtonName = [NSString stringWithFormat:@"%@_DONE.png",playerName];
+	[doneButton setImage:[UIImage imageNamed:doneButtonName] forState:UIControlStateNormal];
 	
+	NSString *backgroundName = [NSString stringWithFormat:@"%@_SET_BACK.png",playerName];
+	[background setImage:[UIImage imageNamed:backgroundName]];
+	
+			
+	
+	
+	[bpmSlider setMinimumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]] forState:UIControlStateNormal];
+	[bpmSlider setMaximumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]] forState:UIControlStateNormal];
+	[bpmSlider setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
+	//CGRect frame = bpmSlider.frame;
+	//frame.size = minTrack.size;
+	//bpmSlider.frame = frame;
+	
+	
+	[volumeSlider setMinimumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_OVER.png",playerName]] forState:UIControlStateNormal];
+	[volumeSlider setMaximumTrackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_BACK.png",playerName]] forState:UIControlStateNormal];
+	[volumeSlider setThumbImage: [UIImage imageNamed:[NSString stringWithFormat:@"%@_SLIDER_PIN.png",playerName]] forState:UIControlStateNormal];
+	//CGRect frame = volumeSlider.frame;
+	//frame.size = minTrack.size;
+	//volumeSlider.frame = frame;
+	
+	
+	//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	[self.setsView addSubview:setsTable.view];
+	
+	
+	
 	
 }
 
@@ -97,7 +99,16 @@
 }
 
 - (void)viewDidUnload {
+	
+	self.setsView = nil;
+	self.doneButton = nil;
+	self.background = nil;
+	self.volumeSlider = nil;
+	self.bpmSlider = nil;
+	//[setsTable release];
+	//self.setsTable = nil;
     [super viewDidUnload];
+	
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
