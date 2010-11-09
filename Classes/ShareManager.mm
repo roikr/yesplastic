@@ -555,7 +555,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 									completionBlock:^(NSURL *assetURL, NSError *error){
 										dispatch_async(dispatch_get_main_queue(), ^{
 											if (error) {
-												NSLog(@"writeVideoToAssestsLibrary failed: %@", error);
+												MilgromLog(@"writeVideoToAssestsLibrary failed: %@", error);
 												UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
 																									message:[error localizedRecoverySuggestion]
 																								   delegate:nil
@@ -565,6 +565,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 												[alertView release];
 											}
 											else {
+												MilgromLog(@"writeVideoToAssestsLibrary successed");
 												//_showSavedVideoToAssestsLibrary = YES;
 												
 											}

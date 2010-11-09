@@ -209,10 +209,21 @@ float testApp::getRenderProgress(){
 //			playhead = temp;
 //		}
 //	}
+	
+	switch (songState) {
+		case SONG_RENDER_AUDIO: {
+			float playhead = (float)currentBlock * (float)blockLength / (float)sampleRate;
+			return playhead/duration;
+		}	break;
+		case SONG_RENDER_VIDEO:
+			return (float)currentBlock/(float)totalBlocks;
+		default:
+			return 0.0f;
+	}
 
-	float playhead = (float)currentBlock * (float)blockLength / (float)sampleRate;
+	
 	//return songState == SONG_RENDER_VIDEO && totalBlocks!=0 ? (float)currentBlock/(float)totalBlocks : 0.0f;
-	return playhead/duration;
+	
 }
 
 
@@ -1012,7 +1023,7 @@ void testApp::renderAudio() {
 	
 	setSongState(SONG_IDLE);
 	
-	//totalBlocks = block;
+	totalBlocks = currentBlock;
 	
 }
 
@@ -1082,7 +1093,6 @@ int  testApp::getSongState() { // should be called frequently to observe changes
 	switch (songState) {
 		case SONG_PLAY:
 		case SONG_RENDER_AUDIO:
-		case SONG_RENDER_VIDEO:
 			if (! getIsPlaying()) {
 				
 				songState = SONG_IDLE;
@@ -1095,6 +1105,17 @@ int  testApp::getSongState() { // should be called frequently to observe changes
 			}
 			break;
 			
+		case SONG_RENDER_VIDEO:
+			
+			if  (currentBlock / totalBlocks >= 1.0) {
+				songState = SONG_IDLE;
+				bNeedDisplay = true;
+			}
+			
+			
+			break;
+
+			
 		default:
 			break;
 	}
@@ -1106,6 +1127,7 @@ int  testApp::getSongState() { // should be called frequently to observe changes
 
 
 bool testApp::getIsPlaying() {
+	
 	for (int i=0;i<3;i++) {
 		if (player[i].getIsPlaying()) {
 			return true;

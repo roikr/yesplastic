@@ -164,7 +164,8 @@ private:
 	
 	float duration;
 	int currentBlock;    //using to seekFrame and renderAudio for rendering video & audio;
-	//int totalBlocks; // calculating by renderAudio before rendering video
+	int totalBlocks; // calculating by renderAudio before rendering video - 
+	// because we don't use midi instrument while video rendering, we need to know when the last sample occured...
 };
 
 
