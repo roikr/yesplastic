@@ -55,7 +55,6 @@ NSString * const kCacheFolder=@"URLCache";
 
 @implementation MilgromInterfaceAppDelegate
 
-@synthesize context;
 @synthesize window;
 @synthesize milgromViewController;
 @synthesize mainViewController;
@@ -543,11 +542,6 @@ NSString * const kCacheFolder=@"URLCache";
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
 	
-	if (mPlaybackViewController)
-	{
-		[mPlaybackViewController release];
-		mPlaybackViewController = nil;
-	}
 }
 
 
@@ -614,17 +608,11 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
-- (void)play {
+- (void)playURL:(NSURL *)url {
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
+	AVPlayerDemoPlaybackViewController* mPlaybackViewController = [[[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init] autorelease];
 	
-	if (!mPlaybackViewController)
-		mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
-	
-
-	
-	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
+	[mPlaybackViewController setURL:url]; //[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]
 	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
 	
 	//[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds([defaults doubleForKey:AVPlayerDemoContentTimeUserDefaultsKey], NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];

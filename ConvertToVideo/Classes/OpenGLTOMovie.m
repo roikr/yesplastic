@@ -13,10 +13,10 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
+
 
 #import "OpenGLTOMovie.h"
+#import "RenderView.h"
 
 
 @implementation OpenGLTOMovie
@@ -26,12 +26,10 @@
 //	return [[[OpenGLTOMovie alloc] init] autorelease];
 //}
 
-+ (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL WithSize:(CGSize)size withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler{
++ (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size withInitializationHandler:(void (^)(void))initializationHandler withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler 
+{
 	
-	
-	
-	
-	
+		
 	NSError *error = nil;
 //	[[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAudioProcessing error: &error];
 //	
@@ -143,6 +141,49 @@
 	NSLog(@"can add audioInput: %i",test);
 	[writer addInput:audioInput];
 	
+		
+	
+	
+	EAGLContext* contextB = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1 sharegroup:contextA.sharegroup];
+		
+	
+	[EAGLContext setCurrentContext:contextB];
+		
+	
+
+	// Create default framebuffer object.
+	GLuint framebuffer;
+	glGenFramebuffersOES(1, &framebuffer);
+	glBindFramebufferOES(GL_FRAMEBUFFER_OES, framebuffer);
+	
+	GLuint colorRenderbuffer;
+	CGRect frame = CGRectMake(0, 0, size.width, size.height);
+	RenderView * renderView = [RenderView renderViewWithFrame:frame];
+	
+	glGenRenderbuffersOES(1, &colorRenderbuffer);
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
+	//glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_RGBA8_OES, size.width, size.height);
+	[contextB renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer *)renderView.layer];
+	glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+	
+	//GLint framebufferWidth;
+	//GLint framebufferHeight;
+	//glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
+	//glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
+	
+	GLenum status = glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) ;
+	if(status != GL_FRAMEBUFFER_COMPLETE_OES) {
+		NSLog(@"failed to make complete framebuffer object %x", status);
+	}
+	
+	glViewport(0, 0, size.width, size.height);
+	
+	initializationHandler();
+	
+	
+	
+	
+	
 	[reader startReading];
 	
 	[writer startWriting];
@@ -188,28 +229,30 @@
 		
 			uint8_t *baseAddress  = (uint8_t *)CVPixelBufferGetBaseAddress(pixelBuffer);
 			
-			dispatch_sync(dispatch_get_main_queue(), ^{
-				drawFrame(frameNum);
 			
-				GLenum err = glGetError();
-				if (err != GL_NO_ERROR)
-				{
-					NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
-				}
 				
-				
-				glReadPixels(0, 0, size.width, size.height, GL_BGRA, GL_UNSIGNED_BYTE, baseAddress);
-				
-				err = glGetError();
-				if (err != GL_NO_ERROR)
-				{
-					NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
-				}
-			});
+			[EAGLContext setCurrentContext:contextB];
+			glBindFramebufferOES(GL_FRAMEBUFFER_OES, framebuffer);
+			glViewport(0, 0, size.width, size.height);
+			
+			drawFrame(frameNum);
 		
-							
-					   
-									  
+			GLenum err = glGetError();
+			if (err != GL_NO_ERROR)
+			{
+				NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
+			}
+			
+			glReadPixels(0, 0, size.width, size.height, GL_BGRA, GL_UNSIGNED_BYTE, baseAddress); //GL_BGRA
+			//glReadPixels(0, 0, 10, 10, GL_RGBA, GL_UNSIGNED_BYTE, baseAddress);
+			
+			err = glGetError();
+			if (err != GL_NO_ERROR)
+			{
+				NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
+			}
+			
+		
 			theError = CVPixelBufferUnlockBaseAddress(pixelBuffer,0); 
 			if (theError!=0) {
 				NSLog(@"CVPixelBufferUnlockBaseAddress: %i", theError);
@@ -219,8 +262,9 @@
 			[adaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum))];
 			CVPixelBufferRelease(pixelBuffer); 
 			frameNum++;
-			
+		
 			if (didFinish(frameNum)) {
+				
 				bVideoFinished = true;
 				[input markAsFinished];
 			}
@@ -232,6 +276,15 @@
 	
 	[writer endSessionAtSourceTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum-1))];
 	[writer finishWriting];
+	
+	[EAGLContext setCurrentContext:contextB];
+	
+	glDeleteFramebuffersOES(1, &framebuffer);
+	glDeleteRenderbuffersOES(1, &colorRenderbuffer);
+	
+	[EAGLContext setCurrentContext:nil];
+	[contextB release];
+	
 	NSLog(@"Writing finished with status: %i",[writer status]);
 	
 	dispatch_async(dispatch_get_main_queue(), ^{

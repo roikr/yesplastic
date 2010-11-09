@@ -14,13 +14,12 @@
 extern NSString * const kCacheFolder;
 extern NSString * const kMilgromFileServerURL;
 
-@class EAGLContext;
+
 @class MilgromViewController;
 @class Song;
 @class SoundSet;
 @class MainViewController;
 @class BandMenu;
-@class AVPlayerDemoPlaybackViewController;
 @class ShareManager;
 class testApp;
 
@@ -43,8 +42,6 @@ class testApp;
 	NSArray *playerControllers;
 	MainViewController *mainViewController;
 	
-	AVPlayerDemoPlaybackViewController* mPlaybackViewController;
-	
 	Song *currentSong;
 	
 	ShareManager *shareManager;
@@ -52,7 +49,6 @@ class testApp;
 	//BOOL rendering;
 }
 
-@property (nonatomic, retain,readonly) EAGLContext *context;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
@@ -91,7 +87,7 @@ class testApp;
 - (void)help;
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
 - (void)dismissModalViewControllerAnimated:(BOOL)animated;
-- (void)play;
+- (void)playURL:(NSURL *)url;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 
 @end

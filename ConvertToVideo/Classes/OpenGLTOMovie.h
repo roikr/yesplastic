@@ -17,7 +17,7 @@
 	
 }
 
-+ (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL WithSize:(CGSize)size withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler;
++ (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size withInitializationHandler:(void (^)(void))initializationHandler withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler;
 //+ (AVAssetExportSession *)exportToURL:(NSURL*)url withVideoURL:(NSURL*) videoURL withAudioURL:(NSURL*)audioURL 
 //					withProgressHandler:(void (^)(float))progressHandler withCompletionHandler:(void (^)(void))completionHandler;
 

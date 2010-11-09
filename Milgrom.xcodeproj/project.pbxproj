@@ -166,6 +166,7 @@
 		E444728012143DB90058D07B /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727912143DB90058D07B /* tinyxmlparser.cpp */; };
 		E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727B12143DB90058D07B /* ofxXmlSettings.cpp */; };
 		E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444728B12143EE60058D07B /* ofxSndFile.cpp */; };
+		E4452EB5128939AC00C7AE2C /* RenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4452EB3128939AC00C7AE2C /* RenderView.m */; };
 		E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = E44D9D231223D1C400477CE0 /* DemoLoader.mm */; };
 		E44F6DBD122A4DC60002386C /* CELL1_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DB8122A4DC60002386C /* CELL1_PROGRESS.png */; };
 		E44F6DBE122A4DC60002386C /* CELL2_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DB9122A4DC60002386C /* CELL2_PROGRESS.png */; };
@@ -599,6 +600,8 @@
 		E444728B12143EE60058D07B /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
 		E444728C12143EE60058D07B /* ofxSndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSndFile.h; sourceTree = "<group>"; };
 		E44472B712143FEE0058D07B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E4452EB3128939AC00C7AE2C /* RenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenderView.m; path = ConvertToVideo/Classes/RenderView.m; sourceTree = SOURCE_ROOT; };
+		E4452EB4128939AC00C7AE2C /* RenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderView.h; path = ConvertToVideo/Classes/RenderView.h; sourceTree = SOURCE_ROOT; };
 		E44D9D221223D1C400477CE0 /* DemoLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoLoader.h; path = Classes/DemoLoader.h; sourceTree = "<group>"; };
 		E44D9D231223D1C400477CE0 /* DemoLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DemoLoader.mm; path = Classes/DemoLoader.mm; sourceTree = "<group>"; };
 		E44F6DB8122A4DC60002386C /* CELL1_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL1_PROGRESS.png; sourceTree = "<group>"; };
@@ -1986,6 +1989,8 @@
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
 				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
 				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
+				E4452EB4128939AC00C7AE2C /* RenderView.h */,
+				E4452EB3128939AC00C7AE2C /* RenderView.m */,
 				E44F8468127EF0C90063FFA1 /* ExportManager.h */,
 				E44F8469127EF0C90063FFA1 /* ExportManager.m */,
 				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
@@ -2602,6 +2607,7 @@
 				E4B54288127089C900851D86 /* FacebookUploader.m in Sources */,
 				E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */,
 				E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */,
+				E4452EB5128939AC00C7AE2C /* RenderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,6 @@
 
 
 @interface MilgromViewController ()
-@property (nonatomic, retain) EAGLContext *context;
 @property (nonatomic, retain) EAGLContext *secondaryContext;
 @end
 

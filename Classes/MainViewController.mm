@@ -21,6 +21,7 @@
 #import "CustomImageView.h"
 #import "ShareManager.h"
 #import "OpenGLTOMovie.h"
+#import "glu.h"
 
 
 @interface MainViewController() 
@@ -618,6 +619,18 @@
 	[renderProgressView setRect:CGRectMake(0.0f, 0.0f,progress,1.0f)];
 }
 
+- (void)updateRenderProgress
+{
+	
+	if (OFSAptr->getSongState()==SONG_RENDER_AUDIO || OFSAptr->getSongState()==SONG_RENDER_VIDEO) {
+		float progress = OFSAptr->getRenderProgress();
+		[self setRenderProgress:progress];
+		//NSLog(@"rendering, progrss: %2.2f",progress);
+		
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
+	}
+}
 
 - (void)renderAudio {
 	[self setRenderProgress:0.0f];
@@ -647,18 +660,6 @@
 	
 }
 
-- (void)updateRenderProgress
-{
-	
-	if (OFSAptr->getSongState()==SONG_RENDER_AUDIO) {
-		float progress = OFSAptr->getRenderProgress();
-		[self setRenderProgress:progress];
-		NSLog(@"export audio, progrss: %2.2f",progress);
-		
-		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-		[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
-	}
-}
 
 
 - (void)renderAudioDidFinish {
@@ -694,15 +695,30 @@
 		
 		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] WithSize:CGSizeMake(480, 320) 
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] 
+						
+						   withContext:milgromViewController.context
+						withSize:CGSizeMake(480, 320) 
+		 
+		 
+				 withInitializationHandler:^ {
+					 glMatrixMode (GL_PROJECTION);
+					 glLoadIdentity ();
+					 gluOrtho2D (0, 480, 0, 320);
+					 
+				 }
+						
 		 
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
 							 OFSAptr->seekFrame(frameNum);
 							 
-							 [milgromViewController renderFrame];
-							 [self setRenderProgress:OFSAptr->getRenderProgress()];
-							 // TODO: playhead is only by DRM
+							 glMatrixMode(GL_MODELVIEW);
+							 glLoadIdentity();
+							 
+							 
+														 
+							 OFSAptr->draw();
 							 
 						 }
 		 
@@ -732,6 +748,9 @@
 	
 	dispatch_release(myCustomQueue);
 	
+	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+	[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
+
 }
 
 - (void)cancelRendering:(id)sender {

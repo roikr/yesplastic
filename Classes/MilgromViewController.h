@@ -46,6 +46,7 @@
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
+@property (nonatomic, retain) EAGLContext *context;
 
 
 - (void)setContextCurrent;
@@ -53,7 +54,7 @@
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)drawFrame;
-- (void)renderFrame;
+//- (void)renderFrame;
 
 
 @end

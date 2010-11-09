@@ -11,6 +11,7 @@
 #import "EAGLView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "OpenGLTOMovie.h"
+#import "AVPlayerDemoPlaybackViewController.h"
 
 
 // Uniform index.
@@ -36,6 +37,7 @@ enum {
 - (void)drawFrame;
 
 - (void)render;
+- (void)play;
 //- (void)export;
 //- (void)updateExportProgress:(AVAssetExportSession *)theSession;
 //- (void)exportDidFinish;
@@ -196,7 +198,17 @@ enum {
 		
 		
 		
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]] WithSize:CGSizeMake(480, 320) 
+		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:videoPath] withAudioURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"temp" ofType:@"wav"]] 
+						   withContext:context
+							  withSize:CGSizeMake(480, 320) 
+		 
+						 withInitializationHandler: ^{
+							 glMatrixMode (GL_PROJECTION);
+							 glLoadIdentity ();
+							 //gluOrtho2D (0, size.width, 0, size.height);
+							 glMatrixMode(GL_MODELVIEW);
+							 glLoadIdentity();
+						 }
 		 
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i",frameNum);
@@ -215,6 +227,7 @@ enum {
 				 withCompletionHandler:^ {
 					 NSLog(@"write completed");
 					 self.progress = [NSNumber numberWithFloat:0.0f];
+					 [self play];
 					 //[self export];
 					 
 				 }];
@@ -386,8 +399,15 @@ enum {
 
 - (void)drawFrame
 {
-    [(EAGLView *)self.view setFramebuffer];
     
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	
     // Replace the implementation of this method to do your own custom drawing.
     static const GLfloat squareVertices[] = {
         -0.5f, -0.33f,
@@ -404,14 +424,16 @@ enum {
     };
     
     static float transY = 0.0f;
-    
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	
+//	[(EAGLView *)self.view setFramebuffer];
+//    
+//    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+//    glClear(GL_COLOR_BUFFER_BIT);
+//    
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
 	glTranslatef(0.0f, (GLfloat)(sinf(transY)/2.0f), 0.0f);
 	transY += 0.075f;
 	
@@ -425,7 +447,7 @@ enum {
     
 	
     
-    [(EAGLView *)self.view presentFramebuffer];
+    //[(EAGLView *)self.view presentFramebuffer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -589,6 +611,24 @@ enum {
         glDeleteShader(fragShader);
     
     return TRUE;
+}
+
+
+- (void)play {
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	AVPlayerDemoPlaybackViewController *mPlaybackViewController = [[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init];
+	
+	
+	
+	[mPlaybackViewController setURL:[NSURL fileURLWithPath:[documentsDirectory stringByAppendingPathComponent:@"video.mov"]]]; 
+	[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds(0.0, NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
+	
+	//[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds([defaults doubleForKey:AVPlayerDemoContentTimeUserDefaultsKey], NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
+	
+	[self presentModalViewController:mPlaybackViewController animated:NO];
 }
 
 @end
