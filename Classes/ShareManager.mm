@@ -533,7 +533,11 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 											}
 											else {
 												MilgromLog(@"writeVideoToAssestsLibrary successed");
-												//_showSavedVideoToAssestsLibrary = YES;
+												UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Library" 
+																								message:@"The video has been saved to your library"
+																							   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
+												[alert show];
+												[alert release];
 												
 											}
 										});

@@ -621,9 +621,20 @@
 
 - (void)share:(id)sender {
 	
-	//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
-	OFSAptr->setSongState(SONG_IDLE);
-	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] menuWithView:self.view];
+	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
+	
+	if ([shareManager isUploading]) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sharing" 
+														message:@"Video upload in progress"
+													   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
+		[alert show];
+		[alert release];
+	} else {
+		
+		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
+		OFSAptr->setSongState(SONG_IDLE);
+		[shareManager menuWithView:self.view];
+	}
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	
 }
