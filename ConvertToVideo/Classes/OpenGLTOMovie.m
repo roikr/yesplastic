@@ -26,10 +26,13 @@
 //	return [[[OpenGLTOMovie alloc] init] autorelease];
 //}
 
-+ (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size withInitializationHandler:(void (^)(void))initializationHandler withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler 
++ (id)renderManager {
+	return [[[OpenGLTOMovie alloc] init] autorelease];
+}
+
+- (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size withInitializationHandler:(void (^)(void))initializationHandler withDrawFrame:(void (^)(int))drawFrame  withIsRendering:(int (^)(void))isRendering withCompletionHandler:(void (^)(void))completionHandler 
 {
 	
-		
 	NSError *error = nil;
 //	[[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAudioProcessing error: &error];
 //	
@@ -44,7 +47,6 @@
 	
 	AVURLAsset *asset;
 	AVAssetReaderTrackOutput *output;
-	AVAssetReader *reader;
 	AVAssetWriterInput *audioInput;
 	
 	asset = [AVURLAsset URLAssetWithURL:audioURL options:nil];
@@ -55,7 +57,7 @@
 	
 
 	
-	reader = [AVAssetReader assetReaderWithAsset:asset error:&error];
+	AVAssetReader *reader = [AVAssetReader assetReaderWithAsset:asset error:&error];
 	
 	if (error) {
 		NSLog(@"AVAssetReader: %@",[error description]);
@@ -96,7 +98,7 @@
 	NSDictionary *pixelBufferAttributes;
 	AVAssetWriterInputPixelBufferAdaptor *adaptor;
 	AVAssetWriterInput *input;
-	AVAssetWriter *writer;
+	
 
 
 
@@ -128,7 +130,7 @@
 	
 	
 	
-	writer = [AVAssetWriter assetWriterWithURL:videoURL fileType:(NSString*)kUTTypeQuickTimeMovie  error:&error]; // kUTTypeMPEG4
+	AVAssetWriter *writer = [AVAssetWriter assetWriterWithURL:videoURL fileType:(NSString*)kUTTypeQuickTimeMovie  error:&error]; // kUTTypeMPEG4
 	if (error) {
 		NSLog(@"AVAssetWriter: %@",[error description]);
 	}
@@ -192,8 +194,11 @@
 	int frameNum = 0;
 	bool bAudioFinished = false;
 	bool bVideoFinished = false;
+	bRenderingCanceled = NO;
 	
 	do {
+		
+		
 		if(!bAudioFinished && [audioInput isReadyForMoreMediaData]) {
 		
 			NSLog(@"writing audio");
@@ -263,7 +268,7 @@
 			CVPixelBufferRelease(pixelBuffer); 
 			frameNum++;
 		
-			if (didFinish(frameNum)) {
+			if (!isRendering()) {
 				
 				bVideoFinished = true;
 				[input markAsFinished];
@@ -272,10 +277,7 @@
 					
 												   
 		} 
-	} while (!bVideoFinished || !bAudioFinished);
-	
-	[writer endSessionAtSourceTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum-1))];
-	[writer finishWriting];
+	} while ((!bVideoFinished || !bAudioFinished) && !bRenderingCanceled);
 	
 	[EAGLContext setCurrentContext:contextB];
 	
@@ -285,15 +287,30 @@
 	[EAGLContext setCurrentContext:nil];
 	[contextB release];
 	
-	NSLog(@"Writing finished with status: %i",[writer status]);
-	
-	dispatch_async(dispatch_get_main_queue(), ^{
-		completionHandler();
-	});
-	
-	
-	
+	if (bRenderingCanceled) {
+		[writer cancelWriting];
+		[reader cancelReading];
+	} else {
+		[writer endSessionAtSourceTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum-1))];
+		[writer finishWriting];
+		NSLog(@"Writing finished with status: %i",[writer status]);
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			completionHandler();
+		});
+		
+	}
 
+
+}
+
+- (void) cancelRender {
+	bRenderingCanceled = YES;
+}
+
+
+- (void)dealloc {
+    [super dealloc];
 }
 	
 	 

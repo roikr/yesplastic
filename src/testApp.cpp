@@ -1007,7 +1007,7 @@ void testApp::renderAudio() {
 	
 	currentBlock = 0;
 	
-	while (getSongState()==SONG_RENDER_AUDIO) {
+	while (getSongState()==SONG_RENDER_AUDIO || getSongState()==SONG_CANCEL_RENDER_AUDIO) {
 		
 		
 		memset(lBlock, 0, blockLength*sizeof(float));
@@ -1096,6 +1096,7 @@ int  testApp::getSongState() { // should be called frequently to observe changes
 	switch (songState) {
 		case SONG_PLAY:
 		case SONG_RENDER_AUDIO:
+		case SONG_CANCEL_RENDER_AUDIO:
 			if (! getIsPlaying()) {
 				
 				songState = SONG_IDLE;

@@ -15,6 +15,7 @@ class testApp;
 @class SaveViewController;
 @class CustomImageView;
 @class ExportManager;
+@class OpenGLTOMovie;
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
@@ -56,6 +57,7 @@ class testApp;
 	CustomImageView *renderProgressView;
 	
 	ExportManager *exportManager;
+	OpenGLTOMovie *renderManager;
 	
 }
 
@@ -84,6 +86,7 @@ class testApp;
 @property BOOL bShowHelp;
 
 @property (nonatomic, retain) ExportManager *exportManager;
+@property (nonatomic, retain) OpenGLTOMovie *renderManager;
 
 
 - (void) menu:(id)sender;

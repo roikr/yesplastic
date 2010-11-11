@@ -239,15 +239,6 @@
     }
 }
 
-- (void)renderFrame // SONG_RENDER_VIDEO
-{
-	[self.eAGLView setFramebuffer];
-    
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	glLoadIdentity();
-	appDelegate.OFSAptr->draw();
-	[self.eAGLView presentFramebuffer];
-}
 
 - (void)drawFrame // NORMAL_PLAY
 {

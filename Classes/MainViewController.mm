@@ -63,6 +63,7 @@
 @synthesize shareProgressView;
 @synthesize renderProgressView;
 @synthesize exportManager;
+@synthesize renderManager;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -214,6 +215,13 @@
 	renderView.hidden = YES;
 	shareProgressView.hidden = YES;
 	
+	int songState =OFSAptr->getSongState();
+	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || exportManager) {
+		renderView.hidden = NO;
+		return;
+	}
+	
+	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
 	if (![[appDelegate shareManager] isUploading]) {
@@ -309,19 +317,12 @@
 				break;
 			
 				
-			case SONG_RENDER_VIDEO:
-			case SONG_RENDER_AUDIO:
-				renderView.hidden = NO;
-				break;
 			default:
 				break;
 		
 		}
 		
 		
-		if (exportManager) {
-			renderView.hidden = NO;
-		}
 		
 		
 		
@@ -711,9 +712,12 @@
 	OFSAptr->soundStreamStop();
 	OFSAptr->setSongState(SONG_RENDER_VIDEO);
 	
+	self.renderManager = [OpenGLTOMovie renderManager];
 	
 	dispatch_queue_t myCustomQueue;
 	myCustomQueue = dispatch_queue_create("renderQueue", NULL);
+	
+	
 	
 	dispatch_async(myCustomQueue, ^{
 		
@@ -721,7 +725,7 @@
 		
 		
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		[OpenGLTOMovie writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] 
+		[renderManager writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] 
 						
 						   withContext:milgromViewController.context
 						withSize:CGSizeMake(480, 320) 
@@ -734,25 +738,20 @@
 					 
 				 }
 						
-		 
 						 withDrawFrame:^(int frameNum) {
-							 //NSLog(@"rendering frame: %i",frameNum);
+							 NSLog(@"rendering frame: %i, progress: %2.2f",frameNum,OFSAptr->getRenderProgress());
 							 OFSAptr->seekFrame(frameNum);
 							 
 							 glMatrixMode(GL_MODELVIEW);
 							 glLoadIdentity();
 							 
-							 
-														 
 							 OFSAptr->draw();
 							 
 						 }
 		 
-						 withDidFinish:^(int frameNum) {
+						 withIsRendering:^ {
 							 
-							 int res = (int)(OFSAptr->getSongState()!=SONG_RENDER_VIDEO);
-							 NSLog(@"writing video, progrss: %2.2f, frame: %i, finished: %i",OFSAptr->getRenderProgress(),frameNum,res);
-							 return res;
+							 return (int)(OFSAptr->getSongState()==SONG_RENDER_VIDEO);
 						 }
 		 
 				 withCompletionHandler:^ {
@@ -762,12 +761,14 @@
 					 OFSAptr->soundStreamStart();
 					 [milgromViewController startAnimation];
 					 [shareManager action];
-					 
+					 self.renderManager = nil;
 					 
 					 //renderingView.hidden = YES;
 					 //[self action];
 					 
-				 }];
+				 }
+		 
+		 ];
 	});
 	
 	
@@ -837,10 +838,24 @@
 
 
 - (void)cancelRendering:(id)sender {
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
 	switch (OFSAptr->getSongState()) {
-		case SONG_RENDER_VIDEO:
-			[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] cancel];
+		case SONG_RENDER_VIDEO:  {
+			
+			
+			
+			[self.renderManager cancelRender];
+			self.renderManager = nil;
 			OFSAptr->setSongState(SONG_IDLE);
+			OFSAptr->soundStreamStart();
+			[appDelegate.milgromViewController startAnimation];
+			
+		}	break;
+		case SONG_RENDER_AUDIO:
+			[appDelegate.shareManager cancel];
+			OFSAptr->setSongState(SONG_CANCEL_RENDER_AUDIO);
 			break;
 		default:
 			break;

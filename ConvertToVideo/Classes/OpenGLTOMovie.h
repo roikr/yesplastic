@@ -11,16 +11,21 @@
 
 
 @class AVAssetExportSession;
+	
 
 @interface OpenGLTOMovie : NSObject {
-
-	
+	BOOL bRenderingCanceled;
 }
 
-+ (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size withInitializationHandler:(void (^)(void))initializationHandler withDrawFrame:(void (^)(int))drawFrame withDidFinish:(int (^)(int))didFinish withCompletionHandler:(void (^)(void))completionHandler;
++(id)renderManager;
+-(void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size 
+	withInitializationHandler:(void (^)(void))initializationHandler 
+		  withDrawFrame:(void (^)(int))drawFrame 
+		  withIsRendering:(int (^)(void))isRendering
+		withCompletionHandler:(void (^)(void))completionHandler;
 //+ (AVAssetExportSession *)exportToURL:(NSURL*)url withVideoURL:(NSURL*) videoURL withAudioURL:(NSURL*)audioURL 
 //					withProgressHandler:(void (^)(float))progressHandler withCompletionHandler:(void (^)(void))completionHandler;
 
 
-
+- (void) cancelRender;
 @end
