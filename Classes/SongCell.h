@@ -21,8 +21,6 @@
 	float progress;
 	CustomImageView *progressView; 
 	Song *song;
-	
-	
 }
 
 @property (nonatomic,retain) IBOutlet CustomFontLabel *label;
@@ -32,7 +30,7 @@
 @property float progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
 @property (nonatomic,retain) Song *song;
-
+@property BOOL progressHidden;
 
 - (void) updateBackgroundWithNumber:(NSInteger)num;
 - (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable; 

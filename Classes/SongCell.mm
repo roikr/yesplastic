@@ -96,9 +96,7 @@
 	NSArray * cells_progress = [NSArray arrayWithObjects:@"CELL1_PROGRESS.png",@"CELL2_PROGRESS.png",@"CELL3_PROGRESS.png",@"CELL4_PROGRESS.png",nil];
 	
 	self.progressView.image =  [UIImage imageNamed:[cells_progress objectAtIndex:num%[cells_progress count]]];
-	
-	
-	
+		
 	//[cell.bkg setImage:[UIImage imageNamed:[cellsBkgs objectAtIndex:[indexPath row]%[cellsBkgs count]]]];
 	[(UIImageView*)self.backgroundView setImage:[UIImage imageNamed:[cells objectAtIndex:num%[cells count]]]];
 	
@@ -115,7 +113,7 @@
 	self.label.text = theSong.songName;
 	self.songsTable = theTable;
 	
-	progressView.hidden = YES;
+	
 	
 }
 
@@ -125,26 +123,23 @@
 }
 
 - (void) setProgress:(float) theProgress {
-	if (theProgress<1.0f) {
-		
-		self.userInteractionEnabled = NO;
-		progressView.hidden = NO;
-		
-		[progressView setRect:CGRectMake(0, 0, theProgress,1.0f)];
-		
-		
-		//progressView.frame = frame;
-		
-				
-	} else {
-		self.userInteractionEnabled = YES;
-		progressView.hidden = YES;
-		
-		
-	}
+	
+	[progressView setRect:CGRectMake(0, 0, theProgress,1.0f)];
+	
+	//self.userInteractionEnabled = theProgress >=1.0f;
+	
 	
 	progress = theProgress;
 	
+}
+
+
+-(BOOL) progressHidden {
+	return progressView.hidden;
+}
+
+-(void) setProgressHidden:(BOOL)hidden {
+	progressView.hidden = hidden;
 }
 
 /*

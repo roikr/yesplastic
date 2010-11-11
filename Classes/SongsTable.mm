@@ -119,16 +119,24 @@
 -(void)updateSong:(Song*)song WithProgress:(float)theProgress {
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0];
 	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	if (cell.progressHidden) {
+		cell.progressHidden = NO;
+	}
 	[cell setProgress:theProgress];
 	
 }
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+	// [super viewWillAppear:animated]; // this will cause selected background to disappear
+	MilgromLog(@"SongsTable::viewWillAppear");
+	self.view.userInteractionEnabled = YES;
+	
+	NSIndexPath *indexPath = [NSIndexPath 
+							  indexPathForRow:[songsArray indexOfObject:[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] currentSong]] 
+							  inSection:0];
+	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+	cell.progressHidden = YES;
 }
-*/
-
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -279,12 +287,10 @@
 }
 */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+	
 	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] loadSong:[songsArray objectAtIndex:indexPath.row]];
 	self.view.userInteractionEnabled = NO;
 }
-
-
 
 
 

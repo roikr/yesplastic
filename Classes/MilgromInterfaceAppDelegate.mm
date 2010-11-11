@@ -802,6 +802,7 @@ NSString * const kCacheFolder=@"URLCache";
 	} else {
 		[self pushMain]; // TODO: prevent double push
 		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
+		
 	}
 	
 }
