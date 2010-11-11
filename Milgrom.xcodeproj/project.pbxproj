@@ -184,6 +184,7 @@
 		E480B6CF1212152400096300 /* SoundSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6CB1212152400096300 /* SoundSet.m */; };
 		E48111361214460D008ABBCC /* precache in Resources */ = {isa = PBXBuildFile; fileRef = E48111351214460D008ABBCC /* precache */; };
 		E48503FC1214BB3600D2271F /* TouchView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48503FB1214BB3600D2271F /* TouchView.mm */; };
+		E4862AB2128B119E00DBC5D0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E4862AB1128B119E00DBC5D0 /* Song.m */; };
 		E48A85F91259A87B004490CE /* GDataFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A83581259A87A004490CE /* GDataFramework.m */; };
 		E48A85FA1259A87B004490CE /* GDataUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A835A1259A87A004490CE /* GDataUtilities.m */; };
 		E48A85FB1259A87B004490CE /* GDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A835E1259A87A004490CE /* GDataObject.m */; };
@@ -338,7 +339,6 @@
 		E4B54287127089C900851D86 /* FacebookUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54283127089C900851D86 /* FacebookUploadViewController.m */; };
 		E4B54288127089C900851D86 /* FacebookUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54285127089C900851D86 /* FacebookUploader.m */; };
 		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
-		E4BAF0FA125EFE5000AE1ED0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF0F8125EFE5000AE1ED0 /* Song.m */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
@@ -627,6 +627,8 @@
 		E48111351214460D008ABBCC /* precache */ = {isa = PBXFileReference; lastKnownFileType = folder; path = precache; sourceTree = "<group>"; };
 		E48503FA1214BB3600D2271F /* TouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchView.h; sourceTree = "<group>"; };
 		E48503FB1214BB3600D2271F /* TouchView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchView.mm; sourceTree = "<group>"; };
+		E4862AB0128B119E00DBC5D0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
+		E4862AB1128B119E00DBC5D0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E48A83551259A87A004490CE /* GData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GData.h; path = "../OpenSource/gdata-objectivec-client-read-only/Source/GData.h"; sourceTree = SOURCE_ROOT; };
 		E48A83561259A87A004490CE /* GDataDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDataDefines.h; path = "../OpenSource/gdata-objectivec-client-read-only/Source/GDataDefines.h"; sourceTree = SOURCE_ROOT; };
 		E48A83571259A87A004490CE /* GDataFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDataFramework.h; path = "../OpenSource/gdata-objectivec-client-read-only/Source/GDataFramework.h"; sourceTree = SOURCE_ROOT; };
@@ -930,8 +932,6 @@
 		E4B54286127089C900851D86 /* FacebookUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploader.h; path = OldFacebookUpload/Classes/FacebookUploader.h; sourceTree = "<group>"; };
 		E4B54289127089EB00851D86 /* YouTubeUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploader.m; path = YouTubeUpload/Classes/YouTubeUploader.m; sourceTree = "<group>"; };
 		E4B5428A127089EB00851D86 /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = YouTubeUpload/Classes/YouTubeUploader.h; sourceTree = "<group>"; };
-		E4BAF0F8125EFE5000AE1ED0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
-		E4BAF0F9125EFE5000AE1ED0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Song.h; path = Model/Song.h; sourceTree = "<group>"; };
 		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ../ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ../ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1854,8 +1854,8 @@
 		E490A1A21206C536008512EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4BAF0F8125EFE5000AE1ED0 /* Song.m */,
-				E4BAF0F9125EFE5000AE1ED0 /* Song.h */,
+				E4862AB0128B119E00DBC5D0 /* Song.h */,
+				E4862AB1128B119E00DBC5D0 /* Song.m */,
 				E480B6C61212152400096300 /* Set.h */,
 				E480B6C71212152400096300 /* Set.m */,
 				E480B6C81212152400096300 /* VideoSet.h */,
@@ -2588,7 +2588,6 @@
 				E48A87321259A87B004490CE /* GDataServiceGoogleYouTube.m in Sources */,
 				E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */,
 				E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */,
-				E4BAF0FA125EFE5000AE1ED0 /* Song.m in Sources */,
 				E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */,
 				E49A3C8F1261016000879E26 /* PVRTexture.m in Sources */,
 				E49A3D041261158700879E26 /* ofxiPhoneSoundStream.mm in Sources */,
@@ -2608,6 +2607,7 @@
 				E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */,
 				E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */,
 				E4452EB5128939AC00C7AE2C /* RenderView.m in Sources */,
+				E4862AB2128B119E00DBC5D0 /* Song.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

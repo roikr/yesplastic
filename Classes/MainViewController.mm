@@ -22,6 +22,7 @@
 #import "ShareManager.h"
 #import "OpenGLTOMovie.h"
 #import "glu.h"
+#import "ExportManager.h"
 
 
 @interface MainViewController() 
@@ -30,8 +31,7 @@
 - (void) fadeInRecordButton;
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
-
-
+- (void)updateExportProgress:(ExportManager*)manager;
 
 
 @end
@@ -53,6 +53,7 @@
 @synthesize soloHelp;
 @synthesize bShowHelp;
 @synthesize renderView;
+@synthesize renderLabel;
 @synthesize interactionView;
 
 
@@ -61,6 +62,7 @@
 @synthesize saveViewController;
 @synthesize shareProgressView;
 @synthesize renderProgressView;
+@synthesize exportManager;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -85,8 +87,9 @@
 	bShowHelp = NO;
 	bAnimatingRecord = NO;
 	
-	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B_BACKGROUND.png"];
+	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B.png"];
 	self.renderProgressView.image =  [UIImage imageNamed:@"BAR_OVERLY.png"];
+	
 	
 	//[self.view addSubview:menuController.view];
 	//menuController.view.hidden = YES;
@@ -209,8 +212,11 @@
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
 	renderView.hidden = YES;
+	shareProgressView.hidden = YES;
 	
-	if (![[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] isUploading]) {
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
+	if (![[appDelegate shareManager] isUploading]) {
 		[self setShareProgress:1.0f];
 	}
 	
@@ -312,8 +318,16 @@
 		
 		}
 		
-		saveButton.hidden = ![(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] canSave];
-		shareButton.hidden = ![(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] canShare];
+		
+		if (exportManager) {
+			renderView.hidden = NO;
+		}
+		
+		
+		
+		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion;
+		shareButton.hidden = shareProgressView.hidden = [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() == appDelegate.lastSavedVersion :
+																									!OFSAptr->getSongVersion(); //  not a demo
 
 		recordButton.hidden = NO;
 		infoButton.hidden = NO; // OFSAptr->getSongState() != SONG_IDLE;
@@ -380,7 +394,7 @@
 		[self stop:nil];
 	}
 		
-	if (OFSAptr->isSongValid()) {
+	if (OFSAptr->getSongVersion()) {
 		OFSAptr->setSongState(SONG_PLAY);
 	}
 	
@@ -633,6 +647,7 @@
 }
 
 - (void)renderAudio {
+	self.renderLabel.text = @"Creating audio";
 	[self setRenderProgress:0.0f];
 	
 	dispatch_queue_t myCustomQueue;
@@ -674,7 +689,7 @@
 
 
 - (void)renderVideo {
-	
+	self.renderLabel.text = @"Creating video";
 	[self setRenderProgress:0.0f];
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -735,7 +750,6 @@
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
 					 [milgromViewController startAnimation];
-					 [shareManager setRendered];
 					 [shareManager action];
 					 
 					 
@@ -753,6 +767,64 @@
 
 }
 
+
+- (void)exportRingtone {
+	self.renderLabel.text = @"Exporting ringtone";
+	//renderingView.hidden = NO;
+	[self setRenderProgress:0.0f];
+	
+
+	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
+	
+	OFSAptr->soundStreamStop();
+	
+	//ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	self.exportManager = [ExportManager  exportAudio:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]]
+							  
+												   toURL:[NSURL fileURLWithPath:[[shareManager getVideoPath] stringByAppendingPathExtension:@"m4r"]]
+							  
+							  
+								   withCompletionHandler:^ {
+									   NSLog(@"export completed");
+									   
+									   OFSAptr->soundStreamStart();
+									   
+									   if ([exportManager didExportComplete]) {
+										    [[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] action];
+									   }
+									   
+									   self.exportManager = nil;
+									   [self updateViews];
+									  
+								   }];
+	
+	NSArray *modes = [[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil];
+	[self performSelector:@selector(updateExportProgress:) withObject:exportManager afterDelay:0.5 inModes:modes];
+	
+	
+}
+
+
+
+
+- (void)updateExportProgress:(ExportManager*)manager
+{
+	
+	if (!manager.didFinish) {
+		//MilgromLog(@"export audio, progrss: %2.2f",manager.progress);
+		[self setRenderProgress:manager.progress];
+		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
+		[self performSelector:@selector(updateExportProgress:) withObject:manager afterDelay:0.5 inModes:modes];
+	}
+}
+
+
+
+
+
 - (void)cancelRendering:(id)sender {
 	switch (OFSAptr->getSongState()) {
 		case SONG_RENDER_VIDEO:
@@ -761,6 +833,11 @@
 			break;
 		default:
 			break;
+	}
+	
+	if (exportManager) {
+		[exportManager cancelExport];
+		self.exportManager = nil;
 	}
 	
 	

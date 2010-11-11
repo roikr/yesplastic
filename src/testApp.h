@@ -63,9 +63,7 @@ public:
 	
 	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
 	
-	bool isSongValid();
-	bool isSongOverwritten();
-	bool canRenderSong();
+	int getSongVersion();
 	void saveSong(string songName);
 	void setSongState(int songState);
 	int  getSongState();
@@ -103,8 +101,7 @@ public:
 	
 private:
 	
-	bool bIsSongOverwritten;
-	bool bIsSongValid;
+	int songVersion;
 	int startRecordingTime;
 	
 	void startRecording();

@@ -14,6 +14,7 @@ class testApp;
 @class CustomFontTextField;
 @class SaveViewController;
 @class CustomImageView;
+@class ExportManager;
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
@@ -32,6 +33,7 @@ class testApp;
 	UIView *loopsView;
 	UIView *bandLoopsView;
 	UIView *renderView;
+	UILabel *renderLabel;
 	
 	
 	
@@ -53,6 +55,8 @@ class testApp;
 	CustomImageView *shareProgressView;
 	CustomImageView *renderProgressView;
 	
+	ExportManager *exportManager;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIView *interactionView;
@@ -70,6 +74,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 @property (nonatomic, retain) IBOutlet UIView *renderView;
+@property (nonatomic, retain) IBOutlet UILabel *renderLabel;
 
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
@@ -77,6 +82,8 @@ class testApp;
 @property (nonatomic,retain ) IBOutlet CustomImageView *renderProgressView;
 
 @property BOOL bShowHelp;
+
+@property (nonatomic, retain) ExportManager *exportManager;
 
 
 - (void) menu:(id)sender;
@@ -97,6 +104,7 @@ class testApp;
 
 - (void)renderAudio;
 - (void)renderVideo;
+- (void)exportRingtone;
 - (void)cancelRendering:(id)sender;
 
 @end

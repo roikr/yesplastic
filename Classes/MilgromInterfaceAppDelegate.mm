@@ -65,6 +65,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 @synthesize currentSong;
+@synthesize lastSavedVersion;
 @synthesize shareManager;
 
 #pragma mark -
@@ -638,17 +639,6 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark -
 #pragma mark Songs Management
 
--(BOOL)canSave {
-	return  OFSAptr->isSongOverwritten() && OFSAptr->isSongValid();
-}
-
--(BOOL)canShare {
-	return (![currentSong.bDemo boolValue] || OFSAptr->isSongOverwritten()) && OFSAptr->isSongValid();
-}
-
-- (BOOL)isSongTemporary {
-	return [currentSong.bDemo boolValue] || OFSAptr->isSongOverwritten();
-}
 
 -(BOOL)canSaveSongName:(NSString *)songName {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -717,9 +707,11 @@ NSString * const kCacheFolder=@"URLCache";
 
 	} 
 	
-	[currentSong setBRendered:[NSNumber numberWithBool:NO]];
+	//[currentSong setBRendered:[NSNumber numberWithBool:NO]]; // no need - the default is NO
 	
 	OFSAptr->saveSong([songName UTF8String]);
+	
+	lastSavedVersion = OFSAptr->getSongVersion();
 	
 	
 	request = [[NSFetchRequest alloc] init];
@@ -788,6 +780,7 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->setBPM([song.bpm integerValue]);
 	}
 	
+	lastSavedVersion = OFSAptr->getSongVersion();
 		
 		//[milgromViewController setContextCurrent];
 		
@@ -847,6 +840,8 @@ NSString * const kCacheFolder=@"URLCache";
 	OFSAptr->bMenu=false;
 		
 	OFSAptr->changeSoundSet(nextSong);
+	lastSavedVersion = 0;
+
 	
 	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
 	dispatch_async(aQueue, ^{
@@ -857,6 +852,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	});
 	
+		
 	//NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 	//[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
 	

@@ -14,7 +14,7 @@
 #import "MilgromMacros.h"
 #import "YouTubeUploadViewController.h"
 #import "FacebookUploadViewController.h"
-#import "ExportManager.h"
+
 #import "testApp.h"
 
 enum {
@@ -22,7 +22,7 @@ enum {
 	STATE_RENDER_AUDIO,
 	STATE_EXPORT_AUDIO,
 	STATE_RENDER_VIDEO,
-	STATE_CANCELED
+	STATE_CANCEL
 };
 
 enum {
@@ -41,10 +41,9 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 @interface ShareManager ()
 - (void)action;
 - (void)sendViaMailWithSubject:(NSString *)subject withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName;
-- (void)export;
-- (void)updateExportProgress:(ExportManager*)manager;
-- (void)exportDidFinish;
 - (void)exportToLibrary;
+- (void)setVideoRendered;
+- (void)setRingtoneExported;
 
 @end
 
@@ -70,7 +69,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		
 		canSendMail = [MFMailComposeViewController canSendMail];
 		
-		
+		[self resetVersions];
 	}
 	return self;
 }
@@ -84,47 +83,53 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 }
 
 
-- (void)setRendered {
-	if (isTemporary) {
-		_hasBeenRendered = YES;
-	} else {
-		MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+- (void)setVideoRendered {
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	renderedVideoVersion = appDelegate.OFSAptr->getSongVersion();
+	if (appDelegate.lastSavedVersion == appDelegate.OFSAptr->getSongVersion()) {
 		Song * song = [appDelegate currentSong];
-		[song setBRendered:[NSNumber numberWithBool:YES]];
+		[song setBVideoRendered:[NSNumber numberWithBool:YES]];
 		[appDelegate saveContext];
-		
 	}
 	
 }
 
 
-- (BOOL)hasBeenRendered {
-	if (isTemporary) {
-		return _hasBeenRendered;
-	} else {
+- (BOOL)videoRendered {
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.lastSavedVersion == appDelegate.OFSAptr->getSongVersion()) {
 		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
-		return [song.bRendered boolValue];
+		return [song.bVideoRendered boolValue];
+	} else {
+		return renderedVideoVersion == appDelegate.OFSAptr->getSongVersion();
+	}
+}
+
+
+- (void)setRingtoneExported {
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	exportedRingtoneVersion = appDelegate.OFSAptr->getSongVersion();
+	if (appDelegate.lastSavedVersion == appDelegate.OFSAptr->getSongVersion()) {
+		Song * song = [appDelegate currentSong];
+		[song setBRingtoneExprted:[NSNumber numberWithBool:YES]];
+		[appDelegate saveContext];
 	}
 	
 }
 
-- (BOOL)didUploadToYouTube {
-	if (isTemporary) {
-		return _didUploadToYouTube;
+
+- (BOOL)ringtoneExported {
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.lastSavedVersion == appDelegate.OFSAptr->getSongVersion()) {
+		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+		return [song.bRingtoneExprted boolValue];
 	} else {
-		//Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
-		return NO;
+		return exportedRingtoneVersion == appDelegate.OFSAptr->getSongVersion();
 	}
 }
 
-- (BOOL)didUploadToFacebook {
-	if (isTemporary) {
-		return _didUploadToFacebook;
-	} else {
-		//Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
-		return NO;
-	}
-}
+
+
 
 
 
@@ -147,10 +152,12 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		return @"";
 	}
 	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
-	return isTemporary ? [[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp"] :
-		[[paths objectAtIndex:0] stringByAppendingPathComponent:[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong] songName]]; 
-		
+	
+	return appDelegate.lastSavedVersion == appDelegate.OFSAptr->getSongVersion() ? 
+		[[paths objectAtIndex:0] stringByAppendingPathComponent:[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong] songName]] :
+	[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp"];
 }
 
 - (NSString *)getVideoTitle {
@@ -273,21 +280,19 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 
 
 
-
+- (void)resetVersions {
+	
+	renderedVideoVersion = 0;
+	exportedRingtoneVersion = 0;
+}
+						
+				
 
 #pragma mark actionSheet
 
 - (void)menuWithView:(UIView *)view {
 	
 	
-	isTemporary =  [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] isSongTemporary];
-	
-	if (isTemporary) {
-		_didUploadToYouTube = NO;
-		_didUploadToFacebook = NO;
-		_hasBeenRendered = NO;
-		
-	}
 	
 	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
 	
@@ -296,20 +301,11 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	sheet.delegate = self;
 	
 	
-	if (!self.didUploadToYouTube) {
-		[sheet addButtonWithTitle:@"Upload to YouTube"];
-		
-	} else {
-		[sheet addButtonWithTitle:@"Post on facebook"];
-	}
 	
-	if (!self.didUploadToFacebook) {
-		[sheet addButtonWithTitle:@"Upload to FaceBook"];
-	}
-	
+	[sheet addButtonWithTitle:@"Upload to YouTube"];
+	[sheet addButtonWithTitle:@"Upload to FaceBook"];
 	[sheet addButtonWithTitle:@"Add to Library"];
 
-	
 	if (canSendMail) {
 		[sheet addButtonWithTitle:@"Send via mail"];
 		[sheet addButtonWithTitle:@"Send ringtone"];
@@ -334,9 +330,6 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	
 	state = STATE_IDLE;
 	// Change the navigation bar style, also make the status bar match with it
-	if (self.didUploadToFacebook && buttonIndex>0) { // no more facebook option
-		buttonIndex++;
-	}
 	
 	if (!canSendMail && buttonIndex>3) { // skip send mail result (2)
 		buttonIndex+=2;
@@ -381,7 +374,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 }
 
 - (void)cancel {
-	state = STATE_CANCELED;
+	state = STATE_CANCEL;
 }
 
 - (void)action {
@@ -394,12 +387,26 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			switch (action) {
 				case ACTION_DONE:
 					break;
-				default:
-					if (!self.hasBeenRendered ) {
+				case ACTION_UPLOAD_TO_YOUTUBE:
+				case ACTION_UPLOAD_TO_FACEBOOK:
+				case ACTION_ADD_TO_LIBRARY:
+				case ACTION_SEND_VIA_MAIL:
+				case ACTION_PLAY:
+					if (!self.videoRendered ) {
 						state = STATE_RENDER_AUDIO;
 						[[appDelegate mainViewController] renderAudio];
 						return;
 					} 
+					break;
+				case ACTION_SEND_RINGTONE:
+					if (!self.ringtoneExported ) {
+						state = STATE_RENDER_AUDIO;
+						[[appDelegate mainViewController] renderAudio];
+						return;
+					} 
+					break;
+					
+				default:
 					break;
 			}
 			
@@ -417,7 +424,8 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 					return;
 					break;
 				case ACTION_SEND_RINGTONE:
-					[self export];
+					state = STATE_EXPORT_AUDIO;
+					[[appDelegate mainViewController] exportRingtone];
 					return;
 					break;
 				default:
@@ -425,7 +433,15 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			}
 			break;
 			
-		case STATE_CANCELED:
+		case STATE_RENDER_VIDEO:
+			[self setVideoRendered];
+			break;
+			
+		case STATE_EXPORT_AUDIO: 
+			[self setRingtoneExported];
+			break;
+			
+		case STATE_CANCEL:
 			return;
 			break;
 
@@ -494,55 +510,6 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 }
 
 
-- (void)export {
-	
-	//renderingView.hidden = NO;
-	//[self setRenderProgress:0.0f];
-	
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->soundStreamStop();
-	
-	//ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
-	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	
-	ExportManager *manager = [ExportManager  exportAudio:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]]
-							  
-												   toURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"m4r"]]
-							  
-							  
-								   withCompletionHandler:^ {
-									   NSLog(@"export completed");
-									   
-									   [self exportDidFinish];
-								   }];
-	
-	NSArray *modes = [[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil];
-	[self performSelector:@selector(updateExportProgress:) withObject:manager afterDelay:0.5 inModes:modes];
-	
-	
-}
-
-
-
-- (void)updateExportProgress:(ExportManager*)manager
-{
-	
-	if (!manager.didFinish) {
-		//[self setRenderProgress:manager.progress];
-		NSLog(@"export audio, progrss: %2.2f",manager.progress);
-		
-		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-		[self performSelector:@selector(updateExportProgress:) withObject:manager afterDelay:0.5 inModes:modes];
-	}
-}
-
-
-- (void)exportDidFinish {
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->soundStreamStart();
-	[self action];
-	//[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] shareManager] menuWithView:self.view];
-	
-}
 
 
 

@@ -351,11 +351,10 @@ bool testApp::isInTransition() {
 
 void testApp::loadSong(string songName,bool bDemo) {
 
-	bIsSongOverwritten = false;
-	bIsSongValid = true;
+	
 	
 	printf("testApp::loadSong: %s\n",songName.c_str());
-		
+	songVersion = 1;	
 	
 	if (!bDemo) {
 		ofDisableDataPath(); // be careful of threads
@@ -383,11 +382,14 @@ void testApp::loadSong(string songName,bool bDemo) {
 			
 		}
 	}
+	
+	
 }
 
 void testApp::changeSoundSet(string nextSoundSet) {
 	this->nextSoundSet = nextSoundSet;
-	bIsSongValid = false;
+	songVersion = 0;
+	
 	
 	bNeedDisplay = true;
 	
@@ -397,6 +399,8 @@ void testApp::changeSoundSet(string nextSoundSet) {
 		//player[controller].setMode(MANUAL_MODE);
 		player[controller].changeSet(str);
 	}
+	
+	
 	
 }
 
@@ -1038,8 +1042,7 @@ void testApp::setSongState(int songState) {
 	
 	// song is valid and can Overwritten only when FINISHING RECORD
 	if (this->songState==SONG_RECORD && songState!=SONG_RECORD) {
-		bIsSongOverwritten = true;
-		bIsSongValid = true;
+		songVersion++;
 	}
 		
 	this->songState = songState;
@@ -1142,7 +1145,7 @@ void testApp::saveSong(string songName) {
 	
 	printf("testApp::saveSong: %s\n",songName.c_str());
 
-	bIsSongOverwritten = false;
+	
 	ofxXmlSettings songXml;
 	ofDisableDataPath();
 	
@@ -1157,19 +1160,19 @@ void testApp::saveSong(string songName) {
 	
 	songXml.saveFile(ofToDocumentsPath(songName+".xml"));
 	ofEnableDataPath();	
+	songVersion = 1;
 	bNeedDisplay = true;
 	
 	
+	
+	
 }
 
-bool testApp::isSongValid() {
-	return bIsSongValid;
+int testApp::getSongVersion() {
+	return songVersion;
 }
 
 
-bool testApp::isSongOverwritten() {
-	return bIsSongOverwritten;
-}
 
 
 	

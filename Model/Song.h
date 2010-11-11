@@ -2,7 +2,7 @@
 //  Song.h
 //  Milgrom
 //
-//  Created by Roee Kremer on 10/19/10.
+//  Created by Roee Kremer on 11/10/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,14 +15,12 @@
 }
 
 @property (nonatomic, retain) NSNumber * bReady;
-@property (nonatomic, retain) NSNumber * bRendered;
+@property (nonatomic, retain) NSNumber * bVideoRendered;
 @property (nonatomic, retain) NSNumber * bDemo;
 @property (nonatomic, retain) NSNumber * bLocked;
 @property (nonatomic, retain) NSString * songName;
 @property (nonatomic, retain) NSNumber * bpm;
-@property (nonatomic, retain) NSNumber * bFacebook;
-@property (nonatomic, retain) NSNumber * bYouTube;
-@property (nonatomic, retain) NSNumber * bRingtone;
+@property (nonatomic, retain) NSNumber * bRingtoneExprted;
 @property (nonatomic, retain) NSSet* soundSets;
 
 @end

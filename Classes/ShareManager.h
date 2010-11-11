@@ -15,10 +15,8 @@
 	FacebookUploader *facebookUploader;
 	YouTubeUploader *youTubeUploader;
 	
-	BOOL _didUploadToYouTube;
-	BOOL _didUploadToFacebook;
-	BOOL _hasBeenRendered;
-	BOOL isTemporary;
+	NSInteger renderedVideoVersion;
+	NSInteger exportedRingtoneVersion;
 	BOOL canSendMail;
 	NSInteger action;
 	NSInteger state;
@@ -29,20 +27,18 @@
 @property (nonatomic,retain) YouTubeUploader *youTubeUploader;
 @property (readonly) BOOL isUploading;
 
-@property (readonly) BOOL didUploadToYouTube;
-@property (readonly) BOOL didUploadToFacebook;
-@property (readonly) BOOL hasBeenRendered;
-
+@property (readonly) BOOL videoRendered;
+@property (readonly) BOOL ringtoneExported;
 
 
 + (ShareManager*) shareManager;
-- (void)setRendered;
 - (NSString *)getVideoName;
 - (NSString *)getVideoPath;
 - (NSString *)getVideoTitle;
 - (void)menuWithView:(UIView *)view;
 - (void)action;
 - (void)cancel;
+- (void)resetVersions;
 //- (void)prepare;
 
 

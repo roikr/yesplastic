@@ -19,5 +19,6 @@
 @property (readonly) float progress;
 
 + (id) exportAudio:(NSURL*)audioURL toURL:(NSURL*)url withCompletionHandler:(void (^)(void))completionHandler;
-
+- (void) cancelExport;
+- (BOOL) didExportComplete;
 @end

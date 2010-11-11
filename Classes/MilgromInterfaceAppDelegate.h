@@ -45,8 +45,8 @@ class testApp;
 	Song *currentSong;
 	
 	ShareManager *shareManager;
+	NSInteger lastSavedVersion;
 	
-	//BOOL rendering;
 }
 
 
@@ -67,7 +67,7 @@ class testApp;
 @property (nonatomic, retain) Song *currentSong;
 
 @property (nonatomic, retain) ShareManager *shareManager;
-//@property BOOL rendering;
+@property NSInteger lastSavedVersion;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;
@@ -76,9 +76,6 @@ class testApp;
 - (Song*)getDemoForCurrentSoundSet;
 - (BOOL)loadSoundSetByDemo:(Song*)demo;
 - (BOOL)canSaveSongName:(NSString *)songName;
-- (BOOL)canSave;
-- (BOOL)canShare;
-- (BOOL)isSongTemporary;
 - (void)saveSong:(NSString *)songName;
 - (void)pushSetMenu;
 - (void)pushMain;

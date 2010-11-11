@@ -61,6 +61,21 @@
 	return [session progress];
 }
 
+- (void) cancelExport {
+	[session cancelExport];
+}
+
+- (BOOL) didExportComplete {
+	return [session status] == AVAssetExportSessionStatusCompleted;
+
+}
+
+
+- (void)dealloc {
+    [super dealloc];
+}
+
+
 /*
 + (AVAssetExportSession *)exportToURL:(NSURL*)url withVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL 
 				  withProgressHandler:(void (^)(float))progressHandler withCompletionHandler:(void (^)(void))completionHandler {
