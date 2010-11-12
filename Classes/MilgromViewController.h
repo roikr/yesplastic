@@ -33,11 +33,11 @@
 	 */
     id displayLink;
     NSTimer *animationTimer;
-	CFTimeInterval startTime;
+	//CFTimeInterval startTime;
 	
 	EAGLContext *secondaryContext;
 	
-	NSInteger currentFrame;
+	
 	
 }
 

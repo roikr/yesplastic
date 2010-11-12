@@ -214,8 +214,8 @@
         else
             animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) target:self selector:@selector(drawFrame) userInfo:nil repeats:TRUE];
         
-		startTime = CACurrentMediaTime();
-		currentFrame =0;
+		//startTime = CACurrentMediaTime();
+		//currentFrame =0;
         animating = TRUE;
     }
 }
@@ -245,31 +245,22 @@
     [self.eAGLView setFramebuffer];
     
 	
-//	if ([viewController.viewControllers count] > 1) {
-//		MainViewController *mainViewController = (MainViewController *)[viewController.viewControllers objectAtIndex:1];
-//		[mainViewController updateViews];
+	
+//	int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
+//	if (frame>currentFrame) {
+//		currentFrame = frame;
+//		appDelegate.OFSAptr->nextFrame();
 //	}
-	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	int frame = (int)(([displayLink timestamp]-startTime) * 1000 / 40);
-	if (frame>currentFrame) {
-		currentFrame = frame;
-		appDelegate.OFSAptr->nextFrame();
-	}
 	
 	glLoadIdentity();
 	glScalef(1.0, -1.0,1.0);
 	glTranslatef(0, -self.eAGLView.framebufferHeight, 0);
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.OFSAptr->draw();
 	
-	//glPushMatrix();
-	//glScalef(1.0, -1.0,1.0);
-	//glTranslatef(0, framebufferHeight, 0);
-	//if (animating) {
-		[self.eAGLView presentFramebuffer];
-   //}
+	[self.eAGLView presentFramebuffer];
+   
 }
 
 - (void)didReceiveMemoryWarning

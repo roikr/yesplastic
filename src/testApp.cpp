@@ -36,6 +36,12 @@ enum {
 
 
 
+testApp::testApp() {
+	bInitialized = false;
+	songState = SONG_IDLE;
+	//bChangeSet = false;
+}
+
 
 void testApp::setup(){	
 	
@@ -150,24 +156,79 @@ void testApp::setup(){
 
 void testApp::update() {
 	
-	int frame =(ofGetElapsedTimeMillis()-startTime)  / 40;
-	if (frame>currentFrame) {
-		if (frame-currentFrame>1) {
-			ofLog(OF_LOG_VERBOSE,"skipped %i",frame-currentFrame);
-		}
-		currentFrame = frame;
-		//ofLog(OF_LOG_VERBOSE,"currentFrame: %i",currentFrame);
+	if (!bInitialized) {
+		return;
 	}
 	
-	if (songState==SONG_RECORD) {
-		if (ofGetElapsedTimeMillis()-startRecordingTime > RECORD_LIMIT) {
-			setSongState(SONG_IDLE);
+	if (songState!=SONG_RENDER_VIDEO) {
+		int frame =(ofGetElapsedTimeMillis()-startTime)  / 40;
+		if (frame>currentFrame) {
+			
+			for (int j=0; j<frame-currentFrame; j++) {
+				for (int i=0;i<3;i++) {
+					player[i].nextFrame();
+				}
+			}
+			
+			if (frame-currentFrame>1) {
+				ofLog(OF_LOG_VERBOSE,"skipped %i",frame-currentFrame);
+			}
+			
+			currentFrame = frame;
 		}
+			
 	}
 	
 	if (isInTransition()!=bInTransition) {
 		bInTransition = !bInTransition;
 		bNeedDisplay = true;
+	}
+	
+
+	
+	switch (songState) {
+		case SONG_TRIGGER_RECORD:
+			for (int i=0; i<3; i++) {
+				if (getMode(i) == LOOP_MODE) {
+					startRecording();
+					break;
+				}
+			}
+			break;
+		case SONG_RECORD:
+			if (ofGetElapsedTimeMillis()-startRecordingTime > RECORD_LIMIT) {
+				setSongState(SONG_IDLE);
+			} 
+			break;
+		case SONG_PLAY:
+		case SONG_RENDER_AUDIO:
+		case SONG_CANCEL_RENDER_AUDIO:
+			if (! getIsPlaying()) {
+				
+				songState = SONG_IDLE;
+				for (int i=0;i<3;i++) {
+					if (player[i].getSongState()!=SONG_IDLE) {
+						player[i].setSongState(SONG_IDLE);
+					}
+				}
+				bNeedDisplay = true;
+			}
+			break;
+			
+		case SONG_RENDER_VIDEO:
+			
+			if  (currentBlock / totalBlocks >= 1.0) {
+				setSongState(SONG_IDLE);
+				//songState = SONG_IDLE; // TODO: check why not notifying players...
+				//bNeedDisplay = true;
+			}
+			
+			
+			break;
+			
+			
+		default:
+			break;
 	}
 		
 }
@@ -502,11 +563,6 @@ void testApp::transitionLoop(){
 	
 }
 
-void testApp::nextFrame() {
-	for (int i=0;i<3;i++) {
-		player[i].nextFrame();
-	}
-}
 
 
 void testApp::getTrans(int state,int controller,float &tx,float &ty,float &ts) {
@@ -1063,6 +1119,10 @@ void testApp::setSongState(int songState) {
 	if (this->songState==SONG_RECORD && songState!=SONG_RECORD) {
 		songVersion++;
 	}
+	
+	if (this->songState==SONG_RENDER_VIDEO && songState!=SONG_RENDER_VIDEO) {
+		currentFrame =(ofGetElapsedTimeMillis()-startTime)  / 40;
+	}
 		
 	this->songState = songState;
 	
@@ -1100,50 +1160,7 @@ void testApp::setSongState(int songState) {
 	
 }
 
-int  testApp::getSongState() { // should be called frequently to observe changes
-	
-	if (songState == SONG_TRIGGER_RECORD) {
-		for (int i=0; i<3; i++) {
-			if (getMode(i) == LOOP_MODE) {
-				startRecording();
-				break;
-			}
-		}
-		
-	}
-	
-	switch (songState) {
-		case SONG_PLAY:
-		case SONG_RENDER_AUDIO:
-		case SONG_CANCEL_RENDER_AUDIO:
-			if (! getIsPlaying()) {
-				
-				songState = SONG_IDLE;
-				for (int i=0;i<3;i++) {
-					if (player[i].getSongState()!=SONG_IDLE) {
-						player[i].setSongState(SONG_IDLE);
-					}
-				}
-				bNeedDisplay = true;
-			}
-			break;
-			
-		case SONG_RENDER_VIDEO:
-			
-			if  (currentBlock / totalBlocks >= 1.0) {
-				songState = SONG_IDLE;
-				bNeedDisplay = true;
-			}
-			
-			
-			break;
-
-			
-		default:
-			break;
-	}
-	
-	
+int  testApp::getSongState() { 
 	
 	return songState;
 }

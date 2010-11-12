@@ -222,25 +222,9 @@ NSString * const kCacheFolder=@"URLCache";
 	[self loadDemos];
 	[bandMenu loadData];
 	
-	//rendering = NO;
-	
-//	dispatch_queue_t updateQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
-//	dispatch_async(updateQueue, ^{
-//		while (1) {
-//			dispatch_async(dispatch_get_main_queue(), ^{
-//				
-//				
-//			});
-//		}
-//	});
-	
-	
-	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		while (1) {
-			OFSAptr->getSongState(); // just to update bNeedDisplay
-			OFSAptr->update();
-			//OFSAptr->threadedFunction();
+			OFSAptr->update(); // also update bNeedDisplay
 			if (OFSAptr->bNeedDisplay) {
 				if (mainViewController) {
 					dispatch_async(dispatch_get_main_queue(), ^{

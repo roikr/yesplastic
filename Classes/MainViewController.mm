@@ -719,10 +719,9 @@
 	[self setRenderProgress:0.0f];
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	MilgromViewController * milgromViewController = appDelegate.milgromViewController;
 	ShareManager *shareManager = [appDelegate shareManager];
 	
-	[milgromViewController stopAnimation];
+	//[milgromViewController stopAnimation];
 	OFSAptr->soundStreamStop();
 	OFSAptr->setSongState(SONG_RENDER_VIDEO);
 	
@@ -741,7 +740,7 @@
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		[renderManager writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] 
 						
-						   withContext:milgromViewController.context
+						   withContext:appDelegate.milgromViewController.context
 						withSize:CGSizeMake(480, 320) 
 		 
 		 
@@ -773,7 +772,7 @@
 					 
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
-					 [milgromViewController startAnimation];
+					 //[milgromViewController startAnimation];
 					 [shareManager action];
 					 self.renderManager = nil;
 					 
@@ -864,7 +863,7 @@
 			self.renderManager = nil;
 			OFSAptr->setSongState(SONG_IDLE);
 			OFSAptr->soundStreamStart();
-			[appDelegate.milgromViewController startAnimation];
+			//[appDelegate.milgromViewController startAnimation];
 			
 		}	break;
 		case SONG_RENDER_AUDIO:

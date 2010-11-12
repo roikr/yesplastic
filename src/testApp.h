@@ -22,15 +22,12 @@ struct measure {
 class testApp : public ofSimpleApp  {
 	
 public:
-	testApp() {
-		bInitialized = false;
-		//bChangeSet = false;
-	}
+	
+	testApp();
 	
 	void setup();
 	void update();
 	void transitionLoop();
-	void nextFrame();
 	void draw();
 	void exit();
 	
