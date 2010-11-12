@@ -8,7 +8,7 @@
 #include "ofxMidiInstrument.h"
 
 enum {
-	TRANSITION_CHANGE_SOUND_SET,
+	TRANSITION_CHANGE_SOUND_SET = 0,
 	TRANSITION_LOAD_SONG,
 	TRANSITION_CHANGE_SOUND_SET_FINISHED,
 	TRANSITION_UNLOAD_SET,
@@ -273,21 +273,15 @@ bool PlayerController::isInTransition() {
 
 	
 float PlayerController::getProgress() {
-//	if (nextPlayer) {
-//		progress = nextPlayer->getProgress();
-//	}
-	
-	float progress;
+
+	float progress = 1.0f;
 	if (isInTransition()) {
 		progress = transitionState;
-		if (transitionState == TRANSITION_LOAD_SONG) {
-			progress+=song.getProgress();
-		}
+//		if (transitionState == TRANSITION_LOAD_SONG) { // ignore song loading progress because we need to initialize the progress deep inside in ofxMidi
+//			progress+=song.getProgress();
+//		}
 		progress/=(float)TRANSITION_IDLE;
-	} else {
-		progress = 1.0f;
-	}
-
+	} 
 	
 	return  progress;
 }
@@ -321,28 +315,6 @@ void PlayerController::update() {
 				transitionState = TRANSITION_CHANGE_SOUND_SET_FINISHED; 
 				break;
 				
-				
-			case TRANSITION_UNLOAD_SET:
-				previousPlayer->release();
-				delete previousPlayer;
-				previousPlayer = 0;
-				transitionState = TRANSITION_UNLOAD_SET_FINISHED;
-				break;
-				
-			case TRANSITION_LOAD_SET:
-				
-				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
-				nextPlayer->initIdle();
-				nextPlayer->initSet();
-				transitionState = TRANSITION_LOAD_SET_FINISHED;
-				break;
-			case TRANSITION_BEFORE_IDLE:
-				bInitialized = true;
-				currentLoop = 0;
-				looper.play();
-				transitionState = TRANSITION_IDLE;
-				break;
-
 			case TRANSITION_CHANGE_SOUND_SET_FINISHED:
 				if (nextVideoSet!=videoSet) {
 					if (currentPlayer) {
@@ -351,7 +323,7 @@ void PlayerController::update() {
 						previousPlayer->unloadIdle();
 						previousPlayer->unloadSet();
 						transitionState = TRANSITION_UNLOAD_SET;
-
+						
 					} else {
 						transitionState = TRANSITION_LOAD_SET;
 					}
@@ -361,10 +333,27 @@ void PlayerController::update() {
 					
 				}
 				break;
+				
+			case TRANSITION_UNLOAD_SET:
+				previousPlayer->release();
+				delete previousPlayer;
+				previousPlayer = 0;
+				transitionState = TRANSITION_UNLOAD_SET_FINISHED;
+				break;
+				
 			case TRANSITION_UNLOAD_SET_FINISHED:
 				
 				transitionState = TRANSITION_LOAD_SET;
 				break;
+				
+			case TRANSITION_LOAD_SET:
+				
+				nextPlayer = createTexturePlayer(soundSet, nextVideoSet);
+				nextPlayer->initIdle();
+				nextPlayer->initSet();
+				transitionState = TRANSITION_LOAD_SET_FINISHED;
+				break;
+			
 			case TRANSITION_LOAD_SET_FINISHED:
 				nextPlayer->loadIdle();
 				nextPlayer->loadSet();
@@ -374,7 +363,18 @@ void PlayerController::update() {
 				transitionState = TRANSITION_BEFORE_IDLE;
 				
 				break;
+				
+				
+			case TRANSITION_BEFORE_IDLE:
+				bInitialized = true;
+				currentLoop = 0;
+				looper.play();
+				transitionState = TRANSITION_IDLE;
+				break;
+
 			
+			
+						
 		}
 		
 	} else {

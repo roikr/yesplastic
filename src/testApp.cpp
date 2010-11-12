@@ -184,16 +184,18 @@ void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 
 float testApp::getProgress() {
 	
+	float progress = 1.0f;
+	
 	if (isInTransition()) {
-		float progress = 0.0f;
 		
+		progress = 0;
 		for (int i=0;i<3;i++)
 			progress+=player[i].getProgress();
 		
-		return progress/3.0;
+		progress/=3.0;
 	} 
 	
-	return 0.0f;
+	return progress;
 }
 
 
