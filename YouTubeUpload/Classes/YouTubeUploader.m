@@ -33,7 +33,6 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 @synthesize password;
 @synthesize progress;
 @synthesize link;
-@synthesize state;
 
 
 + (YouTubeUploader *) youTubeUploader {
@@ -44,7 +43,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	
 	if (self = [super init]) {
 		self.delegates = [NSMutableArray array];
-		state = YOUTUBE_UPLOADER_STATE_IDLE;
+		_state = YOUTUBE_UPLOADER_STATE_IDLE;
 	}
 	return self;
 }
@@ -62,7 +61,22 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 }
 
 
+- (NSInteger) state {
+	return _state;
+}
 
+- (void) setState:(NSInteger)newState {
+	_state = newState;
+	
+	NSLog(@"YouTubeUploader state changed: %i",_state);
+	
+	for (id<YouTubeUploaderDelegate> delegate in delegates) {
+		if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
+			[delegate youTubeUploaderStateChanged:self];
+		}
+	}
+	
+}
 
 #pragma mark -
 
@@ -89,13 +103,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 		[service setUserCredentialsWithUsername:nil
 									   password:nil];
 		
-		state = YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS;
-		
-		for (id<YouTubeUploaderDelegate> delegate in delegates) {
-			if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
-				[delegate youTubeUploaderStateChanged:self];
-			}
-		}
+		self.state = YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS;
 		
 		return nil;
 		
@@ -116,11 +124,12 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	mUploadTicket = [ticket retain];
 }
 
-
-
+	
 - (void) uploadVideoWithTitle:(NSString *)titleStr withDescription:(NSString *)descStr andPath:(NSString *)path {
 	
-	
+	if (self.state == YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED || self.state == YOUTUBE_UPLOADER_STATE_UPLOADING) {
+		return;
+	}
 	
 	GDataServiceGoogleYouTube *service = [self youTubeService];
 	
@@ -130,7 +139,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	
 	[service setYouTubeDeveloperKey:kDeveloperKey];
 	
-	
+	self.state = YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED;
 	
 	NSURL *url = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:username];
 	
@@ -175,14 +184,6 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	SEL progressSel = @selector(ticket:hasDeliveredByteCount:ofTotalByteCount:);
 	[service setServiceUploadProgressSelector:progressSel];
 	
-	state = YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED;
-	
-	for (id<YouTubeUploaderDelegate> delegate in delegates) {
-		if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
-			[delegate youTubeUploaderStateChanged:self];
-		}
-	}
-	
 	
 	GDataServiceTicket *ticket;
 	ticket = [service fetchEntryByInsertingEntry:entry
@@ -201,14 +202,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 hasDeliveredByteCount:(unsigned long long)numberOfBytesRead 
 ofTotalByteCount:(unsigned long long)dataLength {
 	
-	if (state==YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED) {
-		state = YOUTUBE_UPLOADER_STATE_UPLOADING;
-		
-		for (id<YouTubeUploaderDelegate> delegate in delegates) {
-			if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
-				[delegate youTubeUploaderStateChanged:self];
-			}
-		}
+	if (self.state==YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED) {
+		self.state = YOUTUBE_UPLOADER_STATE_UPLOADING;
 	}
 	
 	progress = (float)numberOfBytesRead/(float)dataLength;
@@ -233,47 +228,27 @@ ofTotalByteCount:(unsigned long long)dataLength {
 		link = [videoLink URL];
 		//NSLog(@"location: %@",[videoEntry location]);
 		
-		state = YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED;
-		
-		for (id<YouTubeUploaderDelegate> delegate in delegates) {
-			if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
-				[delegate youTubeUploaderStateChanged:self];
-			}
-		}
-		
+		self.state = YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED;
 		
 	} else {
 //		NSBeginAlertSheet(@"Upload failed", nil, nil, nil,
 //						  [self window], nil, nil,
 //						  nil, nil, @"Upload failed: %@", error);
 		
-		switch (state) {
-			case YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED:
-				state = YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS;
+		switch (self.state) {
+			case YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED:
+				self.state = YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS;
 				break;
 			case YOUTUBE_UPLOADER_STATE_UPLOADING:
-				state = YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED;
+				self.state = YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED;
 				break;
 				
 			default:
 				break;
 		}
 		
-		
-		
-		for (id<YouTubeUploaderDelegate> delegate in delegates) {
-			if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
-				[delegate youTubeUploaderStateChanged:self];
-			}
-		}
-		
 	}
 	
-	
-	
-	
-	
-		
 }
 
 @end

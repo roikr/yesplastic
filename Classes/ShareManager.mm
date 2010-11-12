@@ -79,7 +79,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 }
 
 -(BOOL) isUploading {
-	return facebookUploader.state == FACEBOOK_UPLOADER_STATE_UPLOADING || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOAD_STARTED || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOADING;
+	return facebookUploader.state == FACEBOOK_UPLOADER_STATE_UPLOADING || youTubeUploader.state == YOUTUBE_UPLOADER_STATE_UPLOADING;
 }
 
 
@@ -268,6 +268,16 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			[alert release];
 			
 		} break;
+		case YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload erorr" 
+															message:@"your upload has been stopped"
+														   delegate:nil 
+												  cancelButtonTitle:@"OK" 
+												  otherButtonTitles: nil];
+			[alert show];
+			[alert release];
+		} break;
+			
 		default:
 			break;
 	}
