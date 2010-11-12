@@ -22,7 +22,7 @@ class PlayerController  {
 public:
 	PlayerController();
 	void setup(int playerNum);
-	void update();
+	void transitionLoop();
 	void nextFrame();
 	void translate();
 	void draw();

@@ -236,10 +236,10 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	
-	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0); // TODO: no high priority
-	dispatch_async(aQueue, ^{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		while (1) {
 			OFSAptr->getSongState(); // just to update bNeedDisplay
+			OFSAptr->update();
 			//OFSAptr->threadedFunction();
 			if (OFSAptr->bNeedDisplay) {
 				if (mainViewController) {
@@ -783,6 +783,7 @@ NSString * const kCacheFolder=@"URLCache";
 	lastSavedVersion = OFSAptr->getSongVersion();
 		
 		//[milgromViewController setContextCurrent];
+	
 		
 	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 	[self performSelector:@selector(loadSongLoop) withObject:nil afterDelay:0.01 inModes:modes];
@@ -795,7 +796,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) loadSongLoop {
 	
 	if (OFSAptr->isInTransition()) {
-		OFSAptr->update(); // now update is not linked to frame
+		OFSAptr->transitionLoop(); // now update is not linked to frame
 		[bandMenu.songsTable updateSong:currentSong WithProgress:OFSAptr->getProgress()];
 		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 		[self performSelector:@selector(loadSongLoop) withObject:nil afterDelay:0.01 inModes:modes];
@@ -843,32 +844,20 @@ NSString * const kCacheFolder=@"URLCache";
 	OFSAptr->changeSoundSet(nextSong);
 	lastSavedVersion = 0;
 
-	
-	dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); // TODO: no high priority
-	dispatch_async(aQueue, ^{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		while (OFSAptr->isInTransition()) {
 			[milgromViewController setSecondaryContextCurrent];
-			OFSAptr->update(); 
+			OFSAptr->transitionLoop(); 
 		}
 	
 	});
 	
 		
-	//NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-	//[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
 	
 	return YES;
 	
 }
 
-//- (void) loadSoundSetLoop {
-//	
-//	if (OFSAptr->isInTransition()) {
-//		OFSAptr->update(); // now update is not linked to frame
-//		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
-//		[self performSelector:@selector(loadSoundSetLoop) withObject:nil afterDelay:0.01 inModes:modes];
-//	}
-//}
 
 
 -(void)loadDemos {

@@ -143,6 +143,33 @@ void testApp::setup(){
 	
 	bInitialized = true;
 	
+	startTime = ofGetElapsedTimeMillis();
+	currentFrame = 0;
+	
+}
+
+void testApp::update() {
+	
+	int frame =(ofGetElapsedTimeMillis()-startTime)  / 40;
+	if (frame>currentFrame) {
+		if (frame-currentFrame>1) {
+			ofLog(OF_LOG_VERBOSE,"skipped %i",frame-currentFrame);
+		}
+		currentFrame = frame;
+		//ofLog(OF_LOG_VERBOSE,"currentFrame: %i",currentFrame);
+	}
+	
+	if (songState==SONG_RECORD) {
+		if (ofGetElapsedTimeMillis()-startRecordingTime > RECORD_LIMIT) {
+			setSongState(SONG_IDLE);
+		}
+	}
+	
+	if (isInTransition()!=bInTransition) {
+		bInTransition = !bInTransition;
+		bNeedDisplay = true;
+	}
+		
 }
 
 
@@ -444,29 +471,19 @@ void testApp::seekFrame(int frame) {
 }
 
 
-void testApp::update(){
+void testApp::transitionLoop(){
 	//	printf("update()\n");
 	
 	
-	if (songState==SONG_RECORD) {
-		if (ofGetElapsedTimeMillis()-startRecordingTime > RECORD_LIMIT) {
-			setSongState(SONG_IDLE);
-		}
-	}
-	
-	
 	for (int i=0;i<3;i++) {
-		player[i].update();
+		player[i].transitionLoop();
 		if (player[i].isInTransition()) {
 			break;
 		}
 	}
 	
 	
-	if (isInTransition()!=bInTransition) {
-		bInTransition = !bInTransition;
-		bNeedDisplay = true;
-	}
+	
 		
 /*
 	if (measures.size()==1) {

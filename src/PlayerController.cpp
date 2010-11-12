@@ -299,7 +299,7 @@ float PlayerController::getPlayhead() {
 }
 
 	
-void PlayerController::update() {
+void PlayerController::transitionLoop() {
 	
 	
 	if (!bAnimatedTransition) {

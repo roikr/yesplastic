@@ -29,6 +29,7 @@ public:
 	
 	void setup();
 	void update();
+	void transitionLoop();
 	void nextFrame();
 	void draw();
 	void exit();
@@ -100,6 +101,9 @@ public:
 	
 	
 private:
+	
+	int startTime;
+	int currentFrame;
 	
 	int songVersion;
 	int startRecordingTime;
