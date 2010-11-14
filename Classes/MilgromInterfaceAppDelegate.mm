@@ -679,6 +679,11 @@ NSString * const kCacheFolder=@"URLCache";
 	if ([fetchResults count]) {
 		self.currentSong = (Song *)[fetchResults objectAtIndex:0];
 		[bandMenu.songsTable selectCurrentSong];
+		
+		// if the song allready exist, need to reset it exporting and rendering attribute upon saving
+		
+		[currentSong setBVideoRendered:[NSNumber numberWithBool:NO]];
+		[currentSong setBRingtoneExprted:[NSNumber numberWithBool:NO]];
 	}
 	else {
 		self.currentSong = (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
@@ -688,11 +693,12 @@ NSString * const kCacheFolder=@"URLCache";
 		[currentSong setBDemo:[NSNumber numberWithBool:NO]];
 		
 		[bandMenu.songsTable addCurrentSong]; // TODO: here ?
+		
+		
 
 	} 
 	
-	//[currentSong setBRendered:[NSNumber numberWithBool:NO]]; // no need - the default is NO
-	
+
 	OFSAptr->saveSong([songName UTF8String]);
 	
 	lastSavedVersion = OFSAptr->getSongVersion();
