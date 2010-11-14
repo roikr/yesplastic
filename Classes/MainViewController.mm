@@ -758,7 +758,7 @@
 							 glMatrixMode(GL_MODELVIEW);
 							 glLoadIdentity();
 							 
-							 OFSAptr->draw();
+							 OFSAptr->drawForVideo();
 							 
 						 }
 		 

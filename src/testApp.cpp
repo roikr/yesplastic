@@ -594,6 +594,40 @@ void testApp::getTrans(int state,int controller,float &tx,float &ty,float &ts) {
 	}
 }
 
+
+void testApp::getVideoTrans(int state,int controller,float &tx,float &ty,float &ts) {
+	switch (state) {
+		case SOLO_STATE: {
+			
+			
+			switch (controller) {
+				case 0: {
+					ts = scale * 1.8;
+					tx = 0.0;
+					ty = -90.0;
+				} break;
+				case 1: {
+					ts = scale * 1.7;
+					tx = -200.0;
+					ty = -100.0;
+				} break;
+				case 2: {
+					ts = scale * 1.8;
+					tx = -380.0;
+					ty = -140.0;
+				} break;
+			}
+			
+		} break;
+		case BAND_STATE: {
+			ts = scale;
+			tx = 0;
+			ty = 0;
+		} break;
+	}
+}
+
+
 float easeInOutQuad(float t, float b, float e) { 
 	float d = 1.0;
 	float c = e - b;
@@ -798,6 +832,78 @@ void testApp::draw(){
 	
 	
 	
+}
+
+
+
+void testApp::drawForVideo(){
+	
+	if (!bInitialized)
+		return;
+	//	printf("draw()\n");
+	
+	float ts;
+	float tx;
+	float ty;
+	
+	int time = ofGetElapsedTimeMillis();
+	
+	getVideoTrans(state, controller, tx, ty, ts);
+	
+	if (bTrans) {
+		float t = (float)(time - animStart)/250.0;
+		if (t >= 1) {
+			bTrans = false;
+		} else {
+			float s;
+			float x;
+			float y;
+			getVideoTrans(state == BAND_STATE ? SOLO_STATE : BAND_STATE, controller, x, y, s);
+			
+			ts = easeInOutQuad(t,s,ts);
+			tx = easeInOutQuad(t,x,tx);
+			ty = easeInOutQuad(t,y,ty);
+		}
+	}
+	
+	
+	if (state==SOLO_STATE) {
+		
+		if (measures.size()>1) {
+			float d = measures.back().x-measures.front().x;
+			if ( (controller == 2 && d < 0) || (controller == 0 && d > 0)) {
+				d=d/2;
+			}
+			
+			tx += d/ts;
+			
+		}
+		
+//		if (bMove) {
+//			float t = (float)(time - moveTime)/250.0;
+//			if (t >= 1) 
+//				bMove = false;
+//			else 
+//				tx = easeOutBack(t,sx,tx);
+//		}	
+		
+		
+		
+	}
+	
+	
+	ofPushMatrix();
+	ofScale(ts, ts, 1.0);
+	ofTranslate(tx, ty, 0.0);
+	
+	background.draw(0,0);
+	
+	int i;
+	for(i=0;i<3;i++)
+		player[i].draw();
+	
+		
+	ofPopMatrix();
 }
 
 void testApp::exit() {

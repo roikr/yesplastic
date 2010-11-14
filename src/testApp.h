@@ -70,6 +70,9 @@ public:
 	void renderAudio() ;
 	void cancelRenderingAudio();
 	
+	void getVideoTrans(int state,int controller,float &tx,float &ty,float &ts);
+	void drawForVideo();
+	
 	bool isInTransition();
 	
 	bool isSongAvailiable(string song,int playerNum=0);
