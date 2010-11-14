@@ -334,11 +334,11 @@
 		if (hideShare) {
 			if ([appDelegate.shareManager isUploading]) {
 				shareButton.hidden = shareProgressView.hidden = NO;
-				shareButton.userInteractionEnabled = NO;
+				//shareButton.userInteractionEnabled = NO;
 			}
 		} else {
 			shareButton.hidden = shareProgressView.hidden = NO;
-			shareButton.userInteractionEnabled = YES;
+			//shareButton.userInteractionEnabled = YES;
 		}
 
 		
