@@ -213,6 +213,7 @@
 	NSLog(@"new state: %i",theUploader.state);
 	switch ([theUploader state]) {
 		case FACEBOOK_UPLOADER_STATE_UPLOADING:
+		case FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED:
 			[self.navigationController popViewControllerAnimated:YES];
 			break;
 		default:
