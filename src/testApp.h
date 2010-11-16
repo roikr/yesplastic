@@ -11,7 +11,7 @@
 //#include "ofxOsc.h"
 #include "ofxRKTexture.h"
 #include "ofxSndFile.h"
-
+#include "ofxPincher.h"
 
 struct measure {
 	int x;
@@ -70,8 +70,8 @@ public:
 	void renderAudio() ;
 	void cancelRenderingAudio();
 	
-	void getVideoTrans(int state,int controller,float &tx,float &ty,float &ts);
-	void drawForVideo();
+	//void getVideoTrans(int state,int controller,float &tx,float &ty,float &ts);
+	void render();
 	
 	bool isInTransition();
 	
@@ -167,6 +167,8 @@ private:
 	int currentBlock;    //using to seekFrame and renderAudio for rendering video & audio;
 	int totalBlocks; // calculating by renderAudio before rendering video - 
 	// because we don't use midi instrument while video rendering, we need to know when the last sample occured...
+	
+	ofxPincher pincher;
 };
 
 

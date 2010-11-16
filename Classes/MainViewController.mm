@@ -54,6 +54,7 @@
 @synthesize bShowHelp;
 @synthesize renderView;
 @synthesize renderLabel;
+@synthesize renderTextView;
 @synthesize interactionView;
 
 
@@ -674,6 +675,7 @@
 
 - (void)renderAudio {
 	self.renderLabel.text = @"Creating audio";
+	self.renderTextView.text = @"(it can take some time, depends on your song length...)";
 	[self setRenderProgress:0.0f];
 	
 	dispatch_queue_t myCustomQueue;
@@ -716,6 +718,7 @@
 
 - (void)renderVideo {
 	self.renderLabel.text = @"Creating video";
+	self.renderTextView.text = @"pinch and drag the screen to create camera movements";
 	[self setRenderProgress:0.0f];
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -758,7 +761,7 @@
 							 glMatrixMode(GL_MODELVIEW);
 							 glLoadIdentity();
 							 
-							 OFSAptr->drawForVideo();
+							 OFSAptr->render();
 							 
 						 }
 		 
@@ -795,6 +798,7 @@
 
 - (void)exportRingtone {
 	self.renderLabel.text = @"Exporting ringtone";
+	self.renderTextView.text = @"(it can take some time, depends on your song length...)";
 	//renderingView.hidden = NO;
 	[self setRenderProgress:0.0f];
 	

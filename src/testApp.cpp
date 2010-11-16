@@ -594,7 +594,7 @@ void testApp::getTrans(int state,int controller,float &tx,float &ty,float &ts) {
 	}
 }
 
-
+/*
 void testApp::getVideoTrans(int state,int controller,float &tx,float &ty,float &ts) {
 	switch (state) {
 		case SOLO_STATE: {
@@ -626,6 +626,7 @@ void testApp::getVideoTrans(int state,int controller,float &tx,float &ty,float &
 		} break;
 	}
 }
+ */
 
 
 float easeInOutQuad(float t, float b, float e) { 
@@ -670,6 +671,21 @@ void testApp::draw(){
 	if (!bInitialized)
 		return;
 	//	printf("draw()\n");
+	
+	if (getSongState()==SONG_RENDER_VIDEO) {
+		if (getState()==SOLO_STATE) {
+			ofPushMatrix();
+			ofScale(scale*2/3, scale*2/3, 1);
+			ofTranslate(0, 80, 0);
+			render();
+			ofPopMatrix();
+		} else {
+			render();
+		}
+
+		
+		return;
+	}
 	
 	float ts;
 	float tx;
@@ -836,66 +852,17 @@ void testApp::draw(){
 
 
 
-void testApp::drawForVideo(){
+void testApp::render(){
 	
-	if (!bInitialized)
+	if (!bInitialized) {
 		return;
 	//	printf("draw()\n");
-	
-	float ts;
-	float tx;
-	float ty;
-	
-	int time = ofGetElapsedTimeMillis();
-	
-	getVideoTrans(state, controller, tx, ty, ts);
-	
-	if (bTrans) {
-		float t = (float)(time - animStart)/250.0;
-		if (t >= 1) {
-			bTrans = false;
-		} else {
-			float s;
-			float x;
-			float y;
-			getVideoTrans(state == BAND_STATE ? SOLO_STATE : BAND_STATE, controller, x, y, s);
-			
-			ts = easeInOutQuad(t,s,ts);
-			tx = easeInOutQuad(t,x,tx);
-			ty = easeInOutQuad(t,y,ty);
-		}
-	}
-	
-	
-	if (state==SOLO_STATE) {
-		
-		if (measures.size()>1) {
-			float d = measures.back().x-measures.front().x;
-			if ( (controller == 2 && d < 0) || (controller == 0 && d > 0)) {
-				d=d/2;
-			}
-			
-			tx += d/ts;
-			
-		}
-		
-//		if (bMove) {
-//			float t = (float)(time - moveTime)/250.0;
-//			if (t >= 1) 
-//				bMove = false;
-//			else 
-//				tx = easeOutBack(t,sx,tx);
-//		}	
-		
-		
-		
 	}
 	
 	
 	ofPushMatrix();
-	ofScale(ts, ts, 1.0);
-	ofTranslate(tx, ty, 0.0);
-	
+	pincher.transform();
+		
 	background.draw(0,0);
 	
 	int i;
@@ -961,6 +928,13 @@ void testApp::touchDown(float x, float y, int touchId) {
 	
 	//printf("touchDown: %.f, %.f %i\n", x, y, touchId);
 	
+	if (getSongState()==SONG_RENDER_VIDEO) {
+		pincher.touchDown(x, y, touchId);
+		return;
+	}
+	
+	
+	
 	
 	switch (state) {
 		case BAND_STATE: {
@@ -1008,7 +982,14 @@ void testApp::touchDown(float x, float y, int touchId) {
 	
 
 void testApp::touchMoved(float x, float y, int touchId) {
+	
 	//printf("touchMoved: %.f, %.f %i\n", x, y, touchId);
+	
+	if (getSongState()==SONG_RENDER_VIDEO) {
+		pincher.touchMoved(x, y, touchId);
+		return;
+	}
+	
 	
 	if (touchId!=0) // || bButtonDown) 
 		return;
@@ -1037,6 +1018,11 @@ void testApp::touchMoved(float x, float y, int touchId) {
 
 void testApp::touchUp(float x, float y, int touchId) {
 	//printf("touchUp: %.f, %.f %i\n", x, y, touchId);
+	
+	if (getSongState()==SONG_RENDER_VIDEO) {
+		pincher.touchUp(x, y, touchId);
+		return;
+	}
 	
 	if (touchId!=0 || bMenu) {
 		if (!measures.empty()) { 
@@ -1220,6 +1206,10 @@ void testApp::startRecording() {
 }
 
 void testApp::setSongState(int songState) {
+	
+	if (songState == SONG_RENDER_VIDEO) {
+		pincher.setup(ofPoint(0,0), scale);
+	}
 	
 	// song is valid and can Overwritten only when FINISHING RECORD
 	if (this->songState==SONG_RECORD && songState!=SONG_RECORD) {

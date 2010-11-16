@@ -35,7 +35,7 @@ class testApp;
 	UIView *bandLoopsView;
 	UIView *renderView;
 	UILabel *renderLabel;
-	
+	UITextView *renderTextView;
 	
 	
 	testApp *OFSAptr;
@@ -77,6 +77,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 @property (nonatomic, retain) IBOutlet UIView *renderView;
 @property (nonatomic, retain) IBOutlet UILabel *renderLabel;
+@property (nonatomic, retain) IBOutlet UITextView *renderTextView;
 
 
 @property (nonatomic, retain) SaveViewController *saveViewController;

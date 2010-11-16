@@ -132,6 +132,7 @@
 		E42D14FC124F896C007BEEB0 /* SETCELL_SELECT_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */; };
 		E42D14FD124F896C007BEEB0 /* SETCELL_SELECT_2.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */; };
 		E42D14FE124F896C007BEEB0 /* SETCELL_SELECT_3.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */; };
+		E439299512932D7500F855A8 /* ofxPincher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E439299312932D7500F855A8 /* ofxPincher.cpp */; };
 		E43BE95A125C968F009C8845 /* APP HELP SLIDE.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE954125C968F009C8845 /* APP HELP SLIDE.png */; };
 		E43BE95B125C968F009C8845 /* HELP_BACK_B.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE955125C968F009C8845 /* HELP_BACK_B.png */; };
 		E43BE95C125C968F009C8845 /* HELP_BACK_B_PUSH.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE956125C968F009C8845 /* HELP_BACK_B_PUSH.png */; };
@@ -536,6 +537,9 @@
 		E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_1.png; sourceTree = "<group>"; };
 		E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_2.png; sourceTree = "<group>"; };
 		E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_3.png; sourceTree = "<group>"; };
+		E439299312932D7500F855A8 /* ofxPincher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPincher.cpp; sourceTree = "<group>"; };
+		E439299412932D7500F855A8 /* ofxPincher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPincher.h; sourceTree = "<group>"; };
+		E43929B312932F2500F855A8 /* ofMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMath.h; sourceTree = "<group>"; };
 		E43BE954125C968F009C8845 /* APP HELP SLIDE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "APP HELP SLIDE.png"; sourceTree = "<group>"; };
 		E43BE955125C968F009C8845 /* HELP_BACK_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_B.png; sourceTree = "<group>"; };
 		E43BE956125C968F009C8845 /* HELP_BACK_B_PUSH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_B_PUSH.png; sourceTree = "<group>"; };
@@ -1273,6 +1277,25 @@
 			path = "VOC  push buttons";
 			sourceTree = "<group>";
 		};
+		E439299112932D7500F855A8 /* ofxPincher */ = {
+			isa = PBXGroup;
+			children = (
+				E439299212932D7500F855A8 /* src */,
+			);
+			name = ofxPincher;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxPincher";
+			sourceTree = SOURCE_ROOT;
+		};
+		E439299212932D7500F855A8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E439299412932D7500F855A8 /* ofxPincher.h */,
+				E439299312932D7500F855A8 /* ofxPincher.cpp */,
+				E43929B312932F2500F855A8 /* ofMath.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		E43BE953125C968F009C8845 /* HELP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1331,6 +1354,7 @@
 		E444725212143D810058D07B /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E439299112932D7500F855A8 /* ofxPincher */,
 				E444728912143EE60058D07B /* ofxSndFile */,
 				E444727312143DB90058D07B /* ofxXmlSettings */,
 				E444725312143DAA0058D07B /* ofxFramesDriver */,
@@ -2608,6 +2632,7 @@
 				E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */,
 				E4452EB5128939AC00C7AE2C /* RenderView.m in Sources */,
 				E4862AB2128B119E00DBC5D0 /* Song.m in Sources */,
+				E439299512932D7500F855A8 /* ofxPincher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
