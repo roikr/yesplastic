@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10H574</string>
 		<string key="IBDocument.InterfaceBuilderVersion">823</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="170"/>
+			<integer value="51"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -107,33 +107,10 @@
 										<reference key="IBUINormalTitleColor" ref="438986558"/>
 										<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
 									</object>
-									<object class="IBUIButton" id="741302335">
-										<reference key="NSNextResponder" ref="863361826"/>
-										<int key="NSvFlags">-2147483359</int>
-										<string key="NSFrame">{{230, 0}, {40, 40}}</string>
-										<reference key="NSSuperview" ref="863361826"/>
-										<bool key="IBUIOpaque">NO</bool>
-										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-										<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-											<integer value="257" key="IBUIAccessibilityTraits"/>
-										</object>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<int key="IBUIContentHorizontalAlignment">0</int>
-										<int key="IBUIContentVerticalAlignment">0</int>
-										<reference key="IBUIFont" ref="806562837"/>
-										<reference key="IBUIHighlightedTitleColor" ref="438986558"/>
-										<reference key="IBUIDisabledTitleColor" ref="771441115"/>
-										<reference key="IBUINormalTitleColor" ref="438986558"/>
-										<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
-										<object class="NSCustomResource" key="IBUINormalImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">SAVE_B.png</string>
-										</object>
-									</object>
 									<object class="IBUIView" id="448266039">
 										<reference key="NSNextResponder" ref="863361826"/>
-										<int key="NSvFlags">289</int>
-										<string key="NSFrame">{{280, 0}, {40, 40}}</string>
+										<int key="NSvFlags">-2147483356</int>
+										<string key="NSFrame">{{60, 0}, {40, 40}}</string>
 										<reference key="NSSuperview" ref="863361826"/>
 										<object class="NSColor" key="IBUIBackgroundColor" id="719325150">
 											<int key="NSColorSpace">3</int>
@@ -145,8 +122,8 @@
 									</object>
 									<object class="IBUIButton" id="388573076">
 										<reference key="NSNextResponder" ref="863361826"/>
-										<int key="NSvFlags">289</int>
-										<string key="NSFrame">{{280, 0}, {40, 40}}</string>
+										<int key="NSvFlags">-2147483356</int>
+										<string key="NSFrame">{{60, 0}, {40, 40}}</string>
 										<reference key="NSSuperview" ref="863361826"/>
 										<reference key="IBUIBackgroundColor" ref="719325150"/>
 										<bool key="IBUIOpaque">NO</bool>
@@ -164,6 +141,29 @@
 										<object class="NSCustomResource" key="IBUINormalImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">SHARE_B_BACKGROUND.png</string>
+										</object>
+									</object>
+									<object class="IBUIButton" id="741302335">
+										<reference key="NSNextResponder" ref="863361826"/>
+										<int key="NSvFlags">-2147483359</int>
+										<string key="NSFrame">{{280, 0}, {40, 40}}</string>
+										<reference key="NSSuperview" ref="863361826"/>
+										<bool key="IBUIOpaque">NO</bool>
+										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+										<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+											<integer value="257" key="IBUIAccessibilityTraits"/>
+										</object>
+										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+										<int key="IBUIContentHorizontalAlignment">0</int>
+										<int key="IBUIContentVerticalAlignment">0</int>
+										<reference key="IBUIFont" ref="806562837"/>
+										<reference key="IBUIHighlightedTitleColor" ref="438986558"/>
+										<reference key="IBUIDisabledTitleColor" ref="771441115"/>
+										<reference key="IBUINormalTitleColor" ref="438986558"/>
+										<reference key="IBUINormalTitleShadowColor" ref="860188986"/>
+										<object class="NSCustomResource" key="IBUINormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">SAVE_B.png</string>
 										</object>
 									</object>
 									<object class="IBUIButton" id="561080161">
@@ -1075,15 +1075,15 @@
 						<reference key="object" ref="863361826"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="561080161"/>
 							<reference ref="388573076"/>
 							<reference ref="1060732207"/>
 							<reference ref="404010622"/>
 							<reference ref="345070952"/>
 							<reference ref="541363912"/>
 							<reference ref="14781122"/>
-							<reference ref="741302335"/>
 							<reference ref="448266039"/>
+							<reference ref="741302335"/>
+							<reference ref="561080161"/>
 						</object>
 						<reference key="parent" ref="492911675"/>
 					</object>
@@ -1325,7 +1325,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUKMAAAAAAAAA</bytes>
+						<bytes key="NSTransformStruct">AUOlAAAAAAAAA</bytes>
 					</object>
 					<string>CustomImageView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1397,7 +1397,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAABBgAAAwy4AAA</bytes>
 					</object>
 					<string>TouchView</string>
-					<string>{{182, 261}, {480, 320}}</string>
+					<string>{{66, 261}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -1416,7 +1416,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUNmAAAAAAAAA</bytes>
+						<bytes key="NSTransformStruct">AUOlAAAAAAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
