@@ -1208,7 +1208,7 @@ void testApp::startRecording() {
 void testApp::setSongState(int songState) {
 	
 	if (songState == SONG_RENDER_VIDEO) {
-		pincher.setup(ofPoint(0,0), scale);
+		pincher.setup(ofPoint(0,0), scale,pincherPrefs(480,320,ofRectangle(0,0,762,508),scale,1.8));
 	}
 	
 	// song is valid and can Overwritten only when FINISHING RECORD
