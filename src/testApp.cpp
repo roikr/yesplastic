@@ -933,7 +933,9 @@ void testApp::touchDown(float x, float y, int touchId) {
 		return;
 	}
 	
-	
+	if (getSongState()==SONG_RENDER_AUDIO || isInTransition()) {
+		return;
+	}
 	
 	
 	switch (state) {
@@ -990,6 +992,9 @@ void testApp::touchMoved(float x, float y, int touchId) {
 		return;
 	}
 	
+	if (getSongState()==SONG_RENDER_AUDIO || isInTransition()) {
+		return;
+	}
 	
 	if (touchId!=0) // || bButtonDown) 
 		return;
@@ -1023,6 +1028,11 @@ void testApp::touchUp(float x, float y, int touchId) {
 		pincher.touchUp(x, y, touchId);
 		return;
 	}
+	
+	if (getSongState()==SONG_RENDER_AUDIO || isInTransition()) {
+		return;
+	}
+	
 	
 	if (touchId!=0 || bMenu) {
 		if (!measures.empty()) { 
