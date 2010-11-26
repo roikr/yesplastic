@@ -66,11 +66,14 @@
 		
 		CGPoint touchPoint = [touch locationInView:self];
 		
-		if([touch tapCount] >= 1) {
-			
-			
-			appDelegate.OFSAptr->touchDown(touchPoint.x, touchPoint.y, touchIndex);
+		if([touch tapCount] == 2) {
+			appDelegate.OFSAptr->touchDoubleTap(touchPoint.x, touchPoint.y, touchIndex);// send doubletap
 		}
+		
+		//if([touch tapCount] >= 1) {
+			
+		appDelegate.OFSAptr->touchDown(touchPoint.x, touchPoint.y, touchIndex);
+		//}
 		
 		/*
 		 if([touch tapCount] == 1) 

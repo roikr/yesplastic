@@ -529,6 +529,9 @@ void testApp::seekFrame(int frame) {
 
 	}
 	
+	lastRenderedFrame = frame;
+	pincher.update((float)(lastRenderedFrame-pincherStart)/6);
+	
 }
 
 
@@ -1118,6 +1121,13 @@ void testApp::touchUp(float x, float y, int touchId) {
 //	bButtonDown = false;
 	
 	
+}
+
+void testApp::touchDoubleTap(int x, int y, int touchId) {
+	if (getSongState()==SONG_RENDER_VIDEO && !pincher.getIsAnimating()) {
+		pincherStart = lastRenderedFrame; 
+		pincher.touchDoubleTap(x, y, touchId);
+	}
 }
 
 void testApp::nextLoop(int player) {

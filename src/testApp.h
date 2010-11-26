@@ -50,6 +50,7 @@ public:
 	void touchDown(float x, float y, int touchId);
 	void touchMoved(float x, float y, int touchId);
 	void touchUp(float x, float y, int touchId);
+	void touchDoubleTap(int x, int y, int touchId);
 	
 	void moveBack();
 		
@@ -169,6 +170,8 @@ private:
 	// because we don't use midi instrument while video rendering, we need to know when the last sample occured...
 	
 	ofxPincher pincher;
+	int pincherStart; //  start frame for animating scaling
+	int lastRenderedFrame;
 };
 
 
