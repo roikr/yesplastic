@@ -219,6 +219,7 @@
 	int songState =OFSAptr->getSongState();
 	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || exportManager) {
 		renderView.hidden = NO;
+		renderTextView.hidden = [(TouchView*)self.view renderTouch];
 		return;
 	}
 	
@@ -306,6 +307,7 @@
 				switch (OFSAptr->getState()) {
 					case SOLO_STATE: 
 						soloHelp.hidden = !bShowHelp;
+						//setMenuButton.hidden = NO;
 						break;
 					case BAND_STATE: 
 						bandHelp.hidden = !bShowHelp;
@@ -723,8 +725,10 @@
 
 
 - (void)renderVideo {
+	[(TouchView*)self.view  setRenderTouch:NO];
+	
 	self.renderLabel.text = @"Creating video";
-	self.renderTextView.text = @"pinch and drag the screen to create camera movements";
+	self.renderTextView.text = @"pinch and drag screen to create camera movements.\n\ndouble tap screen to zoom.";
 	[self setRenderProgress:0.0f];
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];

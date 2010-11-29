@@ -16,6 +16,7 @@
 @implementation TouchView
 
 @synthesize viewController;
+@synthesize renderTouch;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -36,6 +37,8 @@
 /******************* TOUCH EVENTS ********************/
 //------------------------------------------------------
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	
 	//	NSLog(@"touchesBegan: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
 	
@@ -46,6 +49,12 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	if (!renderTouch && appDelegate.OFSAptr->getSongState()==SONG_RENDER_VIDEO) {
+		renderTouch = YES;
+		[appDelegate.mainViewController updateViews];
+	}
+	
 	
 	if (appDelegate.mainViewController.bShowHelp) {
 		return;

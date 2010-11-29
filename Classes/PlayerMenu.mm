@@ -22,6 +22,7 @@
 @synthesize volumeSlider;
 @synthesize bpmSlider;
 @synthesize playerName;
+//@synthesize volumeLabel;
 
 
 /*
@@ -125,6 +126,7 @@
 	MilgromLog(@"PlayerMenu::viewWillAppear");
 	[setsTable viewWillAppear:animated];
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
+	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
 	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 80.0)/80.0;
 	
 	
@@ -136,7 +138,7 @@
 - (void)volumeChanged:(id)sender {
 	
 	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setVolume(volumeSlider.value);
-	
+	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
 }
 
 - (void) bpmChanged:(id)sender {

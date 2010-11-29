@@ -21,6 +21,8 @@
 	UISlider *bpmSlider;
 	NSString * playerName;
 	
+	//UILabel *volumeLabel;
+	
 }
 
 @property (nonatomic,retain) SetsTable *setsTable;
@@ -31,6 +33,8 @@
 @property (nonatomic,retain ) IBOutlet UISlider *volumeSlider;
 @property (nonatomic,retain) IBOutlet UISlider *bpmSlider;
 @property (nonatomic,retain) NSString *playerName;
+
+//@property (nonatomic,retain) IBOutlet UILabel *volumeLabel;
 
 - (void)exit:(id)sender;
 - (void)volumeChanged:(id)sender ;

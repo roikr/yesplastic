@@ -17,6 +17,7 @@ class testApp;
 @class ExportManager;
 @class OpenGLTOMovie;
 
+
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
 	UIView *bandHelp;
