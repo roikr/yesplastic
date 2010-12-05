@@ -129,7 +129,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	// [super viewWillAppear:animated]; // this will cause selected background to disappear
 	MilgromLog(@"SongsTable::viewWillAppear");
-	self.view.userInteractionEnabled = YES;
+	//self.view.userInteractionEnabled = YES;
 	
 	NSIndexPath *indexPath = [NSIndexPath 
 							  indexPathForRow:[songsArray indexOfObject:[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] currentSong]] 
@@ -289,7 +289,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] loadSong:[songsArray objectAtIndex:indexPath.row]];
-	self.view.userInteractionEnabled = NO;
+	//self.view.userInteractionEnabled = NO;
 }
 
 

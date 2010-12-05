@@ -746,6 +746,8 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (void)loadSong:(Song*)song {
 	
+	bandMenu.view.userInteractionEnabled = NO;
+	
 	if (currentSong && song ==  currentSong) {	
 		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
 		[self pushMain];

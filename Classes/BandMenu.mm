@@ -138,6 +138,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	self.view.userInteractionEnabled = YES;
 	MilgromLog(@"BandView::viewWillAppear");
 	[songsTable viewWillAppear:animated];
 }
