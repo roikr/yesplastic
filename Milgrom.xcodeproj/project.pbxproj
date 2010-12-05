@@ -388,6 +388,7 @@
 		E4DF708611FEA1CF00EBD904 /* SetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF708511FEA1CF00EBD904 /* SetCell.xib */; };
 		E4DF714D11FEB58400EBD904 /* PlayerMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */; };
 		E4DF714E11FEB58400EBD904 /* SetsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DF714C11FEB58400EBD904 /* SetsTable.xib */; };
+		E4E1382012AC2F88003E7419 /* DeleteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E1381F12AC2F88003E7419 /* DeleteButton.m */; };
 		E4E32C5912A3F1D400508CC8 /* CustomFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E32C5812A3F1D400508CC8 /* CustomFontTextView.m */; };
 		E4E443831282D2CD003ADDA9 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E443821282D2CD003ADDA9 /* facebook_logo.png */; };
 		E4E443861282D2F3003ADDA9 /* youtube_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E443851282D2F3003ADDA9 /* youtube_logo.png */; };
@@ -1003,6 +1004,8 @@
 		E4DF714611FEB55A00EBD904 /* SetsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetsTable.h; sourceTree = "<group>"; };
 		E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlayerMenu.xib; path = Resource/PlayerMenu.xib; sourceTree = "<group>"; };
 		E4DF714C11FEB58400EBD904 /* SetsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetsTable.xib; path = Resource/SetsTable.xib; sourceTree = "<group>"; };
+		E4E1381E12AC2F88003E7419 /* DeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteButton.h; sourceTree = "<group>"; };
+		E4E1381F12AC2F88003E7419 /* DeleteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteButton.m; sourceTree = "<group>"; };
 		E4E32C5712A3F1D400508CC8 /* CustomFontTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextView.h; sourceTree = "<group>"; };
 		E4E32C5812A3F1D400508CC8 /* CustomFontTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFontTextView.m; sourceTree = "<group>"; };
 		E4E443821282D2CD003ADDA9 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook_logo.png; path = OldFacebookUpload/facebook_logo.png; sourceTree = "<group>"; };
@@ -1974,6 +1977,8 @@
 				E4D4A1D411FD79EE00C92628 /* SongsTable.mm */,
 				E4D4A27411FDA23700C92628 /* SongCell.h */,
 				E4D4A27511FDA23700C92628 /* SongCell.mm */,
+				E4E1381E12AC2F88003E7419 /* DeleteButton.h */,
+				E4E1381F12AC2F88003E7419 /* DeleteButton.m */,
 			);
 			name = Band;
 			path = Classes;
@@ -2651,6 +2656,7 @@
 				E4E32C5912A3F1D400508CC8 /* CustomFontTextView.m in Sources */,
 				E49CF1BA12A6798A002CD0B3 /* TriggersView.mm in Sources */,
 				E47C191412A6D77700B35ED9 /* Trigger.m in Sources */,
+				E4E1382012AC2F88003E7419 /* DeleteButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

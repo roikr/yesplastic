@@ -77,6 +77,7 @@ class testApp;
 - (BOOL)loadSoundSetByDemo:(Song*)demo;
 - (BOOL)canSaveSongName:(NSString *)songName;
 - (void)saveSong:(NSString *)songName;
+- (void)updateEditButtonView;
 - (void)pushSetMenu;
 - (void)pushMain;
 - (void)pushViewController:(UIViewController *)controller;

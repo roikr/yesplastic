@@ -16,10 +16,11 @@
 #import "MilgromMacros.h"
 #import "BandMenu.h"
 #import "testApp.h" // for loading progress
+#import "DeleteButton.h"
 
 
 @interface SongsTable()
-
+- (NSIndexPath *) currentSongIndexPath;
 @end
 
 @implementation SongsTable
@@ -78,17 +79,48 @@
 	[self.tableView reloadData];
 }
 
--(void)selectCurrentSong {
+- (void) scrollToSongs {
 	
-	SongCell *cell;
-	for (int i=0; i<[self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] ; i++) {
-		cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-		[cell setSelected:NO animated:NO];
+	CGPoint offset = CGPointMake(0, 0);
+	
+	for (int i=0; i< [songsArray count]; i++) { // [self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0]
+		Song *song = (Song *)[songsArray objectAtIndex:i];
+		
+		//MilgromLog(@"SongsTable::cell: %i %@",i,song.songName);
+		if (![song.bDemo boolValue]) {
+			offset.y = i*44;
+			break;
+		}
+	}
+	CGFloat maxOffset = self.tableView.contentSize.height - self.tableView.frame.size.height;
+	offset.y = min(offset.y,maxOffset);
+	//MilgromLog(@"SongsTable::scrollToSongs: %f %f",offset.x,offset.y);
+	[self.tableView setContentOffset:offset animated:YES];
+	
+}
+
+- (BOOL) anySongs {
+	for (int i=0; i< [songsArray count]; i++) { // [self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0]
+		Song *song = (Song *)[songsArray objectAtIndex:i];
+		
+		//MilgromLog(@"SongsTable::cell: %i %@",i,song.songName);
+		if (![song.bDemo boolValue]) {
+			return YES;
+		}
 	}
 	
+	return NO;
+}
+
+- (NSIndexPath *) currentSongIndexPath {
 	Song * song = [(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] currentSong];
-	cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0]];
-	[cell setSelected:YES animated:YES];
+	return [NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0];
+}
+
+-(void)selectCurrentSong {
+	
+	[self.tableView selectRowAtIndexPath:[self currentSongIndexPath] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+	
 }
 
 
@@ -101,17 +133,13 @@
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	
-	[self selectCurrentSong];
-	
-	 [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	 //[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 
-
-- (void)deleteSong:(SongCell*)songCell {
+- (void)deleteSong:(id)sender {
 	
-	NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)songCell];
-	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[songsArray indexOfObject:((DeleteButton *)sender).song] inSection:0];
 	[self.tableView.dataSource tableView:self.tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
 	
 }
@@ -131,11 +159,7 @@
 	MilgromLog(@"SongsTable::viewWillAppear");
 	//self.view.userInteractionEnabled = YES;
 	
-	NSIndexPath *indexPath = [NSIndexPath 
-							  indexPathForRow:[songsArray indexOfObject:[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] currentSong]] 
-							  inSection:0];
-	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-	cell.progressHidden = YES;
+	
 }
 /*
 - (void)viewDidAppear:(BOOL)animated {
@@ -149,11 +173,13 @@
     [super viewWillDisappear:animated];
 }
 */
-/*
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[self currentSongIndexPath]];
+	cell.progressHidden = YES;
 }
-*/
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -190,17 +216,23 @@
         cell = tmpCell;
         self.tmpCell = nil;
 		
+		
+		
+		
     }
 	
-	 // Configure the cell...
+	// Configure the cell...
 	Song *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	[cell updateBackgroundWithNumber:[indexPath row]];
-	[cell configureWithSong:song withSongsTable:self];
+		
+	[cell.deleteButton addTarget:self action:@selector(deleteSong:) forControlEvents:UIControlEventTouchUpInside];
+	cell.deleteButton.song = song;
+	cell.isSong = ![song.bDemo boolValue];
+	((UILabel*)cell.label).text = song.songName;
 	
 	if (![song.bReady boolValue]) {
 		[cell setProgress:0.0f];
 	}
-		    
     
     return (UITableViewCell*) cell;
 }
@@ -234,6 +266,8 @@
 		
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		
+		[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] updateEditButtonView];
 		
 		NSError *error;
 		

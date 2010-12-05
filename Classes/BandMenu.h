@@ -28,7 +28,6 @@
 - (void)edit:(id)sender;
 - (void)help:(id)sender;
 - (void)link:(id)sender;
-- (void) loadData; // load the song list from the store to the table
 - (void)cancelEdit;
 
 @end

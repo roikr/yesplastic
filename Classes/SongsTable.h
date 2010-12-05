@@ -28,6 +28,8 @@
 -(void)selectCurrentSong;
 -(void)addCurrentSong;
 -(void)updateSong:(Song*)song WithProgress:(float)theProgress; // needed for loading and downloading
-- (void)deleteSong:(SongCell*)songCell;
+- (void)deleteSong:(id)sender;
 - (void) loadData;
+- (void) scrollToSongs;
+- (BOOL) anySongs; // use to decide if all songs are demo, or there is any real user song
 @end

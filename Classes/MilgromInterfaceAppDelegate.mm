@@ -223,7 +223,8 @@ NSString * const kCacheFolder=@"URLCache";
 	[bandMenu.activityIndicator stopAnimating];
 	
 	[self loadDemos];
-	[bandMenu loadData];
+	[bandMenu.songsTable loadData];
+	[self updateEditButtonView];
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		while (1) {
@@ -681,7 +682,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if ([fetchResults count]) {
 		self.currentSong = (Song *)[fetchResults objectAtIndex:0];
-		[bandMenu.songsTable selectCurrentSong];
+		
 		
 		// if the song allready exist, need to reset it exporting and rendering attribute upon saving
 		
@@ -701,6 +702,8 @@ NSString * const kCacheFolder=@"URLCache";
 
 	} 
 	
+	[bandMenu.songsTable selectCurrentSong];
+	[self updateEditButtonView];
 
 	OFSAptr->saveSong([songName UTF8String]);
 	
@@ -741,6 +744,10 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self saveContext];
 	
+}
+
+- (void)updateEditButtonView {
+	bandMenu.editButton.hidden = ![bandMenu.songsTable anySongs];
 }
 
 

@@ -11,29 +11,28 @@
 
 @class CustomFontLabel;
 @class CustomImageView;
-@class SongsTable;
 @class Song;
+@class DeleteButton;
+
 @interface SongCell : UITableViewCell {
 	CustomFontLabel *label;
 	UIImageView *lock;
-	UIButton *deleteButton;
-	SongsTable *songsTable;
+	DeleteButton *deleteButton;
 	float progress;
 	CustomImageView *progressView; 
-	Song *song;
+	
+	BOOL isSong;
 }
 
 @property (nonatomic,retain) IBOutlet CustomFontLabel *label;
 @property (nonatomic,retain) IBOutlet UIImageView *lock;
-@property (nonatomic,retain) IBOutlet UIButton *deleteButton;
-@property (nonatomic,retain) SongsTable *songsTable;
+@property (nonatomic,retain) IBOutlet DeleteButton *deleteButton;
 @property float progress;
 @property (nonatomic,retain) IBOutlet CustomImageView *progressView;
-@property (nonatomic,retain) Song *song;
+@property BOOL isSong;
 @property BOOL progressHidden;
 
 - (void) updateBackgroundWithNumber:(NSInteger)num;
-- (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable; 
-- (void) delete:(id)sender;
+
 
 @end

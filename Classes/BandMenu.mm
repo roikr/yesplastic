@@ -50,10 +50,6 @@
 
 }
 
-- (void) loadData {
-	[self.songsTable loadData];
-}
-
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
@@ -95,7 +91,12 @@
 		[self.songsTable setEditing:YES animated:YES];
 	}
 	
+	
 	button.selected = !button.selected;
+	
+	if (button.selected) {
+		[self.songsTable scrollToSongs];
+	}
 }
 
 - (void)cancelEdit {

@@ -8,13 +8,12 @@
 
 #import "SongCell.h"
 #import "CustomFontLabel.h"
-#import "SongsTable.h"
-#import "Song.h"
 #import "MilgromMacros.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "SoundSet.h"
 #import "VideoSet.h"
 #import "CustomImageView.h"
+#import "DeleteButton.h"
 
 @interface NSObject (PrivateMethods)
 
@@ -27,9 +26,8 @@
 @synthesize label;
 @synthesize lock;
 @synthesize deleteButton;
-@synthesize songsTable;
 @synthesize progressView;
-@synthesize song;
+@synthesize isSong;
 
 
 
@@ -55,7 +53,7 @@
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate {
 	
-	if (![song.bDemo boolValue]) {
+	if (isSong) {
 		if (editing) {
 			deleteButton.hidden = NO;
 		} else {
@@ -107,16 +105,6 @@
 	
 }
 
-- (void) configureWithSong:(Song*)theSong withSongsTable:(SongsTable*)theTable {
-	
-	self.song = theSong;
-	self.label.text = theSong.songName;
-	self.songsTable = theTable;
-	
-	
-	
-}
-
 
 - (float) progress {
 	return progress;
@@ -127,7 +115,6 @@
 	[progressView setRect:CGRectMake(0, 0, theProgress,1.0f)];
 	
 	//self.userInteractionEnabled = theProgress >=1.0f;
-	
 	
 	progress = theProgress;
 	
@@ -153,14 +140,9 @@
 }
 */
 
-- (void) delete:(id)sender {
-	[songsTable deleteSong:self];
-	
-}
+
 
 - (void)dealloc {
-	[songsTable release];
-	[song release];
     [super dealloc];
 }
 
