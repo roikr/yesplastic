@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="51"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -38,7 +37,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="140016098">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -395,7 +394,6 @@
 								<reference key="IBUIBackgroundColor" ref="719325150"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="interfaceOrientation">3</int>
 								</object>
@@ -601,6 +599,7 @@
 								<reference key="NSSuperview" ref="492911675"/>
 								<reference key="IBUIBackgroundColor" ref="719325150"/>
 								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIView" id="751729622">
@@ -683,7 +682,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{480, 320}</string>
-				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="719325150"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -1402,7 +1400,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAABBgAAAwy4AAA</bytes>
 					</object>
 					<string>TouchView</string>
-					<string>{{37, 460}, {480, 320}}</string>
+					<string>{{49, 342}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -1495,9 +1493,11 @@
 							<string>showHelp:</string>
 							<string>stop:</string>
 							<string>trigger:</string>
+							<string>triggerOut:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1530,6 +1530,7 @@
 							<string>showHelp:</string>
 							<string>stop:</string>
 							<string>trigger:</string>
+							<string>triggerOut:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1583,6 +1584,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">trigger:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">triggerOut:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

@@ -24,6 +24,7 @@
 #import "glu.h"
 #import "ExportManager.h"
 
+//#import "Trigger.h"
 
 @interface MainViewController() 
 
@@ -130,6 +131,7 @@
 		
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button addTarget:self action:@selector(trigger:) forControlEvents:UIControlEventTouchDown];
+		//[button addTarget:self action:@selector(triggerTest:) forControlEvents:UIControlEventTouchDragInside];
 		[triggersView addSubview:button];
 		
 		//CGRect frame = button.frame;
@@ -140,6 +142,9 @@
 		frame.size.height = 60;
 		button.frame = frame;
 		button.tag = i;
+		//button.hidden = YES;
+		//button.userInteractionEnabled = NO;
+		//button.multipleTouchEnabled = YES;
 	}
 	
 	
@@ -523,6 +528,12 @@
 //	}
 		
 }
+
+
+//- (void) triggerTest:(id)sender {
+//	NSLog(@"triggerTest: %i",((UIButton*)sender).tag);
+//}
+
 
 - (void) loop:(id)sender {
 	UIButton *button;

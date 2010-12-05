@@ -99,6 +99,7 @@ class testApp;
 - (void) share:(id)sender;
 - (void) setShareProgress:(float) progress;
 - (void) trigger:(id)sender;
+//- (void) triggerTest:(id)sender;
 - (void) loop:(id)sender;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;

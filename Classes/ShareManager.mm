@@ -349,11 +349,12 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	switch (buttonIndex)
 	{
 		case 0: 
-			
-			action = self.isUploading ? ACTION_DONE : ACTION_UPLOAD_TO_YOUTUBE ;
+			action = ACTION_DONE;
+			//action = self.isUploading ? ACTION_DONE : ACTION_UPLOAD_TO_YOUTUBE ;
 			break;
 		case 1:
-			action = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
+			action = ACTION_DONE;
+			//action = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
 			break;
 		case 2:
 			action = ACTION_ADD_TO_LIBRARY;
