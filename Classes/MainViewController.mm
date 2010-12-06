@@ -644,7 +644,7 @@
 {
 	NSTimeInterval diff = [NSDate timeIntervalSinceReferenceDate]-shakeStartTime;
 	MilgromLog(@"shake ended: %2.2f",diff);
-	if ( diff > 0.5 && diff < 1.0) {
+	if ( diff > 0.2 && diff < 1.0) {
 		OFSAptr->playRandomLoop();
 	}
 }
