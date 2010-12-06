@@ -158,7 +158,7 @@
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
-	return YES;	
+	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO ;	
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -218,16 +218,17 @@
 	recordButton.selected = OFSAptr->getSongState() == SONG_TRIGGER_RECORD || OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
-	renderView.hidden = YES;
+	
 	shareProgressView.hidden = YES;
+	renderView.hidden = YES;
+
 	
 	int songState =OFSAptr->getSongState();
-	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || exportManager) {
+	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || songState == SONG_RENDER_AUDIO_FINISHED || exportManager) {
 		renderView.hidden = NO;
 		renderTextView.hidden = [(TouchView*)self.view renderTouch];
 		return;
-	}
-	
+	} 
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
@@ -840,8 +841,9 @@
 								   withCompletionHandler:^ {
 									   NSLog(@"export completed");
 									   
+									   OFSAptr->setSongState(SONG_IDLE);
 									   OFSAptr->soundStreamStart();
-									   
+									  									   
 									   if ([exportManager didExportComplete]) {
 										    [[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] action];
 									   }
@@ -902,6 +904,8 @@
 	if (exportManager) {
 		[exportManager cancelExport];
 		self.exportManager = nil;
+		OFSAptr->setSongState(SONG_IDLE);
+		OFSAptr->soundStreamStart();
 	}
 	
 	

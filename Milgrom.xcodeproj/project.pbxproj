@@ -11,6 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E4101B0212ACD28D000C6AAF /* Reachability.m */; };
 		E4159BD81271EA8B00B28DAE /* SHARE_B_BACKGROUND.png in Resources */ = {isa = PBXBuildFile; fileRef = E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */; };
 		E42D132F124F796A007BEEB0 /* ARROWS_DRM_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */; };
 		E42D1330124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */; };
@@ -420,6 +421,8 @@
 		1D6058910D05DD3D006BFB54 /* Milgrom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Milgrom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E4101B0112ACD28D000C6AAF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Utilities/Reachability.h; sourceTree = "<group>"; };
+		E4101B0212ACD28D000C6AAF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Utilities/Reachability.m; sourceTree = "<group>"; };
 		E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SHARE_B_BACKGROUND.png; sourceTree = "<group>"; };
 		E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_LEFT.png; sourceTree = "<group>"; };
 		E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_RIGHT.png; sourceTree = "<group>"; };
@@ -2060,6 +2063,8 @@
 				E4D1EB3D121133F3004D4E25 /* URLCacheConnection.mm */,
 				E4D1EB3B121133F3004D4E25 /* URLCacheAlert.h */,
 				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
+				E4101B0112ACD28D000C6AAF /* Reachability.h */,
+				E4101B0212ACD28D000C6AAF /* Reachability.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2657,6 +2662,7 @@
 				E49CF1BA12A6798A002CD0B3 /* TriggersView.mm in Sources */,
 				E47C191412A6D77700B35ED9 /* Trigger.m in Sources */,
 				E4E1382012AC2F88003E7419 /* DeleteButton.m in Sources */,
+				E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

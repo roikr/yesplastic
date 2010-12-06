@@ -729,6 +729,7 @@ void PlayerController::setSongState(int songState) {
 	
 	switch (songState) {
 		case SONG_IDLE:
+		case SONG_RENDER_AUDIO_FINISHED:
 		case SONG_CANCEL_RENDER_AUDIO:
 			song.stop();
 			setMode(MANUAL_MODE);

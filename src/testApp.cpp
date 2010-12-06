@@ -1212,7 +1212,7 @@ void testApp::renderAudio() {
 	
 	cout << "renderAudio finished" << endl;
 	
-	setSongState(SONG_IDLE);
+	setSongState(SONG_RENDER_AUDIO_FINISHED);
 	
 	totalBlocks = currentBlock;
 	
