@@ -40,7 +40,7 @@
 			<object class="IBUITableView" id="873029372">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
-				<string key="NSFrameSize">{270, 209}</string>
+				<string key="NSFrameSize">{250, 238}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -131,7 +131,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SongsTable</string>
 					<string>UIResponder</string>
-					<string>{{72, 520}, {270, 209}}</string>
+					<string>{{72, 491}, {250, 238}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
@@ -173,19 +173,16 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">DeleteButton</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/DeleteButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">SongCell</string>
 					<string key="superclassName">UITableViewCell</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">delete:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">delete:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">delete:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -197,7 +194,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
+							<string>DeleteButton</string>
 							<string>CustomFontLabel</string>
 							<string>UIImageView</string>
 							<string>CustomImageView</string>
@@ -216,7 +213,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">deleteButton</string>
-								<string key="candidateClassName">UIButton</string>
+								<string key="candidateClassName">DeleteButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">label</string>
@@ -240,6 +237,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SongsTable</string>
 					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">deleteSong:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">deleteSong:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">deleteSong:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">tmpCell</string>
 						<string key="NS.object.0">SongCell</string>
