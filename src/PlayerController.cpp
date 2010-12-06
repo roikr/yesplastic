@@ -648,7 +648,7 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	
 	for (vector<event>::iterator iter=events.begin(); iter!=events.end(); iter++) {
 		int note = (iter->note - 12) % 24;
-		cout << "tick: " << iter->absolute << endl; // DEBUG
+		//cout << "tick: " << iter->absolute << endl; // DEBUG
 		if (iter->bNoteOn) {
 			midiInstrument->noteOn(note, iter->velocity*volume);
 			currentPlayer->play(midiToSample[note]); // TODO: manage animations for multi player (drum)
