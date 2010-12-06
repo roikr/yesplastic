@@ -15,7 +15,7 @@
 	
 	UITextField *username;
 	UITextField *password;
-	UITextField *videoTitle;
+	UITextField *titleField;
 	UITextView *description;
 		
 	
@@ -29,7 +29,6 @@
 	UIScrollView *srcollView;
 	BOOL viewIsScrolled;
 	BOOL keyboardShown;
-	float kbHeight;
 	
 	UIView *activeView;
 	

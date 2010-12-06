@@ -12,7 +12,6 @@
 @interface FacebookUploadViewController ()
 - (void)registerForKeyboardNotifications;
 
--(void)scroll;
 @end
 
 @implementation FacebookUploadViewController
@@ -112,10 +111,6 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
 	activeView = textView;
 	
-	if (keyboardShown && !viewIsScrolled) {
-		[self scroll];
-	}
-	
 	return YES;
 }
 
@@ -134,17 +129,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(keyboardWillHide:)
 												 name:UIKeyboardWillHideNotification object:nil];
-}
-
--(void)scroll {
 	
-	CGSize contentSize = scrollView.contentSize;
-	contentSize.height+=kbHeight;
-	scrollView.contentSize = contentSize;
-	
-    [scrollView setContentOffset:CGPointMake(0.0, activeView.frame.origin.y) animated:YES];
-	
-    viewIsScrolled = YES;
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardDidHide:)
+												 name:UIKeyboardDidHideNotification object:nil];
 }
 
 
@@ -153,11 +141,16 @@
 - (void)keyboardWillShow:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-	kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+	float kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
 	
+	CGSize contentSize = scrollView.contentSize;
+	contentSize.height+=kbHeight;
+	scrollView.contentSize = contentSize;
 	
-	if (!viewIsScrolled && activeView==descriptionView) {
-		[self scroll];
+	if (!viewIsScrolled && activeView==descriptionView ) {
+		[scrollView setContentOffset:CGPointMake(0.0, activeView.frame.origin.y-30) animated:YES];
+		
+		viewIsScrolled = YES;
 	}
 	
 	keyboardShown = YES;
@@ -169,20 +162,32 @@
 // Called when the UIKeyboardDidHideNotification is sent
 - (void)keyboardWillHide:(NSNotification*)aNotification
 {
-	if (viewIsScrolled) {
-		
-		[scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
-		viewIsScrolled = NO;
-	}
+			
+	[scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+	viewIsScrolled = NO;
+	
 	
 	keyboardShown = NO;
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)theScrollView {
-	CGSize contentSize = theScrollView.contentSize;
+// Called when the UIKeyboardDidHideNotification is sent
+- (void)keyboardDidHide:(NSNotification*)aNotification
+{
+	NSDictionary* info = [aNotification userInfo];
+	float kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+	
+	
+	CGSize contentSize = scrollView.contentSize;
 	contentSize.height-=kbHeight;
-	theScrollView.contentSize = contentSize;
+	scrollView.contentSize = contentSize;
+	
 }
+
+//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)theScrollView {
+//	CGSize contentSize = theScrollView.contentSize;
+//	contentSize.height-=kbHeight;
+//	theScrollView.contentSize = contentSize;
+//}
 
 
 - (void) upload:(id)sender {
