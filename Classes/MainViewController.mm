@@ -695,7 +695,7 @@
 
 - (void)renderAudio {
 	self.renderLabel.text = @"Creating audio";
-	self.renderTextView.text = @"(it can take some time, depends on your song length...)";
+	self.renderTextView.text = @"";// @"(it can take some time, depends on your song length...)";
 	[self setRenderProgress:0.0f];
 	
 	dispatch_queue_t myCustomQueue;
