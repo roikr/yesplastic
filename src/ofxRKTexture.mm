@@ -150,10 +150,10 @@ void ofxRKTexture::draw(float x,float y,int i,float width,float height) {
 		
 	GLfloat delta = 1;
 	
-	GLfloat px0 = 0;		// up to you to get the aspect ratio right
+	GLfloat px0 = 1;		// up to you to get the aspect ratio right
 	GLfloat py0 = (height ? height : _subHeight) - 2*delta;
 	GLfloat px1 =(width ? width : _subWidth) - 2*delta;
-	GLfloat py1 = 0;
+	GLfloat py1 = -1;
 	
 	GLfloat tx0 = ((i % _columnsNumber) * _subWidth+delta)/_width;		
 	GLfloat ty0 = ((i / _columnsNumber)  * _subHeight+delta)/_height;
