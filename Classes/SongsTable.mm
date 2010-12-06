@@ -154,6 +154,7 @@
 	
 }
 
+/*
 - (void)viewWillAppear:(BOOL)animated {
 	// [super viewWillAppear:animated]; // this will cause selected background to disappear
 	MilgromLog(@"SongsTable::viewWillAppear");
@@ -161,6 +162,7 @@
 	
 	
 }
+ */
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -175,6 +177,7 @@
 */
 
 - (void)viewDidDisappear:(BOOL)animated {
+	MilgromLog(@"SongsTable::viewDidDisappear");
     [super viewDidDisappear:animated];
 	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[self currentSongIndexPath]];
 	cell.progressHidden = YES;

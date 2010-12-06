@@ -123,28 +123,34 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated]; // TODO: was deleted before, any bug ?
-	MilgromLog(@"MilgromViewController::viewWillAppear");
+    MilgromLog(@"MilgromViewController::viewWillAppear");
+	[super viewWillAppear:animated]; // TODO: was deleted before, any bug ?
 	[self startAnimation];
-    
-    
-	
-	
 	[viewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
 	MilgromLog(@"MilgromViewController::viewDidAppear");
+	[super viewDidAppear:animated];
 	[viewController viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self stopAnimation];
-    
-   // [super viewWillDisappear:animated];
+	MilgromLog(@"MilgromViewController::viewWillDisappear");
+	[super viewWillDisappear:animated];
+	[self stopAnimation];
+    [viewController viewWillDisappear:animated];
+   
 }
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+	MilgromLog(@"MilgromViewController::viewDidDisappear");
+    [super viewDidDisappear:animated];
+	[viewController viewDidDisappear:animated];
+}
+ 
 
 - (void)viewDidUnload
 {

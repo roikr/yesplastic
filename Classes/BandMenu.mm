@@ -132,16 +132,24 @@
 	
 }
 
+/*
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	MilgromLog(@"BandView::viewDidAppear");
 }
+ */
 
 - (void)viewWillAppear:(BOOL)animated {
+	MilgromLog(@"BandView::viewWillAppear");
 	[super viewWillAppear:animated];
 	self.view.userInteractionEnabled = YES;
-	MilgromLog(@"BandView::viewWillAppear");
-	[songsTable viewWillAppear:animated];
+	//[songsTable viewWillAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	MilgromLog(@"BandView::viewDidDisappear");
+    [super viewDidDisappear:animated];
+	[songsTable viewDidDisappear:animated];
 }
 
 
