@@ -14,6 +14,8 @@
 #define PORT 12345
 #define RECORD_LIMIT 60000
 
+#define GLOBAL_GAIN 0.65
+
 
 enum {
 	loopswitch,
@@ -260,8 +262,8 @@ void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 		
 		
 	for (int i = 0; i < bufferSize; i++){
-		output[i*nChannels] = lBlock[i];
-		output[i*nChannels + 1] = rBlock[i];
+		output[i*nChannels] = lBlock[i] * GLOBAL_GAIN;
+		output[i*nChannels + 1] = rBlock[i] * GLOBAL_GAIN;
 	}
 	
 }
