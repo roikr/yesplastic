@@ -16,6 +16,7 @@
 #import "FacebookUploadViewController.h"
 
 #import "testApp.h"
+#import "Reachability.h"
 
 enum {
 	STATE_IDLE,
@@ -44,6 +45,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 - (void)exportToLibrary;
 - (void)setVideoRendered;
 - (void)setRingtoneExported;
+- (BOOL)gotInternet;
 
 @end
 
@@ -74,8 +76,14 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	return self;
 }
 
-- (void)prepare {
+
+- (BOOL)gotInternet {
 	
+	MilgromLog(@"ShareManager::checkInternet Testing Internet Connectivity");
+	Reachability *r = [Reachability reachabilityForInternetConnection];
+	
+	MilgromLog(@"ShareManager::checkInternet %i",[r currentReachabilityStatus] != NotReachable);
+	return [r currentReachabilityStatus] != NotReachable;
 }
 
 -(BOOL) isUploading {
@@ -349,13 +357,22 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	switch (buttonIndex)
 	{
 		case 0: 
-			action = ACTION_DONE;
+		case 1: {
+			if ([self gotInternet]) {
+				action = buttonIndex ? ACTION_UPLOAD_TO_FACEBOOK : ACTION_UPLOAD_TO_YOUTUBE;
+			} else {
+				
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Movie" 
+																message:@"Trying hard, but no internet connection."
+															   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
+				[alert show];
+				[alert release];
+				action = ACTION_DONE;
+			}
+
 			//action = self.isUploading ? ACTION_DONE : ACTION_UPLOAD_TO_YOUTUBE ;
-			break;
-		case 1:
-			action = ACTION_DONE;
 			//action = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
-			break;
+		} break;
 		case 2:
 			action = ACTION_ADD_TO_LIBRARY;
 			break;
