@@ -486,7 +486,7 @@ void FramesDrivenPlayer::draw(){
 	}
 
 	if (bPush) {
-		pushTexture.draw(x,y,0,0,pushWidth,pushHeight,1.0f);
+		pushTexture.draw(x,y,0,pushWidth,pushHeight);
 		
 	}
 	//font->drawString(debugStr,x,y);
