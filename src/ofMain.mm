@@ -20,6 +20,24 @@
 
 static bool enableDataPath = true; 
 
+#define 	OF_FILLED				0x01
+#define 	OF_OUTLINE				0x02
+#define 	OF_WINDOW 				0
+#define 	OF_FULLSCREEN 			1
+#define 	OF_GAME_MODE			2
+
+#define 	OF_RECTMODE_CORNER				0
+#define 	OF_RECTMODE_CENTER				1
+
+
+
+static float	drawMode			= OF_FILLED;
+bool 			bBakgroundAuto		= true;
+int 			cornerMode			= OF_RECTMODE_CORNER;
+static float linePoints[4];
+static float rectPoints[8];
+static	int		orientation	        = OF_PORTRAIT;
+
 //--------------------------------------------------
 
 void ofEnableDataPath(){
@@ -173,6 +191,127 @@ void ofRotate(float degrees, float vecX, float vecY, float vecZ){
 	glRotatef(degrees, vecX, vecY, vecZ);
 }
 
+void ofRotate(float degrees){
+	glRotatef(degrees, 0, 0, 1);
+}
+
+
+void ofSetColor(int _r, int _g, int _b){
+	float r = (float)_r / 255.0f; r = MAX(0,MIN(r,1.0f));
+	float g = (float)_g / 255.0f; g = MAX(0,MIN(g,1.0f));
+	float b = (float)_b / 255.0f; b = MAX(0,MIN(b,1.0f));
+	
+	
+	
+	glColor4f(r,g,b,1);
+}
+
+
+//----------------------------------------------------------
+void ofSetColor(int _r, int _g, int _b, int _a){
+	float r = (float)_r / 255.0f; r = MAX(0,MIN(r,1.0f));
+	float g = (float)_g / 255.0f; g = MAX(0,MIN(g,1.0f));
+	float b = (float)_b / 255.0f; b = MAX(0,MIN(b,1.0f));
+	float a = (float)_a / 255.0f; a = MAX(0,MIN(a,1.0f));
+	
+		
+	glColor4f(r,g,b,a);
+}
+
+
+//----------------------------------------------------------
+void ofLine(float x1,float y1,float x2,float y2){
+	
+	
+	
+	
+	linePoints[0] = x1;
+	linePoints[1] = y1;
+	linePoints[2] = x2;
+	linePoints[3] = y2;
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, &linePoints[0]);
+	glDrawArrays(GL_LINES, 0, 2);
+	
+	
+	
+}
+
+//----------------------------------------------------------
+void ofNoFill(){
+	drawMode = OF_OUTLINE;
+	
+}
+
+//----------------------------------------------------------
+void ofFill(){
+	drawMode = OF_FILLED;
+	
+}
+
+//----------------------------------------------------------
+void ofRect(float x,float y,float w,float h){
+	
+	
+	
+	if (cornerMode == OF_RECTMODE_CORNER){
+		rectPoints[0] = x;
+		rectPoints[1] = y;
+		
+		rectPoints[2] = x+w;
+		rectPoints[3] = y;
+		
+		rectPoints[4] = x+w;
+		rectPoints[5] = y+h;
+		
+		rectPoints[6] = x;
+		rectPoints[7] = y+h;
+	}else{
+		rectPoints[0] = x-w/2;
+		rectPoints[1] = y-h/2;
+		
+		rectPoints[2] = x+w/2;
+		rectPoints[3] = y-h/2;
+		
+		rectPoints[4] = x+w/2;
+		rectPoints[5] = y+h/2;
+		
+		rectPoints[6] = x-w/2;
+		rectPoints[7] = y+h/2;
+	}
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, &rectPoints[0]);
+	glDrawArrays((drawMode == OF_FILLED) ? GL_TRIANGLE_FAN : GL_LINE_LOOP, 0, 4);
+	
+	
+	
+}
+
+
+//----------------------------------------------------------
+void ofSetColor(int hexColor){
+	int r = (hexColor >> 16) & 0xff;
+	int g = (hexColor >> 8) & 0xff;
+	int b = (hexColor >> 0) & 0xff;
+	ofSetColor(r,g,b);
+}
+
+//----------------------------------------------------------
+void ofEnableAlphaBlending(){
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+}
+
+//----------------------------------------------------------
+void ofDisableAlphaBlending(){
+	glDisable(GL_BLEND);
+	
+}
+
+
 
 float ofClamp(float value, float min, float max) {
 	return value < min ? min : value > max ? max : value;
@@ -199,12 +338,16 @@ void 		ofTrueTypeFont::drawString(string s, float x, float y) {}
 void 		ofTrueTypeFont::setLineHeight(float height) {}
 
 
+void ofSetOrientation(int newOrientation) {
+	orientation = newOrientation;
+}
+
 int ofGetWidth() {
-	return 320;
+	return orientation == OF_PORTRAIT ? 320 : 480;
 }
 
 int 		ofGetHeight() {
-	return 480;
+	return orientation == OF_PORTRAIT ? 480 : 320;
 }
 
 float 		ofGetFrameRate() {

@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 #ifndef MIN
@@ -27,6 +28,9 @@ enum ofLogLevel{
 };
 
 #define OF_DEFAULT_LOG_LEVEL  OF_LOG_WARNING;
+
+#define		OF_PORTRAIT 0
+#define		OF_LANDSCAPE 1
 
 class ofTrueTypeFont{
 	
@@ -98,9 +102,27 @@ void ofPopMatrix();
 void ofTranslate(float x, float y, float z = 0);
 void ofScale(float xAmnt, float yAmnt, float zAmnt = 1);
 void ofRotate(float degrees, float vecX, float vecY, float vecZ);
+void ofRotate(float degrees);
+
+// color options
+void ofSetColor(int r, int g, int b); // 0-255
+void ofSetColor(int r, int g, int b, int a); // 0-255
+void ofSetColor(int hexColor); // hex, like web 0xFF0033;
+
+// transparency
+void ofEnableAlphaBlending();  // this just turns on and off opengl blending, the common mode
+void ofDisableAlphaBlending();
+
+void ofRect(float x1,float y1,float w, float h);
+
+// drawing options
+void ofNoFill();
+void ofFill();
 
 float		ofClamp(float value, float min, float max);
 int		ofGetElapsedTimeMillis();
+
+void ofSetOrientation(int orientation);
 int 		ofGetWidth();			// <-- should we call this ofGetWindowWidth?
 int 		ofGetHeight();
 float 		ofGetFrameRate();

@@ -10,8 +10,7 @@
 
 #import "EAGLView.h"
 #import "glu.h"
-#import "MilgromInterfaceAppDelegate.h"
-#import "testApp.h"
+
 
 @interface EAGLView (PrivateMethods)
 - (void)createFramebuffer;
