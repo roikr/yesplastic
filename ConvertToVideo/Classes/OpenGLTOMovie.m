@@ -30,7 +30,13 @@
 	return [[[OpenGLTOMovie alloc] init] autorelease];
 }
 
-- (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size withInitializationHandler:(void (^)(void))initializationHandler withDrawFrame:(void (^)(int))drawFrame  withIsRendering:(int (^)(void))isRendering withCompletionHandler:(void (^)(void))completionHandler 
+- (void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size 
+	withAudioAverageBitRate:(NSNumber *)audioBitrate
+	withVideoAverageBitRate:(NSNumber *)videoBitrate
+	withInitializationHandler:(void (^)(void))initializationHandler 
+		  withDrawFrame:(void (^)(int))drawFrame  
+		withIsRendering:(int (^)(void))isRendering 
+  withCompletionHandler:(void (^)(void))completionHandler 
 {
 	
 	NSError *error = nil;
@@ -74,7 +80,7 @@
     keys[0] = AVFormatIDKey; values[0] = [NSNumber numberWithInt: kAudioFormatMPEG4AAC ]; //kAudioFormatLinearPCM
     keys[1] = AVSampleRateKey; values[1] = [NSNumber numberWithFloat: 44100. ];
     keys[2] = AVNumberOfChannelsKey; values[2] = [NSNumber numberWithInt: 2 ];
-    keys[3] = AVEncoderBitRateKey; values[3] = [NSNumber numberWithInt: 128000 ];
+    keys[3] = AVEncoderBitRateKey; values[3] = audioBitrate; //[NSNumber numberWithInt: 64000 ];
     keys[4] = AVChannelLayoutKey; values[4] = [NSData dataWithBytes:&layout length:sizeof(AudioChannelLayout)];
     NSDictionary* audioSettings = [NSDictionary dictionaryWithObjects:values forKeys: keys count: 5 ];
 	
@@ -100,11 +106,17 @@
 	AVAssetWriterInput *input;
 	
 
-
+	NSDictionary        *compressionConfiguration = [NSMutableDictionary dictionaryWithCapacity:1];
+	
+	[compressionConfiguration setValue:videoBitrate forKey:AVVideoAverageBitRateKey]; //[NSNumber numberWithDouble:128.0*1024.0]
+	//[configuration setValue:compressionConfiguration forKey:AVVideoCompressionPropertiesKey];
+	
 
 	NSDictionary* videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:AVVideoCodecH264, AVVideoCodecKey, 
 								   [NSNumber numberWithUnsignedInt:size.width],AVVideoWidthKey,
-								   [NSNumber numberWithUnsignedInt:size.height],AVVideoHeightKey,nil];
+								   [NSNumber numberWithUnsignedInt:size.height],AVVideoHeightKey,
+								   compressionConfiguration,AVVideoCompressionPropertiesKey,
+								   nil];
 	
 	input = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
 	input.expectsMediaDataInRealTime = NO;
@@ -183,9 +195,6 @@
 	initializationHandler();
 	
 	
-	
-	
-	
 	[reader startReading];
 	
 	[writer startWriting];
@@ -242,20 +251,20 @@
 			
 			drawFrame(frameNum);
 		
-			GLenum err = glGetError();
-			if (err != GL_NO_ERROR)
-			{
-				NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
-			}
+//			GLenum err = glGetError();
+//			if (err != GL_NO_ERROR)
+//			{
+//				NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
+//			}
 			
 			glReadPixels(0, 0, size.width, size.height, GL_BGRA, GL_UNSIGNED_BYTE, baseAddress); //GL_BGRA
 			//glReadPixels(0, 0, 10, 10, GL_RGBA, GL_UNSIGNED_BYTE, baseAddress);
 			
-			err = glGetError();
-			if (err != GL_NO_ERROR)
-			{
-				NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
-			}
+//			err = glGetError();
+//			if (err != GL_NO_ERROR)
+//			{
+//				NSLog(@"frame: %i, glError: 0x%04X",frameNum, err);
+//			}
 			
 		
 			theError = CVPixelBufferUnlockBaseAddress(pixelBuffer,0); 

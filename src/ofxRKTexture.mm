@@ -134,11 +134,11 @@ void ofxRKTexture::draw(float x,float y,float u,float v,float width,float height
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	
-	GLenum  err = glGetError();
-	if (err != GL_NO_ERROR)
-		NSLog(@"Error in frame. glError: 0x%04X", err);
-	
-	//ofLog(OF_LOG_VERBOSE,"Error in frame. glError: %d", err);
+//	GLenum  err = glGetError();
+//	if (err != GL_NO_ERROR)
+//		NSLog(@"Error in frame. glError: 0x%04X", err);
+//	
+//	//ofLog(OF_LOG_VERBOSE,"Error in frame. glError: %d", err);
 	
 	
 }
@@ -186,11 +186,11 @@ void ofxRKTexture::draw(float x,float y,int i,float width,float height) {
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 	
-	GLenum  err = glGetError();
-	if (err != GL_NO_ERROR)
-		NSLog(@"Error in frame. glError: 0x%04X", err);
-		
-		//ofLog(OF_LOG_VERBOSE,"Error in frame. glError: %d", err);
+//	GLenum  err = glGetError();
+//	if (err != GL_NO_ERROR)
+//		NSLog(@"Error in frame. glError: 0x%04X", err);
+//		
+//		//ofLog(OF_LOG_VERBOSE,"Error in frame. glError: %d", err);
 	
 }
 
@@ -244,9 +244,9 @@ void ofxRKTexture::draw(float x, float y){
 				
 		GLenum err;
 
-   	err = glGetError();
-	if (err != GL_NO_ERROR)
-		NSLog(@"Error in frame. glError: 0x%04X", err);
+//   	err = glGetError();
+//	if (err != GL_NO_ERROR)
+//		NSLog(@"Error in frame. glError: 0x%04X", err);
 }
 
 /*

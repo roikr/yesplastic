@@ -765,9 +765,11 @@
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		[renderManager writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.wav"]] 
 						
+			   
 						   withContext:appDelegate.milgromViewController.context
 						withSize:CGSizeMake(480, 320) 
-		 
+			   withAudioAverageBitRate:[NSNumber numberWithInt: 192000 ]
+			   withVideoAverageBitRate:[NSNumber numberWithDouble:350.0*1024.0]
 		 
 				 withInitializationHandler:^ {
 					 glMatrixMode (GL_PROJECTION);

@@ -19,6 +19,8 @@
 
 +(id)renderManager;
 -(void)writeToVideoURL:(NSURL*)videoURL withAudioURL:(NSURL*)audioURL withContext:(EAGLContext *)contextA withSize:(CGSize)size 
+	withAudioAverageBitRate:(NSNumber *)audioBitrate
+	withVideoAverageBitRate:(NSNumber *)videoBitrate
 	withInitializationHandler:(void (^)(void))initializationHandler 
 		  withDrawFrame:(void (^)(int))drawFrame 
 		  withIsRendering:(int (^)(void))isRendering

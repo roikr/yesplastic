@@ -30,6 +30,10 @@ static bool enableDataPath = true;
 #define 	OF_RECTMODE_CENTER				1
 
 
+void ofRegisterTouchEvents(ofBaseApp *app) {
+	
+}
+
 
 static float	drawMode			= OF_FILLED;
 bool 			bBakgroundAuto		= true;

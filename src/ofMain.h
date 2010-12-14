@@ -32,6 +32,15 @@ enum ofLogLevel{
 #define		OF_PORTRAIT 0
 #define		OF_LANDSCAPE 1
 
+
+struct ofTouchEventArgs {
+	float x;
+	float y;
+	int id;
+};
+
+
+
 class ofTrueTypeFont{
 	
 public:
@@ -82,7 +91,7 @@ public:
 
 typedef ofBaseApp ofSimpleApp;
 
-
+void ofRegisterTouchEvents(ofBaseApp *app);
 
 void	ofEnableDataPath();
 void	ofDisableDataPath();
