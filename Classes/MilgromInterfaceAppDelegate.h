@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <AVFoundation/AVFoundation.h>
 
 #import "DemoLoader.h"
 
@@ -25,7 +26,7 @@ class testApp;
 
 
 
-@interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate> {
+@interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate,AVAudioSessionDelegate> {
     UIWindow *window;
 	
 	NSManagedObjectContext *managedObjectContext_;

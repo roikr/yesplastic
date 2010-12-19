@@ -23,7 +23,7 @@
 #include "PlayerMenu.h"
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
-#import <AVFoundation/AVFoundation.h>
+
 #import "ShareManager.h"
 #import <OpenGLES/EAGL.h>
 
@@ -79,6 +79,12 @@ NSString * const kCacheFolder=@"URLCache";
 		
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
+	
+	
+	// implicitly initializes your audio session
+	AVAudioSession *session = [AVAudioSession sharedInstance];
+	session.delegate = self;
+	
 	//self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	
 	
@@ -257,6 +263,22 @@ NSString * const kCacheFolder=@"URLCache";
 	
 }
 
+- (void)beginInterruption {
+	MilgromLog(@"beginInterruption");
+	OFSAptr->soundStreamStop();
+}
+
+- (void)endInterruptionWithFlags:(NSUInteger)flags {
+	MilgromLog(@"endInterruptionWithFlags: %u",flags);
+	
+	if (flags && AVAudioSessionInterruptionFlags_ShouldResume) {
+		NSError *activationError = nil;
+		[[AVAudioSession sharedInstance] setActive: YES error: &activationError];
+		OFSAptr->soundStreamStart();
+		MilgromLog(@"audio session activated");
+	}
+	
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
