@@ -18,10 +18,13 @@
 @synthesize viewController;
 @synthesize renderTouch;
 
-- (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
-        // Initialization code
-		bzero(activeTouches, sizeof(activeTouches));
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder: decoder])
+    {
+        bzero(activeTouches, sizeof(activeTouches));
+
     }
     return self;
 }
