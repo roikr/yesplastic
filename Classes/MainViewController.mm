@@ -779,7 +779,7 @@
 				 }
 						
 						 withDrawFrame:^(int frameNum) {
-							 NSLog(@"rendering frame: %i, progress: %2.2f",frameNum,OFSAptr->getRenderProgress());
+							 //NSLog(@"rendering frame: %i, progress: %2.2f",frameNum,OFSAptr->getRenderProgress());
 							 OFSAptr->seekFrame(frameNum);
 							 
 							 glMatrixMode(GL_MODELVIEW);
