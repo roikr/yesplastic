@@ -18,7 +18,7 @@ enum {
 };
 
 @class GDataServiceTicket;
-
+@class RKUBackgroundTask;
 @protocol YouTubeUploaderDelegate;
 
 
@@ -36,6 +36,8 @@ enum {
 	NSURL *link;
 	NSInteger _state;
 	
+	RKUBackgroundTask *task;
+	
 }
 
 @property (nonatomic, retain) NSMutableArray * delegates;
@@ -44,6 +46,8 @@ enum {
 @property (readonly) float progress;
 @property (nonatomic,retain,readonly) NSURL *link;
 @property (readonly) NSInteger state;
+
+@property (nonatomic, retain) RKUBackgroundTask *task;
 
 
 + (YouTubeUploader *) youTubeUploader; 

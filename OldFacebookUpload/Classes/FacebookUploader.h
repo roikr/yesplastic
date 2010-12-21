@@ -20,6 +20,7 @@ enum {
 };
 
 @protocol FacebookUploaderDelegate;
+@class RKUBackgroundTask;
 
 
 @interface FacebookUploader : NSObject<FBRequestDelegate,FBDialogDelegate,FBSessionDelegate> {
@@ -34,6 +35,8 @@ enum {
 	NSInteger _state;
 	float progress;
 	
+	RKUBackgroundTask *task;
+	
 }
 
 @property (nonatomic, retain) NSMutableArray * delegates;
@@ -44,7 +47,7 @@ enum {
 
 @property (readonly) NSInteger state;
 @property (readonly) float progress;
-
+@property (nonatomic, retain) RKUBackgroundTask *task;
 
 + (FacebookUploader *) facebookUploader; 
 -(void) addDelegate:(id<FacebookUploaderDelegate>)delegate; 

@@ -13,6 +13,7 @@
 #import "GDataServiceGoogleYouTube.h"
 #import "GDataEntryYouTubeUpload.h"
 #import "GDataEntryYouTubeVideo.h"
+#import "RKUBackgroundTask.h"
 
 NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_ouUT6HFwaWn1GQxuyAIK-zvoeFB-GU_cqx30q-0HggREKxXG-b8w";
 
@@ -33,6 +34,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 @synthesize password;
 @synthesize progress;
 @synthesize link;
+@synthesize task;
 
 
 + (YouTubeUploader *) youTubeUploader {
@@ -66,9 +68,32 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 }
 
 - (void) setState:(NSInteger)newState {
+	
+	BOOL finishUploading = _state == YOUTUBE_UPLOADER_STATE_UPLOADING;
+	
 	_state = newState;
 	
 	NSLog(@"YouTubeUploader state changed: %i",_state);
+	
+	if (newState == YOUTUBE_UPLOADER_STATE_UPLOADING) {
+		self.task = [RKUBackgroundTask backgroundTask];
+	}
+	
+	if (finishUploading) {
+		if (newState == YOUTUBE_UPLOADER_STATE_UPLOADING) {
+			NSLog(@"YouTubeUploader: YOUTUBE_UPLOADER_STATE_UPLOADING twice");
+		} 
+		
+		if ([RKUBackgroundTask isBackground]) {
+			
+			NSLog(@"YouTubeUploader: finish uploading in background, no delegate");
+		}
+		
+		[task finish];
+		
+		self.task = 0;
+		
+	}
 	
 	for (id<YouTubeUploaderDelegate> delegate in delegates) {
 		if ([delegate respondsToSelector:@selector(youTubeUploaderStateChanged:)]) {
@@ -193,6 +218,8 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	
 	[self setUploadTicket:ticket];
 	
+	
+	
 		
 		//[self updateUI];
 }
@@ -205,6 +232,8 @@ ofTotalByteCount:(unsigned long long)dataLength {
 	if (self.state==YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED) {
 		self.state = YOUTUBE_UPLOADER_STATE_UPLOADING;
 	}
+	
+	[task update];
 	
 	progress = (float)numberOfBytesRead/(float)dataLength;
 	NSLog(@"youtube upload progress: %f",progress);

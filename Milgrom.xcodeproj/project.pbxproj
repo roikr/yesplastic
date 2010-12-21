@@ -133,6 +133,7 @@
 		E42D14FC124F896C007BEEB0 /* SETCELL_SELECT_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */; };
 		E42D14FD124F896C007BEEB0 /* SETCELL_SELECT_2.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */; };
 		E42D14FE124F896C007BEEB0 /* SETCELL_SELECT_3.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */; };
+		E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */; };
 		E439299512932D7500F855A8 /* ofxPincher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E439299312932D7500F855A8 /* ofxPincher.cpp */; };
 		E43BE95A125C968F009C8845 /* APP HELP SLIDE.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE954125C968F009C8845 /* APP HELP SLIDE.png */; };
 		E43BE95B125C968F009C8845 /* HELP_BACK_B.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE955125C968F009C8845 /* HELP_BACK_B.png */; };
@@ -544,6 +545,8 @@
 		E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_1.png; sourceTree = "<group>"; };
 		E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_2.png; sourceTree = "<group>"; };
 		E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_3.png; sourceTree = "<group>"; };
+		E4379BAF12C0CAAB006C26AC /* RKUBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKUBackgroundTask.h; sourceTree = "<group>"; };
+		E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKUBackgroundTask.m; sourceTree = "<group>"; };
 		E439299312932D7500F855A8 /* ofxPincher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPincher.cpp; sourceTree = "<group>"; };
 		E439299412932D7500F855A8 /* ofxPincher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPincher.h; sourceTree = "<group>"; };
 		E43929B312932F2500F855A8 /* ofMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMath.h; sourceTree = "<group>"; };
@@ -1073,6 +1076,7 @@
 			children = (
 				E4D1EB3712113350004D4E25 /* Classes */,
 				E444721012143D2F0058D07B /* src */,
+				E4379BAE12C0CAAB006C26AC /* RKUtilities */,
 				E4C44C2012436581007ACEBC /* YouTube */,
 				E4AF9D7A1263694A003E9148 /* Facebook */,
 				E4998B711220317E006EC3BA /* AVPlayer */,
@@ -1290,6 +1294,15 @@
 				E42D1492124F895E007BEEB0 /* VOC_TB_8_P.png */,
 			);
 			path = "VOC  push buttons";
+			sourceTree = "<group>";
+		};
+		E4379BAE12C0CAAB006C26AC /* RKUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				E4379BAF12C0CAAB006C26AC /* RKUBackgroundTask.h */,
+				E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */,
+			);
+			path = RKUtilities;
 			sourceTree = "<group>";
 		};
 		E439299112932D7500F855A8 /* ofxPincher */ = {
@@ -2663,6 +2676,7 @@
 				E47C191412A6D77700B35ED9 /* Trigger.m in Sources */,
 				E4E1382012AC2F88003E7419 /* DeleteButton.m in Sources */,
 				E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */,
+				E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "FacebookUploader.h"
+#import "RKUBackgroundTask.h"
 
 // Your Facebook APP Id must be set before running this example
 // See http://www.facebook.com/developers/createapp.php
@@ -30,6 +31,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 @synthesize videoDescription;
 @synthesize videoPath;
 @synthesize progress;
+@synthesize task;
 
 + (FacebookUploader *) facebookUploader {
 	return [[[FacebookUploader alloc] init] autorelease];
@@ -60,9 +62,34 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 }
 	
 - (void) setState:(NSInteger)newState {
+	
+	BOOL finishUploading = _state == FACEBOOK_UPLOADER_STATE_UPLOADING;
+	
+	
 	_state = newState;
 	
 	NSLog(@"FacebookUploader state changed: %i",_state);
+	
+	if (newState == FACEBOOK_UPLOADER_STATE_UPLOADING) {
+		self.task = [RKUBackgroundTask backgroundTask];
+	}
+	
+	if (finishUploading) {
+		if (newState == FACEBOOK_UPLOADER_STATE_UPLOADING) {
+			NSLog(@"FacebookUploader: FACEBOOK_UPLOADER_STATE_UPLOADING twice");
+		} 
+		
+		if ([RKUBackgroundTask isBackground]) {
+			
+			NSLog(@"FacebookUploader: finish uploading in background, no delegate");
+		}
+		
+		[task finish];
+		
+		self.task = 0;
+		
+	}
+	
 	
 	for (id<FacebookUploaderDelegate> delegate in delegates) {
 		if ([delegate respondsToSelector:@selector(facebookUploaderStateChanged:)]) {
@@ -268,6 +295,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 
 - (void)request:(FBRequest*)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+	[task update];
+	
 	progress = (float)totalBytesWritten/(float)totalBytesExpectedToWrite;
 	NSLog(@"facebook upload progress: %f",progress);
 	
