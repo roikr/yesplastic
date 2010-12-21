@@ -1206,6 +1206,12 @@ void testApp::renderAudio() {
 			player[i].processWithBlocks(lBlock, rBlock);
 		}
 		
+		for (int i = 0; i < blockLength; i++){
+			lBlock[i] *= GLOBAL_GAIN;
+			rBlock[i] *= GLOBAL_GAIN;
+		}
+		
+		
 		song.saveWithBlocks(lBlock, rBlock);
 		currentBlock++;
 	}
