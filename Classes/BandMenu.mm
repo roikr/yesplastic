@@ -117,7 +117,7 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/yesplastic"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
 			break;
 		case 1:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
