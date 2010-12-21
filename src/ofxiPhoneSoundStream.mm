@@ -40,7 +40,7 @@ static inline void checkSoundStreamIsRunning() {
 
 bool checkStatus(OSStatus err) {
 	if(err!=noErr) {
-		ofLog(OF_LOG_ERROR, "There was an error: " + err);
+		ofLog(OF_LOG_ERROR, "There was an error: %i", err);
 //		OFSAptr->error(err);
 		return true;
 	}
