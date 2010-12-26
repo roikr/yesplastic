@@ -17,7 +17,7 @@
 #define RECORD_LIMIT 60000
 
 #define GLOBAL_GAIN 0.65
-
+#define FULL_SCREEN_SCALE 480.0 / 762.0
 
 enum {
 	loopswitch,
@@ -92,7 +92,7 @@ void testApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 		
 	
-	scale = 480.0/ 762.0;
+	
 	
 	string filename = "images/background.pvr";
 	background.setup(ofToDataPath(filename));
@@ -128,12 +128,21 @@ void testApp::setup(){
 	}
 	 
 	 
+	sliderPrefs prefs;
+	float scale;
+	ofPoint pnt;
+	for (int i=0; i<3; i++) {
+		
+		getTrans(SOLO_STATE, i, pnt, scale);
+		prefs.pages.push_back(-pnt);
+	}
 	
+	slider.setup(scale, prefs);
 	controller = 1;
+	
 	setState(SOLO_STATE);
 	
 	bTrans = false;
-	bMove = false;
 	bMenu = false;
 	bPush = false;
 	
@@ -155,6 +164,8 @@ void testApp::setup(){
 	
 	startTime = ofGetElapsedTimeMillis();
 	currentFrame = 0;
+	
+	
 	
 }
 
@@ -417,15 +428,13 @@ void testApp::setState(int state) {
 		} break;
 		case SOLO_STATE:
 			player[controller].setState(state);
+			slider.setPage(controller);
+			break;
 		default:
 			break;
 	}
 	bNeedDisplay = true;
-	/*
-	if (menu.mode!=MENU_IDLE) {
-		menu.setPlayer(player+controller, state);
-	}
-	 */
+	
 }
 
 int	testApp::getState() {
@@ -549,54 +558,35 @@ void testApp::transitionLoop(){
 			break;
 		}
 	}
-	
-	
-	
-		
-/*
-	if (measures.size()==1) {
-		
-		
-		if (!bMove && menu.mode == MENU_IDLE && (ofGetElapsedTimeMillis()-measures.front().t) > 500) {
-			menu.mode = MENU_DISPLAYED;
-			
-			menu.setPlayer(player+controller,state);
-			measures.clear();
-			
-		}
-		
-	}
- */
-	
 }
 
 
 
-void testApp::getTrans(int state,int controller,float &tx,float &ty,float &ts) {
+void testApp::getTrans(int state,int controller,ofPoint &pnt,float &ts) {
 	switch (state) {
 		case SOLO_STATE: {
 			ts = 1.17;
 			
 			switch (controller) {
 				case 0: {
-					tx = -6.0;
-					ty = -75.0;
+					pnt.x = -6.0;
+					pnt.y = -75.0;
 				} break;
 				case 1: {
-					tx = -246.0;
-					ty = -75.0;
+					pnt.x = -246.0;
+					pnt.y = -75.0;
 				} break;
 				case 2: {
-					tx = -488.0;
-					ty = -75.0;
+					pnt.x = -488.0;
+					pnt.y = -75.0;
 				} break;
 			}
 			
 		} break;
 		case BAND_STATE: {
-			ts = scale;
-			tx = 0;
-			ty = 0;
+			ts = FULL_SCREEN_SCALE;
+			pnt.x = 0;
+			pnt.y = 0;
 		} break;
 	}
 }
@@ -609,6 +599,7 @@ void testApp::getTrans(int state,int controller,float &tx,float &ty,float &ts) {
 //--------------------------------------------------------------
 void testApp::draw(){
 	
+	
 	if (!bInitialized)
 		return;
 	//	printf("draw()\n");
@@ -616,7 +607,7 @@ void testApp::draw(){
 	if (getSongState()==SONG_RENDER_VIDEO) {
 		if (getState()==SOLO_STATE) {
 			ofPushMatrix();
-			ofScale(scale*2/3, scale*2/3, 1);
+			ofScale(FULL_SCREEN_SCALE*2/3, FULL_SCREEN_SCALE*2/3, 1);
 			ofTranslate(0, 80, 0);
 			render();
 			ofPopMatrix();
@@ -628,166 +619,50 @@ void testApp::draw(){
 		return;
 	}
 	
-	float ts;
-	float tx;
-	float ty;
-	
-	int time = ofGetElapsedTimeMillis();
-	
-	getTrans(state, controller, tx, ty, ts);
-	
-	if (bTrans) {
-		float t = (float)(time - animStart)/250.0;
-		if (t >= 1) {
-			bTrans = false;
-		} else {
-			float s;
-			float x;
-			float y;
-			getTrans(state == BAND_STATE ? SOLO_STATE : BAND_STATE, controller, x, y, s);
-			
-			ts = easeInOutQuad(t,s,ts);
-			tx = easeInOutQuad(t,x,tx);
-			ty = easeInOutQuad(t,y,ty);
-		}
-	}
-	
-	
-	if (state==SOLO_STATE) {
-		
-		if (measures.size()>1) {
-			float d = measures.back().x-measures.front().x;
-			if ( (controller == 2 && d < 0) || (controller == 0 && d > 0)) {
-				d=d/2;
-			}
-			
-			tx += d/ts;
-			
-			if (bPush) {
-				bPush = false;
-				player[controller].setPush(false);
-			}
-		}
-		
-		if (bMove) {
-			float t = (float)(time - moveTime)/250.0;
-			if (t >= 1) 
-				bMove = false;
-			else 
-				tx = easeOutBack(t,sx,tx);
-		}	
-		
-		
-		
-	}
-	
 
 	ofPushMatrix();
-	ofScale(ts, ts, 1.0);
-	ofTranslate(tx, ty, 0.0);
-			
-	background.draw(0,0);
-
-	int i;
 	
-	if (bTrans || bMove || !measures.empty() || state == BAND_STATE) {
-		for(i=0;i<3;i++)
-			player[i].draw();
-	} else {
-		player[controller].draw();
+		
+	if (bTrans || state == BAND_STATE) {
+		
+		ofPoint pnt;
+		float scale;
+		getTrans(state, controller, pnt, scale);	
+		
+		
+		if (bTrans) {
+			float t = (float)(ofGetElapsedTimeMillis() - animStart)/250.0;
+			if (t >= 1) {
+				bTrans = false;
+			} else {
+				ofPoint pnt2;
+				float scale2;
+				
+				getTrans(state == BAND_STATE ? SOLO_STATE : BAND_STATE, controller, pnt2, scale2);
+				
+				scale = easeInOutQuad(t,scale2,scale);
+				pnt.x = easeInOutQuad(t,pnt2.x,pnt.x);
+				pnt.y = easeInOutQuad(t,pnt2.y,pnt.y);
+			}
+			
+		}
+		
+				
+		ofScale(scale, scale, 1.0);
+		ofTranslate(pnt.x, pnt.y, 0.0);
+		
+	}  else {
+		slider.update();
+		slider.transform();
+	}
+
+	background.draw(0,0);
+	
+	for(int i=0;i<3;i++) {
+		player[i].draw();
 	}
 	
 	ofPopMatrix();
-	
-//	int x;
-//	int y;
-//	
-//	if (!bTrans ) {
-//		switch (state) {
-//			case SOLO_STATE:
-//			{
-//				if (!bMove && measures.empty() && !bMenu) 
-//					for (i=0;i<8;i++) {
-//						
-//						y = 360+(i/4) * 60;
-//						x = 10+(i%4)*80;
-//						if (player[controller].getMode() == MANUAL_MODE)
-//							buttons.draw(x,y,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
-//						else
-//							buttons.draw(x,y,i*60,(controller*2+1)*60,60,60,i==player[controller].getCurrentLoop() ?  1.0f : 0.4f );
-//					}
-//				
-//			} break;
-//			case BAND_STATE:
-//			
-//			{
-//				
-//				/*
-//				for (i=0;i<8;i++) 
-//					if (player[controller].getMidiTrack()->getMode() == MANUAL_MODE)
-//						buttons.draw(i*60,260,i*60,controller*2*60,60,60,bButtonDown && i==button ?  1.0f : 0.4f );
-//					else
-//						buttons.draw(i*60,260,i*60,(controller*2+1)*60,60,60,i==player[controller].getMidiTrack()->getCurrentLoop() ?  1.0f : 0.4f );
-//				*/
-//				
-//				
-//					
-//				
-//				if (!measures.empty() ) 
-//					buttons.draw(50+controller*160,260,nextLoopNum*60,(controller*2+1)*60,60,60,  1.0f );
-//				
-//			} 
-//			 
-//			break;
-//				
-//		}
-//		
-//		
-//		//for(i=0;i<3;i++) {
-//			/*
-//			float alpha =1.0f;
-//			if (state==BAND_STATE && player[i].getMidiTrack()->getMode() == MANUAL_MODE) {
-//				alpha = 1.0f;
-//			} 
-//			
-//			if (player[i].bFade) {
-//				float t = (float)(time - player[i].fadeStart)/250.0;
-//				if (t >= 1) 
-//					player[i].bFade = false;
-//				else {
-//					alpha = easeInOutQuad(t,alpha > 0.0f ? 0.0f : 1.0f,ty);
-//				}
-//					
-//			}
-//			 */
-//			//player[i].mask.draw(player[i].mask_x*scale,0,player[i].mask_width,320,1.0f);
-//			//player[i].mask.draw(player[i].mask_x*scale,0,0,0,player[i].mask_width,320,0.0f);
-//		//
-//	//}
-//		 
-//		
-//		/*
-//		if (menu.mode != MENU_IDLE && !bTrans) 
-//			menu.draw();
-//		 */
-//	}
-//	
-//	
-//	/*
-//	 
-//	 ui.draw(10,0,bPlay ? 90 : 10,0,20,20,bPlay ? 1.0f : 0.4f);
-//	 ui.draw(450,0,bRecord ? 370 : 450,0,20,20,bRecord ? 1.0f : 0.4f);
-//	 
-//	 if (bpmDown) {
-//	 ui.draw(40,0,40,0,20,20,1.0f);
-//	 ui.draw(420,0,420,0,20,20,1.0f);
-//	 ui.draw((bpmVal - 50.0)/150.0 * 380.0 + 40.0,0,60,0,20,20,1.0f);
-//	 }
-//	 else
-//	 ui.draw((float)(MidiTrack::GetBPM() - 50)/150.0 * 380.0 + 40.0,0,60,0,20,20,0.4f);
-//	 */
-	
-	
 	
 }
 
@@ -825,21 +700,7 @@ void testApp::exit() {
 }
 
 
-/*
- 
- // DOWN
- 
- if (y>20) {// characters
- 
- bShowMenu = true;
- 
- 
- }
- 
- 
- 
- 
-  */
+
 
 void testApp::buttonPressed(int button) {
 	
@@ -891,8 +752,6 @@ void testApp::touchDown(float x, float y, int touchId) {
 				
 			}
 			
-			
-			//nextLoopNum = player[controller].getCurrentLoop();
 		} break;
 		case SOLO_STATE: {
 			if (x>50 && x<270 && y>100 && y<350 && (songState!=SONG_PLAY && songState!=SONG_RENDER_VIDEO)) {
@@ -900,21 +759,10 @@ void testApp::touchDown(float x, float y, int touchId) {
 				bPush = true;
 			}
 			
-			measure m;
-			m.x = x;
-			m.y = y;
-			m.t = ofGetElapsedTimeMillis();
-			measures.push_back(m);
+			slider.touchDown(x, y, touchId);
 			break;
 		}
 	}
-	/*
-	if (state==SOLO_STATE && y>=360) {
-		button = 4*(((int)y-360)/60)+(int)x/80;
-		
-		buttonPressed(button);
-		bButtonDown = true; // for view 
-	} */
 	
 }
 
@@ -940,25 +788,17 @@ void testApp::touchMoved(float x, float y, int touchId) {
 	if (touchId!=0) // || bButtonDown) 
 		return;
 	
-	measure m;
-	m.x = x;
-	m.y = y;
-	m.t = ofGetElapsedTimeMillis();
-
-	measures.push_back(m);
-	
-	/*
-	switch (state) {
-		case SOLO_STATE: 
-			
-			break;
-		case BAND_STATE:
-			
-			nextLoopNum = (player[controller].getCurrentLoop() + (measures.back().y-measures.front().y) / 40 + 8) % 8;
-			
-			break;
+	if (getState() == SOLO_STATE) {
+		slider.touchMoved(x, y, touchId);
+		if (bPush) {
+			bPush = false;
+			player[controller].setPush(false);
+		}		
 	}
-	 */
+	
+	
+	
+	
 }
 
 
@@ -974,90 +814,22 @@ void testApp::touchUp(float x, float y, int touchId) {
 		return;
 	}
 	
+	slider.touchUp(x, y, touchId);
 	
-	if (touchId!=0 || bMenu) {
-		if (!measures.empty()) { 
-			measures.clear();
-		}
+	if (bMenu) {
 		return;
 	}
 	
 	if (bPush) {
 		player[controller].setPush(false);
-	}
-		
-	switch (state) {
-		case SOLO_STATE: {
-			
-			if (y<360 && measures.size()>1 ) {
-				bMove = true;
-				
-				
-				moveTime = ofGetElapsedTimeMillis();
-				
-				
-				float y,s;
-				getTrans(SOLO_STATE, controller, sx,y,s);
-				
-				float d = measures.back().x-measures.front().x;
-				if ( (controller == 2 && d < 0) || (controller == 0 && d > 0)) {
-					d=d/2;
-				} else {
-					
-					if (measures.size()>=2) {
-						measure m = measures.back();
-						measure m0 = measures.at(measures.size()-2);
-						float dx = m.x-m0.x;
-						float dt = m.t-m0.t;
-						//printf("touchMoved: %.f, %.f\n", dx, dt);
-						vx = dx/dt;
-					} else 
-						vx = 0;
-					
-					
-					bNeedDisplay = true; // TODO: is this exact ?
-					
-					if (fabs(vx)>1.0) {
-						if (controller < 2 && vx<0) 
-							controller++;
-						else if (controller > 0 && vx>0) 
-							controller--;
-						
-					}  else if (fabs(d/s)>160) {
-						
-						if (controller <2 && d/s<0) 
-							controller++;
-						else if (controller >0 && d/s>0) 
-							controller--;
-					} 
-				}
-				
-				sx+=d/s;
-			}
-		} break;
-			
-			
-		/*
-		case BAND_STATE: 
-			
-			if (player[controller].getCurrentLoop() != nextLoopNum ) 
-				player[controller].changeLoop(nextLoopNum);
-			
-			break;
-		 */
-	}
-	
-	if (bPush) {
 		bPush = false;
-			
-		//if (measures.size()<=1 ) { // && !bButtonDown
-			setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
-		//}
+		setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
+	} else {
+		if (state == SOLO_STATE) {
+			bNeedDisplay = slider.getCurrentPage() != controller;
+			controller = slider.getCurrentPage();
+		}
 	}
-	
-	measures.clear();
-//	bButtonDown = false;
-	
 	
 }
 
@@ -1172,7 +944,7 @@ void testApp::startRecording() {
 void testApp::setSongState(int songState) {
 	
 	if (songState == SONG_RENDER_VIDEO) {
-		pincher.setup(ofPoint(0,0), scale,pincherPrefs(480,320,ofRectangle(0,0,762,508),scale,1.8));
+		pincher.setup(ofPoint(0,0), FULL_SCREEN_SCALE,pincherPrefs(480,320,ofRectangle(0,0,762,508),FULL_SCREEN_SCALE,1.8));
 	}
 	
 	// song is valid and can Overwritten only when FINISHING RECORD

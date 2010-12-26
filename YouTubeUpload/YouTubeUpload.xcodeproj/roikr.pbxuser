@@ -9,9 +9,9 @@
 	};
 	1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1430}}";
-			sepNavSelRange = "{1780, 29}";
-			sepNavVisRange = "{1606, 1700}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1443}}";
+			sepNavSelRange = "{1107, 9}";
+			sepNavVisRange = "{3, 1763}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* YouTubeUpload */ = {
@@ -73,18 +73,17 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 314624602;
-			PBXWorkspaceStateSaveDate = 314624602;
+			PBXPerProjectTemplateStateSaveDate = 314732305;
+			PBXWorkspaceStateSaveDate = 314732305;
 		};
 		perUserProjectItems = {
+			E41E700712C29E4900BEF341 /* PBXTextBookmark */ = E41E700712C29E4900BEF341 /* PBXTextBookmark */;
 			E4379AEF12C0BF1F006C26AC /* PBXTextBookmark */ = E4379AEF12C0BF1F006C26AC /* PBXTextBookmark */;
 			E4379B1712C0C226006C26AC /* PBXTextBookmark */ = E4379B1712C0C226006C26AC /* PBXTextBookmark */;
 			E4379B2312C0C305006C26AC /* PBXTextBookmark */ = E4379B2312C0C305006C26AC /* PBXTextBookmark */;
 			E4379B3A12C0C52F006C26AC /* PBXTextBookmark */ = E4379B3A12C0C52F006C26AC /* PBXTextBookmark */;
 			E4379B3B12C0C52F006C26AC /* PBXTextBookmark */ = E4379B3B12C0C52F006C26AC /* PBXTextBookmark */;
 			E4379B5512C0C8C8006C26AC /* PBXTextBookmark */ = E4379B5512C0C8C8006C26AC /* PBXTextBookmark */;
-			E4379B6812C0C9C6006C26AC /* PBXTextBookmark */ = E4379B6812C0C9C6006C26AC /* PBXTextBookmark */;
-			E4379B8212C0CA7E006C26AC /* PBXTextBookmark */ = E4379B8212C0CA7E006C26AC /* PBXTextBookmark */;
 			E459DD8C12AD605D00DAA283 /* PBXTextBookmark */ = E459DD8C12AD605D00DAA283 /* PBXTextBookmark */;
 			E4B543D61270AA3700851D86 /* PBXTextBookmark */ = E4B543D61270AA3700851D86 /* PBXTextBookmark */;
 			E4B543D71270AA3700851D86 /* PBXTextBookmark */ = E4B543D71270AA3700851D86 /* PBXTextBookmark */;
@@ -106,6 +105,16 @@
 		uiCtxt = {
 			sepNavWindowFrame = "{{340, 74}, {1246, 798}}";
 		};
+	};
+	E41E700712C29E4900BEF341 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */;
+		name = "YouTubeUploadAppDelegate.m: 36";
+		rLen = 9;
+		rLoc = 1107;
+		rType = 0;
+		vrLen = 1763;
+		vrLoc = 3;
 	};
 	E4379AEF12C0BF1F006C26AC /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -167,26 +176,6 @@
 		vrLen = 1700;
 		vrLoc = 1606;
 	};
-	E4379B6812C0C9C6006C26AC /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4B54115127074A600851D86 /* YouTubeUploader.m */;
-		name = "YouTubeUploader.m: 93";
-		rLen = 0;
-		rLoc = 1952;
-		rType = 0;
-		vrLen = 1005;
-		vrLoc = 1307;
-	};
-	E4379B8212C0CA7E006C26AC /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4B54115127074A600851D86 /* YouTubeUploader.m */;
-		name = "YouTubeUploader.m: 93";
-		rLen = 0;
-		rLoc = 1952;
-		rType = 0;
-		vrLen = 1005;
-		vrLoc = 1307;
-	};
 	E459DD8C12AD605D00DAA283 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
@@ -199,9 +188,9 @@
 	};
 	E4B54115127074A600851D86 /* YouTubeUploader.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {950, 3913}}";
+			sepNavIntBoundsRect = "{{0, 0}, {950, 3640}}";
 			sepNavSelRange = "{1952, 0}";
-			sepNavVisRange = "{1307, 1005}";
+			sepNavVisRange = "{4760, 1398}";
 			sepNavWindowFrame = "{{51, 137}, {746, 840}}";
 		};
 	};

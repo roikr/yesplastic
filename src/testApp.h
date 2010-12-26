@@ -12,12 +12,8 @@
 #include "ofxRKTexture.h"
 #include "ofxSndFile.h"
 #include "ofxPincher.h"
+#include "ofxSlider.h"
 
-struct measure {
-	int x;
-	int y;
-	int t;
-};
 
 class testApp : public ofSimpleApp  {
 	
@@ -60,7 +56,7 @@ public:
 	int getBPM();
 	void setBPM(int bpm);
 	
-	void getTrans(int state,int controller,float &tx,float &ty,float &ts);
+	void getTrans(int state,int controller,ofPoint &pnt,float &ts);
 	
 	int getSongVersion();
 	void saveSong(string songName);
@@ -111,17 +107,11 @@ private:
 	
 	void startRecording();
 	
-		
-	float scale;
+	//float scale;
 	
 	ofxRKTexture background;
 	
-//	ofxRKTexture buttons;
-//	bool bButtonDown;
-//	int button;
-		
 	
-	bool bPush;
 	
 	ofTrueTypeFont	verdana;
 		
@@ -136,21 +126,10 @@ private:
 	//int bChangeSet; // //TODO: is it realy needed ?  to delay change video set to next update (so draw wont change)
 	string nextSoundSet;
 	
-	
 	float alpha;
 	bool bTrans;  // I believe it is the transtion between BAND and SOLO states
 	int animStart;
 		
-	bool bMove; // dragging around
-	int moveTime;
-	float sx;
-	
-	vector<measure> measures;
-	int nextLoopNum;
-	float vx;
-	
-	
-	
 	float *lBlock;
 	float *rBlock;
 	
@@ -168,6 +147,9 @@ private:
 	int currentBlock;    //using to seekFrame and renderAudio for rendering video & audio;
 	int totalBlocks; // calculating by renderAudio before rendering video - 
 	// because we don't use midi instrument while video rendering, we need to know when the last sample occured...
+	
+	ofxSlider slider;
+	bool bPush;
 	
 	ofxPincher pincher;
 	int pincherStart; //  start frame for animating scaling

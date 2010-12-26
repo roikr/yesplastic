@@ -181,6 +181,7 @@
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
 		E4749D52121D914600886A6E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D51121D914600886A6E /* MobileCoreServices.framework */; };
+		E47B127612C7A5B7007202BB /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E47B127412C7A5B7007202BB /* ofxSlider.cpp */; };
 		E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47BC952122A8E5A00B6149A /* CustomImageView.m */; };
 		E47C191412A6D77700B35ED9 /* Trigger.m in Sources */ = {isa = PBXBuildFile; fileRef = E47C191312A6D77700B35ED9 /* Trigger.m */; };
 		E480B6CD1212152400096300 /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C71212152400096300 /* Set.m */; };
@@ -325,6 +326,7 @@
 		E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
 		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E49CF1BA12A6798A002CD0B3 /* TriggersView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E49CF1B912A6798A002CD0B3 /* TriggersView.mm */; };
+		E49FD6F412C4EBFC00697288 /* easing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E49FD6F112C4EBFC00697288 /* easing.cpp */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
 		E4B1B2AA126E20B2001A577D /* FBConnectGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B298126E20B2001A577D /* FBConnectGlobal.m */; };
@@ -549,7 +551,6 @@
 		E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKUBackgroundTask.m; sourceTree = "<group>"; };
 		E439299312932D7500F855A8 /* ofxPincher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPincher.cpp; sourceTree = "<group>"; };
 		E439299412932D7500F855A8 /* ofxPincher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPincher.h; sourceTree = "<group>"; };
-		E43929B312932F2500F855A8 /* ofMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMath.h; sourceTree = "<group>"; };
 		E43BE954125C968F009C8845 /* APP HELP SLIDE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "APP HELP SLIDE.png"; sourceTree = "<group>"; };
 		E43BE955125C968F009C8845 /* HELP_BACK_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_B.png; sourceTree = "<group>"; };
 		E43BE956125C968F009C8845 /* HELP_BACK_B_PUSH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_B_PUSH.png; sourceTree = "<group>"; };
@@ -630,6 +631,8 @@
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E4749D51121D914600886A6E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E47B127412C7A5B7007202BB /* ofxSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSlider.cpp; sourceTree = "<group>"; };
+		E47B127512C7A5B7007202BB /* ofxSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSlider.h; sourceTree = "<group>"; };
 		E47BC951122A8E5A00B6149A /* CustomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageView.h; sourceTree = "<group>"; };
 		E47BC952122A8E5A00B6149A /* CustomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageView.m; sourceTree = "<group>"; };
 		E47C191212A6D77700B35ED9 /* Trigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trigger.h; sourceTree = "<group>"; };
@@ -915,6 +918,9 @@
 		E49BD07F125A7AB1005A0FAC /* ActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionCell.m; sourceTree = "<group>"; };
 		E49CF1B812A6798A002CD0B3 /* TriggersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriggersView.h; sourceTree = "<group>"; };
 		E49CF1B912A6798A002CD0B3 /* TriggersView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriggersView.mm; sourceTree = "<group>"; };
+		E49FD6F112C4EBFC00697288 /* easing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = easing.cpp; sourceTree = "<group>"; };
+		E49FD6F212C4EBFC00697288 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
+		E49FD6F312C4EBFC00697288 /* ofMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMath.h; sourceTree = "<group>"; };
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
@@ -1319,7 +1325,6 @@
 			children = (
 				E439299412932D7500F855A8 /* ofxPincher.h */,
 				E439299312932D7500F855A8 /* ofxPincher.cpp */,
-				E43929B312932F2500F855A8 /* ofMath.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1382,6 +1387,8 @@
 		E444725212143D810058D07B /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E47B127212C7A5B7007202BB /* ofxSlider */,
+				E49FD6F012C4EBFC00697288 /* common */,
 				E439299112932D7500F855A8 /* ofxPincher */,
 				E444728912143EE60058D07B /* ofxSndFile */,
 				E444727312143DB90058D07B /* ofxXmlSettings */,
@@ -1552,6 +1559,24 @@
 			children = (
 				E444728C12143EE60058D07B /* ofxSndFile.h */,
 				E444728B12143EE60058D07B /* ofxSndFile.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E47B127212C7A5B7007202BB /* ofxSlider */ = {
+			isa = PBXGroup;
+			children = (
+				E47B127312C7A5B7007202BB /* src */,
+			);
+			name = ofxSlider;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSlider";
+			sourceTree = SOURCE_ROOT;
+		};
+		E47B127312C7A5B7007202BB /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E47B127412C7A5B7007202BB /* ofxSlider.cpp */,
+				E47B127512C7A5B7007202BB /* ofxSlider.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1929,6 +1954,17 @@
 			);
 			name = AVPlayer;
 			sourceTree = "<group>";
+		};
+		E49FD6F012C4EBFC00697288 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				E49FD6F112C4EBFC00697288 /* easing.cpp */,
+				E49FD6F212C4EBFC00697288 /* easing.h */,
+				E49FD6F312C4EBFC00697288 /* ofMath.h */,
+			);
+			name = common;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/common";
+			sourceTree = SOURCE_ROOT;
 		};
 		E4AF9D7A1263694A003E9148 /* Facebook */ = {
 			isa = PBXGroup;
@@ -2677,6 +2713,8 @@
 				E4E1382012AC2F88003E7419 /* DeleteButton.m in Sources */,
 				E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */,
 				E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */,
+				E49FD6F412C4EBFC00697288 /* easing.cpp in Sources */,
+				E47B127612C7A5B7007202BB /* ofxSlider.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
