@@ -171,6 +171,13 @@ string ofToString(int value){
 
 //our openGL wrappers
 //----------------------------------------------------------
+
+void ofBackground(int r, int g, int b) {
+	glClearColor(r,g,b,0);
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+}
+
 void ofPushMatrix(){
 	glPushMatrix();
 }

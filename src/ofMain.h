@@ -106,6 +106,8 @@ void ofSetLogLevel(int logLevel);
 string  ofToString(double value, int precision = 7);
 string  ofToString(int  value);
 
+void ofBackground(int r, int g, int b);
+
 void ofPushMatrix();
 void ofPopMatrix();
 void ofTranslate(float x, float y, float z = 0);

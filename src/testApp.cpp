@@ -604,6 +604,8 @@ void testApp::draw(){
 		return;
 	//	printf("draw()\n");
 	
+	ofBackground(0, 0, 0);
+	
 	if (getSongState()==SONG_RENDER_VIDEO) {
 		if (getState()==SOLO_STATE) {
 			ofPushMatrix();
