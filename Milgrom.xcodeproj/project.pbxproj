@@ -148,7 +148,6 @@
 		E44471D3121438540058D07B /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = E44471CE121438540058D07B /* ZipArchive.mm */; };
 		E44471DB121438CD0058D07B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E44471DA121438CD0058D07B /* main.m */; };
 		E444723412143D300058D07B /* FramesDrivenPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444721212143D300058D07B /* FramesDrivenPlayer.cpp */; };
-		E444723812143D300058D07B /* ofMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444721912143D300058D07B /* ofMain.mm */; };
 		E444723A12143D300058D07B /* ofxRKActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444721C12143D300058D07B /* ofxRKActor.cpp */; };
 		E444723D12143D300058D07B /* ofxRKSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444722212143D300058D07B /* ofxRKSequence.cpp */; };
 		E444723E12143D300058D07B /* ofxRKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444722512143D300058D07B /* ofxRKTexture.mm */; };
@@ -326,7 +325,6 @@
 		E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
 		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E49CF1BA12A6798A002CD0B3 /* TriggersView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E49CF1B912A6798A002CD0B3 /* TriggersView.mm */; };
-		E49FD6F412C4EBFC00697288 /* easing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E49FD6F112C4EBFC00697288 /* easing.cpp */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
 		E4B1B2AA126E20B2001A577D /* FBConnectGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B298126E20B2001A577D /* FBConnectGlobal.m */; };
@@ -415,6 +413,10 @@
 		E4F3A37D1285D04500A3E226 /* CANCEL_B.png in Resources */ = {isa = PBXBuildFile; fileRef = E4F3A3771285D04500A3E226 /* CANCEL_B.png */; };
 		E4F3A37E1285D04500A3E226 /* BAR_OVERLY.png in Resources */ = {isa = PBXBuildFile; fileRef = E4F3A3781285D04500A3E226 /* BAR_OVERLY.png */; };
 		E4F3A37F1285D04500A3E226 /* BAR_BACKGROUND.png in Resources */ = {isa = PBXBuildFile; fileRef = E4F3A3791285D04500A3E226 /* BAR_BACKGROUND.png */; };
+		E4F7D80212CD00FF00D3119E /* easing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4F7D7F812CD00FF00D3119E /* easing.cpp */; };
+		E4F7D80312CD00FF00D3119E /* ofMainExt.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4F7D7FB12CD00FF00D3119E /* ofMainExt.mm */; };
+		E4F7D80412CD00FF00D3119E /* ofMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4F7D7FE12CD00FF00D3119E /* ofMain.mm */; };
+		E4F7D80512CD00FF00D3119E /* ofxiPhoneExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4F7D80112CD00FF00D3119E /* ofxiPhoneExtras.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -574,8 +576,6 @@
 		E444721112143D300058D07B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E444721212143D300058D07B /* FramesDrivenPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FramesDrivenPlayer.cpp; sourceTree = "<group>"; };
 		E444721312143D300058D07B /* FramesDrivenPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesDrivenPlayer.h; sourceTree = "<group>"; };
-		E444721812143D300058D07B /* ofMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMain.h; sourceTree = "<group>"; };
-		E444721912143D300058D07B /* ofMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofMain.mm; sourceTree = "<group>"; };
 		E444721C12143D300058D07B /* ofxRKActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKActor.cpp; sourceTree = "<group>"; };
 		E444721D12143D300058D07B /* ofxRKActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRKActor.h; sourceTree = "<group>"; };
 		E444722212143D300058D07B /* ofxRKSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRKSequence.cpp; sourceTree = "<group>"; };
@@ -918,9 +918,6 @@
 		E49BD07F125A7AB1005A0FAC /* ActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionCell.m; sourceTree = "<group>"; };
 		E49CF1B812A6798A002CD0B3 /* TriggersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriggersView.h; sourceTree = "<group>"; };
 		E49CF1B912A6798A002CD0B3 /* TriggersView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriggersView.mm; sourceTree = "<group>"; };
-		E49FD6F112C4EBFC00697288 /* easing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = easing.cpp; sourceTree = "<group>"; };
-		E49FD6F212C4EBFC00697288 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
-		E49FD6F312C4EBFC00697288 /* ofMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMath.h; sourceTree = "<group>"; };
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
@@ -1040,6 +1037,15 @@
 		E4F3A3771285D04500A3E226 /* CANCEL_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CANCEL_B.png; sourceTree = "<group>"; };
 		E4F3A3781285D04500A3E226 /* BAR_OVERLY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BAR_OVERLY.png; sourceTree = "<group>"; };
 		E4F3A3791285D04500A3E226 /* BAR_BACKGROUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BAR_BACKGROUND.png; sourceTree = "<group>"; };
+		E4F7D7F812CD00FF00D3119E /* easing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = easing.cpp; sourceTree = "<group>"; };
+		E4F7D7F912CD00FF00D3119E /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
+		E4F7D7FA12CD00FF00D3119E /* ofMainExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMainExt.h; sourceTree = "<group>"; };
+		E4F7D7FB12CD00FF00D3119E /* ofMainExt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofMainExt.mm; sourceTree = "<group>"; };
+		E4F7D7FD12CD00FF00D3119E /* ofMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMain.h; sourceTree = "<group>"; };
+		E4F7D7FE12CD00FF00D3119E /* ofMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofMain.mm; sourceTree = "<group>"; };
+		E4F7D7FF12CD00FF00D3119E /* ofTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofTypes.h; sourceTree = "<group>"; };
+		E4F7D80012CD00FF00D3119E /* ofxiPhoneExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneExtras.h; sourceTree = "<group>"; };
+		E4F7D80112CD00FF00D3119E /* ofxiPhoneExtras.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneExtras.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1387,8 +1393,9 @@
 		E444725212143D810058D07B /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E4F7D7F712CD00FF00D3119E /* common */,
+				E4F7D7FC12CD00FF00D3119E /* myOF */,
 				E47B127212C7A5B7007202BB /* ofxSlider */,
-				E49FD6F012C4EBFC00697288 /* common */,
 				E439299112932D7500F855A8 /* ofxPincher */,
 				E444728912143EE60058D07B /* ofxSndFile */,
 				E444727312143DB90058D07B /* ofxXmlSettings */,
@@ -1539,8 +1546,6 @@
 			children = (
 				E49A3D021261158700879E26 /* ofxiPhoneSoundStream.mm */,
 				E49A3D031261158700879E26 /* ofSoundStream.h */,
-				E444721812143D300058D07B /* ofMain.h */,
-				E444721912143D300058D07B /* ofMain.mm */,
 			);
 			name = myOF;
 			sourceTree = "<group>";
@@ -1955,17 +1960,6 @@
 			name = AVPlayer;
 			sourceTree = "<group>";
 		};
-		E49FD6F012C4EBFC00697288 /* common */ = {
-			isa = PBXGroup;
-			children = (
-				E49FD6F112C4EBFC00697288 /* easing.cpp */,
-				E49FD6F212C4EBFC00697288 /* easing.h */,
-				E49FD6F312C4EBFC00697288 /* ofMath.h */,
-			);
-			name = common;
-			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/common";
-			sourceTree = SOURCE_ROOT;
-		};
 		E4AF9D7A1263694A003E9148 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
@@ -2264,6 +2258,31 @@
 			path = Resource/SOLO_BUTTONS;
 			sourceTree = "<group>";
 		};
+		E4F7D7F712CD00FF00D3119E /* common */ = {
+			isa = PBXGroup;
+			children = (
+				E4F7D7F812CD00FF00D3119E /* easing.cpp */,
+				E4F7D7F912CD00FF00D3119E /* easing.h */,
+				E4F7D7FA12CD00FF00D3119E /* ofMainExt.h */,
+				E4F7D7FB12CD00FF00D3119E /* ofMainExt.mm */,
+			);
+			name = common;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/common";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4F7D7FC12CD00FF00D3119E /* myOF */ = {
+			isa = PBXGroup;
+			children = (
+				E4F7D7FD12CD00FF00D3119E /* ofMain.h */,
+				E4F7D7FE12CD00FF00D3119E /* ofMain.mm */,
+				E4F7D7FF12CD00FF00D3119E /* ofTypes.h */,
+				E4F7D80012CD00FF00D3119E /* ofxiPhoneExtras.h */,
+				E4F7D80112CD00FF00D3119E /* ofxiPhoneExtras.mm */,
+			);
+			name = myOF;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/myOF";
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2540,7 +2559,6 @@
 				E44471D3121438540058D07B /* ZipArchive.mm in Sources */,
 				E44471DB121438CD0058D07B /* main.m in Sources */,
 				E444723412143D300058D07B /* FramesDrivenPlayer.cpp in Sources */,
-				E444723812143D300058D07B /* ofMain.mm in Sources */,
 				E444723A12143D300058D07B /* ofxRKActor.cpp in Sources */,
 				E444723D12143D300058D07B /* ofxRKSequence.cpp in Sources */,
 				E444723E12143D300058D07B /* ofxRKTexture.mm in Sources */,
@@ -2713,8 +2731,11 @@
 				E4E1382012AC2F88003E7419 /* DeleteButton.m in Sources */,
 				E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */,
 				E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */,
-				E49FD6F412C4EBFC00697288 /* easing.cpp in Sources */,
 				E47B127612C7A5B7007202BB /* ofxSlider.cpp in Sources */,
+				E4F7D80212CD00FF00D3119E /* easing.cpp in Sources */,
+				E4F7D80312CD00FF00D3119E /* ofMainExt.mm in Sources */,
+				E4F7D80412CD00FF00D3119E /* ofMain.mm in Sources */,
+				E4F7D80512CD00FF00D3119E /* ofxiPhoneExtras.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,6 @@
 
 #include "testApp.h"
+#include "ofMainExt.h"
 
 //#include "ofxRKAQSoundPlayer.h"
 #include "TexturesPlayer.h"
