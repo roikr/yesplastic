@@ -167,7 +167,6 @@
 		E444727F12143DB90058D07B /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727812143DB90058D07B /* tinyxmlerror.cpp */; };
 		E444728012143DB90058D07B /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727912143DB90058D07B /* tinyxmlparser.cpp */; };
 		E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727B12143DB90058D07B /* ofxXmlSettings.cpp */; };
-		E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444728B12143EE60058D07B /* ofxSndFile.cpp */; };
 		E4452EB5128939AC00C7AE2C /* RenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4452EB3128939AC00C7AE2C /* RenderView.m */; };
 		E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = E44D9D231223D1C400477CE0 /* DemoLoader.mm */; };
 		E44F6DBD122A4DC60002386C /* CELL1_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DB8122A4DC60002386C /* CELL1_PROGRESS.png */; };
@@ -345,6 +344,8 @@
 		E4B54288127089C900851D86 /* FacebookUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54285127089C900851D86 /* FacebookUploader.m */; };
 		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
+		E4BBFE4312DC9FE500AA868E /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BBFE3F12DC9FE500AA868E /* libsndfile.a */; };
+		E4BBFE4412DC9FE500AA868E /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BBFE4112DC9FE500AA868E /* ofxSndFile.cpp */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -612,8 +613,6 @@
 		E444727912143DB90058D07B /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		E444727B12143DB90058D07B /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		E444727C12143DB90058D07B /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		E444728B12143EE60058D07B /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
-		E444728C12143EE60058D07B /* ofxSndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSndFile.h; sourceTree = "<group>"; };
 		E44472B712143FEE0058D07B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E4452EB3128939AC00C7AE2C /* RenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenderView.m; path = ConvertToVideo/Classes/RenderView.m; sourceTree = SOURCE_ROOT; };
 		E4452EB4128939AC00C7AE2C /* RenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderView.h; path = ConvertToVideo/Classes/RenderView.h; sourceTree = SOURCE_ROOT; };
@@ -955,6 +954,10 @@
 		E4B5428A127089EB00851D86 /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = YouTubeUpload/Classes/YouTubeUploader.h; sourceTree = "<group>"; };
 		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ../ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ../ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4BBFE3C12DC9FE500AA868E /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sndfile.h; sourceTree = "<group>"; };
+		E4BBFE3F12DC9FE500AA868E /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
+		E4BBFE4112DC9FE500AA868E /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
+		E4BBFE4212DC9FE500AA868E /* ofxSndFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSndFile.h; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -1069,6 +1072,7 @@
 				E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */,
 				E4D82B2A1262EF3400768E33 /* MessageUI.framework in Frameworks */,
 				E4987FD5127F5CED00A07C65 /* AssetsLibrary.framework in Frameworks */,
+				E4BBFE4312DC9FE500AA868E /* libsndfile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1393,11 +1397,11 @@
 		E444725212143D810058D07B /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E4BBFE3812DC9FE500AA868E /* ofxSndFile */,
 				E4F7D7F712CD00FF00D3119E /* common */,
 				E4F7D7FC12CD00FF00D3119E /* myOF */,
 				E47B127212C7A5B7007202BB /* ofxSlider */,
 				E439299112932D7500F855A8 /* ofxPincher */,
-				E444728912143EE60058D07B /* ofxSndFile */,
 				E444727312143DB90058D07B /* ofxXmlSettings */,
 				E444725312143DAA0058D07B /* ofxFramesDriver */,
 				E444725712143DAA0058D07B /* ofxMidi */,
@@ -1548,24 +1552,6 @@
 				E49A3D031261158700879E26 /* ofSoundStream.h */,
 			);
 			name = myOF;
-			sourceTree = "<group>";
-		};
-		E444728912143EE60058D07B /* ofxSndFile */ = {
-			isa = PBXGroup;
-			children = (
-				E444728A12143EE60058D07B /* src */,
-			);
-			name = ofxSndFile;
-			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile";
-			sourceTree = SOURCE_ROOT;
-		};
-		E444728A12143EE60058D07B /* src */ = {
-			isa = PBXGroup;
-			children = (
-				E444728C12143EE60058D07B /* ofxSndFile.h */,
-				E444728B12143EE60058D07B /* ofxSndFile.cpp */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		E47B127212C7A5B7007202BB /* ofxSlider */ = {
@@ -2012,6 +1998,66 @@
 				E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		E4BBFE3812DC9FE500AA868E /* ofxSndFile */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE3912DC9FE500AA868E /* libs */,
+				E4BBFE4012DC9FE500AA868E /* src */,
+			);
+			name = ofxSndFile;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4BBFE3912DC9FE500AA868E /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE3A12DC9FE500AA868E /* sndfile */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		E4BBFE3A12DC9FE500AA868E /* sndfile */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE3B12DC9FE500AA868E /* include */,
+				E4BBFE3D12DC9FE500AA868E /* lib */,
+			);
+			path = sndfile;
+			sourceTree = "<group>";
+		};
+		E4BBFE3B12DC9FE500AA868E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE3C12DC9FE500AA868E /* sndfile.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		E4BBFE3D12DC9FE500AA868E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE3E12DC9FE500AA868E /* iPhone */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		E4BBFE3E12DC9FE500AA868E /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE3F12DC9FE500AA868E /* libsndfile.a */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		E4BBFE4012DC9FE500AA868E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBFE4112DC9FE500AA868E /* ofxSndFile.cpp */,
+				E4BBFE4212DC9FE500AA868E /* ofxSndFile.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		E4BC39D5125DA87300B492E4 /* Band */ = {
@@ -2577,7 +2623,6 @@
 				E444727F12143DB90058D07B /* tinyxmlerror.cpp in Sources */,
 				E444728012143DB90058D07B /* tinyxmlparser.cpp in Sources */,
 				E444728112143DB90058D07B /* ofxXmlSettings.cpp in Sources */,
-				E444728D12143EE60058D07B /* ofxSndFile.cpp in Sources */,
 				E48503FC1214BB3600D2271F /* TouchView.mm in Sources */,
 				E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */,
 				E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */,
@@ -2736,6 +2781,7 @@
 				E4F7D80312CD00FF00D3119E /* ofMainExt.mm in Sources */,
 				E4F7D80412CD00FF00D3119E /* ofMain.mm in Sources */,
 				E4F7D80512CD00FF00D3119E /* ofxiPhoneExtras.mm in Sources */,
+				E4BBFE4412DC9FE500AA868E /* ofxSndFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2756,18 +2802,16 @@
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
 					"$(HOME)/$(SDKROOT)/include",
-					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/src",
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "Milgrom-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
-					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/Xcode/build/Debug-iphoneos",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lGLU",
-					"-lsndfile",
 					"-ObjC",
 					"-lxml2",
 				);
@@ -2790,18 +2834,16 @@
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
 					"$(HOME)/$(SDKROOT)/include",
-					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/src",
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "Milgrom-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
-					"/Users/roikr/Developer/OpenSource/libsndfile-1.0.21/Xcode/build/Debug-iphoneos",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lGLU",
-					"-lsndfile",
 					"-ObjC",
 					"-lxml2",
 				);
