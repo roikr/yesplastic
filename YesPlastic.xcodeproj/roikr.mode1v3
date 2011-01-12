@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -264,6 +266,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
+								<string>E4280BA91172449500F458BB</string>
 								<string>E4E656501105DC6D00754590</string>
 								<string>E4E658141106058200754590</string>
 								<string>E4D9701C121434DA00AB4065</string>
@@ -273,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>1</integer>
+									<integer>31</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -308,14 +311,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>EAGLView.mm</string>
+								<string>ofxiPhoneSoundStream.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +324,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>EAGLView.mm</string>
+										<string>ofxiPhoneSoundStream.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E49FD6E612C4EBCE00697288</string>
+										<string>E4BB003712DCCF5200AA868E</string>
 										<key>history</key>
 										<array>
 											<string>E4ED8CA711076DDC002F9604</string>
@@ -399,7 +400,9 @@
 											<string>E4C8B3F71217E7B800C34620</string>
 											<string>E4C8B3F81217E7B800C34620</string>
 											<string>E4C8B3F91217E7B800C34620</string>
-											<string>E496404E125BA7340058DB34</string>
+											<string>E4BB003412DCCF5200AA868E</string>
+											<string>E4BB003512DCCF5200AA868E</string>
+											<string>E4BB003612DCCF5200AA868E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -411,14 +414,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {817, 428}}</string>
+								<string>{{0, 0}, {817, 419}}</string>
 								<key>RubberWindowFrame</key>
 								<string>135 208 1116 784 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>428pt</string>
+							<string>419pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -431,14 +434,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 433}, {817, 310}}</string>
+								<string>{{0, 424}, {817, 319}}</string>
 								<key>RubberWindowFrame</key>
 								<string>135 208 1116 784 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>310pt</string>
+							<string>319pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -457,9 +460,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E49FD6E012C4EB9E00697288</string>
+				<string>E4BB001F12DCC49000AA868E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>E49FD6E112C4EB9E00697288</string>
+				<string>E4BB002012DCC49000AA868E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -680,7 +683,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>E4E6564A1105D9E900754590</string>
-				<string>E49FD6E212C4EB9E00697288</string>
+				<string>E4BB002112DCC49000AA868E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -693,7 +696,7 @@
 			<key>WindowToolGUID</key>
 			<string>E4E6564A1105D9E900754590</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

@@ -14,6 +14,18 @@
 #include "ofxPincher.h"
 #include "ofxSlider.h"
 
+#include "ofxInteractiveTutorial.h"
+
+enum  {
+	MILGROM_TUTORIAL_PUSH_PLAYER,
+	MILGROM_TUTORIAL_CHANGE_LOOP,
+	MILGROM_TUTORIAL_SHAKE,
+	MILGROM_TUTORIAL_ROTATE,
+	MILGROM_TUTORIAL_SLIDE,
+	MILGROM_TUTORIAL_SOLO_MENU,
+	MILGROM_TUTORIAL_LEARN_MORE
+};
+
 
 class testApp : public ofSimpleApp  {
 	
@@ -95,6 +107,8 @@ public:
 	
 	
 	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
+	ofxInteractiveTutorial tutorial;
+	
 	
 	
 private:
@@ -154,6 +168,8 @@ private:
 	ofxPincher pincher;
 	int pincherStart; //  start frame for animating scaling
 	int lastRenderedFrame;
+	
+	int lastTutorialState;
 };
 
 

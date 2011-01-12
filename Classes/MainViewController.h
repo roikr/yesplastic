@@ -37,6 +37,7 @@ class testApp;
 	UIView *renderView;
 	UILabel *renderLabel;
 	UITextView *renderTextView;
+	UITextView *tutorialView;
 	
 	
 	testApp *OFSAptr;
@@ -79,7 +80,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *renderView;
 @property (nonatomic, retain) IBOutlet UILabel *renderLabel;
 @property (nonatomic, retain) IBOutlet UITextView *renderTextView;
-
+@property (nonatomic, retain) IBOutlet UITextView *tutorialView;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;

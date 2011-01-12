@@ -44,6 +44,10 @@
 		E4A4FE8F11F2FFA4000BE0A2 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE8811F2FFA4000BE0A2 /* tinyxmlparser.cpp */; };
 		E4A4FE9011F2FFA4000BE0A2 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A4FE8A11F2FFA4000BE0A2 /* ofxXmlSettings.cpp */; };
 		E4A4FF8B11F31AEF000BE0A2 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E41F9498114517200080F634 /* XMLParser.m */; };
+		E4BB002E12DCCF4500AA868E /* easing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB002412DCCF4500AA868E /* easing.cpp */; };
+		E4BB002F12DCCF4500AA868E /* ofMainExt.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4BB002712DCCF4500AA868E /* ofMainExt.mm */; };
+		E4BB003012DCCF4500AA868E /* ofMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4BB002A12DCCF4500AA868E /* ofMain.mm */; };
+		E4BB003112DCCF4500AA868E /* ofxiPhoneExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4BB002D12DCCF4500AA868E /* ofxiPhoneExtras.mm */; };
 		E4CDF986113F153A0085D61B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF97C113F153A0085D61B /* ioapi.c */; };
 		E4CDF987113F153A0085D61B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF97E113F153A0085D61B /* mztools.c */; };
 		E4CDF988113F153A0085D61B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CDF980113F153A0085D61B /* unzip.c */; };
@@ -76,7 +80,6 @@
 		E4E6577E1105F47400754590 /* RKPVRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E656651105DC6D00754590 /* RKPVRTexture.m */; };
 		E4E6577F1105F47400754590 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4E656661105DC6D00754590 /* testApp.cpp */; };
 		E4E6583C1106155000754590 /* ofxRKThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E6565F1105DC6D00754590 /* ofxRKThread.mm */; };
-		E4E65847110615F400754590 /* ofMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4E65846110615F400754590 /* ofMain.mm */; };
 		E4ED8C8411076A7B002F9604 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C7D11076A7B002F9604 /* CADebugMacros.cpp */; };
 		E4ED8C8511076A7B002F9604 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C8011076A7B002F9604 /* CAStreamBasicDescription.cpp */; };
 		E4ED8C8611076A7B002F9604 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4ED8C8211076A7B002F9604 /* CAXException.cpp */; };
@@ -153,6 +156,15 @@
 		E4A4FE8811F2FFA4000BE0A2 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		E4A4FE8A11F2FFA4000BE0A2 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		E4A4FE8B11F2FFA4000BE0A2 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		E4BB002412DCCF4500AA868E /* easing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = easing.cpp; sourceTree = "<group>"; };
+		E4BB002512DCCF4500AA868E /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
+		E4BB002612DCCF4500AA868E /* ofMainExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMainExt.h; sourceTree = "<group>"; };
+		E4BB002712DCCF4500AA868E /* ofMainExt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofMainExt.mm; sourceTree = "<group>"; };
+		E4BB002912DCCF4500AA868E /* ofMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMain.h; sourceTree = "<group>"; };
+		E4BB002A12DCCF4500AA868E /* ofMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofMain.mm; sourceTree = "<group>"; };
+		E4BB002B12DCCF4500AA868E /* ofTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofTypes.h; sourceTree = "<group>"; };
+		E4BB002C12DCCF4500AA868E /* ofxiPhoneExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiPhoneExtras.h; sourceTree = "<group>"; };
+		E4BB002D12DCCF4500AA868E /* ofxiPhoneExtras.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiPhoneExtras.mm; sourceTree = "<group>"; };
 		E4CDF97B113F153A0085D61B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		E4CDF97C113F153A0085D61B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		E4CDF97D113F153A0085D61B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
@@ -209,8 +221,6 @@
 		E4E656661105DC6D00754590 /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
 		E4E656671105DC6D00754590 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testApp.h; sourceTree = "<group>"; };
 		E4E656691105DC6D00754590 /* TexturesPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturesPlayer.h; sourceTree = "<group>"; };
-		E4E657471105F03B00754590 /* ofMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofMain.h; path = src/ofMain.h; sourceTree = "<group>"; };
-		E4E65846110615F400754590 /* ofMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ofMain.mm; path = src/ofMain.mm; sourceTree = "<group>"; };
 		E4ED8C2F11076745002F9604 /* MidiTrack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiTrack.cpp; sourceTree = "<group>"; };
 		E4ED8C7D11076A7B002F9604 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
 		E4ED8C7E11076A7B002F9604 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
@@ -366,6 +376,8 @@
 		E4280BA91172449500F458BB /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E4BB002312DCCF4500AA868E /* common */,
+				E4BB002812DCCF4500AA868E /* myOF */,
 				E4A4FE8211F2FFA4000BE0A2 /* ofxXmlSettings */,
 				E4A4FE6F11F2FF90000BE0A2 /* ofxMidi */,
 				E4A4FE7911F2FF90000BE0A2 /* ofxSndFile */,
@@ -504,6 +516,31 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		E4BB002312DCCF4500AA868E /* common */ = {
+			isa = PBXGroup;
+			children = (
+				E4BB002412DCCF4500AA868E /* easing.cpp */,
+				E4BB002512DCCF4500AA868E /* easing.h */,
+				E4BB002612DCCF4500AA868E /* ofMainExt.h */,
+				E4BB002712DCCF4500AA868E /* ofMainExt.mm */,
+			);
+			name = common;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/common";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4BB002812DCCF4500AA868E /* myOF */ = {
+			isa = PBXGroup;
+			children = (
+				E4BB002912DCCF4500AA868E /* ofMain.h */,
+				E4BB002A12DCCF4500AA868E /* ofMain.mm */,
+				E4BB002B12DCCF4500AA868E /* ofTypes.h */,
+				E4BB002C12DCCF4500AA868E /* ofxiPhoneExtras.h */,
+				E4BB002D12DCCF4500AA868E /* ofxiPhoneExtras.mm */,
+			);
+			name = myOF;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/myOF";
+			sourceTree = SOURCE_ROOT;
+		};
 		E4CDF979113F153A0085D61B /* ZipArchive */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,8 +638,6 @@
 			children = (
 				E42E107411F3568400B8B103 /* ofSoundStream.h */,
 				E42E107511F3568400B8B103 /* ofxiPhoneSoundStream.mm */,
-				E4E657471105F03B00754590 /* ofMain.h */,
-				E4E65846110615F400754590 /* ofMain.mm */,
 			);
 			name = myOF;
 			sourceTree = "<group>";
@@ -702,7 +737,6 @@
 				E4E6577C1105F47400754590 /* PlayerController.cpp in Sources */,
 				E4E6577E1105F47400754590 /* RKPVRTexture.m in Sources */,
 				E4E6577F1105F47400754590 /* testApp.cpp in Sources */,
-				E4E65847110615F400754590 /* ofMain.mm in Sources */,
 				E4ED8C8411076A7B002F9604 /* CADebugMacros.cpp in Sources */,
 				E4ED8C8511076A7B002F9604 /* CAStreamBasicDescription.cpp in Sources */,
 				E4ED8C8611076A7B002F9604 /* CAXException.cpp in Sources */,
@@ -748,6 +782,10 @@
 				E4D970041214349A00AB4065 /* SoundSetView.m in Sources */,
 				E4D970051214349A00AB4065 /* YesPlasticAppDelegate.mm in Sources */,
 				E444717E121436500058D07B /* RatingView.m in Sources */,
+				E4BB002E12DCCF4500AA868E /* easing.cpp in Sources */,
+				E4BB002F12DCCF4500AA868E /* ofMainExt.mm in Sources */,
+				E4BB003012DCCF4500AA868E /* ofMain.mm in Sources */,
+				E4BB003112DCCF4500AA868E /* ofxiPhoneExtras.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "MainViewController.h"
 #import "MilgromMacros.h"
+#include "ofxInteractiveTutorial.h"
 
 @implementation TouchView
 
@@ -137,6 +138,11 @@
 		return;
 	}
 	
+	if (appDelegate.OFSAptr->tutorial.getState() == TUTORIAL_MESSAGE_PRESENTED) {
+		appDelegate.OFSAptr->tutorial.setState(TUTORIAL_SCREEN_TOUCHED);
+		[appDelegate.mainViewController updateViews];
+		
+	}
 	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;

@@ -285,7 +285,7 @@
 									<object class="IBUITextView" id="953118637">
 										<reference key="NSNextResponder" ref="991791343"/>
 										<int key="NSvFlags">293</int>
-										<string key="NSFrame">{{80, 80}, {320, 140}}</string>
+										<string key="NSFrame">{{160, 80}, {320, 140}}</string>
 										<reference key="NSSuperview" ref="991791343"/>
 										<reference key="IBUIBackgroundColor" ref="719325150"/>
 										<bool key="IBUIOpaque">NO</bool>
@@ -401,6 +401,35 @@
 									<int key="interfaceOrientation">3</int>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
+							<object class="IBUITextView" id="400855207">
+								<reference key="NSNextResponder" ref="492911675"/>
+								<int key="NSvFlags">-2147483355</int>
+								<string key="NSFrame">{{100, 110}, {280, 100}}</string>
+								<reference key="NSSuperview" ref="492911675"/>
+								<reference key="IBUIBackgroundColor" ref="719325150"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+									<integer value="256" key="IBUIAccessibilityTraits"/>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<bool key="IBUIBounces">NO</bool>
+								<bool key="IBUIScrollEnabled">NO</bool>
+								<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
+								<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
+								<bool key="IBUIDelaysContentTouches">NO</bool>
+								<bool key="IBUICanCancelContentTouches">NO</bool>
+								<bool key="IBUIBouncesZoom">NO</bool>
+								<bool key="IBUIEditable">NO</bool>
+								<string key="IBUIText">Hi You</string>
+								<reference key="IBUITextColor" ref="438986558"/>
+								<int key="IBUITextAlignment">1</int>
+								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIAutocapitalizationType">2</int>
+									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								</object>
 							</object>
 							<object class="IBUIView" id="625351984">
 								<reference key="NSNextResponder" ref="492911675"/>
@@ -1006,6 +1035,14 @@
 					</object>
 					<int key="connectionID">216</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tutorialView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="400855207"/>
+					</object>
+					<int key="connectionID">219</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1073,6 +1110,7 @@
 							<reference ref="751729622"/>
 							<reference ref="625351984"/>
 							<reference ref="991791343"/>
+							<reference ref="400855207"/>
 						</object>
 						<reference key="parent" ref="140016098"/>
 					</object>
@@ -1236,6 +1274,11 @@
 						<reference key="object" ref="324634618"/>
 						<reference key="parent" ref="991791343"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">218</int>
+						<reference key="object" ref="400855207"/>
+						<reference key="parent" ref="492911675"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1295,6 +1338,10 @@
 					<string>191.IBPluginDependency</string>
 					<string>191.IBViewBoundsToFrameTransform</string>
 					<string>200.IBViewBoundsToFrameTransform</string>
+					<string>218.CustomClassName</string>
+					<string>218.IBEditorWindowLastContentRect</string>
+					<string>218.IBPluginDependency</string>
+					<string>218.IBViewBoundsToFrameTransform</string>
 					<string>51.CustomClassName</string>
 					<string>51.IBEditorWindowLastContentRect</string>
 					<string>51.IBPluginDependency</string>
@@ -1407,8 +1454,14 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABBgAAAwy4AAA</bytes>
 					</object>
+					<string>CustomFontTextView</string>
+					<string>{{210, 596}, {280, 100}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AULIAABC3AAAA</bytes>
+					</object>
 					<string>TouchView</string>
-					<string>{{190, 242}, {480, 320}}</string>
+					<string>{{433, 121}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1453,7 +1506,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">216</int>
+			<int key="maxID">219</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1617,6 +1670,7 @@
 							<string>soloHelp</string>
 							<string>stopButton</string>
 							<string>triggersView</string>
+							<string>tutorialView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1639,6 +1693,7 @@
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIView</string>
+							<string>UITextView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1664,6 +1719,7 @@
 							<string>soloHelp</string>
 							<string>stopButton</string>
 							<string>triggersView</string>
+							<string>tutorialView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1742,6 +1798,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">triggersView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tutorialView</string>
+								<string key="candidateClassName">UITextView</string>
 							</object>
 						</object>
 					</object>

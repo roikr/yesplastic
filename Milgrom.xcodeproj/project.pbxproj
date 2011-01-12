@@ -153,7 +153,6 @@
 		E444723E12143D300058D07B /* ofxRKTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = E444722512143D300058D07B /* ofxRKTexture.mm */; };
 		E444724012143D300058D07B /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444722812143D300058D07B /* PlayerController.cpp */; };
 		E444724312143D300058D07B /* SimplePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444722E12143D300058D07B /* SimplePlayer.cpp */; };
-		E444724512143D300058D07B /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444723112143D300058D07B /* testApp.cpp */; };
 		E444726B12143DAA0058D07B /* ofxFramesDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444725512143DAA0058D07B /* ofxFramesDriver.cpp */; };
 		E444726C12143DAA0058D07B /* ofxMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444725912143DAA0058D07B /* ofxMidi.cpp */; };
 		E444726D12143DAA0058D07B /* ofxMidiInstrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444725B12143DAA0058D07B /* ofxMidiInstrument.cpp */; };
@@ -344,6 +343,9 @@
 		E4B54288127089C900851D86 /* FacebookUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54285127089C900851D86 /* FacebookUploader.m */; };
 		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
+		E4BB004512DCCF7500AA868E /* ofxInteractiveTutorial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */; };
+		E4BB005D12DCD12100AA868E /* data in Resources */ = {isa = PBXBuildFile; fileRef = E4BB005A12DCD12100AA868E /* data */; };
+		E4BB007112DCD16000AA868E /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB007012DCD16000AA868E /* testApp.cpp */; };
 		E4BBFE4312DC9FE500AA868E /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BBFE3F12DC9FE500AA868E /* libsndfile.a */; };
 		E4BBFE4412DC9FE500AA868E /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BBFE4112DC9FE500AA868E /* ofxSndFile.cpp */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
@@ -587,7 +589,6 @@
 		E444722912143D300058D07B /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
 		E444722E12143D300058D07B /* SimplePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimplePlayer.cpp; sourceTree = "<group>"; };
 		E444722F12143D300058D07B /* SimplePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlayer.h; sourceTree = "<group>"; };
-		E444723112143D300058D07B /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
 		E444723212143D300058D07B /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testApp.h; sourceTree = "<group>"; };
 		E444723312143D300058D07B /* TexturesPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturesPlayer.h; sourceTree = "<group>"; };
 		E444725512143DAA0058D07B /* ofxFramesDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFramesDriver.cpp; sourceTree = "<group>"; };
@@ -954,6 +955,10 @@
 		E4B5428A127089EB00851D86 /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = YouTubeUpload/Classes/YouTubeUploader.h; sourceTree = "<group>"; };
 		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ../ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ../ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractiveTutorial.cpp; sourceTree = "<group>"; };
+		E4BB004412DCCF7500AA868E /* ofxInteractiveTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractiveTutorial.h; sourceTree = "<group>"; };
+		E4BB005A12DCD12100AA868E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		E4BB007012DCD16000AA868E /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
 		E4BBFE3C12DC9FE500AA868E /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sndfile.h; sourceTree = "<group>"; };
 		E4BBFE3F12DC9FE500AA868E /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
 		E4BBFE4112DC9FE500AA868E /* ofxSndFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSndFile.cpp; sourceTree = "<group>"; };
@@ -1382,8 +1387,8 @@
 		E444721012143D2F0058D07B /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E4BB007012DCD16000AA868E /* testApp.cpp */,
 				E444723212143D300058D07B /* testApp.h */,
-				E444723112143D300058D07B /* testApp.cpp */,
 				E444722912143D300058D07B /* PlayerController.h */,
 				E444722812143D300058D07B /* PlayerController.cpp */,
 				E444721112143D300058D07B /* Constants.h */,
@@ -1397,6 +1402,7 @@
 		E444725212143D810058D07B /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E4BB004112DCCF7500AA868E /* ofxInteractiveTutorial */,
 				E4BBFE3812DC9FE500AA868E /* ofxSndFile */,
 				E4F7D7F712CD00FF00D3119E /* common */,
 				E4F7D7FC12CD00FF00D3119E /* myOF */,
@@ -1990,6 +1996,7 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E4BB005A12DCD12100AA868E /* data */,
 				E4BC39EB125DA96800B492E4 /* xib */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E48111351214460D008ABBCC /* precache */,
@@ -1998,6 +2005,24 @@
 				E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		E4BB004112DCCF7500AA868E /* ofxInteractiveTutorial */ = {
+			isa = PBXGroup;
+			children = (
+				E4BB004212DCCF7500AA868E /* src */,
+			);
+			name = ofxInteractiveTutorial;
+			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxInteractiveTutorial";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4BB004212DCCF7500AA868E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */,
+				E4BB004412DCCF7500AA868E /* ofxInteractiveTutorial.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		E4BBFE3812DC9FE500AA868E /* ofxSndFile */ = {
@@ -2570,6 +2595,7 @@
 				E4F3A37D1285D04500A3E226 /* CANCEL_B.png in Resources */,
 				E4F3A37E1285D04500A3E226 /* BAR_OVERLY.png in Resources */,
 				E4F3A37F1285D04500A3E226 /* BAR_BACKGROUND.png in Resources */,
+				E4BB005D12DCD12100AA868E /* data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2610,7 +2636,6 @@
 				E444723E12143D300058D07B /* ofxRKTexture.mm in Sources */,
 				E444724012143D300058D07B /* PlayerController.cpp in Sources */,
 				E444724312143D300058D07B /* SimplePlayer.cpp in Sources */,
-				E444724512143D300058D07B /* testApp.cpp in Sources */,
 				E444726B12143DAA0058D07B /* ofxFramesDriver.cpp in Sources */,
 				E444726C12143DAA0058D07B /* ofxMidi.cpp in Sources */,
 				E444726D12143DAA0058D07B /* ofxMidiInstrument.cpp in Sources */,
@@ -2782,6 +2807,8 @@
 				E4F7D80412CD00FF00D3119E /* ofMain.mm in Sources */,
 				E4F7D80512CD00FF00D3119E /* ofxiPhoneExtras.mm in Sources */,
 				E4BBFE4412DC9FE500AA868E /* ofxSndFile.cpp in Sources */,
+				E4BB004512DCCF7500AA868E /* ofxInteractiveTutorial.cpp in Sources */,
+				E4BB007112DCD16000AA868E /* testApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 
 #include "Constants.h"
 #include "testApp.h"
+#include "ofxInteractiveTutorial.h"
 
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromViewController.h"
@@ -57,6 +58,7 @@
 @synthesize renderLabel;
 @synthesize renderTextView;
 @synthesize interactionView;
+@synthesize tutorialView;
 
 
 //@synthesize triggerButton;
@@ -236,6 +238,35 @@
 		[self setShareProgress:1.0f];
 	}
 	
+	if (OFSAptr->getSongState() == SONG_IDLE) {
+		switch (OFSAptr->tutorial.getState()) {
+			case TUTORIAL_IDLE:
+				tutorialView.hidden = YES;
+				OFSAptr->tutorial.start();
+				break;
+			case TUTORIAL_TIMER_STARTED:
+				tutorialView.hidden = YES;
+				break;
+
+			case TUTORIAL_TIMER_FINISHED:
+				OFSAptr->tutorial.setState(TUTORIAL_MESSAGE_PRESENTED);
+				tutorialView.hidden = NO;
+				tutorialView.text = [NSString stringWithFormat:@"%s",OFSAptr->tutorial.getCurrentText().c_str()]; 
+				break;
+			case TUTORIAL_SCREEN_TOUCHED:
+				tutorialView.hidden = YES; // TODO: add state for not repeating here
+				OFSAptr->tutorial.setState(TUTORIAL_IDLE);
+			default:
+				break;
+		}
+	} else {
+		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
+		tutorialView.hidden = YES;
+	}
+
+
+	
+		
 	if (!OFSAptr->isInTransition()) {
 		switch (OFSAptr->getSongState()) {
 			case SONG_IDLE:
@@ -399,6 +430,7 @@
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE: 
 			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushSetMenu]; 
+			OFSAptr->tutorial.done(MILGROM_TUTORIAL_SOLO_MENU);
 			break;
 			
 		case BAND_STATE: {
@@ -577,6 +609,7 @@
 		case SONG_IDLE:
 		case SONG_PLAY:
 			bShowHelp = YES;
+			OFSAptr->tutorial.done(MILGROM_TUTORIAL_LEARN_MORE);
 			self.interactionView.userInteractionEnabled = NO;
 			[self updateViews];
 			break;
