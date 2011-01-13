@@ -138,12 +138,6 @@
 		return;
 	}
 	
-	if (appDelegate.OFSAptr->tutorial.getState() == TUTORIAL_MESSAGE_PRESENTED) {
-		appDelegate.OFSAptr->tutorial.setState(TUTORIAL_SCREEN_TOUCHED);
-		[appDelegate.mainViewController updateViews];
-		
-	}
-	
 	for(UITouch *touch in touches) {
 		int touchIndex = 0;
 		while(touchIndex < OF_MAX_TOUCHES && (activeTouches[touchIndex] != touch)) touchIndex++;
