@@ -338,7 +338,8 @@
 						for (int i=0;i<[bandLoopsView.subviews count];i++) {
 							UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
 							//MilgromLog(@"button: %i, tag: %i, mode: %i",i, button.tag,OFSAptr->getMode(button.tag));
-							button.selected = OFSAptr->getMode(button.tag) == MANUAL_MODE;
+							//button.selected = ;
+							button.hidden = OFSAptr->getMode(button.tag) == MANUAL_MODE;
 						}
 						
 						bandHelp.hidden = !bShowHelp;
