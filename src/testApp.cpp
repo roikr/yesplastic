@@ -166,12 +166,10 @@ void testApp::setup(){
 	startTime = ofGetElapsedTimeMillis();
 	currentFrame = 0;
 	
-	tutorial.setup(true);
+	tutorial.setup();
 	lastTutorialState = tutorial.getState();
-	ofDisableDataPath();
-	tutorial.loadFile(ofToResourcesPath("tutorial.xml"));
-	ofEnableDataPath();
-	
+	tutorial.loadFile("tutorial.xml");
+		
 	bInitialized = true;
 	
 }

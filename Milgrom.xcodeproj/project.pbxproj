@@ -344,7 +344,6 @@
 		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
 		E4BB004512DCCF7500AA868E /* ofxInteractiveTutorial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */; };
-		E4BB005D12DCD12100AA868E /* data in Resources */ = {isa = PBXBuildFile; fileRef = E4BB005A12DCD12100AA868E /* data */; };
 		E4BB007112DCD16000AA868E /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB007012DCD16000AA868E /* testApp.cpp */; };
 		E4BBFE4312DC9FE500AA868E /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BBFE3F12DC9FE500AA868E /* libsndfile.a */; };
 		E4BBFE4412DC9FE500AA868E /* ofxSndFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BBFE4112DC9FE500AA868E /* ofxSndFile.cpp */; };
@@ -957,7 +956,6 @@
 		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ../ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
 		E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractiveTutorial.cpp; sourceTree = "<group>"; };
 		E4BB004412DCCF7500AA868E /* ofxInteractiveTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractiveTutorial.h; sourceTree = "<group>"; };
-		E4BB005A12DCD12100AA868E /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		E4BB007012DCD16000AA868E /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
 		E4BBFE3C12DC9FE500AA868E /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sndfile.h; sourceTree = "<group>"; };
 		E4BBFE3F12DC9FE500AA868E /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
@@ -1996,7 +1994,6 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E4BB005A12DCD12100AA868E /* data */,
 				E4BC39EB125DA96800B492E4 /* xib */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E48111351214460D008ABBCC /* precache */,
@@ -2595,7 +2592,6 @@
 				E4F3A37D1285D04500A3E226 /* CANCEL_B.png in Resources */,
 				E4F3A37E1285D04500A3E226 /* BAR_OVERLY.png in Resources */,
 				E4F3A37F1285D04500A3E226 /* BAR_BACKGROUND.png in Resources */,
-				E4BB005D12DCD12100AA868E /* data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

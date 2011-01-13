@@ -223,6 +223,7 @@
 	
 	shareProgressView.hidden = YES;
 	renderView.hidden = YES;
+	tutorialView.hidden = YES;
 
 	
 	int songState =OFSAptr->getSongState();
@@ -238,30 +239,42 @@
 		[self setShareProgress:1.0f];
 	}
 	
-	if (OFSAptr->getSongState() == SONG_IDLE) {
-		switch (OFSAptr->tutorial.getState()) {
-			case TUTORIAL_IDLE:
-				tutorialView.hidden = YES;
-				OFSAptr->tutorial.start();
-				break;
-			case TUTORIAL_TIMER_STARTED:
-				tutorialView.hidden = YES;
-				break;
-
-			case TUTORIAL_TIMER_FINISHED:
-				OFSAptr->tutorial.setState(TUTORIAL_MESSAGE_PRESENTED);
-				tutorialView.hidden = NO;
-				tutorialView.text = [NSString stringWithFormat:@"%s",OFSAptr->tutorial.getCurrentText().c_str()]; 
-				break;
-			case TUTORIAL_SCREEN_TOUCHED:
-				tutorialView.hidden = YES; // TODO: add state for not repeating here
-				OFSAptr->tutorial.setState(TUTORIAL_IDLE);
-			default:
-				break;
+	
+	if (OFSAptr->tutorial.getState()!= TUTORIAL_DONE) { 
+		if ( OFSAptr->getSongState() == SONG_IDLE && !OFSAptr->isInTransition()) {
+			switch (OFSAptr->tutorial.getState()) {
+				
+				case TUTORIAL_IDLE:
+					tutorialView.text = [NSString stringWithFormat:@"%s",OFSAptr->tutorial.getCurrentText().c_str()]; 
+					OFSAptr->tutorial.start();				
+					break;
+				case TUTORIAL_READY:
+					switch (OFSAptr->tutorial.getCurrentNumber()) {
+						case MILGROM_TUTORIAL_PUSH_PLAYER:
+						case MILGROM_TUTORIAL_CHANGE_LOOP:
+						case MILGROM_TUTORIAL_SHAKE:
+						case MILGROM_TUTORIAL_ROTATE:
+							tutorialView.hidden = OFSAptr->getState() != BAND_STATE;
+							break;
+						case MILGROM_TUTORIAL_SLIDE:
+						case MILGROM_TUTORIAL_SOLO_MENU:
+							tutorialView.hidden = OFSAptr->getState() != SOLO_STATE;
+							break;
+						case MILGROM_TUTORIAL_LEARN_MORE:
+							tutorialView.hidden = NO;
+							break;
+						default:
+							break;
+					}
+					
+					break;
+				
+				default:
+					break;
+			}
+		} else {
+			OFSAptr->tutorial.setState(TUTORIAL_IDLE);
 		}
-	} else {
-		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
-		tutorialView.hidden = YES;
 	}
 
 
@@ -659,6 +672,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"MainViewController::viewWillAppear");
+	if (OFSAptr->tutorial.getState()!=TUTORIAL_DONE) {
+		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
+	}
 	[self updateViews];
 }
 
