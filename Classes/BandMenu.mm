@@ -19,6 +19,7 @@
 @synthesize songsView;
 @synthesize activityIndicator;
 @synthesize editButton;
+@synthesize firstLaunchView;
 
 
 

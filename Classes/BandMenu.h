@@ -15,7 +15,9 @@
 	UIView *songsView;
 	UIActivityIndicatorView *activityIndicator;
 	UIButton *editButton;
+	UITextView *firstLaunchView;
 	
+
 	
 }
 
@@ -23,6 +25,7 @@
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
 @property (nonatomic,retain ) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,retain) IBOutlet UIButton *editButton;
+@property (nonatomic, retain) IBOutlet UITextView *firstLaunchView;
 
 
 - (void)edit:(id)sender;

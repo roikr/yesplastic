@@ -169,6 +169,9 @@ void testApp::setup(){
 	tutorial.setup();
 	lastTutorialState = tutorial.getState();
 	tutorial.loadFile("tutorial.xml");
+	if (tutorial.getTimesCompleted()>3) {
+		tutorial.setState(TUTORIAL_DONE);
+	}
 		
 	bInitialized = true;
 	

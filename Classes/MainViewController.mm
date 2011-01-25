@@ -252,12 +252,12 @@
 					switch (OFSAptr->tutorial.getCurrentNumber()) {
 						case MILGROM_TUTORIAL_PUSH_PLAYER:
 						case MILGROM_TUTORIAL_CHANGE_LOOP:
-						case MILGROM_TUTORIAL_SHAKE:
 						case MILGROM_TUTORIAL_ROTATE:
 							tutorialView.hidden = OFSAptr->getState() != BAND_STATE;
 							break;
 						case MILGROM_TUTORIAL_SLIDE:
 						case MILGROM_TUTORIAL_SOLO_MENU:
+						case MILGROM_TUTORIAL_SHAKE:
 							tutorialView.hidden = OFSAptr->getState() != SOLO_STATE;
 							break;
 						case MILGROM_TUTORIAL_LEARN_MORE:

@@ -95,9 +95,10 @@ NSString * const kCacheFolder=@"URLCache";
 //	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
 	self.bandMenu = (BandMenu *)milgromViewController.viewController.visibleViewController; 
-	[bandMenu.activityIndicator startAnimating];
+	
 	
 	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
+	//[self performSelector:@selector(unzipPrecache) withObject:nil];
 	
     return YES;
 }
@@ -198,11 +199,14 @@ NSString * const kCacheFolder=@"URLCache";
 		
 		if (precache) {
 			MilgromLog(@"unzipping precache");
-			
+			[bandMenu.activityIndicator startAnimating];
+			bandMenu.firstLaunchView.hidden = NO;
 			ZipArchive *zip = [[ZipArchive alloc] init];
 			[zip UnzipOpenFile:precache];
 			[zip UnzipFileTo:[paths objectAtIndex:0] overWrite:YES];
 			[zip UnzipCloseFile];
+			
+			
 		} 
 		/*
 		 else {
@@ -227,6 +231,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (void) continueLaunching {
 	[bandMenu.activityIndicator stopAnimating];
+	bandMenu.firstLaunchView.hidden = YES;
 	
 	[self loadDemos];
 	[bandMenu.songsTable loadData];
