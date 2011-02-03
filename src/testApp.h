@@ -10,7 +10,7 @@
 #include "ofxXmlSettings.h"
 //#include "ofxOsc.h"
 #include "ofxRKTexture.h"
-#include "ofxSndFile.h"
+#include "ofxAudioFile.h"
 #include "ofxPincher.h"
 #include "ofxSlider.h"
 
@@ -152,7 +152,7 @@ private:
 	
 	float bpm;
 	
-	ofxSndFile song; // just for saving
+	ofxAudioFile song; // just for saving
 		
 	bool bInitialized;
 	bool bInTransition;

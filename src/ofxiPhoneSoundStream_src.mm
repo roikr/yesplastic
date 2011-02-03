@@ -40,7 +40,7 @@ static inline void checkSoundStreamIsRunning() {
 
 bool checkStatus(OSStatus err) {
 	if(err!=noErr) {
-		ofLog(OF_LOG_ERROR, "There was an error: " + err);
+		ofLog(OF_LOG_ERROR, "There was an error: %i", err);
 //		OFSAptr->error(err);
 		return true;
 	}
@@ -153,37 +153,15 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	OFSAptr = OFSA;
 	OSStatus status;
 	
-	
 	// Initialize and configure the audio session
 	status = AudioSessionInitialize(NULL, NULL, rioInterruptionListener, NULL);
 	if(checkStatus(status)) {
 		ofLog(OF_LOG_ERROR, "couldn't initialize audio session");
 	}
-	
-	
-	//roikr: it is safe to set the following properties before activating the session
-	// roikr: this category enable running AVAssetReader with real time audio !
-	UInt32 category = kAudioSessionCategory_PlayAndRecord;	
-	status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+	status = AudioSessionSetActive(true);
 	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't set audio category!");
+		ofLog(OF_LOG_ERROR, "couldn't set audio session active");
 	}
-	
-	UInt32 doChangeDefaultRoute = 1;
-	status =AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (doChangeDefaultRoute), &doChangeDefaultRoute	 );
-	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't overide category default to speaker!");
-	}
-	
-	Float64 preferredSampleRate = (float)sampleRate; 
-	
-	
-	status = AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareSampleRate, sizeof(preferredSampleRate), &preferredSampleRate);
-	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't set sample rate");
-	}
-	
-	
 	
 	Float32 preferredBufferSize = (float)bufferSize/sampleRate; 
 	
@@ -193,15 +171,6 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 		ofLog(OF_LOG_ERROR, "couldn't set i/o buffer duration");
 	}
 	
-	
-	
-	status = AudioSessionSetActive(true);
-	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't set audio session active");
-	}
-	
-	
-		
 	
 	// Describe audio component
 	AudioComponentDescription desc;
@@ -222,21 +191,11 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	
 	checkStatus(status);
 	
-	// this is supposed to make the audio come out of the speaker rather
-	// than the receiver, but I don't think it works when using the microphone as well.
-//	UInt32 category = kAudioSessionOverrideAudioRoute_Speaker;
-//	AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(category), &category);
-	
-	//UInt32 category = 1; // roikr: removed to enable other category
-	AudioSessionSetProperty(kAudioSessionOverrideAudioRoute_Speaker, sizeof(category), &category);
 	
 	
-//	//roikr :check this
-//	status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(kAudioSessionCategory_MediaPlayback), &(int) {kAudioSessionCategory_MediaPlayback});
-//	checkStatus(status);
-//	status = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof (UInt32), &(UInt32) {1});
-//	checkStatus(status);
-//	//roikr:end
+
+	
+
 	
 	// Describe format
 	audioFormat.mSampleRate			= (double)sampleRate;
@@ -246,6 +205,23 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	audioFormat.mBitsPerChannel		= 16;
 	
 	AURenderCallbackStruct callbackStruct;
+	
+	if (nInputs>0) {
+		UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;    // 1
+		AudioSessionSetProperty ( kAudioSessionProperty_AudioCategory,   sizeof (sessionCategory),  &sessionCategory );
+		UInt32 doChangeDefaultRoute = 1;
+		AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (doChangeDefaultRoute), &doChangeDefaultRoute	 );
+	} else {
+		UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;    // 1
+		AudioSessionSetProperty ( kAudioSessionProperty_AudioCategory,   sizeof (sessionCategory),  &sessionCategory );
+//		// this is supposed to make the audio come out of the speaker rather
+//		// than the receiver, but I don't think it works when using the microphone as well.
+//		//	UInt32 category = kAudioSessionOverrideAudioRoute_Speaker;
+//		//	AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(category), &category);
+//
+//		UInt32 category = 1;
+//		AudioSessionSetProperty(kAudioSessionOverrideAudioRoute_Speaker, sizeof(category), &category);
+	}		
 	
 	if(nOutputs>0) {
 		// Enable IO for playback

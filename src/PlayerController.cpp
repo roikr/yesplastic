@@ -52,7 +52,7 @@ void PlayerController::setup(int playerNum) {
 	song.setup();
 	//looper = 0;
 	
-	bool loaded = switchSound.load(ofToDataPath("SOUNDS/"+getName()+"_SWITCH.aif"),256);
+	bool loaded = switchSound.load(ofToDataPath("SOUNDS/"+getName()+"_SWITCH.caf"),256);
 	assert(loaded);
 }
 
@@ -208,7 +208,7 @@ void  PlayerController::loadSoundSet() {
 	//loops.clear();
 	
 	for (i=0; i<midiNotes.size();i++) {
-		string soundname = path+"_"+ofToString(i+1) + ".aif";
+		string soundname = path+"_"+ofToString(i+1) + ".caf";
 //		ofLog(OF_LOG_VERBOSE,"loading sound: %s, map to midiNote: %i",soundname.c_str(),midiNotes[i]);
 		
 		if (bMulti)

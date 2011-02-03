@@ -12,7 +12,7 @@ class ofxMidiInstrument;
 #include "TexturesPlayer.h"
 #include "ofxMidiLooper.h"
 #include "ofxMidiTrack.h"
-#include "ofxSndFile.h"
+#include "ofxAudioFile.h"
 
 #include <map>
 #include <set>
@@ -141,7 +141,7 @@ private:
 	
 	bool bMulti;
 	
-	ofxSndFile switchSound;
+	ofxAudioFile switchSound;
 	bool bPlaySwitchSound;
 	int switchStart;
 };

@@ -92,10 +92,19 @@ void testApp::setup(){
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
 		
+	sampleRate 			= 44100;
+	blockLength = 256;
+
+	lBlock = new float[blockLength];
+	rBlock = new float[blockLength];
 	
+	bpm = 120; // TODO: send bpm to players
+	song.setupForSave(blockLength);
 	
+	soundStreamSetup();
 	
-	string filename = "images/background.pvr";
+	 
+	string filename = "background.pvr";
 	background.setup(ofToDataPath(filename));
 	background.init();
 	background.load();
@@ -148,17 +157,9 @@ void testApp::setup(){
 	bPush = false;
 	
 	
-	sampleRate 			= 44100;
-	blockLength = 256;
-	
-
-	lBlock = new float[blockLength];
-	rBlock = new float[blockLength];
-
-	bpm = 120; // TODO: send bpm to players
-	song.setupForSave(blockLength);
 		
-	soundStreamSetup();
+
+	
 	ofSeedRandom();
 	
 	
@@ -169,9 +170,9 @@ void testApp::setup(){
 	tutorial.setup();
 	lastTutorialState = tutorial.getState();
 	tutorial.loadFile("tutorial.xml");
-	if (tutorial.getTimesCompleted()>3) {
-		tutorial.setState(TUTORIAL_DONE);
-	}
+	//if (tutorial.getTimesCompleted()>3) {
+	//	tutorial.setState(TUTORIAL_DONE);
+	//}
 		
 	bInitialized = true;
 	
@@ -928,7 +929,7 @@ void testApp::renderAudio() {
 		
 	cout << "renderAudio started" << endl;
 	
-	song.open(ofToDocumentsPath("temp.wav"));
+	song.open(ofToDocumentsPath("temp.caf"));
 	
 	
 	currentBlock = 0;
