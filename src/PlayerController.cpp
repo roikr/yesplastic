@@ -52,7 +52,7 @@ void PlayerController::setup(int playerNum) {
 	song.setup();
 	//looper = 0;
 	
-	bool loaded = switchSound.load(ofToDataPath("SOUNDS/"+getName()+"_SWITCH.caf"),256);
+	bool loaded = switchSound.load(ofToDataPath(getName()+"_SWITCH.caf"),256); // "SOUNDS/"+
 	assert(loaded);
 }
 
