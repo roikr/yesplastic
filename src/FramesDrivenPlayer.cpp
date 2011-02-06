@@ -312,7 +312,7 @@ bool FramesDrivenPlayer::didTransitionEnd() {
 
 void FramesDrivenPlayer::setDrivenSample(string sampleName) {
 	
-	cout << "setDriverSample: " << sampleName << endl;
+	//cout << "setDriverSample: " << sampleName << endl;
 	
 	if (!driver.doesSampleExist(sampleName)) {
 		cout << "sample does not exist" << endl;
@@ -323,7 +323,7 @@ void FramesDrivenPlayer::setDrivenSample(string sampleName) {
 	driver.setCurrentVideo(0);
 	
 	string seqName = driver.getVideoName();
-	cout << "seqName: " << seqName << endl;
+	//cout << "seqName: " << seqName << endl;
 	actor.setSequence(actor.getSequenceNumber(seqName));
 	
 	currentFrame = 0;
@@ -335,6 +335,8 @@ void FramesDrivenPlayer::setDrivenSample(string sampleName) {
 	track.setCurrentTrack(seqName);
 	track.getPoint(vf, lx, ly);
 	lipsActor.setCurrentFrame(6*vf+lf);
+	
+	//cout << "sequence: " << actor.getCurrentSequence() << ", numFrames: " << driver.getNumVideoFrames() << endl;
 }
 
 void FramesDrivenPlayer::play(int num) {
@@ -369,7 +371,7 @@ void FramesDrivenPlayer::update() {
 		 */
 		
 		if (actor.getCurrentSequence() !=specSeqs[SEQUENCE_IN] && actor.getCurrentSequence() !=specSeqs[SEQUENCE_OUT]) {
-			if (currentFrame >= driver.getNumVideoFrames()) {
+			if (currentFrame >= driver.getNumVideoFrames()-1) { // 0-30 we have 31 frames, and we need to change after playing 30 (31-1)
 				if (actor.getCurrentSequence() == specSeqs[SEQUENCE_IDLE]) {
 					currentFrame = -1;
 				} else {
@@ -480,6 +482,8 @@ void FramesDrivenPlayer::draw(){
 	if (actor.getCurrentSequence() ==specSeqs[SEQUENCE_IN] || actor.getCurrentSequence() ==specSeqs[SEQUENCE_OUT]) {
 		actor.draw(tx, ty);
 	} else {
+		
+		//cout << actor.getCurrentSequence() << " " << currentFrame << " " << driver.getVideoFrame(currentFrame) << endl;
 		actor.draw(x,y);
 		if (actor.getCurrentSequence() !=specSeqs[SEQUENCE_IDLE])
 			lipsActor.draw(x+lx,y+ly);
