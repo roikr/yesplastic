@@ -694,7 +694,7 @@
 {
 	NSTimeInterval diff = [NSDate timeIntervalSinceReferenceDate]-shakeStartTime;
 	MilgromLog(@"shake ended: %2.2f",diff);
-	if ( diff > 0.2 && diff < 1.0 && (OFSAptr->getSongState()==SONG_IDLE || OFSAptr->getSongState()==SONG_RECORD || OFSAptr->getSongState()==SONG_TRIGGER_RECORD)) {
+	if ( diff > 0.1 && diff < 1.0 && (OFSAptr->getSongState()==SONG_IDLE || OFSAptr->getSongState()==SONG_RECORD || OFSAptr->getSongState()==SONG_TRIGGER_RECORD)) {
 		OFSAptr->playRandomLoop();
 	}
 }
