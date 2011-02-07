@@ -153,7 +153,7 @@ void testApp::setup(){
 	setState(SOLO_STATE);
 	
 	bTrans = false;
-	bMenu = false;
+	//bMenu = false;
 	bPush = false;
 	
 	
@@ -839,9 +839,9 @@ void testApp::touchUp(float x, float y, int touchId) {
 	
 	slider.touchUp(x, y, touchId);
 	
-	if (bMenu) {
-		return;
-	}
+//	if (bMenu) {
+//		return;
+//	}
 	
 	if (bPush) {
 		player[controller].setPush(false);

@@ -620,7 +620,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[milgromViewController.viewController pushViewController:controller animated:YES];
 	//[self presentModalViewController:controller animated:YES];
 	//controller.view.hidden = NO;
-	OFSAptr->bMenu=true; // TODO: change upon return
+	//OFSAptr->bMenu=true; // TODO: change upon return
 }
 
 
@@ -868,7 +868,7 @@ NSString * const kCacheFolder=@"URLCache";
 		return NO;
 	}
 	
-	OFSAptr->bMenu=false;
+	//OFSAptr->bMenu=false;
 		
 	OFSAptr->changeSoundSet(nextSong);
 	lastSavedVersion = 0;

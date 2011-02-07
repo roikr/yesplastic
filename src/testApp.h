@@ -93,7 +93,7 @@ public:
 
 	int controller;
 	PlayerController player[3];
-	bool bMenu;
+//	bool bMenu;
 	
 	void playRandomLoop();
 	

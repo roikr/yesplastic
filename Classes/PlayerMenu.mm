@@ -148,7 +148,7 @@
 }
 
 - (void)exit:(id)sender {
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->bMenu=false;
+	//((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->bMenu=false;
 	[self.navigationController popViewControllerAnimated:YES];
 	
 }
