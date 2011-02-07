@@ -53,6 +53,9 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if (appDelegate.mainViewController.bShowHelp && !appDelegate.mainViewController.bInteractiveHelp) {
+		return;
+	}
 	
 	if (!renderTouch && appDelegate.OFSAptr->getSongState()==SONG_RENDER_VIDEO) {
 		renderTouch = YES;
@@ -60,10 +63,6 @@
 	}
 	
 	
-	if (appDelegate.mainViewController.bShowHelp) {
-		return;
-	}
-
 	
 	//self.timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5) target:controller selector:@selector(bringPlayerMenu:) userInfo:nil repeats:NO];
 	
@@ -105,7 +104,7 @@
 	//self.timer = nil;
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp) {
+	if (appDelegate.mainViewController.bShowHelp && !appDelegate.mainViewController.bInteractiveHelp) {
 		return;
 	}
 
@@ -133,7 +132,7 @@
 	//	NSLog(@"touchesEnded: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp) {
+	if (appDelegate.mainViewController.bShowHelp && !appDelegate.mainViewController.bInteractiveHelp) {
 		[appDelegate.mainViewController hideHelp];
 		return;
 	}

@@ -34,6 +34,7 @@
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
 - (void)updateExportProgress:(ExportManager*)manager;
+- (void)updateHelp;
 
 
 @end
@@ -54,11 +55,13 @@
 @synthesize bandHelp;
 @synthesize soloHelp;
 @synthesize bShowHelp;
+@synthesize bInteractiveHelp;
 @synthesize renderView;
 @synthesize renderLabel;
 @synthesize renderTextView;
 @synthesize interactionView;
 @synthesize tutorialView;
+@synthesize tutorialTextView;
 
 
 //@synthesize triggerButton;
@@ -90,6 +93,7 @@
 	
 	[(TouchView*)self.view  setViewController:self];
 	bShowHelp = NO;
+	bInteractiveHelp = NO;
 	bAnimatingRecord = NO;
 	
 	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B.png"];
@@ -186,8 +190,14 @@
 	bandLoopsView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
-	bandHelp.hidden = YES;
-	soloHelp.hidden = YES;
+	
+	
+	if ([self.view.subviews containsObject:bandHelp]) {
+		[bandHelp removeFromSuperview];
+	}
+	if ([self.view.subviews containsObject:soloHelp]) {
+		[soloHelp removeFromSuperview];
+	}
 	
 }
 
@@ -215,22 +225,22 @@
 	loopsView.hidden = YES;
 	triggersView.hidden = YES;
 	bandLoopsView.hidden = YES;
-	bandHelp.hidden = YES;
-	soloHelp.hidden = YES;
 	recordButton.selected = OFSAptr->getSongState() == SONG_TRIGGER_RECORD || OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
-	
 	shareProgressView.hidden = YES;
-	renderView.hidden = YES;
-	tutorialView.hidden = YES;
-
+		
+	[self updateHelp];
 	
 	int songState =OFSAptr->getSongState();
 	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || songState == SONG_RENDER_AUDIO_FINISHED || exportManager) {
-		renderView.hidden = NO;
+		if (![self.view.subviews containsObject:renderView]) {
+			[self.view addSubview:renderView];
+		}
 		renderTextView.hidden = [(TouchView*)self.view renderTouch];
 		return;
+	} else if ([self.view.subviews containsObject:renderView]) {
+		[renderView removeFromSuperview];
 	} 
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -240,43 +250,7 @@
 	}
 	
 	
-	if (OFSAptr->tutorial.getState()!= TUTORIAL_DONE) { 
-		if ( OFSAptr->getSongState() == SONG_IDLE && !OFSAptr->isInTransition()) {
-			switch (OFSAptr->tutorial.getState()) {
-				
-				case TUTORIAL_IDLE:
-					tutorialView.text = [NSString stringWithFormat:@"%s",OFSAptr->tutorial.getCurrentText().c_str()]; 
-					OFSAptr->tutorial.start();				
-					break;
-				case TUTORIAL_READY:
-					switch (OFSAptr->tutorial.getCurrentNumber()) {
-						case MILGROM_TUTORIAL_PUSH_PLAYER:
-						case MILGROM_TUTORIAL_CHANGE_LOOP:
-						case MILGROM_TUTORIAL_ROTATE:
-							tutorialView.hidden = OFSAptr->getState() != BAND_STATE;
-							break;
-						case MILGROM_TUTORIAL_SLIDE:
-						case MILGROM_TUTORIAL_SOLO_MENU:
-						case MILGROM_TUTORIAL_SHAKE:
-							tutorialView.hidden = OFSAptr->getState() != SOLO_STATE;
-							break;
-						case MILGROM_TUTORIAL_LEARN_MORE:
-							tutorialView.hidden = NO;
-							break;
-						default:
-							break;
-					}
-					
-					break;
-				
-				default:
-					break;
-			}
-		} else {
-			OFSAptr->tutorial.setState(TUTORIAL_IDLE);
-		}
-	}
-
+	
 
 	
 		
@@ -329,7 +303,7 @@
 								break;
 						}
 						
-						soloHelp.hidden = !bShowHelp;
+						
 						
 					} break;
 					case BAND_STATE: {
@@ -342,7 +316,9 @@
 							button.hidden = OFSAptr->getMode(button.tag) == MANUAL_MODE;
 						}
 						
-						bandHelp.hidden = !bShowHelp;
+						
+
+						
 					} break;
 					default:
 						break;
@@ -354,22 +330,6 @@
 			case SONG_PLAY:
 		
 				stopButton.hidden = NO;
-				
-				switch (OFSAptr->getState()) {
-					case SOLO_STATE: 
-						soloHelp.hidden = !bShowHelp;
-						//setMenuButton.hidden = NO;
-						break;
-					case BAND_STATE: 
-						bandHelp.hidden = !bShowHelp;
-						break;
-					default:
-						break;
-				}
-				
-				
-				break;
-			
 				
 			default:
 				break;
@@ -617,36 +577,107 @@
 	OFSAptr->prevLoop(button.tag);
 }
 
+- (void) closeTutorial:(id)sender {
+	
+}
+
+- (void)updateHelp {
+	
+	bInteractiveHelp = OFSAptr->tutorial.getState()!= TUTORIAL_DONE;
+	if (bInteractiveHelp) { 
+		if (bShowHelp) {
+			if (![self.view.subviews containsObject:tutorialView]) {
+				[self.view addSubview:tutorialView];
+				[self.view bringSubviewToFront:interactionView];
+			}
+			
+			if ( OFSAptr->getSongState() == SONG_IDLE && !OFSAptr->isInTransition()) {
+				switch (OFSAptr->tutorial.getState()) {
+						
+					case TUTORIAL_IDLE:
+						tutorialTextView.text = [NSString stringWithFormat:@"%s",OFSAptr->tutorial.getCurrentText().c_str()]; 
+						OFSAptr->tutorial.start();	
+						tutorialView.hidden = YES;
+						break;
+					case TUTORIAL_READY:
+						switch (OFSAptr->tutorial.getCurrentNumber()) {
+							case MILGROM_TUTORIAL_PUSH_PLAYER:
+							case MILGROM_TUTORIAL_CHANGE_LOOP:
+							case MILGROM_TUTORIAL_ROTATE:
+								tutorialView.hidden = OFSAptr->getState() != BAND_STATE;
+								break;
+							case MILGROM_TUTORIAL_SLIDE:
+							case MILGROM_TUTORIAL_SOLO_MENU:
+							case MILGROM_TUTORIAL_SHAKE:
+								tutorialView.hidden = OFSAptr->getState() != SOLO_STATE;
+								break;
+							case MILGROM_TUTORIAL_LEARN_MORE:
+								tutorialView.hidden = NO;
+								break;
+							default:
+								break;
+						}
+						
+						break;
+						
+					default:
+						break;
+				}
+			} else {
+				OFSAptr->tutorial.setState(TUTORIAL_IDLE);
+			}
+		} 
+	} else {
+		self.interactionView.userInteractionEnabled = !bShowHelp;
+		if (bShowHelp) {
+			switch (OFSAptr->getState()){
+				case SOLO_STATE:
+					if (![self.view.subviews containsObject:soloHelp]) {
+						[self.view addSubview:soloHelp];
+					}
+					break;
+				case BAND_STATE:
+					if (![self.view.subviews containsObject:bandHelp]) {
+						[self.view addSubview:bandHelp];
+						//[self.view bringSubviewToFront:bandHelp];
+					}
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	
+	if (!bShowHelp || !bInteractiveHelp) {
+		if ([self.view.subviews containsObject:tutorialView]) {
+			[tutorialView removeFromSuperview];
+		}
+	}
+	
+	if (!bShowHelp || bInteractiveHelp) {
+		if ([self.view.subviews containsObject:soloHelp]) {
+			[soloHelp removeFromSuperview];
+		}
+		if ([self.view.subviews containsObject:bandHelp]) {
+			[bandHelp removeFromSuperview];
+		}
+	}
+}
 
 - (void) showHelp:(id)sender {
-	switch (OFSAptr->getSongState()) {
-		case SONG_IDLE:
-		case SONG_PLAY:
-			bShowHelp = YES;
-			OFSAptr->tutorial.done(MILGROM_TUTORIAL_LEARN_MORE);
-			self.interactionView.userInteractionEnabled = NO;
-			[self updateViews];
-			break;
-		case SONG_RECORD:
-			bShowHelp = YES;
-			self.interactionView.userInteractionEnabled = NO;
-			OFSAptr->setSongState(SONG_IDLE);
-			
-			break;
-		default:
-			break;
-	}
+	
+	bShowHelp = YES;
+	OFSAptr->tutorial.done(MILGROM_TUTORIAL_LEARN_MORE);
+	[self updateHelp];
 	
 	
 }
 
+
 - (void)hideHelp {
 	
-	
 	bShowHelp = NO;
-	self.interactionView.userInteractionEnabled = YES;
-	[self updateViews];
-	
+	[self updateHelp];
 }
 
 - (void) moreHelp:(id)sender {
@@ -673,9 +704,10 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"MainViewController::viewWillAppear");
-	if (OFSAptr->tutorial.getState()!=TUTORIAL_DONE) {
-		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
-	}
+//	if (OFSAptr->tutorial.getState()!=TUTORIAL_DONE) {
+//		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
+//		bShowHelp = YES;
+//	}
 	[self updateViews];
 }
 

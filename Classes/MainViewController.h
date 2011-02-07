@@ -37,7 +37,8 @@ class testApp;
 	UIView *renderView;
 	UILabel *renderLabel;
 	UITextView *renderTextView;
-	UITextView *tutorialView;
+	UIView *tutorialView;
+	UITextView *tutorialTextView;
 	
 	
 	testApp *OFSAptr;
@@ -51,6 +52,7 @@ class testApp;
 	SaveViewController *saveViewController;
 	
 	BOOL bShowHelp;
+	BOOL bInteractiveHelp;
 	
 	BOOL bAnimatingRecord;
 	NSTimeInterval shakeStartTime;
@@ -80,13 +82,15 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *renderView;
 @property (nonatomic, retain) IBOutlet UILabel *renderLabel;
 @property (nonatomic, retain) IBOutlet UITextView *renderTextView;
-@property (nonatomic, retain) IBOutlet UITextView *tutorialView;
+@property (nonatomic, retain) IBOutlet UIView *tutorialView;
+@property (nonatomic, retain) IBOutlet UITextView *tutorialTextView;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
 @property (nonatomic,retain ) IBOutlet CustomImageView *renderProgressView;
 
 @property BOOL bShowHelp;
+@property BOOL bInteractiveHelp;
 
 @property (nonatomic, retain) ExportManager *exportManager;
 @property (nonatomic, retain) OpenGLTOMovie *renderManager;
@@ -108,6 +112,7 @@ class testApp;
 - (void) showHelp:(id)sender;
 - (void)hideHelp;
 - (void) moreHelp:(id)sender;
+- (void) closeTutorial:(id)sender;
 
 - (void)renderAudio;
 - (void)renderVideo;

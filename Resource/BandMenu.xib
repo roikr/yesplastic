@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10H574</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
 		<string key="IBDocument.InterfaceBuilderVersion">823</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">132</string>
@@ -45,18 +45,33 @@
 					<object class="IBUIImageView" id="421672663">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{480, 320}</string>
+						<string key="NSFrame">{{80, -80}, {320, 480}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">MENU_BACKGROUND.png</string>
+							<string key="NSResourceName">Default.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="634433617">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrame">{{215, 11}, {217, 73}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">SONGS.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="1055700089">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{402, 26}, {64, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -337,6 +352,14 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 					</object>
 					<int key="connectionID">35</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">background</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="421672663"/>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -352,7 +375,6 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="421672663"/>
 							<reference ref="139470624"/>
 							<reference ref="594532104"/>
 							<reference ref="1055700089"/>
@@ -361,6 +383,8 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 							<reference ref="359635211"/>
 							<reference ref="461168073"/>
 							<reference ref="765642688"/>
+							<reference ref="634433617"/>
+							<reference ref="421672663"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -423,6 +447,11 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 						<reference key="object" ref="765642688"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="634433617"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -449,7 +478,9 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 					<string>33.IBEditorWindowLastContentRect</string>
 					<string>33.IBPluginDependency</string>
 					<string>33.IBViewBoundsToFrameTransform</string>
+					<string>36.IBViewBoundsToFrameTransform</string>
 					<string>4.IBPluginDependency</string>
+					<string>4.IBViewBoundsToFrameTransform</string>
 					<string>5.IBPluginDependency</string>
 					<string>5.IBViewBoundsToFrameTransform</string>
 				</object>
@@ -457,7 +488,7 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>BandMenu</string>
 					<string>UIResponder</string>
-					<string>{{341, 660}, {480, 320}}</string>
+					<string>{{412, 659}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -489,7 +520,13 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwsgAAA</bytes>
 					</object>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AUNXAABBMAAAA</bytes>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+8AAA</bytes>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUM+AABCyAAAA</bytes>
@@ -512,7 +549,7 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">35</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -564,6 +601,7 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>activityIndicator</string>
+							<string>background</string>
 							<string>editButton</string>
 							<string>firstLaunchView</string>
 							<string>songsView</string>
@@ -571,6 +609,7 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIActivityIndicatorView</string>
+							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>UITextView</string>
 							<string>UIView</string>
@@ -581,6 +620,7 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>activityIndicator</string>
+							<string>background</string>
 							<string>editButton</string>
 							<string>firstLaunchView</string>
 							<string>songsView</string>
@@ -590,6 +630,10 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 							<object class="IBToOneOutletInfo">
 								<string key="name">activityIndicator</string>
 								<string key="candidateClassName">UIActivityIndicatorView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">background</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">editButton</string>
@@ -873,21 +917,23 @@ bGwgdGhlIGZpbGVzLCAKcGxlYXNlIHdhaXQsIGl0IGNhbiB0YWtlIHVwIHRvIDYwIHNlY29uZHMuA</s
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>DONE.png</string>
+				<string>Default.png</string>
 				<string>EDIT.png</string>
 				<string>FACEBOOK.png</string>
 				<string>HELP.png</string>
-				<string>MENU_BACKGROUND.png</string>
 				<string>MYSPACE.png</string>
+				<string>SONGS.png</string>
 				<string>YOUTUBE.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{64, 42}</string>
+				<string>{320, 480}</string>
 				<string>{64, 42}</string>
 				<string>{82, 80}</string>
 				<string>{151, 83}</string>
-				<string>{480, 320}</string>
 				<string>{81, 71}</string>
+				<string>{217, 73}</string>
 				<string>{85, 88}</string>
 			</object>
 		</object>

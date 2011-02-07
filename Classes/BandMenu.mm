@@ -20,7 +20,7 @@
 @synthesize activityIndicator;
 @synthesize editButton;
 @synthesize firstLaunchView;
-
+@synthesize background;
 
 
 
@@ -45,6 +45,14 @@
 	}
 		
 	[self.songsView addSubview:songsTable.view];
+	
+	
+	//CGAffineTransform rotateTransform = ;
+																
+	//set point of rotation
+	//background.center = CGPointMake(240.0, 160.0);
+
+	background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
 	
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
 	
