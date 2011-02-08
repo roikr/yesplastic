@@ -158,22 +158,10 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	status = AudioSessionInitialize(NULL, NULL, rioInterruptionListener, NULL);
 	if(checkStatus(status)) {
 		ofLog(OF_LOG_ERROR, "couldn't initialize audio session");
-	}
+	} 
 	
 	
 	//roikr: it is safe to set the following properties before activating the session
-	// roikr: this category enable running AVAssetReader with real time audio !
-	UInt32 category = kAudioSessionCategory_PlayAndRecord;	
-	status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
-	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't set audio category!");
-	}
-	
-	UInt32 doChangeDefaultRoute = 1;
-	status =AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (doChangeDefaultRoute), &doChangeDefaultRoute	 );
-	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't overide category default to speaker!");
-	}
 	
 	Float64 preferredSampleRate = (float)sampleRate; 
 	
@@ -194,14 +182,49 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	}
 	
 	
+	// roikr: this category enable running AVAssetReader with real time audio !, but on iPod it is crash (no mic ?)
+//	UInt32 category = kAudioSessionCategory_PlayAndRecord;	
+//	status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+//	if(checkStatus(status)) {
+//		ofLog(OF_LOG_ERROR, "couldn't set audio category!");
+//	}
+	
+	
+	
+//	UInt32 doChangeDefaultRoute = 1;
+//	status =AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (doChangeDefaultRoute), &doChangeDefaultRoute	 );
+//	if(checkStatus(status)) {
+//		ofLog(OF_LOG_ERROR, "couldn't overide category default to speaker!");
+//	}
+	
+	
+	//UInt32 category = 1; // roikr: removed to enable other category
+	
+	//AudioSessionSetProperty(kAudioSessionOverrideAudioRoute_Speaker, sizeof(category), &category);
+	
+	
+	//	//roikr :check this
+	//	status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(kAudioSessionCategory_MediaPlayback), &(int) {kAudioSessionCategory_MediaPlayback});
+	//	checkStatus(status);
+	//	status = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof (UInt32), &(UInt32) {1});
+	//	checkStatus(status);
+	//	//roikr:end
+	
+	
+	// this is supposed to make the audio come out of the speaker rather
+	// than the receiver, but I don't think it works when using the microphone as well.
+		
+	UInt32 value = kAudioSessionOverrideAudioRoute_Speaker;
+	AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(value), &value);
+	if(checkStatus(status)) {
+		ofLog(OF_LOG_ERROR, "couldn't overide category default to speaker!");
+	}
 	
 	status = AudioSessionSetActive(true);
 	if(checkStatus(status)) {
 		ofLog(OF_LOG_ERROR, "couldn't set audio session active");
 	}
 	
-	
-		
 	
 	// Describe audio component
 	AudioComponentDescription desc;
@@ -222,21 +245,6 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	
 	checkStatus(status);
 	
-	// this is supposed to make the audio come out of the speaker rather
-	// than the receiver, but I don't think it works when using the microphone as well.
-//	UInt32 category = kAudioSessionOverrideAudioRoute_Speaker;
-//	AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(category), &category);
-	
-	//UInt32 category = 1; // roikr: removed to enable other category
-	AudioSessionSetProperty(kAudioSessionOverrideAudioRoute_Speaker, sizeof(category), &category);
-	
-	
-//	//roikr :check this
-//	status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(kAudioSessionCategory_MediaPlayback), &(int) {kAudioSessionCategory_MediaPlayback});
-//	checkStatus(status);
-//	status = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof (UInt32), &(UInt32) {1});
-//	checkStatus(status);
-//	//roikr:end
 	
 	// Describe format
 	audioFormat.mSampleRate			= (double)sampleRate;

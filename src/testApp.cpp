@@ -101,7 +101,7 @@ void testApp::setup(){
 	bpm = 120; // TODO: send bpm to players
 	song.setupForSave(blockLength);
 	
-	soundStreamSetup();
+	
 	
 	 
 	string filename = "background.pvr";
@@ -175,6 +175,8 @@ void testApp::setup(){
 	//}
 		
 	bInitialized = true;
+	
+	soundStreamSetup();
 	
 }
 
