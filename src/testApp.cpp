@@ -234,8 +234,10 @@ void testApp::update() {
 			} 
 			break;
 		case SONG_PLAY:
-		case SONG_RENDER_AUDIO:
-		case SONG_CANCEL_RENDER_AUDIO:
+		//case SONG_RENDER_AUDIO:
+		//case SONG_CANCEL_RENDER_AUDIO:
+		// commented - to fix smooth the transition from AUDIO_RENDERING to VIDEO_RENDERING
+			
 			if (! getIsPlaying()) {
 				
 				songState = SONG_IDLE;
@@ -936,8 +938,8 @@ void testApp::renderAudio() {
 	
 	currentBlock = 0;
 	
-	while (getSongState()==SONG_RENDER_AUDIO || getSongState()==SONG_CANCEL_RENDER_AUDIO) {
-		
+	while (getIsPlaying()) { // (getSongState()==SONG_RENDER_AUDIO || getSongState()==SONG_CANCEL_RENDER_AUDIO) {
+	// this need to fix smooth the transition from AUDIO_RENDERING to VIDEO_RENDERING
 		
 		memset(lBlock, 0, blockLength*sizeof(float));
 		memset(rBlock, 0, blockLength*sizeof(float));
@@ -959,6 +961,13 @@ void testApp::renderAudio() {
 	song.close();	
 	
 	cout << "renderAudio finished" << endl;
+	
+	for (int i=0;i<3;i++) {
+		if (player[i].getSongState()!=SONG_IDLE) {
+			player[i].setSongState(SONG_IDLE);
+		}
+	}
+	bNeedDisplay = true;
 	
 	setSongState(SONG_RENDER_AUDIO_FINISHED);
 	

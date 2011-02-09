@@ -34,9 +34,12 @@ class testApp;
 	UIView *triggersView;
 	UIView *loopsView;
 	UIView *bandLoopsView;
+	
 	UIView *renderView;
 	UILabel *renderLabel;
 	UITextView *renderTextView;
+	UIButton *renderCancelButton;
+	
 	UIView *tutorialView;
 	UITextView *tutorialTextView;
 	
@@ -79,9 +82,12 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
+
 @property (nonatomic, retain) IBOutlet UIView *renderView;
 @property (nonatomic, retain) IBOutlet UILabel *renderLabel;
 @property (nonatomic, retain) IBOutlet UITextView *renderTextView;
+@property (nonatomic, retain) IBOutlet UIButton *renderCancelButton;
+
 @property (nonatomic, retain) IBOutlet UIView *tutorialView;
 @property (nonatomic, retain) IBOutlet UITextView *tutorialTextView;
 

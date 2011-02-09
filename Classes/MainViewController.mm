@@ -58,9 +58,12 @@
 @synthesize soloHelp;
 @synthesize bShowHelp;
 @synthesize bInteractiveHelp;
+
 @synthesize renderView;
 @synthesize renderLabel;
 @synthesize renderTextView;
+@synthesize renderCancelButton;
+
 @synthesize interactionView;
 @synthesize tutorialView;
 @synthesize tutorialTextView;
@@ -240,6 +243,9 @@
 			[self.view addSubview:renderView];
 		}
 		renderTextView.hidden = [(TouchView*)self.view renderTouch];
+		renderCancelButton.hidden = songState!=SONG_RENDER_VIDEO;
+		
+		
 		return;
 	} else if ([self.view.subviews containsObject:renderView]) {
 		[renderView removeFromSuperview];
@@ -713,6 +719,7 @@
 //		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
 //		bShowHelp = YES;
 //	}
+	self.view.userInteractionEnabled = YES; // was disabled after video export
 	[self updateViews];
 }
 
@@ -744,6 +751,7 @@
 
 - (void)share:(id)sender {
 	
+	
 	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
 	
 	if ([shareManager isUploading]) {
@@ -752,6 +760,7 @@
 		
 		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
 		OFSAptr->setSongState(SONG_IDLE);
+		self.view.userInteractionEnabled = NO; // disabled to avoid loop activation
 		[shareManager menuWithView:self.view];
 	}
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
@@ -821,6 +830,7 @@
 
 - (void)renderVideo {
 	[(TouchView*)self.view  setRenderTouch:NO];
+	self.view.userInteractionEnabled = YES;
 	
 	self.renderLabel.text = @"Creating video";
 	self.renderTextView.text = @"pinch and drag screen to create camera movements.\n\ndouble tap screen to zoom.";
@@ -885,6 +895,7 @@
 					 //[milgromViewController startAnimation];
 					 [shareManager action];
 					 self.renderManager = nil;
+					 self.view.userInteractionEnabled = NO;
 					 
 					 //renderingView.hidden = YES;
 					 //[self action];

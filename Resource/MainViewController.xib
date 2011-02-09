@@ -12,11 +12,10 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="177"/>
-			<integer value="144"/>
 			<integer value="170"/>
 			<integer value="143"/>
-			<integer value="221"/>
+			<integer value="144"/>
+			<integer value="177"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -713,6 +712,7 @@
 						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{86, 98}, {307, 125}}</string>
 						<reference key="NSSuperview" ref="341227482"/>
+						<reference key="NSWindow"/>
 						<reference key="IBUIBackgroundColor" ref="719325150"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -729,6 +729,7 @@
 						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{115, 120}, {247, 93}}</string>
 						<reference key="NSSuperview" ref="341227482"/>
+						<reference key="NSWindow"/>
 						<reference key="IBUIBackgroundColor" ref="719325150"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -758,6 +759,7 @@
 						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{349, 99}, {39, 37}}</string>
 						<reference key="NSSuperview" ref="341227482"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -777,6 +779,7 @@
 				</object>
 				<string key="NSFrameSize">{480, 320}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="IBUIBackgroundColor" ref="719325150"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -1118,6 +1121,14 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">226</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">renderCancelButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="558195103"/>
+					</object>
+					<int key="connectionID">227</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1619,7 +1630,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">226</int>
+			<int key="maxID">227</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1779,6 +1790,7 @@
 							<string>menuButton</string>
 							<string>playButton</string>
 							<string>recordButton</string>
+							<string>renderCancelButton</string>
 							<string>renderLabel</string>
 							<string>renderProgressView</string>
 							<string>renderTextView</string>
@@ -1800,6 +1812,7 @@
 							<string>UIButton</string>
 							<string>UIView</string>
 							<string>UIView</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1830,6 +1843,7 @@
 							<string>menuButton</string>
 							<string>playButton</string>
 							<string>recordButton</string>
+							<string>renderCancelButton</string>
 							<string>renderLabel</string>
 							<string>renderProgressView</string>
 							<string>renderTextView</string>
@@ -1876,6 +1890,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">recordButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">renderCancelButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
