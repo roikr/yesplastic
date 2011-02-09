@@ -37,6 +37,14 @@ enum {
 	ACTION_PLAY
 };
 
+void ShareAlert(NSString *title,NSString *message) {
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
+	[alert show];
+	[alert release];
+}
+
+
 static NSString* kMilgromURL = @"www.milgrom.com";
 
 @interface ShareManager ()
@@ -237,18 +245,10 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 - (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader {
 	switch (theUploader.state) {
 		case FACEBOOK_UPLOADER_STATE_UPLOAD_FINISHED: {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook upload" 
-															message:@"your upload finished"
-														   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
-			[alert show];
-			[alert release];
+			ShareAlert(@"Facebook upload", @"your upload finished");
 		} break;
 		case FACEBOOK_UPLOADER_STATE_UPLOADING: {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook upload" message:@"Upload in progress"
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-			[alert release];
-			
+			ShareAlert(@"Facebook upload", @"Upload in progress");
 		} break;
 		default:
 			break;
@@ -263,27 +263,14 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 -(void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader{
 	switch (theUploader.state) {
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED: {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube upload" 
-															message:[NSString stringWithFormat:@"your upload finished. link: %@",[theUploader.link absoluteString]]
-														   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
-			[alert show];
-			[alert release];
+			ShareAlert(@"YouTube upload", [NSString stringWithFormat:@"your upload finished. link: %@",[theUploader.link absoluteString]]);
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOADING: {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube upload" message:@"Upload in progress"
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-			[alert release];
+			ShareAlert(@"YouTube upload", @"Upload in progress");
 			
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED: {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload erorr" 
-															message:@"your upload has been stopped"
-														   delegate:nil 
-												  cancelButtonTitle:@"OK" 
-												  otherButtonTitles: nil];
-			[alert show];
-			[alert release];
+			ShareAlert(@"YouTube Upload erorr" , @"your upload has been stopped");
 		} break;
 			
 		default:
@@ -361,12 +348,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			if ([self gotInternet]) {
 				action = buttonIndex ? ACTION_UPLOAD_TO_FACEBOOK : ACTION_UPLOAD_TO_YOUTUBE;
 			} else {
-				
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Movie" 
-																message:@"Trying hard, but no internet connection."
-															   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
-				[alert show];
-				[alert release];
+				ShareAlert(@"Upload Movie", @"No internet connection.");
 				action = ACTION_DONE;
 			}
 
@@ -553,22 +535,13 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 										dispatch_async(dispatch_get_main_queue(), ^{
 											if (error) {
 												MilgromLog(@"writeVideoToAssestsLibrary failed: %@", error);
-												UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
-																									message:[error localizedRecoverySuggestion]
-																								   delegate:nil
-																						  cancelButtonTitle:@"OK"
-																						  otherButtonTitles:nil];
-												[alertView show];
-												[alertView release];
+												ShareAlert([error localizedDescription], [error localizedRecoverySuggestion]);
+												
 											}
 											else {
 												MilgromLog(@"writeVideoToAssestsLibrary successed");
-												UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Library" 
-																								message:@"The video has been saved to your library"
-																							   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
-												[alert show];
-												[alert release];
-												
+												ShareAlert(@"Library", @"The video has been saved to your library");
+										
 											}
 										});
 										

@@ -25,6 +25,8 @@
 #import "glu.h"
 #import "ExportManager.h"
 
+#import "MilgromUtils.h"
+
 //#import "Trigger.h"
 
 @interface MainViewController() 
@@ -432,7 +434,10 @@
 		
 	if (OFSAptr->getSongVersion()) {
 		OFSAptr->setSongState(SONG_PLAY);
+	} else {
+		MilgromAlert(@"Can’t  play", @"there is nothing to play. please record something first.");
 	}
+
 	
 	
 	
@@ -742,11 +747,7 @@
 	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
 	
 	if ([shareManager isUploading]) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sharing" 
-														message:@"Video upload in progress"
-													   delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles: nil];
-		[alert show];
-		[alert release];
+		MilgromAlert(@"Sharing", @"Video upload in progress");
 	} else {
 		
 		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];

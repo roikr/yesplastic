@@ -16,7 +16,7 @@
 {
     if (self = [super initWithCoder: decoder])
     {
-		[self setFont: [UIFont fontWithName: @"Wonderlism" size: 18]];
+		[self setFont: [UIFont fontWithName: @"Wonderlism" size: self.font.pointSize]]; // 18
     }
     return self;
 }

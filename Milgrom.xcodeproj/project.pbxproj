@@ -133,6 +133,7 @@
 		E42D14FC124F896C007BEEB0 /* SETCELL_SELECT_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */; };
 		E42D14FD124F896C007BEEB0 /* SETCELL_SELECT_2.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */; };
 		E42D14FE124F896C007BEEB0 /* SETCELL_SELECT_3.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */; };
+		E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = E437216C1302AF030090CAEC /* MilgromUtils.mm */; };
 		E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */; };
 		E439299512932D7500F855A8 /* ofxPincher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E439299312932D7500F855A8 /* ofxPincher.cpp */; };
 		E43BE95A125C968F009C8845 /* APP HELP SLIDE.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE954125C968F009C8845 /* APP HELP SLIDE.png */; };
@@ -229,6 +230,7 @@
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
 		E4BB004512DCCF7500AA868E /* ofxInteractiveTutorial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */; };
 		E4BB007112DCD16000AA868E /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB007012DCD16000AA868E /* testApp.cpp */; };
+		E4BBD54F1302929D00E135DF /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BBD54E1302929D00E135DF /* CustomButton.m */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -819,6 +821,8 @@
 		E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_1.png; sourceTree = "<group>"; };
 		E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_2.png; sourceTree = "<group>"; };
 		E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_3.png; sourceTree = "<group>"; };
+		E437216B1302AF030090CAEC /* MilgromUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MilgromUtils.h; path = Classes/MilgromUtils.h; sourceTree = "<group>"; };
+		E437216C1302AF030090CAEC /* MilgromUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MilgromUtils.mm; path = Classes/MilgromUtils.mm; sourceTree = "<group>"; };
 		E4379BAF12C0CAAB006C26AC /* RKUBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKUBackgroundTask.h; sourceTree = "<group>"; };
 		E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKUBackgroundTask.m; sourceTree = "<group>"; };
 		E439299312932D7500F855A8 /* ofxPincher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPincher.cpp; sourceTree = "<group>"; };
@@ -988,6 +992,8 @@
 		E4BB004312DCCF7500AA868E /* ofxInteractiveTutorial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractiveTutorial.cpp; sourceTree = "<group>"; };
 		E4BB004412DCCF7500AA868E /* ofxInteractiveTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractiveTutorial.h; sourceTree = "<group>"; };
 		E4BB007012DCD16000AA868E /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
+		E4BBD54D1302929D00E135DF /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		E4BBD54E1302929D00E135DF /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -2130,6 +2136,8 @@
 				E47BC952122A8E5A00B6149A /* CustomImageView.m */,
 				E4E32C5712A3F1D400508CC8 /* CustomFontTextView.h */,
 				E4E32C5812A3F1D400508CC8 /* CustomFontTextView.m */,
+				E4BBD54D1302929D00E135DF /* CustomButton.h */,
+				E4BBD54E1302929D00E135DF /* CustomButton.m */,
 			);
 			name = Custom;
 			path = Classes;
@@ -2183,6 +2191,8 @@
 				E4D1EB3C121133F3004D4E25 /* URLCacheAlert.mm */,
 				E4101B0112ACD28D000C6AAF /* Reachability.h */,
 				E4101B0212ACD28D000C6AAF /* Reachability.m */,
+				E437216B1302AF030090CAEC /* MilgromUtils.h */,
+				E437216C1302AF030090CAEC /* MilgromUtils.mm */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2761,6 +2771,8 @@
 				E4CBC4C012F973A80076C5C6 /* ofxAudioFile.mm in Sources */,
 				E44558F912FA99640001C6CE /* CAStreamBasicDescription.cpp in Sources */,
 				E44558FA12FA99640001C6CE /* CAXException.cpp in Sources */,
+				E4BBD54F1302929D00E135DF /* CustomButton.m in Sources */,
+				E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
