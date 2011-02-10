@@ -518,6 +518,12 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		case ACTION_PLAY:
 			[appDelegate playURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"mov"]]];
 			break;
+			
+		case ACTION_DONE:
+		case ACTION_RENDER:
+			[appDelegate mainViewController].view.userInteractionEnabled = YES; 
+			break;
+
 	}	
 }
 
