@@ -919,7 +919,7 @@
 						
 						 withDrawFrame:^(int frameNum) {
 							 //NSLog(@"rendering frame: %i, progress: %2.2f",frameNum,OFSAptr->getRenderProgress());
-							 OFSAptr->seekFrame(frameNum);
+							 OFSAptr->seekFrame(frameNum+1); // roikr: for synching
 							 
 							 glMatrixMode(GL_MODELVIEW);
 							 glLoadIdentity();

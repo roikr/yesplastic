@@ -334,7 +334,7 @@ float SimplePlayer::getScale() {
 void SimplePlayer::play(int num) {
 	nextSequence = SEQUENCE_SAMPLE_1 + num;
 	actor.setSequence(nextSequence);
-	actor.firstFrame();
+	//actor.firstFrame();
 	//cout << "num: " << num << ", name: " << actor.getSequenceName(nextSequence) << endl; // DEBUG
 }
 
