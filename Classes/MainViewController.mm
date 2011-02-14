@@ -862,7 +862,7 @@
 						   withContext:appDelegate.milgromViewController.context
 						withSize:CGSizeMake(480, 320) 
 			   withAudioAverageBitRate:[NSNumber numberWithInt: 192000 ]
-			   withVideoAverageBitRate:[NSNumber numberWithDouble:350.0*1024.0]
+			   withVideoAverageBitRate:[NSNumber numberWithDouble:VIDEO_BITRATE*1000.0] // appDelegate.videoBitrate
 		 
 				 withInitializationHandler:^ {
 					 glMatrixMode (GL_PROJECTION);

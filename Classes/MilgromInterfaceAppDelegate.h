@@ -48,6 +48,8 @@ class testApp;
 	ShareManager *shareManager;
 	NSInteger lastSavedVersion;
 	
+//	NSNumber *videoBitrate;
+	
 }
 
 
@@ -69,6 +71,8 @@ class testApp;
 
 @property (nonatomic, retain) ShareManager *shareManager;
 @property NSInteger lastSavedVersion;
+
+//@property (nonatomic, retain) NSNumber *videoBitrate;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)saveContext;

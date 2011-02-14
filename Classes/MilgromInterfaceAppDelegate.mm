@@ -68,6 +68,8 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize lastSavedVersion;
 @synthesize shareManager;
 
+//@synthesize videoBitrate;
+
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -77,6 +79,7 @@ NSString * const kCacheFolder=@"URLCache";
 	// Override point for customization after application launch.
 	
 		
+//	self.videoBitrate = [NSNumber numberWithDouble:350.0*1000.0]; // 350.0*1024.0
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
 	

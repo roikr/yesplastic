@@ -127,6 +127,9 @@
 	[setsTable viewWillAppear:animated];
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
 	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
+
+	//volumeSlider.value = [((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate doubleValue] / (1000.0*1000.0*10.0) ;
+	//volumeLabel.text = [NSString stringWithFormat:@"%.0f Kbit",[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate doubleValue]/1000];
 	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 80.0)/80.0;
 	
 	
@@ -139,6 +142,10 @@
 	
 	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setVolume(volumeSlider.value);
 	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
+
+	//((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate = [NSNumber numberWithDouble:volumeSlider.value * (1000.0*1000.0*10.0)];
+	//volumeLabel.text = [NSString stringWithFormat:@"%.0f Kbit",[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate doubleValue]/1000];
+
 }
 
 - (void) bpmChanged:(id)sender {

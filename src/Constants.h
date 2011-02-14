@@ -1,6 +1,8 @@
 #ifndef _CONSTANTS
 #define _CONSTANTS
 
+#define VIDEO_BITRATE 700.0
+
 #define FRAME_RATE 25
 
 //#define SUB_TEXTURE_WIDTH 320
