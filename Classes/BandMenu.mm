@@ -16,11 +16,11 @@
 @implementation BandMenu
 
 @synthesize songsTable;
-@synthesize songsView;
 @synthesize activityIndicator;
 @synthesize editButton;
 @synthesize firstLaunchView;
 @synthesize background;
+@synthesize milgromView,lofiView,menuView,songsView;
 
 
 
@@ -55,8 +55,8 @@
 	background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
 	
 		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
+	firstTime = YES;
 	
-
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -141,12 +141,45 @@
 	
 }
 
-/*
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	MilgromLog(@"BandView::viewDidAppear");
+- (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion {
+	[UIView animateWithDuration:0.5 delay:1.5 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
+					 animations:^{
+						 firstView.transform = CGAffineTransformMakeTranslation(0,640);
+						 secondView.transform = CGAffineTransformMakeTranslation(0,320);
+						 
+						 
+					 } 
+					 completion:completion];
 }
- */
+
+- (void)viewDidAppear:(BOOL)animated {
+	MilgromLog(@"BandView::viewDidAppear");
+	[super viewDidAppear:animated];
+	
+	
+	if (firstTime) {
+		firstTime = NO;
+		
+		[UIView animateWithDuration:0.5 delay:0.0 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
+						 animations:^{
+							 milgromView.transform = CGAffineTransformMakeTranslation(0,320);
+							
+						 } 
+						 completion:^(BOOL finished){
+							 
+							 [self swapView:milgromView with:lofiView 
+								 completion:^(BOOL finished){
+									 
+									 [self swapView:lofiView with:menuView 
+										 completion:^(BOOL finished){
+											
+										
+										 }]; 
+								 }]; 
+						 }];
+	}
+}
+ 
 
 - (void)viewWillAppear:(BOOL)animated {
 	MilgromLog(@"BandView::viewWillAppear");

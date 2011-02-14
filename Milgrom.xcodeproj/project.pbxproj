@@ -191,6 +191,8 @@
 		E48503FC1214BB3600D2271F /* TouchView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48503FB1214BB3600D2271F /* TouchView.mm */; };
 		E4862AB2128B119E00DBC5D0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = E4862AB1128B119E00DBC5D0 /* Song.m */; };
 		E490A1451206AB58008512EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E490A1441206AB58008512EA /* CoreData.framework */; };
+		E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = E49159BC13098B990019ED6B /* LFP_ALPHA.png */; };
+		E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */; };
 		E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E493D3D7122DB16700163EF9 /* MilgromViewController.xib */; };
 		E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */; };
 		E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */; };
@@ -210,6 +212,7 @@
 		E49CF1BA12A6798A002CD0B3 /* TriggersView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E49CF1B912A6798A002CD0B3 /* TriggersView.mm */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
+		E4A9022513094B5100F844CA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A9022413094B5100F844CA /* Icon.png */; };
 		E4B1B2AA126E20B2001A577D /* FBConnectGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B298126E20B2001A577D /* FBConnectGlobal.m */; };
 		E4B1B2AB126E20B2001A577D /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29A126E20B2001A577D /* FBSession.m */; };
 		E4B1B2AC126E20B2001A577D /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29C126E20B2001A577D /* FBRequest.m */; };
@@ -927,6 +930,8 @@
 		E4862AB1128B119E00DBC5D0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Song.m; path = Model/Song.m; sourceTree = "<group>"; };
 		E490A1441206AB58008512EA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Milgrom.xcdatamodel; sourceTree = "<group>"; };
+		E49159BC13098B990019ED6B /* LFP_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LFP_ALPHA.png; path = Resource/LFP_ALPHA.png; sourceTree = "<group>"; };
+		E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MILGROM_ALPHA.png; path = Resource/MILGROM_ALPHA.png; sourceTree = "<group>"; };
 		E493D3D7122DB16700163EF9 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
 		E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YouTubeUploadViewController.xib; path = YouTubeUpload/YouTubeUploadViewController.xib; sourceTree = "<group>"; };
 		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
@@ -955,6 +960,7 @@
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
+		E4A9022413094B5100F844CA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resource/Icon.png; sourceTree = "<group>"; };
 		E4B1B296126E20B2001A577D /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnect.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B297126E20B2001A577D /* FBConnectGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnectGlobal.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnectGlobal.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B298126E20B2001A577D /* FBConnectGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBConnectGlobal.m; path = "../OpenSource/facebook-iphone-sdk/src/FBConnectGlobal.m"; sourceTree = SOURCE_ROOT; };
@@ -2265,6 +2271,9 @@
 		E4DE4F5F11FFFC9A00BF31AF /* png */ = {
 			isa = PBXGroup;
 			children = (
+				E49159BC13098B990019ED6B /* LFP_ALPHA.png */,
+				E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */,
+				E4A9022413094B5100F844CA /* Icon.png */,
 				E43BE953125C968F009C8845 /* HELP */,
 				E42D1424124F895E007BEEB0 /* DRM_SOLO */,
 				E42D1449124F895E007BEEB0 /* GTR_SOLO */,
@@ -2672,6 +2681,9 @@
 				E4F0553D12FFDCE8004430A8 /* SONGS.png in Resources */,
 				E4F0558612FFEE0E004430A8 /* MESSAGE_FRAME.png in Resources */,
 				E4F0558712FFEE0E004430A8 /* MESSAGE_X_BUTTON.png in Resources */,
+				E4A9022513094B5100F844CA /* Icon.png in Resources */,
+				E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */,
+				E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
