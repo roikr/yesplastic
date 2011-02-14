@@ -247,12 +247,15 @@ NSString * const kCacheFolder=@"URLCache";
 				if (mainViewController) {
 					dispatch_async(dispatch_get_main_queue(), ^{
 						[mainViewController updateViews];
+						OFSAptr->bNeedDisplay = false;
 					});
-					OFSAptr->bNeedDisplay = false;
+					
 				}
 			}
 		}
 	});
+	
+	// TODO: move the update loop from here to main view controller
 	
 	OFSAptr->setup();
 	OFSAptr->setState(BAND_STATE);

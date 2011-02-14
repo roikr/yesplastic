@@ -160,8 +160,10 @@
 		//button.multipleTouchEnabled = YES;
 	}
 	
-	
-	
+	for (int i=0;i<[loopsImagesView.subviews count];i++) {
+		UIImageView *imageView = (UIImageView*)[loopsImagesView.subviews objectAtIndex:i];
+		imageView.hidden = YES;
+	}
 }
 
 
@@ -336,7 +338,22 @@
 							NSString *loopName = [NSString stringWithFormat:@"%@_LOOP_%i.png",[NSString stringWithCString:OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding],OFSAptr->getCurrentLoop(i)+1];
 							[imageView setImage:[UIImage imageNamed:loopName]];
 							
-							imageView.hidden = OFSAptr->getMode(imageView.tag) == MANUAL_MODE;
+							if (OFSAptr->getMode(imageView.tag) == LOOP_MODE) {
+								if (imageView.hidden) {
+									imageView.hidden = NO;	
+									imageView.alpha = 1.0;
+									[UIView animateWithDuration:0.1 delay:0.5
+														options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+													 animations:^{imageView.alpha = 0.0;} 
+													 completion:NULL];
+								}
+							} else {
+								imageView.hidden = YES;
+							}
+
+							
+							
+							
 						}						
 						
 
@@ -592,6 +609,14 @@
 - (void) nextLoop:(id)sender {
 	
 	UIButton *button = (UIButton*)sender;
+	for (int i=0;i<[loopsImagesView.subviews count];i++) {
+		UIImageView *imageView = (UIImageView*)[loopsImagesView.subviews objectAtIndex:i];
+		if (imageView.tag == button.tag) {
+			imageView.hidden = YES; // this flag will allow updateView to animate the loop image in band mode
+			break;
+		}
+	}
+	
 	OFSAptr->nextLoop(button.tag);
 	
 }
@@ -599,6 +624,13 @@
 - (void) prevLoop:(id)sender {
 	
 	UIButton *button = (UIButton*)sender;
+	for (int i=0;i<[loopsImagesView.subviews count];i++) {
+		UIImageView *imageView = (UIImageView*)[loopsImagesView.subviews objectAtIndex:i];
+		if (imageView.tag == button.tag) {
+			imageView.hidden = YES; // this flag will allow updateView to animate the loop image in band mode
+			break;
+		}
+	}
 	OFSAptr->prevLoop(button.tag);
 }
 
