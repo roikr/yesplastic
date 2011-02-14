@@ -247,8 +247,9 @@ NSString * const kCacheFolder=@"URLCache";
 				if (mainViewController) {
 					dispatch_async(dispatch_get_main_queue(), ^{
 						[mainViewController updateViews];
-						OFSAptr->bNeedDisplay = false;
+						
 					});
+					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
 					
 				}
 			}

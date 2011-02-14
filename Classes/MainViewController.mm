@@ -939,9 +939,9 @@
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
 					 //[milgromViewController startAnimation];
+					 self.view.userInteractionEnabled = NO;
 					 [shareManager action];
 					 self.renderManager = nil;
-					 self.view.userInteractionEnabled = NO;
 					 
 					 //renderingView.hidden = YES;
 					 //[self action];

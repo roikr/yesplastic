@@ -496,6 +496,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		}	break;
 			
 		case ACTION_ADD_TO_LIBRARY:
+			[appDelegate mainViewController].view.userInteractionEnabled = YES; 
 			[self exportToLibrary];
 			break;
 			
