@@ -54,6 +54,8 @@
 @synthesize triggersView;
 @synthesize loopsView;
 @synthesize bandLoopsView;
+@synthesize loopsImagesView;
+
 @synthesize bandHelp;
 @synthesize soloHelp;
 @synthesize bShowHelp;
@@ -193,6 +195,7 @@
 	triggersView.hidden = YES;
 	loopsView.hidden = YES;
 	bandLoopsView.hidden = YES;
+	loopsImagesView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
 	
@@ -230,6 +233,7 @@
 	loopsView.hidden = YES;
 	triggersView.hidden = YES;
 	bandLoopsView.hidden = YES;
+	loopsImagesView.hidden = YES;
 	recordButton.selected = OFSAptr->getSongState() == SONG_TRIGGER_RECORD || OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
@@ -324,6 +328,16 @@
 							button.hidden = OFSAptr->getMode(button.tag) == MANUAL_MODE;
 						}
 						
+						loopsImagesView.hidden = NO;
+						for (int i=0;i<[loopsImagesView.subviews count];i++) {
+							UIImageView *imageView = (UIImageView*)[loopsImagesView.subviews objectAtIndex:i];
+							//MilgromLog(@"button: %i, tag: %i, mode: %i",i, button.tag,OFSAptr->getMode(button.tag));
+							//button.selected = ;
+							NSString *loopName = [NSString stringWithFormat:@"%@_LOOP_%i.png",[NSString stringWithCString:OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding],OFSAptr->getCurrentLoop(i)+1];
+							[imageView setImage:[UIImage imageNamed:loopName]];
+							
+							imageView.hidden = OFSAptr->getMode(imageView.tag) == MANUAL_MODE;
+						}						
 						
 
 						

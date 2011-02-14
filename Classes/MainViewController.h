@@ -34,6 +34,7 @@ class testApp;
 	UIView *triggersView;
 	UIView *loopsView;
 	UIView *bandLoopsView;
+	UIView *loopsImagesView;
 	
 	UIView *renderView;
 	UILabel *renderLabel;
@@ -80,6 +81,9 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *triggersView;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
+@property (nonatomic, retain) IBOutlet UIView *loopsImagesView;
+
+
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 
