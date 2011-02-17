@@ -12,7 +12,6 @@
 #import "Constants.h"
 #import "MainViewController.h"
 #import "MilgromMacros.h"
-#include "ofxInteractiveTutorial.h"
 
 @implementation TouchView
 
@@ -53,7 +52,7 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp && !appDelegate.mainViewController.bInteractiveHelp) {
+	if (appDelegate.mainViewController.bShowHelp ) { //&& !appDelegate.mainViewController.bInteractiveHelp) {
 		return;
 	}
 	
@@ -104,7 +103,7 @@
 	//self.timer = nil;
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp && !appDelegate.mainViewController.bInteractiveHelp) {
+	if (appDelegate.mainViewController.bShowHelp ) { // && !appDelegate.mainViewController.bInteractiveHelp) {
 		return;
 	}
 
@@ -132,7 +131,7 @@
 	//	NSLog(@"touchesEnded: %i %i %i", [touches count],  [[event touchesForView:self] count], multitouchData.numTouches);
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp && !appDelegate.mainViewController.bInteractiveHelp) {
+	if (appDelegate.mainViewController.bShowHelp ) { // && !appDelegate.mainViewController.bInteractiveHelp) {
 		[appDelegate.mainViewController hideHelp];
 		return;
 	}

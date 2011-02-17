@@ -16,6 +16,7 @@ class testApp;
 @class CustomImageView;
 @class ExportManager;
 @class OpenGLTOMovie;
+@class TutorialView;
 
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
@@ -41,9 +42,7 @@ class testApp;
 	UITextView *renderTextView;
 	UIButton *renderCancelButton;
 	
-	UIView *tutorialView;
-	UITextView *tutorialTextView;
-	
+	TutorialView *tutorialView;
 	
 	testApp *OFSAptr;
 	
@@ -92,15 +91,14 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UITextView *renderTextView;
 @property (nonatomic, retain) IBOutlet UIButton *renderCancelButton;
 
-@property (nonatomic, retain) IBOutlet UIView *tutorialView;
-@property (nonatomic, retain) IBOutlet UITextView *tutorialTextView;
+@property (nonatomic, retain) IBOutlet TutorialView *tutorialView;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
 @property (nonatomic,retain ) IBOutlet CustomImageView *renderProgressView;
 
 @property BOOL bShowHelp;
-@property BOOL bInteractiveHelp;
+
 
 @property (nonatomic, retain) ExportManager *exportManager;
 @property (nonatomic, retain) OpenGLTOMovie *renderManager;
@@ -119,14 +117,15 @@ class testApp;
 - (void) nextLoop:(id)sender;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
-- (void) showHelp:(id)sender;
-- (void)hideHelp;
-- (void) moreHelp:(id)sender;
-- (void) closeTutorial:(id)sender;
 
 - (void)renderAudio;
 - (void)renderVideo;
 - (void)exportRingtone;
 - (void)cancelRendering:(id)sender;
+
+- (void) showHelp:(id)sender;
+- (void) hideHelp;
+- (void) moreHelp:(id)sender;
+
 
 @end

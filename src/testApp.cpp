@@ -167,13 +167,6 @@ void testApp::setup(){
 	startTime = ofGetElapsedTimeMillis();
 	currentFrame = 0;
 	
-	tutorial.setup();
-	lastTutorialState = tutorial.getState();
-	tutorial.loadFile("tutorial.xml");
-	//if (tutorial.getTimesCompleted()>3) {
-	//	tutorial.setState(TUTORIAL_DONE);
-	//}
-		
 	bInitialized = true;
 	
 	soundStreamSetup();
@@ -206,11 +199,7 @@ void testApp::update() {
 	}
 	
 	
-	tutorial.update();
-	if (tutorial.getState() !=lastTutorialState) {
-		bNeedDisplay = true;
-		lastTutorialState = tutorial.getState();
-	}
+
 	
 	if (isInTransition()!=bInTransition) {
 		bInTransition = !bInTransition;
@@ -401,8 +390,6 @@ int getRandomLoop() {
 
 void testApp::playRandomLoop() {
 	
-	tutorial.done(MILGROM_TUTORIAL_SHAKE);
-	
 	float x = ofRandomuf();
 	
 	if (x<0.5) {
@@ -452,7 +439,6 @@ void testApp::setState(int state) {
 		case SOLO_STATE:
 			player[controller].setState(state);
 			slider.setPage(controller);
-			tutorial.done(MILGROM_TUTORIAL_ROTATE);
 			break;
 		default:
 			break;
@@ -819,7 +805,6 @@ void testApp::touchMoved(float x, float y, int touchId) {
 		if (bPush) {
 			bPush = false;
 			player[controller].setPush(false);
-			tutorial.done(MILGROM_TUTORIAL_SLIDE);
 		}		
 	}
 	
@@ -851,7 +836,7 @@ void testApp::touchUp(float x, float y, int touchId) {
 		player[controller].setPush(false);
 		bPush = false;
 		setMode(controller,player[controller].getMode() == MANUAL_MODE ? LOOP_MODE : MANUAL_MODE);
-		tutorial.done(MILGROM_TUTORIAL_PUSH_PLAYER);
+		
 	} else {
 		if (state == SOLO_STATE) {
 			bNeedDisplay = slider.getCurrentPage() != controller;
@@ -876,7 +861,7 @@ void testApp::nextLoop(int player) {
 			break;
 		default:
 			this->player[player].changeLoop((this->player[player].getCurrentLoop()+1)%8);
-			tutorial.done(MILGROM_TUTORIAL_CHANGE_LOOP);
+			
 			bNeedDisplay = true;
 			break;
 	}
@@ -892,7 +877,7 @@ void testApp::prevLoop(int player) {
 			break;
 		default:
 			this->player[player].changeLoop((this->player[player].getCurrentLoop()+7)%8);
-			tutorial.done(MILGROM_TUTORIAL_CHANGE_LOOP);
+			
 			bNeedDisplay = true;
 			break;
 	}

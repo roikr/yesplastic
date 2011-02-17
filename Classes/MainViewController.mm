@@ -11,11 +11,11 @@
 
 #include "Constants.h"
 #include "testApp.h"
-#include "ofxInteractiveTutorial.h"
 
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromViewController.h"
 #import "TouchView.h"
+#import "TutorialView.h"
 #import "MilgromMacros.h"
 #import "SaveViewController.h"
 #import "Song.h"
@@ -36,8 +36,6 @@
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
 - (void)updateExportProgress:(ExportManager*)manager;
-- (void)updateHelp;
-
 
 @end
 
@@ -59,7 +57,6 @@
 @synthesize bandHelp;
 @synthesize soloHelp;
 @synthesize bShowHelp;
-@synthesize bInteractiveHelp;
 
 @synthesize renderView;
 @synthesize renderLabel;
@@ -68,7 +65,7 @@
 
 @synthesize interactionView;
 @synthesize tutorialView;
-@synthesize tutorialTextView;
+
 
 
 //@synthesize triggerButton;
@@ -164,6 +161,22 @@
 		UIImageView *imageView = (UIImageView*)[loopsImagesView.subviews objectAtIndex:i];
 		imageView.hidden = YES;
 	}
+	
+	
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		while (1) {
+			OFSAptr->update(); // also update bNeedDisplay
+			[tutorialView update];
+			if (OFSAptr->bNeedDisplay) {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[self updateViews];
+					
+				});
+				OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
+			}
+		}
+	});
 }
 
 
@@ -173,7 +186,10 @@
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
-	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO ;	
+	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO && 
+	(!tutorialView.isActive  ||  tutorialView.currentSlide == MILGROM_TUTORIAL_ROTATE ||  tutorialView.currentSlide >= MILGROM_TUTORIAL_RECORD_PLAY);
+
+			
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -200,6 +216,7 @@
 	loopsImagesView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
+	tutorialView.hidden = YES;
 	
 	
 	if ([self.view.subviews containsObject:bandHelp]) {
@@ -241,7 +258,36 @@
 	infoButton.hidden = YES;
 	shareProgressView.hidden = YES;
 		
-	[self updateHelp];
+	//[self updateHelp];
+	
+	[tutorialView updateViews];
+	
+	self.interactionView.userInteractionEnabled = !bShowHelp;
+	if (bShowHelp) {
+		switch (OFSAptr->getState()){
+			case SOLO_STATE:
+				if (![self.view.subviews containsObject:soloHelp]) {
+					[self.view addSubview:soloHelp];
+				}
+				break;
+			case BAND_STATE:
+				if (![self.view.subviews containsObject:bandHelp]) {
+					[self.view addSubview:bandHelp];
+					//[self.view bringSubviewToFront:bandHelp];
+				}
+				break;
+			default:
+				break;
+		}
+	} else {
+		if ([self.view.subviews containsObject:soloHelp]) {
+			[soloHelp removeFromSuperview];
+		}
+		if ([self.view.subviews containsObject:bandHelp]) {
+			[bandHelp removeFromSuperview];
+		}
+	}
+
 	
 	int songState =OFSAptr->getSongState();
 	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || songState == SONG_RENDER_AUDIO_FINISHED || exportManager) {
@@ -273,12 +319,12 @@
 			case SONG_IDLE:
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD:
-				playButton.hidden = NO;
+				playButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
 				switch (OFSAptr->getState()) {
 					case SOLO_STATE: {
-						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE;
+						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_SOLO_MENU;
 						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 						
@@ -321,7 +367,7 @@
 						
 					} break;
 					case BAND_STATE: {
-						menuButton.hidden = NO;
+						menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_LEARN_MORE;
 						bandLoopsView.hidden = NO;
 						for (int i=0;i<[bandLoopsView.subviews count];i++) {
 							UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
@@ -403,8 +449,8 @@
 		
 		
 
-		recordButton.hidden = NO;
-		infoButton.hidden = NO; // OFSAptr->getSongState() != SONG_IDLE;
+		recordButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		infoButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_LEARN_MORE; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -443,7 +489,6 @@
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE: 
 			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushSetMenu]; 
-			OFSAptr->tutorial.done(MILGROM_TUTORIAL_SOLO_MENU);
 			break;
 			
 		case BAND_STATE: {
@@ -638,94 +683,12 @@
 	
 }
 
-- (void)updateHelp {
-	
-	bInteractiveHelp = OFSAptr->tutorial.getState()!= TUTORIAL_DONE;
-	if (bInteractiveHelp) { 
-		if (bShowHelp) {
-			if (![self.view.subviews containsObject:tutorialView]) {
-				[self.view addSubview:tutorialView];
-				[self.view bringSubviewToFront:interactionView];
-			}
-			
-			if ( OFSAptr->getSongState() == SONG_IDLE && !OFSAptr->isInTransition()) {
-				switch (OFSAptr->tutorial.getState()) {
-						
-					case TUTORIAL_IDLE:
-						tutorialTextView.text = [NSString stringWithFormat:@"%s",OFSAptr->tutorial.getCurrentText().c_str()]; 
-						OFSAptr->tutorial.start();	
-						tutorialView.hidden = YES;
-						break;
-					case TUTORIAL_READY:
-						switch (OFSAptr->tutorial.getCurrentNumber()) {
-							case MILGROM_TUTORIAL_PUSH_PLAYER:
-							case MILGROM_TUTORIAL_CHANGE_LOOP:
-							case MILGROM_TUTORIAL_ROTATE:
-								tutorialView.hidden = OFSAptr->getState() != BAND_STATE;
-								break;
-							case MILGROM_TUTORIAL_SLIDE:
-							case MILGROM_TUTORIAL_SOLO_MENU:
-							case MILGROM_TUTORIAL_SHAKE:
-								tutorialView.hidden = OFSAptr->getState() != SOLO_STATE;
-								break;
-							case MILGROM_TUTORIAL_LEARN_MORE:
-								tutorialView.hidden = NO;
-								break;
-							default:
-								break;
-						}
-						
-						break;
-						
-					default:
-						break;
-				}
-			} else {
-				OFSAptr->tutorial.setState(TUTORIAL_IDLE);
-			}
-		} 
-	} else {
-		self.interactionView.userInteractionEnabled = !bShowHelp;
-		if (bShowHelp) {
-			switch (OFSAptr->getState()){
-				case SOLO_STATE:
-					if (![self.view.subviews containsObject:soloHelp]) {
-						[self.view addSubview:soloHelp];
-					}
-					break;
-				case BAND_STATE:
-					if (![self.view.subviews containsObject:bandHelp]) {
-						[self.view addSubview:bandHelp];
-						//[self.view bringSubviewToFront:bandHelp];
-					}
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	
-	if (!bShowHelp || !bInteractiveHelp) {
-		if ([self.view.subviews containsObject:tutorialView]) {
-			[tutorialView removeFromSuperview];
-		}
-	}
-	
-	if (!bShowHelp || bInteractiveHelp) {
-		if ([self.view.subviews containsObject:soloHelp]) {
-			[soloHelp removeFromSuperview];
-		}
-		if ([self.view.subviews containsObject:bandHelp]) {
-			[bandHelp removeFromSuperview];
-		}
-	}
-}
-
 - (void) showHelp:(id)sender {
 	
+
+	
 	bShowHelp = YES;
-	OFSAptr->tutorial.done(MILGROM_TUTORIAL_LEARN_MORE);
-	[self updateHelp];
+	[self updateViews];
 	
 	
 }
@@ -734,7 +697,7 @@
 - (void)hideHelp {
 	
 	bShowHelp = NO;
-	[self updateHelp];
+	[self updateViews];
 }
 
 - (void) moreHelp:(id)sender {
@@ -761,10 +724,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"MainViewController::viewWillAppear");
-//	if (OFSAptr->tutorial.getState()!=TUTORIAL_DONE) {
-//		OFSAptr->tutorial.setState(TUTORIAL_IDLE);
-//		bShowHelp = YES;
-//	}
+
 	self.view.userInteractionEnabled = YES; // was disabled after video export
 	[self updateViews];
 }

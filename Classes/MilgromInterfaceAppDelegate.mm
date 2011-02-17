@@ -240,22 +240,6 @@ NSString * const kCacheFolder=@"URLCache";
 	[bandMenu.songsTable loadData];
 	[self updateEditButtonView];
 	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		while (1) {
-			OFSAptr->update(); // also update bNeedDisplay
-			if (OFSAptr->bNeedDisplay) {
-				if (mainViewController) {
-					dispatch_async(dispatch_get_main_queue(), ^{
-						[mainViewController updateViews];
-						
-					});
-					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
-					
-				}
-			}
-		}
-	});
-	
 	// TODO: move the update loop from here to main view controller
 	
 	OFSAptr->setup();
