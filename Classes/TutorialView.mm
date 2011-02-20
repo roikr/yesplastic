@@ -31,8 +31,7 @@
     {
        
 		tutorial.loadFile("tutorial.xml");
-		tutorial.start();
-		lastSlide = tutorial.getCurrentNumber();
+		
 		
 		//if (tutorial.getTimesCompleted()>3) {
 		//	tutorial.setState(TUTORIAL_DONE);
@@ -41,9 +40,14 @@
     return self;
 }
 
+- (void)start {
+	tutorial.start();
+	lastSlide = tutorial.getCurrentSlideNumber();
+}
+
 - (void)update {
 	
-	if (tutorial.getState() == TUTORIAL_DONE) {
+	if (tutorial.getState() == TUTORIAL_IDLE) {
 		return;
 	}
 	
@@ -51,12 +55,12 @@
 	MainViewController * mainViewController = appDelegate.mainViewController;
 	
 	tutorial.update();
-	if (tutorial.getCurrentNumber() !=lastSlide) {
+	if (tutorial.getCurrentSlideNumber() !=lastSlide) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[mainViewController updateViews];
 			
 		});
-		lastSlide = tutorial.getCurrentNumber();
+		lastSlide = tutorial.getCurrentSlideNumber();
 	}
 }
 /*
@@ -70,11 +74,11 @@
 
 
 - (BOOL) isActive {
-	return tutorial.getState()!= TUTORIAL_DONE;
+	return tutorial.getState()!= TUTORIAL_IDLE;
 }
 
 - (NSUInteger) currentSlide  {
-	return tutorial.getCurrentNumber();
+	return tutorial.getCurrentSlideNumber();
 }
 
 
@@ -83,7 +87,7 @@
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	MainViewController * mainViewController = appDelegate.mainViewController;
 	
-	if (tutorial.getState()== TUTORIAL_DONE) { 
+	if (tutorial.getState()== TUTORIAL_IDLE) { 
 		if ([mainViewController.view.subviews containsObject:self]) {
 			[self removeFromSuperview];
 		}
@@ -106,13 +110,25 @@
 	testApp * OFSAptr = appDelegate.OFSAptr;
 
 	if ( OFSAptr->getSongState() == SONG_IDLE &&  tutorial.getState() == TUTORIAL_READY && !OFSAptr->isInTransition()) {
-						
+		
+		int currentTag = tutorial.getCurrentSlideTag();
+		
 		for (int i=0;i<[self.textView.subviews count];i++) {
 			UIView *view = (UIView*)[self.textView.subviews objectAtIndex:i];
-			view.hidden = view.tag != tutorial.getCurrentNumber();
+			
+			view.hidden = view.tag != currentTag;
 		}
 		
-		switch (tutorial.getCurrentNumber()) {
+		switch (tutorial.getCurrentSlideNumber()) {
+			case MILGROM_TUTORIAL_CHANGE_LOOP:
+				
+				for (int i=0; i<3; i++) {
+					if (OFSAptr->getMode(i) == LOOP_MODE) {
+						self.hidden = NO;
+						break;
+					}
+				}
+				break;
 			case MILGROM_TUTORIAL_ROTATE:
 				
 				//self.hidden = self.OFSAptr->getState() != BAND_STATE;

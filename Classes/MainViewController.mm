@@ -187,7 +187,7 @@
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
 	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO && 
-	(!tutorialView.isActive  ||  tutorialView.currentSlide == MILGROM_TUTORIAL_ROTATE ||  tutorialView.currentSlide >= MILGROM_TUTORIAL_RECORD_PLAY);
+	(!tutorialView.isActive  ||  (tutorialView.currentSlide == MILGROM_TUTORIAL_ROTATE && OFSAptr->getState()==BAND_STATE) ||  tutorialView.currentSlide >= MILGROM_TUTORIAL_RECORD_PLAY);
 
 			
 }
