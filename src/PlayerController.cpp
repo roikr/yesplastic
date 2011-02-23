@@ -548,7 +548,11 @@ void PlayerController::release() {
 		return;
 	//for (vector<TexturesPlayer*>::iterator iter = videos.begin() ; iter!=videos.end();iter++)
 	//	(*iter)->exit();
-	currentPlayer->exit();
+	if (currentPlayer) {
+		currentPlayer->release();
+		currentPlayer = 0;
+	}
+	
 	
 	looper.clear();
 	song.clear();

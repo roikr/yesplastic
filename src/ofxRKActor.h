@@ -28,10 +28,11 @@ class ofxRKActor {
 	void lastFrame();
 	void update();
 	void draw(int x,int y);
-	void unload(int seq);
-	void release(int seq);
+	void unloadSequence(int seq);
+	void releaseSequence(int seq);
+	void release();
 	
-	void exit();
+//	void exit();
 	
 	void setCurrentFrame(int i);
 

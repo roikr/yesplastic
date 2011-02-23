@@ -26,19 +26,25 @@ void ofxRKActor::load(int seq) {
 	sequences.at(seq)->load();
 }
 
-void ofxRKActor::unload(int seq) {
+void ofxRKActor::unloadSequence(int seq) {
 	sequences.at(seq)->unload();
 }
 
-void ofxRKActor::release(int seq) {
+void ofxRKActor::releaseSequence(int seq) {
 	sequences.at(seq)->release();
 }
 
-
-void ofxRKActor::exit() {
+void ofxRKActor::release() {
 	for (vector<ofxRKSequence*>::iterator iter  = sequences.begin() ; iter != sequences.end(); iter++)
 		(*iter)->release();
+	sequences.clear();
 }
+
+
+//void ofxRKActor::exit() {
+//	for (vector<ofxRKSequence*>::iterator iter  = sequences.begin() ; iter != sequences.end(); iter++)
+//		(*iter)->release();
+//}
 
 void ofxRKActor::update() {
 	if (!bPlaying) 

@@ -100,7 +100,7 @@ void SimplePlayer::loadIdle() {
 
 void SimplePlayer::unloadIdle() {
 	ofLog(OF_LOG_VERBOSE,"%s: unloading idle actor",setName.c_str());
-	actor.unload(SEQUENCE_IDLE);
+	actor.unloadSequence(SEQUENCE_IDLE);
 }
 
 
@@ -128,7 +128,7 @@ void SimplePlayer::unloadIn() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading in actor",setName.c_str());
-	actor.unload(SEQUENCE_IN);
+	actor.unloadSequence(SEQUENCE_IN);
 		
 }
 
@@ -175,7 +175,7 @@ void SimplePlayer::unloadSet() {
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading actor",setName.c_str());
 	for (int i=SEQUENCE_SAMPLE_1; i<=SEQUENCE_SAMPLE_8; i++) 
-		actor.unload(i);
+		actor.unloadSequence(i);
 	
 	pushTexture.unload();
 	
@@ -205,7 +205,7 @@ void SimplePlayer::unloadOut() {
 	
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading out actor",setName.c_str());
-	actor.unload(SEQUENCE_OUT);
+	actor.unloadSequence(SEQUENCE_OUT);
 	
 }
 
@@ -214,8 +214,9 @@ void SimplePlayer::release() {
 		return;
 	ofLog(OF_LOG_VERBOSE,"%s: releasing actor",setName.c_str());
 	
-	for (int i=SEQUENCE_IDLE; i<=SEQUENCE_OUT; i++) 
-		actor.release(i);
+//	for (int i=SEQUENCE_IDLE; i<=SEQUENCE_OUT; i++) 
+//		actor.release(i);
+	actor.release();
 	
 	pushTexture.release();
 	
@@ -338,9 +339,9 @@ void SimplePlayer::play(int num) {
 	//cout << "num: " << num << ", name: " << actor.getSequenceName(nextSequence) << endl; // DEBUG
 }
 
-void SimplePlayer::exit() {
-	release();
-	
-}
+//void SimplePlayer::exit() {
+//	release();
+//	
+//}
 
 

@@ -11,6 +11,9 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromMacros.h"
 
+#import "MainViewController.h"
+#import "TutorialView.h"
+
 
 
 @implementation BandMenu
@@ -42,21 +45,23 @@
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
 		
+		//CGAffineTransform rotateTransform = ;
+		
+		//set point of rotation
+		//background.center = CGPointMake(240.0, 160.0);
+		
+		background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
+		
+		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
+		firstTime = YES;
+		 
+		
 	}
 		
 	[self.songsView addSubview:songsTable.view];
 	
 	
-	//CGAffineTransform rotateTransform = ;
-																
-	//set point of rotation
-	//background.center = CGPointMake(240.0, 160.0);
-
-	background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
-	
-		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
-	firstTime = YES;
-	
+		
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -126,7 +131,8 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
+			[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).mainViewController.tutorialView start];
+			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
 			break;
 		case 1:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];

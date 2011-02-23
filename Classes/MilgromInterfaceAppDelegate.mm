@@ -290,15 +290,22 @@ NSString * const kCacheFolder=@"URLCache";
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
-	self.currentSong = NULL;
+	
 	[self saveContext];
 	
-	OFSAptr->setSongState(SONG_IDLE);
-	OFSAptr->stopLoops();
-	OFSAptr->release();
+	//if (self.currentSong != NULL) {
+		self.currentSong = NULL;
+		OFSAptr->setSongState(SONG_IDLE);
+		OFSAptr->stopLoops();
+		OFSAptr->release();
+		
+		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
+		
+	//}
 	
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
 	
+	
+		
 }
 
 

@@ -10,7 +10,7 @@ public:
 	virtual void update() = 0;
 	virtual void translate() = 0;
 	virtual void draw() = 0;
-	virtual void exit() = 0;
+//	virtual void exit() = 0;
 	
 	virtual void play(int i) = 0;
 	virtual void setPush(bool bPush) = 0;

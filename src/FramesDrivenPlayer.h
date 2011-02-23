@@ -23,7 +23,7 @@ public:
 	void update();
 	void translate();
 	void draw();
-	void exit();
+//	void exit();
 	
 	void play(int i);
 	void setPush(bool bPush);

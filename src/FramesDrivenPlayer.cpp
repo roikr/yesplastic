@@ -145,7 +145,7 @@ void FramesDrivenPlayer::unloadIdle() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading idle actor",setName.c_str());
-	actor.unload(specSeqs[SEQUENCE_IDLE]);
+	actor.unloadSequence(specSeqs[SEQUENCE_IDLE]);
 		
 }
 
@@ -175,7 +175,7 @@ void FramesDrivenPlayer::unloadIn() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading in actor",setName.c_str());
-	actor.unload(specSeqs[SEQUENCE_IN]);
+	actor.unloadSequence(specSeqs[SEQUENCE_IN]);
 	
 }
 
@@ -230,11 +230,11 @@ void FramesDrivenPlayer::unloadSet() {
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading actor",setName.c_str());
 	for (vector<int>::iterator i=sequences.begin(); i!=sequences.end(); i++) 
-		actor.unload(*i);
+		actor.unloadSequence(*i);
 		
 	ofLog(OF_LOG_VERBOSE,"%s: unloading lips actor",setName.c_str());
 	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
-		lipsActor.unload(i);
+		lipsActor.unloadSequence(i);
 	
 	pushTexture.unload();
 	
@@ -268,7 +268,7 @@ void FramesDrivenPlayer::unloadOut() {
 		return;
 	
 	ofLog(OF_LOG_VERBOSE,"%s: unloading out actor",setName.c_str());
-	actor.unload(specSeqs[SEQUENCE_OUT]);
+	actor.unloadSequence(specSeqs[SEQUENCE_OUT]);
 	
 }
 
@@ -279,13 +279,15 @@ void FramesDrivenPlayer::release() {
 		return;
 	ofLog(OF_LOG_VERBOSE,"%s: releasing actor",setName.c_str());
 	
-	for (int i=0; i<actor.getTotalNumSequences(); i++) // MEMORY: for some reason I got sequences to release which I didn't init !!!
-		actor.release(i);
+//	for (int i=0; i<actor.getTotalNumSequences(); i++) // MEMORY: for some reason I got sequences to release which I didn't init !!!
+//		actor.release(i);
+	actor.release();
 	
 	
 	ofLog(OF_LOG_VERBOSE,"%s: releasing lips actor",setName.c_str());
-	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
-		lipsActor.release(i);
+//	for (int i=0; i<lipsActor.getTotalNumSequences(); i++) 
+//		lipsActor.release(i);
+	lipsActor.release();
 	
 	pushTexture.release();
 	
@@ -526,9 +528,9 @@ float FramesDrivenPlayer::getScale() {
 }
 
 
-void FramesDrivenPlayer::exit() {
-	release(); // TODO: handle exit regarding threads and contexts
-	
-}
+//void FramesDrivenPlayer::exit() {
+//	release(); // TODO: handle exit regarding threads and contexts
+//	
+//}
 
 
