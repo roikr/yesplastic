@@ -542,7 +542,7 @@ void PlayerController::play(int num) {
 
 
 
-void PlayerController::exit() {
+void PlayerController::release() {
 	//stopThread();
 	if (!bInitialized) 
 		return;
@@ -551,6 +551,13 @@ void PlayerController::exit() {
 	currentPlayer->exit();
 	
 	looper.clear();
+	song.clear();
+	
+	if (midiInstrument) {
+		midiInstrument->exit();
+		delete midiInstrument;
+		midiInstrument = 0;
+	}
 }
 
 	

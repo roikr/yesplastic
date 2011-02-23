@@ -701,14 +701,14 @@ void testApp::render(){
 	ofPopMatrix();
 }
 
-void testApp::exit() {
+void testApp::release() {
 	printf("exit()\n");
 	//stopThread();
 	for (int i=0;i<3;i++) {
 		//setMode(i,MANUAL_MODE);
-		player[i].exit();
+		player[i].release();
 	}
-	
+	song.exit();
 }
 
 
@@ -918,7 +918,7 @@ void testApp::renderAudio() {
 		
 	cout << "renderAudio started" << endl;
 	
-	song.open(ofToDocumentsPath("temp.caf"));
+	song.openForSave(ofToDocumentsPath("temp.caf"));
 	
 	
 	currentBlock = 0;

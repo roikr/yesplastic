@@ -26,7 +26,7 @@ public:
 	void update();
 	void transitionLoop();
 	void draw();
-	void exit();
+	void release();
 	
 	void seekFrame(int frame); // for video rendering
 	void audioRequested( float * output, int bufferSize, int nChannels );

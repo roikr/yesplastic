@@ -2,6 +2,9 @@
 #import <OpenGLES/ES1/glext.h>
 #import "PVRTexture.h"
 #include "ofMain.h"
+#include <iostream>
+
+#define LOG_RK_TEXTURE
 
 void ofxRKTexture::setup(string filename,int subWidth ,int subHeight ) {
 	
@@ -44,10 +47,14 @@ void ofxRKTexture::init() {
 void ofxRKTexture::release() {
 	if (bInitialized) {
 		glDeleteTextures(1, &_name);
-		//ofLog(OF_LOG_VERBOSE, "ofxRKTexture::release texture: %i",_name);
+#ifdef LOG_RK_TEXTURE
+		cout << "ofxRKTexture::release: " << filename << ", texture: " << _name  << endl; 
+#endif
 		_name = 0;
 	} else {
-		ofLog(OF_LOG_VERBOSE,"ofxRKTexture::release: %s has not been initialized",filename.c_str());
+#ifdef LOG_RK_TEXTURE
+		cout << "ofxRKTexture::release: " << filename << " has not been initialized" << endl; 
+#endif
 	}
 	_columnsNumber = 0;
 	//_rowFraction = 0;
@@ -242,7 +249,7 @@ void ofxRKTexture::draw(float x, float y){
 			glDisable(GL_TEXTURE_2D);
 				 
 				
-		GLenum err;
+//		GLenum err;
 
 //   	err = glGetError();
 //	if (err != GL_NO_ERROR)

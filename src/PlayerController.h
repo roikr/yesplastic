@@ -27,7 +27,7 @@ public:
 	void translate();
 	void draw();
 	
-	void exit();
+	void release();
 	
 	string getName();
 	
