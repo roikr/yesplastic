@@ -13,7 +13,7 @@
 #include "testApp.h"
 
 #import "MilgromInterfaceAppDelegate.h"
-#import "MilgromViewController.h"
+#import "EAGLView.h"
 #import "TouchView.h"
 #import "TutorialView.h"
 #import "MilgromMacros.h"
@@ -196,19 +196,8 @@
 	
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	switch (toInterfaceOrientation) {
-		case UIInterfaceOrientationPortrait:
-		case UIInterfaceOrientationPortraitUpsideDown:
-			
-			OFSAptr->setState(SOLO_STATE);
-			break;
-		case UIInterfaceOrientationLandscapeRight:
-		case UIInterfaceOrientationLandscapeLeft:
-			OFSAptr->setState(BAND_STATE);
-			break;
-		default:
-			break;
-	}
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.eAGLView setInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	triggersView.hidden = YES;
 	loopsView.hidden = YES;
@@ -226,11 +215,17 @@
 		[soloHelp removeFromSuperview];
 	}
 	
+//	CGAffineTransform t = self.parentViewController.view.transform;
+//	MilgromLog(@"%.2f %.2f %.2f %.2f %.2f %.2f",t.a,t.b,t.c,t.d,t.tx,t.ty);
+	
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	[self updateViews];
+//	CGAffineTransform t = self.parentViewController.view.transform;
+//	MilgromLog(@"%.2f %.2f %.2f %.2f %.2f %.2f",t.a,t.b,t.c,t.d,t.tx,t.ty);
+
 	
 }
 
@@ -724,12 +719,20 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"MainViewController::viewWillAppear");
-
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.eAGLView startAnimation];
+	
 	self.view.userInteractionEnabled = YES; // was disabled after video export
 	[self updateViews];
 }
 
 
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	MilgromLog(@"MainViewController::viewDidDisappear");
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
+}
 
 - (BOOL)canBecomeFirstResponder {
 	return YES;
@@ -799,7 +802,7 @@
 	dispatch_queue_t myCustomQueue;
 	myCustomQueue = dispatch_queue_create("renderAudioQueue", NULL);
 	
-	//[milgromViewController stopAnimation];
+	
 	OFSAptr->soundStreamStop();
 	
 	dispatch_async(myCustomQueue, ^{
@@ -826,7 +829,6 @@
 - (void)renderAudioDidFinish {
 	
 	OFSAptr->soundStreamStart();
-	//[milgromViewController startAnimation];
 	[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] action];
 	
 }
@@ -845,7 +847,7 @@
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	ShareManager *shareManager = [appDelegate shareManager];
 	
-	//[milgromViewController stopAnimation];
+	
 	OFSAptr->soundStreamStop();
 	OFSAptr->setSongState(SONG_RENDER_VIDEO);
 	
@@ -865,7 +867,7 @@
 		[renderManager writeToVideoURL:[NSURL fileURLWithPath:[[shareManager getVideoPath]  stringByAppendingPathExtension:@"mov"]] withAudioURL:[NSURL fileURLWithPath:[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp.caf"]] 
 						
 			   
-						   withContext:appDelegate.milgromViewController.context
+						   withContext:appDelegate.eAGLView.context
 						withSize:CGSizeMake(480, 320) 
 			   withAudioAverageBitRate:[NSNumber numberWithInt: 192000 ]
 			   withVideoAverageBitRate:[NSNumber numberWithDouble:VIDEO_BITRATE*1000.0] // appDelegate.videoBitrate
@@ -898,7 +900,6 @@
 					 
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
-					 //[milgromViewController startAnimation];
 					 self.view.userInteractionEnabled = NO;
 					 [shareManager action];
 					 self.renderManager = nil;
@@ -992,8 +993,7 @@
 			self.renderManager = nil;
 			OFSAptr->setSongState(SONG_IDLE);
 			OFSAptr->soundStreamStart();
-			//[appDelegate.milgromViewController startAnimation];
-			
+					
 		}	break;
 		case SONG_RENDER_AUDIO:
 			[appDelegate.shareManager cancel];

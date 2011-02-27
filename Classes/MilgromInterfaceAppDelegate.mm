@@ -9,7 +9,6 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "BandMenu.h"
 #import "SongsTable.h"
-#import "MilgromViewController.h"
 #import "URLCacheAlert.h"
 #import "MilgromMacros.h"
 #import "ZipArchive.h"
@@ -26,6 +25,7 @@
 
 #import "ShareManager.h"
 #import <OpenGLES/EAGL.h>
+#import "EAGLView.h"
 
 
 NSString * const kMilgromFileServerURL=@"roikr.com";
@@ -56,7 +56,10 @@ NSString * const kCacheFolder=@"URLCache";
 @implementation MilgromInterfaceAppDelegate
 
 @synthesize window;
-@synthesize milgromViewController;
+@synthesize viewController;
+@synthesize eAGLView;
+
+
 @synthesize mainViewController;
 @synthesize bandMenu;
 @synthesize playerControllers;
@@ -97,7 +100,7 @@ NSString * const kCacheFolder=@"URLCache";
 //	
 //	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
-	self.bandMenu = (BandMenu *)milgromViewController.viewController.visibleViewController; 
+	self.bandMenu = (BandMenu *)viewController.visibleViewController; 
 	
 	
 	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
@@ -243,7 +246,7 @@ NSString * const kCacheFolder=@"URLCache";
 	// TODO: move the update loop from here to main view controller
 	
 	OFSAptr->setup();
-	OFSAptr->setState(BAND_STATE);
+	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	
 	/* turn off the NSURLCache shared cache */
 	
@@ -281,7 +284,9 @@ NSString * const kCacheFolder=@"URLCache";
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
-	 [milgromViewController stopAnimation];
+	//[UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
+	
+	
 }
 
 
@@ -293,15 +298,13 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self saveContext];
 	
-	//if (self.currentSong != NULL) {
-		self.currentSong = NULL;
-		OFSAptr->setSongState(SONG_IDLE);
-		OFSAptr->stopLoops();
-		OFSAptr->release();
+	[eAGLView stopAnimation];
+	
+	self.currentSong = NULL;
+	OFSAptr->setSongState(SONG_IDLE);
+	OFSAptr->stopLoops();
+	OFSAptr->release();
 		
-		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
-		
-	//}
 	
 	
 	
@@ -317,10 +320,13 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
+    [viewController popToRootViewControllerAnimated:NO];
+	[viewController dismissModalViewControllerAnimated:NO];
+	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
+	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	/*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
-	[milgromViewController startAnimation];
 }
 
 
@@ -329,7 +335,7 @@ NSString * const kCacheFolder=@"URLCache";
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-	 [milgromViewController stopAnimation];
+	 [eAGLView stopAnimation];
 	[self saveContext];
 }
 
@@ -365,9 +371,10 @@ NSString * const kCacheFolder=@"URLCache";
 	[managedObjectModel_ release];
 	[persistentStoreCoordinator_ release];
 	//TODO: release player controllers
-	[milgromViewController release];
 	[mainViewController release];
 	[window release];
+	[eAGLView release];
+	[viewController release];
     [super dealloc];
 }
 
@@ -571,11 +578,11 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark Navigation Stack
 
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated {
-	[self.milgromViewController presentModalViewController:modalViewController animated:animated];
+	[self.viewController presentModalViewController:modalViewController animated:animated];
 }
 
 - (void)dismissModalViewControllerAnimated:(BOOL)animated {
-	[self.milgromViewController dismissModalViewControllerAnimated:animated];
+	[self.viewController dismissModalViewControllerAnimated:animated];
 }
 
 
@@ -591,7 +598,7 @@ NSString * const kCacheFolder=@"URLCache";
 		//menuController.mainController = self; // TODO: move testApp to app delegate
 	}
 	
-	[milgromViewController.viewController pushViewController:self.mainViewController animated:YES];
+	[viewController pushViewController:self.mainViewController animated:YES];
 	
 	//[self dismissModalViewControllerAnimated:YES];
 	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -623,7 +630,7 @@ NSString * const kCacheFolder=@"URLCache";
 	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
 	
 	//[controller show];
-	[milgromViewController.viewController pushViewController:controller animated:YES];
+	[viewController pushViewController:controller animated:YES];
 	//[self presentModalViewController:controller animated:YES];
 	//controller.view.hidden = NO;
 	//OFSAptr->bMenu=true; // TODO: change upon return
@@ -643,11 +650,11 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)pushViewController:(UIViewController *)controller {
-	[milgromViewController.viewController pushViewController:controller animated:YES];
+	[viewController pushViewController:controller animated:YES];
 }
 
 - (void) popViewController {
-	[milgromViewController.viewController popViewControllerAnimated:YES];
+	[viewController popViewControllerAnimated:YES];
 }
 
 - (void)help {
@@ -881,7 +888,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		while (OFSAptr->isInTransition()) {
-			[milgromViewController setSecondaryContextCurrent];
+			[eAGLView setSecondaryContextCurrent];
 			OFSAptr->transitionLoop(); 
 		}
 	

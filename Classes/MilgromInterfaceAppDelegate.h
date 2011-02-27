@@ -16,24 +16,24 @@ extern NSString * const kCacheFolder;
 extern NSString * const kMilgromFileServerURL;
 
 
-@class MilgromViewController;
 @class Song;
 @class SoundSet;
 @class MainViewController;
 @class BandMenu;
 @class ShareManager;
+@class EAGLView;
 class testApp;
 
 
 
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate,AVAudioSessionDelegate> {
     UIWindow *window;
-	
+	UINavigationController *viewController;
+
 	NSManagedObjectContext *managedObjectContext_;
 	NSManagedObjectModel *managedObjectModel_;
 	NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	
-	MilgromViewController *milgromViewController;
 	
 	testApp *OFSAptr;
 	
@@ -48,14 +48,16 @@ class testApp;
 	ShareManager *shareManager;
 	NSInteger lastSavedVersion;
 	
+	EAGLView *eAGLView;
+	
 //	NSNumber *videoBitrate;
 	
 }
 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet MilgromViewController *milgromViewController;
-
+@property (nonatomic, retain) IBOutlet UINavigationController *viewController;
+@property (nonatomic,retain) IBOutlet EAGLView *eAGLView;
 @property (nonatomic, retain) BandMenu *bandMenu;
 @property (nonatomic,retain ) MainViewController *mainViewController;
 @property (nonatomic, retain) NSArray *playerControllers;

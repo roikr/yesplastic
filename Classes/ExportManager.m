@@ -175,7 +175,6 @@
 	
 	OFSAptr->setSongState(SONG_IDLE);
 	OFSAptr->soundStreamStart();
-	[milgromViewController startAnimation];
 	
 	
 	NSLog(@"exportDidFinish");

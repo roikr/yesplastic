@@ -13,6 +13,7 @@
 
 #import "MainViewController.h"
 #import "TutorialView.h"
+#import "EAGLView.h"
 
 
 
@@ -191,6 +192,7 @@
 	MilgromLog(@"BandView::viewWillAppear");
 	[super viewWillAppear:animated];
 	self.view.userInteractionEnabled = YES;
+	 [((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).eAGLView stopAnimation];
 	//[songsTable viewWillAppear:animated];
 }
 

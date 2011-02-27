@@ -35,12 +35,38 @@
 	//float eyeY;
 	//float dist;
 	
+	BOOL animating;
+    BOOL displayLinkSupported;
+    NSInteger animationFrameInterval;
+    /*
+	 Use of the CADisplayLink class is the preferred method for controlling your animation timing.
+	 CADisplayLink will link to the main display and fire every vsync when added to a given run-loop.
+	 The NSTimer object is used only as fallback when running on a pre-3.1 device where CADisplayLink isn't available.
+	 */
+    id displayLink;
+    NSTimer *animationTimer;
+	//CFTimeInterval startTime;
+	
+	EAGLContext *secondaryContext;
+	
 }
 
 @property (nonatomic, retain) EAGLContext *context;
 @property  GLint framebufferHeight;
 
+@property (readonly, nonatomic, getter=isAnimating) BOOL animating;
+@property (nonatomic) NSInteger animationFrameInterval;
+
+@property (nonatomic, retain) EAGLContext *secondaryContext;
+
+
 - (void)setFramebuffer;
 - (BOOL)presentFramebuffer;
+
+- (void)setSecondaryContextCurrent;
+- (void)startAnimation;
+- (void)stopAnimation;
+- (void)drawFrame;
+- (void)setInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 
 @end

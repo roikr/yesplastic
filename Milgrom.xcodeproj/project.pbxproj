@@ -192,13 +192,12 @@
 		E490A1451206AB58008512EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E490A1441206AB58008512EA /* CoreData.framework */; };
 		E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = E49159BC13098B990019ED6B /* LFP_ALPHA.png */; };
 		E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */; };
-		E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E493D3D7122DB16700163EF9 /* MilgromViewController.xib */; };
+		E493CEA8131105F6009605A4 /* s5 image.png in Resources */ = {isa = PBXBuildFile; fileRef = E493CEA7131105F6009605A4 /* s5 image.png */; };
 		E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */; };
 		E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */; };
 		E4964076125BA7FF0058DB34 /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4964075125BA7FF0058DB34 /* ActionCell.xib */; };
 		E4987FD5127F5CED00A07C65 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4987FD4127F5CED00A07C65 /* AssetsLibrary.framework */; };
 		E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF6121069EB001CB593 /* EAGLView.mm */; };
-		E498DDFA121069EB001CB593 /* MilgromViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF8121069EB001CB593 /* MilgromViewController.mm */; };
 		E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0512106AFA001CB593 /* OpenGLES.framework */; };
 		E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0A12106B0D001CB593 /* QuartzCore.framework */; };
 		E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */; };
@@ -930,6 +929,7 @@
 		E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Milgrom.xcdatamodel; sourceTree = "<group>"; };
 		E49159BC13098B990019ED6B /* LFP_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LFP_ALPHA.png; path = Resource/LFP_ALPHA.png; sourceTree = "<group>"; };
 		E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MILGROM_ALPHA.png; path = Resource/MILGROM_ALPHA.png; sourceTree = "<group>"; };
+		E493CEA7131105F6009605A4 /* s5 image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s5 image.png"; sourceTree = "<group>"; };
 		E493D3D7122DB16700163EF9 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
 		E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YouTubeUploadViewController.xib; path = YouTubeUpload/YouTubeUploadViewController.xib; sourceTree = "<group>"; };
 		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
@@ -938,8 +938,6 @@
 		E4987FD4127F5CED00A07C65 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E498DDF5121069EB001CB593 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		E498DDF6121069EB001CB593 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
-		E498DDF7121069EB001CB593 /* MilgromViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilgromViewController.h; sourceTree = "<group>"; };
-		E498DDF8121069EB001CB593 /* MilgromViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MilgromViewController.mm; sourceTree = "<group>"; };
 		E498DE0512106AFA001CB593 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E498DE0A12106B0D001CB593 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E4998B7212203191006EC3BA /* AVPlayerDemoPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVPlayerDemoPlaybackView.h; path = AVPlayerClasses/AVPlayerDemoPlaybackView.h; sourceTree = "<group>"; };
@@ -1755,6 +1753,7 @@
 		E43BE953125C968F009C8845 /* HELP */ = {
 			isa = PBXGroup;
 			children = (
+				E493CEA7131105F6009605A4 /* s5 image.png */,
 				E4B68B1E130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png */,
 				E4F0558412FFEE0E004430A8 /* MESSAGE_FRAME.png */,
 				E4F0558512FFEE0E004430A8 /* MESSAGE_X_BUTTON.png */,
@@ -2152,8 +2151,6 @@
 		E4BC39D9125DA8DD00B492E4 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E498DDF7121069EB001CB593 /* MilgromViewController.h */,
-				E498DDF8121069EB001CB593 /* MilgromViewController.mm */,
 				E498DDF5121069EB001CB593 /* EAGLView.h */,
 				E498DDF6121069EB001CB593 /* EAGLView.mm */,
 				E4B5427D1270898C00851D86 /* ShareManager.h */,
@@ -2525,7 +2522,6 @@
 				E44F6DBF122A4DC60002386C /* CELL3_PROGRESS.png in Resources */,
 				E44F6DC0122A4DC60002386C /* CELL4_PROGRESS.png in Resources */,
 				E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */,
-				E493D3D8122DB16700163EF9 /* MilgromViewController.xib in Resources */,
 				E42D132F124F796A007BEEB0 /* ARROWS_DRM_LEFT.png in Resources */,
 				E42D1330124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png in Resources */,
 				E42D1331124F796A007BEEB0 /* ARROWS_GTR_LEFT.png in Resources */,
@@ -2683,6 +2679,7 @@
 				E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */,
 				E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */,
 				E4B68B1F130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png in Resources */,
+				E493CEA8131105F6009605A4 /* s5 image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2704,7 +2701,6 @@
 				E4DF708311FEA13300EBD904 /* PlayerMenu.mm in Sources */,
 				E4DE508E1200237B00BF31AF /* HelpViewController.m in Sources */,
 				E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */,
-				E498DDFA121069EB001CB593 /* MilgromViewController.mm in Sources */,
 				E4D1EB3F121133F3004D4E25 /* URLCacheAlert.mm in Sources */,
 				E4D1EB40121133F3004D4E25 /* URLCacheConnection.mm in Sources */,
 				E4D1EB4F12113431004D4E25 /* AssetLoader.mm in Sources */,
