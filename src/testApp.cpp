@@ -708,7 +708,7 @@ void testApp::release() {
 		//setMode(i,MANUAL_MODE);
 		player[i].release();
 	}
-	song.exit();
+	//song.exit();
 }
 
 
