@@ -317,17 +317,25 @@ NSString * const kCacheFolder=@"URLCache";
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
+	[viewController popToRootViewControllerAnimated:NO];
+	[viewController dismissModalViewControllerAnimated:NO];
+	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
+	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	
+		
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [viewController popToRootViewControllerAnimated:NO];
-	[viewController dismissModalViewControllerAnimated:NO];
-	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
-	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+    
 	/*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+	
+	if (OFSAptr) {
+		OFSAptr->soundStreamStart();
+	}
+	
 }
 
 

@@ -86,10 +86,10 @@ public:
 	
 	void playRandomLoop();
 	
-	void soundStreamSetup();
+	
 	void soundStreamStart();
 	void soundStreamStop();
-	void soundStreamClose();
+	
 	
 	float getProgress();
 	float getRenderProgress();
@@ -102,6 +102,8 @@ public:
 	
 	
 private:
+	void soundStreamSetup();
+	void soundStreamClose();
 	
 	int startTime;
 	int currentFrame;

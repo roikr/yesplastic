@@ -167,9 +167,10 @@ void testApp::setup(){
 	startTime = ofGetElapsedTimeMillis();
 	currentFrame = 0;
 	
-	bInitialized = true;
+	
 	
 	soundStreamSetup();
+	bInitialized = true;
 	
 }
 
@@ -1078,7 +1079,10 @@ void testApp::soundStreamSetup() {
 }
 
 void testApp::soundStreamStart() {
-	ofSoundStreamStart();
+	if (bInitialized) {
+		ofSoundStreamStart();
+	}
+	
 }
 
 void testApp::soundStreamStop() {
