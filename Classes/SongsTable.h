@@ -26,6 +26,7 @@
 @property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;
 
 -(void)selectCurrentSong;
+-(void)deselectCurrentSong;
 -(void)addCurrentSong;
 -(void)updateSong:(Song*)song WithProgress:(float)theProgress; // needed for loading and downloading
 - (void)deleteSong:(id)sender;

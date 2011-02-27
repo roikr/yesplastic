@@ -37,6 +37,7 @@ PlayerController::PlayerController() {
 	currentPlayer = 0;
 	bPlaySwitchSound = false;
 	videoSet = "";
+	soundSet = "";
 	
 };
 
@@ -562,6 +563,9 @@ void PlayerController::release() {
 		delete midiInstrument;
 		midiInstrument = 0;
 	}
+	
+	videoSet = "";
+	soundSet = "";
 }
 
 	

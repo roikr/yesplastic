@@ -300,6 +300,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[eAGLView stopAnimation];
 	
+	[bandMenu.songsTable deselectCurrentSong];
 	self.currentSong = NULL;
 	OFSAptr->setSongState(SONG_IDLE);
 	OFSAptr->stopLoops();

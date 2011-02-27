@@ -117,6 +117,11 @@
 	return [NSIndexPath indexPathForRow:[songsArray indexOfObject:song] inSection:0];
 }
 
+-(void)deselectCurrentSong {
+	[self.tableView deselectRowAtIndexPath:[self currentSongIndexPath] animated:NO];
+	
+}
+
 -(void)selectCurrentSong {
 	
 	[self.tableView selectRowAtIndexPath:[self currentSongIndexPath] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
