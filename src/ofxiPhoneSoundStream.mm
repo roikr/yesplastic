@@ -213,12 +213,15 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 	
 	// this is supposed to make the audio come out of the speaker rather
 	// than the receiver, but I don't think it works when using the microphone as well.
-		
-	UInt32 value = kAudioSessionOverrideAudioRoute_Speaker;
-	AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(value), &value);
-	if(checkStatus(status)) {
-		ofLog(OF_LOG_ERROR, "couldn't overide category default to speaker!");
-	}
+	
+
+
+// FIX: on starting app playing from speaker when headphones plugged in
+//	UInt32 value = kAudioSessionOverrideAudioRoute_Speaker;
+//	AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(value), &value);
+//	if(checkStatus(status)) {
+//		ofLog(OF_LOG_ERROR, "couldn't overide category default to speaker!");
+//	}
 	
 	status = AudioSessionSetActive(true);
 	if(checkStatus(status)) {
