@@ -185,15 +185,19 @@
 								 }]; 
 						 }];
 	}
+	
+	self.view.userInteractionEnabled = YES;
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.eAGLView stopAnimation];
+	appDelegate.eAGLView.hidden = YES;
+	
 }
  
 
 - (void)viewWillAppear:(BOOL)animated {
 	MilgromLog(@"BandView::viewWillAppear");
 	[super viewWillAppear:animated];
-	self.view.userInteractionEnabled = YES;
-	 [((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).eAGLView stopAnimation];
-	//[songsTable viewWillAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

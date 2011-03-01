@@ -11,24 +11,24 @@
 
 @implementation HelpViewController
 
+@synthesize scrollView;
 
+/*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [super viewDidLoad];
-		UIScrollView *tempScrollView=(UIScrollView *)self.view;
-		tempScrollView.contentSize=CGSizeMake(480,1180);
     }
     return self; 
 }
+*/
 
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
+	scrollView.contentSize=CGSizeMake(480,1180);
 }
-*/
+
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

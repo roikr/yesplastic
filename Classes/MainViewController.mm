@@ -721,6 +721,7 @@
 	MilgromLog(@"MainViewController::viewWillAppear");
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.eAGLView startAnimation];
+	appDelegate.eAGLView.hidden = NO;
 	
 	self.view.userInteractionEnabled = YES; // was disabled after video export
 	[self updateViews];

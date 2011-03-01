@@ -10,9 +10,11 @@
 
 
 @interface HelpViewController : UIViewController {
-
+	UIScrollView *scrollView;
 }
 
+
+@property (nonatomic,retain) IBOutlet UIScrollView *scrollView;
 
 - (void) exit:(id)sender;
 @end
