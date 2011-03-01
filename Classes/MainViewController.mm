@@ -904,10 +904,19 @@
 					 [shareManager action];
 					 self.renderManager = nil;
 					 
-					 //renderingView.hidden = YES;
-					 //[self action];
-					 
 				 }
+		 
+				 withCancelationHandler:^ {
+					 NSLog(@"videoRender canceled");
+					 OFSAptr->setSongState(SONG_IDLE);
+					 OFSAptr->soundStreamStart();
+					 self.renderManager = nil;
+				 }
+		 
+				withAbortionHandler:^ {
+					NSLog(@"videoRender aborted");
+					self.renderManager = nil;  
+				}
 		 
 		 ];
 	});
@@ -986,14 +995,8 @@
 	
 	switch (OFSAptr->getSongState()) {
 		case SONG_RENDER_VIDEO:  {
-			
-			
-			
 			[self.renderManager cancelRender];
-			self.renderManager = nil;
-			OFSAptr->setSongState(SONG_IDLE);
-			OFSAptr->soundStreamStart();
-					
+			
 		}	break;
 		case SONG_RENDER_AUDIO:
 			[appDelegate.shareManager cancel];
@@ -1013,7 +1016,17 @@
 	
 }
 
-
+- (void)applicationDidEnterBackground {
+	if (renderManager) {
+		[self.renderManager abortRender];
+	}
+	
+	if (exportManager) {
+		[self.exportManager cancelExport];
+		self.exportManager = nil;
+	}
+	
+}
 				   
 
 @end

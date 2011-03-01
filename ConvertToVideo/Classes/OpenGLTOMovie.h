@@ -14,7 +14,7 @@
 	
 
 @interface OpenGLTOMovie : NSObject {
-	BOOL bRenderingCanceled;
+	int state;
 }
 
 +(id)renderManager;
@@ -24,10 +24,13 @@
 	withInitializationHandler:(void (^)(void))initializationHandler 
 		  withDrawFrame:(void (^)(int))drawFrame 
 		  withIsRendering:(int (^)(void))isRendering
-		withCompletionHandler:(void (^)(void))completionHandler;
+		withCompletionHandler:(void (^)(void))completionHandler
+	withCancelationHandler:(void (^)(void))cancelationHandler
+	withAbortionHandler:(void (^)(void))abortionHandler;
 //+ (AVAssetExportSession *)exportToURL:(NSURL*)url withVideoURL:(NSURL*) videoURL withAudioURL:(NSURL*)audioURL 
 //					withProgressHandler:(void (^)(float))progressHandler withCompletionHandler:(void (^)(void))completionHandler;
 
 
 - (void) cancelRender;
+- (void) abortRender;
 @end

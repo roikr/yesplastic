@@ -127,5 +127,6 @@ class testApp;
 - (void) hideHelp;
 - (void) moreHelp:(id)sender;
 
+- (void)applicationDidEnterBackground;
 
 @end

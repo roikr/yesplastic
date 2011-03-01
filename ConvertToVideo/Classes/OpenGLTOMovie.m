@@ -18,6 +18,11 @@
 #import "OpenGLTOMovie.h"
 #import "RenderView.h"
 
+enum  {
+	RENDER_MANAGER_SUCCESS,
+	RENDER_MANAGER_CANCEL,
+	RENDER_MANAGER_ABORT
+};
 
 @implementation OpenGLTOMovie
 
@@ -37,6 +42,8 @@
 		  withDrawFrame:(void (^)(int))drawFrame  
 		withIsRendering:(int (^)(void))isRendering 
   withCompletionHandler:(void (^)(void))completionHandler 
+ withCancelationHandler:(void (^)(void))cancelationHandler
+withAbortionHandler:(void (^)(void))abortionHandler
 {
 	
 	NSError *error = nil;
@@ -203,7 +210,7 @@
 	int frameNum = 0;
 	bool bAudioFinished = false;
 	bool bVideoFinished = false;
-	bRenderingCanceled = NO;
+	state = RENDER_MANAGER_SUCCESS;
 	
 	do {
 		
@@ -286,7 +293,7 @@
 					
 												   
 		} 
-	} while ((!bVideoFinished || !bAudioFinished) && !bRenderingCanceled);
+	} while ((!bVideoFinished || !bAudioFinished) && state == RENDER_MANAGER_SUCCESS);
 	
 	[EAGLContext setCurrentContext:contextB];
 	
@@ -296,27 +303,44 @@
 	[EAGLContext setCurrentContext:nil];
 	[contextB release];
 	
-	if (bRenderingCanceled) {
-		[writer cancelWriting];
-		[reader cancelReading];
-	} else {
-		[writer endSessionAtSourceTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum-1))];
-		[writer finishWriting];
-		NSLog(@"Writing finished with status: %i",[writer status]);
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			completionHandler();
-		});
-		
+	switch (state) {
+		case RENDER_MANAGER_SUCCESS:
+			[writer endSessionAtSourceTime:CMTimeAdd(kCMTimeZero, CMTimeMultiply(CMTimeMake(1, 25), frameNum-1))];
+			[writer finishWriting];
+			NSLog(@"Writing finished with status: %i",[writer status]);
+			
+			dispatch_async(dispatch_get_main_queue(), ^{
+				completionHandler();
+			});
+			break;
+		case RENDER_MANAGER_CANCEL:
+			[writer cancelWriting];
+			[reader cancelReading];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				cancelationHandler();
+			});
+			break;
+		case RENDER_MANAGER_ABORT:
+			[writer cancelWriting];
+			[reader cancelReading];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				abortionHandler();
+			});
+			break;
+
+
+		default:
+			break;
 	}
-
-
 }
 
 - (void) cancelRender {
-	bRenderingCanceled = YES;
+	state = RENDER_MANAGER_CANCEL;
 }
 
+- (void) abortRender {
+	state = RENDER_MANAGER_ABORT;
+}
 
 - (void)dealloc {
     [super dealloc];

@@ -286,7 +286,7 @@ NSString * const kCacheFolder=@"URLCache";
      */
 	//[UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
 	
-	
+	[mainViewController applicationDidEnterBackground];	
 }
 
 
