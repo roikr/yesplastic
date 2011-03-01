@@ -10,7 +10,6 @@
 
 @interface YouTubeUploadViewController (PrivateMethods)
 
-- (void)save;
 - (void)unsave;
 - (void)registerForKeyboardNotifications;
 
@@ -111,22 +110,7 @@
 	return titleField.text;
 }
 
-- (void)save {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if (username.text!=@"") {
-		[defaults setObject:username.text forKey:@"YTUsername"];
-	} else {
-		[defaults removeObjectForKey:@"YTUsername"];
-	}
-	
-	if (password.text!=@"") {
-		[defaults setObject:password.text forKey:@"YTPassword"];
-	} else {
-		[defaults removeObjectForKey:@"YTPassword"];
-	}
-	
-	[defaults synchronize];
-}
+
 
 - (void)unsave {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -139,9 +123,33 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
-	if (textField==username || textField==password) {
-		[self save];
+	
+	if (textField==username) {
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		
+		if (username.text!=@"") {
+			[defaults setObject:username.text forKey:@"YTUsername"];
+		} else {
+			[defaults removeObjectForKey:@"YTUsername"];
+		}
+		
+		[defaults synchronize];
+		
 	}
+	
+	if (textField==password) {
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		
+		if (password.text!=@"") {
+			[defaults setObject:password.text forKey:@"YTPassword"];
+		} else {
+			[defaults removeObjectForKey:@"YTPassword"];
+		}
+		
+		[defaults synchronize];
+		
+	}
+	
 	
 	return NO;
 }
