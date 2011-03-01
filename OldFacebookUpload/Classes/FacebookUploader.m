@@ -18,7 +18,7 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 
 @interface FacebookUploader (PrivateMethods) 
-- (void) requestPermission;
+
 @end
 
 
@@ -32,6 +32,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 @synthesize videoPath;
 @synthesize progress;
 @synthesize task;
+@synthesize loginDialog;
+@synthesize permissionDialog;
 
 + (FacebookUploader *) facebookUploader {
 	return [[[FacebookUploader alloc] init] autorelease];
@@ -106,21 +108,12 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 		
 	if (![session resume]) {
 		// Show the login dialog
-		FBLoginDialog* dialog = [[[FBLoginDialog alloc] init] autorelease];
-		dialog.delegate = self;
+		self.loginDialog = [[FBLoginDialog alloc] init];
+		loginDialog.delegate = self;
 		//m_FBDialogStage = 0;
-		[dialog show];
+		[loginDialog show];
 	}	
 }
-
-- (void) requestPermission { // Ask for extended permissions
-	FBPermissionDialog* dialog = [[[FBPermissionDialog alloc] init] autorelease];
-	dialog.delegate = self;
-	dialog.permission = @"publish_stream";
-	[dialog show];
-	
-}
-
 
 
 - (void) uploadVideoWithTitle:(NSString *)title withDescription:(NSString *)description andPath:(NSString *)path {
@@ -162,7 +155,10 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 - (void)session:(FBSession*)session didLogin:(FBUID)uid {
 	NSLog(@"logged in"); 
 	
-	[self requestPermission];
+	self.permissionDialog = [[FBPermissionDialog alloc] init];
+	permissionDialog.delegate = self;
+	permissionDialog.permission = @"publish_stream";
+	[permissionDialog show];
 }	
 
 
@@ -192,14 +188,27 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 }
 
 
+
+- (void)applicationDidEnterBackground {
+	if (loginDialog) {
+		[loginDialog dismissWithSuccess:NO animated:NO];
+	}
+	
+	if (permissionDialog) {
+		[permissionDialog dismissWithSuccess:NO animated:NO];
+	}
+}
+
+
 /**
  * Called when the dialog succeeds and is about to be dismissed.
  */
 - (void)dialogDidSucceed:(FBDialog*)dialog {
 	NSLog(@"dialogDidSucceed");
-	if ([dialog isKindOfClass:[FBPermissionDialog class]]) {
-		
-		
+	if (dialog == loginDialog) {
+		self.loginDialog = nil;
+	} else if (dialog == permissionDialog) {
+		self.permissionDialog = nil;
 		self.state = FACEBOOK_UPLOADER_STATE_DID_LOGIN;
 		//[delegate facebookUploaderDidLogin:self];
 	}
@@ -210,6 +219,13 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
  */
 - (void)dialogDidCancel:(FBDialog*)dialog {
 	NSLog(@"dialogDidCancel");
+	
+	if (dialog == loginDialog) {
+		self.loginDialog = nil;
+	} else if (dialog == permissionDialog) {
+		self.permissionDialog = nil;
+	}
+	
 	self.state = FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED;
 	
 }
@@ -307,8 +323,6 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 	}
 
 }
-
-
 
 
 

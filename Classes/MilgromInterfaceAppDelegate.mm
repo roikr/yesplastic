@@ -306,6 +306,7 @@ NSString * const kCacheFolder=@"URLCache";
 	OFSAptr->stopLoops();
 	OFSAptr->release();
 		
+	[shareManager applicationDidEnterBackground];
 	
 	
 	

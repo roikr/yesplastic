@@ -20,6 +20,8 @@
 	BOOL canSendMail;
 	NSInteger action;
 	NSInteger state;
+	
+	UIActionSheet* sheet;
 }
 
 
@@ -29,6 +31,8 @@
 
 @property (readonly) BOOL videoRendered;
 @property (readonly) BOOL ringtoneExported;
+
+@property (nonatomic, retain) UIActionSheet *sheet;
 
 
 + (ShareManager*) shareManager;
@@ -40,6 +44,6 @@
 - (void)cancel;
 - (void)resetVersions;
 //- (void)prepare;
-
+- (void)applicationDidEnterBackground;
 
 @end

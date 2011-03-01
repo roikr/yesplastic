@@ -61,6 +61,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 
 @synthesize facebookUploader;
 @synthesize youTubeUploader;
+@synthesize sheet;
 
 
 
@@ -299,7 +300,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	
 	
 	
-	UIActionSheet* sheet = [[[UIActionSheet alloc] init] autorelease];
+	self.sheet = [[UIActionSheet alloc] init];
 	
 	
 	//sheet.title = @"Illustrations";
@@ -380,7 +381,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	}
 	
 	[self performSelector:@selector(action)];
-	
+	self.sheet = nil;
 }
 
 - (void)cancel {
@@ -557,6 +558,21 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	[library release];
 }
 
+- (void)applicationDidEnterBackground {
+    /*
+     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+     If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
+     */
+	
+	
+	if (sheet) {
+		[sheet dismissWithClickedButtonIndex:0 animated:NO];
+		self.sheet = nil;
+	}
+	
+	[facebookUploader applicationDidEnterBackground];
+	
+}
 
 
 @end
