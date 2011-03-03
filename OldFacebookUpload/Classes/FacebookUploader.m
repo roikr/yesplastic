@@ -65,6 +65,10 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 	
 - (void) setState:(NSInteger)newState {
 	
+	if (bDidEnterBackground) {
+		return;
+	}
+	
 	BOOL finishUploading = _state == FACEBOOK_UPLOADER_STATE_UPLOADING;
 	
 	
@@ -102,6 +106,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 }
 
 - (void)login {
+	bDidEnterBackground = NO;
+	
 	if ( self.session == nil) {
 		self.session = [FBSession sessionForApplication: kApiKey secret: kApiSecret delegate: self] ;
 	}
@@ -190,6 +196,8 @@ static NSString* kApiSecret = @"05e64b714292c6405e111357e7110078";
 
 
 - (void)applicationDidEnterBackground {
+	bDidEnterBackground = YES;
+	
 	if (loginDialog) {
 		[loginDialog dismissWithSuccess:NO animated:NO];
 	}

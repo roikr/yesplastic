@@ -41,6 +41,7 @@ enum {
 	
 	RKUBackgroundTask *task;
 	
+	BOOL bDidEnterBackground; // ROIKR: using to avoid sending delegates when canceling upon entering background
 }
 
 @property (nonatomic, retain) NSMutableArray * delegates;
