@@ -26,6 +26,7 @@
 #import "ExportManager.h"
 
 #import "MilgromUtils.h"
+#import "HelpViewController.h"
 
 //#import "Trigger.h"
 
@@ -697,7 +698,11 @@
 
 - (void) moreHelp:(id)sender {
 	[self hideHelp];
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] help];
+	
+	HelpViewController *helpView = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+	helpView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] presentModalViewController:helpView animated:YES];
 }
 
 
