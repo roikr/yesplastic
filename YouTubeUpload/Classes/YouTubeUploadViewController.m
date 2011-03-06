@@ -286,6 +286,14 @@
 
 - (void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader {
 	
+	NSLog(@"new state: %i, app state: %i",theUploader.state,[UIApplication sharedApplication].applicationState );
+	
+	
+	if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+		return;
+	}
+				
+	
 	switch (theUploader.state) {
 		case YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS: {
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"YouTube Upload eror" 

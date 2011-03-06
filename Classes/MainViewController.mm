@@ -424,20 +424,13 @@
 		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion;
 		
 		if (OFSAptr->getState() == BAND_STATE) {
-			BOOL hideShare = [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() == appDelegate.lastSavedVersion : 
-				!OFSAptr->getSongVersion();  //  not a demo
-				
-			if (hideShare) {
-				if ([appDelegate.shareManager isUploading]) {
-					shareButton.hidden = shareProgressView.hidden = NO;
-					//shareButton.userInteractionEnabled = NO;
-				}
-			} else {
-				shareButton.hidden = shareProgressView.hidden = NO;
-				//shareButton.userInteractionEnabled = YES;
-			}
-				
+			BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
+				OFSAptr->getSongVersion();  //  not a demo
+			BOOL isUploading = [appDelegate.shareManager isUploading];
 			
+			shareButton.userInteractionEnabled = shareEnabled && !isUploading;
+			shareButton.hidden = shareProgressView.hidden = !isUploading && !shareEnabled;
+	
 		}
 		
 		

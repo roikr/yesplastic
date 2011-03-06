@@ -254,6 +254,9 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		default:
 			break;
 	}
+	
+	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).mainViewController updateViews];
+		
 }
 
 - (void) facebookUploaderProgress:(float)progress {
@@ -271,12 +274,15 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED: {
-			ShareAlert(@"YouTube Upload erorr" , @"your upload has been stopped");
+			ShareAlert(@"YouTube Upload error" , @"your upload has been stopped");
 		} break;
 			
 		default:
 			break;
 	}
+	
+	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).mainViewController updateViews];
+	
 }
 
 

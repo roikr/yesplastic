@@ -215,7 +215,11 @@
 
 
 - (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader {
-	NSLog(@"new state: %i",theUploader.state);
+	NSLog(@"new state: %i, app state: %i",theUploader.state,[UIApplication sharedApplication].applicationState );
+	if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+		return;
+	}
+	
 	switch ([theUploader state]) {
 		case FACEBOOK_UPLOADER_STATE_UPLOADING:
 		case FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED:
