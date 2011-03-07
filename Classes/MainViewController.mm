@@ -188,7 +188,7 @@
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
 	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO && 
-	(!tutorialView.isActive  ||  (tutorialView.currentSlide == MILGROM_TUTORIAL_ROTATE && OFSAptr->getState()==BAND_STATE) ||  tutorialView.currentSlide >= MILGROM_TUTORIAL_RECORD_PLAY);
+	(!tutorialView.isActive  ||  (tutorialView.currentSlide == MILGROM_TUTORIAL_ROTATE && OFSAptr->getState()==BAND_STATE) ||  tutorialView.currentSlide > MILGROM_TUTORIAL_RECORD_PLAY);
 
 			
 }
@@ -206,7 +206,7 @@
 	loopsImagesView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
-	tutorialView.hidden = YES;
+	[tutorialView hide];
 	
 	
 	if ([self.view.subviews containsObject:bandHelp]) {
@@ -320,7 +320,7 @@
 				
 				switch (OFSAptr->getState()) {
 					case SOLO_STATE: {
-						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_SOLO_MENU;
+						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide <= MILGROM_TUTORIAL_RECORD_PLAY;
 						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 						
@@ -363,7 +363,7 @@
 						
 					} break;
 					case BAND_STATE: {
-						menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_LEARN_MORE;
+						menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide <= MILGROM_TUTORIAL_RECORD_PLAY;
 						bandLoopsView.hidden = NO;
 						for (int i=0;i<[bandLoopsView.subviews count];i++) {
 							UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
@@ -439,7 +439,7 @@
 		
 
 		recordButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_LEARN_MORE; // OFSAptr->getSongState() != SONG_IDLE;
+		infoButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;

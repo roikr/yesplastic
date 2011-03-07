@@ -16,23 +16,24 @@ enum  {
 	MILGROM_TUTORIAL_ROTATE,
 	MILGROM_TUTORIAL_SLIDE,
 	MILGROM_TUTORIAL_CONTROLS,
-//	MILGROM_TUTORIAL_SHAKE,
-	MILGROM_TUTORIAL_SOLO_MENU,
 	MILGROM_TUTORIAL_RECORD_PLAY,
-	MILGROM_TUTORIAL_LEARN_MORE
+//	MILGROM_TUTORIAL_SHAKE,
+//	MILGROM_TUTORIAL_SOLO_MENU,
+//	MILGROM_TUTORIAL_LEARN_MORE
 };
 
 
 
 @interface TutorialView : UIView {	
-	UIButton *skipButton;
-	UIView	*textView;
+
+	UIView *currentView;
+	UIButton *currentButton;
 	ofxInteractiveTutorial tutorial;
 	int lastSlide;
 }
 
-@property (nonatomic, retain) IBOutlet UIView *textView;
-@property (nonatomic, retain) IBOutlet UIButton *skipButton;
+@property (nonatomic, retain) UIView *currentView;
+@property (nonatomic, retain) UIButton *currentButton;
 @property (readonly) BOOL isActive;
 @property (readonly) NSUInteger currentSlide;
 
@@ -40,7 +41,7 @@ enum  {
 - (void)updateViews;
 - (void) nextSlide:(id)sender;
 - (void)start;
-
+- (void) hide;
 @end
 
 

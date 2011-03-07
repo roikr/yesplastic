@@ -22,8 +22,7 @@
 
 @implementation TutorialView
 
-@synthesize textView;
-@synthesize skipButton;
+@synthesize currentView,currentButton;
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -71,6 +70,10 @@
 }
 */
 
+- (void) hide {
+	self.currentButton.hidden = YES;
+	self.currentView.hidden = YES;
+}
 
 
 - (BOOL) isActive {
@@ -88,60 +91,116 @@
 	MainViewController * mainViewController = appDelegate.mainViewController;
 	
 	if (tutorial.getState()== TUTORIAL_IDLE) { 
-		if ([mainViewController.view.subviews containsObject:self]) {
-			[self removeFromSuperview];
+		if (currentButton) {
+			[currentButton removeFromSuperview];
+			[currentView addSubview:currentButton];
+			self.currentButton = nil;
 		}
+		if (currentView) {
+			[currentView removeFromSuperview];
+			[self addSubview:currentView];
+			self.currentView = nil;
+		}
+		
+//		if ([mainViewController.view.subviews containsObject:self]) {
+//			[self removeFromSuperview];
+//		}
 		return;
 	}
 		
-	if (![mainViewController.view.subviews containsObject:self]) {
-		[mainViewController.view addSubview:self];
-		
-		//[mainViewController.view bringSubviewToFront:mainViewController.interactionView];
-	}
+//	if (![mainViewController.view.subviews containsObject:self]) {
+//		[mainViewController.view addSubview:self];
+//		
+//		//[mainViewController.view bringSubviewToFront:mainViewController.interactionView];
+//	}
 
-	self.hidden = YES;
-	self.skipButton.hidden = NO;
+//	self.hidden = YES;
+//	self.skipButton.hidden = NO;
 	
-	CGSize mainSize = mainViewController.view.frame.size;
-	CGSize selfSize = self.frame.size;
-	self.transform = CGAffineTransformMakeTranslation((mainSize.width-selfSize.width)/2, (mainSize.height-selfSize.height)/2);
+//	CGSize mainSize = mainViewController.view.frame.size;
+//	CGSize selfSize = self.frame.size;
+//	self.transform = CGAffineTransformMakeTranslation((mainSize.width-selfSize.width)/2, (mainSize.height-selfSize.height)/2);
 	
 	testApp * OFSAptr = appDelegate.OFSAptr;
 
-	if ( OFSAptr->getSongState() == SONG_IDLE &&  tutorial.getState() == TUTORIAL_READY && !OFSAptr->isInTransition()) {
-		
-		int currentTag = tutorial.getCurrentSlideTag();
-		
-		for (int i=0;i<[self.textView.subviews count];i++) {
-			UIView *view = (UIView*)[self.textView.subviews objectAtIndex:i];
-			
-			view.hidden = view.tag != currentTag;
-		}
-		
-		switch (tutorial.getCurrentSlideNumber()) {
-			case MILGROM_TUTORIAL_CHANGE_LOOP:
+	if ( OFSAptr->getSongState() == SONG_IDLE  && !OFSAptr->isInTransition()) {
+		switch (tutorial.getState()) {
+			case TUTORIAL_READY: 
 				
-				for (int i=0; i<3; i++) {
-					if (OFSAptr->getMode(i) == LOOP_MODE) {
-						self.hidden = NO;
-						break;
+				if (!currentView) {
+					int currentTag = tutorial.getCurrentSlideTag();
+					
+					for (int i=0;i<[self.subviews count];i++) {
+						UIView *view = (UIView*)[self.subviews objectAtIndex:i];
+						
+						if (view.tag == currentTag) {
+							self.currentView = view;
+							[mainViewController.view addSubview:currentView];
+							[mainViewController.view sendSubviewToBack:currentView];
+							break;
+						}
 					}
 				}
-				break;
-			case MILGROM_TUTORIAL_ROTATE:
+				if (!currentButton) {
+					for (int i=0;i<[currentView.subviews count];i++) {
+						
+						UIView *view = (UIView*)[currentView.subviews objectAtIndex:i];
+						if ([view isKindOfClass:[UIButton self]]) {
+							self.currentButton = (UIButton*)view;
+							[currentButton addTarget:self action:@selector(nextSlide:) forControlEvents:UIControlEventTouchUpInside];
+							[mainViewController.view addSubview:currentButton];
+							[mainViewController.view bringSubviewToFront:currentButton];
+							break;
+						}
+						
+					}
+				}
 				
-				//self.hidden = self.OFSAptr->getState() != BAND_STATE;
-				if (OFSAptr->getState() == BAND_STATE) {
-					self.hidden = NO;
-					self.skipButton.hidden = YES;
-				} else {
-					tutorial.skip();
+				switch (tutorial.getCurrentSlideNumber()) {
+					case MILGROM_TUTORIAL_CHANGE_LOOP:
+						currentView.hidden = YES;
+						currentButton.hidden = YES;
+
+						for (int i=0; i<3; i++) {
+							if (OFSAptr->getMode(i) == LOOP_MODE) {
+								currentView.hidden = NO;
+								currentButton.hidden = NO;
+								break;
+							}
+						}
+						break;
+					case MILGROM_TUTORIAL_ROTATE:
+						
+						//self.hidden = self.OFSAptr->getState() != BAND_STATE;
+						if (OFSAptr->getState() == BAND_STATE) {
+							currentView.hidden = NO;
+						} else {
+							currentView.hidden = YES;
+							tutorial.skip();
+						}
+
+						break;
+					default:
+						
+						
+						break;
 				}
 				break;
+				
+			case TUTORIAL_TIMER_STARTED:
+				if (currentButton) {
+					[currentButton removeFromSuperview];
+					[currentView addSubview:currentButton];
+					self.currentButton = nil;
+				}
+				if (currentView) {
+					[currentView removeFromSuperview];
+					[self addSubview:currentView];
+					self.currentView = nil;
+				}
+				
+				break;
 			default:
-				self.hidden = NO;
-							
 				break;
 		}
 	} 
