@@ -760,9 +760,13 @@ void testApp::touchDown(float x, float y, int touchId) {
 			break;
 	}
 	
+	if (touchId!=0)
+		return;
 	
 	switch (state) {
 		case BAND_STATE: {
+			
+			
 			int xmod = (int)x % 160;
 			if (xmod>25 && xmod < 135 && y>75 && y<245) {
 				controller = (int)x/160;
@@ -846,6 +850,9 @@ void testApp::touchUp(float x, float y, int touchId) {
 		default:
 			break;
 	}
+	
+	if (touchId!=0)
+		return;
 	
 	slider.touchUp(x, y, touchId);
 	
