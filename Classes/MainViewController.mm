@@ -196,8 +196,7 @@
 	
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate.eAGLView setInterfaceOrientation:toInterfaceOrientation duration:duration];
+//	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] setGLInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	triggersView.hidden = YES;
 	loopsView.hidden = YES;

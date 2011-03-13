@@ -19,6 +19,8 @@
 @interface EAGLView (PrivateMethods)
 - (void)createFramebuffer;
 - (void)deleteFramebuffer;
+- (void)setInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+
 @end
 
 @implementation EAGLView
@@ -77,6 +79,11 @@
 			displayLinkSupported = TRUE;
 		
 		//[self.view addSubview:viewController.view];
+		
+		[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
+													 name:UIDeviceOrientationDidChangeNotification object:nil];
+		
     }
     
     return self;
@@ -91,6 +98,9 @@
     
 	self.context = nil;	
     [context release];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
     [super dealloc];
 }
@@ -343,8 +353,31 @@
 	
 }
 
+- (void)orientationChanged:(NSNotification *)notification
+{
+	UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	;
+	
+	switch (deviceOrientation) {
+		case UIDeviceOrientationPortrait:
+		case UIDeviceOrientationPortraitUpsideDown:
+		case UIDeviceOrientationLandscapeLeft:
+		case UIDeviceOrientationLandscapeRight:
+			UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation) deviceOrientation;
+			if ([appDelegate.viewController.topViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
+				[self setInterfaceOrientation:interfaceOrientation duration:0.3];
+			}
+			break;
+	}
+	
+}
+
 - (void)setInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	
 	
 	switch (toInterfaceOrientation) {
 		case UIInterfaceOrientationPortrait: {
