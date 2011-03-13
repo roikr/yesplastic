@@ -26,6 +26,7 @@
 #import "ShareManager.h"
 #import <OpenGLES/EAGL.h>
 #import "EAGLView.h"
+#import "RKUBackgroundTask.h"
 
 
 NSString * const kMilgromFileServerURL=@"roikr.com";
@@ -200,7 +201,12 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	
-	if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
+	// if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
+		
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"unzipped"]) {
+		
+		RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
+		
 		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache"];
 		
 		if (precache) {
@@ -214,20 +220,13 @@ NSString * const kCacheFolder=@"URLCache";
 			
 			
 		} 
-		/*
-		 else {
-		 NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"data"];
-		 NSError * error = nil;
-		 if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
-		 URLCacheAlertWithError(error);
-		 return;
-		 }
-		 
-		 
-		 }
-		 */
 		
 		[self addDemos];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"unzipped"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		[task finish];
+		
+		while ([UIApplication sharedApplication].applicationState != UIApplicationStateActive); // stay here while in background
 	}
 	
 	
