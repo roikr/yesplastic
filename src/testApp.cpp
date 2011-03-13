@@ -243,7 +243,7 @@ void testApp::update() {
 		case SONG_RENDER_VIDEO:
 			
 			if  (currentBlock / totalBlocks >= 1.0) {
-				setSongState(SONG_IDLE);
+				setSongState(SONG_RENDER_VIDEO_FINISHED); // 
 				//songState = SONG_IDLE; // TODO: check why not notifying players...
 				//bNeedDisplay = true;
 			}
@@ -743,13 +743,21 @@ void testApp::touchDown(float x, float y, int touchId) {
 	
 	//printf("touchDown: %.f, %.f %i\n", x, y, touchId);
 	
-	if (getSongState()==SONG_RENDER_VIDEO) {
-		pincher.touchDown(x, y, touchId);
+	if ( isInTransition()) {
 		return;
 	}
 	
-	if (getSongState()==SONG_RENDER_AUDIO || isInTransition()) {
-		return;
+	switch (getSongState()) {
+		case SONG_RENDER_VIDEO:
+			pincher.touchDown(x, y, touchId);
+		case SONG_RENDER_VIDEO_FINISHED:
+		case SONG_RENDER_AUDIO:
+		case SONG_RENDER_AUDIO_FINISHED:
+		case SONG_CANCEL_RENDER_AUDIO:
+			return;
+			break;
+		default:
+			break;
 	}
 	
 	
@@ -789,13 +797,21 @@ void testApp::touchMoved(float x, float y, int touchId) {
 	
 	//printf("touchMoved: %.f, %.f %i\n", x, y, touchId);
 	
-	if (getSongState()==SONG_RENDER_VIDEO) {
-		pincher.touchMoved(x, y, touchId);
+	if ( isInTransition()) {
 		return;
 	}
 	
-	if (getSongState()==SONG_RENDER_AUDIO || isInTransition()) {
-		return;
+	switch (getSongState()) {
+		case SONG_RENDER_VIDEO:
+			pincher.touchMoved(x, y, touchId);
+		case SONG_RENDER_VIDEO_FINISHED:
+		case SONG_RENDER_AUDIO:
+		case SONG_RENDER_AUDIO_FINISHED:
+		case SONG_CANCEL_RENDER_AUDIO:
+			return;
+			break;
+		default:
+			break;
 	}
 	
 	if (touchId!=0) // || bButtonDown) 
@@ -818,13 +834,17 @@ void testApp::touchMoved(float x, float y, int touchId) {
 void testApp::touchUp(float x, float y, int touchId) {
 	//printf("touchUp: %.f, %.f %i\n", x, y, touchId);
 	
-	if (getSongState()==SONG_RENDER_VIDEO) {
-		pincher.touchUp(x, y, touchId);
-		return;
-	}
-	
-	if (getSongState()==SONG_RENDER_AUDIO || isInTransition()) {
-		return;
+	switch (getSongState()) {
+		case SONG_RENDER_VIDEO:
+			pincher.touchUp(x, y, touchId);
+		case SONG_RENDER_VIDEO_FINISHED:
+		case SONG_RENDER_AUDIO:
+		case SONG_RENDER_AUDIO_FINISHED:
+		case SONG_CANCEL_RENDER_AUDIO:
+			return;
+			break;
+		default:
+			break;
 	}
 	
 	slider.touchUp(x, y, touchId);

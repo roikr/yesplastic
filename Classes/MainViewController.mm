@@ -187,8 +187,8 @@
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
-	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && 
-	OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO && 
+	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED &&
+	 OFSAptr->getSongState()!=SONG_RENDER_VIDEO && OFSAptr->getSongState()!=SONG_RENDER_VIDEO_FINISHED &&
 	[tutorialView shouldAutorotate];
 }
 
@@ -284,7 +284,7 @@
 
 	
 	int songState =OFSAptr->getSongState();
-	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || songState == SONG_RENDER_AUDIO_FINISHED || exportManager) {
+	if (songState == SONG_RENDER_VIDEO || songState == SONG_RENDER_VIDEO_FINISHED || songState == SONG_RENDER_AUDIO || songState == SONG_CANCEL_RENDER_AUDIO || songState == SONG_RENDER_AUDIO_FINISHED || exportManager) {
 		if (![self.view.subviews containsObject:renderView]) {
 			[self.view addSubview:renderView];
 		}
@@ -899,9 +899,9 @@
 				 withCompletionHandler:^ {
 					 NSLog(@"write completed");
 					 
+					 self.view.userInteractionEnabled = NO;
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
-					 self.view.userInteractionEnabled = NO;
 					 [shareManager action];
 					 self.renderManager = nil;
 					 
