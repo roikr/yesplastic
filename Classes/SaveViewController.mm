@@ -76,7 +76,7 @@
 - (void)done:(id)sender {
 	
 	if (![songName.text length]) {
-		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Plz enter the song name" withCancel:@"OK"];
+		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Don’t you believe in naming your songs?\nplease enter the song name" withCancel:@"OK"];
 	} else if ([(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] canSaveSongName:songName.text]) {
 		[songName resignFirstResponder];
 		[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] saveSong:songName.text];

@@ -427,7 +427,7 @@
 				OFSAptr->getSongVersion();  //  not a demo
 			BOOL isUploading = [appDelegate.shareManager isUploading];
 			
-			shareButton.userInteractionEnabled = shareEnabled && !isUploading;
+			shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
 			shareButton.hidden = shareProgressView.hidden = !isUploading && !shareEnabled;
 	
 		}
@@ -509,7 +509,7 @@
 	if (OFSAptr->getSongVersion()) {
 		OFSAptr->setSongState(SONG_PLAY);
 	} else {
-		MilgromAlert(@"Can’t  play", @"there is nothing to play. please record something first.");
+		MilgromAlert(@"Can’t  play", @"go record something first");
 	}
 
 	
@@ -766,7 +766,7 @@
 	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
 	
 	if ([shareManager isUploading]) {
-		MilgromAlert(@"Sharing", @"Video upload in progress");
+		MilgromAlert(@"Uploading", @"wait a second, your video upload is in progress");
 	} else {
 		
 		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];

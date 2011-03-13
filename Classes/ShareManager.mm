@@ -49,7 +49,8 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 
 @interface ShareManager ()
 - (void)action;
-- (void)sendViaMailWithSubject:(NSString *)subject withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName;
+- (void)sendViaMailWithSubject:(NSString *)subject withMessage:(NSString*)message 
+					  withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName;
 - (void)exportToLibrary;
 - (void)setVideoRendered;
 - (void)setRingtoneExported;
@@ -177,17 +178,15 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 	[[paths objectAtIndex:0] stringByAppendingPathComponent:@"temp"];
 }
 
-- (NSString *)getVideoTitle {
-	return [@"milgrom plays " stringByAppendingString:[self getVideoName]];
-	
-}
+
 
 
 
 #pragma mark mailClass
 
 
-- (void)sendViaMailWithSubject:(NSString *)subject withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName {
+- (void)sendViaMailWithSubject:(NSString *)subject withMessage:(NSString*)message
+					  withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName {
 	
 	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
 	if (mailClass != nil)
@@ -199,7 +198,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		[picker setSubject:subject];
 		[picker addAttachmentData:data mimeType:mimeType fileName:fileName];
 		
-		[picker setMessageBody:[NSString stringWithFormat:@"<br/><br/><a href='%@'>visit milgrom</a>",kMilgromURL] isHTML:YES];
+		[picker setMessageBody:message isHTML:YES];
 		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] presentModalViewController:picker animated:YES];
 		//[self presentModalViewController:picker animated:YES];
 		[picker release];
@@ -246,10 +245,10 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 - (void) facebookUploaderStateChanged:(FacebookUploader *)theUploader {
 	switch (theUploader.state) {
 		case FACEBOOK_UPLOADER_STATE_UPLOAD_FINISHED: {
-			ShareAlert(@"Facebook upload", @"your upload finished");
+			ShareAlert(@"Facebook upload", @"Your video was uploaded successfully!\ngo check your wall");
 		} break;
 		case FACEBOOK_UPLOADER_STATE_UPLOADING: {
-			ShareAlert(@"Facebook upload", @"Upload in progress");
+			ShareAlert(@"Facebook upload", @"Upload is in progress");
 		} break;
 		default:
 			break;
@@ -267,10 +266,10 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 -(void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader{
 	switch (theUploader.state) {
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED: {
-			ShareAlert(@"YouTube upload", [NSString stringWithFormat:@"your upload finished. link: %@",[theUploader.link absoluteString]]);
+			ShareAlert(@"YouTube upload", [NSString stringWithFormat:@"your video was uploaded successfully!"]); // link: %@",[theUploader.link absoluteString]]);
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOADING: {
-			ShareAlert(@"YouTube upload", @"Upload in progress");
+			ShareAlert(@"YouTube upload", @"Upload is in progress");
 			
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED: {
@@ -355,7 +354,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			if ([self gotInternet]) {
 				action = buttonIndex ? ACTION_UPLOAD_TO_FACEBOOK : ACTION_UPLOAD_TO_YOUTUBE;
 			} else {
-				ShareAlert(@"Upload Movie", @"No internet connection.");
+				ShareAlert(@"Upload Movie", @"We’re trying hard, but there’s no Internet connection");
 				action = ACTION_DONE;
 			}
 
@@ -479,9 +478,9 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
 			[appDelegate pushViewController:controller];
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
-			controller.videoTitle = [self getVideoTitle];
-			controller.additionalText = kMilgromURL;
-			controller.descriptionView.text = @"testing";
+			controller.videoTitle = [[self getVideoName] uppercaseString];
+			//controller.additionalText = kMilgromURL;
+			controller.descriptionView.text = [NSString stringWithFormat:@"this video created with Milgrom’s iphone app\nvisit milgrom at http://www.mmmilgrom.com"];
 			controller.videoPath = [[self getVideoPath] stringByAppendingPathExtension:@"mov"];
 			
 			[controller release];
@@ -494,9 +493,9 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			
 			[appDelegate pushViewController:controller];
 			controller.uploader = appDelegate.shareManager.facebookUploader;
-			controller.videoTitle = [self getVideoTitle];
-			controller.additionalText = kMilgromURL;
-			controller.descriptionView.text = @"testing";
+			controller.videoTitle = [NSString stringWithFormat:@"MILGROM PLAYS %@",[[self getVideoName] uppercaseString]];
+			//controller.additionalText = kMilgromURL;
+			controller.descriptionView.text = @"more milgrom at www.mmmilgrom.com/fb";
 			controller.videoPath = [[self getVideoPath]  stringByAppendingPathExtension:@"mov" ];
 			[controller release];
 			
@@ -510,16 +509,21 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		case ACTION_SEND_VIA_MAIL: 
 		{
 			
+			NSString *subject = @"check out my milgrom song";
+			NSString *message = [NSString stringWithFormat:@"Isn’t  it a work of art?<br/><br/><a href='%@'>visit milgrom</a>",kMilgromURL];
 			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"mov"]];
-			[self sendViaMailWithSubject:[self getVideoTitle] withData:myData withMimeType:@"video/mov" 
+			[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"video/mov" 
 							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
 		} break;
 			
 		case ACTION_SEND_RINGTONE: 
 		{
+			NSString *subject = @"Sweeeet! My New Milgrom Ringtone!";
+			NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>I’m sending it to you as I believe you’ll get a kick out of it (or else we cannot be friends)<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under ‘Custom’ you should see this file name.<br/>You can always switch it back if you feel like you’re not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom’s</a> website. I leave it to you to handle the truth.",kMilgromURL];
+			
 			
 			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];
-			[self sendViaMailWithSubject:[self getVideoTitle] withData:myData withMimeType:@"audio/m4r" 
+			[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"audio/m4r" 
 							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"m4r"]];
 		} break;
 			
@@ -554,7 +558,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 											}
 											else {
 												MilgromLog(@"writeVideoToAssestsLibrary successed");
-												ShareAlert(@"Library", @"The video has been saved to your library");
+												ShareAlert(@"Library", @"The video has been saved to your photos library");
 										
 											}
 										});
