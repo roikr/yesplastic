@@ -187,10 +187,9 @@
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
-	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO && 
-	(!tutorialView.isActive  ||  (tutorialView.currentSlide == MILGROM_TUTORIAL_ROTATE && OFSAptr->getState()==BAND_STATE) ||  tutorialView.currentSlide > MILGROM_TUTORIAL_RECORD_PLAY);
-
-			
+	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && 
+	OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED && OFSAptr->getSongState()!=SONG_RENDER_VIDEO && 
+	[tutorialView shouldAutorotate];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -206,7 +205,7 @@
 	loopsImagesView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
-	[tutorialView hide];
+	[tutorialView removeViews];
 	
 	
 	if ([self.view.subviews containsObject:bandHelp]) {
@@ -315,12 +314,12 @@
 			case SONG_IDLE:
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD:
-				playButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+				playButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
 				switch (OFSAptr->getState()) {
 					case SOLO_STATE: {
-						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide <= MILGROM_TUTORIAL_RECORD_PLAY;
+						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 						
@@ -363,7 +362,7 @@
 						
 					} break;
 					case BAND_STATE: {
-						menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isActive && tutorialView.currentSlide <= MILGROM_TUTORIAL_RECORD_PLAY;
+						menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 						bandLoopsView.hidden = NO;
 						for (int i=0;i<[bandLoopsView.subviews count];i++) {
 							UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
@@ -438,8 +437,8 @@
 		
 		
 
-		recordButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = tutorialView.isActive && tutorialView.currentSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
+		recordButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		infoButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -471,16 +470,20 @@
 
 - (void) menu:(id)sender {
 	
+	
+	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
 	}
 	
 	switch (OFSAptr->getState()) {
 		case SOLO_STATE: 
+			[tutorialView doneSlide:MILGROM_SLIDE_SOLO_MENU];
 			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushSetMenu]; 
 			break;
 			
 		case BAND_STATE: {
+			[tutorialView doneSlide:MILGROM_SLIDE_MENU];
 			OFSAptr->stopLoops();
 			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
 			//[self.navigationController popViewControllerAnimated:YES];
@@ -759,7 +762,7 @@
 
 - (void)share:(id)sender {
 	
-	
+	[tutorialView doneSlide:MILGROM_SLIDE_SHARE];
 	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
 	
 	if ([shareManager isUploading]) {

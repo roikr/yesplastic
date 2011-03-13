@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include "ofxInteractiveTutorial.h"
+#include "ofxInteractiveSlides.h"
 
 enum  {
 	MILGROM_TUTORIAL_INTRODUCTION,
@@ -17,9 +18,14 @@ enum  {
 	MILGROM_TUTORIAL_SLIDE,
 	MILGROM_TUTORIAL_CONTROLS,
 	MILGROM_TUTORIAL_RECORD_PLAY,
-//	MILGROM_TUTORIAL_SHAKE,
-//	MILGROM_TUTORIAL_SOLO_MENU,
-//	MILGROM_TUTORIAL_LEARN_MORE
+	
+};
+
+enum  {
+	
+	MILGROM_SLIDE_MENU,
+	MILGROM_SLIDE_SOLO_MENU,
+	MILGROM_SLIDE_SHARE
 };
 
 
@@ -29,19 +35,23 @@ enum  {
 	UIView *currentView;
 	UIButton *currentButton;
 	ofxInteractiveTutorial tutorial;
-	int lastSlide;
+	ofxInteractiveSlides slides;
+	BOOL bTutorialStarted;
 }
 
 @property (nonatomic, retain) UIView *currentView;
 @property (nonatomic, retain) UIButton *currentButton;
-@property (readonly) BOOL isActive;
-@property (readonly) NSUInteger currentSlide;
+@property (readonly) BOOL isTutorialActive;
+@property (readonly) NSUInteger currentTutorialSlide;
 
 - (void)update;
 - (void)updateViews;
-- (void) nextSlide:(id)sender;
+- (void)removeViews;
+
 - (void)start;
-- (void) hide;
+
+- (void)doneSlide:(int)slideNum;
+- (BOOL)shouldAutorotate;
 @end
 
 

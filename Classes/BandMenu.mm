@@ -132,8 +132,7 @@
 	
 	switch (button.tag) {
 		case 0:
-			[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).mainViewController.tutorialView start];
-			//[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
 			break;
 		case 1:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];

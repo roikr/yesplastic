@@ -15,6 +15,11 @@
 #include "testApp.h"
 
 @interface TutorialView() 
+
+- (void)updateWithTag:(int) currentTag;
+
+- (void) skip:(id)sender;
+
 @end
 
 
@@ -30,7 +35,8 @@
     {
        
 		tutorial.loadFile("tutorial.xml");
-		
+		slides.loadFile("slides.xml");
+		bTutorialStarted = NO;
 		
 		//if (tutorial.getTimesCompleted()>3) {
 		//	tutorial.setState(TUTORIAL_DONE);
@@ -40,27 +46,72 @@
 }
 
 - (void)start {
-	tutorial.start();
-	lastSlide = tutorial.getCurrentSlideNumber();
+	tutorial.start();	
 }
 
 - (void)update {
 	
-	if (tutorial.getState() == TUTORIAL_IDLE) {
-		return;
-	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	MainViewController * mainViewController = appDelegate.mainViewController;
+	testApp * OFSAptr = appDelegate.OFSAptr;
 	
-	tutorial.update();
-	if (tutorial.getCurrentSlideNumber() !=lastSlide) {
+	if (tutorial.getState() != TUTORIAL_IDLE ) {
+		bTutorialStarted = YES;
+		
+		if (tutorial.getState() == TUTORIAL_READY ) {
+			switch (tutorial.getCurrentSlideNumber()) {
+	
+				case MILGROM_TUTORIAL_ROTATE:
+					
+					//self.hidden = self.OFSAptr->getState() != BAND_STATE;
+					if (OFSAptr->getState() == SOLO_STATE) {
+						tutorial.skip();
+					}
+					
+					break;
+				default:
+					
+					break;
+			}
+		}
+		
+		tutorial.update();
+	} else if (bTutorialStarted && slides.getState() != SLIDE_DONE) {
+		if (slides.getState() == SLIDE_IDLE) {
+			if ( OFSAptr->getSongState() == SONG_IDLE  && !OFSAptr->isInTransition()) {
+				if (OFSAptr->getState() == BAND_STATE) {
+					if (!slides.getIsDone(MILGROM_SLIDE_SHARE) && mainViewController.shareButton.hidden==NO) {
+						slides.start(MILGROM_SLIDE_SHARE);
+					} else if (!slides.getIsDone(MILGROM_SLIDE_MENU)) {
+						slides.start(MILGROM_SLIDE_MENU);
+					} 
+				} else if (OFSAptr->getState() == SOLO_STATE) {
+					if (!slides.getIsDone(MILGROM_SLIDE_SOLO_MENU)) {
+						slides.start(MILGROM_SLIDE_SOLO_MENU);
+					}
+				}
+			}
+		}
+	
+		slides.update();
+		
+		
+	}
+
+	if (tutorial.getIsNeedRefresh() || slides.getIsNeedRefresh() ) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[mainViewController updateViews];
 			
 		});
-		lastSlide = tutorial.getCurrentSlideNumber();
+		tutorial.setRefreshed();
+		slides.setRefreshed();
+		
 	}
+	
+		
+	
+	
 }
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -70,147 +121,191 @@
 }
 */
 
-- (void) hide {
-	self.currentButton.hidden = YES;
-	self.currentView.hidden = YES;
+
+
+- (BOOL) isTutorialActive {
+	return tutorial.getState()!= TUTORIAL_IDLE ;
 }
 
-
-- (BOOL) isActive {
-	return tutorial.getState()!= TUTORIAL_IDLE;
+- (BOOL) isSlidesActive {
+	return slides.getState()!=SLIDE_IDLE;
 }
 
-- (NSUInteger) currentSlide  {
-	return tutorial.getCurrentSlideNumber();
+- (NSUInteger) currentTutorialSlide  {
+	return tutorial.getCurrentSlideNumber() ;
 }
 
+- (void)removeViews {
+	if (currentButton) {
+		[currentButton removeFromSuperview];
+		[currentView addSubview:currentButton];
+		self.currentButton = nil;
+	}
+	if (currentView) {
+		[currentView removeFromSuperview];
+		[self addSubview:currentView];
+		self.currentView = nil;
+	}
+}
 
-- (void)updateViews {
-		
+- (void)updateWithTag:(int) currentTag {
+	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	MainViewController * mainViewController = appDelegate.mainViewController;
 	
-	if (tutorial.getState()== TUTORIAL_IDLE) { 
-		if (currentButton) {
-			[currentButton removeFromSuperview];
-			[currentView addSubview:currentButton];
-			self.currentButton = nil;
-		}
-		if (currentView) {
-			[currentView removeFromSuperview];
-			[self addSubview:currentView];
-			self.currentView = nil;
-		}
+	for (int i=0;i<[self.subviews count];i++) {
+		UIView *view = (UIView*)[self.subviews objectAtIndex:i];
 		
-//		if ([mainViewController.view.subviews containsObject:self]) {
-//			[self removeFromSuperview];
-//		}
-		return;
-	}
-		
-//	if (![mainViewController.view.subviews containsObject:self]) {
-//		[mainViewController.view addSubview:self];
-//		
-//		//[mainViewController.view bringSubviewToFront:mainViewController.interactionView];
-//	}
-
-//	self.hidden = YES;
-//	self.skipButton.hidden = NO;
-	
-//	CGSize mainSize = mainViewController.view.frame.size;
-//	CGSize selfSize = self.frame.size;
-//	self.transform = CGAffineTransformMakeTranslation((mainSize.width-selfSize.width)/2, (mainSize.height-selfSize.height)/2);
-	
-	testApp * OFSAptr = appDelegate.OFSAptr;
-
-	if ( OFSAptr->getSongState() == SONG_IDLE  && !OFSAptr->isInTransition()) {
-		switch (tutorial.getState()) {
-			case TUTORIAL_READY: 
-				
-				if (!currentView) {
-					int currentTag = tutorial.getCurrentSlideTag();
-					
-					for (int i=0;i<[self.subviews count];i++) {
-						UIView *view = (UIView*)[self.subviews objectAtIndex:i];
-						
-						if (view.tag == currentTag) {
-							self.currentView = view;
-							[mainViewController.view addSubview:currentView];
-							[mainViewController.view sendSubviewToBack:currentView];
-							break;
-						}
-					}
-				}
-				if (!currentButton) {
-					for (int i=0;i<[currentView.subviews count];i++) {
-						
-						UIView *view = (UIView*)[currentView.subviews objectAtIndex:i];
-						if ([view isKindOfClass:[UIButton self]]) {
-							self.currentButton = (UIButton*)view;
-							[currentButton addTarget:self action:@selector(nextSlide:) forControlEvents:UIControlEventTouchUpInside];
-							[mainViewController.view addSubview:currentButton];
-							[mainViewController.view bringSubviewToFront:currentButton];
-							break;
-						}
-						
-					}
-				}
-				
-				switch (tutorial.getCurrentSlideNumber()) {
-					case MILGROM_TUTORIAL_CHANGE_LOOP:
-						currentView.hidden = YES;
-						currentButton.hidden = YES;
-
-						for (int i=0; i<3; i++) {
-							if (OFSAptr->getMode(i) == LOOP_MODE) {
-								currentView.hidden = NO;
-								currentButton.hidden = NO;
-								break;
-							}
-						}
-						break;
-					case MILGROM_TUTORIAL_ROTATE:
-						
-						//self.hidden = self.OFSAptr->getState() != BAND_STATE;
-						if (OFSAptr->getState() == BAND_STATE) {
-							currentView.hidden = NO;
-						} else {
-							currentView.hidden = YES;
-							tutorial.skip();
-						}
-
-						break;
-					default:
-						
-						
-						break;
-				}
-				break;
-				
-			case TUTORIAL_TIMER_STARTED:
+		if (view.tag == currentTag) {
+			
+			
+			if (currentView && view!=currentView) {
 				if (currentButton) {
 					[currentButton removeFromSuperview];
 					[currentView addSubview:currentButton];
 					self.currentButton = nil;
 				}
-				if (currentView) {
-					[currentView removeFromSuperview];
-					[self addSubview:currentView];
-					self.currentView = nil;
+				
+				[currentView removeFromSuperview];
+				[self addSubview:currentView];
+				self.currentView = nil;
+			}
+			
+			if (!currentView) {
+			
+				self.currentView = view;
+				[mainViewController.view addSubview:currentView];
+				[mainViewController.view sendSubviewToBack:currentView];
+				
+				for (int i=0;i<[currentView.subviews count];i++) {
+					
+					UIView *buttonView = (UIView*)[currentView.subviews objectAtIndex:i];
+					if ([buttonView isKindOfClass:[UIButton self]]) {
+						self.currentButton = (UIButton*)buttonView;
+						[currentButton addTarget:self action:@selector(skip:) forControlEvents:UIControlEventTouchUpInside];
+						[mainViewController.view addSubview:currentButton];
+						[mainViewController.view bringSubviewToFront:currentButton];
+						break;
+					}
+					
 				}
+			}	
+			break;
+		}
+	}
+	
+	
+	
+}
+
+
+
+
+- (void)updateViews {
+		
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	testApp * OFSAptr = appDelegate.OFSAptr;
+	
+	if (tutorial.getState()!= TUTORIAL_READY && slides.getState()!=SLIDE_READY || OFSAptr->getSongState() != SONG_IDLE  || OFSAptr->isInTransition() ) { 
+		[self removeViews];
+		return;
+	}
+
+//	CGSize mainSize = mainViewController.view.frame.size;
+//	CGSize selfSize = self.frame.size;
+//	self.transform = CGAffineTransformMakeTranslation((mainSize.width-selfSize.width)/2, (mainSize.height-selfSize.height)/2);
+	
+	
+
+	if (tutorial.getState()==TUTORIAL_READY) {
+			
+		[self updateWithTag: tutorial.getCurrentSlideTag() ];
+		
+		switch (tutorial.getCurrentSlideNumber()) {
+			case MILGROM_TUTORIAL_CHANGE_LOOP:
+				currentView.hidden = YES;
+				currentButton.hidden = YES;
+				int i;
+				for (i=0; i<3; i++) {
+					if (OFSAptr->getMode(i) == LOOP_MODE) {
+						currentView.hidden = NO;
+						currentButton.hidden = NO;
+						break;
+					}
+				}
+				break;
+
+			default:
 				
 				break;
+		}
+		
+	}
+				
+		
+	if (slides.getState() == SLIDE_READY) {
+		
+		[self updateWithTag: slides.getCurrentSlideTag() ];
+		
+		switch (slides.getCurrentSlideNumber()) {
+			case MILGROM_SLIDE_MENU:
+			case MILGROM_SLIDE_SHARE:
+				currentView.hidden = currentButton.hidden = OFSAptr->getState() == SOLO_STATE;
+				break;
+				
+			case MILGROM_SLIDE_SOLO_MENU:
+				currentView.hidden = currentButton.hidden = OFSAptr->getState() == BAND_STATE;
+				break;
 			default:
+				
+				
 				break;
 		}
-	} 
+		
+						
+		
+	}
+	
 
 }
 
-- (void) nextSlide:(id)sender {
-	tutorial.skip();
-	[self updateViews];
+- (void) skip:(id)sender {
+	if (self.isTutorialActive) {
+		tutorial.skip();
+	} else if (slides.getState()!=SLIDE_DONE) {
+		slides.skip();
+	}
 }
+
+- (void)doneSlide:(int)slideNum {
+	slides.done(slideNum); // TODO: check if loaded
+}
+
+
+- (BOOL)shouldAutorotate {
+	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	testApp * OFSAptr = appDelegate.OFSAptr;
+	
+	if (!self.isTutorialActive) {
+		return true;
+	}
+	
+	if (self.currentTutorialSlide == MILGROM_TUTORIAL_ROTATE && OFSAptr->getState()==BAND_STATE) {
+		return true;
+	}
+		
+	if (self.currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY && tutorial.getState()==TUTORIAL_TIMER_STARTED) {
+			
+		return true;
+		
+	}
+   
+	return false;
+	
+	
+}
+
 
 - (void)dealloc {
     [super dealloc];
