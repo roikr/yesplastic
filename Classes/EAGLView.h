@@ -68,4 +68,5 @@
 - (void)stopAnimation;
 - (void)drawFrame;
 
+- (void)setInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 @end
