@@ -98,6 +98,20 @@
     [super dealloc];
 }
 
+- (void)updateEditMode {
+	if ([songsTable anySongs]) {
+		editButton.hidden = NO;
+	} else {
+		editButton.hidden = YES;
+		if (editButton.selected) {
+			editButton.selected = NO;
+			[self.songsTable setEditing:NO animated:YES];
+		}
+	}
+
+	
+}
+
 - (void)edit:(id)sender {
 	UIButton *button = (UIButton*)sender;
 	if (button.selected) {

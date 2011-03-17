@@ -45,6 +45,7 @@
 - (void)help:(id)sender;
 - (void)link:(id)sender;
 - (void)cancelEdit;
+- (void)updateEditMode;
 
 - (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion;
 

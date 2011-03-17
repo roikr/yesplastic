@@ -275,7 +275,7 @@
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 		
-		[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] updateEditButtonView];
+		[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).bandMenu updateEditMode];
 		
 		NSError *error;
 		

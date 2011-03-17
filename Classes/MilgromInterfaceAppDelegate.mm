@@ -203,6 +203,8 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	// if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
 		
+	//[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"unzipped"];
+	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"unzipped"]) {
 		
 		RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
@@ -240,7 +242,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self loadDemos];
 	[bandMenu.songsTable loadData];
-	[self updateEditButtonView];
+	[bandMenu updateEditMode];
 	
 	// TODO: move the update loop from here to main view controller
 	
@@ -752,7 +754,7 @@ NSString * const kCacheFolder=@"URLCache";
 	} 
 	
 	[bandMenu.songsTable selectCurrentSong];
-	[self updateEditButtonView];
+	[bandMenu updateEditMode];
 
 	OFSAptr->saveSong([songName UTF8String]);
 	
@@ -794,11 +796,6 @@ NSString * const kCacheFolder=@"URLCache";
 	[self saveContext];
 	
 }
-
-- (void)updateEditButtonView {
-	bandMenu.editButton.hidden = ![bandMenu.songsTable anySongs];
-}
-
 
 - (void)loadSong:(Song*)song {
 	
