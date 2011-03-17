@@ -15,7 +15,7 @@
 	
 	UIActivityIndicatorView *activityIndicator;
 	UIButton *editButton;
-	UITextView *firstLaunchView;
+	UIView *firstLaunchView; 
 	UIImageView *background;
 	
 	UIView *milgromView;
@@ -31,7 +31,7 @@
 @property (nonatomic,retain) SongsTable *songsTable;
 @property (nonatomic,retain ) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,retain) IBOutlet UIButton *editButton;
-@property (nonatomic, retain) IBOutlet UITextView *firstLaunchView;
+@property (nonatomic, retain) IBOutlet UIView *firstLaunchView;
 @property (nonatomic,retain) IBOutlet UIImageView *background;
 
 
