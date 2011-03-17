@@ -495,7 +495,7 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 			controller.uploader = appDelegate.shareManager.facebookUploader;
 			controller.videoTitle = [NSString stringWithFormat:@"MILGROM PLAYS %@",[[self getVideoName] uppercaseString]];
 			//controller.additionalText = kMilgromURL;
-			controller.descriptionView.text = @"more milgrom at www.mmmilgrom.com/fb";
+			controller.descriptionView.text = @"more milgrom at http://www.mmmilgrom.com/fb";
 			controller.videoPath = [[self getVideoPath]  stringByAppendingPathExtension:@"mov" ];
 			[controller release];
 			
