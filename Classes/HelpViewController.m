@@ -26,7 +26,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	scrollView.contentSize=CGSizeMake(480,1180);
+	scrollView.contentSize=CGSizeMake(480,1152);
 }
 
 

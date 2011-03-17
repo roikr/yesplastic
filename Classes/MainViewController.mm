@@ -27,6 +27,7 @@
 
 #import "MilgromUtils.h"
 #import "HelpViewController.h"
+#import "RenderView.h"
 
 //#import "Trigger.h"
 
@@ -61,8 +62,8 @@
 
 @synthesize renderView;
 @synthesize renderLabel;
-@synthesize renderTextView;
 @synthesize renderCancelButton;
+@synthesize renderCameraIcon;
 
 @synthesize interactionView;
 @synthesize tutorialView;
@@ -288,9 +289,9 @@
 		if (![self.view.subviews containsObject:renderView]) {
 			[self.view addSubview:renderView];
 		}
-		renderTextView.hidden = [(TouchView*)self.view renderTouch];
-		renderCancelButton.hidden = songState!=SONG_RENDER_VIDEO;
 		
+
+		renderView.slideView.hidden =renderCancelButton.hidden = renderCameraIcon.hidden = songState!=SONG_RENDER_VIDEO;
 		
 		return;
 	} else if ([self.view.subviews containsObject:renderView]) {
@@ -797,7 +798,6 @@
 
 - (void)renderAudio {
 	self.renderLabel.text = @"Creating audio";
-	self.renderTextView.text = @"";// @"(it can take some time, depends on your song length...)";
 	[self setRenderProgress:0.0f];
 	
 	dispatch_queue_t myCustomQueue;
@@ -838,11 +838,11 @@
 
 
 - (void)renderVideo {
-	[(TouchView*)self.view  setRenderTouch:NO];
+	// [(TouchView*)self.view  setRenderTouch:NO];
 	self.view.userInteractionEnabled = YES;
 	
 	self.renderLabel.text = @"Creating video";
-	self.renderTextView.text = @"pinch and drag screen to create camera movements.\n\ndouble tap screen to zoom.";
+	
 	[self setRenderProgress:0.0f];
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -933,8 +933,6 @@
 
 - (void)exportRingtone {
 	self.renderLabel.text = @"Exporting ringtone";
-	self.renderTextView.text = @"(it can take some time, depends on your song length...)";
-	//renderingView.hidden = NO;
 	[self setRenderProgress:0.0f];
 	
 

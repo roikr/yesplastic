@@ -17,6 +17,7 @@ class testApp;
 @class ExportManager;
 @class OpenGLTOMovie;
 @class TutorialView;
+@class RenderView;
 
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
@@ -37,10 +38,10 @@ class testApp;
 	UIView *bandLoopsView;
 	UIView *loopsImagesView;
 	
-	UIView *renderView;
+	RenderView *renderView;
 	UILabel *renderLabel;
-	UITextView *renderTextView;
 	UIButton *renderCancelButton;
+	UIImageView *renderCameraIcon;
 	
 	TutorialView *tutorialView;
 	
@@ -86,10 +87,10 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 
-@property (nonatomic, retain) IBOutlet UIView *renderView;
+@property (nonatomic, retain) IBOutlet RenderView *renderView;
 @property (nonatomic, retain) IBOutlet UILabel *renderLabel;
-@property (nonatomic, retain) IBOutlet UITextView *renderTextView;
 @property (nonatomic, retain) IBOutlet UIButton *renderCancelButton;
+@property (nonatomic, retain) IBOutlet UIImageView *renderCameraIcon;
 
 @property (nonatomic, retain) IBOutlet TutorialView *tutorialView;
 

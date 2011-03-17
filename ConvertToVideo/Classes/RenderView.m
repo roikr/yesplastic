@@ -12,6 +12,8 @@
 
 @implementation RenderView
 
+@synthesize slideView;
+
 +(RenderView *) renderViewWithFrame:(CGRect)frame {
 	return [[[RenderView alloc] initWithFrame:frame] autorelease];
 }
@@ -39,7 +41,9 @@
     return self;
 }
 
-
+-(void) closeSlide:(id)sender {
+	slideView.hidden = YES;
+}
 
 
 /*

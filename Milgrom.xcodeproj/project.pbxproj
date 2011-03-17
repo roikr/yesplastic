@@ -133,17 +133,15 @@
 		E42D14FC124F896C007BEEB0 /* SETCELL_SELECT_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */; };
 		E42D14FD124F896C007BEEB0 /* SETCELL_SELECT_2.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */; };
 		E42D14FE124F896C007BEEB0 /* SETCELL_SELECT_3.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */; };
+		E433F7EF1332348600B1D3E5 /* CAMERA_REC.png in Resources */ = {isa = PBXBuildFile; fileRef = E433F7EE1332348600B1D3E5 /* CAMERA_REC.png */; };
+		E433F7F2133234F400B1D3E5 /* APP_HELP_SLIDE.png in Resources */ = {isa = PBXBuildFile; fileRef = E433F7F0133234F400B1D3E5 /* APP_HELP_SLIDE.png */; };
+		E433F7F3133234F400B1D3E5 /* HELP_BACK_BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = E433F7F1133234F400B1D3E5 /* HELP_BACK_BUTTON.png */; };
 		E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = E437216C1302AF030090CAEC /* MilgromUtils.mm */; };
 		E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */; };
 		E439299512932D7500F855A8 /* ofxPincher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E439299312932D7500F855A8 /* ofxPincher.cpp */; };
-		E43BE95A125C968F009C8845 /* APP HELP SLIDE.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE954125C968F009C8845 /* APP HELP SLIDE.png */; };
-		E43BE95B125C968F009C8845 /* HELP_BACK_B.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE955125C968F009C8845 /* HELP_BACK_B.png */; };
-		E43BE95C125C968F009C8845 /* HELP_BACK_B_PUSH.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE956125C968F009C8845 /* HELP_BACK_B_PUSH.png */; };
 		E43BE95D125C968F009C8845 /* MAIN_HELP.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE957125C968F009C8845 /* MAIN_HELP.png */; };
 		E43BE95E125C968F009C8845 /* MORE_HELP.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE958125C968F009C8845 /* MORE_HELP.png */; };
 		E43BE95F125C968F009C8845 /* SOLO_HELP.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BE959125C968F009C8845 /* SOLO_HELP.png */; };
-		E43E999813252C3600216C56 /* ALL_VIDEO STILL2.png in Resources */ = {isa = PBXBuildFile; fileRef = E43E999613252C3600216C56 /* ALL_VIDEO STILL2.png */; };
-		E43E999913252C3600216C56 /* Solos_blank.png in Resources */ = {isa = PBXBuildFile; fileRef = E43E999713252C3600216C56 /* Solos_blank.png */; };
 		E43E9A4313253FAA00216C56 /* IPHONE_ROTATE.png in Resources */ = {isa = PBXBuildFile; fileRef = E43E9A4113253FAA00216C56 /* IPHONE_ROTATE.png */; };
 		E43E9A4413253FAA00216C56 /* RED_ARROW_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E43E9A4213253FAA00216C56 /* RED_ARROW_1.png */; };
 		E43E9A7513254B1700216C56 /* MESSAGE_OK_BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = E43E9A7413254B1700216C56 /* MESSAGE_OK_BUTTON.png */; };
@@ -202,7 +200,6 @@
 		E490A1451206AB58008512EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E490A1441206AB58008512EA /* CoreData.framework */; };
 		E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = E49159BC13098B990019ED6B /* LFP_ALPHA.png */; };
 		E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */; };
-		E493CEA8131105F6009605A4 /* s5 image.png in Resources */ = {isa = PBXBuildFile; fileRef = E493CEA7131105F6009605A4 /* s5 image.png */; };
 		E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */; };
 		E4964072125BA7BE0058DB34 /* YouTubeUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */; };
 		E4964076125BA7FF0058DB34 /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4964075125BA7FF0058DB34 /* ActionCell.xib */; };
@@ -834,20 +831,18 @@
 		E42D14F9124F896C007BEEB0 /* SETCELL_SELECT_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_1.png; sourceTree = "<group>"; };
 		E42D14FA124F896C007BEEB0 /* SETCELL_SELECT_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_2.png; sourceTree = "<group>"; };
 		E42D14FB124F896C007BEEB0 /* SETCELL_SELECT_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETCELL_SELECT_3.png; sourceTree = "<group>"; };
+		E433F7EE1332348600B1D3E5 /* CAMERA_REC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CAMERA_REC.png; sourceTree = "<group>"; };
+		E433F7F0133234F400B1D3E5 /* APP_HELP_SLIDE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APP_HELP_SLIDE.png; sourceTree = "<group>"; };
+		E433F7F1133234F400B1D3E5 /* HELP_BACK_BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_BUTTON.png; sourceTree = "<group>"; };
 		E437216B1302AF030090CAEC /* MilgromUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MilgromUtils.h; path = Classes/MilgromUtils.h; sourceTree = "<group>"; };
 		E437216C1302AF030090CAEC /* MilgromUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MilgromUtils.mm; path = Classes/MilgromUtils.mm; sourceTree = "<group>"; };
 		E4379BAF12C0CAAB006C26AC /* RKUBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKUBackgroundTask.h; sourceTree = "<group>"; };
 		E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKUBackgroundTask.m; sourceTree = "<group>"; };
 		E439299312932D7500F855A8 /* ofxPincher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPincher.cpp; sourceTree = "<group>"; };
 		E439299412932D7500F855A8 /* ofxPincher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPincher.h; sourceTree = "<group>"; };
-		E43BE954125C968F009C8845 /* APP HELP SLIDE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "APP HELP SLIDE.png"; sourceTree = "<group>"; };
-		E43BE955125C968F009C8845 /* HELP_BACK_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_B.png; sourceTree = "<group>"; };
-		E43BE956125C968F009C8845 /* HELP_BACK_B_PUSH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_B_PUSH.png; sourceTree = "<group>"; };
 		E43BE957125C968F009C8845 /* MAIN_HELP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAIN_HELP.png; sourceTree = "<group>"; };
 		E43BE958125C968F009C8845 /* MORE_HELP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MORE_HELP.png; sourceTree = "<group>"; };
 		E43BE959125C968F009C8845 /* SOLO_HELP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SOLO_HELP.png; sourceTree = "<group>"; };
-		E43E999613252C3600216C56 /* ALL_VIDEO STILL2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ALL_VIDEO STILL2.png"; sourceTree = "<group>"; };
-		E43E999713252C3600216C56 /* Solos_blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Solos_blank.png; sourceTree = "<group>"; };
 		E43E9A4113253FAA00216C56 /* IPHONE_ROTATE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPHONE_ROTATE.png; sourceTree = "<group>"; };
 		E43E9A4213253FAA00216C56 /* RED_ARROW_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RED_ARROW_1.png; sourceTree = "<group>"; };
 		E43E9A7413254B1700216C56 /* MESSAGE_OK_BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MESSAGE_OK_BUTTON.png; sourceTree = "<group>"; };
@@ -950,7 +945,6 @@
 		E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Milgrom.xcdatamodel; sourceTree = "<group>"; };
 		E49159BC13098B990019ED6B /* LFP_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LFP_ALPHA.png; path = Resource/LFP_ALPHA.png; sourceTree = "<group>"; };
 		E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MILGROM_ALPHA.png; path = Resource/MILGROM_ALPHA.png; sourceTree = "<group>"; };
-		E493CEA7131105F6009605A4 /* s5 image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "s5 image.png"; sourceTree = "<group>"; };
 		E493D3D7122DB16700163EF9 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
 		E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YouTubeUploadViewController.xib; path = YouTubeUpload/YouTubeUploadViewController.xib; sourceTree = "<group>"; };
 		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
@@ -1746,6 +1740,15 @@
 			path = "VOC  push buttons";
 			sourceTree = "<group>";
 		};
+		E433F7ED1332348500B1D3E5 /* RENDER */ = {
+			isa = PBXGroup;
+			children = (
+				E433F7EE1332348600B1D3E5 /* CAMERA_REC.png */,
+			);
+			name = RENDER;
+			path = Resource/RENDER;
+			sourceTree = "<group>";
+		};
 		E4379BAE12C0CAAB006C26AC /* RKUtilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1776,6 +1779,8 @@
 		E43BE953125C968F009C8845 /* HELP */ = {
 			isa = PBXGroup;
 			children = (
+				E433F7F0133234F400B1D3E5 /* APP_HELP_SLIDE.png */,
+				E433F7F1133234F400B1D3E5 /* HELP_BACK_BUTTON.png */,
 				E43E9AD41325642000216C56 /* RED_ARROW_6.png */,
 				E43E9A4213253FAA00216C56 /* RED_ARROW_1.png */,
 				E43E9A921325519C00216C56 /* RED_ARROW_2.png */,
@@ -1784,15 +1789,9 @@
 				E43E9AAC13255C6D00216C56 /* RED_ARROW_5.png */,
 				E43E9A7413254B1700216C56 /* MESSAGE_OK_BUTTON.png */,
 				E43E9A4113253FAA00216C56 /* IPHONE_ROTATE.png */,
-				E43E999613252C3600216C56 /* ALL_VIDEO STILL2.png */,
-				E43E999713252C3600216C56 /* Solos_blank.png */,
-				E493CEA7131105F6009605A4 /* s5 image.png */,
 				E4B68B1E130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png */,
 				E4F0558412FFEE0E004430A8 /* MESSAGE_FRAME.png */,
 				E4F0558512FFEE0E004430A8 /* MESSAGE_X_BUTTON.png */,
-				E43BE954125C968F009C8845 /* APP HELP SLIDE.png */,
-				E43BE955125C968F009C8845 /* HELP_BACK_B.png */,
-				E43BE956125C968F009C8845 /* HELP_BACK_B_PUSH.png */,
 				E43BE957125C968F009C8845 /* MAIN_HELP.png */,
 				E43BE958125C968F009C8845 /* MORE_HELP.png */,
 				E43BE959125C968F009C8845 /* SOLO_HELP.png */,
@@ -2301,6 +2300,7 @@
 		E4DE4F5F11FFFC9A00BF31AF /* png */ = {
 			isa = PBXGroup;
 			children = (
+				E433F7ED1332348500B1D3E5 /* RENDER */,
 				E49159BC13098B990019ED6B /* LFP_ALPHA.png */,
 				E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */,
 				E4A9022413094B5100F844CA /* Icon.png */,
@@ -2678,9 +2678,6 @@
 				E42D14FE124F896C007BEEB0 /* SETCELL_SELECT_3.png in Resources */,
 				E496406F125BA7AE0058DB34 /* YouTubeUploadViewController.xib in Resources */,
 				E4964076125BA7FF0058DB34 /* ActionCell.xib in Resources */,
-				E43BE95A125C968F009C8845 /* APP HELP SLIDE.png in Resources */,
-				E43BE95B125C968F009C8845 /* HELP_BACK_B.png in Resources */,
-				E43BE95C125C968F009C8845 /* HELP_BACK_B_PUSH.png in Resources */,
 				E43BE95D125C968F009C8845 /* MAIN_HELP.png in Resources */,
 				E43BE95E125C968F009C8845 /* MORE_HELP.png in Resources */,
 				E43BE95F125C968F009C8845 /* SOLO_HELP.png in Resources */,
@@ -2714,9 +2711,6 @@
 				E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */,
 				E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */,
 				E4B68B1F130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png in Resources */,
-				E493CEA8131105F6009605A4 /* s5 image.png in Resources */,
-				E43E999813252C3600216C56 /* ALL_VIDEO STILL2.png in Resources */,
-				E43E999913252C3600216C56 /* Solos_blank.png in Resources */,
 				E43E9A4313253FAA00216C56 /* IPHONE_ROTATE.png in Resources */,
 				E43E9A4413253FAA00216C56 /* RED_ARROW_1.png in Resources */,
 				E43E9A7513254B1700216C56 /* MESSAGE_OK_BUTTON.png in Resources */,
@@ -2725,6 +2719,9 @@
 				E43E9A971325519C00216C56 /* RED_ARROW_4.png in Resources */,
 				E43E9AAD13255C6D00216C56 /* RED_ARROW_5.png in Resources */,
 				E43E9AD51325642000216C56 /* RED_ARROW_6.png in Resources */,
+				E433F7EF1332348600B1D3E5 /* CAMERA_REC.png in Resources */,
+				E433F7F2133234F400B1D3E5 /* APP_HELP_SLIDE.png in Resources */,
+				E433F7F3133234F400B1D3E5 /* HELP_BACK_BUTTON.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

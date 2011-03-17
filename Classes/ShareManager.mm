@@ -45,7 +45,7 @@ void ShareAlert(NSString *title,NSString *message) {
 }
 
 
-static NSString* kMilgromURL = @"www.milgrom.com";
+static NSString* kMilgromURL = @"www.mmmilgrom.com";
 
 @interface ShareManager ()
 - (void)action;
@@ -354,7 +354,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			if ([self gotInternet]) {
 				action = buttonIndex ? ACTION_UPLOAD_TO_FACEBOOK : ACTION_UPLOAD_TO_YOUTUBE;
 			} else {
-				ShareAlert(@"Upload Movie", @"We’re trying hard, but there’s no Internet connection");
+				ShareAlert(@"Upload Movie", @"We're trying hard, but there's no Internet connection");
 				action = ACTION_DONE;
 			}
 
@@ -480,7 +480,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
 			controller.videoTitle = [[self getVideoName] uppercaseString];
 			//controller.additionalText = kMilgromURL;
-			controller.descriptionView.text = [NSString stringWithFormat:@"this video created with Milgrom’s iphone app\nvisit milgrom at http://www.mmmilgrom.com"];
+			controller.descriptionView.text = [NSString stringWithFormat:@"this video created with Milgrom's iphone app\nvisit milgrom at http://www.mmmilgrom.com"];
 			controller.videoPath = [[self getVideoPath] stringByAppendingPathExtension:@"mov"];
 			
 			[controller release];
@@ -510,7 +510,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		{
 			
 			NSString *subject = @"check out my milgrom song";
-			NSString *message = [NSString stringWithFormat:@"Isn’t  it a work of art?<br/><br/><a href='%@'>visit milgrom</a>",kMilgromURL];
+			NSString *message = [NSString stringWithFormat:@"Isn't  it a work of art?<br/><br/><a href='%@'>visit milgrom</a>",kMilgromURL];
 			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"mov"]];
 			[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"video/mov" 
 							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
@@ -519,7 +519,7 @@ static NSString* kMilgromURL = @"www.milgrom.com";
 		case ACTION_SEND_RINGTONE: 
 		{
 			NSString *subject = @"Sweeeet! My New Milgrom Ringtone!";
-			NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>I’m sending it to you as I believe you’ll get a kick out of it (or else we cannot be friends)<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under ‘Custom’ you should see this file name.<br/>You can always switch it back if you feel like you’re not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom’s</a> website. I leave it to you to handle the truth.",kMilgromURL];
+			NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>I'm sending it to you as I believe you'll get a kick out of it (or else we cannot be friends)<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under ‘Custom' you should see this file name.<br/>You can always switch it back if you feel like you're not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom's</a> website. I leave it to you to handle the truth.",kMilgromURL];
 			
 			
 			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];

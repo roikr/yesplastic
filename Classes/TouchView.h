@@ -15,12 +15,9 @@
 @interface TouchView : UIView {
 	UITouch					*activeTouches[OF_MAX_TOUCHES];
 	MainViewController *viewController;
-	
-	BOOL renderTouch;
-
 }
 
 @property (nonatomic, retain) MainViewController *viewController;
-@property BOOL renderTouch;
+
 
 @end

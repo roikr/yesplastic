@@ -12,12 +12,11 @@
 #import "Constants.h"
 #import "MainViewController.h"
 #import "MilgromMacros.h"
+#import "TutorialView.h"
 
 @implementation TouchView
 
 @synthesize viewController;
-@synthesize renderTouch;
-
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -56,10 +55,10 @@
 		return;
 	}
 	
-	if (!renderTouch && appDelegate.OFSAptr->getSongState()==SONG_RENDER_VIDEO) {
-		renderTouch = YES;
-		[appDelegate.mainViewController updateViews];
-	}
+//	if (!renderTouch && appDelegate.OFSAptr->getSongState()==SONG_RENDER_VIDEO) {
+//		renderTouch = YES;
+//		[appDelegate.mainViewController updateViews];
+//	}
 	
 	
 	
@@ -78,6 +77,10 @@
 		CGPoint touchPoint = [touch locationInView:self];
 		
 		if([touch tapCount] == 2) {
+//			if (touchPoint.x>460 && touchPoint.y>300) {
+//				[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).mainViewController.tutorialView start];
+//				return;
+//			}
 			appDelegate.OFSAptr->touchDoubleTap(touchPoint.x, touchPoint.y, touchIndex);// send doubletap
 		}
 		

@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -38,7 +37,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="867430104">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -50,7 +49,7 @@
 							<object class="IBUIImageView" id="167252910">
 								<reference key="NSNextResponder" ref="256734210"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{480, 1180}</string>
+								<string key="NSFrameSize">{480, 1152}</string>
 								<reference key="NSSuperview" ref="256734210"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="300405430">
 									<int key="NSColorSpace">3</int>
@@ -62,13 +61,13 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">APP HELP SLIDE.png</string>
+									<string key="NSResourceName">APP_HELP_SLIDE.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="1020301021">
 								<reference key="NSNextResponder" ref="256734210"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 1092}, {248, 88}}</string>
+								<string key="NSFrame">{{20, 1076}, {110, 51}}</string>
 								<reference key="NSSuperview" ref="256734210"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -88,13 +87,9 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="NSCustomResource" key="IBUIHighlightedImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">HELP_BACK_B_PUSH.png</string>
-								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">HELP_BACK_B.png</string>
+									<string key="NSResourceName">HELP_BACK_BUTTON.png</string>
 								</object>
 							</object>
 						</object>
@@ -109,7 +104,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{480, 320}</string>
-				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -214,14 +208,15 @@
 					<string>6.IBEditorWindowLastContentRect</string>
 					<string>7.IBEditorWindowLastContentRect</string>
 					<string>7.IBPluginDependency</string>
+					<string>7.IBViewBoundsToFrameTransform</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>HelpViewController</string>
 					<string>UIResponder</string>
-					<string>{{378, 299}, {480, 320}}</string>
+					<string>{{750, 188}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{156, 441}, {480, 320}}</string>
+					<string>{{602, 686}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw58AAA</bytes>
@@ -229,6 +224,9 @@
 					<string>{{0, 4}, {495, 1002}}</string>
 					<string>{{21, 895}, {248, 88}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAxI6gAA</bytes>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -247,7 +245,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">15</int>
+			<int key="maxID">16</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -520,15 +518,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>APP HELP SLIDE.png</string>
-				<string>HELP_BACK_B.png</string>
-				<string>HELP_BACK_B_PUSH.png</string>
+				<string>APP_HELP_SLIDE.png</string>
+				<string>HELP_BACK_BUTTON.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{480, 1180}</string>
-				<string>{248, 88}</string>
-				<string>{248, 88}</string>
+				<string>{480, 1152}</string>
+				<string>{110, 51}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">132</string>
