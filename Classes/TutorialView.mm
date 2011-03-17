@@ -36,6 +36,7 @@
        
 		tutorial.loadFile("tutorial.xml");
 		slides.loadFile("slides.xml");
+		bSlidesStarted = NO;
 		bTutorialStarted = NO;
 		
 		//if (tutorial.getTimesCompleted()>3) {
@@ -46,7 +47,8 @@
 }
 
 - (void)start {
-	tutorial.start();	
+	tutorial.start();
+	//bTutorialStarted = YES;
 }
 
 - (void)update {
@@ -78,6 +80,12 @@
 		
 		tutorial.update();
 	} else if (bTutorialStarted && slides.getState() != SLIDE_DONE) {
+		
+		if (!bSlidesStarted) {
+			slides.reset();
+			bSlidesStarted = YES;
+		} 
+		
 		if (slides.getState() == SLIDE_IDLE) {
 			if ( OFSAptr->getSongState() == SONG_IDLE  && !OFSAptr->isInTransition()) {
 				if (OFSAptr->getState() == BAND_STATE) {
@@ -282,26 +290,23 @@
 }
 
 
-- (BOOL)shouldAutorotate {
-	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	testApp * OFSAptr = appDelegate.OFSAptr;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	
 	if (!self.isTutorialActive) {
-		return true;
+		return YES;
 	}
 	
-	if (self.currentTutorialSlide == MILGROM_TUTORIAL_ROTATE && OFSAptr->getState()==BAND_STATE) {
-		return true;
+	if (self.currentTutorialSlide == MILGROM_TUTORIAL_ROTATE && (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation==UIInterfaceOrientationPortraitUpsideDown)) {
+		return YES;
 	}
 		
 	if (self.currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY && tutorial.getState()==TUTORIAL_TIMER_STARTED) {
 			
-		return true;
+		return YES;
 		
 	}
    
-	return false;
+	return NO;
 	
 	
 }

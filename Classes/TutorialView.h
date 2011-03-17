@@ -37,6 +37,7 @@ enum  {
 	ofxInteractiveTutorial tutorial;
 	ofxInteractiveSlides slides;
 	BOOL bTutorialStarted;
+	BOOL bSlidesStarted;
 }
 
 @property (nonatomic, retain) UIView *currentView;
@@ -51,7 +52,7 @@ enum  {
 - (void)start;
 
 - (void)doneSlide:(int)slideNum;
-- (BOOL)shouldAutorotate;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 @end
 
 

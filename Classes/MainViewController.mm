@@ -190,7 +190,7 @@
 	//!bMenuMode
 	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED &&
 	 OFSAptr->getSongState()!=SONG_RENDER_VIDEO && OFSAptr->getSongState()!=SONG_RENDER_VIDEO_FINISHED &&
-	[tutorialView shouldAutorotate];
+	[tutorialView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -509,7 +509,7 @@
 	if (OFSAptr->getSongVersion()) {
 		OFSAptr->setSongState(SONG_PLAY);
 	} else {
-		MilgromAlert(@"Can’t  play", @"go record something first");
+		MilgromAlert(@"Can't  play", @"go record something first");
 	}
 
 	
@@ -749,7 +749,7 @@
 {
 	NSTimeInterval diff = [NSDate timeIntervalSinceReferenceDate]-shakeStartTime;
 	MilgromLog(@"shake ended: %2.2f",diff);
-	if ( diff > 0.1 && diff < 1.0 && (OFSAptr->getSongState()==SONG_IDLE || OFSAptr->getSongState()==SONG_RECORD || OFSAptr->getSongState()==SONG_TRIGGER_RECORD)) {
+	if ( !tutorialView.isTutorialActive && diff > 0.1 && diff < 1.0 && (OFSAptr->getSongState()==SONG_IDLE || OFSAptr->getSongState()==SONG_RECORD || OFSAptr->getSongState()==SONG_TRIGGER_RECORD)) {
 		OFSAptr->playRandomLoop();
 	}
 }

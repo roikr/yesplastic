@@ -357,8 +357,6 @@
 	UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	;
-	
 	switch (deviceOrientation) {
 		case UIDeviceOrientationPortrait:
 		case UIDeviceOrientationPortraitUpsideDown:
