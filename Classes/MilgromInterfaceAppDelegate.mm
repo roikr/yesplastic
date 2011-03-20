@@ -69,6 +69,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 @synthesize currentSong;
+@synthesize loadTask;
 @synthesize lastSavedVersion;
 @synthesize shareManager;
 
@@ -301,12 +302,14 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[eAGLView stopAnimation];
 	
-	[bandMenu.songsTable deselectCurrentSong];
-	self.currentSong = NULL;
-	OFSAptr->setSongState(SONG_IDLE);
-	OFSAptr->stopLoops();
-	OFSAptr->release();
-		
+	if (!loadTask) {
+		[bandMenu.songsTable deselectCurrentSong];
+		self.currentSong = NULL;
+		OFSAptr->setSongState(SONG_IDLE);
+		OFSAptr->stopLoops();
+		OFSAptr->release();
+	}
+	
 	[shareManager applicationDidEnterBackground];
 	
 	
@@ -815,6 +818,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	string nextSong = [song.songName UTF8String];
 	
+	self.loadTask = [RKUBackgroundTask backgroundTask];
 		
 	if ([song.bDemo boolValue]) {
 		if (  !OFSAptr->isInTransition() && OFSAptr->isSongAvailiable(nextSong)) {
@@ -851,7 +855,8 @@ NSString * const kCacheFolder=@"URLCache";
 	} else {
 		[self pushMain]; // TODO: prevent double push
 		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
-		
+		[loadTask finish];
+		self.loadTask = nil;
 	}
 	
 }
@@ -888,7 +893,9 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	//OFSAptr->bMenu=false;
-		
+	
+	self.loadTask = [RKUBackgroundTask backgroundTask];
+	
 	OFSAptr->changeSoundSet(nextSong);
 	lastSavedVersion = 0;
 
@@ -897,6 +904,9 @@ NSString * const kCacheFolder=@"URLCache";
 			[eAGLView setSecondaryContextCurrent];
 			OFSAptr->transitionLoop(); 
 		}
+		
+		[loadTask finish];
+		self.loadTask = nil;
 	
 	});
 	

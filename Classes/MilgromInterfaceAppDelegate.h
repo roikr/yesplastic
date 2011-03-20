@@ -22,6 +22,7 @@ extern NSString * const kMilgromFileServerURL;
 @class BandMenu;
 @class ShareManager;
 @class EAGLView;
+@class RKUBackgroundTask;
 class testApp;
 
 
@@ -52,6 +53,8 @@ class testApp;
 	
 //	NSNumber *videoBitrate;
 	
+	RKUBackgroundTask *loadTask;
+	
 }
 
 
@@ -70,9 +73,12 @@ class testApp;
 @property testApp *OFSAptr;
 @property (nonatomic, retain) NSMutableArray *queuedDemos;
 @property (nonatomic, retain) Song *currentSong;
+@property (nonatomic, retain) RKUBackgroundTask *loadTask;
 
 @property (nonatomic, retain) ShareManager *shareManager;
 @property NSInteger lastSavedVersion;
+
+
 
 //@property (nonatomic, retain) NSNumber *videoBitrate;
 
