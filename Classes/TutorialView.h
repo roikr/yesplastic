@@ -36,8 +36,8 @@ enum  {
 	UIButton *currentButton;
 	ofxInteractiveTutorial tutorial;
 	ofxInteractiveSlides slides;
-	BOOL bTutorialStarted;
-	BOOL bSlidesStarted;
+	BOOL bStartSlides;
+	BOOL bFirstSlide;
 }
 
 @property (nonatomic, retain) UIView *currentView;
@@ -45,11 +45,13 @@ enum  {
 @property (readonly) BOOL isTutorialActive;
 @property (readonly) NSUInteger currentTutorialSlide;
 
+
 - (void)update;
 - (void)updateViews;
 - (void)removeViews;
 
 - (void)start;
+- (void)test;
 
 - (void)doneSlide:(int)slideNum;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;

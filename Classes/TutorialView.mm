@@ -36,19 +36,35 @@
        
 		tutorial.loadFile("tutorial.xml");
 		slides.loadFile("slides.xml");
-		bSlidesStarted = NO;
-		bTutorialStarted = NO;
 		
-		//if (tutorial.getTimesCompleted()>3) {
-		//	tutorial.setState(TUTORIAL_DONE);
-		//}
-    }
+		bStartSlides = NO;
+		
+}
     return self;
 }
 
+
+
 - (void)start {
+	if (!tutorial.getTimesCompleted()) {
+		tutorial.start();
+	}
+	
+	if (slides.getState()!=SLIDE_DONE) {
+		bStartSlides = YES;
+		slides.reset(); // move to idle if we exit app with slide on
+		bFirstSlide = YES;
+	}
+}
+	
+	
+
+- (void)test {
 	tutorial.start();
-	//bTutorialStarted = YES;
+	
+	bStartSlides = YES;
+	slides.reset(); // move to idle if we exit app with slide on
+	bFirstSlide = YES;
 }
 
 - (void)update {
@@ -59,8 +75,7 @@
 	testApp * OFSAptr = appDelegate.OFSAptr;
 	
 	if (tutorial.getState() != TUTORIAL_IDLE ) {
-		bTutorialStarted = YES;
-		
+				
 		if (tutorial.getState() == TUTORIAL_READY ) {
 			switch (tutorial.getCurrentSlideNumber()) {
 	
@@ -79,11 +94,11 @@
 		}
 		
 		tutorial.update();
-	} else if (bTutorialStarted && slides.getState() != SLIDE_DONE) {
+	} else if (slides.getState() != SLIDE_DONE && bStartSlides) {
 		
-		if (!bSlidesStarted) {
+		if (bFirstSlide) {
 			slides.reset();
-			bSlidesStarted = YES;
+			bFirstSlide = NO;
 		} 
 		
 		if (slides.getState() == SLIDE_IDLE) {

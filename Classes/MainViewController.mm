@@ -319,7 +319,7 @@
 				
 				switch (OFSAptr->getState()) {
 					case SOLO_STATE: {
-						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive;//  && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 						
@@ -713,7 +713,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	MilgromLog(@"MainViewController::viewDidAppear");
-    [self becomeFirstResponder];
+    [self becomeFirstResponder]; // ROIKR: why is that ?
 	
 }
 
@@ -725,6 +725,9 @@
 	appDelegate.eAGLView.hidden = NO;
 	
 	self.view.userInteractionEnabled = YES; // was disabled after video export
+	
+	[tutorialView start];
+	
 	[self updateViews];
 }
 
@@ -1025,6 +1028,7 @@
 		self.exportManager = nil;
 	}
 	
+	[tutorialView removeViews];
 }
 				   
 
