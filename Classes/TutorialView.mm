@@ -77,19 +77,19 @@
 	if (tutorial.getState() != TUTORIAL_IDLE ) {
 				
 		if (tutorial.getState() == TUTORIAL_READY ) {
-			switch (tutorial.getCurrentSlideNumber()) {
+			if (tutorial.getCurrentSlideNumber() == MILGROM_TUTORIAL_ROTATE) {
 	
-				case MILGROM_TUTORIAL_ROTATE:
-					
-					//self.hidden = self.OFSAptr->getState() != BAND_STATE;
-					if (OFSAptr->getState() == SOLO_STATE) {
+				switch (mainViewController.interfaceOrientation) {
+					case UIInterfaceOrientationPortrait:
+					case UIInterfaceOrientationPortraitUpsideDown:
 						tutorial.skip();
-					}
+						break;
+
 					
-					break;
-				default:
+					default:
+						break;
+				}
 					
-					break;
 			}
 		}
 		
@@ -103,16 +103,24 @@
 		
 		if (slides.getState() == SLIDE_IDLE) {
 			if ( OFSAptr->getSongState() == SONG_IDLE  && !OFSAptr->isInTransition()) {
-				if (OFSAptr->getState() == BAND_STATE) {
-					if (!slides.getIsDone(MILGROM_SLIDE_SHARE) && mainViewController.shareButton.hidden==NO) {
-						slides.start(MILGROM_SLIDE_SHARE);
-					} else if (!slides.getIsDone(MILGROM_SLIDE_MENU)) {
-						slides.start(MILGROM_SLIDE_MENU);
-					} 
-				} else if (OFSAptr->getState() == SOLO_STATE) {
-					if (!slides.getIsDone(MILGROM_SLIDE_SOLO_MENU)) {
-						slides.start(MILGROM_SLIDE_SOLO_MENU);
-					}
+				switch (mainViewController.interfaceOrientation) {
+					case UIInterfaceOrientationPortrait:
+					case UIInterfaceOrientationPortraitUpsideDown:
+						if (!slides.getIsDone(MILGROM_SLIDE_SHARE) && mainViewController.shareButton.hidden==NO) {
+							slides.start(MILGROM_SLIDE_SHARE);
+						} else if (!slides.getIsDone(MILGROM_SLIDE_MENU)) {
+							slides.start(MILGROM_SLIDE_MENU);
+						}
+						break;
+					case UIInterfaceOrientationLandscapeLeft:
+					case UIInterfaceOrientationLandscapeRight:
+						if (!slides.getIsDone(MILGROM_SLIDE_SOLO_MENU)) {
+							slides.start(MILGROM_SLIDE_SOLO_MENU);
+						}
+						break;
+
+					default:
+						break;
 				}
 			}
 		}
@@ -227,6 +235,7 @@
 - (void)updateViews {
 		
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	MainViewController * mainViewController = appDelegate.mainViewController;
 	testApp * OFSAptr = appDelegate.OFSAptr;
 	
 	if (tutorial.getState()!= TUTORIAL_READY && slides.getState()!=SLIDE_READY || OFSAptr->getSongState() != SONG_IDLE  || OFSAptr->isInTransition() ) { 
@@ -273,11 +282,11 @@
 		switch (slides.getCurrentSlideNumber()) {
 			case MILGROM_SLIDE_MENU:
 			case MILGROM_SLIDE_SHARE:
-				currentView.hidden = currentButton.hidden = OFSAptr->getState() == SOLO_STATE;
+				currentView.hidden = currentButton.hidden = mainViewController.interfaceOrientation == UIInterfaceOrientationPortrait || mainViewController.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 				break;
 				
 			case MILGROM_SLIDE_SOLO_MENU:
-				currentView.hidden = currentButton.hidden = OFSAptr->getState() == BAND_STATE;
+				currentView.hidden = currentButton.hidden = mainViewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || mainViewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight;
 				break;
 			default:
 				

@@ -33,4 +33,5 @@
 - (void) loadData;
 - (void) scrollToSongs;
 - (BOOL) anySongs; // use to decide if all songs are demo, or there is any real user song
+- (void)hideCurrentSongProgress;
 @end

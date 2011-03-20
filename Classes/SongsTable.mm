@@ -181,11 +181,15 @@
 }
 */
 
+- (void)hideCurrentSongProgress {
+	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[self currentSongIndexPath]];
+	cell.progressHidden = YES;
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
 	MilgromLog(@"SongsTable::viewDidDisappear");
     [super viewDidDisappear:animated];
-	SongCell *cell = (SongCell*)[self.tableView cellForRowAtIndexPath:[self currentSongIndexPath]];
-	cell.progressHidden = YES;
+	[self hideCurrentSongProgress];
 }
 
 /*

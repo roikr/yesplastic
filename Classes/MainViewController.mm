@@ -259,13 +259,15 @@
 	
 	self.interactionView.userInteractionEnabled = !bShowHelp;
 	if (bShowHelp) {
-		switch (OFSAptr->getState()){
-			case SOLO_STATE:
+		switch (self.interfaceOrientation){
+			case UIInterfaceOrientationPortrait:
+			case UIInterfaceOrientationPortraitUpsideDown:
 				if (![self.view.subviews containsObject:soloHelp]) {
 					[self.view addSubview:soloHelp];
 				}
 				break;
-			case BAND_STATE:
+			case UIInterfaceOrientationLandscapeLeft:
+			case UIInterfaceOrientationLandscapeRight:
 				if (![self.view.subviews containsObject:bandHelp]) {
 					[self.view addSubview:bandHelp];
 					//[self.view bringSubviewToFront:bandHelp];
@@ -317,8 +319,9 @@
 				playButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
-				switch (OFSAptr->getState()) {
-					case SOLO_STATE: {
+				switch (self.interfaceOrientation) {
+					case UIInterfaceOrientationPortrait:
+					case UIInterfaceOrientationPortraitUpsideDown: {
 						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive;//  && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 						NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 						[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
@@ -361,7 +364,8 @@
 						
 						
 					} break;
-					case BAND_STATE: {
+					case UIInterfaceOrientationLandscapeLeft:
+					case UIInterfaceOrientationLandscapeRight: {
 						menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 						bandLoopsView.hidden = NO;
 						for (int i=0;i<[bandLoopsView.subviews count];i++) {
@@ -422,14 +426,18 @@
 		
 		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion;
 		
-		if (OFSAptr->getState() == BAND_STATE) {
-			BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
+		switch (self.interfaceOrientation) {
+			case UIInterfaceOrientationLandscapeLeft:
+			case UIInterfaceOrientationLandscapeRight: {
+				BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
 				OFSAptr->getSongVersion();  //  not a demo
-			BOOL isUploading = [appDelegate.shareManager isUploading];
-			
-			shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
-			shareButton.hidden = shareProgressView.hidden = !isUploading && !shareEnabled;
-	
+				BOOL isUploading = [appDelegate.shareManager isUploading];
+				
+				shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
+				shareButton.hidden = shareProgressView.hidden = !isUploading && !shareEnabled;
+			}	break;
+			default:
+				break;
 		}
 		
 		
@@ -476,24 +484,18 @@
 		OFSAptr->setSongState(SONG_IDLE);
 	}
 	
-	switch (OFSAptr->getState()) {
-		case SOLO_STATE: 
-			[tutorialView doneSlide:MILGROM_SLIDE_SOLO_MENU];
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushSetMenu]; 
-			break;
-			
-		case BAND_STATE: {
-			[tutorialView doneSlide:MILGROM_SLIDE_MENU];
-			OFSAptr->stopLoops();
-			[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
-			//[self.navigationController popViewControllerAnimated:YES];
-			//[self presentModalViewController:menuController animated:YES];
-			//menuController.view.hidden = NO;
-		} break;
-
-		default:
-			break;
+	if (sender == setMenuButton) {
+		[tutorialView doneSlide:MILGROM_SLIDE_SOLO_MENU];
+		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] pushSetMenu]; 
 	}
+	
+	if (sender == menuButton) {
+		[tutorialView doneSlide:MILGROM_SLIDE_MENU];
+		OFSAptr->stopLoops();
+		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] popViewController]; 
+		
+	}
+	
 	
 }
 

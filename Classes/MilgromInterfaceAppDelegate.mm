@@ -204,7 +204,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	// if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
 		
-	//[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"unzipped"];
+//	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"unzipped"];
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"unzipped"]) {
 		
@@ -249,6 +249,11 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	OFSAptr->setup();
 	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	
+	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
+		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+	}
+	
 	
 	/* turn off the NSURLCache shared cache */
 	
@@ -322,9 +327,15 @@ NSString * const kCacheFolder=@"URLCache";
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
+	MilgromLog(@"applicationWillEnterForeground deviceOrientation: %i",[[UIDevice currentDevice] orientation]);
+	MilgromLog(@"applicationWillEnterForeground viewController orientation: %i",viewController.interfaceOrientation);
+	MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
+	
 	[viewController popToRootViewControllerAnimated:NO];
 	[viewController dismissModalViewControllerAnimated:NO];
+	viewController.view.transform = CGAffineTransformIdentity;
 	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
+//	mainViewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
 	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	
 		
@@ -602,21 +613,9 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)pushMain {
-	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
-		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-		//self.menuController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		
-		
-		//self.menuController = [[MenuViewController alloc] init];
-		
-		//menuController.mainController = self; // TODO: move testApp to app delegate
-	}
 	
 	[viewController pushViewController:self.mainViewController animated:YES];
 	
-	//[self dismissModalViewControllerAnimated:YES];
-	//MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	//[appDelegate.viewController dismissMenu:self];
 	
 	
 }
@@ -804,9 +803,15 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	bandMenu.view.userInteractionEnabled = NO;
 	
-	if (currentSong && song ==  currentSong) {	
+	if (currentSong && song ==  currentSong) {
 		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
-		[self pushMain];
+
+		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+			[self pushMain];
+		} else {
+			bandMenu.view.userInteractionEnabled = YES;
+		}
+
 		return;
 	}
 	
@@ -853,10 +858,19 @@ NSString * const kCacheFolder=@"URLCache";
 		NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 		[self performSelector:@selector(loadSongLoop) withObject:nil afterDelay:0.01 inModes:modes];
 	} else {
-		[self pushMain]; // TODO: prevent double push
+		
 		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
 		[loadTask finish];
 		self.loadTask = nil;
+		
+		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+			[self pushMain]; // TODO: prevent double push
+		} else {
+			bandMenu.view.userInteractionEnabled = YES;
+			[bandMenu.songsTable hideCurrentSongProgress];
+		}
+
+		
 	}
 	
 }
