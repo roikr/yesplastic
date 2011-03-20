@@ -27,6 +27,7 @@
 @synthesize scrollView;
 @synthesize activeView;
 @synthesize additionalText;
+@synthesize processView;
 
 
 
@@ -124,6 +125,28 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	
+		
+	return NO;
+}
+
+- (void) touchDown:(id)sender {
+	NSLog(@"YouTubeUploadViewController::touchDown");
+	for (UIView *view in [self.scrollView subviews]) {  
+        if ([view isFirstResponder]) {  
+            [view resignFirstResponder];
+			break;
+        }
+    }   
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+	activeView = textField;
+	
+	return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+	
 	if (textField==username) {
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		
@@ -151,27 +174,9 @@
 	}
 	
 	
-	return NO;
-}
-
-- (void) touchDown:(id)sender {
-	NSLog(@"touchDown");
-	for (UIView *view in [self.scrollView subviews]) {  
-        if ([view isFirstResponder]) {  
-            [view resignFirstResponder];
-			break;
-        }
-    }   
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-	activeView = textField;
-	
-	return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
 	activeView = nil;
+	
+	
 	
 	return YES;
 	
@@ -286,13 +291,14 @@
 
 - (void) youTubeUploaderStateChanged:(YouTubeUploader *)theUploader {
 	
-	NSLog(@"new state: %i, app state: %i",theUploader.state,[UIApplication sharedApplication].applicationState );
+	NSLog(@"YouTubeUploadViewController new state: %i, app state: %i",theUploader.state,[UIApplication sharedApplication].applicationState );
 	
 	
 	if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
 		return;
 	}
 				
+	processView.hidden = YES;
 	
 	switch (theUploader.state) {
 		case YOUTUBE_UPLOADER_STATE_INCORRECT_CREDENTIALS: {
@@ -304,10 +310,17 @@
 			[alert show];
 			[alert release];
 		} break;
+		
+		case YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED:
+			processView.hidden = NO;
+			break;
+
 			
-		case YOUTUBE_UPLOADER_STATE_UPLOADING: 
+		case YOUTUBE_UPLOADER_STATE_UPLOADING:
+			processView.hidden = NO;
 			[self.navigationController popViewControllerAnimated:YES];
 			break;
+			
 		default:
 			break;
 	}
@@ -315,6 +328,14 @@
 	
 	
 	
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	NSLog(@"YouTubeUploadViewController::viewWillAppear");
+		
+	processView.hidden = uploader.state != YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED && uploader.state != YOUTUBE_UPLOADER_STATE_UPLOADING;
 }
 
 

@@ -29,42 +29,42 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = E42255A812F95BCC0032CA23 /* GData.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 4F38F6A60B66E91D00B24B81 /* GData.framework */;
+			remoteGlobalIDString = 4F38F6A60B66E91D00B24B81;
 			remoteInfo = GDataFramework;
 		};
 		E42255B512F95BCD0032CA23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E42255A812F95BCC0032CA23 /* GData.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 4F1C6E0F1027B3CE00B46459 /* libGDataTouchStaticLib.a */;
+			remoteGlobalIDString = 4F1C6E0F1027B3CE00B46459;
 			remoteInfo = GDataTouchStaticLib;
 		};
 		E42255B712F95BCD0032CA23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E42255A812F95BCC0032CA23 /* GData.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 4F14A9DD0B1276B70072EBB8 /* GDataUnitTests.octest */;
+			remoteGlobalIDString = 4F14A9DD0B1276B70072EBB8;
 			remoteInfo = GDataUnitTests;
 		};
 		E42255B912F95BCD0032CA23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E42255A812F95BCC0032CA23 /* GData.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 4F85E018103B83B700B4C418 /* GDataIPhoneUnitTests.octest */;
+			remoteGlobalIDString = 4F85E018103B83B700B4C418;
 			remoteInfo = GDataIPhoneUnitTests;
 		};
 		E42255BB12F95BCD0032CA23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E42255A812F95BCC0032CA23 /* GData.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 4F1AD9020B71603F00DC0485 /* DevelopmentTestTool */;
+			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
 			remoteInfo = DevelopmentTestTool;
 		};
 		E422574D12F95F8D0032CA23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E42255A812F95BCC0032CA23 /* GData.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 4F1C6E0E1027B3CE00B46459 /* GDataTouchStaticLib */;
+			remoteGlobalIDString = 4F1C6E0E1027B3CE00B46459;
 			remoteInfo = GDataTouchStaticLib;
 		};
 /* End PBXContainerItemProxy section */
@@ -1025,10 +1025,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (S8LHA25A98)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenSource/gdata-objectivec-client-read-only/Source/build/Debug\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1036,13 +1033,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "YouTubeUpload-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenSource/gdata-objectivec-client-read-only/Source/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../../OpenSource/gdata-objectivec-client-read-only/Source/build/GData.build/Debug/GDataFramework.build/Objects-normal/i386\"",
-					"\"$(SRCROOT)/../../OpenSource/gdata-objectivec-client-read-only/Source/build/GData.build/Debug-iphoneos/GDataTouchStaticLib.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/../../OpenSource/gdata-objectivec-client-read-only/Source/build/GData.build/Debug-iphoneos/GDataTouchStaticLib.build/Objects-normal/armv7\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = (
 					"-DGDATA_REQUIRE_SERVICE_INCLUDES=1",
 					"-DGDATA_INCLUDE_YOUTUBE_SERVICE=1",
@@ -1053,7 +1044,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = YouTubeUpload;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "267BCEA7-AFDF-4C2C-9085-E34056B44418";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "397995D3-0DDB-4943-B604-8A8367AE2438";
 			};
 			name = Debug;
 		};

@@ -9,9 +9,9 @@
 	};
 	1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1495}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1508}}";
 			sepNavSelRange = "{1107, 9}";
-			sepNavVisRange = "{3, 1763}";
+			sepNavVisRange = "{381, 1391}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* YouTubeUpload */ = {
@@ -22,17 +22,17 @@
 	};
 	28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 780}}";
-			sepNavSelRange = "{877, 10}";
-			sepNavVisRange = "{159, 1161}";
+			sepNavIntBoundsRect = "{{0, 0}, {723, 819}}";
+			sepNavSelRange = "{1133, 0}";
+			sepNavVisRange = "{299, 797}";
 			sepNavWindowFrame = "{{815, 102}, {820, 867}}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1237, 3991}}";
-			sepNavSelRange = "{2997, 0}";
-			sepNavVisRange = "{0, 1028}";
+			sepNavIntBoundsRect = "{{0, 0}, {723, 4732}}";
+			sepNavSelRange = "{3360, 0}";
+			sepNavVisRange = "{3173, 661}";
 			sepNavWindowFrame = "{{35, 109}, {740, 889}}";
 		};
 	};
@@ -45,6 +45,7 @@
 			1D6058900D05DD3D006BFB54 /* YouTubeUpload */,
 		);
 		breakpoints = (
+			E4002FE71336128400D826A4 /* YouTubeUploadViewController.m:134 */,
 		);
 		codeSenseManager = E4C44A6212435F10007ACEBC /* Code sense */;
 		executables = (
@@ -56,7 +57,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					101,
+					545,
 					20,
 					48,
 					43,
@@ -95,19 +96,18 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 318289678;
-			PBXWorkspaceStateSaveDate = 318289678;
+			PBXPerProjectTemplateStateSaveDate = 322306300;
+			PBXWorkspaceStateSaveDate = 322306300;
 		};
 		perUserProjectItems = {
-			E42255C312F95C9E0032CA23 /* PBXTextBookmark */ = E42255C312F95C9E0032CA23 /* PBXTextBookmark */;
-			E42255C412F95C9E0032CA23 /* PBXTextBookmark */ = E42255C412F95C9E0032CA23 /* PBXTextBookmark */;
+			E4002FF1133615AC00D826A4 /* PBXTextBookmark */ = E4002FF1133615AC00D826A4 /* PBXTextBookmark */;
+			E4002FF2133615AC00D826A4 /* PBXTextBookmark */ = E4002FF2133615AC00D826A4 /* PBXTextBookmark */;
+			E4002FF3133615AC00D826A4 /* PBXTextBookmark */ = E4002FF3133615AC00D826A4 /* PBXTextBookmark */;
+			E4002FF4133615AC00D826A4 /* PBXTextBookmark */ = E4002FF4133615AC00D826A4 /* PBXTextBookmark */;
+			E4002FF5133615AC00D826A4 /* PBXTextBookmark */ = E4002FF5133615AC00D826A4 /* PBXTextBookmark */;
+			E4002FF6133615AC00D826A4 /* PBXTextBookmark */ = E4002FF6133615AC00D826A4 /* PBXTextBookmark */;
+			E4002FF7133615AC00D826A4 /* PBXTextBookmark */ = E4002FF7133615AC00D826A4 /* PBXTextBookmark */;
 			E42255C512F95C9E0032CA23 /* PBXTextBookmark */ = E42255C512F95C9E0032CA23 /* PBXTextBookmark */;
-			E42255C612F95C9E0032CA23 /* PBXTextBookmark */ = E42255C612F95C9E0032CA23 /* PBXTextBookmark */;
-			E42255C712F95C9E0032CA23 /* PBXTextBookmark */ = E42255C712F95C9E0032CA23 /* PBXTextBookmark */;
-			E422573E12F95F270032CA23 /* PBXTextBookmark */ = E422573E12F95F270032CA23 /* PBXTextBookmark */;
-			E422573F12F95F270032CA23 /* PBXTextBookmark */ = E422573F12F95F270032CA23 /* PBXTextBookmark */;
-			E422574012F95F270032CA23 /* PBXBookmark */ = E422574012F95F270032CA23 /* PBXBookmark */;
-			E422595C12F9675C0032CA23 /* PBXTextBookmark */ = E422595C12F9675C0032CA23 /* PBXTextBookmark */;
 			E4379B3A12C0C52F006C26AC /* PBXTextBookmark */ = E4379B3A12C0C52F006C26AC /* PBXTextBookmark */;
 			E4379B3B12C0C52F006C26AC /* PBXTextBookmark */ = E4379B3B12C0C52F006C26AC /* PBXTextBookmark */;
 			E4B543DA1270AA3700851D86 /* PBXTextBookmark */ = E4B543DA1270AA3700851D86 /* PBXTextBookmark */;
@@ -124,25 +124,93 @@
 			sepNavWindowFrame = "{{340, 74}, {1246, 798}}";
 		};
 	};
-	E42255C312F95C9E0032CA23 /* PBXTextBookmark */ = {
+	E4002FE71336128400D826A4 /* YouTubeUploadViewController.m:134 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		functionName = "-textFieldShouldReturn:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 134;
+		location = YouTubeUpload;
+		modificationTime = 322311226.439454;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	E4002FF1133615AC00D826A4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E422573112F95E250032CA23 /* GDataYouTube.h */;
+		name = "GDataYouTube.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1260;
+		vrLoc = 0;
+	};
+	E4002FF2133615AC00D826A4 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E4B54116127074A600851D86 /* YouTubeUploader.h */;
 		name = "YouTubeUploader.h: 50";
 		rLen = 0;
 		rLoc = 1096;
 		rType = 0;
-		vrLen = 1096;
-		vrLoc = 3;
+		vrLen = 848;
+		vrLoc = 651;
 	};
-	E42255C412F95C9E0032CA23 /* PBXTextBookmark */ = {
+	E4002FF3133615AC00D826A4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E4B54115127074A600851D86 /* YouTubeUploader.m */;
+		name = "YouTubeUploader.m: 167";
+		rLen = 39;
+		rLoc = 3577;
+		rType = 0;
+		vrLen = 729;
+		vrLoc = 1247;
+	};
+	E4002FF4133615AC00D826A4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */;
+		name = "YouTubeUploadAppDelegate.m: 36";
+		rLen = 9;
+		rLoc = 1107;
+		rType = 0;
+		vrLen = 1391;
+		vrLoc = 381;
+	};
+	E4002FF5133615AC00D826A4 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
-		name = "YouTubeUploadViewController.h: 43";
-		rLen = 10;
-		rLoc = 877;
+		name = "YouTubeUploadViewController.h: 50";
+		rLen = 0;
+		rLoc = 1133;
 		rType = 0;
-		vrLen = 1161;
-		vrLoc = 159;
+		vrLen = 797;
+		vrLoc = 299;
+	};
+	E4002FF6133615AC00D826A4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		name = "YouTubeUploadViewController.m: 129";
+		rLen = 8;
+		rLoc = 2735;
+		rType = 0;
+		vrLen = 771;
+		vrLoc = 2314;
+	};
+	E4002FF7133615AC00D826A4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		name = "YouTubeUploadViewController.m: 159";
+		rLen = 0;
+		rLoc = 3360;
+		rType = 0;
+		vrLen = 661;
+		vrLoc = 3173;
 	};
 	E42255C512F95C9E0032CA23 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -154,73 +222,19 @@
 		vrLen = 781;
 		vrLoc = 0;
 	};
-	E42255C612F95C9E0032CA23 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1D3623250D0F684500981E51 /* YouTubeUploadAppDelegate.m */;
-		name = "YouTubeUploadAppDelegate.m: 36";
-		rLen = 9;
-		rLoc = 1107;
-		rType = 0;
-		vrLen = 1763;
-		vrLoc = 3;
-	};
-	E42255C712F95C9E0032CA23 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
-		name = "YouTubeUploadViewController.m: 139";
-		rLen = 0;
-		rLoc = 2997;
-		rType = 0;
-		vrLen = 1028;
-		vrLoc = 0;
-	};
 	E422573112F95E250032CA23 /* GDataYouTube.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {641, 819}}";
+			sepNavIntBoundsRect = "{{0, 0}, {723, 819}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1108}";
+			sepNavVisRange = "{0, 1260}";
 		};
 	};
 	E422573212F95E250032CA23 /* GDataYouTubeAccessControl.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {670, 988}}";
+			sepNavIntBoundsRect = "{{0, 0}, {691, 923}}";
 			sepNavSelRange = "{675, 29}";
-			sepNavVisRange = "{0, 867}";
+			sepNavVisRange = "{0, 832}";
 		};
-	};
-	E422573E12F95F270032CA23 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4B54115127074A600851D86 /* YouTubeUploader.m */;
-		name = "YouTubeUploader.m: 93";
-		rLen = 0;
-		rLoc = 1952;
-		rType = 0;
-		vrLen = 824;
-		vrLoc = 0;
-	};
-	E422573F12F95F270032CA23 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E422573112F95E250032CA23 /* GDataYouTube.h */;
-		name = "GDataYouTube.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1108;
-		vrLoc = 0;
-	};
-	E422574012F95F270032CA23 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = E422573212F95E250032CA23 /* GDataYouTubeAccessControl.h */;
-	};
-	E422595C12F9675C0032CA23 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E422573212F95E250032CA23 /* GDataYouTubeAccessControl.h */;
-		name = "GDataYouTubeAccessControl.h: 20";
-		rLen = 29;
-		rLoc = 675;
-		rType = 0;
-		vrLen = 867;
-		vrLoc = 0;
 	};
 	E4379B3A12C0C52F006C26AC /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -244,17 +258,17 @@
 	};
 	E4B54115127074A600851D86 /* YouTubeUploader.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {950, 3913}}";
-			sepNavSelRange = "{1952, 0}";
-			sepNavVisRange = "{0, 824}";
+			sepNavIntBoundsRect = "{{0, 0}, {950, 3770}}";
+			sepNavSelRange = "{3577, 39}";
+			sepNavVisRange = "{1247, 729}";
 			sepNavWindowFrame = "{{51, 137}, {746, 840}}";
 		};
 	};
 	E4B54116127074A600851D86 /* YouTubeUploader.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 871}}";
+			sepNavIntBoundsRect = "{{0, 0}, {803, 871}}";
 			sepNavSelRange = "{1096, 0}";
-			sepNavVisRange = "{3, 1096}";
+			sepNavVisRange = "{651, 848}";
 		};
 	};
 	E4B543DA1270AA3700851D86 /* PBXTextBookmark */ = {
@@ -304,11 +318,6 @@
 		name = GDataEntryBase.m;
 		path = "/Users/roikr/Developer/OpenSource/gdata-objectivec-client-read-only/Source/BaseClasses/GDataEntryBase.m";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 10023}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1206}";
-		};
 	};
 	E4BC3609125DA6FB00B492E4 /* GDataLink.h */ = {
 		isa = PBXFileReference;
@@ -317,11 +326,6 @@
 		name = GDataLink.h;
 		path = "/Users/roikr/Developer/OpenSource/gdata-objectivec-client-read-only/Source/Elements/GDataLink.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {908, 1339}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{2222, 890}";
-		};
 	};
 	E4BC360A125DA6FB00B492E4 /* GDataLink.m */ = {
 		isa = PBXFileReference;
@@ -330,11 +334,6 @@
 		name = GDataLink.m;
 		path = "/Users/roikr/Developer/OpenSource/gdata-objectivec-client-read-only/Source/Elements/GDataLink.m";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 2925}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{102, 1295}";
-		};
 	};
 	E4BC3848125DA6FD00B492E4 /* GDataEntryYouTubeVideo.m */ = {
 		isa = PBXFileReference;
@@ -343,11 +342,6 @@
 		name = GDataEntryYouTubeVideo.m;
 		path = "/Users/roikr/Developer/OpenSource/gdata-objectivec-client-read-only/Source/Clients/YouTube/GDataEntryYouTubeVideo.m";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 3991}}";
-			sepNavSelRange = "{849, 22}";
-			sepNavVisRange = "{0, 1049}";
-		};
 	};
 	E4BC387B125DA6FD00B492E4 /* GDataEntryYouTubeUpload.h */ = {
 		isa = PBXFileReference;
@@ -356,11 +350,6 @@
 		name = GDataEntryYouTubeUpload.h;
 		path = "/Users/roikr/Developer/OpenSource/gdata-objectivec-client-read-only/Source/Clients/YouTube/GDataEntryYouTubeUpload.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 622}}";
-			sepNavSelRange = "{1224, 0}";
-			sepNavVisRange = "{0, 1301}";
-		};
 	};
 	E4BC387C125DA6FD00B492E4 /* GDataEntryYouTubeUpload.m */ = {
 		isa = PBXFileReference;
@@ -369,11 +358,6 @@
 		name = GDataEntryYouTubeUpload.m;
 		path = "/Users/roikr/Developer/OpenSource/gdata-objectivec-client-read-only/Source/Clients/YouTube/GDataEntryYouTubeUpload.m";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {852, 1222}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{1514, 1082}";
-		};
 	};
 	E4C44A5212435F0B007ACEBC /* YouTubeUpload */ = {
 		isa = PBXExecutable;

@@ -34,6 +34,8 @@
 	
 	NSString *additionalText;
 	
+	UIView *processView;
+	
 }
 
 @property (nonatomic,retain) YouTubeUploader *uploader;
@@ -45,6 +47,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, assign) UIView *activeView;
 
+@property (nonatomic,retain) IBOutlet UIView *processView;
 
 @property (nonatomic,retain ) NSString *videoTitle;
 @property (nonatomic,retain) NSString* videoPath;
