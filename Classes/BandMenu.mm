@@ -57,6 +57,8 @@
 		firstTime = YES;
 		 
 		
+	} else {
+		menuView.transform = CGAffineTransformMakeTranslation(0,320); // in case of memory issues - just transform the menu view
 	}
 		
 	[self.songsView addSubview:songsTable.view];
