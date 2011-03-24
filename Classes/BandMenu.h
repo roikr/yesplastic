@@ -23,9 +23,6 @@
 	UIView *menuView;
 	UIView *songsView;
 	
-	BOOL firstTime;
-
-	
 }
 
 @property (nonatomic,retain) SongsTable *songsTable;
@@ -47,6 +44,5 @@
 - (void)cancelEdit;
 - (void)updateEditMode;
 
-- (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion;
 
 @end

@@ -41,6 +41,7 @@ NSString * const kCacheFolder=@"URLCache";
  - (void) displayImageWithURL:(NSURL *)theURL;
  - (void) displayCachedImage;
 */
+- (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion;
 - (void) continueLaunching;
  - (void) initCache;
  - (void) clearCache;
@@ -237,9 +238,20 @@ NSString * const kCacheFolder=@"URLCache";
 	[pool release];
 }
 
+- (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion {
+	[UIView animateWithDuration:0.1 delay:2.0 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
+					 animations:^{
+						 firstView.alpha = 0.0;
+						 secondView.alpha = 1.0;
+						 
+					 } 
+					 completion:^(BOOL finished){ 
+						 
+						 [firstView removeFromSuperview];
+						 completion(YES);}];
+}
+
 - (void) continueLaunching {
-	[bandMenu.activityIndicator stopAnimating];
-	bandMenu.firstLaunchView.hidden = YES;
 	
 	[self loadDemos];
 	[bandMenu.songsTable loadData];
@@ -265,7 +277,25 @@ NSString * const kCacheFolder=@"URLCache";
 	
     /* prepare to use our own on-disk cache */
 	[self initCache];
+	[bandMenu.activityIndicator stopAnimating];
 	
+	[UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
+		 animations:^{
+			 bandMenu.firstLaunchView.alpha = 0.0;
+			 bandMenu.milgromView.alpha = 1.0;
+
+			 
+		 } 
+		 completion:^(BOOL finished){
+		 
+			[bandMenu.firstLaunchView removeFromSuperview];
+			 [self swapView:bandMenu.milgromView with:bandMenu.lofiView 
+				 completion:^(BOOL finished){
+					 
+					 [self swapView:bandMenu.lofiView with:bandMenu.menuView 
+						 completion:^(BOOL finished){}]; 
+				 }];
+		 }];
 	
 }
 
