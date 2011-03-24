@@ -104,16 +104,17 @@
 		if (slides.getState() == SLIDE_IDLE) {
 			if ( OFSAptr->getSongState() == SONG_IDLE  && !OFSAptr->isInTransition()) {
 				switch (mainViewController.interfaceOrientation) {
-					case UIInterfaceOrientationPortrait:
-					case UIInterfaceOrientationPortraitUpsideDown:
+					case UIInterfaceOrientationLandscapeLeft:
+					case UIInterfaceOrientationLandscapeRight:
 						if (!slides.getIsDone(MILGROM_SLIDE_SHARE) && mainViewController.shareButton.hidden==NO) {
 							slides.start(MILGROM_SLIDE_SHARE);
 						} else if (!slides.getIsDone(MILGROM_SLIDE_MENU)) {
 							slides.start(MILGROM_SLIDE_MENU);
 						}
 						break;
-					case UIInterfaceOrientationLandscapeLeft:
-					case UIInterfaceOrientationLandscapeRight:
+					case UIInterfaceOrientationPortrait:
+					case UIInterfaceOrientationPortraitUpsideDown:
+					
 						if (!slides.getIsDone(MILGROM_SLIDE_SOLO_MENU)) {
 							slides.start(MILGROM_SLIDE_SOLO_MENU);
 						}
@@ -167,6 +168,9 @@
 }
 
 - (void)removeViews {
+	
+	
+	
 	if (currentButton) {
 		[currentButton removeFromSuperview];
 		[currentView addSubview:currentButton];
@@ -335,6 +339,11 @@
 	
 }
 
+- (void)willRotate {
+	if (slides.getState() != SLIDE_DONE && slides.getState() != SLIDE_IDLE ) {
+		slides.reset();
+	}
+}
 
 - (void)dealloc {
     [super dealloc];

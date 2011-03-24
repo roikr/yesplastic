@@ -206,6 +206,7 @@
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
 	[tutorialView removeViews];
+	[tutorialView willRotate]; // to reset slides
 	
 	
 	if ([self.view.subviews containsObject:bandHelp]) {

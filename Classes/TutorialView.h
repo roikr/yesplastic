@@ -55,6 +55,7 @@ enum  {
 
 - (void)doneSlide:(int)slideNum;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (void)willRotate;
 @end
 
 
