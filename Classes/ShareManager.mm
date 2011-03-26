@@ -325,8 +325,8 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 	
 	
 	[sheet addButtonWithTitle:@"Cancel"];
-	[sheet addButtonWithTitle:@"Render"];
-	[sheet addButtonWithTitle:@"Play"];
+//	[sheet addButtonWithTitle:@"Render"];
+//	[sheet addButtonWithTitle:@"Play"];
 	
 	sheet.actionSheetStyle = UIActionSheetStyleDefault;
 	
