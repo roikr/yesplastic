@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -283,16 +281,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>45</integer>
-									<integer>41</integer>
-									<integer>40</integer>
-									<integer>35</integer>
-									<integer>29</integer>
+									<integer>3</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 135}, {317, 686}}</string>
+							<string>{{0, 0}, {317, 686}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -322,12 +317,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ofxInteractiveSlides.cpp</string>
+								<string>MilgromInterfaceAppDelegate.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -335,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ofxInteractiveSlides.cpp</string>
+										<string>MilgromInterfaceAppDelegate.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E45A1B02133E6D4C00A58F52</string>
+										<string>E45A1B19133E719D00A58F52</string>
 										<key>history</key>
 										<array>
 											<string>E4DF70F811FEADE100EBD904</string>
@@ -512,17 +509,17 @@
 											<string>E4DE9F04133BFE2A003E9E5D</string>
 											<string>E4DE9F32133C038C003E9E5D</string>
 											<string>E4DE9F33133C038C003E9E5D</string>
-											<string>E4DE9F35133C038C003E9E5D</string>
-											<string>E4DE9F37133C038C003E9E5D</string>
 											<string>E4DE9F3F133C03EE003E9E5D</string>
 											<string>E4DE9F41133C03EE003E9E5D</string>
 											<string>E45A1AF0133E686400A58F52</string>
 											<string>E45A1AF1133E686400A58F52</string>
-											<string>E45A1AFD133E6D4C00A58F52</string>
 											<string>E45A1AFE133E6D4C00A58F52</string>
 											<string>E45A1AFF133E6D4C00A58F52</string>
-											<string>E45A1B00133E6D4C00A58F52</string>
-											<string>E45A1B01133E6D4C00A58F52</string>
+											<string>E45A1B08133E70BE00A58F52</string>
+											<string>E45A1B0A133E70BE00A58F52</string>
+											<string>E45A1B0B133E70BE00A58F52</string>
+											<string>E45A1B11133E710600A58F52</string>
+											<string>E45A1B17133E718000A58F52</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -725,8 +722,8 @@
 		<string>E45A1AE0133E63DB00A58F52</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>E4B3D14D11F81F7F00B57223</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/roikr/Developer/YesPlastic/Milgrom.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>82 204 1464 745 0 0 1680 1028 </string>
@@ -1067,7 +1064,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1237, 583}}</string>
 								<key>RubberWindowFrame</key>
-								<string>1806 239 1237 624 1680 250 1280 800 </string>
+								<string>1788 420 1237 624 1680 250 1280 800 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugCLIModule</string>
@@ -1096,7 +1093,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.consoleV3</string>
 			<key>WindowString</key>
-			<string>1806 239 1237 624 1680 250 1280 800 </string>
+			<string>1788 420 1237 624 1680 250 1280 800 </string>
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
