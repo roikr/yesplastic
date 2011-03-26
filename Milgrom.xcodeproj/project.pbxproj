@@ -185,6 +185,7 @@
 		E44F6DC0122A4DC60002386C /* CELL4_PROGRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = E44F6DBB122A4DC60002386C /* CELL4_PROGRESS.png */; };
 		E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E44F8469127EF0C90063FFA1 /* ExportManager.m */; };
 		E4570FD61268774600BA52A9 /* ofxMidiSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4570FD51268774600BA52A9 /* ofxMidiSample.cpp */; };
+		E45A1AEA133E670900A58F52 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45A1AE9133E670900A58F52 /* icon@2x.png */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
@@ -216,7 +217,7 @@
 		E49BD080125A7AB1005A0FAC /* ActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49BD07F125A7AB1005A0FAC /* ActionCell.m */; };
 		E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */; };
 		E4A6FBE6122D80E600A5C4D9 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */; };
-		E4A9022513094B5100F844CA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A9022413094B5100F844CA /* Icon.png */; };
+		E4A9022513094B5100F844CA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A9022413094B5100F844CA /* icon.png */; };
 		E4B1B2AA126E20B2001A577D /* FBConnectGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B298126E20B2001A577D /* FBConnectGlobal.m */; };
 		E4B1B2AB126E20B2001A577D /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29A126E20B2001A577D /* FBSession.m */; };
 		E4B1B2AC126E20B2001A577D /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B29C126E20B2001A577D /* FBRequest.m */; };
@@ -922,6 +923,7 @@
 		E44F8469127EF0C90063FFA1 /* ExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportManager.m; sourceTree = "<group>"; };
 		E4570FD41268774600BA52A9 /* ofxMidiSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiSample.h; sourceTree = "<group>"; };
 		E4570FD51268774600BA52A9 /* ofxMidiSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiSample.cpp; sourceTree = "<group>"; };
+		E45A1AE9133E670900A58F52 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Resource/icon@2x.png"; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -945,7 +947,6 @@
 		E490A20B1206D05F008512EA /* Milgrom.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Milgrom.xcdatamodel; sourceTree = "<group>"; };
 		E49159BC13098B990019ED6B /* LFP_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LFP_ALPHA.png; path = Resource/LFP_ALPHA.png; sourceTree = "<group>"; };
 		E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MILGROM_ALPHA.png; path = Resource/MILGROM_ALPHA.png; sourceTree = "<group>"; };
-		E493D3D7122DB16700163EF9 /* MilgromViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MilgromViewController.xib; path = Resource/MilgromViewController.xib; sourceTree = "<group>"; };
 		E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YouTubeUploadViewController.xib; path = YouTubeUpload/YouTubeUploadViewController.xib; sourceTree = "<group>"; };
 		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
 		E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadViewController.m; path = YouTubeUpload/Classes/YouTubeUploadViewController.m; sourceTree = "<group>"; };
@@ -969,7 +970,7 @@
 		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
 		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
-		E4A9022413094B5100F844CA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resource/Icon.png; sourceTree = "<group>"; };
+		E4A9022413094B5100F844CA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resource/icon.png; sourceTree = "<group>"; };
 		E4B1B296126E20B2001A577D /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnect.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B297126E20B2001A577D /* FBConnectGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnectGlobal.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnectGlobal.h"; sourceTree = SOURCE_ROOT; };
 		E4B1B298126E20B2001A577D /* FBConnectGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBConnectGlobal.m; path = "../OpenSource/facebook-iphone-sdk/src/FBConnectGlobal.m"; sourceTree = SOURCE_ROOT; };
@@ -2236,7 +2237,6 @@
 			isa = PBXGroup;
 			children = (
 				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
-				E493D3D7122DB16700163EF9 /* MilgromViewController.xib */,
 				E4D4A20F11FD8F7100C92628 /* BandMenu.xib */,
 				E4D4A1E811FD7A9600C92628 /* SongsTable.xib */,
 				E4DF703A11FE9EB000EBD904 /* SongCell.xib */,
@@ -2300,10 +2300,11 @@
 		E4DE4F5F11FFFC9A00BF31AF /* png */ = {
 			isa = PBXGroup;
 			children = (
+				E45A1AE9133E670900A58F52 /* icon@2x.png */,
 				E433F7ED1332348500B1D3E5 /* RENDER */,
 				E49159BC13098B990019ED6B /* LFP_ALPHA.png */,
 				E49159BD13098B990019ED6B /* MILGROM_ALPHA.png */,
-				E4A9022413094B5100F844CA /* Icon.png */,
+				E4A9022413094B5100F844CA /* icon.png */,
 				E43BE953125C968F009C8845 /* HELP */,
 				E42D1424124F895E007BEEB0 /* DRM_SOLO */,
 				E42D1449124F895E007BEEB0 /* GTR_SOLO */,
@@ -2707,7 +2708,7 @@
 				E4F0553D12FFDCE8004430A8 /* SONGS.png in Resources */,
 				E4F0558612FFEE0E004430A8 /* MESSAGE_FRAME.png in Resources */,
 				E4F0558712FFEE0E004430A8 /* MESSAGE_X_BUTTON.png in Resources */,
-				E4A9022513094B5100F844CA /* Icon.png in Resources */,
+				E4A9022513094B5100F844CA /* icon.png in Resources */,
 				E49159BE13098B990019ED6B /* LFP_ALPHA.png in Resources */,
 				E49159BF13098B990019ED6B /* MILGROM_ALPHA.png in Resources */,
 				E4B68B1F130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png in Resources */,
@@ -2722,6 +2723,7 @@
 				E433F7EF1332348600B1D3E5 /* CAMERA_REC.png in Resources */,
 				E433F7F2133234F400B1D3E5 /* APP_HELP_SLIDE.png in Resources */,
 				E433F7F3133234F400B1D3E5 /* HELP_BACK_BUTTON.png in Resources */,
+				E45A1AEA133E670900A58F52 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
