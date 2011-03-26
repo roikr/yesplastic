@@ -205,7 +205,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	// if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
 		
-//	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"unzipped"];
+//	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"unzipped"]; // comment addDemos
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"unzipped"]) {
 		
@@ -221,11 +221,11 @@ NSString * const kCacheFolder=@"URLCache";
 			[zip UnzipOpenFile:precache];
 			[zip UnzipFileTo:[paths objectAtIndex:0] overWrite:YES];
 			[zip UnzipCloseFile];
-			
+			[self addDemos];
 			
 		} 
 		
-		[self addDemos];
+		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"unzipped"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		[task finish];
@@ -359,7 +359,10 @@ NSString * const kCacheFolder=@"URLCache";
      */
 	MilgromLog(@"applicationWillEnterForeground deviceOrientation: %i",[[UIDevice currentDevice] orientation]);
 	MilgromLog(@"applicationWillEnterForeground viewController orientation: %i",viewController.interfaceOrientation);
-	MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
+	
+	if (mainViewController && [mainViewController isViewLoaded]) { // isViewLoaded to avoid crash when return after exit without entering main view
+		MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
+	}
 	
 	[viewController popToRootViewControllerAnimated:NO];
 	[viewController dismissModalViewControllerAnimated:NO];
