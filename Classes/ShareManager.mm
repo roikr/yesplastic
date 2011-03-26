@@ -45,7 +45,7 @@ void ShareAlert(NSString *title,NSString *message) {
 }
 
 
-static NSString* kMilgromURL = @"www.mmmilgrom.com";
+static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 @interface ShareManager ()
 - (void)action;
