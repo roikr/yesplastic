@@ -32,7 +32,7 @@ enum {
 	ACTION_ADD_TO_LIBRARY,
 	ACTION_SEND_VIA_MAIL,
 	ACTION_SEND_RINGTONE,
-	ACTION_DONE,
+	ACTION_CANCEL,
 	ACTION_RENDER,
 	ACTION_PLAY
 };
@@ -324,7 +324,7 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 	
 	
 	
-	[sheet addButtonWithTitle:@"Done"];
+	[sheet addButtonWithTitle:@"Cancel"];
 	[sheet addButtonWithTitle:@"Render"];
 	[sheet addButtonWithTitle:@"Play"];
 	
@@ -355,11 +355,11 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 				action = buttonIndex ? ACTION_UPLOAD_TO_FACEBOOK : ACTION_UPLOAD_TO_YOUTUBE;
 			} else {
 				ShareAlert(@"Upload Movie", @"We're trying hard, but there's no Internet connection");
-				action = ACTION_DONE;
+				action = ACTION_CANCEL;
 			}
 
-			//action = self.isUploading ? ACTION_DONE : ACTION_UPLOAD_TO_YOUTUBE ;
-			//action = self.isUploading ? ACTION_DONE :ACTION_UPLOAD_TO_FACEBOOK;
+			//action = self.isUploading ? ACTION_CANCEL : ACTION_UPLOAD_TO_YOUTUBE ;
+			//action = self.isUploading ? ACTION_CANCEL :ACTION_UPLOAD_TO_FACEBOOK;
 		} break;
 		case 2:
 			action = ACTION_ADD_TO_LIBRARY;
@@ -372,7 +372,7 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 			break;
 			
 		case 5:
-			action = ACTION_DONE;
+			action = ACTION_CANCEL;
 			break;
 			
 		case 6:
@@ -401,7 +401,7 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 	switch (state) {
 		case STATE_IDLE:
 			switch (action) {
-				case ACTION_DONE:
+				case ACTION_CANCEL:
 					break;
 				case ACTION_UPLOAD_TO_YOUTUBE:
 				case ACTION_UPLOAD_TO_FACEBOOK:
@@ -531,7 +531,7 @@ static NSString* kMilgromURL = @"www.mmmilgrom.com";
 			[appDelegate playURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"mov"]]];
 			break;
 			
-		case ACTION_DONE:
+		case ACTION_CANCEL:
 		case ACTION_RENDER:
 			[appDelegate mainViewController].view.userInteractionEnabled = YES; 
 			break;
