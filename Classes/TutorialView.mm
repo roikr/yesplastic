@@ -298,7 +298,7 @@
 				break;
 		}
 		
-						
+		currentView.hidden = currentButton.hidden = mainViewController.bShowHelp;				
 		
 	}
 	
@@ -341,6 +341,9 @@
 
 - (void)willRotate {
 	if (slides.getState() != SLIDE_DONE && slides.getState() != SLIDE_IDLE ) {
+		if (slides.getState() == SLIDE_READY) {
+			slides.done(slides.getCurrentSlideNumber());
+		}
 		slides.reset();
 	}
 }
