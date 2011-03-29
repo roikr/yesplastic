@@ -63,6 +63,7 @@
 	tutorial.start();
 	
 	bStartSlides = YES;
+	slides.restart();
 	slides.reset(); // move to idle if we exit app with slide on
 	bFirstSlide = YES;
 }
