@@ -38,7 +38,6 @@
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
 - (void)updateExportProgress:(ExportManager*)manager;
-- (void)hideViews;
 @end
 
 @implementation MainViewController
@@ -556,9 +555,10 @@
 - (void) record:(id)sender {
 	
 	
-	if (playButton.hidden) 
+	if (playButton.hidden) {
+		MilgromAlert(@"Sorry",@"can't record while a track is being played");
 		return;
-	
+	}
 	
 	if (recordButton.selected) {
 		[self stop:nil];
@@ -825,10 +825,10 @@
 	switch (button.tag)
 	{
 		case 0: 
-			action = ACTION_UPLOAD_TO_FACEBOOK;
+			action = ACTION_UPLOAD_TO_YOUTUBE;
 			break;
 		case 1:
-			action = ACTION_UPLOAD_TO_YOUTUBE;
+			action = ACTION_UPLOAD_TO_FACEBOOK;
 			break;
 		case 2:
 			action = ACTION_ADD_TO_LIBRARY;

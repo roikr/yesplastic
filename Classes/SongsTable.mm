@@ -234,7 +234,7 @@
 	[cell.deleteButton addTarget:self action:@selector(deleteSong:) forControlEvents:UIControlEventTouchUpInside];
 	cell.deleteButton.song = song;
 	cell.isSong = ![song.bDemo boolValue];
-	((UILabel*)cell.label).text = song.songName;
+	((UILabel*)cell.label).text = song.displayName;
 	
 	if (![song.bReady boolValue]) {
 		[cell setProgress:0.0f];

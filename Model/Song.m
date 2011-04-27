@@ -2,8 +2,8 @@
 //  Song.m
 //  Milgrom
 //
-//  Created by Roee Kremer on 11/10/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Created by Roee Kremer on 4/28/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import "Song.h"
@@ -13,12 +13,13 @@
 @implementation Song 
 
 @dynamic bReady;
-@dynamic bVideoRendered;
+@dynamic bRingtoneExprted;
+@dynamic displayName;
 @dynamic bDemo;
 @dynamic bLocked;
 @dynamic songName;
 @dynamic bpm;
-@dynamic bRingtoneExprted;
+@dynamic bVideoRendered;
 @dynamic soundSets;
 
 @end

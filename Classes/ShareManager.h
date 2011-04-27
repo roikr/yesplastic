@@ -49,7 +49,8 @@ enum {
 
 
 + (ShareManager*) shareManager;
-- (NSString *)getVideoName;
+- (NSString *)getSongName;
+- (NSString *)getDisplayName;
 - (NSString *)getVideoPath;
 
 //- (void)menuWithView:(UIView *)view;

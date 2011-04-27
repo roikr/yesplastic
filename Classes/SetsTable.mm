@@ -143,7 +143,7 @@
     }
 	Song  *song = (Song *)[songsArray objectAtIndex:indexPath.row];
 	// Configure the cell...
-	[cell configureCell:[indexPath row] withPlayerName:playerName withLabel:song.songName];
+	[cell configureCell:[indexPath row] withPlayerName:playerName withLabel:song.displayName];
 	
     
     return (UITableViewCell*) cell;

@@ -138,14 +138,17 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 
 
-
-
-
-- (NSString *)getVideoName {
-	
+- (NSString *)getSongName {
 	Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
 	return [song songName];
-	
+
+}
+
+
+- (NSString *)getDisplayName {
+	Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
+	return [song displayName];
+		
 }
 
 - (NSString *)getVideoPath {
@@ -488,7 +491,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
 			[appDelegate pushViewController:controller];
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
-			controller.videoTitle = [[self getVideoName] uppercaseString];
+			controller.videoTitle = [[self getDisplayName] uppercaseString];
 			//controller.additionalText = kMilgromURL;
 			controller.descriptionView.text = [NSString stringWithFormat:@"this video created with Milgrom's iphone app\nvisit milgrom at http://www.mmmilgrom.com"];
 			controller.videoPath = [[self getVideoPath] stringByAppendingPathExtension:@"mov"];
@@ -503,7 +506,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			
 			[appDelegate pushViewController:controller];
 			controller.uploader = appDelegate.shareManager.facebookUploader;
-			controller.videoTitle = [NSString stringWithFormat:@"MILGROM PLAYS %@",[[self getVideoName] uppercaseString]];
+			controller.videoTitle = [NSString stringWithFormat:@"MILGROM PLAYS %@",[[self getDisplayName] uppercaseString]];
 			//controller.additionalText = kMilgromURL;
 			controller.descriptionView.text = @"more milgrom at http://www.mmmilgrom.com/fb";
 			controller.videoPath = [[self getVideoPath]  stringByAppendingPathExtension:@"mov" ];
@@ -523,7 +526,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			NSString *message = [NSString stringWithFormat:@"Isn't  it a work of art?<br/><br/><a href='%@'>visit milgrom</a>",kMilgromURL];
 			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"mov"]];
 			[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"video/mov" 
-							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"mov"]];
+							withFileName:[[self getSongName] stringByAppendingPathExtension:@"mov"]];
 		} break;
 			
 		case ACTION_SEND_RINGTONE: 
@@ -534,7 +537,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			
 			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];
 			[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"audio/m4r" 
-							withFileName:[[self getVideoName] stringByAppendingPathExtension:@"m4r"]];
+							withFileName:[[self getSongName] stringByAppendingPathExtension:@"m4r"]];
 		} break;
 			
 		case ACTION_PLAY:

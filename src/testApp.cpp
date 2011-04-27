@@ -779,7 +779,7 @@ void testApp::touchDown(float x, float y, int touchId) {
 			
 		} break;
 		case SOLO_STATE: {
-			if (x>50 && x<270 && y>100 && y<350 && (songState!=SONG_PLAY && songState!=SONG_RENDER_VIDEO)) {
+			if (x>50 && x<270 && y>100 && y<300 && (songState!=SONG_PLAY && songState!=SONG_RENDER_VIDEO)) {
 				player[controller].setPush(true);
 				bPush = true;
 			}
