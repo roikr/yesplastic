@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+Rotation.h"
 
 @class SongsTable;
 
@@ -43,6 +44,5 @@
 - (void)link:(id)sender;
 - (void)cancelEdit;
 - (void)updateEditMode;
-
 
 @end

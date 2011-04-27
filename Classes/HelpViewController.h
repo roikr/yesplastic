@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface HelpViewController : UIViewController {
 	UIScrollView *scrollView;
 }

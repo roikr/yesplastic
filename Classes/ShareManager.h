@@ -11,6 +11,19 @@
 #import "FacebookUploader.h"
 #import "YouTubeUploader.h"
 
+
+enum {
+	ACTION_UPLOAD_TO_YOUTUBE,
+	ACTION_UPLOAD_TO_FACEBOOK,
+	ACTION_ADD_TO_LIBRARY,
+	ACTION_SEND_VIA_MAIL,
+	ACTION_SEND_RINGTONE,
+	ACTION_CANCEL,
+	ACTION_RENDER,
+	ACTION_PLAY
+};
+
+
 @interface ShareManager : NSObject<FacebookUploaderDelegate,YouTubeUploaderDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate> {
 	FacebookUploader *facebookUploader;
 	YouTubeUploader *youTubeUploader;
@@ -39,7 +52,8 @@
 - (NSString *)getVideoName;
 - (NSString *)getVideoPath;
 
-- (void)menuWithView:(UIView *)view;
+//- (void)menuWithView:(UIView *)view;
+- (void)start:(NSInteger)actionToStart;
 - (void)action;
 - (void)cancel;
 - (void)resetVersions;

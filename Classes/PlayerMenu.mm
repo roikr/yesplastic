@@ -87,10 +87,6 @@
 }
 
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

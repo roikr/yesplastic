@@ -260,6 +260,7 @@
 		E4D4A27611FDA23700C92628 /* SongCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D4A27511FDA23700C92628 /* SongCell.mm */; };
 		E4D4FFF71201FBDF00F8B7B2 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */; };
 		E4D82B2A1262EF3400768E33 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4D82B291262EF3400768E33 /* MessageUI.framework */; };
+		E4DD58ED13687061006FBC9E /* UIViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DD58EC13687061006FBC9E /* UIViewController+Rotation.m */; };
 		E4DE4FB611FFFCAB00BF31AF /* CELL1.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DE4F6311FFFCAB00BF31AF /* CELL1.png */; };
 		E4DE4FB811FFFCAB00BF31AF /* CELL1_SELECT.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DE4F6511FFFCAB00BF31AF /* CELL1_SELECT.png */; };
 		E4DE4FB911FFFCAB00BF31AF /* CELL2.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DE4F6611FFFCAB00BF31AF /* CELL2.png */; };
@@ -1043,6 +1044,8 @@
 		E4D4A27511FDA23700C92628 /* SongCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SongCell.mm; sourceTree = "<group>"; };
 		E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Resource/HelpViewController.xib; sourceTree = "<group>"; };
 		E4D82B291262EF3400768E33 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		E4DD58EB13687061006FBC9E /* UIViewController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Rotation.h"; sourceTree = "<group>"; };
+		E4DD58EC13687061006FBC9E /* UIViewController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Rotation.m"; sourceTree = "<group>"; };
 		E4DE4F6311FFFCAB00BF31AF /* CELL1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL1.png; sourceTree = "<group>"; };
 		E4DE4F6511FFFCAB00BF31AF /* CELL1_SELECT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL1_SELECT.png; sourceTree = "<group>"; };
 		E4DE4F6611FFFCAB00BF31AF /* CELL2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL2.png; sourceTree = "<group>"; };
@@ -2288,6 +2291,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
+				E4DD58EB13687061006FBC9E /* UIViewController+Rotation.h */,
+				E4DD58EC13687061006FBC9E /* UIViewController+Rotation.m */,
 				E4BC39D9125DA8DD00B492E4 /* Main */,
 				E4BC39D5125DA87300B492E4 /* Band */,
 				E4BC39D6125DA88200B492E4 /* Player */,
@@ -2824,6 +2829,7 @@
 				E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */,
 				E4B68B22130C2611004D2F2B /* TutorialView.mm in Sources */,
 				E4C39DDC132A378C00789FE9 /* ofxInteractiveTutorial.cpp in Sources */,
+				E4DD58ED13687061006FBC9E /* UIViewController+Rotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2855,7 +2861,7 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "Milgrom-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",

@@ -55,6 +55,8 @@ class testApp;
 	
 	RKUBackgroundTask *loadTask;
 	
+	UIInterfaceOrientation interfaceOrientation;
+	
 }
 
 
@@ -77,7 +79,7 @@ class testApp;
 
 @property (nonatomic, retain) ShareManager *shareManager;
 @property NSInteger lastSavedVersion;
-
+@property UIInterfaceOrientation interfaceOrientation;
 
 
 //@property (nonatomic, retain) NSNumber *videoBitrate;

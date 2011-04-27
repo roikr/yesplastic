@@ -43,6 +43,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	MilgromLog(@"BandView::viewDidLoad");
+	
+	[self rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+
+	
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
 		
@@ -67,11 +71,6 @@
 	
 	
 		
-}
-
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
 }
 
 
@@ -156,8 +155,8 @@
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
 			break;
 		case 2:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
-			
+//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/mmmilgrom"]];
 			break;
 		default:
 			break;
@@ -186,6 +185,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 	MilgromLog(@"BandView::viewWillAppear");
 	[super viewWillAppear:animated];
+//	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+//	[self rotateToInterfaceOrientation:appDelegate.interfaceOrientation duration:0];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

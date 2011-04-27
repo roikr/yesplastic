@@ -38,11 +38,12 @@
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
 - (void)updateExportProgress:(ExportManager*)manager;
-
+- (void)hideViews;
 @end
 
 @implementation MainViewController
 
+@synthesize stateButton;
 @synthesize playButton;
 @synthesize stopButton;
 @synthesize recordButton;
@@ -67,7 +68,7 @@
 
 @synthesize interactionView;
 @synthesize tutorialView;
-
+@synthesize shareView;
 
 
 //@synthesize triggerButton;
@@ -184,14 +185,16 @@
 
 
 // Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	//!bMenuMode
 	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED &&
 	 OFSAptr->getSongState()!=SONG_RENDER_VIDEO && OFSAptr->getSongState()!=SONG_RENDER_VIDEO_FINISHED &&
-	[tutorialView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+	[tutorialView canRotateToInterfaceOrientation:interfaceOrientation];
 }
+
+
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
@@ -231,14 +234,13 @@
 }
 
 
-
-
 - (void)updateViews {
 	
 	if (self.navigationController.topViewController != self) {
 		return;
 	}
 	
+	stateButton.hidden = YES;
 	playButton.hidden = YES;
 	recordButton.hidden = YES;
 	stopButton.hidden = YES;
@@ -252,15 +254,17 @@
 	recordButton.selected = OFSAptr->getSongState() == SONG_TRIGGER_RECORD || OFSAptr->getSongState() == SONG_RECORD;
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
-	shareProgressView.hidden = YES;
-		
+	shareProgressView.hidden = YES;	
 	//[self updateHelp];
 	
 	[tutorialView updateViews];
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
+	
 	self.interactionView.userInteractionEnabled = !bShowHelp;
 	if (bShowHelp) {
-		switch (self.interfaceOrientation){
+		switch (appDelegate.interfaceOrientation){
 			case UIInterfaceOrientationPortrait:
 			case UIInterfaceOrientationPortraitUpsideDown:
 				if (![self.view.subviews containsObject:soloHelp]) {
@@ -301,7 +305,6 @@
 		[renderView removeFromSuperview];
 	} 
 	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
 	if (![[appDelegate shareManager] isUploading]) {
 		[self setShareProgress:1.0f];
@@ -312,15 +315,16 @@
 
 	
 		
-	if (!OFSAptr->isInTransition()) {
+	if (!OFSAptr->isInTransition() && ![self.view.subviews containsObject:shareView]) {
 		switch (OFSAptr->getSongState()) {
 			case SONG_IDLE:
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD:
+				stateButton.hidden = NO;
 				playButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
-				switch (self.interfaceOrientation) {
+				switch (appDelegate.interfaceOrientation) {
 					case UIInterfaceOrientationPortrait:
 					case UIInterfaceOrientationPortraitUpsideDown: {
 						setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive;//  && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
@@ -413,7 +417,7 @@
 				break;	
 				
 			case SONG_PLAY:
-		
+				stateButton.hidden = NO;
 				stopButton.hidden = NO;
 				
 			default:
@@ -427,7 +431,7 @@
 		
 		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion;
 		
-		switch (self.interfaceOrientation) {
+		switch (appDelegate.interfaceOrientation) {
 			case UIInterfaceOrientationLandscapeLeft:
 			case UIInterfaceOrientationLandscapeRight: {
 				BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
@@ -459,6 +463,23 @@
 }
 
 
+- (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.eAGLView setInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[super rotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	switch (toInterfaceOrientation) {
+		case UIInterfaceOrientationPortrait: 
+		case UIInterfaceOrientationPortraitUpsideDown: 
+			stateButton.selected = YES;			
+			break;
+		case UIInterfaceOrientationLandscapeRight: 
+		case UIInterfaceOrientationLandscapeLeft: 
+			stateButton.selected = NO;
+			break;
+		default:
+			break;
+	}
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -474,7 +495,14 @@
 
 
 
-
+- (void) toggle:(id)sender {
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
+	appDelegate.interfaceOrientation = stateButton.selected ? UIInterfaceOrientationLandscapeRight : UIInterfaceOrientationPortrait;
+	
+	[self rotateToInterfaceOrientation:appDelegate.interfaceOrientation duration:0.3];
+}
 
 
 - (void) menu:(id)sender {
@@ -727,6 +755,8 @@
 	[appDelegate.eAGLView startAnimation];
 	appDelegate.eAGLView.hidden = NO;
 	
+	[self rotateToInterfaceOrientation:appDelegate.interfaceOrientation duration:0];
+	
 	self.view.userInteractionEnabled = YES; // was disabled after video export
 	
 	[tutorialView start];
@@ -777,13 +807,48 @@
 		
 		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
 		OFSAptr->setSongState(SONG_IDLE);
-		self.view.userInteractionEnabled = NO; // disabled to avoid loop activation
-		[shareManager menuWithView:self.view];
+		
+		[self.view addSubview:shareView];
+		[self updateViews];
+		//[shareManager menuWithView:self.view];
 	}
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	
 }
 
+- (void) action:(id)sender {
+	self.view.userInteractionEnabled = NO; // disabled to avoid loop activation
+	[shareView removeFromSuperview];
+	UIButton *button = (UIButton *)sender;
+	NSInteger action;
+	
+	switch (button.tag)
+	{
+		case 0: 
+			action = ACTION_UPLOAD_TO_FACEBOOK;
+			break;
+		case 1:
+			action = ACTION_UPLOAD_TO_YOUTUBE;
+			break;
+		case 2:
+			action = ACTION_ADD_TO_LIBRARY;
+			break;
+		case 3:
+			action = ACTION_SEND_VIA_MAIL;
+			break;
+		case 4:
+			action = ACTION_SEND_RINGTONE;
+			break;
+		case 5:
+			action = ACTION_CANCEL;
+			[self updateViews];
+			break;
+	}
+	
+	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
+	
+	[shareManager start:action];
+}
 
 - (void) setRenderProgress:(float) progress {
 	[renderProgressView setRect:CGRectMake(0.0f, 0.0f,progress,1.0f)];

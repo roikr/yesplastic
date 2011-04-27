@@ -319,7 +319,7 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	
 	if (!self.isTutorialActive) {
 		return YES;

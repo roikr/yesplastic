@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+Rotation.h"
 
 class testApp;
 @class EAGLView;
@@ -25,6 +26,7 @@ class testApp;
 	UIView *bandHelp;
 	UIView *soloHelp;
 	UIView *interactionView;
+	UIButton *stateButton;
 	UIButton *playButton;
 	UIButton *stopButton;
 	UIButton *recordButton;
@@ -37,6 +39,8 @@ class testApp;
 	UIView *loopsView;
 	UIView *bandLoopsView;
 	UIView *loopsImagesView;
+	
+	
 	
 	RenderView *renderView;
 	UILabel *renderLabel;
@@ -67,9 +71,12 @@ class testApp;
 	ExportManager *exportManager;
 	OpenGLTOMovie *renderManager;
 	
+	UIView *shareView;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIView *interactionView;
+@property (nonatomic,retain ) IBOutlet UIButton *stateButton;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 @property (nonatomic, retain) IBOutlet UIButton *stopButton;
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
@@ -82,7 +89,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 @property (nonatomic, retain) IBOutlet UIView *loopsImagesView;
-
+@property (nonatomic, retain) IBOutlet UIView *shareView;
 
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
@@ -104,13 +111,14 @@ class testApp;
 @property (nonatomic, retain) ExportManager *exportManager;
 @property (nonatomic, retain) OpenGLTOMovie *renderManager;
 
-
+- (void) toggle:(id)sender;
 - (void) menu:(id)sender;
 - (void) play:(id)sender;
 - (void) stop:(id)sender;
 - (void) record:(id)sender;
 - (void) save:(id)sender;
 - (void) share:(id)sender;
+- (void) action:(id)sender;
 - (void) setShareProgress:(float) progress;
 - (void) trigger:(id)sender;
 //- (void) triggerTest:(id)sender;
@@ -129,5 +137,7 @@ class testApp;
 - (void) moreHelp:(id)sender;
 
 - (void)applicationDidEnterBackground;
+- (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 
 @end

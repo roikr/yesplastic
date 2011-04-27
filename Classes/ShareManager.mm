@@ -26,16 +26,6 @@ enum {
 	STATE_CANCEL
 };
 
-enum {
-	ACTION_UPLOAD_TO_YOUTUBE,
-	ACTION_UPLOAD_TO_FACEBOOK,
-	ACTION_ADD_TO_LIBRARY,
-	ACTION_SEND_VIA_MAIL,
-	ACTION_SEND_RINGTONE,
-	ACTION_CANCEL,
-	ACTION_RENDER,
-	ACTION_PLAY
-};
 
 void ShareAlert(NSString *title,NSString *message) {
 	
@@ -349,8 +339,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	
 	switch (buttonIndex)
 	{
-		case 0: 
-		case 1: {
+		case 0: {
 			if ([self gotInternet]) {
 				action = buttonIndex ? ACTION_UPLOAD_TO_FACEBOOK : ACTION_UPLOAD_TO_YOUTUBE;
 			} else {
@@ -361,6 +350,11 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			//action = self.isUploading ? ACTION_CANCEL : ACTION_UPLOAD_TO_YOUTUBE ;
 			//action = self.isUploading ? ACTION_CANCEL :ACTION_UPLOAD_TO_FACEBOOK;
 		} break;
+		case 1:
+			ShareAlert(@"Upload Movie", @"in the near future, very near...");
+			action = ACTION_CANCEL;
+
+			break;
 		case 2:
 			action = ACTION_ADD_TO_LIBRARY;
 			break;
@@ -391,6 +385,22 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 - (void)cancel {
 	state = STATE_CANCEL;
+}
+
+- (void)start:(NSInteger)actionToStart {
+	action = actionToStart;
+	switch (action) {
+		case ACTION_UPLOAD_TO_FACEBOOK:
+		case ACTION_UPLOAD_TO_YOUTUBE:
+			if ([self gotInternet]) {
+				[self action];
+			} else {
+				ShareAlert(@"Upload Movie", @"We're trying hard, but there's no Internet connection");
+			}
+			break;
+		default:
+			[self action];
+	}
 }
 
 - (void)action {

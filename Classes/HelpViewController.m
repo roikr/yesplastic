@@ -26,15 +26,15 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	scrollView.transform = CGAffineTransformIdentity;
+	scrollView.transform = CGAffineTransformMakeRotation(0.5*M_PI);
+	scrollView.bounds = CGRectMake(0.0f, 0.0f, 480.0f, 320.0f);
+	scrollView.center = CGPointMake(160.0f, 240.0f);
+	
 	scrollView.contentSize=CGSizeMake(480,1152);
 }
 
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) ; //  NO;//
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

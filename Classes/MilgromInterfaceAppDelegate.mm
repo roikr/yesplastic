@@ -74,6 +74,8 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize lastSavedVersion;
 @synthesize shareManager;
 
+@synthesize interfaceOrientation;
+
 //@synthesize videoBitrate;
 
 #pragma mark -
@@ -88,22 +90,17 @@ NSString * const kCacheFolder=@"URLCache";
 //	self.videoBitrate = [NSNumber numberWithDouble:350.0*1000.0]; // 350.0*1024.0
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
+	self.interfaceOrientation = UIInterfaceOrientationLandscapeRight;
 	
 	
 	// implicitly initializes your audio session
 	AVAudioSession *session = [AVAudioSession sharedInstance];
 	session.delegate = self;
-	
-	//self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-	
-	
-//	if (self.milgromViewController == nil) { // this check use in case of loading after warning message...
-//		self.milgromViewController = [[MilgromViewController alloc] initWithNibName:@"MilgromViewController" bundle:nil];
-//	}
-//	
+		
 //	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
 	self.bandMenu = (BandMenu *)viewController.visibleViewController; 
+	
 	
 	
 	[self performSelectorInBackground:@selector(unzipPrecache) withObject:nil];
@@ -239,7 +236,7 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion {
-	[UIView animateWithDuration:0.1 delay:2.0 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
+	[UIView animateWithDuration:0.1 delay:0.2 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
 					 animations:^{
 						 firstView.alpha = 0.0;
 						 secondView.alpha = 1.0;
@@ -260,13 +257,11 @@ NSString * const kCacheFolder=@"URLCache";
 	// TODO: move the update loop from here to main view controller
 	
 	OFSAptr->setup();
-	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	
 	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
 		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	}
-	
-	
+		
 	/* turn off the NSURLCache shared cache */
 	
     NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0
@@ -296,6 +291,10 @@ NSString * const kCacheFolder=@"URLCache";
 						 completion:^(BOOL finished){}]; 
 				 }];
 		 }];
+	
+	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
+												 name:UIDeviceOrientationDidChangeNotification object:nil];
 	
 }
 
@@ -344,12 +343,7 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->stopLoops();
 		OFSAptr->release();
 	}
-	
 	[shareManager applicationDidEnterBackground];
-	
-	
-	
-		
 }
 
 
@@ -366,10 +360,9 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[viewController popToRootViewControllerAnimated:NO];
 	[viewController dismissModalViewControllerAnimated:NO];
-	viewController.view.transform = CGAffineTransformIdentity;
-	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
-//	mainViewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
-	[eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+//	viewController.view.transform = CGAffineTransformIdentity;
+//	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
+	self.interfaceOrientation = UIInterfaceOrientationLandscapeRight;
 	
 		
 }
@@ -395,6 +388,9 @@ NSString * const kCacheFolder=@"URLCache";
      */
 	 [eAGLView stopAnimation];
 	[self saveContext];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 
 
@@ -425,6 +421,9 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)dealloc {
+	
+	
+	
 	[managedObjectContext_ release];
 	[managedObjectModel_ release];
 	[persistentStoreCoordinator_ release];
@@ -683,6 +682,30 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
+
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+	UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+	
+	switch (deviceOrientation) {
+		case UIDeviceOrientationPortrait:
+		case UIDeviceOrientationPortraitUpsideDown:
+		case UIDeviceOrientationLandscapeLeft:
+		case UIDeviceOrientationLandscapeRight:
+//			UIInterfaceOrientation orientation = (UIInterfaceOrientation) deviceOrientation;
+//			if ([viewController.topViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
+//				[self setInterfaceOrientation:in duration:<#(NSTimeInterval)duration#>
+//				[eAGLView setInterfaceOrientation:interfaceOrientation duration:0.3];
+//				[mainViewController setInterfaceOrientation:interfaceOrientation duration:0.3];
+//			}
+			break;
+	}
+	
+}
+
+
+
 - (void)playURL:(NSURL *)url {
 	
 	AVPlayerDemoPlaybackViewController* mPlaybackViewController = [[[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init] autorelease];
@@ -838,12 +861,12 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (currentSong && song ==  currentSong) {
 		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
-
-		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-			[self pushMain];
-		} else {
-			bandMenu.view.userInteractionEnabled = YES;
-		}
+		[self pushMain];
+//		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+//			[self pushMain];
+//		} else {
+//			bandMenu.view.userInteractionEnabled = YES;
+//		}
 
 		return;
 	}
@@ -895,13 +918,14 @@ NSString * const kCacheFolder=@"URLCache";
 		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
 		[loadTask finish];
 		self.loadTask = nil;
+		[self pushMain];
 		
-		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-			[self pushMain]; // TODO: prevent double push
-		} else {
-			bandMenu.view.userInteractionEnabled = YES;
-			[bandMenu.songsTable hideCurrentSongProgress];
-		}
+//		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+//			[self pushMain]; // TODO: prevent double push
+//		} else {
+//			bandMenu.view.userInteractionEnabled = YES;
+//			[bandMenu.songsTable hideCurrentSongProgress];
+//		}
 
 		
 	}
