@@ -825,10 +825,10 @@
 	switch (button.tag)
 	{
 		case 0: 
-			action = ACTION_UPLOAD_TO_YOUTUBE;
+			action = ACTION_UPLOAD_TO_FACEBOOK;
 			break;
 		case 1:
-			action = ACTION_UPLOAD_TO_FACEBOOK;
+			action = ACTION_UPLOAD_TO_YOUTUBE;
 			break;
 		case 2:
 			action = ACTION_ADD_TO_LIBRARY;
