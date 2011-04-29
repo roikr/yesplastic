@@ -73,6 +73,11 @@
     [super dealloc];
 }
 
+-(void)setDelegate:(id<FacebookUploadViewControllerDelegate>)theDelegate {
+	delegate = theDelegate;
+}
+
+
 -(void)setUploader:(FacebookUploader *) theUploader {
 	uploader = theUploader;
 	[theUploader addDelegate:self];
@@ -198,7 +203,7 @@
 }
 
 - (void) cancel:(id)sender {
-	[self.navigationController popViewControllerAnimated:YES];
+	[delegate FacebookUploadViewControllerDone:self];
 }
 
 - (void) logout:(id)sender {
@@ -223,7 +228,7 @@
 	switch ([theUploader state]) {
 		case FACEBOOK_UPLOADER_STATE_UPLOADING:
 		case FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED:
-			[self.navigationController popViewControllerAnimated:YES];
+			[delegate FacebookUploadViewControllerDone:self];
 			break;
 		default:
 			break;

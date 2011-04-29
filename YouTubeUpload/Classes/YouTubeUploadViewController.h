@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "YouTubeUploader.h"
 
+@protocol YouTubeUploadViewControllerDelegate;
 
 @interface YouTubeUploadViewController : UIViewController<YouTubeUploaderDelegate> {
 	YouTubeUploader *uploader;
@@ -36,6 +37,8 @@
 	
 	UIView *processView;
 	
+	id<YouTubeUploadViewControllerDelegate> delegate;
+	
 }
 
 @property (nonatomic,retain) YouTubeUploader *uploader;
@@ -54,9 +57,15 @@
 
 @property (nonatomic,retain) NSString* additionalText;
 
+-(void)setDelegate:(id<YouTubeUploadViewControllerDelegate>)theDelegate;
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
 - (void) touchDown:(id)sender;
 
 @end
 
+@protocol YouTubeUploadViewControllerDelegate<NSObject>
+
+- (void) YouTubeUploadViewControllerDone:(YouTubeUploadViewController *)controller;
+
+@end

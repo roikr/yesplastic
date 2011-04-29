@@ -93,6 +93,10 @@
     [super dealloc];
 }
 
+-(void)setDelegate:(id<YouTubeUploadViewControllerDelegate>)theDelegate {
+	delegate = theDelegate;
+}
+
 
 -(void)setUploader:(YouTubeUploader *) theUploader {
 	uploader = theUploader;
@@ -285,7 +289,7 @@
 }
 
 - (void) cancel:(id)sender {
-	[self.navigationController popViewControllerAnimated:YES];
+	[delegate YouTubeUploadViewControllerDone:self];
 }
 
 
@@ -318,7 +322,7 @@
 			
 		case YOUTUBE_UPLOADER_STATE_UPLOADING:
 			processView.hidden = NO;
-			[self.navigationController popViewControllerAnimated:YES];
+			[delegate YouTubeUploadViewControllerDone:self];
 			break;
 			
 		default:

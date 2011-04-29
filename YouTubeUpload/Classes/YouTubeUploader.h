@@ -21,7 +21,6 @@ enum {
 @class RKUBackgroundTask;
 @protocol YouTubeUploaderDelegate;
 
-
 @interface YouTubeUploader : NSObject {
 
 	GDataServiceTicket *mUploadTicket;
