@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "FacebookUploader.h"
+#import "FacebookUploadViewController.h"
 #import "YouTubeUploader.h"
+#import "YouTubeUploadViewController.h"
 
 
 enum {
@@ -24,7 +26,7 @@ enum {
 };
 
 
-@interface ShareManager : NSObject<FacebookUploaderDelegate,YouTubeUploaderDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate> {
+@interface ShareManager : NSObject<FacebookUploaderDelegate,FacebookUploadViewControllerDelegate,YouTubeUploaderDelegate,YouTubeUploadViewControllerDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate> {
 	FacebookUploader *facebookUploader;
 	YouTubeUploader *youTubeUploader;
 	

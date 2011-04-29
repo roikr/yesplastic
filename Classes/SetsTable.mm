@@ -207,13 +207,13 @@
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if (song==[appDelegate getDemoForCurrentSoundSet]) {
-		[appDelegate popViewController];
+		[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
 		return;
 	}
 	if ([song.bReady boolValue]  && ![song.bLocked boolValue] ) // && song!=[appDelegate getDemoForCurrentSoundSet]
 	{
 		if ([appDelegate loadSoundSetByDemo:song]) {
-			[appDelegate popViewController];
+			[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
 		}
 	}
 }

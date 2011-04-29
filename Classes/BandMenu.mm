@@ -44,8 +44,7 @@
     [super viewDidLoad];
 	MilgromLog(@"BandView::viewDidLoad");
 	
-	[self rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
-
+	
 	
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
@@ -73,6 +72,11 @@
 		
 }
 
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation==UIInterfaceOrientationLandscapeLeft;
+}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -165,7 +169,16 @@
 }
 
 
-
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	MilgromLog(@"BandView::viewWillAppear");
+	MilgromLog(@"BandView orientation: %u, parent: %u",[self interfaceOrientation],[self.navigationController interfaceOrientation]);
+	
+	//	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	//[self rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0 completion:NULL];
+	
+}
 
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -182,12 +195,7 @@
 }
  
 
-- (void)viewWillAppear:(BOOL)animated {
-	MilgromLog(@"BandView::viewWillAppear");
-	[super viewWillAppear:animated];
-//	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-//	[self rotateToInterfaceOrientation:appDelegate.interfaceOrientation duration:0];
-}
+
 
 - (void)viewDidDisappear:(BOOL)animated {
 	MilgromLog(@"BandView::viewDidDisappear");

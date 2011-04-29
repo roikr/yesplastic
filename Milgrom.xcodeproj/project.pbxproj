@@ -292,7 +292,6 @@
 		E4E32C5912A3F1D400508CC8 /* CustomFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E32C5812A3F1D400508CC8 /* CustomFontTextView.m */; };
 		E4E443831282D2CD003ADDA9 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E443821282D2CD003ADDA9 /* facebook_logo.png */; };
 		E4E443861282D2F3003ADDA9 /* youtube_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E443851282D2F3003ADDA9 /* youtube_logo.png */; };
-		E4EB0E941369ACC6001D2A82 /* UIViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EB0E931369ACC6001D2A82 /* UIViewController+Rotation.m */; };
 		E4EB0E991369AD04001D2A82 /* SHARE_CELL1.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EB0E971369AD04001D2A82 /* SHARE_CELL1.png */; };
 		E4EB0E9A1369AD04001D2A82 /* SHARE_CELL2.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EB0E981369AD04001D2A82 /* SHARE_CELL2.png */; };
 		E4EB0E9D1369AD16001D2A82 /* ALL_B.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EB0E9B1369AD16001D2A82 /* ALL_B.png */; };
@@ -1086,8 +1085,6 @@
 		E4E32C5812A3F1D400508CC8 /* CustomFontTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFontTextView.m; sourceTree = "<group>"; };
 		E4E443821282D2CD003ADDA9 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook_logo.png; path = OldFacebookUpload/facebook_logo.png; sourceTree = "<group>"; };
 		E4E443851282D2F3003ADDA9 /* youtube_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youtube_logo.png; path = YouTubeUpload/youtube_logo.png; sourceTree = "<group>"; };
-		E4EB0E921369ACC6001D2A82 /* UIViewController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Rotation.h"; path = "Classes/UIViewController+Rotation.h"; sourceTree = "<group>"; };
-		E4EB0E931369ACC6001D2A82 /* UIViewController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Rotation.m"; path = "Classes/UIViewController+Rotation.m"; sourceTree = "<group>"; };
 		E4EB0E971369AD04001D2A82 /* SHARE_CELL1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SHARE_CELL1.png; sourceTree = "<group>"; };
 		E4EB0E981369AD04001D2A82 /* SHARE_CELL2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SHARE_CELL2.png; sourceTree = "<group>"; };
 		E4EB0E9B1369AD16001D2A82 /* ALL_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ALL_B.png; sourceTree = "<group>"; };
@@ -2304,8 +2301,6 @@
 				E4BC39D6125DA88200B492E4 /* Player */,
 				E4BC39DA125DA91000B492E4 /* Utils */,
 				E4BC39D8125DA8CA00B492E4 /* Custom */,
-				E4EB0E921369ACC6001D2A82 /* UIViewController+Rotation.h */,
-				E4EB0E931369ACC6001D2A82 /* UIViewController+Rotation.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2854,7 +2849,6 @@
 				E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */,
 				E4B68B22130C2611004D2F2B /* TutorialView.mm in Sources */,
 				E4C39DDC132A378C00789FE9 /* ofxInteractiveTutorial.cpp in Sources */,
-				E4EB0E941369ACC6001D2A82 /* UIViewController+Rotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

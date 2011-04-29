@@ -352,58 +352,50 @@
 - (void)setInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	
-	
 	switch (toInterfaceOrientation) {
-		case UIInterfaceOrientationPortrait: {
-			
+		case UIInterfaceOrientationPortrait: 
+		case UIInterfaceOrientationPortraitUpsideDown: 
 			appDelegate.OFSAptr->setState(SOLO_STATE);
-			[UIView animateWithDuration:duration delay:0
-								options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
-							 animations:^{
-								 self.center = CGPointMake(240, 240);
-								 self.transform = CGAffineTransformMakeRotation(0);
-								 
-								 
-							 } 
-							 completion:NULL];
-		} break;
-		case UIInterfaceOrientationPortraitUpsideDown: {
-			
-			appDelegate.OFSAptr->setState(SOLO_STATE);
-			[UIView animateWithDuration:duration delay:0
-								options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
-							 animations:^{
-								 self.center = CGPointMake(80, 240);
-								 self.transform = CGAffineTransformMakeRotation(M_PI);
-								 
-
-							 } 
-							 completion:NULL];
-		} break;
-		case UIInterfaceOrientationLandscapeRight: {
+			break;
+		case UIInterfaceOrientationLandscapeRight: 
+		case UIInterfaceOrientationLandscapeLeft: 
 			appDelegate.OFSAptr->setState(BAND_STATE);
-			[UIView animateWithDuration:duration delay:0
-								options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
-							 animations:^{
-								 self.center = CGPointMake(80, 240);
-								 self.transform = CGAffineTransformMakeRotation(0.5*M_PI);
-							 } 
-							 completion:NULL];
-		} break;
-		case UIInterfaceOrientationLandscapeLeft: {
-			appDelegate.OFSAptr->setState(BAND_STATE);
-			[UIView animateWithDuration:duration delay:0
-								options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
-							 animations:^{
-								 self.center = CGPointMake(240, 240);
-								 self.transform = CGAffineTransformMakeRotation(1.5*M_PI);
-							 } 
-							 completion:NULL];
-		} break;
-		default:
 			break;
 	}
+	
+		
+	[UIView animateWithDuration:duration delay:0 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction// UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+					 animations:^{
+						 switch (toInterfaceOrientation) {
+							 case UIInterfaceOrientationPortrait: 
+							 case UIInterfaceOrientationPortraitUpsideDown: 
+								 self.center = CGPointMake(240, 240);
+								 break;
+							 case UIInterfaceOrientationLandscapeRight: 
+							 case UIInterfaceOrientationLandscapeLeft: 
+								 self.center = CGPointMake(80, 240);
+								 break;
+						 }
+						 
+						 self.transform = CGAffineTransformIdentity;
+						 switch (toInterfaceOrientation) {
+							 case UIInterfaceOrientationPortrait: 
+								 self.transform = CGAffineTransformMakeRotation(0);
+								 break;
+							 case UIInterfaceOrientationLandscapeRight: 
+								 self.transform = CGAffineTransformMakeRotation(0.5*M_PI);
+								 break;
+							 case UIInterfaceOrientationPortraitUpsideDown: 
+								 self.transform = CGAffineTransformMakeRotation(M_PI);
+								 break;
+							 case UIInterfaceOrientationLandscapeLeft: 
+								 self.transform = CGAffineTransformMakeRotation(1.5*M_PI);
+								 break;
+						 }
+					 } 
+					 completion:NULL];
+	
+	
 }
 
 @end

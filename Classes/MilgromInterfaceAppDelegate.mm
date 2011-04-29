@@ -19,7 +19,6 @@
 #include "SoundSet.h"
 #import "MainViewController.h"
 #import "HelpViewController.h"
-#include "PlayerMenu.h"
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 
@@ -34,13 +33,6 @@ NSString * const kCacheFolder=@"URLCache";
 
 @interface NSObject (PrivateMethods)
 
-/*
- - (void) initUI;
- - (void) buttonsEnabled:(BOOL)flag;
- - (void) getFileModificationDate;
- - (void) displayImageWithURL:(NSURL *)theURL;
- - (void) displayCachedImage;
-*/
 - (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion;
 - (void) continueLaunching;
  - (void) initCache;
@@ -58,13 +50,12 @@ NSString * const kCacheFolder=@"URLCache";
 @implementation MilgromInterfaceAppDelegate
 
 @synthesize window;
-@synthesize viewController;
+@synthesize navigationController;
 @synthesize eAGLView;
 
 
 @synthesize mainViewController;
 @synthesize bandMenu;
-@synthesize playerControllers;
 @synthesize OFSAptr;
 @synthesize queuedDemos;
 
@@ -74,7 +65,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize lastSavedVersion;
 @synthesize shareManager;
 
-@synthesize interfaceOrientation;
+
 
 //@synthesize videoBitrate;
 
@@ -83,14 +74,14 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    
+
 	// Override point for customization after application launch.
 	
 		
 //	self.videoBitrate = [NSNumber numberWithDouble:350.0*1000.0]; // 350.0*1024.0
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
-	self.interfaceOrientation = UIInterfaceOrientationLandscapeRight;
+
 	
 	
 	// implicitly initializes your audio session
@@ -99,7 +90,7 @@ NSString * const kCacheFolder=@"URLCache";
 		
 //	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
-	self.bandMenu = (BandMenu *)viewController.visibleViewController; 
+	self.bandMenu = (BandMenu *)self.navigationController.visibleViewController; 
 	
 	
 	
@@ -259,10 +250,6 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	OFSAptr->setup();
 	
-	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
-		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-	}
-		
 	/* turn off the NSURLCache shared cache */
 	
     NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0
@@ -293,9 +280,7 @@ NSString * const kCacheFolder=@"URLCache";
 				 }];
 		 }];
 	
-	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
-												 name:UIDeviceOrientationDidChangeNotification object:nil];
+	
 	
 }
 
@@ -321,7 +306,6 @@ NSString * const kCacheFolder=@"URLCache";
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
-	//[UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
 	
 	[mainViewController applicationDidEnterBackground];	
 }
@@ -352,19 +336,17 @@ NSString * const kCacheFolder=@"URLCache";
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
-	MilgromLog(@"applicationWillEnterForeground deviceOrientation: %i",[[UIDevice currentDevice] orientation]);
-	MilgromLog(@"applicationWillEnterForeground viewController orientation: %i",viewController.interfaceOrientation);
+//	MilgromLog(@"applicationWillEnterForeground deviceOrientation: %i",[[UIDevice currentDevice] orientation]);
+//	MilgromLog(@"applicationWillEnterForeground viewController orientation: %i",navigationController.interfaceOrientation);
+//	
+//	if (mainViewController && [mainViewController isViewLoaded]) { // isViewLoaded to avoid crash when return after exit without entering main view
+//		MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
+//	}
 	
-	if (mainViewController && [mainViewController isViewLoaded]) { // isViewLoaded to avoid crash when return after exit without entering main view
-		MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
-	}
-	
-	[viewController popToRootViewControllerAnimated:NO];
-	[viewController dismissModalViewControllerAnimated:NO];
-//	viewController.view.transform = CGAffineTransformIdentity;
-//	viewController.view.transform = CGAffineTransformMakeRotation(0.5*M_PI);
-	self.interfaceOrientation = UIInterfaceOrientationLandscapeRight;
-	
+	[self.navigationController popToRootViewControllerAnimated:NO];
+	[self.navigationController dismissModalViewControllerAnimated:NO];
+	mainViewController.stateButton.selected = NO;
+
 		
 }
 
@@ -432,7 +414,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[mainViewController release];
 	[window release];
 	[eAGLView release];
-	[viewController release];
+	[navigationController release];
     [super dealloc];
 }
 
@@ -635,76 +617,6 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark -
 #pragma mark Navigation Stack
 
-- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated {
-	[self.viewController presentModalViewController:modalViewController animated:animated];
-}
-
-- (void)dismissModalViewControllerAnimated:(BOOL)animated {
-	[self.viewController dismissModalViewControllerAnimated:animated];
-}
-
-
-
-- (void)pushMain {
-	
-	[viewController pushViewController:self.mainViewController animated:YES];
-	
-	
-	
-}
-
-
-- (void)pushSetMenu {
-	//TODO: replace with NULL as done in the page controll example
-	
-	if (self.playerControllers == nil) { // this check use in case of loading after warning message...
-		NSMutableArray *controllers = [[NSMutableArray alloc] init];
-		for (unsigned i = 0; i < 3; i++) {
-			PlayerMenu *controller = [[PlayerMenu alloc] initWithNibName:@"PlayerMenu" bundle:nil];
-			controller.playerName = [NSString stringWithCString:OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding];
-			
-			//PlayerViewContorller *controller = [[PlayerViewContorller alloc] init];
-			//controller.mainController = self;
-			[controllers addObject:controller];
-			[controller release];
-		}
-		self.playerControllers = [NSArray arrayWithArray:controllers];
-		[controllers release];
-	}
-	
-	//topMenu.hidden = YES;
-	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
-	
-	//[controller show];
-	[viewController pushViewController:controller animated:YES];
-	//[self presentModalViewController:controller animated:YES];
-	//controller.view.hidden = NO;
-	//OFSAptr->bMenu=true; // TODO: change upon return
-}
-
-
-
-
-- (void)orientationChanged:(NSNotification *)notification
-{
-	UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-	
-	switch (deviceOrientation) {
-		case UIDeviceOrientationPortrait:
-		case UIDeviceOrientationPortraitUpsideDown:
-		case UIDeviceOrientationLandscapeLeft:
-		case UIDeviceOrientationLandscapeRight:
-//			UIInterfaceOrientation orientation = (UIInterfaceOrientation) deviceOrientation;
-//			if ([viewController.topViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
-//				[self setInterfaceOrientation:in duration:<#(NSTimeInterval)duration#>
-//				[eAGLView setInterfaceOrientation:interfaceOrientation duration:0.3];
-//				[mainViewController setInterfaceOrientation:interfaceOrientation duration:0.3];
-//			}
-			break;
-	}
-	
-}
-
 
 
 - (void)playURL:(NSURL *)url {
@@ -716,22 +628,20 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	//[[mPlaybackViewController player] seekToTime:CMTimeMakeWithSeconds([defaults doubleForKey:AVPlayerDemoContentTimeUserDefaultsKey], NSEC_PER_SEC) toleranceBefore:CMTimeMake(1, 2 * NSEC_PER_SEC) toleranceAfter:CMTimeMake(1, 2 * NSEC_PER_SEC)];
 	
-	[self presentModalViewController:mPlaybackViewController animated:NO];
+	[self.navigationController presentModalViewController:mPlaybackViewController animated:NO];
 }
 
 - (void)pushViewController:(UIViewController *)controller {
-	[viewController pushViewController:controller animated:YES];
+	[self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void) popViewController {
-	[viewController popViewControllerAnimated:YES];
-}
+
 
 - (void)help {
 	HelpViewController *helpView = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
 	helpView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	
-	[self presentModalViewController:helpView animated:YES];
+	[self.navigationController presentModalViewController:helpView animated:YES];
 }
 
 #pragma mark -
@@ -862,13 +772,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (currentSong && song ==  currentSong) {
 		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
-		[self pushMain];
-//		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-//			[self pushMain];
-//		} else {
-//			bandMenu.view.userInteractionEnabled = YES;
-//		}
-
+		[self.navigationController pushViewController:self.mainViewController animated:YES];
 		return;
 	}
 	
@@ -919,14 +823,14 @@ NSString * const kCacheFolder=@"URLCache";
 		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
 		[loadTask finish];
 		self.loadTask = nil;
-		[self pushMain];
 		
-//		if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight || viewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-//			[self pushMain]; // TODO: prevent double push
-//		} else {
-//			bandMenu.view.userInteractionEnabled = YES;
-//			[bandMenu.songsTable hideCurrentSongProgress];
-//		}
+		if (self.mainViewController == nil) { // this check use in case of loading after warning message...
+			self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+		}
+		
+		[self.navigationController pushViewController:self.mainViewController animated:YES];
+		
+
 
 		
 	}

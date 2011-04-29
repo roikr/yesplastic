@@ -192,8 +192,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		[picker addAttachmentData:data mimeType:mimeType fileName:fileName];
 		
 		[picker setMessageBody:message isHTML:YES];
-		[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] presentModalViewController:picker animated:YES];
-		//[self presentModalViewController:picker animated:YES];
+		[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController presentModalViewController:picker animated:YES];
 		[picker release];
 
 	}
@@ -228,7 +227,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			//message.text = @"Result: not sent";
 			break;
 	}
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] dismissModalViewControllerAnimated:YES];
+	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
 	
 }
 
@@ -489,7 +488,8 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		case ACTION_UPLOAD_TO_YOUTUBE: {
 			
 			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
-			[appDelegate pushViewController:controller];
+			[controller setDelegate:self];
+			[appDelegate.navigationController presentModalViewController:controller animated:YES];
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
 			controller.videoTitle = [[self getDisplayName] uppercaseString];
 			//controller.additionalText = kMilgromURL;
@@ -503,8 +503,8 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			
 			[facebookUploader login];
 			FacebookUploadViewController * controller = [[FacebookUploadViewController alloc] initWithNibName:@"FacebookUploadViewController" bundle:nil];
-			
-			[appDelegate pushViewController:controller];
+			[controller setDelegate:self];
+			[appDelegate.navigationController presentModalViewController:controller animated:YES];
 			controller.uploader = appDelegate.shareManager.facebookUploader;
 			controller.videoTitle = [NSString stringWithFormat:@"MILGROM PLAYS %@",[[self getDisplayName] uppercaseString]];
 			//controller.additionalText = kMilgromURL;
@@ -552,9 +552,13 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	}	
 }
 
+- (void) YouTubeUploadViewControllerDone:(YouTubeUploadViewController *)controller {
+	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+}
 
-
-
+- (void) FacebookUploadViewControllerDone:(FacebookUploadViewController *)controller {
+	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+}
 
 - (void)exportToLibrary
 {

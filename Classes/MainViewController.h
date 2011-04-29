@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+Rotation.h"
+
 
 class testApp;
 @class EAGLView;
@@ -40,6 +40,7 @@ class testApp;
 	UIView *bandLoopsView;
 	UIView *loopsImagesView;
 	
+	NSArray *playerControllers;
 	
 	
 	RenderView *renderView;
@@ -94,6 +95,8 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 
+@property (nonatomic, retain) NSArray *playerControllers;
+
 @property (nonatomic, retain) IBOutlet RenderView *renderView;
 @property (nonatomic, retain) IBOutlet UILabel *renderLabel;
 @property (nonatomic, retain) IBOutlet UIButton *renderCancelButton;
@@ -138,6 +141,9 @@ class testApp;
 
 - (void)applicationDidEnterBackground;
 - (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+- (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration completion:(void (^)(void))completionHandler;
 
 @end
+
+
+

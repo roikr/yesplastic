@@ -29,7 +29,7 @@ class testApp;
 
 @interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate,AVAudioSessionDelegate> {
     UIWindow *window;
-	UINavigationController *viewController;
+	UINavigationController *navigationController;
 
 	NSManagedObjectContext *managedObjectContext_;
 	NSManagedObjectModel *managedObjectModel_;
@@ -41,7 +41,6 @@ class testApp;
 	NSMutableArray *queuedDemos;
 	
 	BandMenu *bandMenu;
-	NSArray *playerControllers;
 	MainViewController *mainViewController;
 	
 	Song *currentSong;
@@ -55,17 +54,15 @@ class testApp;
 	
 	RKUBackgroundTask *loadTask;
 	
-	UIInterfaceOrientation interfaceOrientation;
 	
 }
 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *viewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic,retain) IBOutlet EAGLView *eAGLView;
 @property (nonatomic, retain) BandMenu *bandMenu;
 @property (nonatomic,retain ) MainViewController *mainViewController;
-@property (nonatomic, retain) NSArray *playerControllers;
 
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
@@ -79,7 +76,7 @@ class testApp;
 
 @property (nonatomic, retain) ShareManager *shareManager;
 @property NSInteger lastSavedVersion;
-@property UIInterfaceOrientation interfaceOrientation;
+
 
 
 //@property (nonatomic, retain) NSNumber *videoBitrate;
@@ -92,13 +89,8 @@ class testApp;
 - (BOOL)loadSoundSetByDemo:(Song*)demo;
 - (BOOL)canSaveSongName:(NSString *)songName;
 - (void)saveSong:(NSString *)songName;
-- (void)pushSetMenu;
-- (void)pushMain;
 - (void)pushViewController:(UIViewController *)controller;
-- (void)popViewController;
 - (void)help;
-- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
-- (void)dismissModalViewControllerAnimated:(BOOL)animated;
 - (void)playURL:(NSURL *)url;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 
