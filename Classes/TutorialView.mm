@@ -81,7 +81,7 @@
 			if (tutorial.getCurrentSlideNumber() == MILGROM_TUTORIAL_ROTATE) {
 	
 				if (mainViewController.stateButton.selected) {
-						tutorial.skip();
+					tutorial.skip();
 				}
 					
 			}
@@ -147,7 +147,11 @@
 }
 */
 
-
+- (BOOL)isTutorialRotateble {
+	return (tutorial.getCurrentSlideNumber() == MILGROM_TUTORIAL_ROTATE && tutorial.getState()==TUTORIAL_READY) || 
+		(tutorial.getCurrentSlideNumber() == MILGROM_TUTORIAL_RECORD_PLAY && tutorial.getState()==TUTORIAL_TIMER_STARTED);
+	
+}
 
 - (BOOL) isTutorialActive {
 	return tutorial.getState()!= TUTORIAL_IDLE ;

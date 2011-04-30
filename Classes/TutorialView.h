@@ -43,6 +43,7 @@ enum  {
 @property (nonatomic, retain) UIView *currentView;
 @property (nonatomic, retain) UIButton *currentButton;
 @property (readonly) BOOL isTutorialActive;
+@property (readonly) BOOL isTutorialRotateble;
 @property (readonly) NSUInteger currentTutorialSlide;
 
 
@@ -55,6 +56,7 @@ enum  {
 
 - (void)doneSlide:(int)slideNum;
 - (void)willRotate;
+
 @end
 
 

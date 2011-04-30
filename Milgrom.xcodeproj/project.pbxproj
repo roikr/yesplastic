@@ -136,6 +136,7 @@
 		E433F7EF1332348600B1D3E5 /* CAMERA_REC.png in Resources */ = {isa = PBXBuildFile; fileRef = E433F7EE1332348600B1D3E5 /* CAMERA_REC.png */; };
 		E433F7F2133234F400B1D3E5 /* APP_HELP_SLIDE.png in Resources */ = {isa = PBXBuildFile; fileRef = E433F7F0133234F400B1D3E5 /* APP_HELP_SLIDE.png */; };
 		E433F7F3133234F400B1D3E5 /* HELP_BACK_BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = E433F7F1133234F400B1D3E5 /* HELP_BACK_BUTTON.png */; };
+		E43678C8136CC23900E72419 /* REPLAY_TUTORIAL.png in Resources */ = {isa = PBXBuildFile; fileRef = E43678C7136CC23900E72419 /* REPLAY_TUTORIAL.png */; };
 		E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = E437216C1302AF030090CAEC /* MilgromUtils.mm */; };
 		E4379BB112C0CAAB006C26AC /* RKUBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379BB012C0CAAB006C26AC /* RKUBackgroundTask.m */; };
 		E439299512932D7500F855A8 /* ofxPincher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E439299312932D7500F855A8 /* ofxPincher.cpp */; };
@@ -844,6 +845,7 @@
 		E433F7EE1332348600B1D3E5 /* CAMERA_REC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CAMERA_REC.png; sourceTree = "<group>"; };
 		E433F7F0133234F400B1D3E5 /* APP_HELP_SLIDE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APP_HELP_SLIDE.png; sourceTree = "<group>"; };
 		E433F7F1133234F400B1D3E5 /* HELP_BACK_BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP_BACK_BUTTON.png; sourceTree = "<group>"; };
+		E43678C7136CC23900E72419 /* REPLAY_TUTORIAL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = REPLAY_TUTORIAL.png; sourceTree = "<group>"; };
 		E437216B1302AF030090CAEC /* MilgromUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MilgromUtils.h; path = Classes/MilgromUtils.h; sourceTree = "<group>"; };
 		E437216C1302AF030090CAEC /* MilgromUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MilgromUtils.mm; path = Classes/MilgromUtils.mm; sourceTree = "<group>"; };
 		E4379BAF12C0CAAB006C26AC /* RKUBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKUBackgroundTask.h; sourceTree = "<group>"; };
@@ -1800,6 +1802,7 @@
 		E43BE953125C968F009C8845 /* HELP */ = {
 			isa = PBXGroup;
 			children = (
+				E43678C7136CC23900E72419 /* REPLAY_TUTORIAL.png */,
 				E433F7F0133234F400B1D3E5 /* APP_HELP_SLIDE.png */,
 				E433F7F1133234F400B1D3E5 /* HELP_BACK_BUTTON.png */,
 				E43E9AD41325642000216C56 /* RED_ARROW_6.png */,
@@ -2803,6 +2806,7 @@
 				E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */,
 				E468AE19136C92BA00C372D0 /* RenderViewController.xib in Resources */,
 				E47A619B136CBD170050F796 /* MORE_MILGROM.png in Resources */,
+				E43678C8136CC23900E72419 /* REPLAY_TUTORIAL.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

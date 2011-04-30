@@ -77,10 +77,7 @@
 		CGPoint touchPoint = [touch locationInView:self];
 		
 		if([touch tapCount] == 2) {
-			if (touchPoint.x>460 && touchPoint.y>300) {
-				[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).mainViewController.tutorialView test];
-				return;
-			}
+			
 			appDelegate.OFSAptr->touchDoubleTap(touchPoint.x, touchPoint.y, touchIndex);// send doubletap
 		}
 		

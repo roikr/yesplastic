@@ -413,7 +413,7 @@
 		}
 		
 		
-		stateButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE ; // || tutorialView.currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY && tutorial.getState()==TUTORIAL_TIMER_STARTED);
+		stateButton.hidden = tutorialView.isTutorialActive && !tutorialView.isTutorialRotateble;
 		recordButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 		infoButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
 		
@@ -726,6 +726,10 @@
 	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController presentModalViewController:helpView animated:YES];
 }
 
+- (void) replayTutorial:(id)sender {
+	[self hideHelp];
+	[self.tutorialView test];
+}
 
 - (void)dealloc {
 	[saveViewController release];

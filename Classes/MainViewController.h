@@ -104,6 +104,7 @@ class testApp;
 - (void) showHelp:(id)sender;
 - (void) hideHelp;
 - (void) moreHelp:(id)sender;
+- (void) replayTutorial:(id)sender;
 
 - (void)applicationDidEnterBackground;
 - (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration completion:(void (^)(void))completionHandler;
