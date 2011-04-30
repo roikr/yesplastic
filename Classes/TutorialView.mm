@@ -80,15 +80,8 @@
 		if (tutorial.getState() == TUTORIAL_READY ) {
 			if (tutorial.getCurrentSlideNumber() == MILGROM_TUTORIAL_ROTATE) {
 	
-				switch (mainViewController.interfaceOrientation) {
-					case UIInterfaceOrientationPortrait:
-					case UIInterfaceOrientationPortraitUpsideDown:
+				if (mainViewController.stateButton.selected) {
 						tutorial.skip();
-						break;
-
-					
-					default:
-						break;
 				}
 					
 			}
@@ -253,6 +246,10 @@
 //	self.transform = CGAffineTransformMakeTranslation((mainSize.width-selfSize.width)/2, (mainSize.height-selfSize.height)/2);
 	
 	
+	
+//	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED &&
+//	OFSAptr->getSongState()!=SONG_RENDER_VIDEO && OFSAptr->getSongState()!=SONG_RENDER_VIDEO_FINISHED &&
+//	[tutorialView canRotateToInterfaceOrientation:interfaceOrientation];
 
 	if (tutorial.getState()==TUTORIAL_READY) {
 			
@@ -319,26 +316,6 @@
 }
 
 
-- (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	
-	if (!self.isTutorialActive) {
-		return YES;
-	}
-	
-	if (self.currentTutorialSlide == MILGROM_TUTORIAL_ROTATE && (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation==UIInterfaceOrientationPortraitUpsideDown)) {
-		return YES;
-	}
-		
-	if (self.currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY && tutorial.getState()==TUTORIAL_TIMER_STARTED) {
-			
-		return YES;
-		
-	}
-   
-	return NO;
-	
-	
-}
 
 - (void)willRotate {
 	if (slides.getState() != SLIDE_DONE && slides.getState() != SLIDE_IDLE ) {

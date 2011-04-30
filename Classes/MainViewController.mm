@@ -28,6 +28,7 @@
 
 #import "MilgromUtils.h"
 #import "HelpViewController.h"
+#import "ShareViewController.h"
 #import "RenderView.h"
 
 //#import "Trigger.h"
@@ -70,7 +71,7 @@
 
 @synthesize interactionView;
 @synthesize tutorialView;
-@synthesize shareView;
+
 
 
 //@synthesize triggerButton;
@@ -242,16 +243,6 @@
 }
 
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	//!bMenuMode
-	return OFSAptr->getSongState()!=SONG_RENDER_AUDIO && OFSAptr->getSongState()!=SONG_RENDER_AUDIO_FINISHED &&
-	 OFSAptr->getSongState()!=SONG_RENDER_VIDEO && OFSAptr->getSongState()!=SONG_RENDER_VIDEO_FINISHED &&
-	[tutorialView canRotateToInterfaceOrientation:interfaceOrientation];
-}
-
 
 - (void)updateViews {
 	
@@ -328,12 +319,12 @@
 
 	
 		
-	if (!OFSAptr->isInTransition() && ![self.view.subviews containsObject:shareView] ) {
+	if (!OFSAptr->isInTransition()  ) {
 		switch (OFSAptr->getSongState()) {
 			case SONG_IDLE:
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD:
-				stateButton.hidden = NO;
+				
 				playButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				if (isBandState) {
@@ -418,7 +409,7 @@
 				break;	
 				
 			case SONG_PLAY:
-				stateButton.hidden = NO;
+				
 				stopButton.hidden = NO;
 				
 			default:
@@ -444,10 +435,7 @@
 		}
 		
 		
-
-		
-		
-
+		stateButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE ; // || tutorialView.currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY && tutorial.getState()==TUTORIAL_TIMER_STARTED);
 		recordButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 		infoButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
 		
@@ -479,6 +467,8 @@
 
 - (void) toggle:(id)sender {
 	
+	[tutorialView doneSlide:MILGROM_TUTORIAL_ROTATE];
+	
 	stateButton.selected = !stateButton.selected;
 	
 	
@@ -488,6 +478,7 @@
 	loopsImagesView.hidden = YES;
 	menuButton.hidden = YES;
 	setMenuButton.hidden = YES;
+	stateButton.hidden = YES;
 	[tutorialView removeViews];
 	[tutorialView willRotate]; // to reset slides
 	
@@ -837,7 +828,8 @@
 	
 	[tutorialView doneSlide:MILGROM_SLIDE_SHARE];
 	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
-	
+	//self.view.userInteractionEnabled = NO; // disabled to avoid loop activation
+
 	if ([shareManager isUploading]) {
 		MilgromAlert(@"Uploading", @"wait a second, your video upload is in progress");
 	} else {
@@ -845,47 +837,18 @@
 		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
 		OFSAptr->setSongState(SONG_IDLE);
 		
-		[self.view addSubview:shareView];
-		[self updateViews];
+		ShareViewController *share = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+		share.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		
+		[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController presentModalViewController:share animated:YES];
+		//[self updateViews];
 		//[shareManager menuWithView:self.view];
 	}
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 	
 }
 
-- (void) action:(id)sender {
-	self.view.userInteractionEnabled = NO; // disabled to avoid loop activation
-	[shareView removeFromSuperview];
-	UIButton *button = (UIButton *)sender;
-	NSInteger action;
-	
-	switch (button.tag)
-	{
-		case 0: 
-			action = ACTION_UPLOAD_TO_FACEBOOK;
-			break;
-		case 1:
-			action = ACTION_UPLOAD_TO_YOUTUBE;
-			break;
-		case 2:
-			action = ACTION_ADD_TO_LIBRARY;
-			break;
-		case 3:
-			action = ACTION_SEND_VIA_MAIL;
-			break;
-		case 4:
-			action = ACTION_SEND_RINGTONE;
-			break;
-		case 5:
-			action = ACTION_CANCEL;
-			[self updateViews];
-			break;
-	}
-	
-	ShareManager *shareManager = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager];
-	
-	[shareManager start:action];
-}
+
 
 - (void) setRenderProgress:(float) progress {
 	[renderProgressView setRect:CGRectMake(0.0f, 0.0f,progress,1.0f)];

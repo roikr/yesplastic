@@ -71,9 +71,7 @@ class testApp;
 	
 	ExportManager *exportManager;
 	OpenGLTOMovie *renderManager;
-	
-	UIView *shareView;
-	
+		
 }
 
 @property (nonatomic, retain) IBOutlet UIView *interactionView;
@@ -90,7 +88,7 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *loopsView;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 @property (nonatomic, retain) IBOutlet UIView *loopsImagesView;
-@property (nonatomic, retain) IBOutlet UIView *shareView;
+
 
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
@@ -121,7 +119,6 @@ class testApp;
 - (void) record:(id)sender;
 - (void) save:(id)sender;
 - (void) share:(id)sender;
-- (void) action:(id)sender;
 - (void) setShareProgress:(float) progress;
 - (void) trigger:(id)sender;
 //- (void) triggerTest:(id)sender;
@@ -140,7 +137,6 @@ class testApp;
 - (void) moreHelp:(id)sender;
 
 - (void)applicationDidEnterBackground;
-- (BOOL)canRotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 - (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration completion:(void (^)(void))completionHandler;
 
 @end

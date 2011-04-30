@@ -186,6 +186,8 @@
 		E44F846A127EF0C90063FFA1 /* ExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E44F8469127EF0C90063FFA1 /* ExportManager.m */; };
 		E4570FD61268774600BA52A9 /* ofxMidiSample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4570FD51268774600BA52A9 /* ofxMidiSample.cpp */; };
 		E45A1AEA133E670900A58F52 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45A1AE9133E670900A58F52 /* icon@2x.png */; };
+		E468ADC9136C7E3A00C372D0 /* ShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E468ADC7136C7E3A00C372D0 /* ShareViewController.mm */; };
+		E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E468ADCB136C7EA800C372D0 /* ShareViewController.xib */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
@@ -909,8 +911,8 @@
 		E444727B12143DB90058D07B /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		E444727C12143DB90058D07B /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		E44472B712143FEE0058D07B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		E4452EB3128939AC00C7AE2C /* RenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenderView.m; path = ConvertToVideo/Classes/RenderView.m; sourceTree = SOURCE_ROOT; };
-		E4452EB4128939AC00C7AE2C /* RenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderView.h; path = ConvertToVideo/Classes/RenderView.h; sourceTree = SOURCE_ROOT; };
+		E4452EB3128939AC00C7AE2C /* RenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenderView.m; path = ConvertToVideo/Classes/RenderView.m; sourceTree = "<group>"; };
+		E4452EB4128939AC00C7AE2C /* RenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderView.h; path = ConvertToVideo/Classes/RenderView.h; sourceTree = "<group>"; };
 		E44558F312FA99640001C6CE /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
 		E44558F412FA99640001C6CE /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
 		E44558F512FA99640001C6CE /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
@@ -923,11 +925,14 @@
 		E44F6DB9122A4DC60002386C /* CELL2_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL2_PROGRESS.png; sourceTree = "<group>"; };
 		E44F6DBA122A4DC60002386C /* CELL3_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL3_PROGRESS.png; sourceTree = "<group>"; };
 		E44F6DBB122A4DC60002386C /* CELL4_PROGRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELL4_PROGRESS.png; sourceTree = "<group>"; };
-		E44F8468127EF0C90063FFA1 /* ExportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportManager.h; sourceTree = "<group>"; };
-		E44F8469127EF0C90063FFA1 /* ExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportManager.m; sourceTree = "<group>"; };
+		E44F8468127EF0C90063FFA1 /* ExportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExportManager.h; path = Classes/ExportManager.h; sourceTree = "<group>"; };
+		E44F8469127EF0C90063FFA1 /* ExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExportManager.m; path = Classes/ExportManager.m; sourceTree = "<group>"; };
 		E4570FD41268774600BA52A9 /* ofxMidiSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiSample.h; sourceTree = "<group>"; };
 		E4570FD51268774600BA52A9 /* ofxMidiSample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiSample.cpp; sourceTree = "<group>"; };
 		E45A1AE9133E670900A58F52 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Resource/icon@2x.png"; sourceTree = "<group>"; };
+		E468ADC6136C7E3A00C372D0 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = Classes/ShareViewController.h; sourceTree = "<group>"; };
+		E468ADC7136C7E3A00C372D0 /* ShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShareViewController.mm; path = Classes/ShareViewController.mm; sourceTree = "<group>"; };
+		E468ADCB136C7EA800C372D0 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Resource/ShareViewController.xib; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -999,8 +1004,8 @@
 		E4B3D17C11F823E000B57223 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E4B3D17D11F823E000B57223 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E4B3D2C611F83D5200B57223 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resource/MainWindow.xib; sourceTree = "<group>"; };
-		E4B5427D1270898C00851D86 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
-		E4B5427E1270898C00851D86 /* ShareManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareManager.mm; sourceTree = "<group>"; };
+		E4B5427D1270898C00851D86 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareManager.h; path = Classes/ShareManager.h; sourceTree = "<group>"; };
+		E4B5427E1270898C00851D86 /* ShareManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShareManager.mm; path = Classes/ShareManager.mm; sourceTree = "<group>"; };
 		E4B54283127089C900851D86 /* FacebookUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploadViewController.m; path = OldFacebookUpload/Classes/FacebookUploadViewController.m; sourceTree = "<group>"; };
 		E4B54284127089C900851D86 /* FacebookUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookUploadViewController.h; path = OldFacebookUpload/Classes/FacebookUploadViewController.h; sourceTree = "<group>"; };
 		E4B54285127089C900851D86 /* FacebookUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookUploader.m; path = OldFacebookUpload/Classes/FacebookUploader.m; sourceTree = "<group>"; };
@@ -1010,8 +1015,8 @@
 		E4B68B1E130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MESSAGE_NEXT_BUTTON.png; sourceTree = "<group>"; };
 		E4B68B20130C2611004D2F2B /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
 		E4B68B21130C2611004D2F2B /* TutorialView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TutorialView.mm; sourceTree = "<group>"; };
-		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ../ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
-		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ../ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
+		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
+		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
 		E4BB004312DCCF7500AA868E /* ofxInteractiveSlides.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractiveSlides.cpp; sourceTree = "<group>"; };
 		E4BB004412DCCF7500AA868E /* ofxInteractiveSlides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractiveSlides.h; sourceTree = "<group>"; };
 		E4BB007012DCD16000AA868E /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
@@ -2024,6 +2029,31 @@
 			path = iPublicUtility;
 			sourceTree = "<group>";
 		};
+		E468ADC0136C7D4300C372D0 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				E4B5427D1270898C00851D86 /* ShareManager.h */,
+				E4B5427E1270898C00851D86 /* ShareManager.mm */,
+				E468ADC6136C7E3A00C372D0 /* ShareViewController.h */,
+				E468ADC7136C7E3A00C372D0 /* ShareViewController.mm */,
+				E468ADCB136C7EA800C372D0 /* ShareViewController.xib */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
+		E468ADFF136C907A00C372D0 /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
+				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
+				E4452EB4128939AC00C7AE2C /* RenderView.h */,
+				E4452EB3128939AC00C7AE2C /* RenderView.m */,
+				E44F8468127EF0C90063FFA1 /* ExportManager.h */,
+				E44F8469127EF0C90063FFA1 /* ExportManager.m */,
+			);
+			name = Render;
+			sourceTree = "<group>";
+		};
 		E47B127212C7A5B7007202BB /* ofxSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -2196,20 +2226,12 @@
 			children = (
 				E498DDF5121069EB001CB593 /* EAGLView.h */,
 				E498DDF6121069EB001CB593 /* EAGLView.mm */,
-				E4B5427D1270898C00851D86 /* ShareManager.h */,
-				E4B5427E1270898C00851D86 /* ShareManager.mm */,
 				E4B3D17C11F823E000B57223 /* MainViewController.h */,
 				E4B3D17D11F823E000B57223 /* MainViewController.mm */,
 				E4B68B20130C2611004D2F2B /* TutorialView.h */,
 				E4B68B21130C2611004D2F2B /* TutorialView.mm */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
-				E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */,
-				E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */,
-				E4452EB4128939AC00C7AE2C /* RenderView.h */,
-				E4452EB3128939AC00C7AE2C /* RenderView.m */,
-				E44F8468127EF0C90063FFA1 /* ExportManager.h */,
-				E44F8469127EF0C90063FFA1 /* ExportManager.m */,
 				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
 				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
@@ -2296,8 +2318,10 @@
 			children = (
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
-				E4BC39D9125DA8DD00B492E4 /* Main */,
 				E4BC39D5125DA87300B492E4 /* Band */,
+				E4BC39D9125DA8DD00B492E4 /* Main */,
+				E468ADC0136C7D4300C372D0 /* Share */,
+				E468ADFF136C907A00C372D0 /* Render */,
 				E4BC39D6125DA88200B492E4 /* Player */,
 				E4BC39DA125DA91000B492E4 /* Utils */,
 				E4BC39D8125DA8CA00B492E4 /* Custom */,
@@ -2749,6 +2773,7 @@
 				E4EB0E9A1369AD04001D2A82 /* SHARE_CELL2.png in Resources */,
 				E4EB0E9D1369AD16001D2A82 /* ALL_B.png in Resources */,
 				E4EB0E9E1369AD16001D2A82 /* SOLO_B.png in Resources */,
+				E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2849,6 +2874,7 @@
 				E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */,
 				E4B68B22130C2611004D2F2B /* TutorialView.mm in Sources */,
 				E4C39DDC132A378C00789FE9 /* ofxInteractiveTutorial.cpp in Sources */,
+				E468ADC9136C7E3A00C372D0 /* ShareViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
