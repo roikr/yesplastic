@@ -712,6 +712,8 @@ NSString * const kCacheFolder=@"URLCache";
 	else {
 		self.currentSong = (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
 		[currentSong setSongName:songName];
+		[currentSong setDisplayName:songName];
+
 		
 		[currentSong setBReady:[NSNumber numberWithBool:YES]];
 		[currentSong setBDemo:[NSNumber numberWithBool:NO]];

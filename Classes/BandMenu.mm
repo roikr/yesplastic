@@ -153,14 +153,16 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/mmmilgrom"]];
 			break;
 		case 1:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
 			break;
 		case 2:
-//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/mmmilgrom"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
+			break;
+		case 3:
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
 			break;
 		default:
 			break;

@@ -194,6 +194,7 @@
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
 		E4749D52121D914600886A6E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D51121D914600886A6E /* MobileCoreServices.framework */; };
+		E47A619B136CBD170050F796 /* MORE_MILGROM.png in Resources */ = {isa = PBXBuildFile; fileRef = E47A619A136CBD170050F796 /* MORE_MILGROM.png */; };
 		E47B127612C7A5B7007202BB /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E47B127412C7A5B7007202BB /* ofxSlider.cpp */; };
 		E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47BC952122A8E5A00B6149A /* CustomImageView.m */; };
 		E480B6CD1212152400096300 /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = E480B6C71212152400096300 /* Set.m */; };
@@ -942,6 +943,7 @@
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E4749D51121D914600886A6E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E47A619A136CBD170050F796 /* MORE_MILGROM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MORE_MILGROM.png; sourceTree = "<group>"; };
 		E47B127412C7A5B7007202BB /* ofxSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSlider.cpp; sourceTree = "<group>"; };
 		E47B127512C7A5B7007202BB /* ofxSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSlider.h; sourceTree = "<group>"; };
 		E47BC951122A8E5A00B6149A /* CustomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageView.h; sourceTree = "<group>"; };
@@ -2377,6 +2379,7 @@
 		E4DE4F6111FFFCAB00BF31AF /* Band Menu */ = {
 			isa = PBXGroup;
 			children = (
+				E47A619A136CBD170050F796 /* MORE_MILGROM.png */,
 				E4F0553C12FFDCE8004430A8 /* SONGS.png */,
 				E42D133E124F80A4007BEEB0 /* FACEBOOK.png */,
 				E42D133F124F80A4007BEEB0 /* HELP.png */,
@@ -2799,6 +2802,7 @@
 				E4EB0E9E1369AD16001D2A82 /* SOLO_B.png in Resources */,
 				E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */,
 				E468AE19136C92BA00C372D0 /* RenderViewController.xib in Resources */,
+				E47A619B136CBD170050F796 /* MORE_MILGROM.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
