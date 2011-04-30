@@ -60,7 +60,6 @@
 		
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
-	[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
 	
 	UIButton *button = (UIButton *)sender;
 	NSInteger action;
@@ -87,7 +86,9 @@
 			break;
 	}
 	
-	[appDelegate.shareManager start:action];
+	[appDelegate.navigationController dismissModalViewControllerAnimated:action==ACTION_CANCEL];
+	
+	[appDelegate.shareManager action:action];
 }
 
 @end

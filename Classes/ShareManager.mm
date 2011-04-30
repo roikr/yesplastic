@@ -14,6 +14,7 @@
 #import "MilgromMacros.h"
 #import "YouTubeUploadViewController.h"
 #import "FacebookUploadViewController.h"
+#import "RenderViewController.h"
 
 #import "testApp.h"
 #import "Reachability.h"
@@ -38,13 +39,14 @@ void ShareAlert(NSString *title,NSString *message) {
 static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 @interface ShareManager ()
-- (void)action;
 - (void)sendViaMailWithSubject:(NSString *)subject withMessage:(NSString*)message 
 					  withData:(NSData *)data withMimeType:(NSString*) mimeType withFileName:(NSString*)fileName;
 - (void)exportToLibrary;
 - (void)setVideoRendered;
 - (void)setRingtoneExported;
 - (BOOL)gotInternet;
+- (void)processVideo;
+- (void)processRingtone;
 
 @end
 
@@ -290,7 +292,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 }
 						
 				
-
+/*
 #pragma mark actionSheet
 
 - (void)menuWithView:(UIView *)view {
@@ -384,105 +386,82 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	[self performSelector:@selector(action)];
 	self.sheet = nil;
 }
+ */
 
 - (void)cancel {
-	state = STATE_CANCEL;
+	
 }
 
-- (void)start:(NSInteger)actionToStart {
-	action = actionToStart;
+
+
+- (void)action:(NSInteger)theAction {
+	action = theAction;
 	switch (action) {
 		case ACTION_UPLOAD_TO_FACEBOOK:
 		case ACTION_UPLOAD_TO_YOUTUBE:
-			if ([self gotInternet]) {
-				[self action];
-			} else {
+			if (![self gotInternet]) {
 				ShareAlert(@"Upload Movie", @"We're trying hard, but there's no Internet connection");
+				return;
 			}
 			break;
 		default:
-			[self action];
+			break;
+	}
+	
+	
+	
+	
+	
+	
+	BOOL bNeedToRender = YES;
+	
+	switch (action) {
+		case ACTION_CANCEL:
+			break;
+		case ACTION_UPLOAD_TO_YOUTUBE:
+		case ACTION_UPLOAD_TO_FACEBOOK:
+		case ACTION_ADD_TO_LIBRARY:
+		case ACTION_SEND_VIA_MAIL:
+		case ACTION_PLAY:
+		case ACTION_RENDER:
+			if (self.videoRendered ) {
+				bNeedToRender = NO;
+				[self processVideo];
+			}
+			break;
+		case ACTION_SEND_RINGTONE:
+			if (self.ringtoneExported ) {
+				bNeedToRender = NO;
+				[self processRingtone];
+			} 		
+			break;
+			
+		default:
+			break;
+	}
+				 
+	if (bNeedToRender) {
+		RenderViewController *renderViewController = [[RenderViewController alloc] initWithNibName:@"RenderViewController" bundle:nil];
+		renderViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+		[renderViewController setDelegate:self];
+		[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController presentModalViewController:renderViewController animated:YES];
+		[renderViewController release];
 	}
 }
 
-- (void)action {
+- (void) processRingtone {
+	NSString *subject = @"Sweeeet! My New Milgrom Ringtone!";
+	NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>I'm sending it to you as I believe you'll get a kick out of it (or else we cannot be friends)<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under 'Custom' you should see this file name.<br/>You can always switch it back if you feel like you're not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom's</a> website. I leave it to you to handle the truth.",kMilgromURL];
 	
+	
+	NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];
+	[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"audio/m4r" 
+					withFileName:[[self getSongName] stringByAppendingPathExtension:@"m4r"]];	
+}
+
+- (void) processVideo {
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-	
-	switch (state) {
-		case STATE_IDLE:
-			switch (action) {
-				case ACTION_CANCEL:
-					break;
-				case ACTION_UPLOAD_TO_YOUTUBE:
-				case ACTION_UPLOAD_TO_FACEBOOK:
-				case ACTION_ADD_TO_LIBRARY:
-				case ACTION_SEND_VIA_MAIL:
-				case ACTION_PLAY:
-				case ACTION_RENDER:
-					if (!self.videoRendered ) {
-						state = STATE_RENDER_AUDIO;
-						[[appDelegate mainViewController] renderAudio];
-						return;
-					} 
-					break;
-				case ACTION_SEND_RINGTONE:
-					if (!self.ringtoneExported ) {
-						state = STATE_RENDER_AUDIO;
-						[[appDelegate mainViewController] renderAudio];
-						return;
-					} 
-					break;
-					
-				default:
-					break;
-			}
-			
-			break;
-			
-		case STATE_RENDER_AUDIO:
-			switch (action) {
-				case ACTION_UPLOAD_TO_YOUTUBE:
-				case ACTION_UPLOAD_TO_FACEBOOK:
-				case ACTION_ADD_TO_LIBRARY:
-				case ACTION_SEND_VIA_MAIL:
-				case ACTION_PLAY:
-				case ACTION_RENDER:
-					state = STATE_RENDER_VIDEO;
-					[[appDelegate mainViewController] renderVideo];
-					return;
-					break;
-				case ACTION_SEND_RINGTONE:
-					state = STATE_EXPORT_AUDIO;
-					[[appDelegate mainViewController] exportRingtone];
-					return;
-					break;
-				default:
-					break;
-			}
-			break;
-			
-		case STATE_RENDER_VIDEO:
-			[self setVideoRendered];
-			break;
-			
-		case STATE_EXPORT_AUDIO: 
-			[self setRingtoneExported];
-			break;
-			
-		case STATE_CANCEL:
-			return;
-			break;
-
-		default:
-			break;
-	}
-	
-	
-	
-		
-	
 	switch (action)
 	{
 		case ACTION_UPLOAD_TO_YOUTUBE: {
@@ -515,7 +494,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		}	break;
 			
 		case ACTION_ADD_TO_LIBRARY:
-			[appDelegate mainViewController].view.userInteractionEnabled = YES; 
+			//[appDelegate mainViewController].view.userInteractionEnabled = YES; 
 			[self exportToLibrary];
 			break;
 			
@@ -529,16 +508,6 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 							withFileName:[[self getSongName] stringByAppendingPathExtension:@"mov"]];
 		} break;
 			
-		case ACTION_SEND_RINGTONE: 
-		{
-			NSString *subject = @"Sweeeet! My New Milgrom Ringtone!";
-			NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>I'm sending it to you as I believe you'll get a kick out of it (or else we cannot be friends)<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under 'Custom' you should see this file name.<br/>You can always switch it back if you feel like you're not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom's</a> website. I leave it to you to handle the truth.",kMilgromURL];
-			
-			
-			NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];
-			[self sendViaMailWithSubject:subject withMessage:message withData:myData withMimeType:@"audio/m4r" 
-							withFileName:[[self getSongName] stringByAppendingPathExtension:@"m4r"]];
-		} break;
 			
 		case ACTION_PLAY:
 			[appDelegate playURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"mov"]]];
@@ -546,11 +515,56 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			
 		case ACTION_CANCEL:
 		case ACTION_RENDER:
-			[appDelegate mainViewController].view.userInteractionEnabled = YES; 
+			//[appDelegate mainViewController].view.userInteractionEnabled = YES; 
 			break;
-
+			
 	}	
+	
 }
+
+
+
+#pragma mark delegates
+
+- (void) RenderViewControllerDelegateCanceled:(RenderViewController *)controller {
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	
+
+}
+
+- (void) RenderViewControllerDelegateAudioRendered:(RenderViewController *)controller {
+	
+	switch (action) {
+		case ACTION_UPLOAD_TO_YOUTUBE:
+		case ACTION_UPLOAD_TO_FACEBOOK:
+		case ACTION_ADD_TO_LIBRARY:
+		case ACTION_SEND_VIA_MAIL:
+		case ACTION_PLAY:
+		case ACTION_RENDER:
+			[controller renderVideo];
+			break;
+		case ACTION_SEND_RINGTONE:
+			[controller exportRingtone];
+			break;
+		default:
+			break;
+	}
+}
+
+- (void) RenderViewControllerDelegateVideoRendered:(RenderViewController *)controller {
+	[self setVideoRendered];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:NO];
+	[self processVideo];
+}
+
+
+- (void) RenderViewControllerDelegateRingtoneExported:(RenderViewController *)controller {
+	[self setRingtoneExported];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:NO];
+	[self processRingtone];
+}
+
+
 
 - (void) YouTubeUploadViewControllerDone:(YouTubeUploadViewController *)controller {
 	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
@@ -592,10 +606,10 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
      */
 	
 	
-	if (sheet) {
-		[sheet dismissWithClickedButtonIndex:0 animated:NO];
-		self.sheet = nil;
-	}
+//	if (sheet) {
+//		[sheet dismissWithClickedButtonIndex:0 animated:NO];
+//		self.sheet = nil;
+//	}
 	
 	[facebookUploader applicationDidEnterBackground];
 	

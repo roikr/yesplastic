@@ -188,6 +188,8 @@
 		E45A1AEA133E670900A58F52 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45A1AE9133E670900A58F52 /* icon@2x.png */; };
 		E468ADC9136C7E3A00C372D0 /* ShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E468ADC7136C7E3A00C372D0 /* ShareViewController.mm */; };
 		E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E468ADCB136C7EA800C372D0 /* ShareViewController.xib */; };
+		E468AE17136C92A700C372D0 /* RenderViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E468AE16136C92A700C372D0 /* RenderViewController.mm */; };
+		E468AE19136C92BA00C372D0 /* RenderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E468AE18136C92BA00C372D0 /* RenderViewController.xib */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
@@ -933,6 +935,9 @@
 		E468ADC6136C7E3A00C372D0 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = Classes/ShareViewController.h; sourceTree = "<group>"; };
 		E468ADC7136C7E3A00C372D0 /* ShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShareViewController.mm; path = Classes/ShareViewController.mm; sourceTree = "<group>"; };
 		E468ADCB136C7EA800C372D0 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Resource/ShareViewController.xib; sourceTree = "<group>"; };
+		E468AE15136C92A700C372D0 /* RenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderViewController.h; path = Classes/RenderViewController.h; sourceTree = "<group>"; };
+		E468AE16136C92A700C372D0 /* RenderViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RenderViewController.mm; path = Classes/RenderViewController.mm; sourceTree = "<group>"; };
+		E468AE18136C92BA00C372D0 /* RenderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RenderViewController.xib; path = Resource/RenderViewController.xib; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -976,8 +981,8 @@
 		E49A3D031261158700879E26 /* ofSoundStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofSoundStream.h; sourceTree = "<group>"; };
 		E49BD07E125A7AB1005A0FAC /* ActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionCell.h; sourceTree = "<group>"; };
 		E49BD07F125A7AB1005A0FAC /* ActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionCell.m; sourceTree = "<group>"; };
-		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
-		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveViewController.mm; sourceTree = "<group>"; };
+		E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveViewController.h; path = Classes/SaveViewController.h; sourceTree = "<group>"; };
+		E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SaveViewController.mm; path = Classes/SaveViewController.mm; sourceTree = "<group>"; };
 		E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveViewController.xib; path = Resource/SaveViewController.xib; sourceTree = "<group>"; };
 		E4A9022413094B5100F844CA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resource/icon.png; sourceTree = "<group>"; };
 		E4B1B296126E20B2001A577D /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = "../OpenSource/facebook-iphone-sdk/src/FBConnect/FBConnect.h"; sourceTree = SOURCE_ROOT; };
@@ -1044,10 +1049,10 @@
 		E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Wonderlism.ttf; path = Resource/Wonderlism.ttf; sourceTree = "<group>"; };
 		E4D4A1D311FD79EE00C92628 /* SongsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongsTable.h; sourceTree = "<group>"; };
 		E4D4A1D411FD79EE00C92628 /* SongsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SongsTable.mm; sourceTree = "<group>"; };
-		E4D4A1E811FD7A9600C92628 /* SongsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SongsTable.xib; path = Resource/SongsTable.xib; sourceTree = "<group>"; };
+		E4D4A1E811FD7A9600C92628 /* SongsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SongsTable.xib; path = ../Resource/SongsTable.xib; sourceTree = "<group>"; };
 		E4D4A20A11FD8F4500C92628 /* BandMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BandMenu.h; sourceTree = "<group>"; };
 		E4D4A20B11FD8F4500C92628 /* BandMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BandMenu.mm; sourceTree = "<group>"; };
-		E4D4A20F11FD8F7100C92628 /* BandMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BandMenu.xib; path = Resource/BandMenu.xib; sourceTree = "<group>"; };
+		E4D4A20F11FD8F7100C92628 /* BandMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BandMenu.xib; path = ../Resource/BandMenu.xib; sourceTree = "<group>"; };
 		E4D4A27411FDA23700C92628 /* SongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongCell.h; sourceTree = "<group>"; };
 		E4D4A27511FDA23700C92628 /* SongCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SongCell.mm; sourceTree = "<group>"; };
 		E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Resource/HelpViewController.xib; sourceTree = "<group>"; };
@@ -1072,18 +1077,18 @@
 		E4DE4F9711FFFCAB00BF31AF /* RECORD_B_OVERLY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RECORD_B_OVERLY.png; sourceTree = "<group>"; };
 		E4DE4F9A11FFFCAB00BF31AF /* SAVE_B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAVE_B.png; sourceTree = "<group>"; };
 		E4DE500511FFFDEB00BF31AF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resource/Default.png; sourceTree = "<group>"; };
-		E4DE50541200185200BF31AF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Resource/MainViewController.xib; sourceTree = "<group>"; };
+		E4DE50541200185200BF31AF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = ../Resource/MainViewController.xib; sourceTree = "<group>"; };
 		E4DE508B1200237B00BF31AF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = Classes/HelpViewController.h; sourceTree = "<group>"; };
 		E4DE508C1200237B00BF31AF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = Classes/HelpViewController.m; sourceTree = "<group>"; };
-		E4DF703A11FE9EB000EBD904 /* SongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SongCell.xib; path = Resource/SongCell.xib; sourceTree = "<group>"; };
+		E4DF703A11FE9EB000EBD904 /* SongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SongCell.xib; path = ../Resource/SongCell.xib; sourceTree = "<group>"; };
 		E4DF707D11FEA10C00EBD904 /* SetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCell.h; sourceTree = "<group>"; };
 		E4DF707E11FEA10C00EBD904 /* SetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCell.m; sourceTree = "<group>"; };
 		E4DF708011FEA13300EBD904 /* PlayerMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMenu.h; sourceTree = "<group>"; };
 		E4DF708111FEA13300EBD904 /* PlayerMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMenu.mm; sourceTree = "<group>"; };
-		E4DF708511FEA1CF00EBD904 /* SetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetCell.xib; path = Resource/SetCell.xib; sourceTree = "<group>"; };
+		E4DF708511FEA1CF00EBD904 /* SetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetCell.xib; path = ../Resource/SetCell.xib; sourceTree = "<group>"; };
 		E4DF714611FEB55A00EBD904 /* SetsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetsTable.h; sourceTree = "<group>"; };
-		E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlayerMenu.xib; path = Resource/PlayerMenu.xib; sourceTree = "<group>"; };
-		E4DF714C11FEB58400EBD904 /* SetsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetsTable.xib; path = Resource/SetsTable.xib; sourceTree = "<group>"; };
+		E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlayerMenu.xib; path = ../Resource/PlayerMenu.xib; sourceTree = "<group>"; };
+		E4DF714C11FEB58400EBD904 /* SetsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SetsTable.xib; path = ../Resource/SetsTable.xib; sourceTree = "<group>"; };
 		E4E1381E12AC2F88003E7419 /* DeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteButton.h; sourceTree = "<group>"; };
 		E4E1381F12AC2F88003E7419 /* DeleteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteButton.m; sourceTree = "<group>"; };
 		E4E32C5712A3F1D400508CC8 /* CustomFontTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextView.h; sourceTree = "<group>"; };
@@ -2050,8 +2055,31 @@
 				E4452EB3128939AC00C7AE2C /* RenderView.m */,
 				E44F8468127EF0C90063FFA1 /* ExportManager.h */,
 				E44F8469127EF0C90063FFA1 /* ExportManager.m */,
+				E468AE15136C92A700C372D0 /* RenderViewController.h */,
+				E468AE16136C92A700C372D0 /* RenderViewController.mm */,
+				E468AE18136C92BA00C372D0 /* RenderViewController.xib */,
 			);
 			name = Render;
+			sourceTree = "<group>";
+		};
+		E468AE8C136CAF6000C372D0 /* Save */ = {
+			isa = PBXGroup;
+			children = (
+				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
+				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
+				E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */,
+			);
+			name = Save;
+			sourceTree = "<group>";
+		};
+		E468AE8D136CAFA400C372D0 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				E4DE508B1200237B00BF31AF /* HelpViewController.h */,
+				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
+				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
+			);
+			name = Help;
 			sourceTree = "<group>";
 		};
 		E47B127212C7A5B7007202BB /* ofxSlider */ = {
@@ -2184,6 +2212,9 @@
 				E4D4A27511FDA23700C92628 /* SongCell.mm */,
 				E4E1381E12AC2F88003E7419 /* DeleteButton.h */,
 				E4E1381F12AC2F88003E7419 /* DeleteButton.m */,
+				E4D4A20F11FD8F7100C92628 /* BandMenu.xib */,
+				E4D4A1E811FD7A9600C92628 /* SongsTable.xib */,
+				E4DF703A11FE9EB000EBD904 /* SongCell.xib */,
 			);
 			name = Band;
 			path = Classes;
@@ -2198,6 +2229,9 @@
 				E4C8B40A1217E7E500C34620 /* SetsTable.mm */,
 				E4DF707D11FEA10C00EBD904 /* SetCell.h */,
 				E4DF707E11FEA10C00EBD904 /* SetCell.m */,
+				E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */,
+				E4DF714C11FEB58400EBD904 /* SetsTable.xib */,
+				E4DF708511FEA1CF00EBD904 /* SetCell.xib */,
 			);
 			name = Player;
 			path = Classes;
@@ -2232,10 +2266,9 @@
 				E4B68B21130C2611004D2F2B /* TutorialView.mm */,
 				E48503FA1214BB3600D2271F /* TouchView.h */,
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
-				E4A6FBE0122D807F00A5C4D9 /* SaveViewController.h */,
-				E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
 				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
+				E4DE50541200185200BF31AF /* MainViewController.xib */,
 			);
 			name = Main;
 			path = Classes;
@@ -2244,8 +2277,6 @@
 		E4BC39DA125DA91000B492E4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				E4DE508B1200237B00BF31AF /* HelpViewController.h */,
-				E4DE508C1200237B00BF31AF /* HelpViewController.m */,
 				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				E44D9D221223D1C400477CE0 /* DemoLoader.h */,
 				E44D9D231223D1C400477CE0 /* DemoLoader.mm */,
@@ -2267,16 +2298,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
-				E4D4A20F11FD8F7100C92628 /* BandMenu.xib */,
-				E4D4A1E811FD7A9600C92628 /* SongsTable.xib */,
-				E4DF703A11FE9EB000EBD904 /* SongCell.xib */,
-				E4D4FFF61201FBDF00F8B7B2 /* HelpViewController.xib */,
 				E4964075125BA7FF0058DB34 /* ActionCell.xib */,
-				E4DE50541200185200BF31AF /* MainViewController.xib */,
-				E4A6FBE5122D80E600A5C4D9 /* SaveViewController.xib */,
-				E4DF714B11FEB58400EBD904 /* PlayerMenu.xib */,
-				E4DF714C11FEB58400EBD904 /* SetsTable.xib */,
-				E4DF708511FEA1CF00EBD904 /* SetCell.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -2319,7 +2341,9 @@
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
 				E4BC39D5125DA87300B492E4 /* Band */,
+				E468AE8D136CAFA400C372D0 /* Help */,
 				E4BC39D9125DA8DD00B492E4 /* Main */,
+				E468AE8C136CAF6000C372D0 /* Save */,
 				E468ADC0136C7D4300C372D0 /* Share */,
 				E468ADFF136C907A00C372D0 /* Render */,
 				E4BC39D6125DA88200B492E4 /* Player */,
@@ -2774,6 +2798,7 @@
 				E4EB0E9D1369AD16001D2A82 /* ALL_B.png in Resources */,
 				E4EB0E9E1369AD16001D2A82 /* SOLO_B.png in Resources */,
 				E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */,
+				E468AE19136C92BA00C372D0 /* RenderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2875,6 +2900,7 @@
 				E4B68B22130C2611004D2F2B /* TutorialView.mm in Sources */,
 				E4C39DDC132A378C00789FE9 /* ofxInteractiveTutorial.cpp in Sources */,
 				E468ADC9136C7E3A00C372D0 /* ShareViewController.mm in Sources */,
+				E468AE17136C92A700C372D0 /* RenderViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

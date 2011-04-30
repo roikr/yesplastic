@@ -12,6 +12,7 @@
 #import "FacebookUploadViewController.h"
 #import "YouTubeUploader.h"
 #import "YouTubeUploadViewController.h"
+#import "RenderViewController.h"
 
 
 enum {
@@ -26,7 +27,7 @@ enum {
 };
 
 
-@interface ShareManager : NSObject<FacebookUploaderDelegate,FacebookUploadViewControllerDelegate,YouTubeUploaderDelegate,YouTubeUploadViewControllerDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate> {
+@interface ShareManager : NSObject<FacebookUploaderDelegate,FacebookUploadViewControllerDelegate,YouTubeUploaderDelegate,YouTubeUploadViewControllerDelegate,MFMailComposeViewControllerDelegate,RenderViewControllerDelegate> {
 	FacebookUploader *facebookUploader;
 	YouTubeUploader *youTubeUploader;
 	
@@ -34,8 +35,6 @@ enum {
 	NSInteger exportedRingtoneVersion;
 	BOOL canSendMail;
 	NSInteger action;
-	NSInteger state;
-	
 	UIActionSheet* sheet;
 }
 
@@ -55,10 +54,8 @@ enum {
 - (NSString *)getDisplayName;
 - (NSString *)getVideoPath;
 
-//- (void)menuWithView:(UIView *)view;
-- (void)start:(NSInteger)actionToStart;
-- (void)action;
-- (void)cancel;
+- (void)action:(NSInteger)theAction;
+//- (void)cancel;
 - (void)resetVersions;
 //- (void)prepare;
 - (void)applicationDidEnterBackground;

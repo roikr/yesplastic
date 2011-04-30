@@ -11,15 +11,10 @@
 
 class testApp;
 @class EAGLView;
-@class TouchView;
 @class CustomFontTextField;
 @class SaveViewController;
 @class CustomImageView;
-@class ExportManager;
-@class OpenGLTOMovie;
 @class TutorialView;
-@class RenderView;
-
 
 @interface MainViewController : UIViewController<UINavigationControllerDelegate> {
 
@@ -42,18 +37,9 @@ class testApp;
 	
 	NSArray *playerControllers;
 	
-	
-	RenderView *renderView;
-	UILabel *renderLabel;
-	UIButton *renderCancelButton;
-	UIImageView *renderCameraIcon;
-	
 	TutorialView *tutorialView;
 	
 	testApp *OFSAptr;
-	
-	
-	
 	
 	//UIButton *triggerButton;
 	//UIButton *loopButton;
@@ -67,10 +53,8 @@ class testApp;
 	NSTimeInterval shakeStartTime;
 	
 	CustomImageView *shareProgressView;
-	CustomImageView *renderProgressView;
 	
-	ExportManager *exportManager;
-	OpenGLTOMovie *renderManager;
+	
 		
 }
 
@@ -89,28 +73,17 @@ class testApp;
 @property (nonatomic, retain) IBOutlet UIView *bandLoopsView;
 @property (nonatomic, retain) IBOutlet UIView *loopsImagesView;
 
-
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 @property (nonatomic, retain) IBOutlet UIView *soloHelp;
 
 @property (nonatomic, retain) NSArray *playerControllers;
 
-@property (nonatomic, retain) IBOutlet RenderView *renderView;
-@property (nonatomic, retain) IBOutlet UILabel *renderLabel;
-@property (nonatomic, retain) IBOutlet UIButton *renderCancelButton;
-@property (nonatomic, retain) IBOutlet UIImageView *renderCameraIcon;
-
 @property (nonatomic, retain) IBOutlet TutorialView *tutorialView;
 
 @property (nonatomic, retain) SaveViewController *saveViewController;
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
-@property (nonatomic,retain ) IBOutlet CustomImageView *renderProgressView;
 
 @property BOOL bShowHelp;
-
-
-@property (nonatomic, retain) ExportManager *exportManager;
-@property (nonatomic, retain) OpenGLTOMovie *renderManager;
 
 - (void) toggle:(id)sender;
 - (void) menu:(id)sender;
@@ -127,10 +100,6 @@ class testApp;
 - (void) prevLoop:(id)sender;
 - (void) updateViews;
 
-- (void)renderAudio;
-- (void)renderVideo;
-- (void)exportRingtone;
-- (void)cancelRendering:(id)sender;
 
 - (void) showHelp:(id)sender;
 - (void) hideHelp;
