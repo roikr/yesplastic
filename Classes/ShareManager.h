@@ -55,9 +55,7 @@ enum {
 - (NSString *)getVideoPath;
 
 - (void)action:(NSInteger)theAction;
-//- (void)cancel;
 - (void)resetVersions;
-//- (void)prepare;
 - (void)applicationDidEnterBackground;
 
 @end

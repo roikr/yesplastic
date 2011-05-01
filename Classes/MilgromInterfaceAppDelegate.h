@@ -19,6 +19,10 @@ extern NSString * const kMilgromFileServerURL;
 @class Song;
 @class SoundSet;
 @class MainViewController;
+@class SoloViewController;
+@class SaveViewController;
+@class ShareViewController;
+@class HelpViewController;
 @class BandMenu;
 @class ShareManager;
 @class EAGLView;
@@ -42,6 +46,10 @@ class testApp;
 	
 	BandMenu *bandMenu;
 	MainViewController *mainViewController;
+	SoloViewController *soloViewController;
+	SaveViewController *saveViewController;
+	ShareViewController *shareViewController;
+	HelpViewController *helpViewController;
 	
 	Song *currentSong;
 	
@@ -63,7 +71,10 @@ class testApp;
 @property (nonatomic,retain) IBOutlet EAGLView *eAGLView;
 @property (nonatomic, retain) BandMenu *bandMenu;
 @property (nonatomic,retain ) MainViewController *mainViewController;
-
+@property (nonatomic,retain ) SoloViewController *soloViewController;
+@property (nonatomic,retain) SaveViewController *saveViewController;
+@property (nonatomic,retain) ShareViewController *shareViewController;
+@property (nonatomic,retain) HelpViewController *helpViewController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain,readonly) NSManagedObjectModel *managedObjectModel;
@@ -87,10 +98,14 @@ class testApp;
 - (SoundSet*)getCurrentSoundSet;
 - (Song*)getDemoForCurrentSoundSet;
 - (BOOL)loadSoundSetByDemo:(Song*)demo;
+- (void)main;
+- (void)soloAnimated:(BOOL)animated;
+- (void)share;
+- (void)save;
 - (BOOL)canSaveSongName:(NSString *)songName;
 - (void)saveSong:(NSString *)songName;
 - (void)pushViewController:(UIViewController *)controller;
-- (void)help;
+- (void)helpWithTransition:(UIModalTransitionStyle)transition;
 - (void)playURL:(NSURL *)url;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 

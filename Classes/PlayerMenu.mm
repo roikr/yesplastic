@@ -137,7 +137,12 @@
 	
 }
 
-
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	MilgromLog(@"PlayerMenu::viewDidDisappear");
+	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] soloAnimated:NO];	
+	
+}
 
 - (void)volumeChanged:(id)sender {
 	
@@ -156,9 +161,9 @@
 }
 
 - (void)exit:(id)sender {
-	//((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->bMenu=false;
-	//[self.navigationController popViewControllerAnimated:YES];
-	[self dismissModalViewControllerAnimated:YES];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	
+
 }
 
 

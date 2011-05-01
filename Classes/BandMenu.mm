@@ -144,7 +144,7 @@
 
 - (void)help:(id)sender {
 	[self cancelEdit];
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]) help];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]) helpWithTransition:UIModalTransitionStyleFlipHorizontal];
 }
 
 - (void)link:(id)sender {

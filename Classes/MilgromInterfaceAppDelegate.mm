@@ -18,7 +18,10 @@
 #include "VideoSet.h"
 #include "SoundSet.h"
 #import "MainViewController.h"
+#import "SoloViewController.h"
 #import "HelpViewController.h"
+#import "SaveViewController.h"
+#import "ShareViewController.h"
 #import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 
@@ -26,6 +29,7 @@
 #import <OpenGLES/EAGL.h>
 #import "EAGLView.h"
 #import "RKUBackgroundTask.h"
+#import "MilgromUtils.h"
 
 
 NSString * const kMilgromFileServerURL=@"roikr.com";
@@ -55,6 +59,10 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 @synthesize mainViewController;
+@synthesize soloViewController;
+@synthesize helpViewController;
+@synthesize saveViewController;
+@synthesize shareViewController;
 @synthesize bandMenu;
 @synthesize OFSAptr;
 @synthesize queuedDemos;
@@ -281,7 +289,32 @@ NSString * const kCacheFolder=@"URLCache";
 		 }];
 	
 	
-	
+	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		while (1) {
+			if (self.navigationController.topViewController != bandMenu) {
+				OFSAptr->update(); // also update bNeedDisplay
+				[mainViewController.tutorialView update];
+				if (OFSAptr->bNeedDisplay) {
+					dispatch_async(dispatch_get_main_queue(), ^{
+						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
+							[mainViewController updateViews];
+						} else if (self.mainViewController.modalViewController == soloViewController){
+							[soloViewController updateViews];
+							
+						}
+
+						
+						
+					});
+					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
+				}
+				
+			}
+			
+		}
+	});
 }
 
 - (void)beginInterruption {
@@ -345,8 +378,9 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	[self.navigationController dismissModalViewControllerAnimated:NO];
-	mainViewController.stateButton.selected = NO;
-
+	
+	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	
 		
 }
 
@@ -412,6 +446,10 @@ NSString * const kCacheFolder=@"URLCache";
 	[persistentStoreCoordinator_ release];
 	//TODO: release player controllers
 	[mainViewController release];
+	[soloViewController release];
+	[saveViewController release];
+	[shareViewController release];
+	[helpViewController release];
 	[window release];
 	[eAGLView release];
 	[navigationController release];
@@ -636,12 +674,68 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
-
-- (void)help {
-	HelpViewController *helpView = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
-	helpView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+- (void)main {
+	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
+		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+	}
 	
-	[self.navigationController presentModalViewController:helpView animated:YES];
+	[self.navigationController pushViewController:mainViewController animated:YES];
+}
+
+- (void)soloAnimated:(BOOL)animated {
+	if (self.soloViewController == nil) { // this check use in case of loading after warning message...
+		self.soloViewController = [[SoloViewController alloc] initWithNibName:@"SoloViewController" bundle:nil];
+		soloViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+	}
+
+	[self.navigationController presentModalViewController:soloViewController animated:animated];
+}
+
+- (void)share {
+	
+	
+	//[tutorialView doneSlide:MILGROM_SLIDE_SHARE];
+
+	//self.view.userInteractionEnabled = NO; // disabled to avoid loop activation
+	
+	if ([self.shareManager isUploading]) {
+		MilgromAlert(@"Uploading", @"wait a second, your video upload is in progress");
+	} else {
+		
+		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
+		OFSAptr->setSongState(SONG_IDLE);
+		
+		if (self.shareViewController == nil) {
+			self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+			shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		}
+		
+		
+		[self.navigationController presentModalViewController:shareViewController animated:YES];
+		//[self updateViews];
+		//[shareManager menuWithView:self.view];
+	}
+	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
+}
+
+- (void) save {
+	OFSAptr->setSongState(SONG_IDLE);
+	
+	if (self.saveViewController == nil) {
+		self.saveViewController = [[SaveViewController alloc] initWithNibName:@"SaveViewController" bundle:nil];
+		//saveViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	
+	[self.navigationController presentModalViewController:self.saveViewController animated:YES];
+}
+
+- (void)helpWithTransition:(UIModalTransitionStyle)transition {
+	if (self.helpViewController == nil) {
+		self.helpViewController = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+	}
+	helpViewController.modalTransitionStyle = transition;
+
+	[self.navigationController presentModalViewController:helpViewController animated:YES];
 }
 
 #pragma mark -
@@ -774,7 +868,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (currentSong && song ==  currentSong) {
 		MilgromLog(@"loadSong::willSelectRowAtIndexPath: Song already selected");
-		[self.navigationController pushViewController:self.mainViewController animated:YES];
+		[self main];
 		return;
 	}
 	
@@ -826,11 +920,7 @@ NSString * const kCacheFolder=@"URLCache";
 		[loadTask finish];
 		self.loadTask = nil;
 		
-		if (self.mainViewController == nil) { // this check use in case of loading after warning message...
-			self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-		}
-		
-		[self.navigationController pushViewController:self.mainViewController animated:YES];
+		[self main];
 		
 
 

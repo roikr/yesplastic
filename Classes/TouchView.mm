@@ -16,8 +16,6 @@
 
 @implementation TouchView
 
-@synthesize viewController;
-
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder: decoder])
@@ -176,12 +174,29 @@
 	}
 }
 
+- (BOOL)canBecomeFirstResponder {
+	return YES;
+}
 
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+	MilgromLog(@"shake began");
+	shakeStartTime = [NSDate timeIntervalSinceReferenceDate];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+	NSTimeInterval diff = [NSDate timeIntervalSinceReferenceDate]-shakeStartTime;
+	MilgromLog(@"shake ended: %2.2f",diff);
+	testApp *OFSAptr = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr;
+	
+	if (  diff > 0.1 && diff < 1.0 && (OFSAptr->getSongState()==SONG_IDLE || OFSAptr->getSongState()==SONG_RECORD || OFSAptr->getSongState()==SONG_TRIGGER_RECORD)) { // !tutorialView.isTutorialActive &&
+		OFSAptr->playRandomLoop();
+	}
+}
 
 
 
 - (void)dealloc {
-	[viewController release];
     [super dealloc];
 }
 

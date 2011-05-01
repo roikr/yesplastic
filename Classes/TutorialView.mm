@@ -80,7 +80,7 @@
 		if (tutorial.getState() == TUTORIAL_READY ) {
 			if (tutorial.getCurrentSlideNumber() == MILGROM_TUTORIAL_ROTATE) {
 	
-				if (mainViewController.stateButton.selected) {
+				if (mainViewController.stateButton.selected) { // TODO: fix here
 					tutorial.skip();
 				}
 					

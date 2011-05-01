@@ -388,30 +388,9 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 }
  */
 
-- (void)cancel {
-	
-}
-
-
 
 - (void)action:(NSInteger)theAction {
 	action = theAction;
-	switch (action) {
-		case ACTION_UPLOAD_TO_FACEBOOK:
-		case ACTION_UPLOAD_TO_YOUTUBE:
-			if (![self gotInternet]) {
-				ShareAlert(@"Upload Movie", @"We're trying hard, but there's no Internet connection");
-				return;
-			}
-			break;
-		default:
-			break;
-	}
-	
-	
-	
-	
-	
 	
 	BOOL bNeedToRender = YES;
 	
@@ -420,6 +399,10 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			break;
 		case ACTION_UPLOAD_TO_YOUTUBE:
 		case ACTION_UPLOAD_TO_FACEBOOK:
+			if (![self gotInternet]) {
+				ShareAlert(@"Upload Movie", @"We're trying hard, but there's no Internet connection");
+				return;
+			}
 		case ACTION_ADD_TO_LIBRARY:
 		case ACTION_SEND_VIA_MAIL:
 		case ACTION_PLAY:

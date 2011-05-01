@@ -11,13 +11,10 @@
 
 #define	OF_MAX_TOUCHES			5		// iphone has max 5 finger support
 
-@class MainViewController;
+
 @interface TouchView : UIView {
 	UITouch					*activeTouches[OF_MAX_TOUCHES];
-	MainViewController *viewController;
+	NSTimeInterval shakeStartTime;
 }
-
-@property (nonatomic, retain) MainViewController *viewController;
-
 
 @end
