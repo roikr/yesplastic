@@ -248,22 +248,21 @@
 		
 		
 		
-		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion;
+		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 		
-					
 		BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
 		OFSAptr->getSongVersion();  //  not a demo
 		BOOL isUploading = [appDelegate.shareManager isUploading];
 		
 		shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
-		shareButton.hidden = shareProgressView.hidden = !isUploading && !shareEnabled;
+		shareButton.hidden = shareProgressView.hidden = (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 		
 		
 		
 		
 		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 		recordButton.hidden =  appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
+		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -272,20 +271,25 @@
 		
 	}
 	
-	if (!appDelegate.slidesManager.currentView) {
-		if (appDelegate.slidesManager.currentTutorialSlide == MILGROM_TUTORIAL_CHANGE_LOOP) {
-			for (int i=0; i<3; i++) {
-				if (OFSAptr->getMode(i) == LOOP_MODE) {
-					[appDelegate.slidesManager updateViews];
-					break;
+	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.view) {
+		switch (appDelegate.slidesManager.currentTutorialSlide) {
+			case MILGROM_TUTORIAL_CHANGE_LOOP: 
+				for (int i=0; i<3; i++) {
+					if (OFSAptr->getMode(i) == LOOP_MODE) {
+						[appDelegate.slidesManager addViews];
+						break;
+					}
 				}
-			}
-		}
-		
-		if (appDelegate.slidesManager.currentTutorialSlide == MILGROM_TUTORIAL_SHARE) {
-			if (self.shareButton.hidden==NO) {
-				[appDelegate.slidesManager updateViews];
-			}
+				break;
+			case MILGROM_TUTORIAL_SHARE:
+				if (self.shareButton.hidden==NO) {
+					[appDelegate.slidesManager addViews];
+				}
+				break;
+
+			default:
+				[appDelegate.slidesManager addViews];
+				break;
 		}
 	}
 	
@@ -503,10 +507,6 @@
 	
 	[appDelegate.slidesManager start];
 	[self updateViews];
-	[appDelegate.slidesManager updateViews];
-	
-	
-	
 }
 
 - (void)dealloc {

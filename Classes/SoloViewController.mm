@@ -254,31 +254,28 @@
 		
 		
 		
+		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 		
-		
-		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion;
-		
-		
-			
 		BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
 		OFSAptr->getSongVersion();  //  not a demo
 		BOOL isUploading = [appDelegate.shareManager isUploading];
 		
 		shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
-		shareButton.hidden = shareProgressView.hidden = !isUploading && !shareEnabled;
-		
-		
-		
+		shareButton.hidden = shareProgressView.hidden = (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 		
 		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 		recordButton.hidden =  appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
+		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
 			[self fadeOutRecordButton];
 		}
 		
+	}
+	
+	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.view) {
+		[appDelegate.slidesManager addViews];
 	}
 		
 }
@@ -301,11 +298,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"SoloViewControlloer::viewWillAppear");
-	
-	//self.view.userInteractionEnabled = YES; // was disabled after video export
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
-	
 	[self updateViews];
 }
 
@@ -380,6 +374,8 @@
 
 - (void) play:(id)sender {
 	
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
+	
 		
 	if (recordButton.selected) {
 		[self stop:nil];
@@ -393,7 +389,6 @@
 
 	
 	
-	
 }
 
 - (void) stop:(id)sender {
@@ -403,6 +398,7 @@
 
 - (void) record:(id)sender {
 	
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
 	
 	if (playButton.hidden) {
 		MilgromAlert(@"Sorry",@"can't record while a track is being played");
@@ -514,7 +510,6 @@
 
 - (void) showHelp:(id)sender {
 	
-
 	
 	bShowHelp = YES;
 	[self updateViews];

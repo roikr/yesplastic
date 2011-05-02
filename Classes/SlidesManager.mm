@@ -40,8 +40,6 @@
 - (void)setTargetView:(UIView *)view withSlides:(UIView *)slides {
 	self.targetView = view;
 	self.targetSlides = slides;
-	
-	[self updateViews];
 }
 
 - (void)removeViews {
@@ -60,7 +58,7 @@
 	}
 }
 
-- (void)updateViews {
+- (void)addViews {
 	
 	if (currentTutorialSlide >= MILGROM_TUTORIAL_DONE || currentView) {
 		return;
@@ -102,21 +100,24 @@
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
-	if (currentTutorialSlide == MILGROM_TUTORIAL_CHANGE_LOOP || currentTutorialSlide == MILGROM_TUTORIAL_SHARE) {
-		[appDelegate.mainViewController updateViews];
-		return ;
-	}
-	
+	[appDelegate.mainViewController updateViews];
+	[appDelegate.soloViewController updateViews];
 		
-	[self updateViews];
-	
-	if (currentTutorialSlide == MILGROM_TUTORIAL_ROTATE || currentTutorialSlide == MILGROM_TUTORIAL_MENU) {
-		[appDelegate.mainViewController updateViews];
-	}
-	
-	if (currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY || currentTutorialSlide == MILGROM_TUTORIAL_SOLO_MENU) {
-		[appDelegate.soloViewController updateViews];
-	}
+//	if (currentTutorialSlide == MILGROM_TUTORIAL_CHANGE_LOOP || currentTutorialSlide == MILGROM_TUTORIAL_SHARE) {
+//		[appDelegate.mainViewController updateViews];
+//		return ;
+//	}
+//	
+//		
+//	[self updateViews];
+//	
+//	if (currentTutorialSlide == MILGROM_TUTORIAL_ROTATE || currentTutorialSlide == MILGROM_TUTORIAL_MENU) {
+//		[appDelegate.mainViewController updateViews];
+//	}
+//	
+//	if (currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY || currentTutorialSlide == MILGROM_TUTORIAL_SOLO_MENU) {
+//		[appDelegate.soloViewController updateViews];
+//	}
 
 
 }

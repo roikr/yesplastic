@@ -40,6 +40,6 @@ enum  {
 + (SlidesManager*) slidesManager;
 - (void)start;
 - (void)setTargetView:(UIView *)view withSlides:(UIView *)slides;
-- (void)updateViews;
+- (void)addViews;
 - (void)doneSlide:(NSUInteger)slide;
 @end
