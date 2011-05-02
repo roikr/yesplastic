@@ -972,7 +972,7 @@
 		E496406E125BA7AE0058DB34 /* YouTubeUploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YouTubeUploadViewController.xib; path = YouTubeUpload/YouTubeUploadViewController.xib; sourceTree = "<group>"; };
 		E4964070125BA7BE0058DB34 /* YouTubeUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadViewController.h; path = YouTubeUpload/Classes/YouTubeUploadViewController.h; sourceTree = "<group>"; };
 		E4964071125BA7BE0058DB34 /* YouTubeUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadViewController.m; path = YouTubeUpload/Classes/YouTubeUploadViewController.m; sourceTree = "<group>"; };
-		E4964075125BA7FF0058DB34 /* ActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionCell.xib; path = Resource/ActionCell.xib; sourceTree = "<group>"; };
+		E4964075125BA7FF0058DB34 /* ActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionCell.xib; path = ../Resource/ActionCell.xib; sourceTree = "<group>"; };
 		E4987FD4127F5CED00A07C65 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E498DDF5121069EB001CB593 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = Classes/EAGLView.h; sourceTree = "<group>"; };
 		E498DDF6121069EB001CB593 /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EAGLView.mm; path = Classes/EAGLView.mm; sourceTree = "<group>"; };
@@ -2194,7 +2194,6 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E4BC39EB125DA96800B492E4 /* xib */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E48111351214460D008ABBCC /* precache */,
 				E444720112143ABC0058D07B /* Milgrom-Info.plist */,
@@ -2288,6 +2287,7 @@
 				E48503FB1214BB3600D2271F /* TouchView.mm */,
 				E49BD07E125A7AB1005A0FAC /* ActionCell.h */,
 				E49BD07F125A7AB1005A0FAC /* ActionCell.m */,
+				E4964075125BA7FF0058DB34 /* ActionCell.xib */,
 			);
 			name = Main;
 			path = Classes;
@@ -2311,15 +2311,6 @@
 				E437216C1302AF030090CAEC /* MilgromUtils.mm */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		E4BC39EB125DA96800B492E4 /* xib */ = {
-			isa = PBXGroup;
-			children = (
-				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
-				E4964075125BA7FF0058DB34 /* ActionCell.xib */,
-			);
-			name = xib;
 			sourceTree = "<group>";
 		};
 		E4C44C2012436581007ACEBC /* YouTube */ = {
@@ -2359,6 +2350,7 @@
 			children = (
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
+				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
 				E498DDF5121069EB001CB593 /* EAGLView.h */,
 				E498DDF6121069EB001CB593 /* EAGLView.mm */,
 				E4BC39D5125DA87300B492E4 /* Band */,

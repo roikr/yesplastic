@@ -186,14 +186,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	MilgromLog(@"BandView::viewDidAppear");
 	[super viewDidAppear:animated];
-	
-		
 	self.view.userInteractionEnabled = YES;
-	
-	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate.eAGLView stopAnimation];
-	appDelegate.eAGLView.hidden = YES;
-	
 }
  
 

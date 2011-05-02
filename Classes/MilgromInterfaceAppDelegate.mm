@@ -657,7 +657,21 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark -
 #pragma mark Navigation Stack
 
+- (void)navigationController:(UINavigationController *)navController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	MilgromLog(@"navigationController::willShowViewController: %@",[viewController description]);
+	if (viewController == self.mainViewController) {
+		[self.eAGLView startAnimation];
+		self.eAGLView.hidden = NO;
+	}
+}
 
+- (void)navigationController:(UINavigationController *)navController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	MilgromLog(@"navigationController::didShowViewController %@",[viewController description]);
+	if (viewController == self.bandMenu) {
+		[self.eAGLView stopAnimation];
+		self.eAGLView.hidden = YES;
+	}
+}
 
 - (void)playURL:(NSURL *)url {
 	
@@ -691,6 +705,21 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 
 	[self.navigationController presentModalViewController:soloViewController animated:animated];
+}
+
+- (void)toggle:(UIInterfaceOrientation)orientation {
+	switch (orientation) {
+		case UIInterfaceOrientationPortrait:
+			[self soloAnimated:YES];	
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			[self.navigationController dismissModalViewControllerAnimated:YES];
+			break;
+
+		default:
+			break;
+	}
+	[self.eAGLView setInterfaceOrientation:orientation duration:0.3];
 }
 
 - (void)share {

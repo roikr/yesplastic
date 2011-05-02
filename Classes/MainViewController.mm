@@ -13,7 +13,6 @@
 #include "testApp.h"
 
 #import "MilgromInterfaceAppDelegate.h"
-#import "EAGLView.h"
 #import "TouchView.h"
 #import "SlidesManager.h"
 #import "MilgromMacros.h"
@@ -312,14 +311,6 @@
 	[super viewWillAppear:animated];
 	MilgromLog(@"MainViewController::viewWillAppear");
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate.eAGLView startAnimation];
-	appDelegate.eAGLView.hidden = NO;
-	
-	//[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
-	
-	
-	//self.view.userInteractionEnabled = YES; // was disabled after video export
-	
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	[self updateViews];
 }
@@ -328,7 +319,6 @@
 	[super viewDidAppear:animated];
 	MilgromLog(@"MainViewController::viewDidAppear");
     [self.view becomeFirstResponder]; // this is for the shake detection
-	
 	self.view.hidden = NO;
 }
 
@@ -352,15 +342,8 @@
 - (void) toggle:(id)sender {
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_ROTATE];
-	
-//	[tutorialView removeViews];
-//	[tutorialView willRotate]; // to reset slides
-		
-	[appDelegate soloAnimated:YES];	
-	[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationPortrait duration:0.3];
-
+	[appDelegate toggle:UIInterfaceOrientationPortrait];
 }
 
 

@@ -32,7 +32,7 @@ class testApp;
 
 
 
-@interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate,AVAudioSessionDelegate> {
+@interface MilgromInterfaceAppDelegate : NSObject <UIApplicationDelegate,DemoLoaderDelegate,AVAudioSessionDelegate,UINavigationControllerDelegate> {
     UIWindow *window;
 	UINavigationController *navigationController;
 
@@ -103,6 +103,7 @@ class testApp;
 - (BOOL)loadSoundSetByDemo:(Song*)demo;
 - (void)main;
 - (void)soloAnimated:(BOOL)animated;
+- (void)toggle:(UIInterfaceOrientation)orientation;
 - (void)share;
 - (void)save;
 - (BOOL)canSaveSongName:(NSString *)songName;

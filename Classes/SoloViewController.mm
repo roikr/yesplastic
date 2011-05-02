@@ -14,7 +14,6 @@
 
 #import "MilgromInterfaceAppDelegate.h"
 #include "PlayerMenu.h"
-#import "EAGLView.h"
 #import "TouchView.h"
 #import "MilgromMacros.h"
 #import "Song.h"
@@ -336,11 +335,7 @@
 #pragma mark Buttons
 
 - (void) toggle:(id)sender {
-	
-	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
-	[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0.3];
-
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] toggle:UIInterfaceOrientationLandscapeRight];
 }
 
 
