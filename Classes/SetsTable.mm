@@ -9,6 +9,7 @@
 #import "SetsTable.h"
 #import "SetCell.h"
 #import "MilgromInterfaceAppDelegate.h"
+#import "SoloViewController.h"
 #import "Song.h"
 #import "SoundSet.h"
 #import "MilgromMacros.h"
@@ -207,13 +208,13 @@
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if (song==[appDelegate getDemoForCurrentSoundSet]) {
-		[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
+		[appDelegate.soloViewController dismissModalViewControllerAnimated:YES];
 		return;
 	}
 	if ([song.bReady boolValue]  && ![song.bLocked boolValue] ) // && song!=[appDelegate getDemoForCurrentSoundSet]
 	{
 		if ([appDelegate loadSoundSetByDemo:song]) {
-			[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
+			[appDelegate.soloViewController dismissModalViewControllerAnimated:YES];
 		}
 	}
 }

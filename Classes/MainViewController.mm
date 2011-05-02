@@ -364,7 +364,7 @@
 	
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_MENU];
 	OFSAptr->stopLoops();
-	[self.navigationController popViewControllerAnimated:YES]; 
+	[appDelegate.navigationController popViewControllerAnimated:YES]; 
 		
 	
 	

@@ -140,9 +140,6 @@
 		//button.multipleTouchEnabled = YES;
 	}
 	
-	
-	
-	
 }
 
 
@@ -338,7 +335,7 @@
 	
 	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	[appDelegate.navigationController dismissModalViewControllerAnimated:NO];
+	//[appDelegate.navigationController dismissModalViewControllerAnimated:NO];
 	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
@@ -364,7 +361,7 @@
 	
 	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
 	// ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate])
-	[appDelegate.navigationController presentModalViewController:controller animated:YES];
+	[self presentModalViewController:controller animated:YES];
 	
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SOLO_MENU]; // to avoid slide in mainViewController
 	

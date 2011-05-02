@@ -9,6 +9,7 @@
 #import "PlayerMenu.h"
 #import "SetsTable.h"
 #import "MilgromInterfaceAppDelegate.h"
+#import "SoloViewController.h"
 #import "testApp.h"
 #import "MilgromMacros.h"
 
@@ -140,7 +141,6 @@
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 	MilgromLog(@"PlayerMenu::viewDidDisappear");
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] soloAnimated:NO];	
 	
 }
 
@@ -161,7 +161,7 @@
 }
 
 - (void)exit:(id)sender {
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).soloViewController dismissModalViewControllerAnimated:YES];
 	
 
 }

@@ -197,7 +197,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>E448A995136EB705007571B7</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>SoloViewController.mm</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>E448A996136EB705007571B7</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>SoloViewController.mm</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>E448A9A8136EB8DB007571B7</string>
+						<key>history</key>
+						<array>
+							<string>E448A98C136EB2E3007571B7</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {731, 780}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>546 177 731 821 0 0 1680 1028 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -229,6 +270,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -277,14 +320,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>31</integer>
+									<integer>35</integer>
 									<integer>29</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 120}, {301, 854}}</string>
+							<string>{{0, 0}, {301, 854}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -314,14 +357,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoloViewController.mm</string>
+								<string>MilgromInterfaceAppDelegate.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +370,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoloViewController.mm</string>
+										<string>MilgromInterfaceAppDelegate.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E448A985136EAF45007571B7</string>
+										<string>E448A9A7136EB8DB007571B7</string>
 										<key>history</key>
 										<array>
 											<string>E4DF70F811FEADE100EBD904</string>
@@ -509,7 +550,6 @@
 											<string>E4D5FD72136DC921003249A8</string>
 											<string>E4D5FD73136DC921003249A8</string>
 											<string>E4D5FD74136DC921003249A8</string>
-											<string>E4D5FD75136DC921003249A8</string>
 											<string>E4FEBFB1136DF8A100FB715F</string>
 											<string>E4FEBFB2136DF8A100FB715F</string>
 											<string>E4FEBFB3136DF8A100FB715F</string>
@@ -522,13 +562,15 @@
 											<string>E4025B81136E38EA00261012</string>
 											<string>E4025B82136E38EA00261012</string>
 											<string>E4E1B0FA136EA4CA008A5BCB</string>
-											<string>E4E1B0FC136EA4CA008A5BCB</string>
 											<string>E4E1B0FD136EA4CA008A5BCB</string>
 											<string>E448A974136EAE23007571B7</string>
-											<string>E448A975136EAE23007571B7</string>
 											<string>E448A976136EAE23007571B7</string>
-											<string>E448A977136EAE23007571B7</string>
-											<string>E448A984136EAF45007571B7</string>
+											<string>E448A991136EB705007571B7</string>
+											<string>E448A992136EB705007571B7</string>
+											<string>E448A9A3136EB8DB007571B7</string>
+											<string>E448A9A4136EB8DB007571B7</string>
+											<string>E448A9A5136EB8DB007571B7</string>
+											<string>E448A9A6136EB8DB007571B7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -726,13 +768,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E448A986136EAF45007571B7</string>
 		<string>E448A960136EA8DE007571B7</string>
 		<string>E448A962136EA8DE007571B7</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>E4B3D14D11F81F7F00B57223</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>E448A995136EB705007571B7</string>
 		<string>/Users/roikr/Developer/YesPlastic/Milgrom.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -1062,6 +1104,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1107,7 +1151,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
