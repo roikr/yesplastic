@@ -75,8 +75,8 @@
 	OFSAptr = appDelegate.OFSAptr;
 	
 	//[(TouchView*)self.view  setViewController:self];
-	bShowHelp = NO;
-	bInteractiveHelp = NO;
+	
+	
 	bAnimatingRecord = NO;
 	
 	self.shareProgressView.image =  [UIImage imageNamed:@"SHARE_B.png"];
@@ -316,6 +316,7 @@
 	MilgromLog(@"MainViewController::viewWillAppear");
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
+	bShowHelp = NO;
 	[self updateViews];
 }
 
@@ -516,8 +517,6 @@
 
 
 
-
-
 #pragma mark Share
 
 - (void) setShareProgress:(float) progress {
@@ -528,11 +527,7 @@
 	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] share];	
 }
 
-- (void)applicationDidEnterBackground {
-	
-	
-	//[tutorialView removeViews];
-}
+
 				   
 
 @end

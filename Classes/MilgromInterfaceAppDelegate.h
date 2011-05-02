@@ -102,7 +102,6 @@ class testApp;
 - (Song*)getDemoForCurrentSoundSet;
 - (BOOL)loadSoundSetByDemo:(Song*)demo;
 - (void)main;
-- (void)soloAnimated:(BOOL)animated;
 - (void)toggle:(UIInterfaceOrientation)orientation;
 - (void)share;
 - (void)save;

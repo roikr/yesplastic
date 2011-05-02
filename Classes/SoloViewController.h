@@ -37,8 +37,6 @@ class testApp;
 	testApp *OFSAptr;
 	
 	BOOL bShowHelp;
-	BOOL bInteractiveHelp;
-	
 	BOOL bAnimatingRecord;
 	
 	CustomImageView *shareProgressView;
@@ -86,8 +84,6 @@ class testApp;
 - (void) showHelp:(id)sender;
 - (void) hideHelp;
 
-
-- (void)applicationDidEnterBackground;
 
 @end
 

@@ -342,7 +342,6 @@ NSString * const kCacheFolder=@"URLCache";
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
 	
-	[mainViewController applicationDidEnterBackground];	
 }
 
 
@@ -354,7 +353,11 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self saveContext];
 	
-	[eAGLView stopAnimation];
+	[self.soloViewController dismissModalViewControllerAnimated:NO];
+	[self.navigationController dismissModalViewControllerAnimated:NO];
+	[self.navigationController popToRootViewControllerAnimated:NO];
+	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	[shareManager applicationDidEnterBackground];
 	
 	if (!loadTask) {
 		[bandMenu.songsTable deselectCurrentSong];
@@ -363,7 +366,8 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->stopLoops();
 		OFSAptr->release();
 	}
-	[shareManager applicationDidEnterBackground];
+	
+	
 }
 
 
@@ -378,10 +382,9 @@ NSString * const kCacheFolder=@"URLCache";
 //		MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
 //	}
 	
-	[self.navigationController popToRootViewControllerAnimated:NO];
-	[self.navigationController dismissModalViewControllerAnimated:NO];
 	
-	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	
+	
 	
 		
 }
@@ -698,19 +701,16 @@ NSString * const kCacheFolder=@"URLCache";
 	[self.navigationController pushViewController:mainViewController animated:YES];
 }
 
-- (void)soloAnimated:(BOOL)animated {
-	if (self.soloViewController == nil) { // this check use in case of loading after warning message...
-		self.soloViewController = [[SoloViewController alloc] initWithNibName:@"SoloViewController" bundle:nil];
-		soloViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	}
-
-	[self.navigationController presentModalViewController:soloViewController animated:animated];
-}
 
 - (void)toggle:(UIInterfaceOrientation)orientation {
 	switch (orientation) {
 		case UIInterfaceOrientationPortrait:
-			[self soloAnimated:YES];	
+			if (self.soloViewController == nil) { // this check use in case of loading after warning message...
+				self.soloViewController = [[SoloViewController alloc] initWithNibName:@"SoloViewController" bundle:nil];
+				soloViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+			}
+			
+			[self.navigationController presentModalViewController:soloViewController animated:YES];	
 			break;
 		case UIInterfaceOrientationLandscapeRight:
 			[self.navigationController dismissModalViewControllerAnimated:YES];
