@@ -25,6 +25,7 @@ extern NSString * const kMilgromFileServerURL;
 @class HelpViewController;
 @class BandMenu;
 @class ShareManager;
+@class SlidesManager;
 @class EAGLView;
 @class RKUBackgroundTask;
 class testApp;
@@ -54,6 +55,7 @@ class testApp;
 	Song *currentSong;
 	
 	ShareManager *shareManager;
+	SlidesManager *slidesManager;
 	NSInteger lastSavedVersion;
 	
 	EAGLView *eAGLView;
@@ -86,6 +88,7 @@ class testApp;
 @property (nonatomic, retain) RKUBackgroundTask *loadTask;
 
 @property (nonatomic, retain) ShareManager *shareManager;
+@property (nonatomic, retain) SlidesManager *slidesManager;
 @property NSInteger lastSavedVersion;
 
 

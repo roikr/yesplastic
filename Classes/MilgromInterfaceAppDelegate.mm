@@ -26,6 +26,7 @@
 #import <CoreMedia/CoreMedia.h>
 
 #import "ShareManager.h"
+#import "SlidesManager.h"
 #import <OpenGLES/EAGL.h>
 #import "EAGLView.h"
 #import "RKUBackgroundTask.h"
@@ -72,6 +73,7 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize loadTask;
 @synthesize lastSavedVersion;
 @synthesize shareManager;
+@synthesize slidesManager;
 
 
 
@@ -89,7 +91,7 @@ NSString * const kCacheFolder=@"URLCache";
 //	self.videoBitrate = [NSNumber numberWithDouble:350.0*1000.0]; // 350.0*1024.0
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
-
+	self.slidesManager = [SlidesManager slidesManager];
 	
 	
 	// implicitly initializes your audio session
@@ -295,7 +297,7 @@ NSString * const kCacheFolder=@"URLCache";
 		while (1) {
 			if (self.navigationController.topViewController != bandMenu) {
 				OFSAptr->update(); // also update bNeedDisplay
-				[mainViewController.tutorialView update];
+				//[mainViewController.tutorialView update]; // TODO: replace with ?
 				if (OFSAptr->bNeedDisplay) {
 					dispatch_async(dispatch_get_main_queue(), ^{
 						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {

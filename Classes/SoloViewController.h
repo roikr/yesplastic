@@ -32,7 +32,7 @@ class testApp;
 	
 	NSArray *playerControllers;
 	
-	TutorialView *tutorialView;
+	UIView *slides;
 	
 	testApp *OFSAptr;
 	
@@ -63,7 +63,7 @@ class testApp;
 
 @property (nonatomic, retain) NSArray *playerControllers;
 
-@property (nonatomic, retain) IBOutlet TutorialView *tutorialView;
+@property (nonatomic, retain) IBOutlet UIView *slides;
 
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
 
@@ -85,7 +85,7 @@ class testApp;
 
 - (void) showHelp:(id)sender;
 - (void) hideHelp;
-- (void) replayTutorial:(id)sender;
+
 
 - (void)applicationDidEnterBackground;
 

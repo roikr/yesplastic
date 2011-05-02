@@ -15,7 +15,7 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "EAGLView.h"
 #import "TouchView.h"
-#import "TutorialView.h"
+#import "SlidesManager.h"
 #import "MilgromMacros.h"
 #import "Song.h"
 #import "CustomImageView.h"
@@ -50,7 +50,7 @@
 @synthesize bShowHelp;
 
 @synthesize interactionView;
-@synthesize tutorialView;
+@synthesize slides;
 
 @synthesize shareProgressView;
 
@@ -164,13 +164,6 @@
 	shareButton.hidden = YES;
 	infoButton.hidden = YES;
 	shareProgressView.hidden = YES;	
-	//[self updateHelp];
-	
-	[tutorialView updateViews];
-	
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	
-	
 	
 	self.interactionView.userInteractionEnabled = !bShowHelp;
 	if (bShowHelp) {
@@ -187,7 +180,11 @@
 		}
 	}
 
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
+		
+		
+		
 	if (![[appDelegate shareManager] isUploading]) {
 		[self setShareProgress:1.0f];
 	}
@@ -199,10 +196,10 @@
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD: {
 				
-				playButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
-				menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+				menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_MENU;
 				bandLoopsView.hidden = NO;
 				for (int i=0;i<[bandLoopsView.subviews count];i++) {
 					UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
@@ -265,9 +262,9 @@
 		
 		
 		
-		stateButton.hidden = tutorialView.isTutorialActive && !tutorialView.isTutorialRotateble;
-		recordButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
+		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		recordButton.hidden =  appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -275,6 +272,24 @@
 		}
 		
 	}
+	
+	if (!appDelegate.slidesManager.currentView) {
+		if (appDelegate.slidesManager.currentTutorialSlide == MILGROM_TUTORIAL_CHANGE_LOOP) {
+			for (int i=0; i<3; i++) {
+				if (OFSAptr->getMode(i) == LOOP_MODE) {
+					[appDelegate.slidesManager updateViews];
+					break;
+				}
+			}
+		}
+		
+		if (appDelegate.slidesManager.currentTutorialSlide == MILGROM_TUTORIAL_SHARE) {
+			if (self.shareButton.hidden==NO) {
+				[appDelegate.slidesManager updateViews];
+			}
+		}
+	}
+	
 		
 }
 
@@ -305,8 +320,7 @@
 	
 	//self.view.userInteractionEnabled = YES; // was disabled after video export
 	
-	[tutorialView start];
-	
+	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	[self updateViews];
 }
 
@@ -337,25 +351,13 @@
 
 - (void) toggle:(id)sender {
 	
-	[tutorialView doneSlide:MILGROM_TUTORIAL_ROTATE];
-	
-	bandLoopsView.hidden = YES;
-	loopsImagesView.hidden = YES;
-	menuButton.hidden = YES;
-	stateButton.hidden = YES;
-	[tutorialView removeViews];
-	[tutorialView willRotate]; // to reset slides
-	
-	
-	if ([self.view.subviews containsObject:bandHelp]) {
-		[bandHelp removeFromSuperview];
-	}
-	
-	
-	//[super rotateToInterfaceOrientation:toInterfaceOrientation duration:duration ];
-
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
+	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_ROTATE];
+	
+//	[tutorialView removeViews];
+//	[tutorialView willRotate]; // to reset slides
+		
 	[appDelegate soloAnimated:YES];	
 	[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationPortrait duration:0.3];
 
@@ -371,8 +373,9 @@
 	}
 	
 	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
-	[tutorialView doneSlide:MILGROM_SLIDE_MENU];
+	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_MENU];
 	OFSAptr->stopLoops();
 	[self.navigationController popViewControllerAnimated:YES]; 
 		
@@ -513,7 +516,14 @@
 
 - (void) replayTutorial:(id)sender {
 	[self hideHelp];
-	[self.tutorialView test];
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
+	[appDelegate.slidesManager start];
+	[self updateViews];
+	[appDelegate.slidesManager updateViews];
+	
+	
+	
 }
 
 - (void)dealloc {
@@ -538,7 +548,7 @@
 - (void)applicationDidEnterBackground {
 	
 	
-	[tutorialView removeViews];
+	//[tutorialView removeViews];
 }
 				   
 

@@ -16,12 +16,11 @@
 #include "PlayerMenu.h"
 #import "EAGLView.h"
 #import "TouchView.h"
-#import "TutorialView.h"
 #import "MilgromMacros.h"
 #import "Song.h"
 #import "CustomImageView.h"
 #import "ShareManager.h"
-
+#import "SlidesManager.h"
 #import "MilgromUtils.h"
 
 
@@ -55,7 +54,7 @@
 @synthesize playerControllers;
 
 @synthesize interactionView;
-@synthesize tutorialView;
+@synthesize slides;
 
 @synthesize shareProgressView;
 
@@ -174,7 +173,6 @@
 	shareProgressView.hidden = YES;	
 	//[self updateHelp];
 	
-	[tutorialView updateViews];
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
@@ -202,10 +200,10 @@
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD: {
 				
-				playButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
+				setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SOLO_MENU;
 				
-				setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || tutorialView.isTutorialActive;//  && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 				[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 				
@@ -273,9 +271,9 @@
 		
 		
 		
-		stateButton.hidden = tutorialView.isTutorialActive && !tutorialView.isTutorialRotateble;
-		recordButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = tutorialView.isTutorialActive && tutorialView.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
+		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		recordButton.hidden =  appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -304,10 +302,10 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"SoloViewControlloer::viewWillAppear");
-		
-	//self.view.userInteractionEnabled = YES; // was disabled after video export
 	
-	[tutorialView start];
+	//self.view.userInteractionEnabled = YES; // was disabled after video export
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	
 	[self updateViews];
 }
@@ -339,10 +337,6 @@
 
 - (void) toggle:(id)sender {
 	
-	[tutorialView doneSlide:MILGROM_TUTORIAL_ROTATE];
-	[tutorialView removeViews];
-	[tutorialView willRotate]; // to reset slides
-	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.navigationController dismissModalViewControllerAnimated:YES];
 	[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0.3];
@@ -354,6 +348,7 @@
 	
 	
 	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
 	[appDelegate.navigationController dismissModalViewControllerAnimated:NO];
 	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
@@ -381,6 +376,8 @@
 	PlayerMenu *controller = [playerControllers objectAtIndex:OFSAptr->controller];
 	// ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate])
 	[appDelegate.navigationController presentModalViewController:controller animated:YES];
+	
+	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SOLO_MENU]; // to avoid slide in mainViewController
 	
 }
 
@@ -538,10 +535,7 @@
 }
 
 
-- (void) replayTutorial:(id)sender {
-	[self hideHelp];
-	[self.tutorialView test];
-}
+
 
 - (void)dealloc {
     [super dealloc];
@@ -571,7 +565,7 @@
 - (void)applicationDidEnterBackground {
 	
 	
-	[tutorialView removeViews];
+	//[tutorialView removeViews];
 }
 				   
 

@@ -30,14 +30,9 @@ class testApp;
 	UIView *bandLoopsView;
 	UIView *loopsImagesView;
 	
-	TutorialView *tutorialView;
+	UIView *slides;
 	
 	testApp *OFSAptr;
-	
-	//UIButton *triggerButton;
-	//UIButton *loopButton;
-	
-
 	
 	BOOL bShowHelp;
 	BOOL bInteractiveHelp;
@@ -46,8 +41,6 @@ class testApp;
 	
 	CustomImageView *shareProgressView;
 	
-	
-		
 }
 
 @property (nonatomic, retain) IBOutlet UIView *interactionView;
@@ -64,7 +57,7 @@ class testApp;
 
 @property (nonatomic, retain) IBOutlet UIView *bandHelp;
 
-@property (nonatomic, retain) IBOutlet TutorialView *tutorialView;
+@property (nonatomic, retain) IBOutlet UIView *slides;
 
 @property (nonatomic,retain ) IBOutlet CustomImageView *shareProgressView;
 
