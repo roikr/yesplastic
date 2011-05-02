@@ -86,7 +86,7 @@
 			break;
 	}
 	
-	[appDelegate.navigationController dismissModalViewControllerAnimated:action==ACTION_CANCEL];
+	[self.parentViewController dismissModalViewControllerAnimated:action==ACTION_CANCEL];
 	
 	[appDelegate.shareManager action:action];
 }

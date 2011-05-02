@@ -54,7 +54,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 @synthesize facebookUploader;
 @synthesize youTubeUploader;
-@synthesize sheet;
+@synthesize parentViewController;
 
 
 
@@ -194,7 +194,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		[picker addAttachmentData:data mimeType:mimeType fileName:fileName];
 		
 		[picker setMessageBody:message isHTML:YES];
-		[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController presentModalViewController:picker animated:YES];
+		[parentViewController presentModalViewController:picker animated:YES];
 		[picker release];
 
 	}
@@ -229,7 +229,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			//message.text = @"Result: not sent";
 			break;
 	}
-	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	[parentViewController dismissModalViewControllerAnimated:YES];
 	
 }
 
@@ -427,7 +427,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		RenderViewController *renderViewController = [[RenderViewController alloc] initWithNibName:@"RenderViewController" bundle:nil];
 		renderViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 		[renderViewController setDelegate:self];
-		[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController presentModalViewController:renderViewController animated:YES];
+		[parentViewController presentModalViewController:renderViewController animated:YES];
 		[renderViewController release];
 	}
 }
@@ -451,7 +451,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			
 			YouTubeUploadViewController *controller = [[YouTubeUploadViewController alloc] initWithNibName:@"YouTubeUploadViewController" bundle:nil];
 			[controller setDelegate:self];
-			[appDelegate.navigationController presentModalViewController:controller animated:YES];
+			[parentViewController presentModalViewController:controller animated:YES];
 			controller.uploader = appDelegate.shareManager.youTubeUploader;
 			controller.videoTitle = [[self getDisplayName] uppercaseString];
 			//controller.additionalText = kMilgromURL;
@@ -466,7 +466,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			[facebookUploader login];
 			FacebookUploadViewController * controller = [[FacebookUploadViewController alloc] initWithNibName:@"FacebookUploadViewController" bundle:nil];
 			[controller setDelegate:self];
-			[appDelegate.navigationController presentModalViewController:controller animated:YES];
+			[parentViewController presentModalViewController:controller animated:YES];
 			controller.uploader = appDelegate.shareManager.facebookUploader;
 			controller.videoTitle = [NSString stringWithFormat:@"MILGROM PLAYS %@",[[self getDisplayName] uppercaseString]];
 			//controller.additionalText = kMilgromURL;
@@ -510,7 +510,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 #pragma mark delegates
 
 - (void) RenderViewControllerDelegateCanceled:(RenderViewController *)controller {
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	[parentViewController dismissModalViewControllerAnimated:YES];
 	
 
 }
@@ -536,25 +536,25 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 - (void) RenderViewControllerDelegateVideoRendered:(RenderViewController *)controller {
 	[self setVideoRendered];
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:NO];
+	[parentViewController dismissModalViewControllerAnimated:NO];
 	[self processVideo];
 }
 
 
 - (void) RenderViewControllerDelegateRingtoneExported:(RenderViewController *)controller {
 	[self setRingtoneExported];
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:NO];
+	[parentViewController dismissModalViewControllerAnimated:NO];
 	[self processRingtone];
 }
 
 
 
 - (void) YouTubeUploadViewControllerDone:(YouTubeUploadViewController *)controller {
-	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	[parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (void) FacebookUploadViewControllerDone:(FacebookUploadViewController *)controller {
-	[((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).navigationController dismissModalViewControllerAnimated:YES];
+	[parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)exportToLibrary

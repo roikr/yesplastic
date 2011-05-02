@@ -8,6 +8,7 @@
 
 #import "SoloViewController.h"
 #import "MainViewController.h"
+#import "SaveViewController.h"
 
 #include "Constants.h"
 #include "testApp.h"
@@ -326,7 +327,7 @@
 #pragma mark Buttons
 
 - (void) toggle:(id)sender {
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] toggle:UIInterfaceOrientationLandscapeRight];
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] toggle:UIInterfaceOrientationLandscapeRight animated:YES];
 }
 
 
@@ -334,8 +335,6 @@
 	
 	
 	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	//[appDelegate.navigationController dismissModalViewControllerAnimated:NO];
 	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
@@ -440,8 +439,7 @@
 }
 
 - (void) save:(id)sender {
-	
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] save];	
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] saveWithin:self];
 }
 
 
@@ -541,8 +539,7 @@
 }
 
 - (void)share:(id)sender {
-	
-	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] share];
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareWithin:self];	
 }
 
 				   

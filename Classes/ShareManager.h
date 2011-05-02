@@ -36,6 +36,8 @@ enum {
 	BOOL canSendMail;
 	NSInteger action;
 	UIActionSheet* sheet;
+	
+	UIViewController *parentViewController;
 }
 
 
@@ -46,8 +48,7 @@ enum {
 @property (readonly) BOOL videoRendered;
 @property (readonly) BOOL ringtoneExported;
 
-@property (nonatomic, retain) UIActionSheet *sheet;
-
+@property (nonatomic,retain) UIViewController *parentViewController;
 
 + (ShareManager*) shareManager;
 - (NSString *)getSongName;

@@ -8,6 +8,7 @@
 
 #import "RenderViewController.h"
 #import "MilgromInterfaceAppDelegate.h"
+#import "SoloViewController.h"
 #include "testApp.h"
 #include "Constants.h"
 #import "OpenGLTOMovie.h"
@@ -24,6 +25,7 @@
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
 - (void)updateExportProgress:(ExportManager*)manager;
+- (void)renderFinished;
 @end
 
 
@@ -61,6 +63,12 @@
 	self.view.userInteractionEnabled = NO; // we don't need no band control - only for video
 	self.renderCancelButton.hidden = YES;
 	self.renderView.slideView.hidden = YES;
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	if (self.parentViewController == appDelegate.soloViewController) {
+		[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration: 0.3];
+	}
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -172,6 +180,7 @@
 	OFSAptr->soundStreamStart();
 	[delegate RenderViewControllerDelegateAudioRendered:self];
 	
+	
 }
 
 
@@ -249,7 +258,9 @@
 					 self.renderView.slideView.hidden = YES;
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
+					 [self renderFinished];
 					 [delegate RenderViewControllerDelegateVideoRendered:self];
+					
 					 self.renderManager = nil;
 					 
 				 }
@@ -304,7 +315,9 @@
 								   OFSAptr->soundStreamStart();
 								   
 								   if ([exportManager didExportComplete]) {
+									   [self renderFinished];
 									   [delegate RenderViewControllerDelegateRingtoneExported:self];
+									   
 								   }
 								   
 								   self.exportManager = nil;
@@ -333,9 +346,6 @@
 }
 
 
-
-
-
 - (void)cancelRendering:(id)sender {
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -359,7 +369,17 @@
 		OFSAptr->soundStreamStart();
 	}
 	
+	
 	[delegate RenderViewControllerDelegateCanceled:self];
+	[self renderFinished];
+	
+}
+
+- (void)renderFinished {
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	if (self.parentViewController == appDelegate.soloViewController) {
+		[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationPortrait duration: 0.3];
+	}
 }
 
 - (void)applicationDidEnterBackground {

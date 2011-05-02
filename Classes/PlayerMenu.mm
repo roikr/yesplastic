@@ -161,7 +161,7 @@
 }
 
 - (void)exit:(id)sender {
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).soloViewController dismissModalViewControllerAnimated:YES];
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
 	
 
 }

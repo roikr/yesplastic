@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "SoloViewController.h"
-
 #include "Constants.h"
 #include "testApp.h"
 
@@ -348,7 +347,7 @@
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_ROTATE];
-	[appDelegate toggle:UIInterfaceOrientationPortrait];
+	[appDelegate toggle:UIInterfaceOrientationPortrait animated:YES];
 }
 
 
@@ -443,9 +442,7 @@
 }
 
 - (void) save:(id)sender {
-	
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] save];
-	
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] saveWithin:self];
 }
 
 
@@ -524,7 +521,7 @@
 }
 
 - (void)share:(id)sender {
-	[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] share];	
+	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareWithin:self];	
 }
 
 

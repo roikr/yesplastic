@@ -92,6 +92,7 @@ NSString * const kCacheFolder=@"URLCache";
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
 	self.slidesManager = [SlidesManager slidesManager];
+	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
 	
 	
 	// implicitly initializes your audio session
@@ -694,15 +695,29 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)main {
+	
+	if (self.saveViewController == nil) {
+		self.saveViewController = [[SaveViewController alloc] initWithNibName:@"SaveViewController" bundle:nil];
+		saveViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	
+	if (self.shareViewController == nil) {
+		self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+		shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	
 	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
 		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
 	}
 	
 	[self.navigationController pushViewController:mainViewController animated:YES];
+	
+	
+	
 }
 
 
-- (void)toggle:(UIInterfaceOrientation)orientation {
+- (void)toggle:(UIInterfaceOrientation)orientation animated:(BOOL)animated{
 	switch (orientation) {
 		case UIInterfaceOrientationPortrait:
 			if (self.soloViewController == nil) { // this check use in case of loading after warning message...
@@ -710,20 +725,25 @@ NSString * const kCacheFolder=@"URLCache";
 				soloViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 			}
 			
-			[self.navigationController presentModalViewController:soloViewController animated:YES];	
+			[self.navigationController presentModalViewController:soloViewController animated:animated];	
 			break;
 		case UIInterfaceOrientationLandscapeRight:
-			[self.navigationController dismissModalViewControllerAnimated:YES];
+			[self.navigationController dismissModalViewControllerAnimated:animated];
 			break;
 
 		default:
 			break;
 	}
-	[self.eAGLView setInterfaceOrientation:orientation duration:0.3];
+	[self.eAGLView setInterfaceOrientation:orientation duration: 0.3];
 }
 
-- (void)share {
-	
+- (void)saveWithin:(UIViewController *)controller {
+	self.OFSAptr->setSongState(SONG_IDLE);
+	[controller presentModalViewController:saveViewController animated:YES];
+}
+
+- (void)shareWithin:(UIViewController *)controller {
+		
 	
 	//[tutorialView doneSlide:MILGROM_SLIDE_SHARE];
 
@@ -735,30 +755,15 @@ NSString * const kCacheFolder=@"URLCache";
 		
 		//[[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareManager] prepare];
 		OFSAptr->setSongState(SONG_IDLE);
-		
-		if (self.shareViewController == nil) {
-			self.shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-			shareViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		}
-		
-		
-		[self.navigationController presentModalViewController:shareViewController animated:YES];
+		self.shareManager.parentViewController = controller;
+		[controller presentModalViewController:self.shareViewController animated:YES];
 		//[self updateViews];
 		//[shareManager menuWithView:self.view];
 	}
 	// BUG FIX: this is very important: don't present from milgromViewController as it will result in crash when returning to BandView after share
 }
 
-- (void) save {
-	OFSAptr->setSongState(SONG_IDLE);
-	
-	if (self.saveViewController == nil) {
-		self.saveViewController = [[SaveViewController alloc] initWithNibName:@"SaveViewController" bundle:nil];
-		//saveViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-	}
-	
-	[self.navigationController presentModalViewController:self.saveViewController animated:YES];
-}
+
 
 - (void)helpWithTransition:(UIModalTransitionStyle)transition {
 	if (self.helpViewController == nil) {
