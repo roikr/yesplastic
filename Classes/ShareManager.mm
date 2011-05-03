@@ -254,6 +254,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 - (void) facebookUploaderProgress:(float)progress {
 	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] setShareProgress:progress];
+	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] soloViewController] setShareProgress:progress];
 }
 
 
@@ -281,6 +282,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 - (void) youTubeUploaderProgress:(float)progress {
 	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] setShareProgress:progress];
+	[[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] soloViewController] setShareProgress:progress];
 }
 
 
@@ -396,6 +398,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	
 	switch (action) {
 		case ACTION_CANCEL:
+			bNeedToRender = NO;
 			break;
 		case ACTION_UPLOAD_TO_YOUTUBE:
 		case ACTION_UPLOAD_TO_FACEBOOK:

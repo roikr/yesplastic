@@ -42,4 +42,5 @@ enum  {
 - (void)setTargetView:(UIView *)view withSlides:(UIView *)slides;
 - (void)addViews;
 - (void)doneSlide:(NSUInteger)slide;
+- (void)removeViews;
 @end

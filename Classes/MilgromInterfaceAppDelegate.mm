@@ -49,7 +49,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 - (void) loadSongLoop;
-//- (void) loadSoundSetLoop;
+- (void) startUpdateLoop;
 @end
 
 @implementation MilgromInterfaceAppDelegate
@@ -92,7 +92,16 @@ NSString * const kCacheFolder=@"URLCache";
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
 	self.slidesManager = [SlidesManager slidesManager];
-	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
+	
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides"]) {
+		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_INTRODUCTION;
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	} else {
+		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
+	}
+
+
 	
 	
 	// implicitly initializes your audio session
@@ -251,6 +260,36 @@ NSString * const kCacheFolder=@"URLCache";
 						 completion(YES);}];
 }
 
+- (void) startUpdateLoop {
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		MilgromLog(@"update loop started");
+		while ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+			if (self.navigationController.topViewController != bandMenu) {
+				OFSAptr->update(); // also update bNeedDisplay
+				//[mainViewController.tutorialView update]; // TODO: replace with ?
+				if (OFSAptr->bNeedDisplay) {
+					dispatch_async(dispatch_get_main_queue(), ^{
+						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
+							[mainViewController updateViews];
+						} else if (self.mainViewController.modalViewController == soloViewController){
+							[soloViewController updateViews];
+							
+						}
+						
+						
+						
+					});
+					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
+				}
+				
+			}
+			
+		}
+		MilgromLog(@"update loop exited");		
+	});
+	
+}
+
 - (void) continueLaunching {
 	
 	[self loadDemos];
@@ -293,31 +332,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
-
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		while (1) {
-			if (self.navigationController.topViewController != bandMenu) {
-				OFSAptr->update(); // also update bNeedDisplay
-				//[mainViewController.tutorialView update]; // TODO: replace with ?
-				if (OFSAptr->bNeedDisplay) {
-					dispatch_async(dispatch_get_main_queue(), ^{
-						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
-							[mainViewController updateViews];
-						} else if (self.mainViewController.modalViewController == soloViewController){
-							[soloViewController updateViews];
-							
-						}
-
-						
-						
-					});
-					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
-				}
-				
-			}
-			
-		}
-	});
+	[self startUpdateLoop];
 }
 
 - (void)beginInterruption {
@@ -357,6 +372,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[self.soloViewController dismissModalViewControllerAnimated:NO];
 	[self.navigationController dismissModalViewControllerAnimated:NO];
 	[self.navigationController popToRootViewControllerAnimated:NO];
+	[self.slidesManager removeViews];
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	[shareManager applicationDidEnterBackground];
 	
@@ -384,8 +400,11 @@ NSString * const kCacheFolder=@"URLCache";
 //	}
 	
 	
-	
-	
+	[self startUpdateLoop];
+	if (slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE ) {
+		MilgromAlert(@"Need a start ?", @"you can always launch the tutorial from the help slide !");
+		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
+	}
 	
 		
 }
@@ -768,10 +787,11 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)helpWithTransition:(UIModalTransitionStyle)transition {
 	if (self.helpViewController == nil) {
 		self.helpViewController = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+		
 	}
-	helpViewController.modalTransitionStyle = transition;
-
-	[self.navigationController presentModalViewController:helpViewController animated:YES];
+	
+	self.helpViewController.modalTransitionStyle = transition;
+	[self.navigationController presentModalViewController:self.helpViewController animated:YES];
 }
 
 #pragma mark -

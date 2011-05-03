@@ -48,24 +48,19 @@
 	
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
-		
-		//CGAffineTransform rotateTransform = ;
-		
-		//set point of rotation
-		//background.center = CGPointMake(240.0, 160.0);
-		
-		background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
-		
-		//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
-		 
-		
 	} else {
 		[firstLaunchView removeFromSuperview];
 		[milgromView removeFromSuperview];
 		[lofiView removeFromSuperview];
 		menuView.alpha = 1.0;
 	}
-		
+	
+	//CGAffineTransform rotateTransform = ;
+	
+	//set point of rotation
+	//background.center = CGPointMake(240.0, 160.0);
+	background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
+	
 	[self.songsView addSubview:songsTable.view];
 	
 	

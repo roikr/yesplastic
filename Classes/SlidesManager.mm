@@ -13,7 +13,6 @@
 
 
 @interface SlidesManager() 
-- (void)removeViews;
 - (void) next:(id)sender;
 
 @end

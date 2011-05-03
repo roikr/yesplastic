@@ -83,6 +83,7 @@ class testApp;
 
 - (void) showHelp:(id)sender;
 - (void) hideHelp;
+- (void) replayTutorial:(id)sender;
 
 
 @end

@@ -519,6 +519,12 @@
 	[self updateViews];
 }
 
+- (void) replayTutorial:(id)sender {
+	[self hideHelp];
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.slidesManager start];
+	[appDelegate toggle:UIInterfaceOrientationLandscapeRight animated:YES];
+}
 
 
 

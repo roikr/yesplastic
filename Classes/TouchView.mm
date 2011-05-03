@@ -11,6 +11,7 @@
 #import "testApp.h"
 #import "Constants.h"
 #import "MainViewController.h"
+#import "SoloViewController.h"
 #import "MilgromMacros.h"
 #import "TutorialView.h"
 
@@ -49,7 +50,7 @@
 //	}
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp ) {
+	if (appDelegate.mainViewController.bShowHelp || appDelegate.soloViewController.bShowHelp ) {
 		return;
 	}
 	
@@ -101,7 +102,7 @@
 	//self.timer = nil;
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (appDelegate.mainViewController.bShowHelp ) {
+	if (appDelegate.mainViewController.bShowHelp || appDelegate.soloViewController.bShowHelp) {
 		return;
 	}
 
@@ -131,6 +132,11 @@
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (appDelegate.mainViewController.bShowHelp ) {
 		[appDelegate.mainViewController hideHelp];
+		return;
+	}
+	
+	if (appDelegate.soloViewController.bShowHelp ) {
+		[appDelegate.soloViewController hideHelp];
 		return;
 	}
 	

@@ -7,6 +7,7 @@
 //
 
 #import "HelpViewController.h"
+#import "MilgromMacros.h"
 
 
 @implementation HelpViewController
@@ -34,6 +35,11 @@
 	scrollView.contentSize=CGSizeMake(480,1152);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"HelpViewController::viewWillAppear");
+	[scrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +57,6 @@
 
 - (void) exit:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
-	[self release];
 }
 - (void)dealloc {
     [super dealloc];
