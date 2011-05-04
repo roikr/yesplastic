@@ -109,7 +109,7 @@ class testApp;
 - (void)saveSong:(NSString *)songName;
 - (void)pushViewController:(UIViewController *)controller;
 - (void)helpWithTransition:(UIModalTransitionStyle)transition;
-- (void)playURL:(NSURL *)url;
+//- (void)playURL:(NSURL *)url;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 
 @end

@@ -22,7 +22,7 @@
 #import "HelpViewController.h"
 #import "SaveViewController.h"
 #import "ShareViewController.h"
-#import "AVPlayerDemoPlaybackViewController.h"
+//#import "AVPlayerDemoPlaybackViewController.h"
 #import <CoreMedia/CoreMedia.h>
 
 #import "ShareManager.h"
@@ -49,7 +49,6 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 - (void) loadSongLoop;
-- (void) startUpdateLoop;
 @end
 
 @implementation MilgromInterfaceAppDelegate
@@ -83,7 +82,7 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
+    MilgromLog(@"didFinishLaunchingWithOptions");
 
 	// Override point for customization after application launch.
 	
@@ -172,6 +171,10 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)addDemos {
+	
+#ifdef FREE_APP
+	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
+#else	
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"BROWN BUNNY",nil] bpm:160 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"DOG",@"GTR_DOG",@"GTR_ELECTRO",@"VOC_DOG",@"VOC_BB",@"DRM_DOG",@"DRM_ELECTRO",@"DOG/RABBIT",nil] bpm:131 download:NO ];
@@ -180,7 +183,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"SALAD",nil] bpm:160 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"PLASTIC TOWER",nil] bpm:118 download:NO];
-	
+#endif
 	[self saveContext];
 	
 	
@@ -260,38 +263,9 @@ NSString * const kCacheFolder=@"URLCache";
 						 completion(YES);}];
 }
 
-- (void) startUpdateLoop {
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		MilgromLog(@"update loop started");
-		while ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-			if (self.navigationController.topViewController != bandMenu) {
-				OFSAptr->update(); // also update bNeedDisplay
-				//[mainViewController.tutorialView update]; // TODO: replace with ?
-				if (OFSAptr->bNeedDisplay) {
-					dispatch_async(dispatch_get_main_queue(), ^{
-						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
-							[mainViewController updateViews];
-						} else if (self.mainViewController.modalViewController == soloViewController){
-							[soloViewController updateViews];
-							
-						}
-						
-						
-						
-					});
-					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
-				}
-				
-			}
-			
-		}
-		MilgromLog(@"update loop exited");		
-	});
-	
-}
 
 - (void) continueLaunching {
-	
+	 MilgromLog(@"continueLaunching");
 	[self loadDemos];
 	[bandMenu.songsTable loadData];
 	[bandMenu updateEditMode];
@@ -332,7 +306,6 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
-	[self startUpdateLoop];
 }
 
 - (void)beginInterruption {
@@ -353,7 +326,9 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    /*
+    MilgromLog(@"applicationWillResignActive");
+
+	/*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
@@ -362,7 +337,8 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    /*
+     MilgromLog(@"applicationDidEnterBackground");
+	/*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
@@ -389,7 +365,8 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
+    MilgromLog(@"applicationWillEnterForeground");
+	/*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
 //	MilgromLog(@"applicationWillEnterForeground deviceOrientation: %i",[[UIDevice currentDevice] orientation]);
@@ -400,7 +377,7 @@ NSString * const kCacheFolder=@"URLCache";
 //	}
 	
 	
-	[self startUpdateLoop];
+	
 	if (slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE ) {
 		MilgromAlert(@"Need a start ?", @"you can always launch the tutorial from the help slide !");
 		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
@@ -411,10 +388,38 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
+    MilgromLog(@"applicationDidBecomeActive");
 	/*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		MilgromLog(@"update loop started");
+		while ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+			if (self.navigationController.topViewController != bandMenu) {
+				OFSAptr->update(); // also update bNeedDisplay
+				//[mainViewController.tutorialView update]; // TODO: replace with ?
+				if (OFSAptr->bNeedDisplay) {
+					dispatch_async(dispatch_get_main_queue(), ^{
+						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
+							[mainViewController updateViews];
+						} else if (self.mainViewController.modalViewController == soloViewController){
+							[soloViewController updateViews];
+							
+						}
+						
+						
+						
+					});
+					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
+				}
+				
+			}
+			
+		}
+		MilgromLog(@"update loop exited");		
+	});
+	
 	
 	if (OFSAptr) {
 		OFSAptr->soundStreamStart();
@@ -424,6 +429,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+	MilgromLog(@"applicationWillTerminate");
     /*
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
@@ -696,6 +702,7 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 }
 
+/*
 - (void)playURL:(NSURL *)url {
 	
 	AVPlayerDemoPlaybackViewController* mPlaybackViewController = [[[AVPlayerDemoPlaybackViewController allocWithZone:[self zone]] init] autorelease];
@@ -707,7 +714,7 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	[self.navigationController presentModalViewController:mPlaybackViewController animated:NO];
 }
-
+*/
 - (void)pushViewController:(UIViewController *)controller {
 	[self.navigationController pushViewController:controller animated:YES];
 }

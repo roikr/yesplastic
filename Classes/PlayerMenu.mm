@@ -40,6 +40,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+#ifndef FREE_APP
 	if (self.setsTable == nil) {
 		self.setsTable = [[SetsTable alloc] initWithNibName:@"SetsTable" bundle:nil];
 		
@@ -49,6 +51,7 @@
 		
 		[self.setsTable loadData];
 	}
+#endif
 		
 	NSString *doneButtonName = [NSString stringWithFormat:@"%@_DONE.png",playerName];
 	[doneButton setImage:[UIImage imageNamed:doneButtonName] forState:UIControlStateNormal];
@@ -76,7 +79,9 @@
 	
 	
 	//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
+#ifndef FREE_APP
 	[self.setsView addSubview:setsTable.view];
+#endif
 	
 	
 	
@@ -126,7 +131,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"PlayerMenu::viewWillAppear");
+#ifndef FREE_APP
 	[setsTable viewWillAppear:animated];
+#endif
 	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
 	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
 
@@ -168,7 +175,9 @@
 
 
 - (void)dealloc {
+#ifndef FREE_APP
 	[setsTable release];
+#endif
     [super dealloc];
 }
 

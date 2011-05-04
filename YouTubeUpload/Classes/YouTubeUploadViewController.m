@@ -70,7 +70,7 @@
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return YES;
+    return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
 }
 
 
@@ -286,6 +286,11 @@
 		uploader.password = password.text;
 		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath]; //[descriptionView.text stringByAppendingString:additionalText]
 	}
+	
+	if (self.activeView) {
+		[activeView resignFirstResponder];
+	}
+	
 }
 
 - (void) cancel:(id)sender {

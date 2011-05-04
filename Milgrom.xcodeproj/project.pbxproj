@@ -215,9 +215,6 @@
 		E498DDF9121069EB001CB593 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E498DDF6121069EB001CB593 /* EAGLView.mm */; };
 		E498DE0612106AFA001CB593 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0512106AFA001CB593 /* OpenGLES.framework */; };
 		E498DE0B12106B0D001CB593 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E498DE0A12106B0D001CB593 /* QuartzCore.framework */; };
-		E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7312203191006EC3BA /* AVPlayerDemoPlaybackView.m */; };
-		E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4998B7412203191006EC3BA /* AVPlayerDemoPlaybackView.xib */; };
-		E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4998B7612203191006EC3BA /* AVPlayerDemoPlaybackViewController.m */; };
 		E49A3C8F1261016000879E26 /* PVRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = E49A3C8D1261016000879E26 /* PVRTexture.m */; };
 		E49A3D041261158700879E26 /* ofxiPhoneSoundStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = E49A3D021261158700879E26 /* ofxiPhoneSoundStream.mm */; };
 		E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44472B712143FEE0058D07B /* AudioToolbox.framework */; };
@@ -244,10 +241,8 @@
 		E4B5428B127089EB00851D86 /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B54289127089EB00851D86 /* YouTubeUploader.m */; };
 		E4B68B1F130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = E4B68B1E130C233B004D2F2B /* MESSAGE_NEXT_BUTTON.png */; };
 		E4BAF27B125F198C00AE1ED0 /* OpenGLTOMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */; };
-		E4BB004512DCCF7500AA868E /* ofxInteractiveSlides.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB004312DCCF7500AA868E /* ofxInteractiveSlides.cpp */; };
 		E4BB007112DCD16000AA868E /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BB007012DCD16000AA868E /* testApp.cpp */; };
 		E4BBD54F1302929D00E135DF /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BBD54E1302929D00E135DF /* CustomButton.m */; };
-		E4C39DDC132A378C00789FE9 /* ofxInteractiveTutorial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4C39DDA132A378C00789FE9 /* ofxInteractiveTutorial.cpp */; };
 		E4C44D971243661A007ACEBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D961243661A007ACEBC /* Security.framework */; };
 		E4C44D991243661E007ACEBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C44D981243661E007ACEBC /* SystemConfiguration.framework */; };
 		E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C64FEA121A7F2200E0C425 /* CustomFontTextField.m */; };
@@ -1030,13 +1025,9 @@
 		E4B68B21130C2611004D2F2B /* TutorialView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TutorialView.mm; path = Classes/TutorialView.mm; sourceTree = "<group>"; };
 		E4BAF279125F198C00AE1ED0 /* OpenGLTOMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTOMovie.m; path = ConvertToVideo/Classes/OpenGLTOMovie.m; sourceTree = "<group>"; };
 		E4BAF27A125F198C00AE1ED0 /* OpenGLTOMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTOMovie.h; path = ConvertToVideo/Classes/OpenGLTOMovie.h; sourceTree = "<group>"; };
-		E4BB004312DCCF7500AA868E /* ofxInteractiveSlides.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractiveSlides.cpp; sourceTree = "<group>"; };
-		E4BB004412DCCF7500AA868E /* ofxInteractiveSlides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractiveSlides.h; sourceTree = "<group>"; };
 		E4BB007012DCD16000AA868E /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
 		E4BBD54D1302929D00E135DF /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		E4BBD54E1302929D00E135DF /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
-		E4C39DDA132A378C00789FE9 /* ofxInteractiveTutorial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractiveTutorial.cpp; sourceTree = "<group>"; };
-		E4C39DDB132A378C00789FE9 /* ofxInteractiveTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractiveTutorial.h; sourceTree = "<group>"; };
 		E4C44D961243661A007ACEBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4C44D981243661E007ACEBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E4C64FE9121A7F2200E0C425 /* CustomFontTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFontTextField.h; sourceTree = "<group>"; };
@@ -1887,7 +1878,6 @@
 			isa = PBXGroup;
 			children = (
 				E4CBC4B812F973A80076C5C6 /* ofxAudioFile */,
-				E4BB004112DCCF7500AA868E /* ofxInteractiveTutorial */,
 				E4F7D7F712CD00FF00D3119E /* common */,
 				E4F7D7FC12CD00FF00D3119E /* myOF */,
 				E47B127212C7A5B7007202BB /* ofxSlider */,
@@ -2203,26 +2193,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		E4BB004112DCCF7500AA868E /* ofxInteractiveTutorial */ = {
-			isa = PBXGroup;
-			children = (
-				E4BB004212DCCF7500AA868E /* src */,
-			);
-			name = ofxInteractiveTutorial;
-			path = "../of_preRelease_v0061_osxSL_FAT/My Addons/ofxInteractiveTutorial";
-			sourceTree = SOURCE_ROOT;
-		};
-		E4BB004212DCCF7500AA868E /* src */ = {
-			isa = PBXGroup;
-			children = (
-				E4C39DDB132A378C00789FE9 /* ofxInteractiveTutorial.h */,
-				E4C39DDA132A378C00789FE9 /* ofxInteractiveTutorial.cpp */,
-				E4BB004412DCCF7500AA868E /* ofxInteractiveSlides.h */,
-				E4BB004312DCCF7500AA868E /* ofxInteractiveSlides.cpp */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		E4BC39D5125DA87300B492E4 /* Band */ = {
 			isa = PBXGroup;
 			children = (
@@ -2296,7 +2266,6 @@
 		E4BC39DA125DA91000B492E4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				E44D9D221223D1C400477CE0 /* DemoLoader.h */,
 				E44D9D231223D1C400477CE0 /* DemoLoader.mm */,
 				E4D1EB4D12113431004D4E25 /* AssetLoader.h */,
@@ -2348,6 +2317,7 @@
 		E4D1EB3712113350004D4E25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E4D1EBE712114631004D4E25 /* MilgromMacros.h */,
 				1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */,
 				E4B3D2C611F83D5200B57223 /* MainWindow.xib */,
@@ -2647,7 +2617,6 @@
 				E4D4FFF71201FBDF00F8B7B2 /* HelpViewController.xib in Resources */,
 				E444727D12143DB90058D07B /* install.xml in Resources */,
 				E48111361214460D008ABBCC /* precache in Resources */,
-				E4998B7812203191006EC3BA /* AVPlayerDemoPlaybackView.xib in Resources */,
 				E44F6DBD122A4DC60002386C /* CELL1_PROGRESS.png in Resources */,
 				E44F6DBE122A4DC60002386C /* CELL2_PROGRESS.png in Resources */,
 				E44F6DBF122A4DC60002386C /* CELL3_PROGRESS.png in Resources */,
@@ -2882,8 +2851,6 @@
 				E48503FC1214BB3600D2271F /* TouchView.mm in Sources */,
 				E4C8B40B1217E7E500C34620 /* SetsTable.mm in Sources */,
 				E4C64FEB121A7F2200E0C425 /* CustomFontTextField.m in Sources */,
-				E4998B7712203191006EC3BA /* AVPlayerDemoPlaybackView.m in Sources */,
-				E4998B7912203191006EC3BA /* AVPlayerDemoPlaybackViewController.m in Sources */,
 				E44D9D241223D1C400477CE0 /* DemoLoader.mm in Sources */,
 				E47BC953122A8E5A00B6149A /* CustomImageView.m in Sources */,
 				E4A6FBE3122D807F00A5C4D9 /* SaveViewController.mm in Sources */,
@@ -2919,14 +2886,12 @@
 				E4F7D80312CD00FF00D3119E /* ofMainExt.mm in Sources */,
 				E4F7D80412CD00FF00D3119E /* ofMain.mm in Sources */,
 				E4F7D80512CD00FF00D3119E /* ofxiPhoneExtras.mm in Sources */,
-				E4BB004512DCCF7500AA868E /* ofxInteractiveSlides.cpp in Sources */,
 				E4BB007112DCD16000AA868E /* testApp.cpp in Sources */,
 				E4CBC4C012F973A80076C5C6 /* ofxAudioFile.mm in Sources */,
 				E44558F912FA99640001C6CE /* CAStreamBasicDescription.cpp in Sources */,
 				E44558FA12FA99640001C6CE /* CAXException.cpp in Sources */,
 				E4BBD54F1302929D00E135DF /* CustomButton.m in Sources */,
 				E437216D1302AF030090CAEC /* MilgromUtils.mm in Sources */,
-				E4C39DDC132A378C00789FE9 /* ofxInteractiveTutorial.cpp in Sources */,
 				E468ADC9136C7E3A00C372D0 /* ShareViewController.mm in Sources */,
 				E468AE17136C92A700C372D0 /* RenderViewController.mm in Sources */,
 				E4D5FCC3136DA0B6003249A8 /* SoloViewController.mm in Sources */,
@@ -3016,7 +2981,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "397995D3-0DDB-4943-B604-8A8367AE2438";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D855CFA4-F1BA-4719-AE9A-486A7D8A86CB";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 				VALIDATE_PRODUCT = YES;

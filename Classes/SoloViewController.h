@@ -13,7 +13,6 @@ class testApp;
 @class EAGLView;
 @class CustomFontTextField;
 @class CustomImageView;
-@class TutorialView;
 
 @interface SoloViewController : UIViewController<UINavigationControllerDelegate> {
 

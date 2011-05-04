@@ -13,7 +13,7 @@
 #import "MainViewController.h"
 #import "SoloViewController.h"
 #import "MilgromMacros.h"
-#import "TutorialView.h"
+
 
 @implementation TouchView
 

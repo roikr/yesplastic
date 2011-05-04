@@ -12,7 +12,6 @@
 #import "MilgromMacros.h"
 
 #import "MainViewController.h"
-#import "TutorialView.h"
 #import "EAGLView.h"
 
 

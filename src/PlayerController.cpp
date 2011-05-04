@@ -53,8 +53,10 @@ void PlayerController::setup(int playerNum) {
 	song.setup();
 	//looper = 0;
 	
+#ifndef FREE_APP
 	bool loaded = switchSound.load(ofToDataPath(getName()+"_SWITCH.caf"),256); // "SOUNDS/"+
 	assert(loaded);
+#endif
 }
 
 string PlayerController::getName()  {

@@ -495,9 +495,9 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		} break;
 			
 			
-		case ACTION_PLAY:
-			[appDelegate playURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"mov"]]];
-			break;
+//		case ACTION_PLAY:
+//			[appDelegate playURL:[NSURL fileURLWithPath:[[self getVideoPath] stringByAppendingPathExtension:@"mov"]]];
+//			break;
 			
 		case ACTION_CANCEL:
 		case ACTION_RENDER:
