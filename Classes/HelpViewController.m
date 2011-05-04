@@ -9,6 +9,10 @@
 #import "HelpViewController.h"
 #import "MilgromMacros.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
 
 @implementation HelpViewController
 
@@ -39,6 +43,9 @@
 	[super viewWillAppear:animated];
 	MilgromLog(@"HelpViewController::viewWillAppear");
 	[scrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"HELP"];
+#endif
 }
 
 

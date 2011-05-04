@@ -20,6 +20,11 @@
 #import "ShareManager.h"
 #import "MilgromMacros.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
+
 @interface RenderViewController() 
 
 - (void)updateRenderProgress;
@@ -69,6 +74,9 @@
 		[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration: 0.3];
 	}
 	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"RENDER"];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated {

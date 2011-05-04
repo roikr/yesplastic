@@ -8,7 +8,13 @@
 
 #import "ShareViewController.h"
 #import "MilgromInterfaceAppDelegate.h"
-#import "ShareManager.h"m
+#import "ShareManager.h"
+#import "MilgromMacros.h"
+
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
 
 @implementation ShareViewController
 
@@ -51,6 +57,13 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	MilgromLog(@"ShareViewController::viewWillAppear");
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"SHARE"];
+#endif
+}
 
 - (void)dealloc {
     [super dealloc];

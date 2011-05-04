@@ -13,6 +13,9 @@
 #import "testApp.h"
 #import "MilgromMacros.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
 
 @implementation PlayerMenu
 
@@ -134,14 +137,19 @@
 #ifndef FREE_APP
 	[setsTable viewWillAppear:animated];
 #endif
-	volumeSlider.value = ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume();
+	
+	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
+	volumeSlider.value = OFSAptr->getVolume();
 	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
 
 	//volumeSlider.value = [((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate doubleValue] / (1000.0*1000.0*10.0) ;
 	//volumeLabel.text = [NSString stringWithFormat:@"%.0f Kbit",[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate doubleValue]/1000];
-	bpmSlider.value = ((float)((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getBPM() - 80.0)/80.0;
+	bpmSlider.value = ((float)OFSAptr->getBPM() - 80.0)/80.0;
 	
-	
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"SET_MENU" withParameters:dictionary];
+#endif
 	
 }
 
@@ -152,19 +160,30 @@
 }
 
 - (void)volumeChanged:(id)sender {
-	
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setVolume(volumeSlider.value);
+	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
+	OFSAptr->setVolume(volumeSlider.value);
+
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"CHANGE_VOLUME" withParameters:dictionary];
+#endif
 	//volumeLabel.text = [NSString stringWithFormat:@"%1.3f",((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->getVolume()];
 
 	//((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate = [NSNumber numberWithDouble:volumeSlider.value * (1000.0*1000.0*10.0)];
 	//volumeLabel.text = [NSString stringWithFormat:@"%.0f Kbit",[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).videoBitrate doubleValue]/1000];
-
+	
+	
 }
 
 - (void) bpmChanged:(id)sender {
 	
 	//ofClamp(bpm*150.0+50.0,50,200)
-	((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->setBPM(bpmSlider.value * 80.0 + 80);
+	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
+	OFSAptr->setBPM(bpmSlider.value * 80.0 + 80);
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"CHANGE_BPM" withParameters:dictionary];
+#endif	
 }
 
 - (void)exit:(id)sender {

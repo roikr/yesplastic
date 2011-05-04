@@ -14,6 +14,10 @@
 #import "MainViewController.h"
 #import "EAGLView.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
 
 
 @implementation BandMenu
@@ -173,7 +177,9 @@
 	
 	//	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	//[self rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0 completion:NULL];
-	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"MENU"];
+#endif	
 }
 
 

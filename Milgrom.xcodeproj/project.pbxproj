@@ -12,6 +12,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		E4025ACE136E180A00261012 /* SlidesManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4025ACD136E180A00261012 /* SlidesManager.mm */; };
+		E4091AC91371748E00A740D2 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4091AC81371748E00A740D2 /* libFlurry.a */; };
 		E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E4101B0212ACD28D000C6AAF /* Reachability.m */; };
 		E4159BD81271EA8B00B28DAE /* SHARE_B_BACKGROUND.png in Resources */ = {isa = PBXBuildFile; fileRef = E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */; };
 		E422590B12F962AF0032CA23 /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E42258F612F962050032CA23 /* libGDataTouchStaticLib.a */; };
@@ -381,6 +382,8 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E4025ACC136E180A00261012 /* SlidesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlidesManager.h; path = Classes/SlidesManager.h; sourceTree = "<group>"; };
 		E4025ACD136E180A00261012 /* SlidesManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SlidesManager.mm; path = Classes/SlidesManager.mm; sourceTree = "<group>"; };
+		E4091AC71371748E00A740D2 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
+		E4091AC81371748E00A740D2 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		E4101B0112ACD28D000C6AAF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Utilities/Reachability.h; sourceTree = "<group>"; };
 		E4101B0212ACD28D000C6AAF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Utilities/Reachability.m; sourceTree = "<group>"; };
 		E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SHARE_B_BACKGROUND.png; sourceTree = "<group>"; };
@@ -1155,6 +1158,7 @@
 				E49A3D071261161500879E26 /* AudioToolbox.framework in Frameworks */,
 				E4D82B2A1262EF3400768E33 /* MessageUI.framework in Frameworks */,
 				E4987FD5127F5CED00A07C65 /* AssetsLibrary.framework in Frameworks */,
+				E4091AC91371748E00A740D2 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,6 +1179,7 @@
 				E4D1EB3712113350004D4E25 /* Classes */,
 				E444721012143D2F0058D07B /* src */,
 				E4379BAE12C0CAAB006C26AC /* RKUtilities */,
+				E4091AC61371748E00A740D2 /* FlurryLib */,
 				E4C44C2012436581007ACEBC /* YouTube */,
 				E4AF9D7A1263694A003E9148 /* Facebook */,
 				E4998B711220317E006EC3BA /* AVPlayer */,
@@ -1230,6 +1235,15 @@
 				E4B68B21130C2611004D2F2B /* TutorialView.mm */,
 			);
 			name = Slides;
+			sourceTree = "<group>";
+		};
+		E4091AC61371748E00A740D2 /* FlurryLib */ = {
+			isa = PBXGroup;
+			children = (
+				E4091AC71371748E00A740D2 /* FlurryAPI.h */,
+				E4091AC81371748E00A740D2 /* libFlurry.a */,
+			);
+			path = FlurryLib;
 			sourceTree = "<group>";
 		};
 		E422579712F961C30032CA23 /* GDATA */ = {
@@ -2920,6 +2934,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = _FLURRY;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
@@ -2931,6 +2946,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",
+					"\"$(SRCROOT)/FlurryLib\"",
 				);
 				OTHER_CFLAGS = (
 					"-DGDATA_REQUIRE_SERVICE_INCLUDES=1",
@@ -2968,6 +2984,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",
+					"\"$(SRCROOT)/FlurryLib\"",
 				);
 				OTHER_CFLAGS = (
 					"-DNS_BLOCK_ASSERTIONS=1",
@@ -3048,6 +3065,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
 					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",
+					"\"$(SRCROOT)/FlurryLib\"",
 				);
 				OTHER_CFLAGS = (
 					"-DNS_BLOCK_ASSERTIONS=1",

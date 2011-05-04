@@ -23,7 +23,9 @@
 #import "SlidesManager.h"
 #import "MilgromUtils.h"
 
-
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
 
 
 //#import "Trigger.h"
@@ -295,10 +297,14 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"SoloViewControlloer::viewWillAppear");
+	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
 	[self updateViews];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"SOLO"];
+#endif
 }
 
 
@@ -370,7 +376,8 @@
 
 - (void) play:(id)sender {
 	
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
+	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
 	
 		
 	if (recordButton.selected) {
@@ -379,6 +386,14 @@
 		
 	if (OFSAptr->getSongVersion()) {
 		OFSAptr->setSongState(SONG_PLAY);
+#ifdef _FLURRY
+		if ([appDelegate.currentSong.bDemo boolValue]) {
+			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:appDelegate.currentSong.songName,@"NAME", nil];
+			[FlurryAPI logEvent:@"PLAY" withParameters:dictionary];
+		} else {
+			[FlurryAPI logEvent:@"PLAY_USER_SONG"];
+		}
+#endif
 	} else {
 		MilgromAlert(@"Can't  play", @"go record something first");
 	}
@@ -390,6 +405,9 @@
 - (void) stop:(id)sender {
 	
 	OFSAptr->setSongState(SONG_IDLE);
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"STOP"];
+#endif
 }
 
 - (void) record:(id)sender {
@@ -406,6 +424,9 @@
 	}
 	else {
 		OFSAptr->setSongState(SONG_TRIGGER_RECORD);
+#ifdef _FLURRY
+		[FlurryAPI logEvent:@"RECORD"];
+#endif	
 		
 	}
 }
@@ -467,7 +488,11 @@
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
-	
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
+								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"TRIGGER" withParameters:dictionary];
+#endif	
 	
 //	if (button.tag == 7) {
 //		triggersView.hidden = YES;
@@ -491,6 +516,12 @@
 	button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
+								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"LOOP" withParameters:dictionary];
+#endif
+	
 //	if (button.tag == 7) {
 //		triggersView.hidden = NO;
 //		loopsView.hidden = YES;
@@ -508,7 +539,9 @@
 	
 	bShowHelp = YES;
 	[self updateViews];
-	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"SOLO_HELP"];
+#endif	
 	
 }
 
@@ -524,6 +557,9 @@
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager start];
 	[appDelegate toggle:UIInterfaceOrientationLandscapeRight animated:YES];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"REPLAY_TUTORIAL"];
+#endif
 }
 
 

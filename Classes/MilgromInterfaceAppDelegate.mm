@@ -33,6 +33,10 @@
 #import "MilgromUtils.h"
 
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
 NSString * const kMilgromFileServerURL=@"roikr.com";
 NSString * const kCacheFolder=@"URLCache";
 
@@ -75,7 +79,6 @@ NSString * const kCacheFolder=@"URLCache";
 @synthesize slidesManager;
 
 
-
 //@synthesize videoBitrate;
 
 #pragma mark -
@@ -83,6 +86,15 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     MilgromLog(@"didFinishLaunchingWithOptions");
+
+#ifdef _FLURRY
+#ifdef FREE_APP
+	[FlurryAPI startSession:@"6AD8PYM15XFBH5QQ8ITI"]; 
+#else
+	[FlurryAPI startSession:@"QHB9XPQ4RUUGDYIS7H4Z"]; 
+#endif
+	[FlurryAPI logAllPageViews:self.navigationController];
+#endif
 
 	// Override point for customization after application launch.
 	
@@ -734,6 +746,9 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
 		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+#ifdef _FLURRY
+		[FlurryAPI logAllPageViews:self.mainViewController.navigationController];
+#endif
 	}
 	
 	[self.navigationController pushViewController:mainViewController animated:YES];
@@ -749,6 +764,9 @@ NSString * const kCacheFolder=@"URLCache";
 			if (self.soloViewController == nil) { // this check use in case of loading after warning message...
 				self.soloViewController = [[SoloViewController alloc] initWithNibName:@"SoloViewController" bundle:nil];
 				soloViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+#ifdef _FLURRY
+				[FlurryAPI logAllPageViews:self.soloViewController.navigationController];
+#endif
 			}
 			
 			[self.navigationController presentModalViewController:soloViewController animated:animated];	
@@ -886,6 +904,10 @@ NSString * const kCacheFolder=@"URLCache";
 
 	OFSAptr->saveSong([songName UTF8String]);
 	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"SAVE_SONG"];
+#endif
+	
 	lastSavedVersion = OFSAptr->getSongVersion();
 	
 	
@@ -950,11 +972,20 @@ NSString * const kCacheFolder=@"URLCache";
 			
 			OFSAptr->loadSong(nextSong,true);
 			OFSAptr->setBPM([song.bpm integerValue]);
+			
+#ifdef _FLURRY
+			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:song.songName,@"NAME", nil];
+			[FlurryAPI logEvent:@"LOAD_SONG" withParameters:dictionary];
+#endif
+			
 		}
 		
 	} else {
 		OFSAptr->loadSong([song.songName UTF8String],false);
 		OFSAptr->setBPM([song.bpm integerValue]);
+#ifdef _FLURRY
+		[FlurryAPI logEvent:@"LOAD_USER_SONG"];
+#endif
 	}
 	
 	lastSavedVersion = OFSAptr->getSongVersion();
@@ -1028,6 +1059,13 @@ NSString * const kCacheFolder=@"URLCache";
 	self.loadTask = [RKUBackgroundTask backgroundTask];
 	
 	OFSAptr->changeSoundSet(nextSong);
+	
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:demo.songName,@"NAME",
+								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"LOAD_SOUND_SET" withParameters:dictionary];
+#endif
+	
 	lastSavedVersion = 0;
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{

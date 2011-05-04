@@ -20,7 +20,9 @@
 #import "ShareManager.h"
 #import "MilgromUtils.h"
 
-
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
 
 
 //#import "Trigger.h"
@@ -317,6 +319,9 @@
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
 	[self updateViews];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"MAIN"];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -382,18 +387,27 @@
 		
 	if (OFSAptr->getSongVersion()) {
 		OFSAptr->setSongState(SONG_PLAY);
+#ifdef _FLURRY
+		
+		MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+		if ([appDelegate.currentSong.bDemo boolValue]) {
+			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:appDelegate.currentSong.songName,@"NAME", nil];
+			[FlurryAPI logEvent:@"PLAY" withParameters:dictionary];
+		} else {
+			[FlurryAPI logEvent:@"PLAY_USER_SONG"];
+		}
+#endif
 	} else {
 		MilgromAlert(@"Can't  play", @"go record something first");
-	}
-
-	
-	
-	
+	}	
 }
 
 - (void) stop:(id)sender {
 	
 	OFSAptr->setSongState(SONG_IDLE);
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"STOP"];
+#endif	
 }
 
 - (void) record:(id)sender {
@@ -409,6 +423,9 @@
 	}
 	else {
 		OFSAptr->setSongState(SONG_TRIGGER_RECORD);
+#ifdef _FLURRY
+		[FlurryAPI logEvent:@"RECORD"];
+#endif	
 		
 	}
 }
@@ -460,6 +477,11 @@
 	
 	OFSAptr->nextLoop(button.tag);
 	
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"NEXT_LOOP" withParameters:dictionary];
+#endif	
+	
 }
 
 - (void) prevLoop:(id)sender {
@@ -473,6 +495,11 @@
 		}
 	}
 	OFSAptr->prevLoop(button.tag);
+	
+#ifdef _FLURRY
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+	[FlurryAPI logEvent:@"PREV_LOOP" withParameters:dictionary];
+#endif	
 }
 
 - (void) closeTutorial:(id)sender {
@@ -483,7 +510,9 @@
 	
 	bShowHelp = YES;
 	[self updateViews];
-	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"BAND_HELP"];
+#endif	
 	
 }
 
@@ -505,6 +534,10 @@
 	
 	[appDelegate.slidesManager start];
 	[self updateViews];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"REPLAY_TUTORIAL"];
+#endif	
+	
 }
 
 - (void)dealloc {

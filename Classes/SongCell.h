@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AssetLoader.h"
 
 @class CustomFontLabel;
 @class CustomImageView;

@@ -11,6 +11,10 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "MilgromMacros.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
 
 @implementation SaveViewController
 
@@ -64,6 +68,9 @@
 	[super viewWillAppear:animated];
 	MilgromLog(@"SaveViewController::viewWillAppear");
 	[songName becomeFirstResponder];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"SAVE"];
+#endif
 }
 
 

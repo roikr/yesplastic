@@ -19,6 +19,11 @@
 #import "testApp.h"
 #import "Reachability.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
+
 enum {
 	STATE_IDLE,
 	STATE_RENDER_AUDIO,
@@ -219,6 +224,20 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 			//message.text = @"Result: saved";
 			break;
 		case MFMailComposeResultSent: 
+			
+#ifdef _FLURRY
+			switch (action) {
+				case ACTION_SEND_VIA_MAIL:
+					[FlurryAPI logEvent:@"VIDEO_SENT"];
+					break;
+				case ACTION_SEND_RINGTONE:
+					[FlurryAPI logEvent:@"RINGTONE_SENT"];
+					break;
+
+				default:
+					break;
+			}
+#endif
 			//message.text = @"Result: sent";
 			
 			break;
@@ -240,10 +259,24 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	switch (theUploader.state) {
 		case FACEBOOK_UPLOADER_STATE_UPLOAD_FINISHED: {
 			ShareAlert(@"Facebook upload", @"Your video was uploaded successfully!\ngo check your wall");
+#ifdef _FLURRY
+			[FlurryAPI endTimedEvent:@"FACEBOOK_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"FINISHED" forKey:@"STATE"]];
+#endif
 		} break;
 		case FACEBOOK_UPLOADER_STATE_UPLOADING: {
 			ShareAlert(@"Facebook upload", @"Upload is in progress");
+#ifdef _FLURRY
+			[FlurryAPI logEvent:@"FACEBOOK_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"STARTED" forKey:@"STATE"] timed:YES];
+#endif
 		} break;
+#ifdef _FLURRY
+		case FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED:
+			[FlurryAPI endTimedEvent:@"FACEBOOK_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"CANCELED" forKey:@"STATE"]];
+			break;	
+		case FACEBOOK_UPLOADER_STATE_UPLOAD_FAILED:
+			[FlurryAPI endTimedEvent:@"FACEBOOK_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"FAILED" forKey:@"STATE"]];
+			break;
+#endif
 		default:
 			break;
 	}
@@ -262,13 +295,23 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	switch (theUploader.state) {
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_FINISHED: {
 			ShareAlert(@"YouTube upload", [NSString stringWithFormat:@"your video was uploaded successfully!"]); // link: %@",[theUploader.link absoluteString]]);
+#ifdef _FLURRY
+			[FlurryAPI endTimedEvent:@"YOUTUBE_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"FINISHED" forKey:@"STATE"]];
+#endif
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOADING: {
 			ShareAlert(@"YouTube upload", @"Upload is in progress");
+#ifdef _FLURRY
+			[FlurryAPI logEvent:@"YOUTUBE_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"STARTED" forKey:@"STATE"] timed:YES];
+#endif
+			
 			
 		} break;
 		case YOUTUBE_UPLOADER_STATE_UPLOAD_STOPPED: {
 			ShareAlert(@"YouTube Upload error" , @"your upload has been stopped");
+#ifdef _FLURRY
+			[FlurryAPI endTimedEvent:@"YOUTUBE_UPLOAD" withParameters:[NSDictionary dictionaryWithObject:@"STOPPED" forKey:@"STATE"]];
+#endif
 		} break;
 			
 		default:
@@ -576,7 +619,9 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 											else {
 												MilgromLog(@"writeVideoToAssestsLibrary successed");
 												ShareAlert(@"Library", @"The video has been saved to your photos library");
-										
+#ifdef _FLURRY
+												[FlurryAPI logEvent:@"VIDEO_ADDED_TO_LIBRARY"];												
+#endif
 											}
 										});
 										
