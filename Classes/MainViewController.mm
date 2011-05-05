@@ -477,10 +477,10 @@
 	
 	OFSAptr->nextLoop(button.tag);
 	
-#ifdef _FLURRY
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-	[FlurryAPI logEvent:@"NEXT_LOOP" withParameters:dictionary];
-#endif	
+//#ifdef _FLURRY
+//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+//	[FlurryAPI logEvent:@"NEXT_LOOP" withParameters:dictionary];
+//#endif	
 	
 }
 
@@ -496,10 +496,10 @@
 	}
 	OFSAptr->prevLoop(button.tag);
 	
-#ifdef _FLURRY
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-	[FlurryAPI logEvent:@"PREV_LOOP" withParameters:dictionary];
-#endif	
+//#ifdef _FLURRY
+//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+//	[FlurryAPI logEvent:@"PREV_LOOP" withParameters:dictionary];
+//#endif	
 }
 
 - (void) closeTutorial:(id)sender {

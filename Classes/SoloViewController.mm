@@ -488,11 +488,11 @@
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
-#ifdef _FLURRY
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
-								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-	[FlurryAPI logEvent:@"TRIGGER" withParameters:dictionary];
-#endif	
+//#ifdef _FLURRY
+//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
+//								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+//	[FlurryAPI logEvent:@"TRIGGER" withParameters:dictionary];
+//#endif	
 	
 //	if (button.tag == 7) {
 //		triggersView.hidden = YES;
@@ -516,11 +516,11 @@
 	button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
-#ifdef _FLURRY
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
-								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-	[FlurryAPI logEvent:@"LOOP" withParameters:dictionary];
-#endif
+//#ifdef _FLURRY
+//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
+//								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+//	[FlurryAPI logEvent:@"LOOP" withParameters:dictionary];
+//#endif
 	
 //	if (button.tag == 7) {
 //		triggersView.hidden = NO;

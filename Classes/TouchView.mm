@@ -158,17 +158,17 @@
 //		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
 		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
-		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
+//		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
 		
 		appDelegate.OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);
 
-#ifdef _FLURRY
-		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
-			
-			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:appDelegate.OFSAptr->getPlayerName(appDelegate.OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-			[FlurryAPI logEvent:@"TOGGLE_LOOP" withParameters:dictionary];
-		}
-#endif
+//#ifdef _FLURRY
+//		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
+//			
+//			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:appDelegate.OFSAptr->getPlayerName(appDelegate.OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
+//			[FlurryAPI logEvent:@"TOGGLE_LOOP" withParameters:dictionary];
+//		}
+//#endif
 		
 		
 //		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
