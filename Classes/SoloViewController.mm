@@ -200,7 +200,7 @@
 				
 				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
-				setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SOLO_MENU;
+				setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 				
 				NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 				[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
@@ -274,8 +274,20 @@
 	}
 	
 	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.view) {
-		[appDelegate.slidesManager addViews];
+		switch (appDelegate.slidesManager.currentTutorialSlide) {
+			case MILGROM_TUTORIAL_SHARE:
+				if (self.shareButton.hidden==NO) {
+					[appDelegate.slidesManager addViews];
+				}
+				break;
+				
+			default:
+				[appDelegate.slidesManager addViews];
+				break;
+		}
 	}
+	
+	
 		
 }
 
@@ -340,8 +352,6 @@
 - (void) menu:(id)sender {
 	
 	
-	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
 	}
@@ -368,7 +378,7 @@
 	// ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate])
 	[self presentModalViewController:controller animated:YES];
 	
-	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SOLO_MENU]; // to avoid slide in mainViewController
+	//[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SOLO_MENU]; // to avoid slide in mainViewController
 	
 }
 

@@ -199,7 +199,7 @@
 				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
-				menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_MENU;
+				menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 				bandLoopsView.hidden = NO;
 				for (int i=0;i<[bandLoopsView.subviews count];i++) {
 					UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
@@ -367,7 +367,7 @@
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
-	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_MENU];
+	//[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_MENU];
 	OFSAptr->stopLoops();
 	[appDelegate.navigationController popViewControllerAnimated:YES]; 
 		
