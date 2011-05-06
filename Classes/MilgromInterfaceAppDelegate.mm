@@ -185,7 +185,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)addDemos {
 	
 #ifdef FREE_APP
-	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
 #else	
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"BROWN BUNNY",nil] bpm:160 download:NO];
@@ -234,8 +234,12 @@ NSString * const kCacheFolder=@"URLCache";
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"unzipped"]) {
 		
 		RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
-		
-		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache"];
+#ifdef FREE_APP
+		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache_free"];
+#else
+		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache_full"];
+#endif		
+
 		
 		if (precache) {
 			MilgromLog(@"unzipping precache");

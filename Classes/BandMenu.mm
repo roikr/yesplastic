@@ -28,7 +28,7 @@
 @synthesize firstLaunchView;
 @synthesize background;
 @synthesize milgromView,lofiView,menuView,songsView;
-
+@synthesize appButton;
 
 
 /*
@@ -63,6 +63,10 @@
 	//set point of rotation
 	//background.center = CGPointMake(240.0, 160.0);
 	background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
+	
+#ifndef FREE_APP
+	[self.appButton removeFromSuperview];
+#endif
 	
 	[self.songsView addSubview:songsTable.view];
 	
@@ -168,6 +172,9 @@
 	
 }
 
+- (void)appStore:(id)sender {
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/"]];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -197,6 +204,7 @@
     [super viewDidDisappear:animated];
 	[songsTable viewDidDisappear:animated];
 }
+
 
 
 

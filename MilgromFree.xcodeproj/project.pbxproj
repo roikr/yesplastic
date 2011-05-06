@@ -18,7 +18,6 @@
 		E4101B0312ACD28D000C6AAF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E4101B0212ACD28D000C6AAF /* Reachability.m */; };
 		E4159BD81271EA8B00B28DAE /* SHARE_B_BACKGROUND.png in Resources */ = {isa = PBXBuildFile; fileRef = E4159BD71271EA8B00B28DAE /* SHARE_B_BACKGROUND.png */; };
 		E422590B12F962AF0032CA23 /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E42258F612F962050032CA23 /* libGDataTouchStaticLib.a */; };
-		E425614313748A55006E46E8 /* precache_full in Resources */ = {isa = PBXBuildFile; fileRef = E425614013748A55006E46E8 /* precache_full */; };
 		E42D132F124F796A007BEEB0 /* ARROWS_DRM_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */; };
 		E42D1330124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */; };
 		E42D1331124F796A007BEEB0 /* ARROWS_GTR_LEFT.png in Resources */ = {isa = PBXBuildFile; fileRef = E42D1327124F796A007BEEB0 /* ARROWS_GTR_LEFT.png */; };
@@ -171,7 +170,6 @@
 		E444727012143DAA0058D07B /* ofxMidiTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444726112143DAA0058D07B /* ofxMidiTrack.cpp */; };
 		E444727112143DAA0058D07B /* ofxOnePointTracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444726512143DAA0058D07B /* ofxOnePointTracks.cpp */; };
 		E444727212143DAA0058D07B /* ofxRKUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444726912143DAA0058D07B /* ofxRKUtilities.cpp */; };
-		E444727D12143DB90058D07B /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = E444727412143DB90058D07B /* install.xml */; };
 		E444727E12143DB90058D07B /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727612143DB90058D07B /* tinyxml.cpp */; };
 		E444727F12143DB90058D07B /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727812143DB90058D07B /* tinyxmlerror.cpp */; };
 		E444728012143DB90058D07B /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E444727912143DB90058D07B /* tinyxmlparser.cpp */; };
@@ -191,6 +189,7 @@
 		E468ADCC136C7EA800C372D0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E468ADCB136C7EA800C372D0 /* ShareViewController.xib */; };
 		E468AE17136C92A700C372D0 /* RenderViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E468AE16136C92A700C372D0 /* RenderViewController.mm */; };
 		E468AE19136C92BA00C372D0 /* RenderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E468AE18136C92BA00C372D0 /* RenderViewController.xib */; };
+		E46C458E1374873500E45241 /* precache_free in Resources */ = {isa = PBXBuildFile; fileRef = E46C458C1374873500E45241 /* precache_free */; };
 		E4749D3C121D908700886A6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3B121D908700886A6E /* AVFoundation.framework */; };
 		E4749D40121D909D00886A6E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D3F121D909D00886A6E /* CoreMedia.framework */; };
 		E4749D44121D90C100886A6E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4749D43121D90C100886A6E /* CoreVideo.framework */; };
@@ -376,7 +375,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MilgromInterfaceAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MilgromInterfaceAppDelegate.h; path = Classes/MilgromInterfaceAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MilgromInterfaceAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MilgromInterfaceAppDelegate.mm; path = Classes/MilgromInterfaceAppDelegate.mm; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Milgrom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Milgrom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* MilgromFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilgromFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E4025ACC136E180A00261012 /* SlidesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlidesManager.h; path = Classes/SlidesManager.h; sourceTree = "<group>"; };
@@ -726,7 +725,7 @@
 		E42258E912F961DA0032CA23 /* GDataYouTubeRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataYouTubeRating.h; sourceTree = "<group>"; };
 		E42258EA12F961DA0032CA23 /* GDataYouTubeStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataYouTubeStatistics.h; sourceTree = "<group>"; };
 		E42258EB12F962050032CA23 /* GData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GData.xcodeproj; path = "../OpenSource/gdata-objectivec-client-read-only/Source/GData.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		E425614013748A55006E46E8 /* precache_full */ = {isa = PBXFileReference; lastKnownFileType = folder; path = precache_full; sourceTree = "<group>"; };
+		E425616613748C77006E46E8 /* Milgrom-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Milgrom-Info.plist"; sourceTree = "<group>"; };
 		E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_LEFT.png; sourceTree = "<group>"; };
 		E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_RIGHT.png; sourceTree = "<group>"; };
 		E42D1327124F796A007BEEB0 /* ARROWS_GTR_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_GTR_LEFT.png; sourceTree = "<group>"; };
@@ -874,8 +873,6 @@
 		E44471CD121438540058D07B /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		E44471CE121438540058D07B /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		E44471DA121438CD0058D07B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Classes/main.m; sourceTree = "<group>"; };
-		E444720112143ABC0058D07B /* Milgrom-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Milgrom-Info.plist"; sourceTree = "<group>"; };
-		E444720812143BE90058D07B /* Milgrom_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Milgrom_Prefix.pch; sourceTree = "<group>"; };
 		E444721112143D300058D07B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E444721212143D300058D07B /* FramesDrivenPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FramesDrivenPlayer.cpp; sourceTree = "<group>"; };
 		E444721312143D300058D07B /* FramesDrivenPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesDrivenPlayer.h; sourceTree = "<group>"; };
@@ -940,6 +937,8 @@
 		E468AE15136C92A700C372D0 /* RenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderViewController.h; path = Classes/RenderViewController.h; sourceTree = "<group>"; };
 		E468AE16136C92A700C372D0 /* RenderViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RenderViewController.mm; path = Classes/RenderViewController.mm; sourceTree = "<group>"; };
 		E468AE18136C92BA00C372D0 /* RenderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RenderViewController.xib; path = Resource/RenderViewController.xib; sourceTree = "<group>"; };
+		E46C458C1374873500E45241 /* precache_free */ = {isa = PBXFileReference; lastKnownFileType = folder; path = precache_free; sourceTree = "<group>"; };
+		E46C459B1374897E00E45241 /* MilgromFree_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilgromFree_Prefix.pch; sourceTree = "<group>"; };
 		E4749D3B121D908700886A6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E4749D3F121D909D00886A6E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E4749D43121D90C100886A6E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -1166,7 +1165,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Milgrom.app */,
+				1D6058910D05DD3D006BFB54 /* MilgromFree.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1195,7 +1194,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E444720812143BE90058D07B /* Milgrom_Prefix.pch */,
+				E46C459B1374897E00E45241 /* MilgromFree_Prefix.pch */,
 				E44471DA121438CD0058D07B /* main.m */,
 			);
 			name = "Other Sources";
@@ -2193,9 +2192,9 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E425614013748A55006E46E8 /* precache_full */,
+				E425616613748C77006E46E8 /* Milgrom-Info.plist */,
+				E46C458C1374873500E45241 /* precache_free */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
-				E444720112143ABC0058D07B /* Milgrom-Info.plist */,
 				E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */,
 				E4D4A1CF11FD725000C92628 /* Wonderlism.ttf */,
 			);
@@ -2505,9 +2504,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Milgrom */ = {
+		1D6058900D05DD3D006BFB54 /* MilgromFree */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Milgrom" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MilgromFree" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -2518,9 +2517,9 @@
 			dependencies = (
 				E422590012F9621B0032CA23 /* PBXTargetDependency */,
 			);
-			name = Milgrom;
+			name = MilgromFree;
 			productName = MilgromInterface;
-			productReference = 1D6058910D05DD3D006BFB54 /* Milgrom.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* MilgromFree.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2528,7 +2527,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Milgrom" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MilgromFree" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -2548,7 +2547,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Milgrom */,
+				1D6058900D05DD3D006BFB54 /* MilgromFree */,
 			);
 		};
 /* End PBXProject section */
@@ -2626,7 +2625,6 @@
 				E4DE500611FFFDEB00BF31AF /* Default.png in Resources */,
 				E4DE50551200185200BF31AF /* MainViewController.xib in Resources */,
 				E4D4FFF71201FBDF00F8B7B2 /* HelpViewController.xib in Resources */,
-				E444727D12143DB90058D07B /* install.xml in Resources */,
 				E44F6DBD122A4DC60002386C /* CELL1_PROGRESS.png in Resources */,
 				E44F6DBE122A4DC60002386C /* CELL2_PROGRESS.png in Resources */,
 				E44F6DBF122A4DC60002386C /* CELL3_PROGRESS.png in Resources */,
@@ -2806,7 +2804,7 @@
 				E406DF111372C26C00F4B57A /* RED_ARROW_22.png in Resources */,
 				E4A676ED1374467300584C6C /* GETFULL_MAIN.png in Resources */,
 				E4A676EE1374467300584C6C /* GETFULL_SET.png in Resources */,
-				E425614313748A55006E46E8 /* precache_full in Resources */,
+				E46C458E1374873500E45241 /* precache_free in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2929,8 +2927,11 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = _FLURRY;
+				GCC_PREFIX_HEADER = MilgromFree_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					FREE_APP,
+					_FLURRY,
+				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
@@ -2954,8 +2955,8 @@
 					"-lxml2",
 					"-all_load",
 				);
-				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "410843A4-7212-46E6-99F2-B5840B81BA19";
+				PRODUCT_NAME = MilgromFree;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9CF97EB7-F633-4BE7-A54F-1BEBB66C5834";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 			};
@@ -2968,8 +2969,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roee Kremer (S8LHA25A98)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = _FLURRY;
+				GCC_PREFIX_HEADER = MilgromFree_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					FREE_APP,
+					_FLURRY,
+				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
@@ -2994,8 +2998,8 @@
 					"-lxml2",
 					"-all_load",
 				);
-				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D855CFA4-F1BA-4719-AE9A-486A7D8A86CB";
+				PRODUCT_NAME = MilgromFree;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9CF97EB7-F633-4BE7-A54F-1BEBB66C5834";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 				VALIDATE_PRODUCT = YES;
@@ -3075,7 +3079,7 @@
 					"-lxml2",
 					"-all_load",
 				);
-				PRODUCT_NAME = Milgrom;
+				PRODUCT_NAME = MilgromFree;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "24C307B2-522E-40EC-BD60-E97ED85931D3";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
@@ -3086,7 +3090,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Milgrom" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MilgromFree" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -3096,7 +3100,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Milgrom" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MilgromFree" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

@@ -24,6 +24,8 @@
 	UIView *menuView;
 	UIView *songsView;
 	
+	UIButton *appButton;
+	
 }
 
 @property (nonatomic,retain) SongsTable *songsTable;
@@ -38,11 +40,13 @@
 @property (nonatomic, retain) IBOutlet UIView *menuView;
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
 
+@property (nonatomic,retain) IBOutlet UIButton *appButton;
 
 - (void)edit:(id)sender;
 - (void)help:(id)sender;
 - (void)link:(id)sender;
 - (void)cancelEdit;
 - (void)updateEditMode;
+- (void)appStore:(id)sender;
 
 @end

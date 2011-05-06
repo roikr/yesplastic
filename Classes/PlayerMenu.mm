@@ -27,7 +27,7 @@
 @synthesize bpmSlider;
 @synthesize playerName;
 //@synthesize volumeLabel;
-
+@synthesize appButton;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-#ifndef FREE_APP
+
 	if (self.setsTable == nil) {
 		self.setsTable = [[SetsTable alloc] initWithNibName:@"SetsTable" bundle:nil];
 		
@@ -54,7 +54,7 @@
 		
 		[self.setsTable loadData];
 	}
-#endif
+
 		
 	NSString *doneButtonName = [NSString stringWithFormat:@"%@_DONE.png",playerName];
 	[doneButton setImage:[UIImage imageNamed:doneButtonName] forState:UIControlStateNormal];
@@ -82,13 +82,12 @@
 	
 	
 	//NSArray *array = [NSArray arrayWithObject:self.songsTable.editButtonItem];
+	
 #ifndef FREE_APP
-	[self.setsView addSubview:setsTable.view];
+	[self.appButton removeFromSuperview];
 #endif
-	
-	
-	
-	
+
+	[self.setsView addSubview:setsTable.view];
 }
 
 - (void) loadData {
@@ -134,9 +133,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	MilgromLog(@"PlayerMenu::viewWillAppear");
-#ifndef FREE_APP
+
 	[setsTable viewWillAppear:animated];
-#endif
+
 	
 	testApp *OFSAptr = ((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr;
 	volumeSlider.value = OFSAptr->getVolume();
@@ -192,11 +191,14 @@
 
 }
 
+- (void)appStore:(id)sender {
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/"]];
+}
 
 - (void)dealloc {
-#ifndef FREE_APP
+
 	[setsTable release];
-#endif
+
     [super dealloc];
 }
 

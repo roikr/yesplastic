@@ -22,6 +22,7 @@
 	NSString * playerName;
 	
 	//UILabel *volumeLabel;
+	UIButton *appButton;
 	
 }
 
@@ -33,6 +34,7 @@
 @property (nonatomic,retain ) IBOutlet UISlider *volumeSlider;
 @property (nonatomic,retain) IBOutlet UISlider *bpmSlider;
 @property (nonatomic,retain) NSString *playerName;
+@property (nonatomic,retain) IBOutlet UIButton *appButton;
 
 //@property (nonatomic,retain) IBOutlet UILabel *volumeLabel;
 
@@ -40,6 +42,6 @@
 - (void)volumeChanged:(id)sender ;
 - (void)bpmChanged:(id)sender;
 - (void) loadData; // load the sets list from the store to the table
-
+- (void)appStore:(id)sender;
 
 @end
