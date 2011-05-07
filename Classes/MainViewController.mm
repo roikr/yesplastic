@@ -318,6 +318,18 @@
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
+	
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_played"]) {
+		((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_INTRODUCTION;
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_played"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	} else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
+		MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+	} 
+	
 	[self updateViews];
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"MAIN"];
@@ -352,13 +364,15 @@
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_ROTATE];
+	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	[appDelegate toggle:UIInterfaceOrientationPortrait animated:YES];
 }
 
 
 - (void) menu:(id)sender {
 	
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
@@ -379,6 +393,8 @@
 
 
 - (void) play:(id)sender {
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	
 		
 	if (recordButton.selected) {
@@ -390,6 +406,8 @@
 #ifdef _FLURRY
 		
 		MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
+		
+				
 		if ([appDelegate.currentSong.bDemo boolValue]) {
 			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:appDelegate.currentSong.songName,@"NAME", nil];
 			[FlurryAPI logEvent:@"PLAY" withParameters:dictionary];
@@ -404,6 +422,9 @@
 
 - (void) stop:(id)sender {
 	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
+	
 	OFSAptr->setSongState(SONG_IDLE);
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"STOP"];
@@ -411,7 +432,8 @@
 }
 
 - (void) record:(id)sender {
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	
 	if (playButton.hidden) {
 		MilgromAlert(@"Sorry",@"can't record while a track is being played");
@@ -459,6 +481,7 @@
 }
 
 - (void) save:(id)sender {
+	
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] saveWithin:self];
 }
 
@@ -502,12 +525,10 @@
 //#endif	
 }
 
-- (void) closeTutorial:(id)sender {
-	
-}
 
 - (void) showHelp:(id)sender {
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	bShowHelp = YES;
 	[self updateViews];
 #ifdef _FLURRY
@@ -529,6 +550,11 @@
 }
 
 - (void) replayTutorial:(id)sender {
+	
+	if (OFSAptr->getSongState()!=SONG_IDLE ) {
+		OFSAptr->setSongState(SONG_IDLE);
+	}
+	
 	[self hideHelp];
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
@@ -554,6 +580,7 @@
 }
 
 - (void)share:(id)sender {
+
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] shareWithin:self];	
 }
 

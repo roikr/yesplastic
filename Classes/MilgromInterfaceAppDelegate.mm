@@ -103,16 +103,8 @@ NSString * const kCacheFolder=@"URLCache";
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
 	self.slidesManager = [SlidesManager slidesManager];
+	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
 	
-	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides"]) {
-		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_INTRODUCTION;
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-	} else {
-		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
-	}
-
-
 	
 	
 	// implicitly initializes your audio session
@@ -376,7 +368,12 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->release();
 	}
 	
-	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"slides_played"] && ![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
+		if (slidesManager.currentTutorialSlide >= MILGROM_TUTORIAL_RECORD_PLAY) {
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		}
+	} 
 }
 
 
@@ -392,13 +389,9 @@ NSString * const kCacheFolder=@"URLCache";
 //		MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
 //	}
 	
+	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
 	
-	
-	if (slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE ) {
-		MilgromAlert(@"Need a start ?", @"you can always launch the tutorial from the help slide !");
-		slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
-	}
-	
+																		
 		
 }
 
@@ -786,12 +779,14 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 - (void)saveWithin:(UIViewController *)controller {
+	[self.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	self.OFSAptr->setSongState(SONG_IDLE);
 	[controller presentModalViewController:saveViewController animated:YES];
 }
 
 - (void)shareWithin:(UIViewController *)controller {
-		
+	[self.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	
 	//[tutorialView doneSlide:MILGROM_SLIDE_SHARE];
 

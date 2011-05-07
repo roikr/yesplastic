@@ -345,13 +345,16 @@
 #pragma mark Buttons
 
 - (void) toggle:(id)sender {
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] toggle:UIInterfaceOrientationLandscapeRight animated:YES];
 }
 
 
 - (void) menu:(id)sender {
 	
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
 	}
@@ -388,7 +391,7 @@
 	
 	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
-	
+	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 		
 	if (recordButton.selected) {
 		[self stop:nil];
@@ -413,7 +416,8 @@
 }
 
 - (void) stop:(id)sender {
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	OFSAptr->setSongState(SONG_IDLE);
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"STOP"];
@@ -421,7 +425,7 @@
 }
 
 - (void) record:(id)sender {
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
 	
 	if (playButton.hidden) {
@@ -540,13 +544,10 @@
 }
 
 
-- (void) closeTutorial:(id)sender {
-	
-}
-
 - (void) showHelp:(id)sender {
 	
-	
+	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+
 	bShowHelp = YES;
 	[self updateViews];
 #ifdef _FLURRY
@@ -563,6 +564,9 @@
 }
 
 - (void) replayTutorial:(id)sender {
+	if (OFSAptr->getSongState()!=SONG_IDLE ) {
+		OFSAptr->setSongState(SONG_IDLE);
+	}
 	[self hideHelp];
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager start];

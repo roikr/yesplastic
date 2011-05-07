@@ -122,7 +122,7 @@
 }
 
 - (void)doneSlide:(NSUInteger)slide {
-	if (slide==currentTutorialSlide) {
+	if (slide==currentTutorialSlide && self.currentView) {
 		[self next:NULL];
 	}
 }
