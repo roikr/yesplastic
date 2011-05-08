@@ -319,17 +319,7 @@
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
 	
-	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_played"]) {
-		((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_INTRODUCTION;
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_played"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-	} else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
-		MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
 		
-	} 
-	
 	[self updateViews];
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"MAIN"];
@@ -341,6 +331,13 @@
 	MilgromLog(@"MainViewController::viewDidAppear");
     [self.view becomeFirstResponder]; // this is for the shake detection
 	self.view.hidden = NO;
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"replay_reminder"]) {
+		MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"replay_reminder"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+	} 
 }
 
 

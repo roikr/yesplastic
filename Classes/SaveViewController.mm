@@ -84,12 +84,12 @@
 	
 	if (![songName.text length]) {
 		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Don’t you believe in naming your songs?\nplease enter the song name" withCancel:@"OK"];
-	} else if ([(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] canSaveSongName:songName.text]) {
+	} else if ([(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] isPresetSongExist:songName.text]) {
+		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Cannot save with preset song name" withCancel:@"OK"];
+	} else {
 		[songName resignFirstResponder];
 		[(MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate] saveSong:songName.text];
 		[self.parentViewController dismissModalViewControllerAnimated:YES];
-	} else {
-		[MilgromInterfaceAppDelegate alertWithTitle:@"Milgrom Alert" withMessage:@"Cannot save with preset song name" withCancel:@"OK"];
 	}
 }
 

@@ -103,7 +103,7 @@ NSString * const kCacheFolder=@"URLCache";
 	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
 	self.slidesManager = [SlidesManager slidesManager];
-	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
+	slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
 	
 	
 	
@@ -125,6 +125,10 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 -(void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload {
+	
+	if ([self isPresetSongExist:[theArray objectAtIndex:0]]) {
+		return;
+	}
 	
 	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
 	[song setSongName:[theArray objectAtIndex:0]];
@@ -178,6 +182,8 @@ NSString * const kCacheFolder=@"URLCache";
 	
 #ifdef FREE_APP
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
+//	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
+	
 #else	
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"BROWN BUNNY",nil] bpm:160 download:NO];
@@ -221,9 +227,13 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	// if (![[NSFileManager defaultManager] fileExistsAtPath:[documentsDirectory stringByAppendingPathComponent:@"data"]]) { // roikr: first time run check for release
 		
-//	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"unzipped"]; // comment addDemos
 	
-	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"unzipped"]) {
+	
+	NSString *key = [NSString stringWithFormat:@"first_run_%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+	MilgromLog(@"%@",key);
+	
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:key]) {
+		MilgromLog(@"extracting");
 		
 		RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
 #ifdef FREE_APP
@@ -246,7 +256,7 @@ NSString * const kCacheFolder=@"URLCache";
 		} 
 		
 		
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"unzipped"];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		[task finish];
 		
@@ -368,11 +378,13 @@ NSString * const kCacheFolder=@"URLCache";
 		OFSAptr->release();
 	}
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"slides_played"] && ![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
-		if (slidesManager.currentTutorialSlide >= MILGROM_TUTORIAL_RECORD_PLAY) {
-			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished"];
-			[[NSUserDefaults standardUserDefaults] synchronize];
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
+		if (((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_SHARE) {
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"replay_reminder"];
 		}
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
 	} 
 }
 
@@ -822,7 +834,7 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark Songs Management
 
 
--(BOOL)canSaveSongName:(NSString *)songName {
+-(BOOL)isPresetSongExist:(NSString *)songName {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
 	[request setEntity:entity];
@@ -845,11 +857,11 @@ NSString * const kCacheFolder=@"URLCache";
 	
 		Song *song = (Song *)[fetchResults objectAtIndex:0];
 		if ([song.bDemo boolValue]) {
-			return NO;
+			return YES;
 		}
 	}
 	
-	return YES;
+	return NO;
 
 	
 	

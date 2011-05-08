@@ -105,7 +105,7 @@ class testApp;
 - (void)toggle:(UIInterfaceOrientation)orientation animated:(BOOL)animated;
 - (void)saveWithin:(UIViewController *)controller;
 - (void)shareWithin:(UIViewController *)controller;
-- (BOOL)canSaveSongName:(NSString *)songName;
+- (BOOL)isPresetSongExist:(NSString *)songName;
 - (void)saveSong:(NSString *)songName;
 - (void)pushViewController:(UIViewController *)controller;
 - (void)helpWithTransition:(UIModalTransitionStyle)transition;

@@ -52,6 +52,11 @@
 	
 	if (self.songsTable == nil) {
 		self.songsTable = [[SongsTable alloc] initWithNibName:@"SongsTable" bundle:nil];
+		CGRect frame = songsView.frame;
+#ifdef FREE_APP
+		frame.size.height-=appButton.frame.size.height;
+#endif
+		songsTable.view.frame = frame;
 	} else {
 		[firstLaunchView removeFromSuperview];
 		[milgromView removeFromSuperview];
@@ -65,13 +70,16 @@
 	//background.center = CGPointMake(240.0, 160.0);
 	background.transform = CGAffineTransformRotate(CGAffineTransformIdentity,-M_PI/2.0);
 	
+
+	
+	[self.menuView addSubview:songsTable.view];
+	[self.menuView insertSubview:songsTable.view aboveSubview:songsView];
+	
 #ifndef FREE_APP
 	[self.appButton removeFromSuperview];
 #endif
 	
-	[self.songsView addSubview:songsTable.view];
-	
-	
+	[songsView removeFromSuperview];
 		
 }
 
@@ -156,16 +164,18 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/mmmilgrom"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com"]];
+//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
 			break;
 		case 1:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/mmmilgrom"]];
 			break;
 		case 2:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
 			break;
 		case 3:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/fb"]];
+//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/pages/Milgrom/137470506285895?ref=ts"]];
 			break;
 		default:
 			break;
@@ -174,7 +184,7 @@
 }
 
 - (void)appStore:(id)sender {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/"]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/appstore"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

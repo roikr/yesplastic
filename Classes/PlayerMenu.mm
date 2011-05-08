@@ -192,7 +192,7 @@
 }
 
 - (void)appStore:(id)sender {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/"]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/appstore"]];
 }
 
 - (void)dealloc {

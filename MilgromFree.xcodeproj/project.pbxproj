@@ -380,6 +380,7 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E4025ACC136E180A00261012 /* SlidesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlidesManager.h; path = Classes/SlidesManager.h; sourceTree = "<group>"; };
 		E4025ACD136E180A00261012 /* SlidesManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SlidesManager.mm; path = Classes/SlidesManager.mm; sourceTree = "<group>"; };
+		E4050A1913770DF10016E029 /* MilgromFree-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MilgromFree-Info.plist"; sourceTree = "<group>"; };
 		E406DF0E1372C26C00F4B57A /* RED_ARROW_21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RED_ARROW_21.png; sourceTree = "<group>"; };
 		E406DF0F1372C26C00F4B57A /* RED_ARROW_22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RED_ARROW_22.png; sourceTree = "<group>"; };
 		E4091AC71371748E00A740D2 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
@@ -725,7 +726,6 @@
 		E42258E912F961DA0032CA23 /* GDataYouTubeRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataYouTubeRating.h; sourceTree = "<group>"; };
 		E42258EA12F961DA0032CA23 /* GDataYouTubeStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataYouTubeStatistics.h; sourceTree = "<group>"; };
 		E42258EB12F962050032CA23 /* GData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GData.xcodeproj; path = "../OpenSource/gdata-objectivec-client-read-only/Source/GData.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		E425616613748C77006E46E8 /* Milgrom-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Milgrom-Info.plist"; sourceTree = "<group>"; };
 		E42D1325124F796A007BEEB0 /* ARROWS_DRM_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_LEFT.png; sourceTree = "<group>"; };
 		E42D1326124F796A007BEEB0 /* ARROWS_DRM_RIGHT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_DRM_RIGHT.png; sourceTree = "<group>"; };
 		E42D1327124F796A007BEEB0 /* ARROWS_GTR_LEFT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROWS_GTR_LEFT.png; sourceTree = "<group>"; };
@@ -2192,7 +2192,7 @@
 		E4B3D2C211F83D4100B57223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E425616613748C77006E46E8 /* Milgrom-Info.plist */,
+				E4050A1913770DF10016E029 /* MilgromFree-Info.plist */,
 				E46C458C1374873500E45241 /* precache_free */,
 				E4DE4F5F11FFFC9A00BF31AF /* png */,
 				E4F0DB251208618E00D28745 /* Milgrom.xcdatamodeld */,
@@ -2938,7 +2938,7 @@
 					"$(HOME)/$(SDKROOT)/include",
 					/usr/include/libxml2,
 				);
-				INFOPLIST_FILE = "Milgrom-Info.plist";
+				INFOPLIST_FILE = "MilgromFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
@@ -2980,7 +2980,7 @@
 					"$(HOME)/$(SDKROOT)/include",
 					/usr/include/libxml2,
 				);
-				INFOPLIST_FILE = "Milgrom-Info.plist";
+				INFOPLIST_FILE = "MilgromFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
@@ -3033,6 +3033,64 @@
 			};
 			name = Release;
 		};
+		E4050A33137714040016E029 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.2;
+			};
+			name = "Ad Hoc";
+		};
+		E4050A34137714040016E029 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roee Kremer";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MilgromFree_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					FREE_APP,
+					_FLURRY,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
+				HEADER_SEARCH_PATHS = (
+					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
+					"$(HOME)/$(SDKROOT)/include",
+					/usr/include/libxml2,
+				);
+				INFOPLIST_FILE = "MilgromFree-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
+					"\"$(SRCROOT)/../of_preRelease_v0061_osxSL_FAT/My Addons/ofxSndFile/libs/sndfile/lib/iPhone\"",
+					"\"$(SRCROOT)/FlurryLib\"",
+				);
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"-DGDATA_REQUIRE_SERVICE_INCLUDES=1",
+					"-DGDATA_INCLUDE_YOUTUBE_SERVICE=1",
+				);
+				OTHER_LDFLAGS = (
+					"-lGLU",
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
+				);
+				PRODUCT_NAME = MilgromFree;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C98C2F9B-4E1E-48CE-892B-097C1D44D4B4";
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
+		};
 		E4C2B5DA133E77EF0098A620 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3061,7 +3119,7 @@
 					"$(HOME)/$(SDKROOT)/include",
 					/usr/include/libxml2,
 				);
-				INFOPLIST_FILE = "Milgrom-Info.plist";
+				INFOPLIST_FILE = "MilgromFree-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/lib",
@@ -3095,6 +3153,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				E4050A34137714040016E029 /* Ad Hoc */,
 				E4C2B5DB133E77EF0098A620 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3105,6 +3164,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				E4050A33137714040016E029 /* Ad Hoc */,
 				E4C2B5DA133E77EF0098A620 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
