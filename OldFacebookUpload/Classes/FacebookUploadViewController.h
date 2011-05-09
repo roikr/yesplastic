@@ -21,10 +21,6 @@
 	NSString *videoPath;
 	
 	UIScrollView *srcollView;
-	BOOL viewIsScrolled;
-	BOOL keyboardShown;
-	
-	UIView *activeView;
 	
 	NSString *additionalText;
 	
@@ -45,9 +41,9 @@
 -(void)setDelegate:(id<FacebookUploadViewControllerDelegate>)theDelegate;
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
+- (void) closeTextView:(id)sender;
 - (void) logout:(id)sender;
 - (void) touchDown:(id)sender;
-- (void)registerForKeyboardNotifications;
 
 
 @end
