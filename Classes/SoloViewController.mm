@@ -313,7 +313,13 @@
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
+	[(TouchView*)self.view resetCounters];
+	for (int i=0; i<3; i++) {
+		loopChanges[i] = 0;
+		triggers[i] = 0;
+	}
 	[self updateViews];
+	
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"SOLO"];
 #endif
@@ -334,6 +340,32 @@
 	MilgromLog(@"SoloViewControlloer::viewWillDisappear");
 	[self.view resignFirstResponder]; // this is for the shake detection
 	self.view.hidden = YES;
+	
+#ifdef _FLURRY
+	for (int i=0; i<3; i++) {
+		NSString *event = [NSString stringWithFormat:@"%@_SOLO_LOOP_TOGGLE",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
+		for (int j=0; j<[(TouchView*)self.view getCounter:i]; j++) {
+			[FlurryAPI logEvent:event];
+		}
+		MilgromLog(@"%@: %u",event,[(TouchView*)self.view getCounter:i]);
+	}	
+	
+	for (int i=0; i<3; i++) {
+		NSString *event = [NSString stringWithFormat:@"%@_SOLO_CHANGE_LOOP",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
+		for (int j=0; j<loopChanges[i]; j++) {
+			[FlurryAPI logEvent:event];
+		}
+		MilgromLog(@"%@: %u",event,loopChanges[i]);
+	}	
+	
+	for (int i=0; i<3; i++) {
+		NSString *event = [NSString stringWithFormat:@"%@_SOLO_TRIGGER",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
+		for (int j=0; j<triggers[i]; j++) {
+			[FlurryAPI logEvent:event];
+		}
+		MilgromLog(@"%@: %u",event,triggers[i]);
+	}	
+#endif
 	
 }
 
@@ -502,11 +534,7 @@
 	UIButton *button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
-//#ifdef _FLURRY
-//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
-//								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-//	[FlurryAPI logEvent:@"TRIGGER" withParameters:dictionary];
-//#endif	
+	triggers[ ((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->controller]++;
 	
 //	if (button.tag == 7) {
 //		triggersView.hidden = YES;
@@ -530,11 +558,7 @@
 	button = (UIButton*)sender;
 	OFSAptr->buttonPressed(button.tag);
 	
-//#ifdef _FLURRY
-//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%u", button.tag],@"SAMPLE",
-//								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-//	[FlurryAPI logEvent:@"LOOP" withParameters:dictionary];
-//#endif
+	loopChanges[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).OFSAptr->controller]++;
 	
 //	if (button.tag == 7) {
 //		triggersView.hidden = NO;

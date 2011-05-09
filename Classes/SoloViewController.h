@@ -40,6 +40,8 @@ class testApp;
 	
 	CustomImageView *shareProgressView;
 	
+	int loopChanges[3];
+	int triggers[3];
 }
 
 @property (nonatomic, retain) IBOutlet UIView *interactionView;

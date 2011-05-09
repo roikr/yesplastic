@@ -14,9 +14,6 @@
 #import "SoloViewController.h"
 #import "MilgromMacros.h"
 
-#ifdef _FLURRY
-#import "FlurryAPI.h"
-#endif
 
 @implementation TouchView
 
@@ -155,20 +152,19 @@
 		
 		CGPoint touchPoint = [touch locationInView:self];
 	
-//		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
-		MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-//		int mode = appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller);
-		
-		appDelegate.OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);
 
-//#ifdef _FLURRY
-//		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
-//			
-//			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:appDelegate.OFSAptr->getPlayerName(appDelegate.OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-//			[FlurryAPI logEvent:@"TOGGLE_LOOP" withParameters:dictionary];
-//		}
-//#endif
+		testApp *OFSAptr = appDelegate.OFSAptr;
+		
+		int mode = OFSAptr->getMode(OFSAptr->controller);
+		
+		OFSAptr->touchUp(touchPoint.x, touchPoint.y, touchIndex);
+
+
+		if (mode!=OFSAptr->getMode(OFSAptr->controller)) {
+			
+			toggle[OFSAptr->controller]++;
+			
+		}
 		
 		
 //		if (mode!=appDelegate.OFSAptr->getMode(appDelegate.OFSAptr->controller)) {
@@ -215,7 +211,15 @@
 	}
 }
 
+-(int) getCounter:(int)number {
+	return toggle[number];
+}
 
+-(void) resetCounters  {
+	for (int i=0; i<3; i++) {
+		toggle[i] = 0;
+	}
+}
 
 - (void)dealloc {
     [super dealloc];

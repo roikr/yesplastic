@@ -318,8 +318,10 @@
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
-	
-		
+	[(TouchView*)self.view resetCounters];
+	for (int i=0; i<3; i++) {
+		loopChanges[i] = 0;
+	}
 	[self updateViews];
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"MAIN"];
@@ -346,6 +348,25 @@
 	MilgromLog(@"MainViewController::viewWillDisappear");
 	 [self.view resignFirstResponder]; // this is for the shake detection
 	self.view.hidden = YES;
+	
+#ifdef _FLURRY
+	for (int i=0; i<3; i++) {
+		NSString *event = [NSString stringWithFormat:@"%@_MAIN_LOOP_TOGGLE",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
+		for (int j=0; j<[(TouchView*)self.view getCounter:i]; j++) {
+			[FlurryAPI logEvent:event];
+		}
+		MilgromLog(@"%@: %u",event,[(TouchView*)self.view getCounter:i]);
+	}	
+	
+	for (int i=0; i<3; i++) {
+		NSString *event = [NSString stringWithFormat:@"%@_MAIN_LOOP_CHANGE",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
+		for (int j=0; j<loopChanges[i]; j++) {
+			[FlurryAPI logEvent:event];
+		}
+		MilgromLog(@"%@: %u",event,loopChanges[i]);
+	}	
+#endif
+	
 	
 }
 
@@ -496,11 +517,8 @@
 	}
 	
 	OFSAptr->nextLoop(button.tag);
-	
-//#ifdef _FLURRY
-//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-//	[FlurryAPI logEvent:@"NEXT_LOOP" withParameters:dictionary];
-//#endif	
+	loopChanges[button.tag]++;
+
 	
 }
 
@@ -515,11 +533,9 @@
 		}
 	}
 	OFSAptr->prevLoop(button.tag);
+	loopChanges[button.tag]++;
 	
-//#ifdef _FLURRY
-//	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:OFSAptr->getPlayerName(button.tag).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
-//	[FlurryAPI logEvent:@"PREV_LOOP" withParameters:dictionary];
-//#endif	
+	
 }
 
 

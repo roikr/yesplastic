@@ -24,6 +24,9 @@
 	//UILabel *volumeLabel;
 	UIButton *appButton;
 	
+	BOOL bpmChanged;
+	BOOL volumeChanged;
+	
 }
 
 @property (nonatomic,retain) SetsTable *setsTable;

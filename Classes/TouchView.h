@@ -15,6 +15,10 @@
 @interface TouchView : UIView {
 	UITouch					*activeTouches[OF_MAX_TOUCHES];
 	NSTimeInterval shakeStartTime;
+	int toggle[3];
 }
+
+-(int) getCounter:(int)number;
+-(void) resetCounters;
 
 @end

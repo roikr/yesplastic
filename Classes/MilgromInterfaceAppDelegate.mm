@@ -93,7 +93,6 @@ NSString * const kCacheFolder=@"URLCache";
 #else
 	[FlurryAPI startSession:@"QHB9XPQ4RUUGDYIS7H4Z"]; 
 #endif
-	[FlurryAPI logAllPageViews:self.navigationController];
 #endif
 
 	// Override point for customization after application launch.
@@ -258,6 +257,10 @@ NSString * const kCacheFolder=@"URLCache";
 		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
 		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+#ifdef _FLURRY
+		[FlurryAPI logEvent:@"FILES_EXTRACTED"];
+#endif
 		[task finish];
 		
 		while ([UIApplication sharedApplication].applicationState != UIApplicationStateActive); // stay here while in background
@@ -755,9 +758,6 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (self.mainViewController == nil) { // this check use in case of loading after warning message...
 		self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-#ifdef _FLURRY
-		[FlurryAPI logAllPageViews:self.mainViewController.navigationController];
-#endif
 	}
 	
 	[self.navigationController pushViewController:mainViewController animated:YES];
@@ -773,9 +773,6 @@ NSString * const kCacheFolder=@"URLCache";
 			if (self.soloViewController == nil) { // this check use in case of loading after warning message...
 				self.soloViewController = [[SoloViewController alloc] initWithNibName:@"SoloViewController" bundle:nil];
 				soloViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-#ifdef _FLURRY
-				[FlurryAPI logAllPageViews:self.soloViewController.navigationController];
-#endif
 			}
 			
 			[self.navigationController presentModalViewController:soloViewController animated:animated];	

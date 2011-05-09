@@ -181,10 +181,34 @@
 			break;
 	}
 	
+#ifdef _FLURRY
+	switch (button.tag) {
+		case 0:
+			[FlurryAPI logEvent:@"MILGROM_LINK"];
+			break;
+		case 1:
+			[FlurryAPI logEvent:@"YOUTUBE_LINK"];
+			break;
+		case 2:
+			[FlurryAPI logEvent:@"MYSPACE_LINK"];
+			break;
+		case 3:
+			[FlurryAPI logEvent:@"FACEBOOK_LINK"];
+			break;
+		default:
+			break;
+	}
+	
+#endif	
+	
 }
 
 - (void)appStore:(id)sender {
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/appstore"]];
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"APPSTORE_LINK"];
+#endif	
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
