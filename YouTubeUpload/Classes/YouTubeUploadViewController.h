@@ -24,15 +24,10 @@
 	NSString *videoName;
 	NSString *path;
 	
-	UIView *inputView;
 	UIView *uploadView;
 	
 	UIScrollView *srcollView;
-	BOOL viewIsScrolled;
-	BOOL keyboardShown;
-	
-	UIView *activeView;
-	
+		
 	NSString *additionalText;
 	
 	UIView *processView;
@@ -48,7 +43,7 @@
 @property (nonatomic,retain) IBOutlet UITextField *titleField;
 @property (nonatomic,retain) IBOutlet UITextView *descriptionView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, assign) UIView *activeView;
+
 
 @property (nonatomic,retain) IBOutlet UIView *processView;
 
@@ -60,8 +55,7 @@
 -(void)setDelegate:(id<YouTubeUploadViewControllerDelegate>)theDelegate;
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
-- (void) touchDown:(id)sender;
-
+- (void) closeTextView:(id)sender;
 @end
 
 @protocol YouTubeUploadViewControllerDelegate<NSObject>

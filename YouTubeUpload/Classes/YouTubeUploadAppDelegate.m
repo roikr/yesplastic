@@ -26,16 +26,17 @@
 
     // Add the view controller's view to the window and display.
    // [window addSubview:navigationController.view];
-    [window makeKeyAndVisible];
+   
 	//YouTubeUploadViewController * controller = (YouTubeUploadViewController*)navigationController.visibleViewController;
 	self.uploader = [YouTubeUploader youTubeUploader];
 	[uploader addDelegate:self];
+	
+	[window makeKeyAndVisible];
+	
 	controller.uploader = uploader;
 	controller.videoTitle = @"kremer the cat";
 	controller.descriptionView.text = @"testing";
 	controller.videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"];
-	
-	
 	
 		
     return YES;

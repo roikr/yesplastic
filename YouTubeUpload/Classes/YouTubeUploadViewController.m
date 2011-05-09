@@ -11,8 +11,6 @@
 @interface YouTubeUploadViewController (PrivateMethods)
 
 - (void)unsave;
-- (void)registerForKeyboardNotifications;
-
 @end
 
 @implementation YouTubeUploadViewController
@@ -25,7 +23,6 @@
 @synthesize descriptionView;
 @synthesize videoPath;
 @synthesize scrollView;
-@synthesize activeView;
 @synthesize additionalText;
 @synthesize processView;
 
@@ -56,15 +53,12 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	username.text = [defaults objectForKey:@"YTUsername"];
 	password.text = [defaults objectForKey:@"YTPassword"];
-	
-	[self registerForKeyboardNotifications];
-	viewIsScrolled = NO;
-	keyboardShown = NO;
 	additionalText = @"";
-		
+	
+	scrollView.contentSize=CGSizeMake(scrollView.frame.size.width,scrollView.frame.size.height+150);
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
-
-
 
 
 // Override to allow orientations other than the default portrait orientation.
@@ -72,6 +66,11 @@
     // Return YES for supported orientations
     return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
 }
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	
+}
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -128,26 +127,19 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
-	
-		
 	return NO;
 }
 
-- (void) touchDown:(id)sender {
-	NSLog(@"YouTubeUploadViewController::touchDown");
-	for (UIView *view in [self.scrollView subviews]) {  
-        if ([view isFirstResponder]) {  
-            [view resignFirstResponder];
-			break;
-        }
-    }   
-}
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-	activeView = textField;
-	
-	return YES;
-}
+
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+//	[scrollView scrollRectToVisible:textField.frame animated:YES];
+//	return YES;
+//}
+//
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//	[scrollView scrollRectToVisible:textField.frame animated:YES];
+//}
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
 	
@@ -178,103 +170,39 @@
 	}
 	
 	
-	activeView = nil;
-	
-	
-	
 	return YES;
 	
 }
 
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+- (void) closeTextView:(id)sender {
 	
-	activeView = textView;
-	
-	return YES;
-}
-
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-	
-	
-	
-	activeView = nil;
-	
-	return YES;
-}
-
-// Call this method somewhere in your view controller setup code.
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardWillShow:)
-												 name:UIKeyboardWillShowNotification object:nil];
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardWillHide:)
-												 name:UIKeyboardWillHideNotification object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardDidHide:)
-												 name:UIKeyboardDidHideNotification object:nil];
-}
-
-
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWillShow:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-	float kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-	
-	CGSize contentSize = scrollView.contentSize;
-	contentSize.height+=kbHeight;
-	scrollView.contentSize = contentSize;
-	
-	
-	if (!viewIsScrolled && (activeView==descriptionView || activeView==titleField)) {
-		//[scrollView setContentOffset:CGPointMake(0.0, activeView.frame.origin.y-30) animated:YES];
-		[scrollView setContentOffset:CGPointMake(0.0, titleField.frame.origin.y-7) animated:YES];
-		
-		viewIsScrolled = YES;
+	if ([descriptionView isFirstResponder]) {  
+		[descriptionView resignFirstResponder];
 	}
 	
-	keyboardShown = YES;
-	
-	
 }
 
-
-// Called when the UIKeyboardDidHideNotification is sent
-- (void)keyboardWillHide:(NSNotification*)aNotification
-{
-	
-		
-	[scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
-	viewIsScrolled = NO;
-	
-	keyboardShown = NO;
+/*
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+	[scrollView scrollRectToVisible:textView.frame animated:YES];
+	return YES;
 }
+*/
+
+
+
+
+
 
 // Called when the UIKeyboardDidHideNotification is sent
 - (void)keyboardDidHide:(NSNotification*)aNotification
 {
-	NSDictionary* info = [aNotification userInfo];
-	float kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-	
-	
-	CGSize contentSize = scrollView.contentSize;
-	contentSize.height-=kbHeight;
-	scrollView.contentSize = contentSize;
-	
+	[scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+
 }
 
 
-//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)theScrollView {
-//	CGSize contentSize = theScrollView.contentSize;
-//	contentSize.height-=kbHeight;
-//	theScrollView.contentSize = contentSize;
-//}
+
 
 
 
@@ -286,11 +214,7 @@
 		uploader.password = password.text;
 		[uploader uploadVideoWithTitle:titleField.text withDescription:descriptionView.text andPath:videoPath]; //[descriptionView.text stringByAppendingString:additionalText]
 	}
-	
-	if (self.activeView) {
-		[activeView resignFirstResponder];
-	}
-	
+		
 }
 
 - (void) cancel:(id)sender {
@@ -343,8 +267,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	NSLog(@"YouTubeUploadViewController::viewWillAppear");
-		
+	[scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
 	processView.hidden = uploader.state != YOUTUBE_UPLOADER_STATE_UPLOAD_REQUESTED && uploader.state != YOUTUBE_UPLOADER_STATE_UPLOADING;
+//	scrollView.scrollEnabled = NO;
 }
 
 
