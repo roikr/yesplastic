@@ -3113,6 +3113,10 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					FREE_APP,
+					_FLURRY,
+				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",
@@ -3138,7 +3142,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = MilgromFree;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "24C307B2-522E-40EC-BD60-E97ED85931D3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7103736D-7991-4879-ABF0-AA19FDCC718E";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 				VALIDATE_PRODUCT = YES;

@@ -2955,7 +2955,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "410843A4-7212-46E6-99F2-B5840B81BA19";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D855CFA4-F1BA-4719-AE9A-486A7D8A86CB";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 			};
@@ -3077,7 +3077,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Milgrom;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58514784-7C60-4B2A-B64B-423464916480";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E89A62C7-F93A-4566-B40D-A68F74A0AA98";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/include /Users/roikr/Developer/OpenSource/facebook-iphone-sdk/src";
 				VALIDATE_PRODUCT = YES;
@@ -3106,6 +3106,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Milgrom_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = _FLURRY;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "_$(CONFIGURATION)";
 				HEADER_SEARCH_PATHS = (
 					"/Users/roikr/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(IPHONEOS_DEPLOYMENT_TARGET).sdk/include",

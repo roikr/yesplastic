@@ -23,7 +23,7 @@
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeArchitecturePreference = armv6;
-		activeBuildConfigurationName = Debug;
+		activeBuildConfigurationName = "Ad Hoc";
 		activeExecutable = E4B3D14511F81F6B00B57223 /* Milgrom */;
 		activeSDKPreference = iphoneos4.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Milgrom */;
@@ -107,8 +107,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 326575547;
-			PBXWorkspaceStateSaveDate = 326575547;
+			PBXPerProjectTemplateStateSaveDate = 326624590;
+			PBXWorkspaceStateSaveDate = 326624590;
 		};
 		perUserProjectItems = {
 			E400B94D13423C5500373D4E /* PBXTextBookmark */ = E400B94D13423C5500373D4E /* PBXTextBookmark */;
@@ -123,7 +123,6 @@
 			E4050AC513772DE50016E029 /* PBXTextBookmark */ = E4050AC513772DE50016E029 /* PBXTextBookmark */;
 			E4050AC613772DE50016E029 /* PBXTextBookmark */ = E4050AC613772DE50016E029 /* PBXTextBookmark */;
 			E4050AC713772DE50016E029 /* PBXTextBookmark */ = E4050AC713772DE50016E029 /* PBXTextBookmark */;
-			E4050ACA13772E4F0016E029 /* PlistBookmark */ = E4050ACA13772E4F0016E029 /* PlistBookmark */;
 			E40536D01287592C00D75B55 /* PBXTextBookmark */ = E40536D01287592C00D75B55 /* PBXTextBookmark */;
 			E406DF051372B71900F4B57A /* PBXTextBookmark */ = E406DF051372B71900F4B57A /* PBXTextBookmark */;
 			E406DF081372B71900F4B57A /* PBXTextBookmark */ = E406DF081372B71900F4B57A /* PBXTextBookmark */;
@@ -187,6 +186,7 @@
 			E43678DE136CC88F00E72419 /* PBXTextBookmark */ = E43678DE136CC88F00E72419 /* PBXTextBookmark */;
 			E43721661302AE630090CAEC /* PBXTextBookmark */ = E43721661302AE630090CAEC /* PBXTextBookmark */;
 			E43721941302B5550090CAEC /* PBXTextBookmark */ = E43721941302B5550090CAEC /* PBXTextBookmark */;
+			E43985FA137735E7002538DC /* PlistBookmark */ = E43985FA137735E7002538DC /* PlistBookmark */;
 			E43E99A1132531DD00216C56 /* PBXTextBookmark */ = E43E99A1132531DD00216C56 /* PBXTextBookmark */;
 			E448A9D1136EC375007571B7 /* PBXTextBookmark */ = E448A9D1136EC375007571B7 /* PBXTextBookmark */;
 			E448AA05136ED039007571B7 /* PBXTextBookmark */ = E448AA05136ED039007571B7 /* PBXTextBookmark */;
@@ -275,7 +275,6 @@
 			E4C39DA6132A28CE00789FE9 /* PBXTextBookmark */ = E4C39DA6132A28CE00789FE9 /* PBXTextBookmark */;
 			E4CB57791369C87B00C4AE41 /* PBXTextBookmark */ = E4CB57791369C87B00C4AE41 /* PBXTextBookmark */;
 			E4CBD1831344B138004623C8 /* PBXTextBookmark */ = E4CBD1831344B138004623C8 /* PBXTextBookmark */;
-			E4CE22F8136FD2EB005D472C /* PlistBookmark */ = E4CE22F8136FD2EB005D472C /* PlistBookmark */;
 			E4CE231D136FD81F005D472C /* PBXTextBookmark */ = E4CE231D136FD81F005D472C /* PBXTextBookmark */;
 			E4CE2354136FE6F5005D472C /* PBXTextBookmark */ = E4CE2354136FE6F5005D472C /* PBXTextBookmark */;
 			E4CF33151315672E00F7C2D7 /* PBXTextBookmark */ = E4CF33151315672E00F7C2D7 /* PBXTextBookmark */;
@@ -296,6 +295,7 @@
 			E4D7EAB0136AF2A6009E9C9C /* PBXTextBookmark */ = E4D7EAB0136AF2A6009E9C9C /* PBXTextBookmark */;
 			E4D8543412DF8B8D008B24D2 /* PBXTextBookmark */ = E4D8543412DF8B8D008B24D2 /* PBXTextBookmark */;
 			E4D9451F1369F84800921D53 /* PBXTextBookmark */ = E4D9451F1369F84800921D53 /* PBXTextBookmark */;
+			E4DCA6AE1377E615003A05FD /* PlistBookmark */ = E4DCA6AE1377E615003A05FD /* PlistBookmark */;
 			E4DD599A1368B293006FBC9E /* PBXTextBookmark */ = E4DD599A1368B293006FBC9E /* PBXTextBookmark */;
 			E4DD599B1368B293006FBC9E /* PBXTextBookmark */ = E4DD599B1368B293006FBC9E /* PBXTextBookmark */;
 			E4DE9F3F133C03EE003E9E5D /* PBXTextBookmark */ = E4DE9F3F133C03EE003E9E5D /* PBXTextBookmark */;
@@ -448,18 +448,6 @@
 		rType = 0;
 		vrLen = 2553;
 		vrLoc = 6043;
-	};
-	E4050ACA13772E4F0016E029 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			NSServices,
-		);
-		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775807;
 	};
 	E40536D01287592C00D75B55 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1029,6 +1017,18 @@
 			sepNavVisRange = "{0, 767}";
 		};
 	};
+	E43985FA137735E7002538DC /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			NSServices,
+		);
+		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
 	E43E99A1132531DD00216C56 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E4B54285127089C900851D86 /* FacebookUploader.m */;
@@ -1428,7 +1428,7 @@
 		ignoreCount = 0;
 		lineNumber = 487;
 		location = Milgrom;
-		modificationTime = 326577631.208287;
+		modificationTime = 326577631.2082869;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -3094,18 +3094,6 @@
 		vrLen = 1121;
 		vrLoc = 0;
 	};
-	E4CE22F8136FD2EB005D472C /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			NSServices,
-		);
-		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
-	};
 	E4CE231D136FD81F005D472C /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E4B5427D1270898C00851D86 /* ShareManager.h */;
@@ -3440,6 +3428,18 @@
 		rType = 0;
 		vrLen = 399;
 		vrLoc = 0;
+	};
+	E4DCA6AE1377E615003A05FD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			LSRequiresIPhoneOS,
+		);
+		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
 	};
 	E4DD599A1368B293006FBC9E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
