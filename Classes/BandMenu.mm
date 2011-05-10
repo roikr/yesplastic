@@ -30,7 +30,7 @@
 @synthesize background;
 @synthesize milgromView,lofiView,menuView,songsView;
 @synthesize appButton;
-
+@synthesize extractLabel;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -55,6 +55,9 @@
 		CGRect frame = songsView.frame;
 #ifdef FREE_APP
 		frame.size.height-=appButton.frame.size.height;
+		extractLabel.text = @"(it will take about 10 seconds)";
+#else
+		extractLabel.text = @"(it can take up to 60 seconds)";
 #endif
 		songsTable.view.frame = frame;
 	} else {

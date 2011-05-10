@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="38"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -56,7 +56,7 @@
 					</object>
 					<object class="IBUIView" id="996501761">
 						<reference key="NSNextResponder" ref="212769150"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">292</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIImageView" id="1039705575">
@@ -116,7 +116,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">(it can take up to 60 seconds)</string>
+								<string key="IBUIText"/>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">14</double>
@@ -388,7 +388,7 @@
 							<object class="IBUIView" id="594532104">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{203, 82}, {270, 238}}</string>
+								<string key="NSFrame">{{210, 82}, {270, 238}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -591,6 +591,14 @@
 					</object>
 					<int key="connectionID">104</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">extractLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="677035488"/>
+					</object>
+					<int key="connectionID">105</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -620,8 +628,8 @@
 							<reference ref="892527401"/>
 							<reference ref="193822288"/>
 							<reference ref="952371224"/>
-							<reference ref="996501761"/>
 							<reference ref="191373211"/>
+							<reference ref="996501761"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -657,38 +665,6 @@
 						<int key="objectID">63</int>
 						<reference key="object" ref="879406163"/>
 						<reference key="parent" ref="952371224"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">86</int>
-						<reference key="object" ref="996501761"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1039705575"/>
-							<reference ref="193164219"/>
-							<reference ref="677035488"/>
-							<reference ref="919245097"/>
-						</object>
-						<reference key="parent" ref="212769150"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">87</int>
-						<reference key="object" ref="1039705575"/>
-						<reference key="parent" ref="996501761"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">88</int>
-						<reference key="object" ref="193164219"/>
-						<reference key="parent" ref="996501761"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">89</int>
-						<reference key="object" ref="677035488"/>
-						<reference key="parent" ref="996501761"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">90</int>
-						<reference key="object" ref="919245097"/>
-						<reference key="parent" ref="996501761"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1</int>
@@ -751,6 +727,38 @@
 						<int key="objectID">36</int>
 						<reference key="object" ref="634433617"/>
 						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">86</int>
+						<reference key="object" ref="996501761"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="1039705575"/>
+							<reference ref="193164219"/>
+							<reference ref="677035488"/>
+							<reference ref="919245097"/>
+						</object>
+						<reference key="parent" ref="212769150"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">87</int>
+						<reference key="object" ref="1039705575"/>
+						<reference key="parent" ref="996501761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">88</int>
+						<reference key="object" ref="193164219"/>
+						<reference key="parent" ref="996501761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">89</int>
+						<reference key="object" ref="677035488"/>
+						<reference key="parent" ref="996501761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">90</int>
+						<reference key="object" ref="919245097"/>
+						<reference key="parent" ref="996501761"/>
 					</object>
 				</object>
 			</object>
@@ -839,7 +847,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUNXAABBMAAAA</bytes>
 					</object>
-					<string>{{34, 110}, {480, 320}}</string>
+					<string>{{52, 550}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -859,9 +867,7 @@
 					<object class="NSAffineTransform"/>
 					<string>{{520, 197}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw58AAA</bytes>
-					</object>
+					<object class="NSAffineTransform"/>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABCFAAAw34AAA</bytes>
 					</object>
@@ -901,7 +907,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">104</int>
+			<int key="maxID">105</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -963,6 +969,7 @@
 							<string>appButton</string>
 							<string>background</string>
 							<string>editButton</string>
+							<string>extractLabel</string>
 							<string>firstLaunchView</string>
 							<string>lofiView</string>
 							<string>menuView</string>
@@ -975,6 +982,7 @@
 							<string>UIButton</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
+							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIView</string>
@@ -990,6 +998,7 @@
 							<string>appButton</string>
 							<string>background</string>
 							<string>editButton</string>
+							<string>extractLabel</string>
 							<string>firstLaunchView</string>
 							<string>lofiView</string>
 							<string>menuView</string>
@@ -1013,6 +1022,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">editButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">extractLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">firstLaunchView</string>

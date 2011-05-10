@@ -26,6 +26,8 @@
 	
 	UIButton *appButton;
 	
+	UILabel *extractLabel;
+	
 }
 
 @property (nonatomic,retain) SongsTable *songsTable;
@@ -41,6 +43,7 @@
 @property (nonatomic,retain ) IBOutlet UIView *songsView;
 
 @property (nonatomic,retain) IBOutlet UIButton *appButton;
+@property (nonatomic,retain) IBOutlet UILabel *extractLabel;
 
 - (void)edit:(id)sender;
 - (void)help:(id)sender;

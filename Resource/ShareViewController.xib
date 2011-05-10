@@ -45,7 +45,7 @@
 					<object class="IBUIView" id="351969407">
 						<reference key="NSNextResponder" ref="295153614"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{480, 320}</string>
+						<string key="NSFrameSize">{318, 482}</string>
 						<reference key="NSSuperview" ref="295153614"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="907383507">
 							<int key="NSColorSpace">1</int>
@@ -81,7 +81,7 @@
 									<double key="NSSize">20</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<string key="IBUINormalTitle">UPLOAD TO FACEBOOK</string>
+								<string key="IBUINormalTitle">upload to facebook</string>
 								<object class="NSColor" key="IBUIHighlightedTitleColor" id="868267739">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
@@ -108,7 +108,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="545776362"/>
-								<string key="IBUINormalTitle">UPLOAD TO YOUTUBE</string>
+								<string key="IBUINormalTitle">upload to youtube</string>
 								<reference key="IBUIHighlightedTitleColor" ref="868267739"/>
 								<reference key="IBUINormalTitleColor" ref="907383507"/>
 								<reference key="IBUINormalTitleShadowColor" ref="173360413"/>
@@ -129,7 +129,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="545776362"/>
-								<string key="IBUINormalTitle">ADD TO LIBRARY</string>
+								<string key="IBUINormalTitle">add to library</string>
 								<reference key="IBUIHighlightedTitleColor" ref="868267739"/>
 								<reference key="IBUINormalTitleColor" ref="907383507"/>
 								<reference key="IBUINormalTitleShadowColor" ref="173360413"/>
@@ -147,7 +147,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="545776362"/>
-								<string key="IBUINormalTitle">SEND VIA MAIL</string>
+								<string key="IBUINormalTitle">send via mail</string>
 								<reference key="IBUIHighlightedTitleColor" ref="868267739"/>
 								<reference key="IBUINormalTitleColor" ref="907383507"/>
 								<reference key="IBUINormalTitleShadowColor" ref="173360413"/>
@@ -165,7 +165,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="545776362"/>
-								<string key="IBUINormalTitle">SEND RINGTONE</string>
+								<string key="IBUINormalTitle">send ringtone</string>
 								<reference key="IBUIHighlightedTitleColor" ref="868267739"/>
 								<reference key="IBUINormalTitleColor" ref="907383507"/>
 								<reference key="IBUINormalTitleShadowColor" ref="173360413"/>
@@ -183,14 +183,14 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="545776362"/>
-								<string key="IBUINormalTitle">CANCEL</string>
+								<string key="IBUINormalTitle">cancel</string>
 								<reference key="IBUIHighlightedTitleColor" ref="868267739"/>
 								<reference key="IBUINormalTitleColor" ref="907383507"/>
 								<reference key="IBUINormalTitleShadowColor" ref="173360413"/>
 								<reference key="IBUINormalBackgroundImage" ref="853228842"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{88, 20}, {303, 278}}</string>
+						<string key="NSFrame">{{7, 101}, {303, 278}}</string>
 						<reference key="NSSuperview" ref="295153614"/>
 						<reference key="IBUIBackgroundColor" ref="276223401"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -200,13 +200,10 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{480, 318}</string>
+				<string key="NSFrameSize">{318, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="276223401"/>
 				<bool key="IBUIOpaque">NO</bool>
-				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-					<int key="interfaceOrientation">3</int>
-				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</object>
@@ -398,7 +395,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ShareViewController</string>
 					<string>UIResponder</string>
-					<string>{{140, 329}, {480, 318}}</string>
+					<string>{{193, 124}, {318, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw54AAA</bytes>
@@ -709,7 +706,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../Milgrom.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../MilgromFree.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>
