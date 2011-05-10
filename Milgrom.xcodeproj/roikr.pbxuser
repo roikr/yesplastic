@@ -107,8 +107,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 326631248;
-			PBXWorkspaceStateSaveDate = 326631248;
+			PBXPerProjectTemplateStateSaveDate = 326759450;
+			PBXWorkspaceStateSaveDate = 326759450;
 		};
 		perUserProjectItems = {
 			E400B94D13423C5500373D4E /* PBXTextBookmark */ = E400B94D13423C5500373D4E /* PBXTextBookmark */;
@@ -187,6 +187,9 @@
 			E448AA05136ED039007571B7 /* PBXTextBookmark */ = E448AA05136ED039007571B7 /* PBXTextBookmark */;
 			E448AA4B136EE20C007571B7 /* PBXTextBookmark */ = E448AA4B136EE20C007571B7 /* PBXTextBookmark */;
 			E448AA4C136EE20C007571B7 /* PBXTextBookmark */ = E448AA4C136EE20C007571B7 /* PBXTextBookmark */;
+			E44BEAC71379F5D6001F32E7 /* PBXTextBookmark */ = E44BEAC71379F5D6001F32E7 /* PBXTextBookmark */;
+			E44BEAC81379F5D6001F32E7 /* PlistBookmark */ = E44BEAC81379F5D6001F32E7 /* PlistBookmark */;
+			E44BEAC91379F5D6001F32E7 /* PlistBookmark */ = E44BEAC91379F5D6001F32E7 /* PlistBookmark */;
 			E454950B1366D2F500E046B1 /* PBXTextBookmark */ = E454950B1366D2F500E046B1 /* PBXTextBookmark */;
 			E459DC4812AD280500DAA283 /* PBXTextBookmark */ = E459DC4812AD280500DAA283 /* PBXTextBookmark */;
 			E459DC8012AD35BD00DAA283 /* PBXBookmark */ = E459DC8012AD35BD00DAA283 /* PBXBookmark */;
@@ -288,11 +291,8 @@
 			E4D7EAB0136AF2A6009E9C9C /* PBXTextBookmark */ = E4D7EAB0136AF2A6009E9C9C /* PBXTextBookmark */;
 			E4D8543412DF8B8D008B24D2 /* PBXTextBookmark */ = E4D8543412DF8B8D008B24D2 /* PBXTextBookmark */;
 			E4D9451F1369F84800921D53 /* PBXTextBookmark */ = E4D9451F1369F84800921D53 /* PBXTextBookmark */;
-			E4DCA75B137801C3003A05FD /* PlistBookmark */ = E4DCA75B137801C3003A05FD /* PlistBookmark */;
 			E4DCA78E137808C9003A05FD /* PBXTextBookmark */ = E4DCA78E137808C9003A05FD /* PBXTextBookmark */;
 			E4DCA78F137808C9003A05FD /* PBXTextBookmark */ = E4DCA78F137808C9003A05FD /* PBXTextBookmark */;
-			E4DCA790137808C9003A05FD /* PBXTextBookmark */ = E4DCA790137808C9003A05FD /* PBXTextBookmark */;
-			E4DCA7C313781367003A05FD /* PBXTextBookmark */ = E4DCA7C313781367003A05FD /* PBXTextBookmark */;
 			E4DD599A1368B293006FBC9E /* PBXTextBookmark */ = E4DD599A1368B293006FBC9E /* PBXTextBookmark */;
 			E4DD599B1368B293006FBC9E /* PBXTextBookmark */ = E4DD599B1368B293006FBC9E /* PBXTextBookmark */;
 			E4DE9F3F133C03EE003E9E5D /* PBXTextBookmark */ = E4DE9F3F133C03EE003E9E5D /* PBXTextBookmark */;
@@ -1300,6 +1300,40 @@
 		rType = 0;
 		vrLen = 1453;
 		vrLoc = 196;
+	};
+	E44BEAC71379F5D6001F32E7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */;
+		name = "SaveViewController.mm: 67";
+		rLen = 214;
+		rLoc = 1787;
+		rType = 0;
+		vrLen = 864;
+		vrLoc = 1139;
+	};
+	E44BEAC81379F5D6001F32E7 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			LSRequiresIPhoneOS,
+		);
+		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	E44BEAC91379F5D6001F32E7 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleShortVersionString,
+		);
+		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
 	};
 	E44D9D221223D1C400477CE0 /* DemoLoader.h */ = {
 		uiCtxt = {
@@ -2387,9 +2421,9 @@
 	};
 	E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1146, 1456}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 1339}}";
 			sepNavSelRange = "{1787, 214}";
-			sepNavVisRange = "{1139, 865}";
+			sepNavVisRange = "{1139, 864}";
 			sepNavWindowFrame = "{{1764, 250}, {1067, 800}}";
 		};
 	};
@@ -3352,18 +3386,6 @@
 		vrLen = 399;
 		vrLoc = 0;
 	};
-	E4DCA75B137801C3003A05FD /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = E444720112143ABC0058D07B /* Milgrom-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			LSRequiresIPhoneOS,
-		);
-		name = "/Users/roikr/Developer/YesPlastic/Milgrom-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775807;
-	};
 	E4DCA78E137808C9003A05FD /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E4B5427E1270898C00851D86 /* ShareManager.mm */;
@@ -3383,26 +3405,6 @@
 		rType = 0;
 		vrLen = 993;
 		vrLoc = 485;
-	};
-	E4DCA790137808C9003A05FD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */;
-		name = "SaveViewController.mm: 17";
-		rLen = 0;
-		rLoc = 319;
-		rType = 0;
-		vrLen = 770;
-		vrLoc = 0;
-	};
-	E4DCA7C313781367003A05FD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = E4A6FBE1122D807F00A5C4D9 /* SaveViewController.mm */;
-		name = "SaveViewController.mm: 67";
-		rLen = 214;
-		rLoc = 1787;
-		rType = 0;
-		vrLen = 865;
-		vrLoc = 1139;
 	};
 	E4DD599A1368B293006FBC9E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

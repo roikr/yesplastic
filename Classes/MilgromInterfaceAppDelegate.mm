@@ -112,6 +112,7 @@ NSString * const kCacheFolder=@"URLCache";
 		
 //	window.rootViewController = milgromViewController;
 	[window makeKeyAndVisible]; // we access OFSAptr in start animation...
+//	[window addSubview:navigationController.view];
 	self.bandMenu = (BandMenu *)self.navigationController.visibleViewController; 
 	
 	
@@ -180,18 +181,18 @@ NSString * const kCacheFolder=@"URLCache";
 - (void)addDemos {
 	
 #ifdef FREE_APP
-	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
 //	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
 	
 #else	
-	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"BOY",nil] bpm:136 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"BROWN BUNNY",nil] bpm:160 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"DOG",@"GTR_DOG",@"GTR_ELECTRO",@"VOC_DOG",@"VOC_BB",@"DRM_DOG",@"DRM_ELECTRO",@"DOG/RABBIT",nil] bpm:131 download:NO ];
-	[self addDemo:[NSArray arrayWithObjects:@"HOT",@"GTR_HOT",@"GTR_ROCK",@"VOC_HOT",@"VOC_POP",@"DRM_HOT",@"DRM_ELECTRO",@"HOT",nil] bpm:100 download:NO ];
-	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_HH",@"DRM_PACIFIST",@"DRM_NEOJAZZ",@"PACIFIST",nil] bpm:146 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"SALAD",nil] bpm:160 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"PLASTIC TOWER",nil] bpm:118 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"brown bunny",nil] bpm:160 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"DOG",@"GTR_DOG",@"GTR_ELECTRO",@"VOC_DOG",@"VOC_BB",@"DRM_DOG",@"DRM_ELECTRO",@"dog/rabbit",nil] bpm:131 download:NO ];
+	[self addDemo:[NSArray arrayWithObjects:@"HOT",@"GTR_HOT",@"GTR_ROCK",@"VOC_HOT",@"VOC_POP",@"DRM_HOT",@"DRM_ELECTRO",@"hot",nil] bpm:100 download:NO ];
+//	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_HH",@"DRM_PACIFIST",@"DRM_NEOJAZZ",@"pacifist",nil] bpm:146 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"salad",nil] bpm:160 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"summer bliss",nil] bpm:92 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"plastic tower",nil] bpm:118 download:NO];
 #endif
 	[self saveContext];
 	
