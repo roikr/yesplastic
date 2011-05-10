@@ -25,6 +25,7 @@
 @synthesize scrollView;
 @synthesize additionalText;
 @synthesize processView;
+@synthesize keyboardButton;
 
 
 
@@ -189,9 +190,14 @@
 }
 */
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+	keyboardButton.hidden = NO;
+}
 
 
-
+- (void)textViewDidEndEditing:(UITextView *)textView {
+	keyboardButton.hidden = YES;
+}
 
 
 // Called when the UIKeyboardDidHideNotification is sent

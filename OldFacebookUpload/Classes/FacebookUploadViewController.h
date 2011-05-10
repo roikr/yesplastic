@@ -17,6 +17,7 @@
 	
 	UITextField *titleField;
 	UITextView *descriptionView;
+	UIButton *keyboardButton;
 	
 	NSString *videoPath;
 	
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet UITextView *descriptionView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, assign) UIView *activeView;
+@property (nonatomic, retain) IBOutlet UIButton *keyboardButton;
 //@property (nonatomic, retain) IBOutlet UIView *scrollView;
 
 @property (nonatomic,retain ) NSString *videoTitle;

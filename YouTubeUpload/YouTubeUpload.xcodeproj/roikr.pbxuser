@@ -22,17 +22,17 @@
 	};
 	28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {915, 858}}";
-			sepNavSelRange = "{978, 15}";
-			sepNavVisRange = "{483, 1115}";
+			sepNavIntBoundsRect = "{{0, 0}, {915, 884}}";
+			sepNavSelRange = "{1151, 0}";
+			sepNavVisRange = "{548, 1141}";
 			sepNavWindowFrame = "{{815, 102}, {820, 867}}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1237, 3757}}";
-			sepNavSelRange = "{4258, 0}";
-			sepNavVisRange = "{3971, 934}";
+			sepNavIntBoundsRect = "{{0, 0}, {1237, 3900}}";
+			sepNavSelRange = "{4537, 0}";
+			sepNavVisRange = "{4028, 695}";
 			sepNavWindowFrame = "{{35, 109}, {740, 889}}";
 		};
 	};
@@ -95,14 +95,17 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 326625925;
-			PBXWorkspaceStateSaveDate = 326625925;
+			PBXPerProjectTemplateStateSaveDate = 326748166;
+			PBXWorkspaceStateSaveDate = 326748166;
 		};
 		perUserProjectItems = {
 			E4002FF1133615AC00D826A4 /* PBXTextBookmark */ = E4002FF1133615AC00D826A4 /* PBXTextBookmark */;
 			E4002FF3133615AC00D826A4 /* PBXTextBookmark */ = E4002FF3133615AC00D826A4 /* PBXTextBookmark */;
 			E4379B3A12C0C52F006C26AC /* PBXTextBookmark */ = E4379B3A12C0C52F006C26AC /* PBXTextBookmark */;
 			E4379B3B12C0C52F006C26AC /* PBXTextBookmark */ = E4379B3B12C0C52F006C26AC /* PBXTextBookmark */;
+			E44BE9ED1379CA3E001F32E7 /* PBXTextBookmark */ = E44BE9ED1379CA3E001F32E7 /* PBXTextBookmark */;
+			E44BE9EE1379CA3E001F32E7 /* PBXTextBookmark */ = E44BE9EE1379CA3E001F32E7 /* PBXTextBookmark */;
+			E44BE9EF1379CA3E001F32E7 /* PBXTextBookmark */ = E44BE9EF1379CA3E001F32E7 /* PBXTextBookmark */;
 			E4B543DA1270AA3700851D86 /* PBXTextBookmark */ = E4B543DA1270AA3700851D86 /* PBXTextBookmark */;
 			E4B543E11270AA3700851D86 /* PBXTextBookmark */ = E4B543E11270AA3700851D86 /* PBXTextBookmark */;
 			E4B543EC1270AAE600851D86 /* PBXTextBookmark */ = E4B543EC1270AAE600851D86 /* PBXTextBookmark */;
@@ -110,9 +113,6 @@
 			E4DCA74D1378016C003A05FD /* PBXTextBookmark */ = E4DCA74D1378016C003A05FD /* PBXTextBookmark */;
 			E4DCA74F1378016C003A05FD /* PBXTextBookmark */ = E4DCA74F1378016C003A05FD /* PBXTextBookmark */;
 			E4DCA7801378068C003A05FD /* PBXTextBookmark */ = E4DCA7801378068C003A05FD /* PBXTextBookmark */;
-			E4DCA7B5137811A7003A05FD /* PBXTextBookmark */ = E4DCA7B5137811A7003A05FD /* PBXTextBookmark */;
-			E4DCA7C11378135E003A05FD /* PBXTextBookmark */ = E4DCA7C11378135E003A05FD /* PBXTextBookmark */;
-			E4DCA7C21378135E003A05FD /* PBXTextBookmark */ = E4DCA7C21378135E003A05FD /* PBXTextBookmark */;
 		};
 		sourceControlManager = E4C44A6112435F10007ACEBC /* Source Control */;
 		userBuildSettings = {
@@ -176,6 +176,36 @@
 		rType = 0;
 		vrLen = 1301;
 		vrLoc = 0;
+	};
+	E44BE9ED1379CA3E001F32E7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
+		name = "YouTubeUploadViewController.h: 48";
+		rLen = 0;
+		rLoc = 1151;
+		rType = 0;
+		vrLen = 1141;
+		vrLoc = 548;
+	};
+	E44BE9EE1379CA3E001F32E7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		name = "YouTubeUploadViewController.m: 187";
+		rLen = 0;
+		rLoc = 4286;
+		rType = 0;
+		vrLen = 576;
+		vrLoc = 3948;
+	};
+	E44BE9EF1379CA3E001F32E7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
+		name = "YouTubeUploadViewController.m: 199";
+		rLen = 0;
+		rLoc = 4537;
+		rType = 0;
+		vrLen = 695;
+		vrLoc = 4028;
 	};
 	E4B54115127074A600851D86 /* YouTubeUploader.m */ = {
 		uiCtxt = {
@@ -355,35 +385,5 @@
 		rType = 0;
 		vrLen = 1450;
 		vrLoc = 157;
-	};
-	E4DCA7B5137811A7003A05FD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF60DDB3853001CB0EB /* YouTubeUploadViewController.h */;
-		name = "YouTubeUploadViewController.h: 44";
-		rLen = 15;
-		rLoc = 978;
-		rType = 0;
-		vrLen = 1115;
-		vrLoc = 483;
-	};
-	E4DCA7C11378135E003A05FD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
-		name = "YouTubeUploadViewController.m: 183";
-		rLen = 0;
-		rLoc = 4241;
-		rType = 0;
-		vrLen = 832;
-		vrLoc = 3796;
-	};
-	E4DCA7C21378135E003A05FD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF70DDB3853001CB0EB /* YouTubeUploadViewController.m */;
-		name = "YouTubeUploadViewController.m: 183";
-		rLen = 0;
-		rLoc = 4258;
-		rType = 0;
-		vrLen = 934;
-		vrLoc = 3971;
 	};
 }

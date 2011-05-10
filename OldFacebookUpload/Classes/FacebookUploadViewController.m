@@ -22,6 +22,7 @@
 @synthesize activeView;
 @synthesize scrollView;
 @synthesize additionalText;
+@synthesize keyboardButton;
 
 
 /*
@@ -124,6 +125,15 @@
 		[descriptionView resignFirstResponder];
 	}
 	
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+	keyboardButton.hidden = NO;
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+	keyboardButton.hidden = YES;
 }
 
 

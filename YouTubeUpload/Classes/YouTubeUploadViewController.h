@@ -18,7 +18,7 @@
 	UITextField *password;
 	UITextField *titleField;
 	UITextView *description;
-		
+	UIButton *keyboardButton;
 	
 	
 	NSString *videoName;
@@ -34,6 +34,8 @@
 	
 	id<YouTubeUploadViewControllerDelegate> delegate;
 	
+	
+	
 }
 
 @property (nonatomic,retain) YouTubeUploader *uploader;
@@ -43,7 +45,7 @@
 @property (nonatomic,retain) IBOutlet UITextField *titleField;
 @property (nonatomic,retain) IBOutlet UITextView *descriptionView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-
+@property (nonatomic,retain) IBOutlet UIButton *keyboardButton;
 
 @property (nonatomic,retain) IBOutlet UIView *processView;
 
