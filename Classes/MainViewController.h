@@ -10,7 +10,6 @@
 
 
 class testApp;
-@class EAGLView;
 @class CustomFontTextField;
 @class CustomImageView;
 

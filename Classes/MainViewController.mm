@@ -256,7 +256,7 @@
 		BOOL isUploading = [appDelegate.shareManager isUploading];
 		
 		shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
-		shareButton.hidden = shareProgressView.hidden = (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
+		shareButton.hidden = shareProgressView.hidden = NSClassFromString(@"AVAssetWriter")==nil || (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
 		
 		
 		

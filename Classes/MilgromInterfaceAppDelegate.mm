@@ -53,6 +53,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) play;
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 - (void) loadSongLoop;
+- (void) resetCurrentSong;
 @end
 
 @implementation MilgromInterfaceAppDelegate
@@ -86,6 +87,7 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     MilgromLog(@"didFinishLaunchingWithOptions");
+	appLaunched = NO;
 
 #ifdef _FLURRY
 #ifdef FREE_APP
@@ -99,12 +101,20 @@ NSString * const kCacheFolder=@"URLCache";
 	
 		
 //	self.videoBitrate = [NSNumber numberWithDouble:350.0*1000.0]; // 350.0*1024.0
-	self.OFSAptr = new testApp;
 	self.shareManager = [ShareManager shareManager];
 	self.slidesManager = [SlidesManager slidesManager];
 	slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
 	
+	/* turn off the NSURLCache shared cache */
 	
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0
+                                                            diskCapacity:0
+                                                                diskPath:nil];
+    [NSURLCache setSharedURLCache:sharedCache];
+    [sharedCache release];
+	
+    /* prepare to use our own on-disk cache */
+	[self initCache];
 	
 	// implicitly initializes your audio session
 	AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -124,89 +134,7 @@ NSString * const kCacheFolder=@"URLCache";
 }
 
 
--(void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload {
-	
-	if ([self isPresetSongExist:[theArray objectAtIndex:0]]) {
-		return;
-	}
-	
-	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
-	[song setSongName:[theArray objectAtIndex:0]];
-	[song setDisplayName:[theArray objectAtIndex:7]];
-	[song setBLocked:[NSNumber numberWithBool:NO]];
-	[song setBDemo:[NSNumber numberWithBool:YES]];
-	if (!bDownload) {
-		[song setBReady:[NSNumber numberWithBool:YES]];  
-	}
-	[song setBpm:[NSNumber numberWithInteger:bpm]];
-	
-	SoundSet *soundSet;
-	VideoSet *videoSet;
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
-	[soundSet setDemo:song];
-	[soundSet setSetName:[theArray objectAtIndex:1]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:2]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
-	[soundSet setVideoSet:videoSet];
-	[soundSet setPlayerNum:[NSNumber numberWithInt:0]];
-	[song addSoundSetsObject:soundSet];
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
-	[soundSet setDemo:song];
-	[soundSet setSetName:[theArray objectAtIndex:3]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:4]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
-	[soundSet setVideoSet:videoSet];
-	[soundSet setPlayerNum:[NSNumber numberWithInt:1]];
-	[song addSoundSetsObject:soundSet];
-	
-	
-	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
-	[soundSet setDemo:song];
-	[soundSet setSetName:[theArray objectAtIndex:5]];
-	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
-	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
-	[videoSet setSetName:[theArray objectAtIndex:6]];
-	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
-	[soundSet setVideoSet:videoSet];
-	[soundSet setPlayerNum:[NSNumber numberWithInt:2]];
-	[song addSoundSetsObject:soundSet];
-	
-}
 
-- (void)addDemos {
-	
-#ifdef FREE_APP
-	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
-//	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
-	
-#else	
-	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"brown bunny",nil] bpm:160 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"DOG",@"GTR_DOG",@"GTR_ELECTRO",@"VOC_DOG",@"VOC_BB",@"DRM_DOG",@"DRM_ELECTRO",@"dog/rabbit",nil] bpm:131 download:NO ];
-	[self addDemo:[NSArray arrayWithObjects:@"HOT",@"GTR_HOT",@"GTR_ROCK",@"VOC_HOT",@"VOC_POP",@"DRM_HOT",@"DRM_ELECTRO",@"hot",nil] bpm:100 download:NO ];
-//	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_HH",@"DRM_PACIFIST",@"DRM_NEOJAZZ",@"pacifist",nil] bpm:146 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"salad",nil] bpm:160 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"summer bliss",nil] bpm:92 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"plastic tower",nil] bpm:118 download:NO];
-#endif
-	[self saveContext];
-	
-	
-	//[songsArray addObject:song];
-	
-	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-	
-	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
-	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
 
 
 - (void)unzipPrecache {
@@ -234,8 +162,8 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:key]) {
 		MilgromLog(@"extracting");
+		self.loadTask = [RKUBackgroundTask backgroundTask];
 		
-		RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
 #ifdef FREE_APP
 		NSString * precache = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"zip" inDirectory:@"precache_free"];
 #else
@@ -256,19 +184,23 @@ NSString * const kCacheFolder=@"URLCache";
 		} 
 		
 		
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-		
 #ifdef _FLURRY
 		[FlurryAPI logEvent:@"FILES_EXTRACTED"];
 #endif
-		[task finish];
 		
-		while ([UIApplication sharedApplication].applicationState != UIApplicationStateActive); // stay here while in background
+		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		[loadTask finish];
+		self.loadTask = nil;
+				
 	}
 	
+	if ([UIApplication sharedApplication].applicationState != UIApplicationStateBackground) {
+		[self performSelectorOnMainThread:@selector(continueLaunching) withObject:nil waitUntilDone:NO];
+	}
 	
-	[self performSelectorOnMainThread:@selector(continueLaunching) withObject:nil waitUntilDone:NO];
 	[pool release];
 }
 
@@ -287,25 +219,18 @@ NSString * const kCacheFolder=@"URLCache";
 
 
 - (void) continueLaunching {
+	appLaunched = YES;
 	 MilgromLog(@"continueLaunching");
 	[self loadDemos];
 	[bandMenu.songsTable loadData];
 	[bandMenu updateEditMode];
 	
 	// TODO: move the update loop from here to main view controller
-	
+	self.OFSAptr = new testApp;
+
 	OFSAptr->setup();
 	
-	/* turn off the NSURLCache shared cache */
 	
-    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0
-                                                            diskCapacity:0
-                                                                diskPath:nil];
-    [NSURLCache setSharedURLCache:sharedCache];
-    [sharedCache release];
-	
-    /* prepare to use our own on-disk cache */
-	[self initCache];
 	[bandMenu.activityIndicator stopAnimating];
 	
 	[UIView animateWithDuration:0.1 delay:0.0 options: UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut 
@@ -332,7 +257,9 @@ NSString * const kCacheFolder=@"URLCache";
 
 - (void)beginInterruption {
 	MilgromLog(@"beginInterruption");
-	OFSAptr->soundStreamStop();
+	if (OFSAptr) {
+		OFSAptr->soundStreamStop();
+	}
 }
 
 - (void)endInterruptionWithFlags:(NSUInteger)flags {
@@ -341,21 +268,16 @@ NSString * const kCacheFolder=@"URLCache";
 	if (flags && AVAudioSessionInterruptionFlags_ShouldResume) {
 		NSError *activationError = nil;
 		[[AVAudioSession sharedInstance] setActive: YES error: &activationError];
-		OFSAptr->soundStreamStart();
 		MilgromLog(@"audio session activated");
+		if (OFSAptr) {
+			OFSAptr->soundStreamStart();
+		}
+		
 	}
 	
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    MilgromLog(@"applicationWillResignActive");
 
-	/*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
-	
-}
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -365,22 +287,11 @@ NSString * const kCacheFolder=@"URLCache";
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
 	
-	[self saveContext];
+	//[self saveContext]; // TODO: why do I need that ?
 	
-	[self.soloViewController dismissModalViewControllerAnimated:NO];
-	[self.navigationController dismissModalViewControllerAnimated:NO];
-	[self.navigationController popToRootViewControllerAnimated:NO];
 	[self.slidesManager removeViews];
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	[shareManager applicationDidEnterBackground];
-	
-	if (!loadTask) {
-		[bandMenu.songsTable deselectCurrentSong];
-		self.currentSong = NULL;
-		OFSAptr->setSongState(SONG_IDLE);
-		OFSAptr->stopLoops();
-		OFSAptr->release();
-	}
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
 		if (((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_SHARE) {
@@ -390,6 +301,21 @@ NSString * const kCacheFolder=@"URLCache";
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
 	} 
+	
+	
+	
+	if (!self.loadTask) {
+		[self.soloViewController dismissModalViewControllerAnimated:NO];
+		[self.navigationController dismissModalViewControllerAnimated:NO];
+		[self.navigationController popToRootViewControllerAnimated:NO];
+		
+		[self resetCurrentSong];
+		
+		if (OFSAptr) {
+			OFSAptr->suspend();
+			
+		}
+	}
 }
 
 
@@ -407,8 +333,13 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
 	
-																		
-		
+	if (!self.loadTask) {
+		if (!appLaunched) {
+			[self continueLaunching];
+		} else if (OFSAptr) {
+			OFSAptr->resume();
+		} 
+	}
 }
 
 
@@ -421,9 +352,8 @@ NSString * const kCacheFolder=@"URLCache";
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		MilgromLog(@"update loop started");
 		while ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-			if (self.navigationController.topViewController != bandMenu) {
+			if (OFSAptr && self.navigationController.topViewController != bandMenu) {
 				OFSAptr->update(); // also update bNeedDisplay
-				//[mainViewController.tutorialView update]; // TODO: replace with ?
 				if (OFSAptr->bNeedDisplay) {
 					dispatch_async(dispatch_get_main_queue(), ^{
 						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
@@ -452,6 +382,15 @@ NSString * const kCacheFolder=@"URLCache";
 	
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application {
+    MilgromLog(@"applicationWillResignActive");
+	
+	/*
+     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+     */
+	
+}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	MilgromLog(@"applicationWillTerminate");
@@ -460,7 +399,7 @@ NSString * const kCacheFolder=@"URLCache";
      See also applicationDidEnterBackground:.
      */
 	 [eAGLView stopAnimation];
-	[self saveContext];
+	// [self saveContext]; // TODO: why do I need that
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
@@ -483,6 +422,12 @@ NSString * const kCacheFolder=@"URLCache";
         } 
     }
 }    
+
+- (void) resetCurrentSong { // before going to background
+	[bandMenu.songsTable deselectCurrentSong];
+	self.currentSong = NULL;
+	[self.shareManager resetVersions];
+}
 
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:cancel otherButtonTitles: nil];	
@@ -509,6 +454,7 @@ NSString * const kCacheFolder=@"URLCache";
 	[window release];
 	[eAGLView release];
 	[navigationController release];
+	[shareManager release];
     [super dealloc];
 }
 
@@ -831,6 +777,93 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark -
 #pragma mark Songs Management
 
+- (void)addDemos {
+	
+#ifdef FREE_APP
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
+	//	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
+	
+#else	
+	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"brown bunny",nil] bpm:160 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"DOG",@"GTR_DOG",@"GTR_ELECTRO",@"VOC_DOG",@"VOC_BB",@"DRM_DOG",@"DRM_ELECTRO",@"dog/rabbit",nil] bpm:131 download:NO ];
+	[self addDemo:[NSArray arrayWithObjects:@"HOT",@"GTR_HOT",@"GTR_ROCK",@"VOC_HOT",@"VOC_POP",@"DRM_HOT",@"DRM_ELECTRO",@"hot",nil] bpm:100 download:NO ];
+	//	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_HH",@"DRM_PACIFIST",@"DRM_NEOJAZZ",@"pacifist",nil] bpm:146 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"salad",nil] bpm:160 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"summer bliss",nil] bpm:92 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"plastic tower",nil] bpm:118 download:NO];
+#endif
+	[self saveContext];
+	
+	
+	//[songsArray addObject:song];
+	
+	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	
+	//NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([songsArray count]-1) inSection:0];
+	//[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+
+
+-(void)addDemo:(NSArray *)theArray bpm:(NSInteger)bpm download:(BOOL)bDownload {
+	
+	if ([self isPresetSongExist:[theArray objectAtIndex:0]]) {
+		return;
+	}
+	
+	Song *song= (Song *)[NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.managedObjectContext];
+	[song setSongName:[theArray objectAtIndex:0]];
+	[song setDisplayName:[theArray objectAtIndex:7]];
+	[song setBLocked:[NSNumber numberWithBool:NO]];
+	[song setBDemo:[NSNumber numberWithBool:YES]];
+	if (!bDownload) {
+		[song setBReady:[NSNumber numberWithBool:YES]];  
+	}
+	[song setBpm:[NSNumber numberWithInteger:bpm]];
+	
+	SoundSet *soundSet;
+	VideoSet *videoSet;
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
+	[soundSet setSetName:[theArray objectAtIndex:1]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:1]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:2]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:2]]];
+	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:0]];
+	[song addSoundSetsObject:soundSet];
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
+	[soundSet setSetName:[theArray objectAtIndex:3]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:3]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:4]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:4]]];
+	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:1]];
+	[song addSoundSetsObject:soundSet];
+	
+	
+	soundSet= (SoundSet *)[NSEntityDescription insertNewObjectForEntityForName:@"SoundSet" inManagedObjectContext:self.managedObjectContext];
+	[soundSet setDemo:song];
+	[soundSet setSetName:[theArray objectAtIndex:5]];
+	[soundSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:5]]];
+	videoSet= (VideoSet *)[NSEntityDescription insertNewObjectForEntityForName:@"VideoSet" inManagedObjectContext:self.managedObjectContext];
+	[videoSet setSetName:[theArray objectAtIndex:6]];
+	[videoSet setFilename:[NSString stringWithFormat:@"%@.zip",[theArray objectAtIndex:6]]];
+	[soundSet setVideoSet:videoSet];
+	[soundSet setPlayerNum:[NSNumber numberWithInt:2]];
+	[song addSoundSetsObject:soundSet];
+	
+}
+
+
 
 -(BOOL)isPresetSongExist:(NSString *)songName {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -912,12 +945,13 @@ NSString * const kCacheFolder=@"URLCache";
 	[bandMenu updateEditMode];
 
 	OFSAptr->saveSong([songName UTF8String]);
+	lastSavedVersion = OFSAptr->getSongVersion();
 	
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"SAVE_SONG"];
 #endif
 	
-	lastSavedVersion = OFSAptr->getSongVersion();
+	
 	
 	
 	request = [[NSFetchRequest alloc] init];
@@ -967,6 +1001,7 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	self.currentSong = song;
+	
 	//self.currentSoundSets = nil; // TODO: check if it really frees...
 	//self.currentSoundSets = [NSMutableArray arrayWithArray:[song.soundSets allObjects]];
 		
@@ -998,7 +1033,7 @@ NSString * const kCacheFolder=@"URLCache";
 	}
 	
 	lastSavedVersion = OFSAptr->getSongVersion();
-		
+	[self.shareManager resetVersions];	
 		//[milgromViewController setContextCurrent];
 	
 		
@@ -1020,14 +1055,23 @@ NSString * const kCacheFolder=@"URLCache";
 	} else {
 		
 		[bandMenu.songsTable updateSong:currentSong WithProgress:1.0f];
+		
+		if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+			
+			[bandMenu.songsTable hideCurrentSongProgress];
+			bandMenu.view.userInteractionEnabled = YES;
+			[self resetCurrentSong];
+			OFSAptr->suspend();
+			
+		} else {
+			[self main];
+			
+		}
+		
 		[loadTask finish];
+		
 		self.loadTask = nil;
-		
-		[self main];
-		
-
-
-		
+				
 	}
 	
 }
@@ -1069,19 +1113,31 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	OFSAptr->changeSoundSet(nextSong);
 	
+	lastSavedVersion = OFSAptr->getSongVersion(); //  = 0;
+	[self.shareManager resetVersions];
 #ifdef _FLURRY
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:demo.songName,@"NAME",
 								[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", nil];
 	[FlurryAPI logEvent:@"LOAD_SOUND_SET" withParameters:dictionary];
 #endif
 	
-	lastSavedVersion = 0;
-
+	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		while (OFSAptr->isInTransition()) {
 			[eAGLView setSecondaryContextCurrent];
 			OFSAptr->transitionLoop(); 
 		}
+		
+		if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+			
+			[self.soloViewController dismissModalViewControllerAnimated:NO];
+			[self.navigationController dismissModalViewControllerAnimated:NO];
+			[self.navigationController popToRootViewControllerAnimated:NO];
+			
+			[self resetCurrentSong];
+			
+			OFSAptr->suspend();
+		} 
 		
 		[loadTask finish];
 		self.loadTask = nil;

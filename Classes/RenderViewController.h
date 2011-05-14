@@ -42,6 +42,7 @@
 - (void)renderVideo;
 - (void)exportRingtone;
 - (void)cancelRendering:(id)sender;
+- (void)applicationDidEnterBackground;
 
 @end
 

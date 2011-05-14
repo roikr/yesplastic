@@ -8,7 +8,6 @@
 
 #import "RenderViewController.h"
 #import "MilgromInterfaceAppDelegate.h"
-#import "SoloViewController.h"
 #include "testApp.h"
 #include "Constants.h"
 #import "OpenGLTOMovie.h"
@@ -30,7 +29,7 @@
 - (void)updateRenderProgress;
 - (void)renderAudioDidFinish;
 - (void)updateExportProgress:(ExportManager*)manager;
-- (void)renderFinished;
+
 @end
 
 
@@ -69,10 +68,7 @@
 	self.renderCancelButton.hidden = YES;
 	self.renderView.slideView.hidden = YES;
 	
-	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	if (self.parentViewController == appDelegate.soloViewController) {
-		[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration: 0.3];
-	}
+	
 	
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"RENDER"];
@@ -266,7 +262,6 @@
 					 self.renderView.slideView.hidden = YES;
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
-					 [self renderFinished];
 					 [delegate RenderViewControllerDelegateVideoRendered:self];
 					
 					 self.renderManager = nil;
@@ -277,6 +272,7 @@
 					NSLog(@"videoRender canceled");
 					OFSAptr->setSongState(SONG_IDLE);
 					OFSAptr->soundStreamStart();
+					[delegate RenderViewControllerDelegateCanceled:self];
 					self.renderManager = nil;
 				}
 		 
@@ -323,7 +319,6 @@
 								   OFSAptr->soundStreamStart();
 								   
 								   if ([exportManager didExportComplete]) {
-									   [self renderFinished];
 									   [delegate RenderViewControllerDelegateRingtoneExported:self];
 									   
 								   }
@@ -375,20 +370,16 @@
 		self.exportManager = nil;
 		OFSAptr->setSongState(SONG_IDLE);
 		OFSAptr->soundStreamStart();
+		[delegate RenderViewControllerDelegateCanceled:self];
 	}
 	
 	
-	[delegate RenderViewControllerDelegateCanceled:self];
-	[self renderFinished];
+	
+	
 	
 }
 
-- (void)renderFinished {
-	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	if (self.parentViewController == appDelegate.soloViewController) {
-		[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationPortrait duration: 0.3];
-	}
-}
+
 
 - (void)applicationDidEnterBackground {
 	if (renderManager) {

@@ -2,9 +2,7 @@
 #include "testApp.h"
 #include "ofMainExt.h"
 
-//#include "ofxRKAQSoundPlayer.h"
 #include "TexturesPlayer.h"
-//#include "ofxRKTexture.h"
 #include "Constants.h"
 #include <math.h>
 
@@ -13,31 +11,10 @@
 
 #include "easing.h"
 
-// listen on port 12345
-#define PORT 12345
 #define RECORD_LIMIT 60000
 
 #define GLOBAL_GAIN 0.65
 #define FULL_SCREEN_SCALE 480.0 / 762.0
-
-enum {
-	loopswitch,
-	tempo,
-	gtr_loopswitch,
-	gtr_volume,
-	gtr_set,
-	gtr_key,
-	voc_loopswitch,
-	voc_volume,
-	voc_set,
-	voc_key,
-	drm_loopswitch,
-	drm_volume,
-	drm_set,
-	drm_key,
-	song_record,
-	song_play
-};
 
 
 
@@ -51,45 +28,9 @@ testApp::testApp() {
 void testApp::setup(){	
 	
 	
-	/*
-	verdana.loadFont(ofToDataPath("verdana.ttf"),16);
-	verdana.setLineHeight(20.0f);
 	
-	oscMap["/loopswitch"] = loopswitch;
-	oscMap["/tempo"] = tempo;
-	oscMap["/gtr_loopswitch"]=gtr_loopswitch;
-	oscMap["/gtr_volume"]=gtr_volume;
-	oscMap["/gtr_set"]=gtr_set;
-	oscMap["/gtr_key"]=gtr_key;
-	oscMap["/voc_loopswitch"]=voc_loopswitch;
-	oscMap["/voc_volume"]=voc_volume;
-	oscMap["/voc_set"]=voc_set;
-	oscMap["/voc_key"]=voc_key;
-	oscMap["/drm_loopswitch"]=drm_loopswitch;
-	oscMap["/drm_volume"]=drm_volume;
-	oscMap["/drm_set"]=drm_set;
-	oscMap["/drm_key"]=drm_key;	
-	oscMap["/record"]=song_record;
-	oscMap["/play"]=song_play;	
-	 */
-	
-	
-	//cout << "listening for osc messages on port " << PORT << "\n";
-	//receiver.setup( PORT );
-	
-	//printf("setup()\n");
-	
-	//ofBackground(0, 0, 0);
-	
-	//ofSetBackgroundAuto(true);
 	ofSetFrameRate(60);
-	
-	// initialize the accelerometer
-	//ofxAccelerometer.setup();
-
-	// touch events will be sent to this class (testApp)
-	//ofxMultiTouch.addListener(this);
-	
+		
 	ofSetLogLevel(OF_LOG_VERBOSE);
 		
 	sampleRate 			= 44100;
@@ -101,40 +42,17 @@ void testApp::setup(){
 	bpm = 120; // TODO: send bpm to players
 	song.setupForSave(blockLength);
 	
-	
-	
 	 
 	string filename = "background.pvr";
 	background.setup(ofToDataPath(filename));
 	background.init();
 	background.load();
 	
-	
-
-//	filename = "images/buttons.pvr";
-//	buttons.setup(ofToDataPath(filename));
-//	buttons.init();
-//	buttons.load();
-	
-	
-	
-	//bChangeSet = false; 
-	
-//	bButtonDown = false;
-	bNeedDisplay = false;
-	bInTransition = false;
-	
-	//startThread();
-	
+		
 	
 	for(int i=0;i<3;i++) {
 		player[i].setup(i);
-		//player[i].setFont(&verdana);
-		//player[i].loadSet();
-		//player[i].getTexturesPlayer()->setState(state);
-		//player[i].loadSet(getPlayerName(i)+"_"+"HEAT","");
-		
-		
+	
 	}
 	 
 	 
@@ -148,30 +66,35 @@ void testApp::setup(){
 	}
 	
 	slider.setup(scale, prefs);
-	controller = 1;
+	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
+	bInitialized = true;
+	controller = 2;
 	
-	setState(SOLO_STATE);
-	
-	bTrans = false;
-	//bMenu = false;
-	bPush = false;
-	
+	resume();
 	
 		
+}
 
-	
+void testApp::resume() {
 	ofSeedRandom();
+	bNeedDisplay = true;
+	bInTransition = false;
 	
+	setState(BAND_STATE);
+	setSongState(SONG_IDLE);
 	
+	bTrans = false; 
+	bPush = false;
 	
 	startTime = ofGetElapsedTimeMillis();
 	currentFrame = 0;
 	
-	
-	
-	soundStreamSetup();
-	bInitialized = true;
-	
+}
+
+void testApp::suspend() {
+	setSongState(SONG_IDLE);
+	stopLoops();
+	release();
 }
 
 void testApp::update() {
@@ -1097,13 +1020,6 @@ int testApp::getSongVersion() {
 
 
 
-
-	
-void testApp::soundStreamSetup() {
-	
-	
-	ofSoundStreamSetup(2,0,this, sampleRate, blockLength, 4);
-}
 
 void testApp::soundStreamStart() {
 	if (bInitialized) {

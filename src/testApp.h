@@ -28,6 +28,9 @@ public:
 	void draw();
 	void release();
 	
+	void resume();
+	void suspend();
+	
 	void seekFrame(int frame); // for video rendering
 	void audioRequested( float * output, int bufferSize, int nChannels );
 	
@@ -102,7 +105,6 @@ public:
 	
 	
 private:
-	void soundStreamSetup();
 	void soundStreamClose();
 	
 	int startTime;

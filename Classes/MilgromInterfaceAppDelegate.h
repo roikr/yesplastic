@@ -64,7 +64,7 @@ class testApp;
 	
 	RKUBackgroundTask *loadTask;
 	
-	
+	BOOL appLaunched;
 }
 
 

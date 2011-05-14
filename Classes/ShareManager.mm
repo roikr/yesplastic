@@ -9,6 +9,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ShareManager.h"
 #import "MainViewController.h"
+#import "SoloViewController.h"
+#import <OpenGLES/EAGL.h>
+#import "EAGLView.h"
 #import "MilgromInterfaceAppDelegate.h"
 #import "Song.h"
 #import "MilgromMacros.h"
@@ -52,6 +55,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 - (BOOL)gotInternet;
 - (void)processVideo;
 - (void)processRingtone;
+- (void)renderFinished;
 
 @end
 
@@ -60,12 +64,12 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 @synthesize facebookUploader;
 @synthesize youTubeUploader;
 @synthesize parentViewController;
-
+@synthesize renderViewController;
 
 
 + (ShareManager*) shareManager {
 	
-	return [[[ShareManager alloc] init] autorelease];
+	return  [[[ShareManager alloc] init] autorelease];
 }
 
 - (id)init {
@@ -81,6 +85,11 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 		[self resetVersions];
 	}
 	return self;
+}
+
+- (void)dealloc {
+	[renderViewController release];
+    [super dealloc];
 }
 
 
@@ -112,6 +121,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 - (BOOL)videoRendered {
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	MilgromLog(@"videoRendered, getSongVersion: %u, renderedVideoVersion: %u, lastSavedVersion: %u",appDelegate.OFSAptr->getSongVersion(),renderedVideoVersion ,appDelegate.lastSavedVersion);
 	if (appDelegate.lastSavedVersion == appDelegate.OFSAptr->getSongVersion()) {
 		Song * song = [(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] currentSong];
 		return [song.bVideoRendered boolValue];
@@ -470,17 +480,24 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 	}
 				 
 	if (bNeedToRender) {
-		RenderViewController *renderViewController = [[RenderViewController alloc] initWithNibName:@"RenderViewController" bundle:nil];
-		renderViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		[renderViewController setDelegate:self];
+		MilgromLog(@"NeedToRender");
+		if (self.renderViewController == nil) {
+			renderViewController = [[RenderViewController alloc] initWithNibName:@"RenderViewController" bundle:nil];
+			renderViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+			[renderViewController setDelegate:self];
+		}
+		
 		[parentViewController presentModalViewController:renderViewController animated:YES];
-		[renderViewController release];
+		MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+		if (parentViewController == appDelegate.soloViewController) {
+			[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration: 0.3];
+		}
 	}
 }
 
 - (void) processRingtone {
 	NSString *subject = @"Sweeeet! My New Milgrom Ringtone!";
-	NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>I'm sending it to you as I believe you'll get a kick out of it (or else we cannot be friends)<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under 'Custom' you should see this file name.<br/>You can always switch it back if you feel like you're not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom's</a> website. I leave it to you to handle the truth.",kMilgromURL];
+	NSString *message = [NSString stringWithFormat:@"Hey,<br/>I just made a ringtone created with the help of this cool little band Milgrom.<br/>Double click the attachment to listen to it first.<br/>Then, save it to your desktop, and then drag it to your itunes library. Now sync your iDevice.<br/>Next, in your iDevice, go to Settings > Sounds > Ringtone > and under 'Custom' you should see this file name.<br/>You can always switch it back if you feel like you're not ready for this work of art, yet.<br/><br/>Now, pay a visit to <a href='%@'>Milgrom's</a> website. I leave it to you to handle the truth.",kMilgromURL];
 	
 	
 	NSData *myData = [NSData dataWithContentsOfFile:[[self getVideoPath]  stringByAppendingPathExtension:@"m4r"]];
@@ -555,8 +572,16 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 
 #pragma mark delegates
 
+- (void)renderFinished {
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	if (self.parentViewController == appDelegate.soloViewController) {
+		[appDelegate.eAGLView setInterfaceOrientation:UIInterfaceOrientationPortrait duration: 0.3];
+	}
+}
+
 - (void) RenderViewControllerDelegateCanceled:(RenderViewController *)controller {
 	[parentViewController dismissModalViewControllerAnimated:YES];
+	[self renderFinished];
 	
 
 }
@@ -583,6 +608,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 - (void) RenderViewControllerDelegateVideoRendered:(RenderViewController *)controller {
 	[self setVideoRendered];
 	[parentViewController dismissModalViewControllerAnimated:NO];
+	[self renderFinished];
 	[self processVideo];
 }
 
@@ -590,6 +616,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 - (void) RenderViewControllerDelegateRingtoneExported:(RenderViewController *)controller {
 	[self setRingtoneExported];
 	[parentViewController dismissModalViewControllerAnimated:NO];
+	[self renderFinished];
 	[self processRingtone];
 }
 
@@ -642,6 +669,7 @@ static NSString* kMilgromURL = @"http://www.mmmilgrom.com";
 //		self.sheet = nil;
 //	}
 	
+	[renderViewController applicationDidEnterBackground];
 	[facebookUploader applicationDidEnterBackground];
 	
 }

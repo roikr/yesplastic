@@ -26,6 +26,7 @@ enum {
 	ACTION_PLAY
 };
 
+@class RenderViewController;
 
 @interface ShareManager : NSObject<FacebookUploaderDelegate,FacebookUploadViewControllerDelegate,YouTubeUploaderDelegate,YouTubeUploadViewControllerDelegate,MFMailComposeViewControllerDelegate,RenderViewControllerDelegate> {
 	FacebookUploader *facebookUploader;
@@ -38,6 +39,8 @@ enum {
 	UIActionSheet* sheet;
 	
 	UIViewController *parentViewController;
+	
+	RenderViewController *renderViewController;
 }
 
 
@@ -49,6 +52,7 @@ enum {
 @property (readonly) BOOL ringtoneExported;
 
 @property (nonatomic,retain) UIViewController *parentViewController;
+@property (nonatomic,retain) RenderViewController *renderViewController;
 
 + (ShareManager*) shareManager;
 - (NSString *)getSongName;

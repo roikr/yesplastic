@@ -12,7 +12,6 @@
 #import "MilgromMacros.h"
 
 #import "MainViewController.h"
-#import "EAGLView.h"
 
 
 #ifdef _FLURRY

@@ -352,15 +352,17 @@
 - (void)setInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	switch (toInterfaceOrientation) {
-		case UIInterfaceOrientationPortrait: 
-		case UIInterfaceOrientationPortraitUpsideDown: 
-			appDelegate.OFSAptr->setState(SOLO_STATE);
-			break;
-		case UIInterfaceOrientationLandscapeRight: 
-		case UIInterfaceOrientationLandscapeLeft: 
-			appDelegate.OFSAptr->setState(BAND_STATE);
-			break;
+	if (appDelegate.OFSAptr) {
+		switch (toInterfaceOrientation) {
+			case UIInterfaceOrientationPortrait: 
+			case UIInterfaceOrientationPortraitUpsideDown: 
+				appDelegate.OFSAptr->setState(SOLO_STATE);
+				break;
+			case UIInterfaceOrientationLandscapeRight: 
+			case UIInterfaceOrientationLandscapeLeft: 
+				appDelegate.OFSAptr->setState(BAND_STATE);
+				break;
+		}
 	}
 	
 		
