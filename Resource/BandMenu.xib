@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="86"/>
+			<integer value="38"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -301,7 +301,7 @@
 							<object class="IBUIButton" id="119167289">
 								<reference key="NSNextResponder" ref="191373211"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{30, 122}, {151, 87}}</string>
+								<string key="NSFrame">{{30, 122}, {150, 88}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -316,7 +316,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="1007426080"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">MORE_MILGROM.png</string>
+									<string key="NSResourceName">ON_ITUNES.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="359635211">
@@ -360,7 +360,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="1007426080"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">MYSPACE.png</string>
+									<string key="NSResourceName">MILGROM_ICON.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="124916358">
@@ -628,8 +628,8 @@
 							<reference ref="892527401"/>
 							<reference ref="193822288"/>
 							<reference ref="952371224"/>
-							<reference ref="191373211"/>
 							<reference ref="996501761"/>
+							<reference ref="191373211"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -665,6 +665,38 @@
 						<int key="objectID">63</int>
 						<reference key="object" ref="879406163"/>
 						<reference key="parent" ref="952371224"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">86</int>
+						<reference key="object" ref="996501761"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="1039705575"/>
+							<reference ref="193164219"/>
+							<reference ref="677035488"/>
+							<reference ref="919245097"/>
+						</object>
+						<reference key="parent" ref="212769150"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">87</int>
+						<reference key="object" ref="1039705575"/>
+						<reference key="parent" ref="996501761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">88</int>
+						<reference key="object" ref="193164219"/>
+						<reference key="parent" ref="996501761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">89</int>
+						<reference key="object" ref="677035488"/>
+						<reference key="parent" ref="996501761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">90</int>
+						<reference key="object" ref="919245097"/>
+						<reference key="parent" ref="996501761"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1</int>
@@ -727,38 +759,6 @@
 						<int key="objectID">36</int>
 						<reference key="object" ref="634433617"/>
 						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">86</int>
-						<reference key="object" ref="996501761"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1039705575"/>
-							<reference ref="193164219"/>
-							<reference ref="677035488"/>
-							<reference ref="919245097"/>
-						</object>
-						<reference key="parent" ref="212769150"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">87</int>
-						<reference key="object" ref="1039705575"/>
-						<reference key="parent" ref="996501761"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">88</int>
-						<reference key="object" ref="193164219"/>
-						<reference key="parent" ref="996501761"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">89</int>
-						<reference key="object" ref="677035488"/>
-						<reference key="parent" ref="996501761"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">90</int>
-						<reference key="object" ref="919245097"/>
-						<reference key="parent" ref="996501761"/>
 					</object>
 				</object>
 			</object>
@@ -1302,7 +1302,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../Milgrom.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../MilgromFree.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1317,8 +1317,8 @@
 				<string>LFP_ALPHA.png</string>
 				<string>MESSAGE_FRAME.png</string>
 				<string>MILGROM_ALPHA.png</string>
-				<string>MORE_MILGROM.png</string>
-				<string>MYSPACE.png</string>
+				<string>MILGROM_ICON.png</string>
+				<string>ON_ITUNES.png</string>
 				<string>SONGS.png</string>
 				<string>YOUTUBE.png</string>
 			</object>
@@ -1333,8 +1333,8 @@
 				<string>{398, 68}</string>
 				<string>{306, 138}</string>
 				<string>{463, 139}</string>
-				<string>{151, 87}</string>
 				<string>{50, 46}</string>
+				<string>{150, 88}</string>
 				<string>{217, 73}</string>
 				<string>{46, 49}</string>
 			</object>

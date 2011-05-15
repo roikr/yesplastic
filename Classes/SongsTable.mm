@@ -58,8 +58,8 @@
 	
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
 								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:NO],
-								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO]
-								,nil];
+								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:YES], // want my order - not sorted
+								nil];
 	[request setSortDescriptors:sortDescriptors];
 	[sortDescriptors release];
 	

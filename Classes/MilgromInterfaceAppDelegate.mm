@@ -221,7 +221,7 @@ NSString * const kCacheFolder=@"URLCache";
 - (void) continueLaunching {
 	appLaunched = YES;
 	 MilgromLog(@"continueLaunching");
-	[self loadDemos];
+//	[self loadDemos]; // this is for queued demos...
 	[bandMenu.songsTable loadData];
 	[bandMenu updateEditMode];
 	
@@ -783,15 +783,16 @@ NSString * const kCacheFolder=@"URLCache";
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
 	//	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"SUMMER BLISS",nil] bpm:92 download:NO];
 	
-#else	
+#else
+	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"plastic tower",nil] bpm:118 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"BOY",@"GTR_BOY",@"GTR_ROCK",@"VOC_BOY",@"VOC_CORE",@"DRM_BOY",@"DRM_OLDSCHOOL",@"boy",nil] bpm:136 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"HOT",@"GTR_HOT",@"GTR_ROCK",@"VOC_HOT",@"VOC_POP",@"DRM_HOT",@"DRM_ELECTRO",@"hot",nil] bpm:100 download:NO ];
+	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"summer bliss",nil] bpm:92 download:NO];
+	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"salad",nil] bpm:160 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"BUNNY",@"GTR_BUNNY",@"GTR_ROCK",@"VOC_BUNNY",@"VOC_POP",@"DRM_BUNNY",@"DRM_OLDSCHOOL",@"brown bunny",nil] bpm:160 download:NO];
 	[self addDemo:[NSArray arrayWithObjects:@"DOG",@"GTR_DOG",@"GTR_ELECTRO",@"VOC_DOG",@"VOC_BB",@"DRM_DOG",@"DRM_ELECTRO",@"dog/rabbit",nil] bpm:131 download:NO ];
-	[self addDemo:[NSArray arrayWithObjects:@"HOT",@"GTR_HOT",@"GTR_ROCK",@"VOC_HOT",@"VOC_POP",@"DRM_HOT",@"DRM_ELECTRO",@"hot",nil] bpm:100 download:NO ];
 	//	[self addDemo:[NSArray arrayWithObjects:@"PACIFIST",@"GTR_PACIFIST",@"GTR_FUNK",@"VOC_PACIFIST",@"VOC_HH",@"DRM_PACIFIST",@"DRM_NEOJAZZ",@"pacifist",nil] bpm:146 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SALAD",@"GTR_SALAD",@"GTR_SHORTS",@"VOC_SALAD",@"VOC_CORE",@"DRM_SALAD",@"DRM_ROCK",@"salad",nil] bpm:160 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"SUMMER",@"GTR_SUMMER",@"GTR_SHORTS",@"VOC_SUMMER",@"VOC_POP",@"DRM_SUMMER",@"DRM_ROCK",@"summer bliss",nil] bpm:92 download:NO];
-	[self addDemo:[NSArray arrayWithObjects:@"PLASTIC",@"GTR_PLASTIC",@"GTR_FUNK",@"VOC_PLASTIC",@"VOC_BB",@"DRM_PLASTIC",@"DRM_NEOJAZZ",@"plastic tower",nil] bpm:118 download:NO];
+	
 #endif
 	[self saveContext];
 	
@@ -1162,8 +1163,8 @@ NSString * const kCacheFolder=@"URLCache";
 	
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:
 								[[NSSortDescriptor alloc] initWithKey:@"bDemo" ascending:YES],
-								[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO]
-								,nil];
+								//[[NSSortDescriptor alloc] initWithKey:@"songName" ascending:NO], // want my order
+								nil];
 	[request setSortDescriptors:sortDescriptors];
 	[sortDescriptors release];
 	

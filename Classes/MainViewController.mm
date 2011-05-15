@@ -274,6 +274,13 @@
 	
 	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.view) {
 		switch (appDelegate.slidesManager.currentTutorialSlide) {
+			case MILGROM_TUTORIAL_INTRODUCTION: {
+			
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0e9 * 2.0)), dispatch_get_main_queue(),^{[appDelegate.slidesManager addViews];});
+				
+				//[NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(2.0) target:appDelegate.slidesManager selector:@selector(addViews) userInfo:nil repeats:NO];
+				
+			}	break;
 			case MILGROM_TUTORIAL_CHANGE_LOOP: 
 				for (int i=0; i<3; i++) {
 					if (OFSAptr->getMode(i) == LOOP_MODE) {
@@ -294,6 +301,15 @@
 		}
 	}
 	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"replay_reminder"]) {
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"replay_reminder"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0e9 * 2.0)), dispatch_get_main_queue(),^{MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");});
+		
+		
+		
+	} 
 		
 }
 
@@ -334,12 +350,6 @@
     [self.view becomeFirstResponder]; // this is for the shake detection
 	self.view.hidden = NO;
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"replay_reminder"]) {
-		MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"replay_reminder"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-		
-	} 
 }
 
 

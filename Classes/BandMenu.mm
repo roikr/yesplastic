@@ -166,14 +166,16 @@
 	
 	switch (button.tag) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com"]];
-//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/itunes"]];
+			
 			break;
 		case 1:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/mmmilgrom"]];
 			break;
 		case 2:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com"]];
+//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.youtube.com/watch?v=ClR7aADV0Zs"]];
+//			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.myspace.com/milgromband"]];
 			break;
 		case 3:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.mmmilgrom.com/fb"]];
@@ -186,13 +188,13 @@
 #ifdef _FLURRY
 	switch (button.tag) {
 		case 0:
-			[FlurryAPI logEvent:@"MILGROM_LINK"];
+			[FlurryAPI logEvent:@"ITUNES_LINK"];
 			break;
 		case 1:
 			[FlurryAPI logEvent:@"YOUTUBE_LINK"];
 			break;
 		case 2:
-			[FlurryAPI logEvent:@"MYSPACE_LINK"];
+			[FlurryAPI logEvent:@"MILGROM_LINK"];
 			break;
 		case 3:
 			[FlurryAPI logEvent:@"FACEBOOK_LINK"];
