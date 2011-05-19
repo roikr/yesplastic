@@ -636,7 +636,10 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	}
 	
 	if (bPlaySwitchSound) {
-		switchSound.mixWithBlocks(left,right);
+		//switchSound.mixWithBlocks(left,right);
+		switchSound.channelRequested(left, 0, 1);
+		switchSound.channelRequested(right, 0, 1);
+		
 		switchSound.postProcess();
 		bPlaySwitchSound = switchSound.getIsPlaying();
 	}
