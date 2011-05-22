@@ -85,11 +85,18 @@ NSString * const kCacheFolder=@"URLCache";
 #pragma mark -
 #pragma mark Application lifecycle
 
+#ifdef _FLURRY
+void uncaughtExceptionHandler(NSException *exception) { 
+	[FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception]; 
+}
+#endif
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     MilgromLog(@"didFinishLaunchingWithOptions");
 	appLaunched = NO;
 
 #ifdef _FLURRY
+	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 #ifdef FREE_APP
 	[FlurryAPI startSession:@"6AD8PYM15XFBH5QQ8ITI"]; 
 #else
@@ -316,6 +323,21 @@ NSString * const kCacheFolder=@"URLCache";
 			
 		}
 	}
+	
+#ifdef _FLURRY
+	RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		MilgromLog(@"analytics report");
+		if (self.mainViewController!=nil) {
+			[self.mainViewController updateAnalytics];
+		}
+		
+		if (self.soloViewController!=nil) {
+			[self.soloViewController updateAnalytics];
+		}
+		[task finish];
+	});
+#endif
 }
 
 

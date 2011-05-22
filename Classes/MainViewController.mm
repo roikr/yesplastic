@@ -86,6 +86,11 @@
 		UIImageView *imageView = (UIImageView*)[loopsImagesView.subviews objectAtIndex:i];
 		imageView.hidden = YES;
 	}
+	
+	[(TouchView*)self.view resetCounters];
+	for (int i=0; i<3; i++) {
+		loopChanges[i] = 0;
+	}
 }
 
 
@@ -334,10 +339,7 @@
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	bShowHelp = NO;
-	[(TouchView*)self.view resetCounters];
-	for (int i=0; i<3; i++) {
-		loopChanges[i] = 0;
-	}
+	
 	[self updateViews];
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"MAIN"];
@@ -358,25 +360,6 @@
 	MilgromLog(@"MainViewController::viewWillDisappear");
 	 [self.view resignFirstResponder]; // this is for the shake detection
 	self.view.hidden = YES;
-	
-#ifdef _FLURRY
-	for (int i=0; i<3; i++) {
-		NSString *event = [NSString stringWithFormat:@"%@_MAIN_LOOP_TOGGLE",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
-		for (int j=0; j<[(TouchView*)self.view getCounter:i]; j++) {
-			[FlurryAPI logEvent:event];
-		}
-		MilgromLog(@"%@: %u",event,[(TouchView*)self.view getCounter:i]);
-	}	
-	
-	for (int i=0; i<3; i++) {
-		NSString *event = [NSString stringWithFormat:@"%@_MAIN_LOOP_CHANGE",[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding]];
-		for (int j=0; j<loopChanges[i]; j++) {
-			[FlurryAPI logEvent:event];
-		}
-		MilgromLog(@"%@: %u",event,loopChanges[i]);
-	}	
-#endif
-	
 	
 }
 
@@ -608,6 +591,42 @@
 }
 
 
-				   
+#pragma mark Analytics
+
+- (void) updateAnalytics {
+	
+	
+#ifdef _FLURRY
+	for (int i=0; i<3; i++) {
+		NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+									[NSString stringWithCString:((MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate]).OFSAptr->getPlayerName(i).c_str() encoding:NSASCIIStringEncoding],@"PLAYER", 
+									@"MAIN",@"VIEW",
+									nil];
+		
+		MilgromLog(@"view: %@, player: %@",[dictionary objectForKey:@"VIEW"],[dictionary objectForKey:@"PLAYER"]);
+		
+		for (int j=0; j<[(TouchView*)self.view getCounter:i]; j++) {
+			[FlurryAPI logEvent:@"LOOP_TOGGLE" withParameters:dictionary];
+		}
+		MilgromLog(@"LOOP_TOGGLE: %i",[(TouchView*)self.view getCounter:i]);
+		
+		for (int j=0; j<loopChanges[i]; j++) {
+			[FlurryAPI logEvent:@"LOOP_CHANGE" withParameters:dictionary];
+		}
+		
+		
+		MilgromLog(@"LOOP_CHANGE: %i",loopChanges[i]);
+		
+	}	
+	
+	
+#endif
+	
+	
+	[(TouchView*)self.view resetCounters];
+	for (int i=0; i<3; i++) {
+		loopChanges[i] = 0;
+	}
+}
 
 @end

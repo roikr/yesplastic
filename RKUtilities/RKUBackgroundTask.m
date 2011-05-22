@@ -48,7 +48,7 @@
 	UIApplication*    app = [UIApplication sharedApplication];
 	lastTimeRemaining = [app backgroundTimeRemaining];
 	if (app.applicationState == UIApplicationStateBackground) {
-		NSLog(@"RKUBackgroundTask::update time: %f",lastTimeRemaining);
+		NSLog(@"RKUBackgroundTask::update time: %qu",lastTimeRemaining);
 	} else {
 		NSLog(@"RKUBackgroundTask::update time: unlimited, state: %i",app.applicationState);
 	}

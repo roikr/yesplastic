@@ -78,7 +78,7 @@ class testApp;
 - (void) moreHelp:(id)sender;
 - (void) replayTutorial:(id)sender;
 
-
+- (void) updateAnalytics;
 @end
 
 

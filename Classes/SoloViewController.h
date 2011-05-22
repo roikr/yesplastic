@@ -85,7 +85,7 @@ class testApp;
 - (void) hideHelp;
 - (void) replayTutorial:(id)sender;
 
-
+- (void) updateAnalytics;
 @end
 
 
