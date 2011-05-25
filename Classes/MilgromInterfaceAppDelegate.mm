@@ -420,7 +420,13 @@ void uncaughtExceptionHandler(NSException *exception) {
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-	 [eAGLView stopAnimation];
+	 
+	
+	if (OFSAptr) {
+		OFSAptr->suspend();
+	}
+	
+	[eAGLView stopAnimation];
 	// [self saveContext]; // TODO: why do I need that
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
