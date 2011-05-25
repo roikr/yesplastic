@@ -8,9 +8,9 @@
 
 #import "RKUBackgroundTask.h"
 
-
-
 @implementation RKUBackgroundTask
+
+
 
 @synthesize lastTimeRemaining;
 
@@ -26,16 +26,19 @@
 - (id)init {
 	
 	if (self = [super init]) {
-		NSLog(@"RKUBackgroundTask::init");
 		
-		UIApplication*    app = [UIApplication sharedApplication];
 		
-		bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-			[app endBackgroundTask:bgTask];
-			bgTask = UIBackgroundTaskInvalid;
-		}];
-		
-		[self update];
+		if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]) {
+			NSLog(@"RKUBackgroundTask::init");
+			UIApplication*    app = [UIApplication sharedApplication];
+			
+			bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+				[app endBackgroundTask:bgTask];
+				bgTask = UIBackgroundTaskInvalid;
+			}];
+			
+			[self update];
+		}
 		
 		
 		
@@ -59,11 +62,14 @@
 
 
 - (void) finish {
-	NSLog(@"RKUBackgroundTask::finish");
-	if (bgTask!=UIBackgroundTaskInvalid) {
-		UIApplication*    app = [UIApplication sharedApplication];
-		[app endBackgroundTask:bgTask];
-		bgTask = UIBackgroundTaskInvalid;
+	if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]) {
+		NSLog(@"RKUBackgroundTask::finish");
+
+		if (bgTask!=UIBackgroundTaskInvalid) {
+			UIApplication*    app = [UIApplication sharedApplication];
+			[app endBackgroundTask:bgTask];
+			bgTask = UIBackgroundTaskInvalid;
+		}
 	}
 	
 }
