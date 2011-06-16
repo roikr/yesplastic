@@ -121,7 +121,7 @@ private:
 	
 	
 	
-	ofTrueTypeFont	verdana;
+	//ofTrueTypeFont	verdana;
 		
 	ofxXmlSettings xml;
 		

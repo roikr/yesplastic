@@ -28,7 +28,6 @@ public:
 	void play(int i);
 	void setPush(bool bPush);
 	void setState(int state);
-	void setFont(ofTrueTypeFont * font);
 	
 	void initIdle();
 	void loadIdle();
@@ -87,8 +86,6 @@ private:
 	bool bChangeSequence;
 	
 	ofxRKActor actor;
-	
-	ofTrueTypeFont	*font;
 	
 	bool bTransitionEnded;
 	

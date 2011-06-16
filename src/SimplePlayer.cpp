@@ -83,10 +83,6 @@ void SimplePlayer::setup(string setName) {
 	bTransitionEnded = false;
 }
 
-void SimplePlayer::setFont(ofTrueTypeFont * font) {
-	this->font = font;
-}
-
 
 void SimplePlayer::initIdle() {
 	ofLog(OF_LOG_VERBOSE,"%s: initializing idle actor",setName.c_str());
