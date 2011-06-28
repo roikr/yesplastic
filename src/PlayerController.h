@@ -4,7 +4,7 @@
 
 class ofxXmlSettings;
 class TexturesPlayerBase;
-class ofxMidiInstrument;
+class ofxAudioInstrument;
 
 
 
@@ -55,7 +55,7 @@ public:
 	int getCurrentLoop();
 	void changeLoop(int loopNum);
 	
-	void processWithBlocks(float *left,float *right);
+	void mixAudio(float *output, int nChannels);
 	void processForVideo();
 	
 	void setVolume(float volume); //  0.0 to 1.0
@@ -98,7 +98,7 @@ private:
 	TexturesPlayer *currentPlayer;
 	TexturesPlayer *nextPlayer;
 	
-	ofxMidiInstrument *midiInstrument;
+	ofxAudioInstrument *midiInstrument;
 		
 	string soundSet;
 	int playerNum;

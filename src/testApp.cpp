@@ -35,9 +35,10 @@ void testApp::setup(){
 		
 	sampleRate 			= 44100;
 	blockLength = 256;
-
-	lBlock = new float[blockLength];
-	rBlock = new float[blockLength];
+	nChannels = 2;
+	
+	buffer = new float[blockLength*nChannels];
+	
 	
 	bpm = 120; // TODO: send bpm to players
 	song.setupForSave(blockLength);
@@ -198,18 +199,18 @@ bool testApp::isSongAvailiable(string song,int playerNum) {
 void testApp::audioRequested(float * output, int bufferSize, int nChannels){
 	
 	
+	memset(output, 0, bufferSize*sizeof(float)*nChannels);
 	
-	memset(lBlock, 0, bufferSize*sizeof(float));
-	memset(rBlock, 0, bufferSize*sizeof(float));
+
+	
 	
 	for (int i=0;i<3;i++) {
-		player[i].processWithBlocks(lBlock, rBlock);
+		player[i].mixAudio(output, nChannels);
 	}
 		
 		
-	for (int i = 0; i < bufferSize; i++){
-		output[i*nChannels] = lBlock[i] * GLOBAL_GAIN;
-		output[i*nChannels + 1] = rBlock[i] * GLOBAL_GAIN;
+	for (int i = 0; i < bufferSize*nChannels; i++){
+		output[i] *= GLOBAL_GAIN;
 	}
 	
 }
@@ -877,20 +878,19 @@ void testApp::renderAudio() {
 	while (getIsPlaying()) { // (getSongState()==SONG_RENDER_AUDIO || getSongState()==SONG_CANCEL_RENDER_AUDIO) {
 	// this need to fix smooth the transition from AUDIO_RENDERING to VIDEO_RENDERING
 		
-		memset(lBlock, 0, blockLength*sizeof(float));
-		memset(rBlock, 0, blockLength*sizeof(float));
+		memset(buffer, 0, blockLength*sizeof(float)*nChannels);
+		
 		
 		for (int i=0;i<3;i++) {
-			player[i].processWithBlocks(lBlock, rBlock);
+			player[i].mixAudio(buffer, nChannels);
 		}
 		
-		for (int i = 0; i < blockLength; i++){
-			lBlock[i] *= GLOBAL_GAIN;
-			rBlock[i] *= GLOBAL_GAIN;
+		for (int i = 0; i < blockLength*nChannels; i++){
+			buffer[i] *= GLOBAL_GAIN;
 		}
 		
 		
-		song.saveWithBlocks(lBlock, rBlock);
+		song.saveAudio(buffer, nChannels);
 		currentBlock++;
 	}
 	

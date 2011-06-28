@@ -138,8 +138,8 @@ private:
 	bool bTrans;  // I believe it is the transtion between BAND and SOLO states
 	int animStart;
 		
-	float *lBlock;
-	float *rBlock;
+	float *buffer;
+	int nChannels;
 	
 	int sampleRate;
 	int blockLength;

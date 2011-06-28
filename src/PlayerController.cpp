@@ -5,7 +5,7 @@
 #include "PlayerController.h"
 #include "ofxXmlSettings.h"
 #include "Constants.h"
-#include "ofxMidiInstrument.h"
+#include "ofxAudioInstrument.h"
 
 enum {
 	TRANSITION_CHANGE_SOUND_SET = 0,
@@ -204,7 +204,7 @@ void  PlayerController::loadSoundSet() {
 		midiInstrument->exit();
 		delete midiInstrument;
 	}
-	midiInstrument = new ofxMidiInstrument;
+	midiInstrument = new ofxAudioInstrument;
 	midiInstrument->setup(256, bMulti ? 8 : 1); // , 44100 // TODO: move these out
 	
 	int i;
@@ -629,7 +629,7 @@ void PlayerController::processForVideo() {
 	
 }
  
-void PlayerController::processWithBlocks(float *left,float *right) {
+void PlayerController::mixAudio(float *output, int nChannels) {
 	
 	if (!bInitialized) {
 		return;
@@ -637,11 +637,11 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	
 	if (bPlaySwitchSound) {
 		//switchSound.mixWithBlocks(left,right);
-		switchSound.channelRequested(left, 0, 1);
-		switchSound.channelRequested(right, 0, 1);
+		switchSound.mixChannel(output, 0, nChannels);	
+		switchSound.mixChannel(output, 1, nChannels);	
 		
 		switchSound.postProcess();
-		bPlaySwitchSound = switchSound.getIsPlaying();
+		bPlaySwitchSound = switchSound.getNumPlaying();
 	}
 	
 	vector<event> events;
@@ -724,7 +724,8 @@ void PlayerController::processWithBlocks(float *left,float *right) {
 	}
 	
 	midiInstrument->preProcess();
-	midiInstrument->mixWithBlocks(left,right);
+	midiInstrument->mixChannel(output,0,nChannels);
+	midiInstrument->mixChannel(output,1,nChannels);
 	midiInstrument->postProcess();
 	recordEvents.clear(); // TODO: is it safe ?
 	
