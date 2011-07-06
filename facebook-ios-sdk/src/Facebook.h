@@ -84,6 +84,11 @@
 
 - (BOOL)isSessionValid;
 
+- (FBRequest*)openUrl:(NSString *)url
+               params:(NSMutableDictionary *)params
+           httpMethod:(NSString *)httpMethod
+             delegate:(id<FBRequestDelegate>)delegate;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
