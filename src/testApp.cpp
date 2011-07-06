@@ -890,7 +890,7 @@ void testApp::renderAudio() {
 		}
 		
 		
-		song.saveAudio(buffer, nChannels);
+		song.save(buffer, nChannels);
 		currentBlock++;
 	}
 	
