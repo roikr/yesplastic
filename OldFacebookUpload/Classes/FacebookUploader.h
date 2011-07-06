@@ -23,12 +23,13 @@ enum {
 @class RKUBackgroundTask;
 
 
-@interface FacebookUploader : NSObject<FBRequestDelegate,FBDialogDelegate,FBSessionDelegate> {
+@interface FacebookUploader : NSObject<FBRequestDelegate,FBSessionDelegate> { // FBDialogDelegate
 
-	FBSession* session;
+	Facebook *facebook;
+//	FBSession* session;
 	
-	FBLoginDialog* loginDialog;
-	FBPermissionDialog* permissionDialog;
+//	FBLoginDialog* loginDialog;
+//	FBPermissionDialog* permissionDialog;
 	
 	NSMutableArray * delegates;
 	
@@ -45,7 +46,8 @@ enum {
 }
 
 @property (nonatomic, retain) NSMutableArray * delegates;
-@property (nonatomic,retain) FBSession *session;
+@property (nonatomic, retain) Facebook *facebook;
+//@property (nonatomic,retain) FBSession *session;
 @property (nonatomic,retain) NSString *videoTitle;
 @property (nonatomic,retain) NSString *videoDescription;
 @property (nonatomic,retain) NSString *videoPath;
@@ -54,8 +56,8 @@ enum {
 @property (readonly) float progress;
 @property (nonatomic, retain) RKUBackgroundTask *task;
 
-@property (nonatomic, retain) FBLoginDialog* loginDialog;
-@property (nonatomic, retain) FBPermissionDialog* permissionDialog;
+//@property (nonatomic, retain) FBLoginDialog* loginDialog;
+//@property (nonatomic, retain) FBPermissionDialog* permissionDialog;
 
 + (FacebookUploader *) facebookUploader; 
 -(void) addDelegate:(id<FacebookUploaderDelegate>)delegate; 
