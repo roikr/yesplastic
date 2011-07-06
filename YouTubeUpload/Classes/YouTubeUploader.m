@@ -112,7 +112,7 @@ NSString* const kDeveloperKey = @"AI39si435pYVfbsWYr6_f70JFUWGyfK7_SEb7vOkGO7ay_
 	if (!service) {
 		service = [[GDataServiceGoogleYouTube alloc] init];
 		
-		[service setShouldCacheDatedData:YES];
+//		[service setShouldCacheDatedData:YES];
 		[service setServiceShouldFollowNextLinks:YES];
 		[service setIsServiceRetryEnabled:YES];
 	}

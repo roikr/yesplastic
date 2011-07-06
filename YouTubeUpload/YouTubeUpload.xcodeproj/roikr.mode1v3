@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -264,9 +266,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
-								<string>E42255E312F95E0F0032CA23</string>
-								<string>080E96DDFE201D6D7F000001</string>
-								<string>29B97317FDCFA39411CA2CEA</string>
+								<string>E4DA2BBA13C486F800C104C1</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
@@ -274,8 +274,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
 									<integer>5</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -299,7 +299,7 @@
 							<real>489</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>105 70 1487 842 0 0 1680 1028 </string>
+						<string>78 173 1487 842 0 0 1680 1028 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -310,14 +310,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>YouTubeUploadViewController.m</string>
+								<string>GData.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,26 +323,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>YouTubeUploadViewController.m</string>
+										<string>GData.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E44BE9EF1379CA3E001F32E7</string>
+										<string>E4DA2D1D13C488A800C104C1</string>
 										<key>history</key>
 										<array>
-											<string>E4B543DA1270AA3700851D86</string>
-											<string>E4B543E11270AA3700851D86</string>
-											<string>E4B543EC1270AAE600851D86</string>
-											<string>E4B543FC1270ABE500851D86</string>
-											<string>E4379B3A12C0C52F006C26AC</string>
-											<string>E4379B3B12C0C52F006C26AC</string>
-											<string>E4002FF1133615AC00D826A4</string>
-											<string>E4002FF3133615AC00D826A4</string>
 											<string>E4DCA74D1378016C003A05FD</string>
 											<string>E4DCA74F1378016C003A05FD</string>
-											<string>E4DCA7801378068C003A05FD</string>
 											<string>E44BE9ED1379CA3E001F32E7</string>
-											<string>E44BE9EE1379CA3E001F32E7</string>
+											<string>E4E61E4513C3100A0045EB2A</string>
+											<string>E4DA2D1B13C488A800C104C1</string>
+											<string>E4DA2D1C13C488A800C104C1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -356,14 +347,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {976, 567}}</string>
+								<string>{{0, 0}, {976, 549}}</string>
 								<key>RubberWindowFrame</key>
-								<string>105 70 1487 842 0 0 1680 1028 </string>
+								<string>78 173 1487 842 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>567pt</string>
+							<string>549pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -376,14 +367,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 572}, {976, 229}}</string>
+								<string>{{0, 554}, {976, 247}}</string>
 								<key>RubberWindowFrame</key>
-								<string>105 70 1487 842 0 0 1680 1028 </string>
+								<string>78 173 1487 842 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>229pt</string>
+							<string>247pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -402,9 +393,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E44BE9F01379CA3E001F32E7</string>
+				<string>E4DA2D1E13C488A800C104C1</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>E44BE9F11379CA3E001F32E7</string>
+				<string>E4DA2D1F13C488A800C104C1</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -542,15 +533,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E44BE9FA1379CA3E001F32E7</string>
-		<string>E44BE9FB1379CA3E001F32E7</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>E4C44A5F12435F0F007ACEBC</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>/Users/roikr/Developer/YesPlastic/YouTubeUpload/YouTubeUpload.xcodeproj</string>
+		<string>/Users/roikr/Developer/yesplastic/YouTubeUpload/YouTubeUpload.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>105 70 1487 842 0 0 1680 1028 </string>
+	<string>78 173 1487 842 0 0 1680 1028 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -627,7 +614,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>E4C44A5F12435F0F007ACEBC</string>
-				<string>E44BE9F21379CA3E001F32E7</string>
+				<string>E4DA2D2013C488A800C104C1</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -723,10 +710,10 @@
 									<key>Frame</key>
 									<string>{{438, 0}, {522, 412}}</string>
 									<key>RubberWindowFrame</key>
-									<string>666 116 960 814 0 0 1680 1028 </string>
+									<string>666 172 960 814 0 0 1680 1028 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>666 116 960 814 0 0 1680 1028 </string>
+								<string>666 172 960 814 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -749,22 +736,22 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>E44BE9F31379CA3E001F32E7</string>
+				<string>E4DA2A4013C4833B00C104C1</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>E44BE9F41379CA3E001F32E7</string>
-				<string>E44BE9F51379CA3E001F32E7</string>
-				<string>E44BE9F61379CA3E001F32E7</string>
-				<string>E44BE9F71379CA3E001F32E7</string>
-				<string>E44BE9F81379CA3E001F32E7</string>
+				<string>E4DA2A4113C4833B00C104C1</string>
+				<string>E4DA2A4213C4833B00C104C1</string>
+				<string>E4DA2A4313C4833B00C104C1</string>
+				<string>E4DA2A4413C4833B00C104C1</string>
+				<string>E4DA2A4513C4833B00C104C1</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>666 116 960 814 0 0 1680 1028 </string>
+			<string>666 172 960 814 0 0 1680 1028 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -874,6 +861,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -909,7 +898,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>E44BE9F91379CA3E001F32E7</string>
+				<string>E4DA2A4613C4833B00C104C1</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -919,7 +908,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

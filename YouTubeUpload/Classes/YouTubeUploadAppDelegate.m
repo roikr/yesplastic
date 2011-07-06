@@ -36,7 +36,7 @@
 	controller.uploader = uploader;
 	controller.videoTitle = @"kremer the cat";
 	controller.descriptionView.text = @"testing";
-	controller.videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mov"];
+	controller.videoPath = [[NSBundle mainBundle] pathForResource:@"BOY" ofType:@"mov"];
 	
 		
     return YES;
