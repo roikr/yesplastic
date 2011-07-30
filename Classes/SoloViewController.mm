@@ -203,10 +203,10 @@
 			case SONG_RECORD:
 			case SONG_TRIGGER_RECORD: {
 				
-				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 				
-				setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
-				
+				setMenuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
+
 				NSString *setButton = [NSString stringWithFormat:@"%@_SET_B.png",[NSString stringWithCString:OFSAptr->getPlayerName(OFSAptr->controller).c_str() encoding:NSASCIIStringEncoding]];
 				[setMenuButton setImage:[UIImage imageNamed:setButton] forState:UIControlStateNormal];
 				
@@ -258,18 +258,18 @@
 		
 		
 		
-		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
+		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 		
 		BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
 		OFSAptr->getSongVersion();  //  not a demo
 		BOOL isUploading = [appDelegate.shareManager isUploading];
 		
 		shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
-		shareButton.hidden = shareProgressView.hidden = NSClassFromString(@"AVAssetWriter")==nil || (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
+		shareButton.hidden = shareProgressView.hidden = NSClassFromString(@"AVAssetWriter")==nil || (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 		
-		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
+		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 		recordButton.hidden =  appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE; // OFSAptr->getSongState() != SONG_IDLE;
+		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -280,11 +280,11 @@
 	
 	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.view) {
 		switch (appDelegate.slidesManager.currentTutorialSlide) {
-			case MILGROM_TUTORIAL_SHARE:
-				if (self.shareButton.hidden==NO) {
-					[appDelegate.slidesManager addViews];
-				}
-				break;
+//			case MILGROM_TUTORIAL_SHARE:
+//				if (self.shareButton.hidden==NO) {
+//					[appDelegate.slidesManager addViews];
+//				}
+//				break;
 				
 			default:
 				[appDelegate.slidesManager addViews];
@@ -352,7 +352,7 @@
 #pragma mark Buttons
 
 - (void) toggle:(id)sender {
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	[(MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate] toggle:UIInterfaceOrientationLandscapeRight animated:YES];
 }
@@ -360,7 +360,7 @@
 
 - (void) menu:(id)sender {
 	
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
 		OFSAptr->setSongState(SONG_IDLE);
@@ -397,8 +397,8 @@
 - (void) play:(id)sender {
 	
 	MilgromInterfaceAppDelegate *appDelegate =  (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
-	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
+//	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 		
 	if (recordButton.selected) {
 		[self stop:nil];
@@ -423,7 +423,7 @@
 }
 
 - (void) stop:(id)sender {
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	OFSAptr->setSongState(SONG_IDLE);
 #ifdef _FLURRY
@@ -432,10 +432,11 @@
 }
 
 - (void) record:(id)sender {
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
 	
-	if (playButton.hidden) {
+//	if (playButton.hidden) {
+	if (OFSAptr->getSongState()==SONG_PLAY) {
 		MilgromAlert(@"Sorry",@"can't record while a track is being played");
 		return;
 	}
@@ -545,7 +546,7 @@
 
 - (void) showHelp:(id)sender {
 	
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	bShowHelp = YES;
 	[self updateViews];

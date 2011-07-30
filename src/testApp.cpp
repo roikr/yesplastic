@@ -11,7 +11,7 @@
 
 #include "easing.h"
 
-#define RECORD_LIMIT 60000
+#define RECORD_LIMIT 30000
 
 #define GLOBAL_GAIN 0.65
 #define FULL_SCREEN_SCALE 480.0 / 762.0

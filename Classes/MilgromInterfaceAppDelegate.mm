@@ -43,6 +43,7 @@ NSString * const kCacheFolder=@"URLCache";
 @interface NSObject (PrivateMethods)
 
 - (void) swapView:(UIView *)firstView with:(UIView *)secondView completion:(void (^)(BOOL finished))completion;
+- (void) lastView;
 - (void) continueLaunching;
  - (void) initCache;
  - (void) clearCache;
@@ -54,6 +55,7 @@ NSString * const kCacheFolder=@"URLCache";
 + (void)alertWithTitle:(NSString *)title withMessage:(NSString *)msg withCancel:(NSString *)cancel;
 - (void) loadSongLoop;
 - (void) resetCurrentSong;
+
 @end
 
 @implementation MilgromInterfaceAppDelegate
@@ -110,7 +112,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 //	self.videoBitrate = [NSNumber numberWithDouble:350.0*1000.0]; // 350.0*1024.0
 	self.shareManager = [ShareManager shareManager];
 	self.slidesManager = [SlidesManager slidesManager];
-	slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
+//	slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
+	slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
+
 	
 	/* turn off the NSURLCache shared cache */
 	
@@ -224,6 +228,19 @@ void uncaughtExceptionHandler(NSException *exception) {
 						 completion(YES);}];
 }
 
+- (void) lastView {
+	[self swapView:bandMenu.lofiView with:bandMenu.menuView 
+		completion:^(BOOL finished){
+			if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"]) {
+				
+				[self loadSong:[bandMenu.songsTable.songsArray objectAtIndex:0]];
+			} 
+			
+		}]; 
+	
+	
+	
+}
 
 - (void) continueLaunching {
 	appLaunched = YES;
@@ -250,16 +267,15 @@ void uncaughtExceptionHandler(NSException *exception) {
 		 completion:^(BOOL finished){
 		 
 			[bandMenu.firstLaunchView removeFromSuperview];
+			 
 			 [self swapView:bandMenu.milgromView with:bandMenu.lofiView 
-				 completion:^(BOOL finished){
-					 
-					 [self swapView:bandMenu.lofiView with:bandMenu.menuView 
-						 completion:^(BOOL finished){}]; 
-				 }];
+				 completion:^(BOOL finished){[self lastView];}];
 		 }];
 	
 	
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
+	
+	
 }
 
 - (void)beginInterruption {
@@ -300,16 +316,17 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	[shareManager applicationDidEnterBackground];
 	
-	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished"]) {
-		if (((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_SHARE) {
-			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"replay_reminder"];
-		}
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished"];
+	
+	if (slidesManager.currentTutorialSlide==MILGROM_TUTORIAL_DONE && ![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"]) {
+//		if (((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_SHARE) {
+//			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"replay_reminder"];
+//		}
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished_2"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
 	} 
 	
-	
+		
 	
 	if (!self.loadTask) {
 		[self.soloViewController dismissModalViewControllerAnimated:NO];
@@ -323,6 +340,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 			
 		}
 	}
+	
+	
 	
 #ifdef _FLURRY
 	RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
@@ -353,13 +372,20 @@ void uncaughtExceptionHandler(NSException *exception) {
 //		MilgromLog(@"applicationWillEnterForeground mainViewController orientation: %i",mainViewController.interfaceOrientation);
 //	}
 	
-	slidesManager.currentTutorialSlide = MILGROM_TUTORIAL_DONE;
+	//slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
+
+	if (slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_DONE && slidesManager.currentTutorialSlide>=MILGROM_TUTORIAL_ROTATE) {
+		slidesManager.currentTutorialSlide=MILGROM_TUTORIAL_ROTATE;
+	}
 	
 	if (!self.loadTask) {
 		if (!appLaunched) {
 			[self continueLaunching];
 		} else if (OFSAptr) {
 			OFSAptr->resume();
+			if (![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"]) {
+				[self loadSong:[bandMenu.songsTable.songsArray objectAtIndex:0]];
+			} 
 		} 
 	}
 }
@@ -373,9 +399,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		MilgromLog(@"update loop started");
+		bool bRecording = false;
 		while ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
 			if (OFSAptr && self.navigationController.topViewController != bandMenu) {
+				
 				OFSAptr->update(); // also update bNeedDisplay
+		
 				if (OFSAptr->bNeedDisplay) {
 					dispatch_async(dispatch_get_main_queue(), ^{
 						if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
@@ -390,6 +419,26 @@ void uncaughtExceptionHandler(NSException *exception) {
 					});
 					OFSAptr->bNeedDisplay = false; // this should stay out off the main view async call
 				}
+				
+				
+				
+				if (bRecording) {
+					if (OFSAptr->getSongState() != SONG_RECORD) {
+						bRecording = false;
+						dispatch_async(dispatch_get_main_queue(), ^{
+							if (self.mainViewController.navigationController.visibleViewController == mainViewController) {
+								[mainViewController share:NULL];
+							} else if (self.mainViewController.modalViewController == soloViewController){
+								[soloViewController share:NULL];
+								
+							}
+						});
+						
+					}
+				} else {
+					bRecording  = OFSAptr->getSongState() == SONG_RECORD;
+				}
+
 				
 			}
 			
@@ -763,14 +812,14 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)saveWithin:(UIViewController *)controller {
-	[self.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[self.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	self.OFSAptr->setSongState(SONG_IDLE);
 	[controller presentModalViewController:saveViewController animated:YES];
 }
 
 - (void)shareWithin:(UIViewController *)controller {
-	[self.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[self.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	
 	//[tutorialView doneSlide:MILGROM_SLIDE_SHARE];
 

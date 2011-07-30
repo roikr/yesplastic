@@ -204,7 +204,7 @@
 				playButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 				
 				
-				menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
+				menuButton.hidden = OFSAptr->getSongState() != SONG_IDLE || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 				bandLoopsView.hidden = NO;
 				for (int i=0;i<[bandLoopsView.subviews count];i++) {
 					UIButton *button = (UIButton*)[bandLoopsView.subviews objectAtIndex:i];
@@ -254,21 +254,21 @@
 		
 		
 		
-		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
+		saveButton.hidden = OFSAptr->getSongVersion() == appDelegate.lastSavedVersion || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 		
 		BOOL shareEnabled =  [appDelegate.currentSong.bDemo boolValue] ? OFSAptr->getSongVersion() != appDelegate.lastSavedVersion : 
 		OFSAptr->getSongVersion();  //  not a demo
 		BOOL isUploading = [appDelegate.shareManager isUploading];
 		
 		shareButton.userInteractionEnabled = shareEnabled || isUploading; // && !isUploading - to disable when uploading
-		shareButton.hidden = shareProgressView.hidden = NSClassFromString(@"AVAssetWriter")==nil || (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE;
+		shareButton.hidden = shareProgressView.hidden = NSClassFromString(@"AVAssetWriter")==nil || (!isUploading && !shareEnabled) || appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE;
 		
 		
 		
 		
 		stateButton.hidden = appDelegate.slidesManager.currentTutorialSlide != MILGROM_TUTORIAL_ROTATE && appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
 		recordButton.hidden =  appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_RECORD_PLAY;
-		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_SHARE; // OFSAptr->getSongState() != SONG_IDLE;
+		infoButton.hidden = appDelegate.slidesManager.currentTutorialSlide < MILGROM_TUTORIAL_DONE; // OFSAptr->getSongState() != SONG_IDLE;
 		
 		if (!bAnimatingRecord && OFSAptr->getSongState() == SONG_RECORD) {
 			bAnimatingRecord = YES;
@@ -294,11 +294,11 @@
 					}
 				}
 				break;
-			case MILGROM_TUTORIAL_SHARE:
-				if (self.shareButton.hidden==NO) {
-					[appDelegate.slidesManager addViews];
-				}
-				break;
+//			case MILGROM_TUTORIAL_SHARE:
+//				if (self.shareButton.hidden==NO) {
+//					[appDelegate.slidesManager addViews];
+//				}
+//				break;
 
 			default:
 				[appDelegate.slidesManager addViews];
@@ -306,15 +306,15 @@
 		}
 	}
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"replay_reminder"]) {
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"replay_reminder"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-		
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0e9 * 2.0)), dispatch_get_main_queue(),^{MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");});
-		
-		
-		
-	} 
+//	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"replay_reminder"]) {
+//		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"replay_reminder"];
+//		[[NSUserDefaults standardUserDefaults] synchronize];
+//		
+//		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0e9 * 2.0)), dispatch_get_main_queue(),^{MilgromAlert(@"No worries", @"you can always replay tutorial from the ? slide");});
+//		
+//		
+//		
+//	} 
 		
 }
 
@@ -375,14 +375,14 @@
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_ROTATE];
-	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	[appDelegate toggle:UIInterfaceOrientationPortrait animated:YES];
 }
 
 
 - (void) menu:(id)sender {
 	
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	
 	if (OFSAptr->getSongState()==SONG_RECORD ) {
@@ -404,7 +404,7 @@
 
 
 - (void) play:(id)sender {
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	
 		
@@ -433,7 +433,7 @@
 
 - (void) stop:(id)sender {
 	
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	
 	OFSAptr->setSongState(SONG_IDLE);
@@ -443,8 +443,7 @@
 }
 
 - (void) record:(id)sender {
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
-
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	
 	if (playButton.hidden) {
 		MilgromAlert(@"Sorry",@"can't record while a track is being played");
@@ -533,7 +532,7 @@
 
 
 - (void) showHelp:(id)sender {
-	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
+//	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 
 	bShowHelp = YES;
 	[self updateViews];
