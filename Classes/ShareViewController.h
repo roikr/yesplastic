@@ -10,9 +10,15 @@
 
 
 @interface ShareViewController : UIViewController {
-
+	UIView *slides;
+	UIView *container;
 }
 
+@property (nonatomic, retain) IBOutlet UIView *slides;
+@property (nonatomic, retain) IBOutlet UIView *container;
+
 - (void) action:(id)sender;
+- (void) tutorialShare;
+
 
 @end

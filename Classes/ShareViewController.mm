@@ -10,6 +10,7 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "ShareManager.h"
 #import "MilgromMacros.h"
+#import "SlidesManager.h"
 
 #ifdef _FLURRY
 #import "FlurryAPI.h"
@@ -17,6 +18,9 @@
 
 
 @implementation ShareViewController
+
+@synthesize slides;
+@synthesize container;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -40,7 +44,8 @@
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.
-    return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+    return interfaceOrientation == UIInterfaceOrientationPortrait || (appDelegate.slidesManager.currentTutorialSlide==MILGROM_TUTORIAL_DONE && interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 
@@ -63,7 +68,27 @@
 #ifdef _FLURRY
 	[FlurryAPI logEvent:@"SHARE"];
 #endif
+	
+	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.slidesManager setTargetView:self.container withSlides:self.slides];
+	
+	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.container) {
+		switch (appDelegate.slidesManager.currentTutorialSlide) {
+			case MILGROM_TUTORIAL_SHARE:
+				[appDelegate.slidesManager addViews];
+				
+				break;
+				
+			default:
+				
+				break;
+		}
+	}
+	
 }
+
+
+
 
 - (void)dealloc {
     [super dealloc];
@@ -71,9 +96,6 @@
 
 - (void) action:(id)sender {
 		
-	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	
-	
 	UIButton *button = (UIButton *)sender;
 	NSInteger action;
 	
@@ -101,7 +123,16 @@
 	
 	[self.parentViewController dismissModalViewControllerAnimated:action==ACTION_CANCEL];
 	
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
 	[appDelegate.shareManager action:action];
+}
+
+- (void) tutorialShare {
+	[self.parentViewController dismissModalViewControllerAnimated:NO];
+	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate.shareManager action:ACTION_UPLOAD_TO_FACEBOOK];
+	
 }
 
 @end

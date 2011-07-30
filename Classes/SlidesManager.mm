@@ -10,7 +10,7 @@
 #import "MilgromInterfaceAppDelegate.h"
 #import "MainViewController.h"
 #import "SoloViewController.h"
-
+#import "ShareViewController.h"
 
 @interface SlidesManager() 
 - (void) next:(id)sender;
@@ -95,13 +95,19 @@
 	
 - (void) next:(id)sender {
 	[self removeViews];
-	currentTutorialSlide++;
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
+	if (currentTutorialSlide==MILGROM_TUTORIAL_SHARE) {
+		[appDelegate.shareViewController tutorialShare];
+	}
+	
+	currentTutorialSlide++;
+	
 	[appDelegate.mainViewController updateViews];
 	[appDelegate.soloViewController updateViews];
-		
+	
+	
 //	if (currentTutorialSlide == MILGROM_TUTORIAL_CHANGE_LOOP || currentTutorialSlide == MILGROM_TUTORIAL_SHARE) {
 //		[appDelegate.mainViewController updateViews];
 //		return ;
