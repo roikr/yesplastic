@@ -68,11 +68,6 @@
 	self.renderCancelButton.hidden = YES;
 	self.renderView.slideView.hidden = YES;
 	
-	
-	
-#ifdef _FLURRY
-	[FlurryAPI logEvent:@"RENDER"];
-#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -174,6 +169,10 @@
 	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 	[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
 	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"RENDER_AUDIO" timed:YES];
+#endif
+	
 }
 
 
@@ -184,6 +183,9 @@
 	OFSAptr->soundStreamStart();
 	[delegate RenderViewControllerDelegateAudioRendered:self];
 	
+#ifdef _FLURRY
+	[FlurryAPI endTimedEvent:@"RENDER_AUDIO" withParameters:nil];
+#endif
 	
 }
 
@@ -265,6 +267,10 @@
 					 [delegate RenderViewControllerDelegateVideoRendered:self];
 					
 					 self.renderManager = nil;
+					
+#ifdef _FLURRY
+					[FlurryAPI endTimedEvent:@"RENDER_VIDEO" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"COMPLETED",@"STATUS", nil]];
+#endif
 					 
 				 }
 		 
@@ -274,11 +280,17 @@
 					OFSAptr->soundStreamStart();
 					[delegate RenderViewControllerDelegateCanceled:self];
 					self.renderManager = nil;
+#ifdef _FLURRY
+					[FlurryAPI endTimedEvent:@"RENDER_VIDEO" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"CANCELED",@"STATUS", nil]];
+#endif
 				}
 		 
 				   withAbortionHandler:^ {
 					   NSLog(@"videoRender aborted");
 					   self.renderManager = nil;  
+#ifdef _FLURRY
+					   [FlurryAPI endTimedEvent:@"RENDER_VIDEO" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"ABORTED",@"STATUS", nil]];
+#endif
 				   }
 		 
 		 ];
@@ -289,6 +301,11 @@
 	
 	NSArray *modes = [[[NSArray alloc] initWithObjects:NSDefaultRunLoopMode, UITrackingRunLoopMode, nil] autorelease];
 	[self performSelector:@selector(updateRenderProgress) withObject:nil afterDelay:0.1 inModes:modes];
+	
+#ifdef _FLURRY
+	[FlurryAPI logEvent:@"RENDER_VIDEO" timed:YES];
+#endif
+	
 	
 }
 

@@ -342,21 +342,21 @@ void uncaughtExceptionHandler(NSException *exception) {
 	}
 	
 	
-	
-#ifdef _FLURRY
-	RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		MilgromLog(@"analytics report");
-		if (self.mainViewController!=nil) {
-			[self.mainViewController updateAnalytics];
-		}
-		
-		if (self.soloViewController!=nil) {
-			[self.soloViewController updateAnalytics];
-		}
-		[task finish];
-	});
-#endif
+
+//#ifdef _FLURRY
+//	RKUBackgroundTask *task = [RKUBackgroundTask backgroundTask];
+//	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//		MilgromLog(@"analytics report");
+//		if (self.mainViewController!=nil) {
+//			[self.mainViewController updateAnalytics];
+//		}
+//		
+//		if (self.soloViewController!=nil) {
+//			[self.soloViewController updateAnalytics];
+//		}
+//		[task finish];
+//	});
+//#endif
 }
 
 

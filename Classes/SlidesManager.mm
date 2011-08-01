@@ -12,6 +12,10 @@
 #import "SoloViewController.h"
 #import "ShareViewController.h"
 
+#ifdef _FLURRY
+#import "FlurryAPI.h"
+#endif
+
 @interface SlidesManager() 
 - (void) next:(id)sender;
 
@@ -85,6 +89,11 @@
 				}
 				
 			}
+			
+#ifdef _FLURRY
+			[FlurryAPI logEvent:[NSString stringWithFormat:@"SLIDE_%i",currentTutorialSlide] timed:YES];
+#endif
+			
 				
 			break;
 		}
@@ -101,6 +110,11 @@
 	if (currentTutorialSlide==MILGROM_TUTORIAL_SHARE) {
 		[appDelegate.shareViewController tutorialShare];
 	}
+	
+#ifdef _FLURRY
+	[FlurryAPI endTimedEvent:[NSString stringWithFormat:@"SLIDE_%i",currentTutorialSlide] withParameters:nil];
+#endif
+	
 	
 	currentTutorialSlide++;
 	
