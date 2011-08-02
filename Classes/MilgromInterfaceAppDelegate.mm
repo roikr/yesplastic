@@ -316,15 +316,20 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[self.eAGLView setInterfaceOrientation:UIInterfaceOrientationLandscapeRight duration:0];
 	[shareManager applicationDidEnterBackground];
 	
-	
-	if (slidesManager.currentTutorialSlide==MILGROM_TUTORIAL_DONE && ![[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"]) {
-//		if (((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_SHARE) {
-//			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"replay_reminder"];
-//		}
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished_2"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
-		
-	} 
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"]) {
+		slidesManager.currentTutorialSlide=MILGROM_TUTORIAL_DONE;
+	} else {
+		if (slidesManager.currentTutorialSlide==MILGROM_TUTORIAL_DONE) {
+//			if (((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_SHARE) {
+//				[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"replay_reminder"];
+//			}
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"slides_finished_2"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
+		} 
+	}
+
+	 
 	
 		
 	
@@ -374,8 +379,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 	
 	//slidesManager.currentTutorialSlide = [[NSUserDefaults standardUserDefaults] boolForKey:@"slides_finished_2"] ? MILGROM_TUTORIAL_DONE : MILGROM_TUTORIAL_INTRODUCTION;
 
-	if (slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_DONE && slidesManager.currentTutorialSlide>=MILGROM_TUTORIAL_ROTATE) {
-		slidesManager.currentTutorialSlide=MILGROM_TUTORIAL_ROTATE;
+	
+	if (slidesManager.currentTutorialSlide==MILGROM_TUTORIAL_SHARE) {
+		slidesManager.currentTutorialSlide=MILGROM_TUTORIAL_RECORD_PLAY;
 	}
 	
 	if (!self.loadTask) {
@@ -747,6 +753,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 	if (viewController == self.bandMenu) {
 		[self.eAGLView stopAnimation];
 		self.eAGLView.hidden = YES;
+	}
+	
+	if (viewController == self.mainViewController) { // in slides mode
+		if (slidesManager.currentTutorialSlide>MILGROM_TUTORIAL_ROTATE && slidesManager.currentTutorialSlide<MILGROM_TUTORIAL_DONE) {
+			[self toggle:UIInterfaceOrientationPortrait animated:YES];
+		}
 	}
 }
 

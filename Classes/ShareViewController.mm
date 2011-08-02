@@ -22,6 +22,7 @@
 @synthesize slides;
 @synthesize container;
 
+
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -70,17 +71,19 @@
 #endif
 	
 	MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate.slidesManager setTargetView:self.container withSlides:self.slides];
+	[appDelegate.slidesManager setTargetView:self.view withSlides:self.slides];
 	
-	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.container) {
+	if (!appDelegate.slidesManager.currentView && appDelegate.slidesManager.targetView == self.view) {
 		switch (appDelegate.slidesManager.currentTutorialSlide) {
 			case MILGROM_TUTORIAL_SHARE:
 				[appDelegate.slidesManager addViews];
-				
+				[self.view sendSubviewToBack:container];
+				container.userInteractionEnabled=NO;
 				break;
 				
 			default:
-				
+				container.userInteractionEnabled=YES;
+
 				break;
 		}
 	}
