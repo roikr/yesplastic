@@ -43,6 +43,7 @@
 -(void)setDelegate:(id<FacebookUploadViewControllerDelegate>)theDelegate;
 - (void) upload:(id)sender;
 - (void) cancel:(id)sender;
+- (void) login:(id)sender;
 - (void) closeTextView:(id)sender;
 - (void) logout:(id)sender;
 - (void) touchDown:(id)sender;

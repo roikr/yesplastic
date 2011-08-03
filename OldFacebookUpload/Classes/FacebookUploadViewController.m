@@ -146,9 +146,27 @@
 
 
 - (void) upload:(id)sender {
-	
 	if (uploader!=nil) {
-		[uploader uploadVideoWithTitle:titleField.text withDescription:[descriptionView.text stringByAppendingString:additionalText] andPath:videoPath];
+		if ([uploader isConnected]) {
+			[uploader uploadVideoWithTitle:titleField.text withDescription:[descriptionView.text stringByAppendingString:additionalText] andPath:videoPath];
+		} else {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook Upload" message:@"You are not logged in. Please login to upload" delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+		}
+	}
+}
+
+- (void) login:(id)sender {
+	if (uploader!=nil) {
+		if ([uploader isConnected]) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook Login" message:@"You are already logged in" delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+		} else {
+			[uploader login];
+		}
+
 	}
 }
 
@@ -159,11 +177,12 @@
 - (void) logout:(id)sender {
 	
 	if (uploader!=nil) {
-		if ([uploader isConnected]) {
-			[uploader logout];
-		} else {
-			[uploader login];
-		}
+		[uploader logout];
+//		if ([uploader isConnected]) {
+//			[uploader logout];
+//		} else {
+//			[uploader login];
+//		}
 
 	}
 }
@@ -180,6 +199,11 @@
 		case FACEBOOK_UPLOADER_STATE_UPLOAD_CANCELED:
 			[delegate FacebookUploadViewControllerDone:self];
 			break;
+		case FACEBOOK_UPLOADER_STATE_DID_NOT_LOGIN: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook Login" message:@"Logged in failed. Please login to upload" delegate:nil  cancelButtonTitle:@"OK"  otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+		}	break;
 		default:
 			break;
 	}

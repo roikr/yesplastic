@@ -29,7 +29,7 @@
 	[uploader login];
 	
 	controller.uploader = uploader;
-	controller.videoTitle = @"kremer the cat";
+	controller.videoTitle = @"testing";
 	controller.descriptionView.text = @"testing";
 	//controller.videoPath = [[NSBundle mainBundle] pathForResource:@"IMG_0015" ofType:@"MOV"];
 	controller.videoPath = [[NSBundle mainBundle] pathForResource:@"BOY" ofType:@"mov"];
