@@ -91,6 +91,7 @@
 			}
 			
 #ifdef _FLURRY
+			[FlurryAPI logEvent:@"SLIDE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%i",currentTutorialSlide],@"NUMBER",nil]];
 			[FlurryAPI logEvent:[NSString stringWithFormat:@"SLIDE_%i",currentTutorialSlide] timed:YES];
 #endif
 			
