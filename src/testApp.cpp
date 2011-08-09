@@ -11,8 +11,6 @@
 
 #include "easing.h"
 
-#define RECORD_LIMIT 30000
-
 #define GLOBAL_GAIN 0.65
 #define FULL_SCREEN_SCALE 480.0 / 762.0
 
@@ -21,6 +19,7 @@
 testApp::testApp() {
 	bInitialized = false;
 	songState = SONG_IDLE;
+	recordLimit = NORMAL_RECORD_LIMIT;
 	//bChangeSet = false;
 }
 
@@ -143,7 +142,7 @@ void testApp::update() {
 			}
 			break;
 		case SONG_RECORD:
-			if (ofGetElapsedTimeMillis()-startRecordingTime > RECORD_LIMIT) {
+			if (ofGetElapsedTimeMillis()-startRecordingTime > recordLimit) {
 				setSongState(SONG_IDLE);
 			} 
 			break;
@@ -1034,4 +1033,8 @@ void testApp::soundStreamStop() {
 
 void testApp::soundStreamClose() {
 	ofSoundStreamClose();
+}
+
+void testApp::setRecordLimit(int recordLimit) {
+	this->recordLimit = recordLimit;
 }

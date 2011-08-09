@@ -445,6 +445,8 @@
 - (void) record:(id)sender {
 //	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
 	
+	
+	
 	if (playButton.hidden) {
 		MilgromAlert(@"Sorry",@"can't record while a track is being played");
 		return;
@@ -454,6 +456,7 @@
 		[self stop:nil];
 	}
 	else {
+		OFSAptr->setRecordLimit(NORMAL_RECORD_LIMIT);
 		OFSAptr->setSongState(SONG_TRIGGER_RECORD);
 #ifdef _FLURRY
 		[FlurryAPI logEvent:@"RECORD"];

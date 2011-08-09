@@ -100,7 +100,7 @@ public:
 	
 	bool bNeedDisplay; // refresh the control layer due to changes in state, mode, etc
 	
-	
+	void setRecordLimit(int recordLimit);
 	
 	
 	
@@ -163,6 +163,7 @@ private:
 	int pincherStart; //  start frame for animating scaling
 	int lastRenderedFrame;
 	
+	int recordLimit;
 };
 
 

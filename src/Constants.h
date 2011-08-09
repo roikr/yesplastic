@@ -41,6 +41,7 @@ enum {
 	
 };
 
-
+#define TUTORIAL_RECORD_LIMIT 15000
+#define NORMAL_RECORD_LIMIT 30000
 
 #endif 

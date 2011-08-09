@@ -432,8 +432,14 @@
 }
 
 - (void) record:(id)sender {
+	
+	
+	
+	
+	
 //	[( (MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_SHARE];
-	[((MilgromInterfaceAppDelegate *)[[UIApplication sharedApplication] delegate]).slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
+	
+	
 	
 //	if (playButton.hidden) {
 	if (OFSAptr->getSongState()==SONG_PLAY) {
@@ -445,7 +451,11 @@
 		[self stop:nil];
 	}
 	else {
+		MilgromInterfaceAppDelegate * appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
+		OFSAptr->setRecordLimit(appDelegate.slidesManager.currentTutorialSlide == MILGROM_TUTORIAL_RECORD_PLAY ? TUTORIAL_RECORD_LIMIT : NORMAL_RECORD_LIMIT);
+		[appDelegate.slidesManager doneSlide:MILGROM_TUTORIAL_RECORD_PLAY]; 
 		OFSAptr->setSongState(SONG_TRIGGER_RECORD);
+		
 #ifdef _FLURRY
 		[FlurryAPI logEvent:@"RECORD"];
 #endif	
