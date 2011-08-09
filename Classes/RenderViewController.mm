@@ -66,7 +66,7 @@
 	MilgromLog(@"RenderViewController::viewWillAppear");
 	self.view.userInteractionEnabled = NO; // we don't need no band control - only for video
 	self.renderCancelButton.hidden = YES;
-	self.renderView.slideView.hidden = YES;
+//	self.renderView.slideView.hidden = YES;
 	
 }
 
@@ -196,7 +196,7 @@
 	// [(TouchView*)self.view  setRenderTouch:NO];
 	self.view.userInteractionEnabled = YES;
 	self.renderCancelButton.hidden = NO;
-	self.renderView.slideView.hidden = NO;
+//	self.renderView.slideView.hidden = NO;
 	
 	self.renderLabel.text = @"Creating video";
 	
@@ -261,7 +261,7 @@
 					 
 					 self.view.userInteractionEnabled = NO;
 					 self.renderCancelButton.hidden = YES;
-					 self.renderView.slideView.hidden = YES;
+//					 self.renderView.slideView.hidden = YES;
 					 OFSAptr->setSongState(SONG_IDLE);
 					 OFSAptr->soundStreamStart();
 					 [delegate RenderViewControllerDelegateVideoRendered:self];
