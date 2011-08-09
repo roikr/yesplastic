@@ -108,9 +108,9 @@
 	
 	MilgromInterfaceAppDelegate *appDelegate = (MilgromInterfaceAppDelegate*)[[UIApplication sharedApplication] delegate];
 	
-	if (currentTutorialSlide==MILGROM_TUTORIAL_SHARE) {
-		[appDelegate.shareViewController tutorialShare];
-	}
+//	if (currentTutorialSlide==MILGROM_TUTORIAL_SHARE) {
+//		[appDelegate.shareViewController tutorialShare];
+//	}
 	
 #ifdef _FLURRY
 	[FlurryAPI endTimedEvent:[NSString stringWithFormat:@"SLIDE_%i",currentTutorialSlide] withParameters:nil];

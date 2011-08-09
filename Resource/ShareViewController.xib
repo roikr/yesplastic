@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="52"/>
+			<integer value="41"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -238,7 +238,7 @@
 								<reference key="NSSuperview" ref="574753114"/>
 								<reference key="IBUIBackgroundColor" ref="907383507"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<float key="IBUIAlpha">0.5</float>
+								<float key="IBUIAlpha">0.75</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="interfaceOrientation">3</int>
@@ -263,7 +263,7 @@
 							<object class="IBUILabel" id="298475878">
 								<reference key="NSNextResponder" ref="574753114"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 232}, {279, 21}}</string>
+								<string key="NSFrame">{{25, 234}, {279, 21}}</string>
 								<reference key="NSSuperview" ref="574753114"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -286,7 +286,7 @@
 							<object class="IBUILabel" id="956514333">
 								<reference key="NSNextResponder" ref="574753114"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{89, 251}, {215, 21}}</string>
+								<string key="NSFrame">{{89, 255}, {215, 21}}</string>
 								<reference key="NSSuperview" ref="574753114"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -312,7 +312,7 @@
 							<object class="IBUILabel" id="817979786">
 								<reference key="NSNextResponder" ref="574753114"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 251}, {153, 21}}</string>
+								<string key="NSFrame">{{25, 255}, {153, 21}}</string>
 								<reference key="NSSuperview" ref="574753114"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -383,7 +383,6 @@
 						<reference key="IBUIBackgroundColor" ref="276223401"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
@@ -767,7 +766,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUMgAABDCwAAA</bytes>
 					</object>
-					<string>{{162, 15}, {320, 480}}</string>
+					<string>{{329, 15}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+8AAA</bytes>

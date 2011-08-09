@@ -78,11 +78,11 @@
 			case MILGROM_TUTORIAL_SHARE:
 				[appDelegate.slidesManager addViews];
 				[self.view sendSubviewToBack:container];
-				container.userInteractionEnabled=NO;
+//				container.userInteractionEnabled=NO;
 				break;
 				
 			default:
-				container.userInteractionEnabled=YES;
+//				container.userInteractionEnabled=YES;
 
 				break;
 		}
